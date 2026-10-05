@@ -11,9 +11,10 @@
 A full-stack conference registration, payment, accommodation, and check-in system for
 **Philippine Youth for Christ (PYC)** — a Seventh-day Adventist youth ministry event.
 
-- **Event:** PYC 2026 — "Above and Beyond" (Ephesians 3:20)
-- **Dates:** June 3–7, 2026
-- **Venue:** Mountain View College, Valencia, Bukidnon, Mindanao, Philippines
+- **Event:** PYC 2027 — "Abide" (John 15:4, KJV on the site)
+- **Dates:** June 2–6, 2027 · opening night 6:00 PM Philippine Time
+- **Venue:** SMX Convention Center Davao, Davao City, Mindanao, Philippines
+- (Previous: PYC 2026 — "Above and Beyond", June 3–7, 2026, Mountain View College)
 - **Audience:** SDA youth and young adults
 - **Public site:** https://philippineyouthforchrist.org
 - **Status:** Live and handling real registrations. A 2027 redesign (`register-v2`) is in progress.
@@ -135,7 +136,23 @@ raise risks *before* proceeding rather than correcting afterward.
 
 ## 4. DESIGN / THEME
 
-Matches `index.html`. Apply this to every page.
+**2027 theme (current):** Apple-developer-style. Black background, system font stack
+(SF Pro on Apple devices, Inter fallback), large tight headlines, one gold accent
+(`#d4a556`), full-bleed photos with text on top, pill buttons. Source of truth:
+`public/home-v2.html` (new landing page) + **`public/theme-2027.css`**.
+
+- `theme-2027.css` is linked as the LAST stylesheet on every app page (one `<link>` line
+  just before `</head>`, or before `<body>` in register.html, which has no `</head>`). It
+  re-maps `--primary-navy`/`--secondary-gold`, forces the black background, hides the old
+  starfield, swaps every font to the system stack, and restyles former Bebas Neue headings.
+  **New pages: add that one `<link>` line last in `<head>`.**
+- The old navy literals in pages were swapped to neutrals (`#1a2332`→`#1c1c1e`,
+  `#0f1419`→`#000`, `#2a3f5f`→`#2c2c2e`, matching `rgba()` forms).
+- Photos live in `public/img/` (worship, community, notes, delegates; `-sm` = mobile).
+- Not themed on purpose: `index.html` (old 2026 landing — to be replaced by home-v2),
+  `special-welcome.html`, `monkey-*.html`, `stress-test.html`, `analytics67.html.html`.
+
+**2026 theme (legacy, for reference):**
 
 - **Fonts:** `Bebas Neue` for headings (with `letter-spacing`), `Montserrat` for body.
   (The older `Cinzel` serif was replaced by Bebas Neue; some legacy pages may still
@@ -513,7 +530,18 @@ realistic load.
   then switch over. Netlify must install the new `qrcode` dependency (package.json).
 - Update the 2026 early-bird date in live `register.html`/`payment.html`/
   `submit-registration.js`/`email-helper.js` (developer will do this later).
-- Emails still say "PYC 2026" (email-helper.js) — update wording for 2027.
+- Branding text in pages + emails is now PYC 2027 / Abide / John 15:4 / June 2–6 / SMX
+  Convention Center Davao, and the 2026 poster (`IMG_3908.jpeg`) was replaced by
+  `img/worship.jpg` (pages, og:image, email banners, success-page share banner). Swap in a
+  real 2027 poster when one exists.
+- NOT changed (logic dates — developer to update): registration/accommodation close dates in
+  `server-time.js`, `submit-registration.js`, closed-state messages ("ended on May 20/22,
+  2026"), Mindanao dorm unlock date, 2026 early-bird dates in live register/payment.
+  Because those 2026 close dates have passed, the OLD register/accommodations/tenting pages
+  currently show their "closed" screens.
+- `PYC_2026_Minor_Waiver.pdf` and the `PYC2026_RoomAssignments` Google Sheet name are still
+  2026 — replace the PDF and rename references when ready.
+- Make `home-v2.html` the real `index.html` when ready to go live.
 - "Check my status" page (self-service lookup) — top-bar link shows "coming soon" for now.
 - Obtain `accommodation-login.js` (not in working copies) if accommodation login needs changes.
 - Consider the QR check-in + meal redemption system for 2027 (§11 future).

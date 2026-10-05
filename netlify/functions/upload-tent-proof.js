@@ -31,15 +31,15 @@ function buildEmailHtml(innerContent, subtitle) {
     '.info-value{color:#555;}' +
     '.total-bar{background:#d4a556;color:white;padding:15px 20px;margin:20px 0;border-radius:8px;display:flex;justify-content:space-between;font-size:18px;font-weight:bold;}' +
     '</style></head><body><div class="container">' +
-    '<img src="https://philippineyouthforchrist.org/IMG_3908.jpeg" alt="PYC 2026" style="width:100%;display:block;border-radius:10px 10px 0 0;">' +
+    '<img src="https://philippineyouthforchrist.org/img/worship.jpg" alt="PYC 2027" style="width:100%;display:block;border-radius:10px 10px 0 0;">' +
     '<div style="background:linear-gradient(135deg,#1a2332 0%,#2a3f5f 100%);color:#d4a556;padding:20px;text-align:center;">' +
-      '<h1 style="margin:0;font-size:28px;letter-spacing:2px;">PYC 2026</h1>' +
+      '<h1 style="margin:0;font-size:28px;letter-spacing:2px;">PYC 2027</h1>' +
       '<p style="color:#f5f5f5;margin:5px 0 0;">' + (subtitle || 'Tenting Reservation') + '</p>' +
     '</div>' +
     '<div style="padding:40px 30px;">' + innerContent + '</div>' +
     '<div style="background:#f8f9fa;padding:20px;text-align:center;color:#666;font-size:14px;">' +
       '<p><strong>Philippine Youth for Christ</strong></p>' +
-      '<p style="color:#999;">June 3-7 | Mountain View College, Mindanao</p>' +
+      '<p style="color:#999;">June 2-6 | SMX Convention Center Davao, Mindanao</p>' +
     '</div></div></body></html>';
 }
 
@@ -59,7 +59,7 @@ async function sendTentPendingEmail(reservations, registrantName, registrantEmai
 
     const inner = '<h2 style="color:#1a2332;">&#128203; Tenting Reservation Under Review</h2>' +
       '<p>Dear ' + registrantName + ',</p>' +
-      '<p>Thank you for reserving your tenting space for PYC 2026! Your payment proof has been received and is being reviewed by our team.</p>' +
+      '<p>Thank you for reserving your tenting space for PYC 2027! Your payment proof has been received and is being reviewed by our team.</p>' +
       '<div class="info-box">' +
         '<div class="info-row"><span class="info-label">Accommodation</span><span class="info-value">Tenting</span></div>' +
         '<div class="info-row"><span class="info-label">Tents Reserved</span><span class="info-value">' + reservations.length + '</span></div>' +
@@ -74,7 +74,7 @@ async function sendTentPendingEmail(reservations, registrantName, registrantEmai
     const sendSmtpEmail = new SibApiV3Sdk.SendSmtpEmail();
     sendSmtpEmail.sender = { name: 'Philippine Youth for Christ', email: process.env.BREVO_FROM_EMAIL || 'noreply@philippineyouthforchrist.org' };
     sendSmtpEmail.to = [{ email: registrantEmail, name: registrantName }];
-    sendSmtpEmail.subject = 'Tenting Payment Under Review - PYC 2026';
+    sendSmtpEmail.subject = 'Tenting Payment Under Review - PYC 2027';
     sendSmtpEmail.htmlContent = buildEmailHtml(inner, 'Tenting Reservation');
     await apiInstance.sendTransacEmail(sendSmtpEmail);
   } catch (e) {

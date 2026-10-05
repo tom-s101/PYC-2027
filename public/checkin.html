@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>PYC 2026 Check-In</title>
+    <title>PYC 2027 Check-In</title>
     <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Montserrat:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
     <style>
         * {
@@ -14,7 +14,7 @@
 
         body {
             font-family: 'Montserrat', sans-serif;
-            background: linear-gradient(135deg, #0f1419 0%, #1a2332 50%, #2a3f5f 100%);
+            background: linear-gradient(135deg, #000000 0%, #1c1c1e 50%, #2c2c2e 100%);
             background-attachment: fixed;
             color: #f5f5f5;
             min-height: 100vh;
@@ -30,7 +30,7 @@
         .login-container {
             max-width: 450px;
             margin: 100px auto;
-            background: rgba(26, 35, 50, 0.95);
+            background: rgba(28, 28, 30, 0.95);
             padding: 40px;
             border-radius: 15px;
             box-shadow: 0 20px 60px rgba(0, 0, 0, 0.5);
@@ -75,7 +75,7 @@
             width: 100%;
             padding: 15px;
             background: linear-gradient(135deg, #d4a556 0%, #c9965d 100%);
-            color: #1a2332;
+            color: #1c1c1e;
             border: none;
             border-radius: 8px;
             font-size: 16px;
@@ -149,7 +149,7 @@
             justify-content: space-between;
             align-items: center;
             padding: 15px 20px;
-            background: rgba(26, 35, 50, 0.9);
+            background: rgba(28, 28, 30, 0.9);
             border-radius: 10px;
             margin-bottom: 30px;
         }
@@ -170,7 +170,7 @@
         }
 
         .search-box {
-            background: rgba(26, 35, 50, 0.9);
+            background: rgba(28, 28, 30, 0.9);
             padding: 30px;
             border-radius: 15px;
             margin-bottom: 30px;
@@ -210,7 +210,7 @@
 
         .search-tab.active {
             background: #d4a556;
-            color: #1a2332;
+            color: #1c1c1e;
             border-color: #d4a556;
         }
 
@@ -238,7 +238,7 @@
         }
 
         .results-header {
-            background: rgba(26, 35, 50, 0.9);
+            background: rgba(28, 28, 30, 0.9);
             padding: 15px 20px;
             border-radius: 10px 10px 0 0;
             color: #d4a556;
@@ -246,7 +246,7 @@
         }
 
         .registrant-card {
-            background: rgba(26, 35, 50, 0.9);
+            background: rgba(28, 28, 30, 0.9);
             padding: 20px;
             border-radius: 10px;
             margin-bottom: 15px;
@@ -427,11 +427,12 @@
             .search-tab { font-size: 0.82rem; }
         }
     </style>
+    <link rel="stylesheet" href="/theme-2027.css"><!-- PYC 2027 site theme: keep this the LAST stylesheet in <head> -->
 </head>
 <body>
     <!-- Login Screen -->
     <div id="loginScreen" class="login-container">
-        <h1>🎫 PYC 2026 Check-In</h1>
+        <h1>🎫 PYC 2027 Check-In</h1>
         <p style="text-align: center; color: rgba(245, 245, 245, 0.7); margin-bottom: 30px;">
             Volunteer & Admin Access
         </p>
@@ -457,8 +458,8 @@
     <div id="checkinScreen" class="checkin-screen">
         <div class="container">
             <div class="header">
-                <h1>PYC 2026 Check-In</h1>
-                <p>June 3-7, 2026 • Valencia, Bukidnon</p>
+                <h1>PYC 2027 Check-In</h1>
+                <p>June 2-6, 2027 • Davao City</p>
             </div>
 
             <div class="top-bar">
@@ -1065,7 +1066,7 @@
                 const unchecked = members.filter(m => !m.checked_in);
                 let html = '';
                 if (unchecked.length > 0) {
-                    html += '<button onclick="checkInAllGroup(\'' + groupId + '\')" style="background:#d4a556;color:#1a2332;border:none;padding:14px;border-radius:8px;cursor:pointer;font-weight:700;font-size:0.9rem;width:100%;margin-bottom:12px;min-height:50px;">✅ Check In All (' + unchecked.length + ' remaining)</button>';
+                    html += '<button onclick="checkInAllGroup(\'' + groupId + '\')" style="background:#d4a556;color:#1c1c1e;border:none;padding:14px;border-radius:8px;cursor:pointer;font-weight:700;font-size:0.9rem;width:100%;margin-bottom:12px;min-height:50px;">✅ Check In All (' + unchecked.length + ' remaining)</button>';
                 }
                 members.forEach(m => {
                     const checked = m.checked_in === true;
@@ -1188,7 +1189,7 @@
                 html += '</div></div>';
                 html += '<div id="gcGrp' + idx + '" style="display:none;border-top:1px solid rgba(212,165,86,0.1);padding:12px 16px;">';
                 if (uncheckedCount > 0) {
-                    html += '<button onclick="checkInAllGroup(\'' + gid + '\')" style="background:#d4a556;color:#1a2332;border:none;padding:14px;border-radius:8px;cursor:pointer;font-weight:700;font-size:0.9rem;width:100%;margin-bottom:12px;min-height:50px;">✅ Check In All (' + uncheckedCount + ' remaining)</button>';
+                    html += '<button onclick="checkInAllGroup(\'' + gid + '\')" style="background:#d4a556;color:#1c1c1e;border:none;padding:14px;border-radius:8px;cursor:pointer;font-weight:700;font-size:0.9rem;width:100%;margin-bottom:12px;min-height:50px;">✅ Check In All (' + uncheckedCount + ' remaining)</button>';
                 }
                 members.forEach(m => {
                     const checked = m.checked_in === true;
@@ -1224,7 +1225,7 @@
                 overlay.id = 'ciConfirmModal';
                 overlay.style.cssText = 'position:fixed;inset:0;background:rgba(0,0,0,0.85);z-index:9000;display:flex;align-items:center;justify-content:center;padding:20px;';
                 overlay.innerHTML =
-                    '<div style="background:#1a2332;border:2px solid rgba(212,165,86,0.45);border-radius:14px;padding:24px;max-width:420px;width:100%;">' +
+                    '<div style="background:#1c1c1e;border:2px solid rgba(212,165,86,0.45);border-radius:14px;padding:24px;max-width:420px;width:100%;">' +
                     '<p style="color:rgba(245,245,245,0.9);font-size:1rem;line-height:1.5;margin:0 0 22px;white-space:pre-wrap;">' + (message || '').replace(/</g,'&lt;').replace(/>/g,'&gt;') + '</p>' +
                     '<div style="display:flex;gap:12px;">' +
                     '<button id="ciConfirmCancel" style="flex:1;padding:14px;background:rgba(255,255,255,0.08);color:#f5f5f5;border:1px solid rgba(255,255,255,0.15);border-radius:8px;font-weight:600;font-size:16px;cursor:pointer;min-height:50px;">Cancel</button>' +

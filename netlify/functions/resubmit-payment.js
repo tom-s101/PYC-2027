@@ -240,9 +240,9 @@ async function sendResubmissionEmail(registration) {
 </head>
 <body>
   <div class="container">
-    <img src="https://philippineyouthforchrist.org/IMG_3908.jpeg" alt="PYC 2026" class="banner-image">
+    <img src="https://philippineyouthforchrist.org/img/worship.jpg" alt="PYC 2027" class="banner-image">
     <div class="header">
-      <p style="color: #f5f5f5 !important;">June 3-7 • Mountain View College, Mindanao</p>
+      <p style="color: #f5f5f5 !important;">June 2-6 • SMX Convention Center Davao, Mindanao</p>
     </div>
     
     <div class="content">
@@ -252,7 +252,7 @@ async function sendResubmissionEmail(registration) {
       
       <p>Dear ${registration.first_name} ${registration.last_name},</p>
       
-      <p>Thank you for resubmitting your payment proof for Philippine Youth for Christ 2026.</p>
+      <p>Thank you for resubmitting your payment proof for Philippine Youth for Christ 2027.</p>
       
       <p>We have received your new payment screenshot and our team will review it shortly. You will receive a confirmation email once your payment has been verified and approved.</p>
       
@@ -265,7 +265,7 @@ async function sendResubmissionEmail(registration) {
 
     <div class="footer">
       <p><strong>Philippine Youth for Christ</strong></p>
-      <p style="color: #999 !important;">June 3-7 | Mountain View College, Mindanao, Philippines</p>
+      <p style="color: #999 !important;">June 2-6 | SMX Convention Center Davao, Mindanao, Philippines</p>
       <div class="social-links">
         <a href="https://www.facebook.com/share/1D9PJw6wkq/?mibextid=wwXIfr">Facebook</a> |
         <a href="https://www.instagram.com/philippineyouthforchrist?igsh=c2Q0MjAwbWh1cXZ2">Instagram</a>

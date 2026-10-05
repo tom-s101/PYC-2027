@@ -27,15 +27,15 @@ function getEmailTemplate(innerContent) {
     .social-links a { color: #d4a556; text-decoration: none; margin: 0 10px; }
   </style></head><body>
   <div class="container">
-    <img src="https://philippineyouthforchrist.org/IMG_3908.jpeg" alt="PYC 2026 - Above and Beyond" class="banner-image" style="width:100%;display:block;border-radius:10px 10px 0 0;">
+    <img src="https://philippineyouthforchrist.org/img/worship.jpg" alt="PYC 2027 - Abide" class="banner-image" style="width:100%;display:block;border-radius:10px 10px 0 0;">
     <div class="header">
-      <h1>PYC 2026</h1>
+      <h1>PYC 2027</h1>
       <p style="color:#f5f5f5;margin:5px 0 0;">Accommodation Reservation</p>
     </div>
     <div class="content">${innerContent}</div>
     <div class="footer">
       <p><strong>Philippine Youth for Christ</strong></p>
-      <p style="color:#999;">June 3-7 | Mountain View College, Mindanao</p>
+      <p style="color:#999;">June 2-6 | SMX Convention Center Davao, Mindanao</p>
       <div class="social-links">
         <a href="https://www.facebook.com/share/1D9PJw6wkq/?mibextid=wwXIfr">Facebook</a> |
         <a href="https://www.instagram.com/philippineyouthforchrist?igsh=c2Q0MjAwbWh1cXZ2">Instagram</a>
@@ -102,7 +102,7 @@ async function sendPendingEmail(reservation) {
   const innerHtml = `
     <h2 style="color:#1a2332;">&#128203; Reservation Under Review</h2>
     <p>Dear ${reservation.registrant_name},</p>
-    <p>Thank you for reserving your accommodation for PYC 2026! Your payment proof has been received and is being reviewed by our team.</p>
+    <p>Thank you for reserving your accommodation for PYC 2027! Your payment proof has been received and is being reviewed by our team.</p>
     <div class="info-box">
       <div class="info-row"><span class="info-label">Registration Number:</span><span class="info-value">${displayId}</span></div>
       <div class="info-row"><span class="info-label">Accommodation:</span><span class="info-value">${typeName}</span></div>
@@ -116,7 +116,7 @@ async function sendPendingEmail(reservation) {
   await sendAccommodationEmail(
     reservation.registrant_email,
     reservation.registrant_name,
-    `Accommodation Under Review - PYC 2026 (${displayId})`,
+    `Accommodation Under Review - PYC 2027 (${displayId})`,
     innerHtml
   );
 }
@@ -136,13 +136,13 @@ async function sendApprovedEmail(reservation) {
       <div class="info-row"><span class="info-label">Spots Confirmed:</span><span class="info-value">${reservation.spots_requested} person(s)</span></div>
     </div>
     <div class="total-bar"><span>Amount Paid:</span><span>\u20B1${parseFloat(reservation.total_amount).toFixed(2)}</span></div>
-    <p style="margin-top:20px;">You will be sharing your accommodation with other PYC 2026 delegates. Room assignments will be coordinated by the organizing team closer to the event.</p>
-    <p style="color:#666;font-size:14px;margin-top:15px;">Please bring a valid ID for check-in. We look forward to seeing you at PYC 2026!</p>
+    <p style="margin-top:20px;">You will be sharing your accommodation with other PYC 2027 delegates. Room assignments will be coordinated by the organizing team closer to the event.</p>
+    <p style="color:#666;font-size:14px;margin-top:15px;">Please bring a valid ID for check-in. We look forward to seeing you at PYC 2027!</p>
   `;
   await sendAccommodationEmail(
     reservation.registrant_email,
     reservation.registrant_name,
-    `Accommodation Confirmed! - PYC 2026 (${displayId})`,
+    `Accommodation Confirmed! - PYC 2027 (${displayId})`,
     innerHtml
   );
 }
@@ -171,7 +171,7 @@ async function sendRejectedEmail(reservation) {
   await sendAccommodationEmail(
     reservation.registrant_email,
     reservation.registrant_name,
-    `Action Required: Accommodation Payment Issue - PYC 2026`,
+    `Action Required: Accommodation Payment Issue - PYC 2027`,
     innerHtml
   );
 }
@@ -196,7 +196,7 @@ async function sendPendingEmailBatch(reservations) {
   const innerHtml = `
     <h2 style="color:#1a2332;">&#128203; Reservation Under Review</h2>
     <p>Dear ${primary.registrant_name},</p>
-    <p>Thank you for reserving your accommodations for PYC 2026! Your payment proof has been received and is being reviewed by our team.</p>
+    <p>Thank you for reserving your accommodations for PYC 2027! Your payment proof has been received and is being reviewed by our team.</p>
     <div class="info-box">
       <div class="info-row"><span class="info-label">Registration Number:</span><span class="info-value">${displayId}</span></div>
       <div class="info-row"><span class="info-label">Total Accommodations:</span><span class="info-value">${reservations.length}</span></div>
@@ -212,7 +212,7 @@ async function sendPendingEmailBatch(reservations) {
   await sendAccommodationEmail(
     primary.registrant_email,
     primary.registrant_name,
-    `Accommodation Under Review - PYC 2026 (${displayId})`,
+    `Accommodation Under Review - PYC 2027 (${displayId})`,
     innerHtml
   );
 }
@@ -247,13 +247,13 @@ async function sendApprovedEmailBatch(reservations) {
       ${lines}
     </div>
     <div class="total-bar"><span>Amount Paid:</span><span>\u20B1${grandTotal.toFixed(2)}</span></div>
-    <p style="margin-top:20px;">You will be sharing your accommodation with other PYC 2026 delegates. Room assignments will be coordinated by the organizing team closer to the event.</p>
-    <p style="color:#666;font-size:14px;margin-top:15px;">Please bring a valid ID for check-in. We look forward to seeing you at PYC 2026!</p>
+    <p style="margin-top:20px;">You will be sharing your accommodation with other PYC 2027 delegates. Room assignments will be coordinated by the organizing team closer to the event.</p>
+    <p style="color:#666;font-size:14px;margin-top:15px;">Please bring a valid ID for check-in. We look forward to seeing you at PYC 2027!</p>
   `;
   await sendAccommodationEmail(
     primary.registrant_email,
     primary.registrant_name,
-    `Accommodations Confirmed! - PYC 2026 (${displayId})`,
+    `Accommodations Confirmed! - PYC 2027 (${displayId})`,
     innerHtml
   );
 }
@@ -295,7 +295,7 @@ async function sendRejectedEmailBatch(reservations) {
   await sendAccommodationEmail(
     primary.registrant_email,
     primary.registrant_name,
-    `Action Required: Accommodation Payment Issue - PYC 2026`,
+    `Action Required: Accommodation Payment Issue - PYC 2027`,
     innerHtml
   );
 }

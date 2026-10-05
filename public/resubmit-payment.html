@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Resubmit Payment - PYC 2026</title>
+    <title>Resubmit Payment - PYC 2027</title>
     <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Cinzel:wght@400;700&family=Montserrat:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
     <style>
         * {
@@ -13,14 +13,14 @@
         }
 
         :root {
-            --primary-navy: #1a2332;
+            --primary-navy: #1c1c1e;
             --secondary-gold: #d4a556;
             --text-light: #f5f5f5;
         }
 
         body {
             font-family: 'Montserrat', sans-serif;
-            background: linear-gradient(135deg, #0f1419 0%, #1a2332 50%, #2a3f5f 100%);
+            background: linear-gradient(135deg, #000000 0%, #1c1c1e 50%, #2c2c2e 100%);
             color: var(--text-light);
             min-height: 100vh;
             padding: 40px 20px;
@@ -29,7 +29,7 @@
         .container {
             max-width: 600px;
             margin: 0 auto;
-            background: rgba(26, 35, 50, 0.95);
+            background: rgba(28, 28, 30, 0.95);
             border-radius: 15px;
             padding: 40px;
             box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
@@ -157,8 +157,8 @@
         }
 
         .spinner {
-            border: 3px solid rgba(26, 35, 50, 0.3);
-            border-top: 3px solid #1a2332;
+            border: 3px solid rgba(28, 28, 30, 0.3);
+            border-top: 3px solid #1c1c1e;
             border-radius: 50%;
             width: 20px;
             height: 20px;
@@ -198,7 +198,7 @@
             left: 0;
             width: 100%;
             height: 100%;
-            background: linear-gradient(135deg, #0f1419 0%, #1a2332 50%, #2a3f5f 100%);
+            background: linear-gradient(135deg, #000000 0%, #1c1c1e 50%, #2c2c2e 100%);
             z-index: 10000;
             justify-content: center;
             align-items: center;
@@ -271,14 +271,14 @@
         .slide-btn-handle { position: absolute; top: 4px; left: 4px; width: 50px; height: 50px; background: linear-gradient(135deg, #d4a556, #c9965d); border-radius: 50%; display: flex; align-items: center; justify-content: center; cursor: grab; z-index: 2; transition: none; box-shadow: 0 2px 8px rgba(0,0,0,0.3); }
         .slide-btn-handle:active { cursor: grabbing; }
         .slide-btn-track.resetting .slide-btn-handle { transition: left 0.3s ease; }
-        .slide-btn-handle svg { width: 22px; height: 22px; fill: none; stroke: #1a2332; stroke-width: 2.5; stroke-linecap: round; stroke-linejoin: round; }
+        .slide-btn-handle svg { width: 22px; height: 22px; fill: none; stroke: #1c1c1e; stroke-width: 2.5; stroke-linecap: round; stroke-linejoin: round; }
         .slide-btn-track.completed .slide-btn-handle { background: linear-gradient(135deg, #d4a556, #c9965d); left: calc(100% - 54px) !important; transition: left 0.3s; }
         .slide-btn-track.completed .slide-btn-handle svg { display: none; }
         .slide-btn-loading { display: none; width: 30px; height: 30px; position: relative; }
         .slide-btn-loading .orbit { position: absolute; border: 2px solid transparent; border-radius: 50%; }
-        .slide-btn-loading .orbit-1 { inset: 0; border-top-color: #1a2332; animation: spin 1s linear infinite; }
-        .slide-btn-loading .orbit-2 { inset: 4px; border-top-color: #1a2332; animation: spin-reverse 1.5s linear infinite; }
-        .slide-btn-loading .orbit-3 { inset: 8px; border-top-color: #1a2332; animation: spin 0.8s linear infinite; }
+        .slide-btn-loading .orbit-1 { inset: 0; border-top-color: #1c1c1e; animation: spin 1s linear infinite; }
+        .slide-btn-loading .orbit-2 { inset: 4px; border-top-color: #1c1c1e; animation: spin-reverse 1.5s linear infinite; }
+        .slide-btn-loading .orbit-3 { inset: 8px; border-top-color: #1c1c1e; animation: spin 0.8s linear infinite; }
         @keyframes spin-reverse { to { transform: rotate(-360deg); } }
         .slide-btn-track.completed .slide-btn-loading { display: block; }
         .slide-btn-dots { display: none; position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); z-index: 1; pointer-events: none; }
@@ -286,11 +286,12 @@
         .slide-btn-track.completed .slide-btn-label { top: 35%; }
         @media (max-width: 480px) { .slide-btn-track { height: 52px; } .slide-btn-handle { width: 44px; height: 44px; } .slide-btn-label { font-size: 0.8rem; } }
     </style>
+    <link rel="stylesheet" href="/theme-2027.css"><!-- PYC 2027 site theme: keep this the LAST stylesheet in <head> -->
 </head>
 <body>
     <div class="container">
         <h1>RESUBMIT PAYMENT</h1>
-        <p class="subtitle">PYC 2026 - Mountain View College, Mindanao</p>
+        <p class="subtitle">PYC 2027 - SMX Convention Center Davao, Mindanao</p>
 
         <div id="alertMessage" class="alert"></div>
 

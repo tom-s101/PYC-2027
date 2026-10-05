@@ -1,0 +1,82 @@
+/* ==========================================================================
+   PYC 2027 site theme — "Abide"
+   Loaded LAST in <head> on every page (one <link> line), so it overrides each
+   page's own 2026 styles without touching page logic. To retheme the whole site,
+   change the tokens below. Matches the landing page (home-v2.html).
+   ========================================================================== */
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap');
+
+:root {
+    --pyc-bg: #000000;
+    --pyc-surface: #1c1c1e;
+    --pyc-surface-2: #2c2c2e;
+    --pyc-line: rgba(255, 255, 255, 0.14);
+    --pyc-text: #f5f5f7;
+    --pyc-text-dim: rgba(245, 245, 247, 0.68);
+    --pyc-accent: #d4a556;
+    --pyc-font: -apple-system, BlinkMacSystemFont, "SF Pro Display", "SF Pro Text", "Inter", "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+
+    /* Re-map the 2026 page variables onto the new palette */
+    --primary-navy: #1c1c1e !important;
+    --secondary-gold: #d4a556 !important;
+    --text-light: #f5f5f7 !important;
+    --light: #f5f5f7 !important;
+}
+
+/* ---- Page background: plain black instead of the navy gradient + stars ---- */
+html { background: var(--pyc-bg); }
+body {
+    background: var(--pyc-bg) !important;
+    background-attachment: scroll !important;
+    color: var(--pyc-text);
+    -webkit-font-smoothing: antialiased;
+}
+.stars, #stars, .star, .shooting-star { display: none !important; }
+
+/* ---- One type family everywhere (icon fonts excluded) ---- */
+body, body *:not([class*="fa-"]):not(.material-icons) {
+    font-family: var(--pyc-font) !important;
+}
+
+/* Elements that used Bebas Neue (condensed caps display face): give them the
+   new bold, tightly-tracked headline treatment instead. */
+h1, h2,
+.section-header, .section-title, .page-header h1, .header h1, .dash-header h1,
+.dashboard-header h1, .login-box h1, .login-container h1, .login-title,
+.content-box h2, .content-box h3, .search-box h2, .modal-box h3, .accomm-card h3,
+.breakdown h3, .cart-title, .countdown-title, .results-header, .share-section-title,
+.policy-modal-header h2, .terms-box-header h3, .upload-instructions strong,
+.topbar-brand, [style*="Bebas"] {
+    font-weight: 700 !important;
+    letter-spacing: -0.02em !important;
+    line-height: 1.15;
+}
+h1, .header h1, .page-header h1, .dash-header h1, .dashboard-header h1,
+.login-box h1, .login-container h1, .login-title {
+    letter-spacing: -0.035em !important;
+}
+.stat-number, .total-amount, .member-row .mr-pyc, .member-select .ms-pyc,
+.review-member .rm-pyc, .loading-text, .submit-btn {
+    font-weight: 700 !important;
+    letter-spacing: -0.01em !important;
+}
+
+/* ---- Form controls: Apple-style fields ---- */
+input[type="text"], input[type="email"], input[type="tel"], input[type="number"],
+input[type="password"], input[type="search"], input[type="date"], input[type="file"],
+select, textarea {
+    border-radius: 12px;
+    font-size: 16px; /* keeps iOS from zooming on focus */
+}
+input[type="text"]:focus, input[type="email"]:focus, input[type="tel"]:focus,
+input[type="number"]:focus, input[type="password"]:focus, input[type="search"]:focus,
+select:focus, textarea:focus {
+    outline: none;
+    border-color: var(--pyc-accent);
+    box-shadow: 0 0 0 3px rgba(212, 165, 86, 0.25);
+}
+select option { background: var(--pyc-surface); color: var(--pyc-text); }
+input[type="checkbox"], input[type="radio"] { accent-color: var(--pyc-accent); }
+
+/* ---- Links & selection ---- */
+::selection { background: rgba(212, 165, 86, 0.35); }

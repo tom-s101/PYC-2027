@@ -109,11 +109,11 @@ async function sendOfferEmail(entry, paymentLink, paymentAccount) {
 
   const html = `
     <div style="font-family:Arial,sans-serif;max-width:600px;margin:0 auto;background:#1a2332;color:#f5f5f5;border-radius:12px;overflow:hidden;">
-      <img src="https://philippineyouthforchrist.org/IMG_3908.jpeg" alt="PYC 2026" style="width:100%;display:block;">
+      <img src="https://philippineyouthforchrist.org/img/worship.jpg" alt="PYC 2027" style="width:100%;display:block;">
       <div style="padding:30px;">
         <h1 style="color:#d4a556;font-size:22px;">A Spot Has Opened Up!</h1>
         <p>Hi ${entry.registrant_name},</p>
-        <p>Great news! A spot has become available for <strong>${typeName}</strong> at PYC 2026.</p>
+        <p>Great news! A spot has become available for <strong>${typeName}</strong> at PYC 2027.</p>
         <div style="background:rgba(212,165,86,0.1);border:1px solid rgba(212,165,86,0.3);border-radius:8px;padding:15px;margin:20px 0;">
           <p style="margin:5px 0;"><strong>Accommodation:</strong> ${typeName}</p>
           <p style="margin:5px 0;"><strong>Spots:</strong> ${entry.spots_requested}</p>
@@ -130,9 +130,9 @@ async function sendOfferEmail(entry, paymentLink, paymentAccount) {
     method: 'POST',
     headers: { 'api-key': apiKey, 'Content-Type': 'application/json' },
     body: JSON.stringify({
-      sender: { email: fromEmail, name: 'PYC 2026' },
+      sender: { email: fromEmail, name: 'PYC 2027' },
       to: [{ email: entry.registrant_email, name: entry.registrant_name }],
-      subject: `PYC 2026: A ${typeName} Spot Has Opened Up!`,
+      subject: `PYC 2027: A ${typeName} Spot Has Opened Up!`,
       htmlContent: html
     })
   });

@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Master Dashboard - PYC 2026</title>
+<title>Master Dashboard - PYC 2027</title>
 <link rel="preconnect" href="https://fonts.googleapis.com" crossorigin>
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Montserrat:wght@300;400;500;600;700&display=swap" rel="stylesheet">
@@ -12,13 +12,13 @@
 * { margin: 0; padding: 0; box-sizing: border-box; }
 
 :root {
-    --primary-navy: #1a2332;
+    --primary-navy: #1c1c1e;
     --secondary-gold: #d4a556;
     --accent-blue: #4a7c9e;
     --text-light: #f5f5f5;
     --text-dark: #2c3e50;
     --border-gold: #c9965d;
-    --background-overlay: rgba(26, 35, 50, 0.92);
+    --background-overlay: rgba(28, 28, 30, 0.92);
     --success: #27ae60;
     --danger: #e74c3c;
     --warning: #f39c12;
@@ -26,7 +26,7 @@
 
 body {
     font-family: 'Montserrat', sans-serif;
-    background: linear-gradient(135deg, #0f1419 0%, #1a2332 50%, #2a3f5f 100%);
+    background: linear-gradient(135deg, #000000 0%, #1c1c1e 50%, #2c2c2e 100%);
     background-attachment: fixed;
     color: var(--text-light);
     min-height: 100vh;
@@ -727,7 +727,7 @@ tr:hover td { background: rgba(255, 255, 255, 0.04); }
 }
 
 select { cursor: pointer; }
-select option { background: #1a2332; color: #f5f5f5; padding: 10px; }
+select option { background: #1c1c1e; color: #f5f5f5; padding: 10px; }
 
 /* ===== MOBILE OPTIMIZATIONS ===== */
 @media (max-width: 768px) {
@@ -848,6 +848,7 @@ select option { background: #1a2332; color: #f5f5f5; padding: 10px; }
     .dashboard-header h1 { font-size: 1.5rem; }
 }
 </style>
+    <link rel="stylesheet" href="/theme-2027.css"><!-- PYC 2027 site theme: keep this the LAST stylesheet in <head> -->
 </head>
 <body>
 <div class="stars" id="stars"></div>
@@ -855,7 +856,7 @@ select option { background: #1a2332; color: #f5f5f5; padding: 10px; }
 <!-- LOGIN SCREEN -->
 <div class="login-container" id="loginContainer">
     <div class="login-box">
-        <h1>PYC 2026 Master</h1>
+        <h1>PYC 2027 Master</h1>
         <p>Admin Access Only</p>
         <div class="form-group">
             <label>Username</label>
@@ -875,7 +876,7 @@ select option { background: #1a2332; color: #f5f5f5; padding: 10px; }
     <div class="dashboard-header">
         <div>
             <h1>Master Dashboard</h1>
-            <div class="subtitle">PYC 2026 &mdash; <span id="loggedInAs"></span></div>
+            <div class="subtitle">PYC 2027 &mdash; <span id="loggedInAs"></span></div>
         </div>
         <div class="user-info">
             <button class="logout-btn" onclick="doLogout()">Logout</button>
@@ -2206,7 +2207,7 @@ function exportRegistrations() {
     var ws = XLSX.utils.json_to_sheet(data);
     var wb = XLSX.utils.book_new();
     XLSX.utils.book_append_sheet(wb, ws, 'Registrations');
-    XLSX.writeFile(wb, 'PYC2026_Registrations_' + new Date().toISOString().slice(0, 10) + '.xlsx');
+    XLSX.writeFile(wb, 'PYC2027_Registrations_' + new Date().toISOString().slice(0, 10) + '.xlsx');
 }
 
 async function loadRegGroups() {
@@ -2542,7 +2543,7 @@ function exportAccommodations() {
     var ws = XLSX.utils.json_to_sheet(data);
     var wb = XLSX.utils.book_new();
     XLSX.utils.book_append_sheet(wb, ws, 'Accommodations');
-    XLSX.writeFile(wb, 'PYC2026_Accommodations_' + new Date().toISOString().slice(0, 10) + '.xlsx');
+    XLSX.writeFile(wb, 'PYC2027_Accommodations_' + new Date().toISOString().slice(0, 10) + '.xlsx');
 }
 
 async function loadAccTents() {
@@ -2843,12 +2844,12 @@ function renderRoomMap(halls, summary) {
             var bg = isLocked ? 'rgba(212,165,86,0.10)' : 'rgba(255,255,255,0.03)';
             var boxShadow = isLocked ? 'box-shadow:0 0 0 1px rgba(212,165,86,0.3) inset;' : '';
             var lockIconHtml = isLocked
-                ? '<svg width="14" height="16" viewBox="0 0 14 16" fill="none" xmlns="http://www.w3.org/2000/svg" style="vertical-align:middle;"><rect x="2" y="7" width="10" height="7" rx="1.2" fill="#d4a556" stroke="#d4a556" stroke-width="0.6"/><path d="M4 7V4.5C4 2.84 5.34 1.5 7 1.5C8.66 1.5 10 2.84 10 4.5V7" stroke="#d4a556" stroke-width="1.6" fill="none" stroke-linecap="round"/><circle cx="7" cy="10.2" r="1.1" fill="#1a2332"/><rect x="6.55" y="10.5" width="0.9" height="2" fill="#1a2332"/></svg>'
+                ? '<svg width="14" height="16" viewBox="0 0 14 16" fill="none" xmlns="http://www.w3.org/2000/svg" style="vertical-align:middle;"><rect x="2" y="7" width="10" height="7" rx="1.2" fill="#d4a556" stroke="#d4a556" stroke-width="0.6"/><path d="M4 7V4.5C4 2.84 5.34 1.5 7 1.5C8.66 1.5 10 2.84 10 4.5V7" stroke="#d4a556" stroke-width="1.6" fill="none" stroke-linecap="round"/><circle cx="7" cy="10.2" r="1.1" fill="#1c1c1e"/><rect x="6.55" y="10.5" width="0.9" height="2" fill="#1c1c1e"/></svg>'
                 : '<svg width="14" height="16" viewBox="0 0 14 16" fill="none" xmlns="http://www.w3.org/2000/svg" style="vertical-align:middle;opacity:0.55;"><rect x="2" y="7" width="10" height="7" rx="1.2" fill="none" stroke="#aaa" stroke-width="1.4"/><path d="M4 7V4.5C4 2.84 5.34 1.5 7 1.5C8.66 1.5 10 2.84 10 4.5V5.5" stroke="#aaa" stroke-width="1.4" fill="none" stroke-linecap="round"/></svg>';
             var cls = 'room-card' + (isLocked ? ' room-card-locked' : '');
             h += '<div class="' + cls + '" data-hall="' + esc(hallName) + '" data-room="' + room.room_number + '" style="background:' + bg + ';border:' + border + ';border-radius:8px;padding:10px 12px;' + boxShadow + 'transition:all 0.2s ease;">';
             h += '<div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:6px;gap:6px;">';
-            h += '<span style="font-weight:700;color:var(--secondary-gold);font-size:0.85rem;display:inline-flex;align-items:center;gap:6px;">Room ' + esc(room.room_number) + '<span class="room-card-badge" style="' + (isLocked ? '' : 'display:none;') + 'background:#d4a556;color:#1a2332;padding:1px 7px;border-radius:3px;font-size:0.65rem;font-weight:800;letter-spacing:0.5px;">LOCKED</span></span>';
+            h += '<span style="font-weight:700;color:var(--secondary-gold);font-size:0.85rem;display:inline-flex;align-items:center;gap:6px;">Room ' + esc(room.room_number) + '<span class="room-card-badge" style="' + (isLocked ? '' : 'display:none;') + 'background:#d4a556;color:#1c1c1e;padding:1px 7px;border-radius:3px;font-size:0.65rem;font-weight:800;letter-spacing:0.5px;">LOCKED</span></span>';
             h += '<span style="display:flex;align-items:center;gap:6px;">';
             h += '<span style="font-size:0.72rem;color:' + (isFull ? '#27ae60' : 'rgba(245,245,245,0.4)') + ';">' + members.length + '/' + cap + '</span>';
             h += '<button class="room-card-lockbtn" onclick="toggleRoomLock(\'' + esc(hallName) + '\', ' + (room.room_number || 0) + ', ' + (isLocked ? 'false' : 'true') + ')" style="background:rgba(0,0,0,0.2);border:1px solid ' + (isLocked ? '#d4a556' : 'rgba(245,245,245,0.2)') + ';border-radius:5px;cursor:pointer;padding:3px 6px;line-height:1;display:inline-flex;align-items:center;justify-content:center;transition:all 0.15s;" title="' + (isLocked ? 'Unlock' : 'Lock') + ' this room">' + lockIconHtml + '</button>';
@@ -2890,7 +2891,7 @@ function exportRoomAssignments() {
         var ws = XLSX.utils.json_to_sheet(rows);
         var wb = XLSX.utils.book_new();
         XLSX.utils.book_append_sheet(wb, ws, 'Rooms');
-        XLSX.writeFile(wb, 'PYC2026_Rooms_' + new Date().toISOString().slice(0, 10) + '.xlsx');
+        XLSX.writeFile(wb, 'PYC2027_Rooms_' + new Date().toISOString().slice(0, 10) + '.xlsx');
     }).catch(function(e) { pycCustomAlert('Error: ' + e.message); });
 }
 
@@ -2942,7 +2943,7 @@ function applyLockVisualToCard(hall, roomNumber, locked) {
         btn.title = locked ? 'Unlock this room' : 'Lock this room';
         btn.style.borderColor = locked ? '#d4a556' : 'rgba(245,245,245,0.2)';
         btn.innerHTML = locked
-            ? '<svg width="14" height="16" viewBox="0 0 14 16" fill="none" xmlns="http://www.w3.org/2000/svg" style="vertical-align:middle;"><rect x="2" y="7" width="10" height="7" rx="1.2" fill="#d4a556" stroke="#d4a556" stroke-width="0.6"/><path d="M4 7V4.5C4 2.84 5.34 1.5 7 1.5C8.66 1.5 10 2.84 10 4.5V7" stroke="#d4a556" stroke-width="1.6" fill="none" stroke-linecap="round"/><circle cx="7" cy="10.2" r="1.1" fill="#1a2332"/><rect x="6.55" y="10.5" width="0.9" height="2" fill="#1a2332"/></svg>'
+            ? '<svg width="14" height="16" viewBox="0 0 14 16" fill="none" xmlns="http://www.w3.org/2000/svg" style="vertical-align:middle;"><rect x="2" y="7" width="10" height="7" rx="1.2" fill="#d4a556" stroke="#d4a556" stroke-width="0.6"/><path d="M4 7V4.5C4 2.84 5.34 1.5 7 1.5C8.66 1.5 10 2.84 10 4.5V7" stroke="#d4a556" stroke-width="1.6" fill="none" stroke-linecap="round"/><circle cx="7" cy="10.2" r="1.1" fill="#1c1c1e"/><rect x="6.55" y="10.5" width="0.9" height="2" fill="#1c1c1e"/></svg>'
             : '<svg width="14" height="16" viewBox="0 0 14 16" fill="none" xmlns="http://www.w3.org/2000/svg" style="vertical-align:middle;opacity:0.55;"><rect x="2" y="7" width="10" height="7" rx="1.2" fill="none" stroke="#aaa" stroke-width="1.4"/><path d="M4 7V4.5C4 2.84 5.34 1.5 7 1.5C8.66 1.5 10 2.84 10 4.5V5.5" stroke="#aaa" stroke-width="1.4" fill="none" stroke-linecap="round"/></svg>';
         btn.setAttribute('onclick', "toggleRoomLock('" + hall.replace(/'/g, "\\'") + "', " + roomNumber + ", " + (locked ? 'false' : 'true') + ')');
     }

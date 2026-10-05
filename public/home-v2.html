@@ -3,13 +3,13 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
-    <title>PYC 2027 — Philippine Youth for Christ</title>
-    <meta name="description" content="Philippine Youth for Christ 2027. Worship, the Word, and a generation that shows up for each other.">
+    <title>PYC 2027: Abide — Philippine Youth for Christ</title>
+    <meta name="description" content="PYC 2027: Abide. June 2–6, 2027 at SMX Convention Center Davao, Mindanao. &ldquo;Abide in me, and I in you.&rdquo; — John 15:4">
     <meta name="theme-color" content="#000000">
     <link rel="icon" type="image/x-icon" href="/favicon.ico">
     <link rel="apple-touch-icon" href="/apple-touch-icon.png">
-    <meta property="og:title" content="PYC 2027 — Philippine Youth for Christ">
-    <meta property="og:description" content="Worship, the Word, and a generation that shows up for each other.">
+    <meta property="og:title" content="PYC 2027: Abide">
+    <meta property="og:description" content="June 2–6, 2027 · SMX Convention Center Davao, Mindanao. &ldquo;Abide in me, and I in you.&rdquo; — John 15:4">
     <meta property="og:image" content="https://philippineyouthforchrist.org/img/worship.jpg">
     <meta property="og:type" content="website">
     <meta name="twitter:card" content="summary_large_image">
@@ -28,7 +28,7 @@
             --text-dim: rgba(245,245,247,0.68);
             --ink: #1d1d1f;
             --ink-dim: #6e6e73;
-            --accent: #e0b25c;          /* single accent colour */
+            --accent: #d4a556;          /* single accent colour (same gold as theme-2027.css) */
             --accent-ink: #1d1500;      /* text on accent buttons */
             --radius: 28px;
             --nav-h: 52px;
@@ -215,6 +215,10 @@
             .hero-copy { padding-bottom: max(40px, env(safe-area-inset-bottom)); }
             .cta-row .pill { width: 100%; }
             .rail img { height: 54vh; }
+            .countdown { gap: 0; justify-content: space-between; }
+            .countdown div { min-width: 0; }
+            .countdown b { font-size: 2.4rem; }
+            .countdown span { font-size: 0.68rem; }
         }
         @media (prefers-reduced-motion: reduce) {
             html { scroll-behavior: auto; }
@@ -233,13 +237,14 @@
 <script>
     var PYC = {
         year: '2027',
-        theme: '',                 // e.g. 'Your Theme Title'  (leave '' until announced)
-        verse: '',                 // e.g. 'Verse text…'
-        verseRef: '',              // e.g. 'Book 1:1'
-        dates: '',                 // e.g. 'June 2–6, 2027'
-        venue: '',                 // e.g. 'Mountain View College'
-        venueSub: '',              // e.g. 'Valencia, Bukidnon · Mindanao'
-        startsAt: '',              // ISO with offset, e.g. '2027-06-02T16:00:00+08:00' (drives countdown)
+        theme: 'Abide',
+        verse: 'Abide in me, and I in you. As the branch cannot bear fruit of itself, except it abide in the vine; no more can ye, except ye abide in me.',
+        verseRef: 'John 15:4',     // KJV
+        heroLine: 'Abide in me, and I in you.',   // short line shown under the hero title
+        dates: 'June 2–6, 2027',
+        venue: 'SMX Convention Center Davao',
+        venueSub: 'Davao City, Mindanao',
+        startsAt: '2027-06-02T18:00:00+08:00',   // 6:00 PM Philippine Time — drives the countdown
         registerUrl: '/register-v2',
         earlyBirdUntil: 'April 15, 2027',
         priceFrom: '₱750'
@@ -268,9 +273,9 @@
             <img class="hero-img" src="/img/worship.jpg" alt="Hundreds of young people praying together in the conference hall" fetchpriority="high">
         </picture>
         <div class="wrap hero-copy">
-            <p class="eyebrow">Philippine Youth for Christ</p>
-            <h1>PYC&nbsp;<span data-cfg="year">2027</span></h1>
-            <p class="hero-sub">Worship, the Word, and a generation that shows up for each other.</p>
+            <p class="eyebrow">Philippine Youth for Christ <span data-cfg="year">2027</span></p>
+            <h1 data-cfg="heroTitle">PYC <span data-cfg="year">2027</span></h1>
+            <p class="hero-sub" data-cfg="heroSub">Worship, the Word, and a generation that shows up for each other.</p>
             <p class="hero-meta" data-cfg="heroMeta">Dates and venue to be announced.</p>
             <div class="cta-row">
                 <a class="pill" href="/register-v2" data-register>Register now</a>
@@ -330,7 +335,7 @@
                 <div class="fact">
                     <div class="k">When</div>
                     <div class="v" data-cfg="dates">To be announced</div>
-                    <div class="s">Check back soon, or follow us for the announcement.</div>
+                    <div class="s" data-cfg="whenSub">Opening night at 6:00 PM.</div>
                 </div>
                 <div class="fact">
                     <div class="k">Where</div>
@@ -402,7 +407,7 @@
         <img src="/img/community.jpg" alt="" loading="lazy">
         <div class="wrap">
             <h2 class="rv">Be there.</h2>
-            <p class="rv d1">Join young people from across the Philippines for PYC <span data-cfg="year">2027</span>.</p>
+            <p class="rv d1">Join young people from across the Philippines for PYC <span data-cfg="year">2027</span> in Davao.</p>
             <div class="cta-row rv d2">
                 <a class="pill" href="/register-v2" data-register>Register now</a>
             </div>
@@ -445,7 +450,8 @@
         document.querySelectorAll('[data-cfg="' + key + '"]').forEach(function (el) { el.textContent = text; });
     }
     ['year', 'priceFrom', 'earlyBirdUntil'].forEach(function (k) { if (PYC[k]) set(k, PYC[k]); });
-    if (PYC.theme) set('theme', PYC.theme);
+    if (PYC.theme) { set('theme', PYC.theme + '.'); set('heroTitle', PYC.theme + '.'); }
+    if (PYC.heroLine) set('heroSub', '\u201C' + PYC.heroLine + '\u201D' + (PYC.verseRef ? ' \u2014\u00A0' + PYC.verseRef.replace(/ /g, '\u00A0') : ''));
     if (PYC.dates) set('dates', PYC.dates);
     if (PYC.venue) set('venue', PYC.venue);
     if (PYC.venueSub) set('venueSub', PYC.venueSub);

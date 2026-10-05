@@ -3,20 +3,20 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Reserve Tenting - PYC 2026</title>
+    <title>Reserve Tenting - PYC 2027</title>
     <link rel="preconnect" href="https://fonts.googleapis.com" crossorigin>
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Montserrat:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <style>
         *{margin:0;padding:0;box-sizing:border-box;}
-        :root{--primary-navy:#1a2332;--secondary-gold:#d4a556;--text-light:#f5f5f5;--background-overlay:rgba(26,35,50,0.92);}
-        html{background:#0f1419;}
-        body{font-family:'Montserrat',sans-serif;background:linear-gradient(135deg,#0f1419 0%,#1a2332 50%,#2a3f5f 100%);background-attachment:fixed;color:var(--text-light);min-height:100vh;}
+        :root{--primary-navy:#1c1c1e;--secondary-gold:#d4a556;--text-light:#f5f5f5;--background-overlay:rgba(28, 28, 30,0.92);}
+        html{background:#000000;}
+        body{font-family:'Montserrat',sans-serif;background:linear-gradient(135deg,#000000 0%,#1c1c1e 50%,#2c2c2e 100%);background-attachment:fixed;color:var(--text-light);min-height:100vh;}
         body::before{content:'';position:fixed;top:0;left:0;width:100%;height:100%;background:radial-gradient(circle at 20% 30%,rgba(74,124,158,0.1) 0%,transparent 50%),radial-gradient(circle at 80% 70%,rgba(212,165,86,0.08) 0%,transparent 50%);pointer-events:none;z-index:1;}
         .stars{position:fixed;top:0;left:0;width:100%;height:100%;pointer-events:none;z-index:0;}.star{position:absolute;background:white;border-radius:50%;box-shadow:0 0 3px rgba(255,255,255,0.8);filter:blur(0.5px);animation:twinkle 3s infinite;}
         @keyframes twinkle{0%,100%{opacity:0.4;}50%{opacity:1;}}
         .container{position:relative;z-index:2;max-width:700px;margin:0 auto;padding:30px 20px 60px;}
-        .pyc-progress{max-width:700px;margin:0 auto 25px;padding:15px 10px 5px}.pyc-progress-title{text-align:center;font-size:0.7rem;text-transform:uppercase;letter-spacing:2px;color:rgba(245,245,245,0.3);margin-bottom:14px;font-weight:600}.pyc-steps{display:flex;align-items:flex-start;justify-content:space-between;position:relative}.pyc-steps::before{content:'';position:absolute;top:16px;left:0;right:0;height:3px;background:rgba(255,255,255,0.06);border-radius:2px}.pyc-line{position:absolute;top:16px;left:0;height:3px;z-index:1;background:linear-gradient(90deg,#d4a556,#e5b96a);border-radius:2px;transition:width 0.3s}.pyc-s{display:flex;flex-direction:column;align-items:center;flex:1;position:relative;z-index:3}.pyc-dot{width:32px;height:32px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:0.75rem;font-weight:700;border:3px solid rgba(255,255,255,0.08);background:#1a2332;color:rgba(245,245,245,0.25);transition:all 0.3s}.pyc-s.done .pyc-dot{background:#d4a556;color:#1a2332;border-color:#d4a556}.pyc-s.now .pyc-dot,.pyc-s.active .pyc-dot{background:#1a2332;border-color:#d4a556;color:#d4a556;box-shadow:0 0 15px rgba(212,165,86,0.3);animation:pyc-glow 2s infinite}.pyc-lbl{margin-top:7px;font-size:0.62rem;color:rgba(245,245,245,0.2);text-align:center;font-weight:600;text-transform:uppercase;letter-spacing:0.3px;line-height:1.3;max-width:70px}.pyc-s.done .pyc-lbl,.pyc-s.now .pyc-lbl,.pyc-s.active .pyc-lbl{color:rgba(212,165,86,0.65)}.pyc-hint{text-align:center;margin-top:10px;font-size:0.78rem;color:rgba(212,165,86,0.55);font-style:italic}
+        .pyc-progress{max-width:700px;margin:0 auto 25px;padding:15px 10px 5px}.pyc-progress-title{text-align:center;font-size:0.7rem;text-transform:uppercase;letter-spacing:2px;color:rgba(245,245,245,0.3);margin-bottom:14px;font-weight:600}.pyc-steps{display:flex;align-items:flex-start;justify-content:space-between;position:relative}.pyc-steps::before{content:'';position:absolute;top:16px;left:0;right:0;height:3px;background:rgba(255,255,255,0.06);border-radius:2px}.pyc-line{position:absolute;top:16px;left:0;height:3px;z-index:1;background:linear-gradient(90deg,#d4a556,#e5b96a);border-radius:2px;transition:width 0.3s}.pyc-s{display:flex;flex-direction:column;align-items:center;flex:1;position:relative;z-index:3}.pyc-dot{width:32px;height:32px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:0.75rem;font-weight:700;border:3px solid rgba(255,255,255,0.08);background:#1c1c1e;color:rgba(245,245,245,0.25);transition:all 0.3s}.pyc-s.done .pyc-dot{background:#d4a556;color:#1c1c1e;border-color:#d4a556}.pyc-s.now .pyc-dot,.pyc-s.active .pyc-dot{background:#1c1c1e;border-color:#d4a556;color:#d4a556;box-shadow:0 0 15px rgba(212,165,86,0.3);animation:pyc-glow 2s infinite}.pyc-lbl{margin-top:7px;font-size:0.62rem;color:rgba(245,245,245,0.2);text-align:center;font-weight:600;text-transform:uppercase;letter-spacing:0.3px;line-height:1.3;max-width:70px}.pyc-s.done .pyc-lbl,.pyc-s.now .pyc-lbl,.pyc-s.active .pyc-lbl{color:rgba(212,165,86,0.65)}.pyc-hint{text-align:center;margin-top:10px;font-size:0.78rem;color:rgba(212,165,86,0.55);font-style:italic}
         @keyframes pyc-glow{0%,100%{box-shadow:0 0 10px rgba(212,165,86,0.2);}50%{box-shadow:0 0 20px rgba(212,165,86,0.45);}}
         @media(max-width:480px){.pyc-dot{width:26px;height:26px;font-size:0.65rem;border-width:2px}.pyc-lbl{font-size:0.55rem;max-width:55px}}
         .page-header{text-align:center;margin-bottom:25px;}.page-header h1{font-family:'Bebas Neue',sans-serif;color:var(--secondary-gold);font-size:clamp(2rem,5vw,2.8rem);letter-spacing:2px;}.page-header p{color:rgba(245,245,245,0.5);font-size:0.9rem;margin-top:5px;}
@@ -42,18 +42,19 @@
         .terms-scroll-hint{text-align:center;padding:6px;color:rgba(212,165,86,0.5);font-size:0.72rem;font-weight:600;letter-spacing:1px;animation:pulseHint 2s infinite;}@keyframes pulseHint{0%,100%{opacity:0.5}50%{opacity:1}}
         .terms-checkbox{display:flex;align-items:flex-start;gap:10px;margin:10px 0 0;padding:0 16px 14px;}.terms-checkbox input[type="checkbox"]{width:18px;height:18px;margin-top:2px;accent-color:var(--secondary-gold);cursor:pointer;flex-shrink:0;}.terms-checkbox label{font-size:0.84rem;color:rgba(245,245,245,0.7);cursor:pointer;line-height:1.5;}
     </style>
+    <link rel="stylesheet" href="/theme-2027.css"><!-- PYC 2027 site theme: keep this the LAST stylesheet in <head> -->
 </head>
 <body>
 <div class="stars" id="stars"></div>
 
 <!-- Accommodation-closed overlay (hidden by default; shown when /server-time reports accommodationClosed) -->
-<div id="accomClosedOverlay" style="display:none;position:fixed;inset:0;z-index:9000;background:linear-gradient(135deg,#0f1419 0%,#1a2332 50%,#2a3f5f 100%);overflow-y:auto;padding:40px 20px;">
+<div id="accomClosedOverlay" style="display:none;position:fixed;inset:0;z-index:9000;background:linear-gradient(135deg,#000000 0%,#1c1c1e 50%,#2c2c2e 100%);overflow-y:auto;padding:40px 20px;">
     <div style="max-width:520px;margin:40px auto 0;background:var(--background-overlay);border:2px solid rgba(212,165,86,0.3);border-radius:20px;padding:40px 30px;text-align:center;">
-        <h1 style="font-family:'Bebas Neue',sans-serif;font-size:2.2rem;color:var(--secondary-gold);letter-spacing:3px;margin-bottom:10px;">SEE YOU IN MVC!</h1>
+        <h1 style="font-family:'Bebas Neue',sans-serif;font-size:2.2rem;color:var(--secondary-gold);letter-spacing:3px;margin-bottom:10px;">SEE YOU IN DAVAO!</h1>
         <p style="font-size:1.1rem;color:rgba(245,245,245,0.85);margin-bottom:8px;">Tenting reservations are closed.</p>
         <p style="color:rgba(245,245,245,0.65);margin:14px 0 26px 0;line-height:1.7;">
             Reservations ended on <strong>May 22, 2026 (Philippine Time)</strong>.<br>
-            <em>June 3-7 &middot; Mountain View College, Mindanao, Philippines</em>
+            <em>June 2-6 &middot; SMX Convention Center Davao, Mindanao, Philippines</em>
         </p>
         <a href="/" style="display:inline-block;padding:12px 28px;background:transparent;border:2px solid var(--secondary-gold);color:var(--secondary-gold);border-radius:8px;font-weight:700;text-decoration:none;text-transform:uppercase;letter-spacing:1px;">Return Home</a>
         <p style="margin-top:36px;font-size:0.78rem;color:rgba(245,245,245,0.35);">
@@ -75,7 +76,7 @@
         <div class="pyc-hint">Step 1 of 3 &mdash; Book your tenting space</div>
         <script>(function(){var s=document.getElementById('pycSteps');var l=document.getElementById('pycLine');var now=s.querySelector('.pyc-s.now .pyc-dot');if(!s||!l||!now)return;function calc(){var sr=s.getBoundingClientRect();var nr=now.getBoundingClientRect();var edge=nr.left-sr.left+nr.width/2;l.style.width=edge+'px';l.style.left='0px';}calc();window.addEventListener('resize',calc);})();</script>
     </div>
-    <div class="page-header"><h1>Reserve Tenting Space</h1><p>Camping &mdash; ₱150 per person &mdash; bring your own tent to PYC 2026</p></div>
+    <div class="page-header"><h1>Reserve Tenting Space</h1><p>Camping &mdash; ₱150 per person &mdash; bring your own tent to PYC 2027</p></div>
     <div id="alertBox"></div>
     <div class="content-box" id="lookupBox">
         <h3>Your Information</h3>
@@ -152,7 +153,7 @@
                 <div class="terms-scroll-hint" id="termsScrollHint">&#8595; Scroll down to read all terms &#8595;</div>
                 <div class="terms-checkbox">
                     <input type="checkbox" id="acceptTerms" onchange="document.getElementById('reviewBtn').style.display=this.checked?'block':'none';" disabled>
-                    <label for="acceptTerms" id="termsLabel" style="opacity:0.4;">I have read and accept the Terms &amp; Conditions for PYC 2026 accommodation reservations.</label>
+                    <label for="acceptTerms" id="termsLabel" style="opacity:0.4;">I have read and accept the Terms &amp; Conditions for PYC 2027 accommodation reservations.</label>
                 </div>
             </div>
             <button class="btn btn-gold" id="reviewBtn" onclick="goToReview()" style="width:100%;display:none;margin-top:12px;">Review &amp; Confirm Reservation</button>

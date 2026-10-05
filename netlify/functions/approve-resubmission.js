@@ -271,7 +271,7 @@ async function sendApprovalEmail(registration) {
   const receiptCard = `
     <div style="max-width:550px;margin:20px auto;background:#fff;border:1px solid #ddd;border-radius:4px;overflow:hidden;font-family:Arial,sans-serif;">
       <div style="background:#1a2332;padding:18px;text-align:center;">
-        <h2 style="margin:0;color:#d4a556;font-size:22px;font-style:italic;font-weight:bold;">PYC 2026, Above and Beyond</h2>
+        <h2 style="margin:0;color:#d4a556;font-size:22px;font-style:italic;font-weight:bold;">PYC 2027, Abide</h2>
       </div>
       <div style="padding:30px 35px;background:#fff;">
         <table style="width:100%;border-collapse:collapse;font-size:14px;">
@@ -301,29 +301,29 @@ async function sendApprovalEmail(registration) {
   </style></head><body>
   <div class="container">
     <div class="header">
-      <h1>PYC 2026</h1>
-      <p style="margin:5px 0 0;color:rgba(212,165,86,0.7);font-size:14px;">Above and Beyond</p>
+      <h1>PYC 2027</h1>
+      <p style="margin:5px 0 0;color:rgba(212,165,86,0.7);font-size:14px;">Abide</p>
     </div>
     <div class="content">
       <p style="font-size:16px;color:#333;">Dear ${registration.first_name},</p>
       <p style="font-size:15px;color:#555;line-height:1.6;">Greetings from PYC!</p>
-      <p style="font-size:15px;color:#555;line-height:1.6;">Great news! Your resubmitted payment proof has been reviewed and approved. Your registration for PYC 2026, "Above and Beyond" is now confirmed. Please see your official receipt below.</p>
-      <p style="font-size:15px;color:#555;line-height:1.6;">See you in Mountain View College, Bukidnon!</p>
+      <p style="font-size:15px;color:#555;line-height:1.6;">Great news! Your resubmitted payment proof has been reviewed and approved. Your registration for PYC 2027, "Abide" is now confirmed. Please see your official receipt below.</p>
+      <p style="font-size:15px;color:#555;line-height:1.6;">See you in SMX Convention Center Davao!</p>
       ${receiptCard}
       <p style="font-size:15px;color:#555;line-height:1.6;margin-top:25px;"><strong>Important:</strong> Please bring a valid ID for on-site check-in.</p>
       <p style="font-size:15px;color:#555;line-height:1.6;margin-top:25px;">Blessings,<br><strong>Registration Team</strong></p>
     </div>
     <div class="footer">
-      <p>PYC 2026: Above and Beyond</p>
-      <p>June 3-7, 2026 &middot; Mountain View College, Mindanao</p>
+      <p>PYC 2027: Abide</p>
+      <p>June 2-6, 2027 &middot; SMX Convention Center Davao, Mindanao</p>
     </div>
   </div>
   </body></html>`;
 
   const sendSmtpEmail = {
     to: [{ email: registration.email, name: name }],
-    sender: { name: 'PYC 2026', email: process.env.BREVO_FROM_EMAIL || 'noreply@philippineyouthforchrist.org' },
-    subject: `PYC 2026 — Payment Resubmission Approved! (${confNum})`,
+    sender: { name: 'PYC 2027', email: process.env.BREVO_FROM_EMAIL || 'noreply@philippineyouthforchrist.org' },
+    subject: `PYC 2027 — Payment Resubmission Approved! (${confNum})`,
     htmlContent: emailHtml
   };
 
@@ -421,9 +421,9 @@ async function sendRejectionEmail(registration) {
 </head>
 <body>
   <div class="container">
-    <img src="https://philippineyouthforchrist.org/IMG_3908.jpeg" alt="PYC 2026" class="banner-image">
+    <img src="https://philippineyouthforchrist.org/img/worship.jpg" alt="PYC 2027" class="banner-image">
     <div class="header">
-      <p style="color: #f5f5f5 !important;">June 3-7 • Mountain View College, Mindanao</p>
+      <p style="color: #f5f5f5 !important;">June 2-6 • SMX Convention Center Davao, Mindanao</p>
     </div>
     
     <div class="content">
@@ -455,7 +455,7 @@ async function sendRejectionEmail(registration) {
 
     <div class="footer">
       <p><strong>Philippine Youth for Christ</strong></p>
-      <p style="color: #999 !important;">June 3-7 | Mountain View College, Mindanao, Philippines</p>
+      <p style="color: #999 !important;">June 2-6 | SMX Convention Center Davao, Mindanao, Philippines</p>
       <div class="social-links">
         <a href="https://www.facebook.com/share/1D9PJw6wkq/?mibextid=wwXIfr">Facebook</a> |
         <a href="https://www.instagram.com/philippineyouthforchrist?igsh=c2Q0MjAwbWh1cXZ2">Instagram</a>
@@ -481,7 +481,7 @@ async function sendRejectionEmail(registration) {
     name: `${registration.first_name} ${registration.last_name}`
   }];
   
-  sendSmtpEmail.subject = `Payment Resubmission Required - PYC 2026 (${registration.confirmation_number || registration.id})`;
+  sendSmtpEmail.subject = `Payment Resubmission Required - PYC 2027 (${registration.confirmation_number || registration.id})`;
   sendSmtpEmail.htmlContent = emailHtml;
 
   await apiInstance.sendTransacEmail(sendSmtpEmail);

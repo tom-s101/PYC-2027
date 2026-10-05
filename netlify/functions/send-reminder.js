@@ -288,23 +288,23 @@ async function sendReminderEmail(apiInstance, registration) {
 </head>
 <body>
   <div class="container">
-    <img src="https://philippineyouthforchrist.org/IMG_3908.jpeg" alt="PYC 2026 - Above and Beyond" class="banner-image">
+    <img src="https://philippineyouthforchrist.org/img/worship.jpg" alt="PYC 2027 - Abide" class="banner-image">
     <div class="header">
-      <h1>PYC 2026 REMINDER</h1>
-      <p>June 3-7 • Mountain View College, Valencia, Bukidnon</p>
+      <h1>PYC 2027 REMINDER</h1>
+      <p>June 2-6 • SMX Convention Center, Davao City</p>
     </div>
     
     <div class="content">
-      <h2>PYC 2026 is Almost Here</h2>
+      <h2>PYC 2027 is Almost Here</h2>
       
       <div class="countdown-box">
-        <div class="label">PYC 2026 Begins June 3 — In</div>
+        <div class="label">PYC 2027 Begins June 2 — In</div>
         <div class="number">10</div>
         <div class="label">Days</div>
       </div>
       
       <p>Dear ${registration.first_name} ${registration.last_name},</p>
-      <p>Philippine Youth for Christ 2026 begins on <strong>June 3</strong>, just <strong>10 days</strong> from now. We are looking forward to welcoming you for a meaningful time of worship, fellowship, and growth. To help you prepare, please review the details and checklist below.</p>
+      <p>Philippine Youth for Christ 2027 begins on <strong>June 2</strong>, just <strong>10 days</strong> from now. We are looking forward to welcoming you for a meaningful time of worship, fellowship, and growth. To help you prepare, please review the details and checklist below.</p>
       
       <div class="info-box">
         <h3 style="margin-top: 0; color: #1a2332;">Your Registration Details</h3>
@@ -362,9 +362,9 @@ async function sendReminderEmail(apiInstance, registration) {
 
       <div style="background: #e8f5e9; border-left: 4px solid #27ae60; padding: 20px; margin: 20px 0; border-radius: 4px;">
         <h3 style="color: #1a2332; margin-top: 0;">Event Details</h3>
-        <p style="margin: 5px 0;"><strong>When:</strong> June 3-7, 2026</p>
-        <p style="margin: 5px 0;"><strong>Where:</strong> Mountain View College, Valencia, Bukidnon, Philippines</p>
-        <p style="margin: 5px 0;"><strong>Theme:</strong> "Above and Beyond" (Ephesians 3:20)</p>
+        <p style="margin: 5px 0;"><strong>When:</strong> June 2-6, 2027</p>
+        <p style="margin: 5px 0;"><strong>Where:</strong> SMX Convention Center, Davao City, Philippines</p>
+        <p style="margin: 5px 0;"><strong>Theme:</strong> "Abide" (John 15:4)</p>
         <p style="margin: 15px 0 5px; font-style: italic; color: #666;">
           "Now to him who is able to do immeasurably more than all we ask or imagine..."
         </p>
@@ -381,7 +381,7 @@ async function sendReminderEmail(apiInstance, registration) {
 
     <div class="footer">
       <p><strong>Philippine Youth for Christ</strong></p>
-      <p>June 3-7, 2026 | Mountain View College, Valencia, Bukidnon, Philippines</p>
+      <p>June 2-6, 2027 | SMX Convention Center, Davao City, Philippines</p>
       <p style="font-size: 14px; margin: 15px 0;">If you have any questions, please reach out to us through our social media accounts:</p>
       <div class="social-links">
         <a href="https://www.facebook.com/share/1D9PJw6wkq/?mibextid=wwXIfr" style="display: inline-block; margin: 5px 10px;">
@@ -409,7 +409,7 @@ async function sendReminderEmail(apiInstance, registration) {
     name: `${registration.first_name} ${registration.last_name}`
   }];
   
-  sendSmtpEmail.subject = `PYC 2026 Begins in 10 Days - Registration ${registration.confirmation_number || registration.id}`;
+  sendSmtpEmail.subject = `PYC 2027 Begins in 10 Days - Registration ${registration.confirmation_number || registration.id}`;
   sendSmtpEmail.htmlContent = emailHtml;
 
   await apiInstance.sendTransacEmail(sendSmtpEmail);
