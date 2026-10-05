@@ -1,0 +1,689 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+        <meta property="og:title" content="PYC 2026 — Book Your Accommodation">
+    <meta property="og:description" content="Reserve your accommodation for Philippine Youth for Christ 2026 — June 3-7, Valencia, Bukidnon. Above and Beyond! Ephesians 3:20">
+    <meta property="og:image" content="https://philippineyouthforchrist.org/IMG_3908.jpeg">
+    <meta property="og:url" content="https://philippineyouthforchrist.org/accommodations">
+    <meta property="og:type" content="website">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="PYC 2026 — Book Your Accommodation">
+    <meta name="twitter:description" content="Reserve your accommodation for PYC 2026 — Above and Beyond!">
+    <meta name="twitter:image" content="https://philippineyouthforchrist.org/IMG_3908.jpeg">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" type="image/x-icon" href="/favicon.ico">
+    <link rel="apple-touch-icon" href="/apple-touch-icon.png">
+    <title>Accommodation Reservation - PYC 2026</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" crossorigin>
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Montserrat:wght@400;600;700&display=swap" rel="stylesheet">
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        :root { --primary-navy: #1a2332; --secondary-gold: #d4a556; --accent-blue: #4a7c9e; --text-light: #f5f5f5; --background-overlay: rgba(26, 35, 50, 0.92); --success: #27ae60; --danger: #e74c3c; }
+        html { background: #0f1419; }
+        body { font-family: 'Montserrat', sans-serif; background-color: #0f1419; background: linear-gradient(135deg, #0f1419 0%, #1a2332 50%, #2a3f5f 100%); background-attachment: fixed; color: var(--text-light); min-height: 100vh; overscroll-behavior: none; overflow-x: hidden; }
+        body::before { content: ''; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: radial-gradient(circle at 20% 30%, rgba(74,124,158,0.1) 0%, transparent 50%), radial-gradient(circle at 80% 70%, rgba(212,165,86,0.08) 0%, transparent 50%); pointer-events: none; z-index: 1; }
+        .stars { position: fixed; top: 0; left: 0; width: 100%; height: 100%; pointer-events: none; z-index: 0; }
+        .star { position: absolute; background: white; border-radius: 50%; box-shadow: 0 0 3px rgba(255,255,255,0.8); filter: blur(0.5px); animation: twinkle 3s infinite; }
+        @keyframes twinkle { 0%,100% { opacity: 0.4; } 50% { opacity: 1; } }
+        .container { position: relative; z-index: 2; max-width: 900px; margin: 0 auto; padding: 25px 15px; }
+        .page-header { text-align: center; margin-bottom: 25px; }
+        .page-header h1 { font-family: 'Bebas Neue', sans-serif; font-size: 2.2rem; color: var(--secondary-gold); letter-spacing: 3px; margin-bottom: 8px; }
+        .page-header p { color: rgba(245,245,245,0.7); font-size: 0.95rem; max-width: 600px; margin: 0 auto; line-height: 1.5; }
+        .registrant-info { background: var(--background-overlay); border: 1px solid rgba(212,165,86,0.3); border-radius: 12px; padding: 18px 20px; margin-bottom: 20px; }
+        .registrant-info h3 { color: var(--secondary-gold); margin-bottom: 12px; font-size: 1rem; letter-spacing: 1px; }
+        .info-row-display { display: flex; gap: 25px; flex-wrap: wrap; margin-bottom: 12px; }
+        .info-item { font-size: 0.95rem; color: rgba(245,245,245,0.8); }
+        .info-item strong { color: var(--text-light); }
+        .lookup-form { display: flex; gap: 10px; margin-top: 15px; flex-wrap: wrap; }
+        .lookup-form input { flex: 1; min-width: 200px; padding: 12px 16px; background: rgba(255,255,255,0.06); border: 1px solid rgba(212,165,86,0.3); border-radius: 8px; color: var(--text-light); font-family: 'Montserrat', sans-serif; font-size: 0.95rem; }
+        .lookup-form input::placeholder { color: rgba(245,245,245,0.4); }
+        .lookup-form input:focus { outline: none; border-color: var(--secondary-gold); }
+        .lookup-btn { padding: 12px 24px; background: var(--secondary-gold); color: var(--primary-navy); border: none; border-radius: 8px; font-weight: 700; cursor: pointer; font-size: 0.95rem; transition: all 0.3s; }
+        .lookup-btn:hover { background: #e5b96a; }
+        .lookup-btn:disabled { opacity: 0.5; cursor: not-allowed; }
+        .group-box { background: rgba(212,165,86,0.06); border: 1px solid rgba(212,165,86,0.25); border-radius: 10px; padding: 18px; margin-top: 15px; }
+        .group-box h4 { color: var(--secondary-gold); font-size: 0.9rem; margin-bottom: 10px; letter-spacing: 1px; }
+        .member-row { display: flex; justify-content: space-between; align-items: center; padding: 8px 0; border-bottom: 1px solid rgba(255,255,255,0.06); font-size: 0.9rem; }
+        .member-row:last-child { border-bottom: none; }
+        .member-name { color: var(--text-light); font-weight: 600; }
+        .member-detail { color: rgba(245,245,245,0.6); font-size: 0.82rem; }
+        .member-primary { color: var(--secondary-gold); font-size: 0.75rem; font-weight: 600; }
+        .member-select { cursor:pointer; transition:all 0.2s; padding:10px 12px; border-radius:8px; border:1px solid rgba(255,255,255,0.06); margin-bottom:6px; }
+        .member-select:hover { background:rgba(212,165,86,0.06); border-color:rgba(212,165,86,0.2); }
+        .member-select.selected { background:rgba(212,165,86,0.1); border-color:rgba(212,165,86,0.4); }
+        .member-select .ms-check { width:18px; height:18px; border-radius:4px; border:2px solid rgba(245,245,245,0.25); display:inline-flex; align-items:center; justify-content:center; margin-right:10px; flex-shrink:0; transition:all 0.2s; }
+        .member-select.selected .ms-check { background:var(--secondary-gold); border-color:var(--secondary-gold); color:#1a2332; }
+        .member-select .ms-pyc { font-family:'Bebas Neue',sans-serif; color:var(--secondary-gold); font-size:0.85rem; letter-spacing:0.5px; margin-left:auto; }
+        .member-select-hint { font-size:0.82rem; color:rgba(245,245,245,0.5); margin-bottom:12px; }
+        .member-select-confirm { padding:12px 24px; background:var(--secondary-gold); color:#1a2332; border:none; border-radius:8px; font-family:'Montserrat',sans-serif; font-weight:700; font-size:0.9rem; cursor:pointer; margin-top:12px; transition:all 0.3s; }
+        .member-select-confirm:disabled { opacity:0.35; cursor:not-allowed; }
+        .spot-selector { background: rgba(212,165,86,0.08); border: 1px solid rgba(212,165,86,0.25); border-radius: 10px; padding: 18px 22px; margin-bottom: 25px; display: none; }
+        .spot-selector h4 { color: var(--secondary-gold); font-size: 0.9rem; margin-bottom: 10px; }
+        .spot-selector p { color: rgba(245,245,245,0.7); font-size: 0.88rem; margin-bottom: 12px; line-height: 1.5; }
+        .spot-controls { display: flex; align-items: center; gap: 12px; }
+        .spot-controls button { width: 36px; height: 36px; border-radius: 50%; border: 1px solid rgba(212,165,86,0.4); background: rgba(255,255,255,0.05); color: var(--secondary-gold); font-size: 1.2rem; cursor: pointer; transition: all 0.2s; display: flex; align-items: center; justify-content: center; }
+        .spot-controls button:hover { background: rgba(212,165,86,0.15); }
+        .spot-controls .spot-count { font-size: 1.5rem; font-weight: 800; color: var(--text-light); min-width: 40px; text-align: center; }
+        .spot-total { font-size: 0.92rem; color: rgba(245,245,245,0.7); margin-top: 10px; }
+        .spot-total strong { color: var(--secondary-gold); font-size: 1.05rem; }
+        .accomm-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); gap: 16px; margin-bottom: 20px; }
+        .accomm-card { background: var(--background-overlay); border: 2px solid rgba(212,165,86,0.2); border-radius: 14px; padding: 20px; transition: all 0.3s; position: relative; overflow: hidden; }
+        .accomm-card:hover { border-color: var(--secondary-gold); transform: translateY(-3px); box-shadow: 0 10px 30px rgba(0,0,0,0.3); }
+        .accomm-card.full { opacity: 0.85; }
+        .accomm-card.full-hidden::after { content: 'NOT AVAILABLE'; position: absolute; top: 20px; right: -35px; background: #e74c3c; color: white; padding: 5px 40px; font-size: 12px; font-weight: 700; letter-spacing: 1px; transform: rotate(45deg); z-index: 5; }
+        .accomm-card .card-header { display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 10px; }
+        .accomm-card h3 { font-family: 'Bebas Neue', sans-serif; font-size: 1.35rem; color: var(--secondary-gold); letter-spacing: 1px; }
+        .accomm-card .price { font-size: 1.15rem; font-weight: 800; color: var(--text-light); background: rgba(212,165,86,0.15); padding: 5px 10px; border-radius: 8px; }
+        .accomm-card .price small { font-size: 0.7rem; font-weight: 400; color: rgba(245,245,245,0.6); }
+        .accomm-card .description { color: rgba(245,245,245,0.7); font-size: 0.85rem; line-height: 1.5; margin-bottom: 10px; }
+        .accomm-card .details { display: flex; gap: 8px; flex-wrap: wrap; margin-bottom: 10px; }
+        .accomm-card .detail-tag { background: rgba(255,255,255,0.06); border: 1px solid rgba(255,255,255,0.1); padding: 4px 8px; border-radius: 6px; font-size: 0.78rem; color: rgba(245,245,245,0.8); }
+        .accomm-card .availability-bar { margin-bottom: 10px; }
+        .accomm-card .bar-label { display: flex; justify-content: space-between; font-size: 0.82rem; margin-bottom: 6px; color: rgba(245,245,245,0.7); }
+        .bar-track { height: 8px; background: rgba(255,255,255,0.1); border-radius: 4px; overflow: hidden; }
+        .bar-fill { height: 100%; border-radius: 4px; transition: width 0.5s ease; }
+        .bar-fill.low { background: #27ae60; } .bar-fill.medium { background: #f39c12; } .bar-fill.high { background: #e74c3c; }
+        .reserve-btn { width: 100%; padding: 12px; background: var(--secondary-gold); color: var(--primary-navy); border: none; border-radius: 10px; font-family: 'Montserrat', sans-serif; font-size: 1rem; font-weight: 700; cursor: pointer; transition: all 0.3s; text-transform: uppercase; letter-spacing: 1px; }
+        .reserve-btn:hover { background: #e5b96a; transform: translateY(-2px); }
+        .reserve-btn:disabled { opacity: 0.4; cursor: not-allowed; transform: none; }
+        .waitlist-btn { width: 100%; padding: 14px; background: transparent; color: var(--secondary-gold); border: 2px solid var(--secondary-gold); border-radius: 10px; font-family: 'Montserrat', sans-serif; font-size: 0.95rem; font-weight: 700; cursor: pointer; transition: all 0.3s; text-transform: uppercase; letter-spacing: 1px; margin-top: 8px; }
+        .waitlist-btn:hover { background: rgba(212,165,86,0.1); }
+        .waitlist-btn:disabled { opacity: 0.4; cursor: not-allowed; }
+        .full-badge { display: inline-block; background: rgba(231,76,60,0.15); border: 1px solid rgba(231,76,60,0.3); color: #e74c3c; padding: 4px 12px; border-radius: 6px; font-size: 0.82rem; font-weight: 600; }
+        .note-box { background: rgba(212,165,86,0.08); border: 1px solid rgba(212,165,86,0.25); border-radius: 10px; padding: 14px 16px; margin-bottom: 20px; font-size: 0.85rem; color: rgba(245,245,245,0.75); line-height: 1.7; }
+        .note-box strong { color: var(--secondary-gold); }
+        .alert { padding: 15px 20px; border-radius: 8px; margin-bottom: 20px; font-size: 0.95rem; }
+        .alert-error { background: rgba(231,76,60,0.15); border: 1px solid rgba(231,76,60,0.4); color: #e74c3c; }
+        .alert-success { background: rgba(39,174,96,0.15); border: 1px solid rgba(39,174,96,0.4); color: #27ae60; }
+        .back-link { display: inline-block; color: var(--secondary-gold); text-decoration: none; margin-bottom: 20px; font-size: 0.95rem; }
+        .back-link:hover { opacity: 0.8; }
+        .loading { text-align: center; padding: 60px 20px; color: rgba(245,245,245,0.4); }
+        /* Cart */
+        .cart-section { background: var(--background-overlay); border: 2px solid rgba(212,165,86,0.3); border-radius: 14px; padding: 25px; margin: 25px 0; display: none; }
+        .cart-section.has-items { display: block; }
+        .cart-title { font-family: 'Bebas Neue', sans-serif; font-size: 1.6rem; color: var(--secondary-gold); letter-spacing: 2px; margin-bottom: 15px; }
+        .cart-item { display: flex; justify-content: space-between; align-items: center; padding: 12px 0; border-bottom: 1px solid rgba(255,255,255,0.06); }
+        .cart-item:last-child { border-bottom: none; }
+        .cart-item-name { color: var(--text-light); font-weight: 600; font-size: 0.95rem; }
+        .cart-item-detail { color: rgba(245,245,245,0.5); font-size: 0.82rem; }
+        .cart-item-price { color: var(--secondary-gold); font-weight: 700; font-size: 1rem; }
+        .cart-item-remove { background: none; border: none; color: #e74c3c; cursor: pointer; font-size: 0.82rem; padding: 4px 8px; }
+        .cart-total { display: flex; justify-content: space-between; align-items: center; padding-top: 15px; margin-top: 10px; border-top: 2px solid rgba(212,165,86,0.3); }
+        .cart-total-label { font-weight: 700; font-size: 1.05rem; }
+        .cart-total-amount { color: var(--secondary-gold); font-weight: 800; font-size: 1.3rem; }
+        .checkout-btn { display: none; }
+        .checkout-btn:hover { background: #e5b96a; transform: translateY(-2px); }
+        .checkout-btn:disabled { opacity: 0.4; cursor: not-allowed; transform: none; }
+        /* Slide Button */
+        .slide-btn-wrapper { width: 100%; margin-top: 18px; }
+        .slide-btn-track { position: relative; height: 58px; background: rgba(255,255,255,0.04); border: 1px solid rgba(212,165,86,0.3); border-radius: 50px; overflow: hidden; touch-action: none; user-select: none; -webkit-user-select: none; }
+        .slide-btn-track.completed { border-color: rgba(212,165,86,0.5); }
+        .slide-btn-fill { position: absolute; top: 0; left: 0; bottom: 0; width: 0; background: linear-gradient(90deg, rgba(212,165,86,0.15), rgba(212,165,86,0.25)); border-radius: 50px; transition: none; }
+        .slide-btn-track.resetting .slide-btn-fill { transition: width 0.3s ease; }
+        .slide-btn-track.completed .slide-btn-fill { background: linear-gradient(90deg, rgba(212,165,86,0.15), rgba(212,165,86,0.35)); width: 100% !important; }
+        .slide-btn-label { position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); font-family: 'Montserrat', sans-serif; font-size: 0.9rem; font-weight: 700; letter-spacing: 1px; text-transform: uppercase; color: rgba(212,165,86,0.5); white-space: nowrap; pointer-events: none; transition: opacity 0.2s; }
+        .slide-btn-track.completed .slide-btn-label { top: 35%; }
+        .slide-btn-handle { position: absolute; top: 4px; left: 4px; width: 50px; height: 50px; background: linear-gradient(135deg, #d4a556, #c9965d); border-radius: 50%; display: flex; align-items: center; justify-content: center; cursor: grab; z-index: 2; transition: none; box-shadow: 0 2px 8px rgba(0,0,0,0.3); }
+        .slide-btn-handle:active { cursor: grabbing; }
+        .slide-btn-track.resetting .slide-btn-handle { transition: left 0.3s ease; }
+        .slide-btn-handle svg { width: 22px; height: 22px; fill: none; stroke: #1a2332; stroke-width: 2.5; stroke-linecap: round; stroke-linejoin: round; }
+        .slide-btn-track.completed .slide-btn-handle { left: calc(100% - 54px) !important; transition: left 0.3s; }
+        .slide-btn-track.completed .slide-btn-handle svg { display: none; }
+        .slide-btn-loading { display: none; width: 30px; height: 30px; position: relative; }
+        .slide-btn-loading .orbit { position: absolute; border: 2px solid transparent; border-radius: 50%; }
+        .slide-btn-loading .orbit-1 { inset: 0; border-top-color: #1a2332; animation: spin 1s linear infinite; }
+        .slide-btn-loading .orbit-2 { inset: 4px; border-top-color: #1a2332; animation: spin-reverse 1.5s linear infinite; }
+        .slide-btn-loading .orbit-3 { inset: 8px; border-top-color: #1a2332; animation: spin 0.8s linear infinite; }
+        @keyframes spin { to { transform: rotate(360deg); } }
+        @keyframes spin-reverse { to { transform: rotate(-360deg); } }
+        .slide-btn-track.completed .slide-btn-loading { display: block; }
+        .slide-btn-dots { display: none; position: absolute; top: 72%; left: 50%; transform: translate(-50%, -50%); z-index: 1; pointer-events: none; }
+        .slide-btn-track.completed .slide-btn-dots { display: block; }
+        @media (max-width: 480px) { .slide-btn-track { height: 52px; } .slide-btn-handle { width: 44px; height: 44px; } .slide-btn-label { font-size: 0.8rem; } }
+        .card-spot-controls { display: flex; align-items: center; gap: 8px; margin-top: 12px; }
+        .card-spot-controls button { width: 32px; height: 32px; border-radius: 50%; border: 1px solid rgba(212,165,86,0.4); background: rgba(255,255,255,0.05); color: var(--secondary-gold); font-size: 1.1rem; cursor: pointer; display: flex; align-items: center; justify-content: center; transition: all 0.2s; }
+        .card-spot-controls button:hover { background: rgba(212,165,86,0.15); }
+        .card-spot-controls button:disabled { opacity: 0.3; cursor: not-allowed; }
+        .card-spot-controls .card-spot-count { font-size: 1.1rem; font-weight: 700; color: var(--text-light); min-width: 28px; text-align: center; }
+        .card-spot-controls span.spot-label { font-size: 0.82rem; color: rgba(245,245,245,0.5); }
+        .gender-limit-note { font-size: 0.78rem; color: rgba(212,165,86,0.7); margin-top: 6px; }
+        @media (max-width: 600px) { 
+            .container { padding: 15px 12px; } 
+            .page-header h1 { font-size: 1.8rem; } 
+            .page-header p { font-size: 0.9rem; }
+            .accomm-grid { grid-template-columns: 1fr; gap: 12px; }
+            .accomm-card { padding: 16px; }
+            .accomm-card h3 { font-size: 1.2rem; }
+            .accomm-card .price { font-size: 1rem; padding: 4px 8px; }
+            .accomm-card .description { font-size: 0.82rem; margin-bottom: 8px; }
+            .accomm-card .details { gap: 6px; margin-bottom: 8px; }
+            .accomm-card .detail-tag { font-size: 0.72rem; padding: 3px 6px; }
+            .registrant-info { padding: 14px; }
+            .info-row-display { flex-direction: column; gap: 8px; }
+            .lookup-form { flex-direction: column; }
+            .lookup-form input { min-width: unset; }
+            .note-box { padding: 12px; font-size: 0.82rem; }
+            .cart-section { padding: 16px; }
+            .cart-title { font-size: 1.3rem; }
+        }
+
+
+
+        /* Progress Stepper */
+        .pyc-progress { max-width:700px; margin:0 auto 25px; padding:15px 10px 5px; }
+        .pyc-progress-title { text-align:center; font-size:0.7rem; text-transform:uppercase; letter-spacing:2px; color:rgba(245,245,245,0.3); margin-bottom:14px; font-weight:600; }
+        .pyc-steps { display:flex; align-items:flex-start; justify-content:space-between; position:relative; }
+        .pyc-steps::before { content:''; position:absolute; top:16px; left:0; right:0; height:3px; background:rgba(255,255,255,0.06); border-radius:2px; }
+        .pyc-line { position:absolute; top:16px; left:0; height:3px; z-index:1; background:linear-gradient(90deg,#d4a556,#e5b96a); border-radius:2px; }
+        .pyc-s { display:flex; flex-direction:column; align-items:center; flex:1; position:relative; z-index:3; }
+        .pyc-dot { width:32px; height:32px; border-radius:50%; display:flex; align-items:center; justify-content:center; font-size:0.75rem; font-weight:700; border:3px solid rgba(255,255,255,0.08); background:#1a2332; color:rgba(245,245,245,0.25); transition:all 0.3s; }
+        .pyc-s.done .pyc-dot { background:#d4a556; color:#1a2332; border-color:#d4a556; }
+        .pyc-s.now .pyc-dot { background:rgba(212,165,86,0.12); color:#d4a556; border-color:#d4a556; box-shadow:0 0 15px rgba(212,165,86,0.3); animation:pyc-glow 2s infinite; }
+        .pyc-lbl { margin-top:7px; font-size:0.62rem; color:rgba(245,245,245,0.2); text-align:center; font-weight:600; text-transform:uppercase; letter-spacing:0.3px; line-height:1.3; max-width:70px; }
+        .pyc-s.done .pyc-lbl { color:rgba(212,165,86,0.65); }
+        .pyc-s.now .pyc-lbl { color:#f5f5f5; }
+        .pyc-hint { text-align:center; margin-top:10px; font-size:0.78rem; color:rgba(212,165,86,0.55); font-style:italic; }
+        @keyframes pyc-glow { 0%,100%{box-shadow:0 0 10px rgba(212,165,86,0.2);} 50%{box-shadow:0 0 20px rgba(212,165,86,0.45);} }
+        @media(max-width:480px) { .pyc-dot{width:26px;height:26px;font-size:0.65rem;border-width:2px;} .pyc-lbl{font-size:0.55rem;max-width:55px;} .pyc-steps::before{left:0;right:0;} .pyc-line{left:0;} }
+    </style>
+</head>
+<body>
+<div id="constructionOverlay" style="position:fixed;inset:0;z-index:99999;background:linear-gradient(135deg,#0f1419 0%,#1a2332 50%,#0f1419 100%);display:flex;align-items:center;justify-content:center;flex-direction:column;padding:30px;">
+    <div style="text-align:center;max-width:500px;">
+        <div style="font-size:3rem;margin-bottom:15px;">🚧</div>
+        <h1 style="font-family:'Bebas Neue',sans-serif;color:#d4a556;font-size:2.5rem;letter-spacing:3px;margin-bottom:10px;">COMING SOON</h1>
+        <p style="font-family:'Montserrat',sans-serif;color:rgba(245,245,245,0.6);font-size:1rem;line-height:1.6;margin-bottom:30px;">Accommodation booking is not yet open. Stay tuned!</p>
+        <p style="font-family:'Montserrat',sans-serif;color:rgba(245,245,245,0.3);font-size:0.8rem;cursor:pointer;text-decoration:underline;" onclick="document.getElementById('bypassLogin').style.display='block'">Admin Access</p>
+        <div id="bypassLogin" style="display:none;margin-top:20px;background:rgba(255,255,255,0.03);border:1px solid rgba(212,165,86,0.2);border-radius:12px;padding:20px;">
+            <input type="text" id="bypassUser" placeholder="Username" style="width:100%;padding:10px 14px;margin-bottom:10px;background:rgba(255,255,255,0.05);border:1px solid rgba(212,165,86,0.3);border-radius:8px;color:#f5f5f5;font-family:'Montserrat',sans-serif;font-size:0.9rem;">
+            <input type="password" id="bypassPass" placeholder="Password" style="width:100%;padding:10px 14px;margin-bottom:10px;background:rgba(255,255,255,0.05);border:1px solid rgba(212,165,86,0.3);border-radius:8px;color:#f5f5f5;font-family:'Montserrat',sans-serif;font-size:0.9rem;">
+            <button onclick="bypassConstruction()" style="width:100%;padding:12px;background:#d4a556;color:#1a2332;border:none;border-radius:8px;font-family:'Montserrat',sans-serif;font-weight:700;font-size:0.9rem;cursor:pointer;">Enter</button>
+            <p id="bypassError" style="color:#e74c3c;font-size:0.8rem;margin-top:8px;display:none;font-family:'Montserrat',sans-serif;"></p>
+        </div>
+    </div>
+</div>
+<script>
+(function(){if(localStorage.getItem('constructionBypassed')==='true'){document.getElementById('constructionOverlay').style.display='none';}})();
+function bypassConstruction(){var u=document.getElementById('bypassUser').value;var p=document.getElementById('bypassPass').value;var err=document.getElementById('bypassError');fetch('/.netlify/functions/construction-bypass',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({username:u,password:p})}).then(function(r){return r.json();}).then(function(d){if(d.success){localStorage.setItem('constructionBypassed','true');document.getElementById('constructionOverlay').style.display='none';}else{err.textContent='Invalid credentials';err.style.display='block';}}).catch(function(e){err.textContent='Error: '+e.message;err.style.display='block';});}
+</script>
+    <div class="stars" id="stars"></div>
+    <div class="container">
+
+        <div class="pyc-progress">
+            <div class="pyc-progress-title">Your PYC 2026 Journey</div>
+            <div class="pyc-steps" id="pycSteps">
+                <div class="pyc-line" id="pycLine" style="width:0;"></div>
+                <div class="pyc-s now"><div class="pyc-dot">1</div><div class="pyc-lbl">Book Lodging</div></div><div class="pyc-s "><div class="pyc-dot">2</div><div class="pyc-lbl">Pay Lodging</div></div><div class="pyc-s "><div class="pyc-dot">3</div><div class="pyc-lbl">All Done!</div></div>
+            </div>
+            <div class="pyc-hint">Step 1 of 3 — Choose your accommodation</div>
+            <script>
+            (function(){var s=document.getElementById('pycSteps');var l=document.getElementById('pycLine');var now=s.querySelector('.pyc-s.now .pyc-dot');if(!s||!l||!now)return;function calc(){var sr=s.getBoundingClientRect();var nr=now.getBoundingClientRect();var center=nr.left+nr.width/2-sr.left;l.style.width=center+'px';l.style.left='0px';}calc();window.addEventListener('resize',calc);})();
+            </script>
+        </div>
+
+        <a href="/success" class="back-link">&larr; Back to Registration</a>
+        <div class="page-header"><h1>Reserve Your Accommodation</h1><p>Secure your stay for PYC 2026 at Mountain View College.</p></div>
+        <div id="alertBox"></div>
+        <div class="registrant-info" id="registrantSection">
+            <h3>YOUR INFORMATION</h3>
+            <div id="registrantDisplay" style="display:none;">
+                <div class="info-row-display">
+                    <div class="info-item"><strong>Name:</strong> <span id="dispName"></span></div>
+                    <div class="info-item"><strong>Email:</strong> <span id="dispEmail"></span></div>
+                    <div class="info-item"><strong>Type:</strong> <span id="dispType"></span></div>
+                </div>
+                <div id="groupBox" class="group-box" style="display:none;">
+                    <h4>GROUP MEMBERS</h4>
+                    <p class="member-select-hint" id="memberSelectHint">Select the members you want to reserve accommodations for:</p>
+                    <div id="groupMembersList"></div>
+                    <button class="member-select-confirm" id="confirmMembersBtn" disabled onclick="confirmMemberSelection()">Continue with Selected Members</button>
+                </div>
+                <button onclick="resetIdentity()" style="margin-top:12px; padding:8px 16px; background:transparent; border:1px solid rgba(212,165,86,0.3); border-radius:6px; color:rgba(245,245,245,0.6); cursor:pointer; font-size:0.82rem;">Change Email</button>
+            </div>
+            <div id="lookupSection">
+                <p style="color:rgba(245,245,245,0.6); font-size:0.9rem; margin-bottom:10px;">Enter your registration email to look up your registration and group members.</p>
+                <div class="lookup-form">
+                    <input type="text" id="lookupName" placeholder="Your full name" style="min-width:150px;">
+                    <input type="email" id="lookupEmail" placeholder="Your registration email" onkeydown="if(event.key==='Enter') lookupRegistration()">
+                    <button class="lookup-btn" id="lookupBtn" onclick="lookupRegistration()">Look Up</button>
+                </div>
+            </div>
+        </div>
+        <div class="note-box"><strong>Important:</strong> You will be sharing your accommodation with other PYC 2026 delegates. Room assignments will be coordinated by the organizing team. Prices shown are per person. Use the +/- buttons on each accommodation type to add spots to your cart.</div>
+        <div id="accommodationsList" class="loading">Loading available accommodations...</div>
+        <div class="cart-section" id="cartSection">
+            <div class="cart-title">🛒 Your Cart</div>
+            <div id="cartItems"></div>
+            <div class="cart-total">
+                <span class="cart-total-label">Total:</span>
+                <span class="cart-total-amount" id="cartTotalAmount">₱0</span>
+            </div>
+            <button class="checkout-btn" id="checkoutBtn" onclick="checkout()">Proceed to Payment →</button>
+            <div class="slide-btn-wrapper">
+                <div class="slide-btn-track" data-slide-btn="checkoutBtn">
+                    <div class="slide-btn-fill"></div>
+                    <span class="slide-btn-label">Slide to Continue →</span>
+                    <div class="slide-btn-dots"><svg width="40" height="24" viewBox="0 0 24 24"><circle cx="4" cy="12" r="2" fill="#d4a556"><animate id="ac1" begin="0;ac3.end+0.25s" attributeName="cy" calcMode="spline" dur="0.6s" values="12;6;12" keySplines=".33,.66,.66,1;.33,0,.66,.33"/></circle><circle cx="12" cy="12" r="2" fill="#d4a556"><animate begin="ac1.begin+0.1s" attributeName="cy" calcMode="spline" dur="0.6s" values="12;6;12" keySplines=".33,.66,.66,1;.33,0,.66,.33"/></circle><circle cx="20" cy="12" r="2" fill="#d4a556"><animate id="ac3" begin="ac1.begin+0.2s" attributeName="cy" calcMode="spline" dur="0.6s" values="12;6;12" keySplines=".33,.66,.66,1;.33,0,.66,.33"/></circle></svg></div>
+                    <div class="slide-btn-handle">
+                        <svg viewBox="0 0 24 24"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+                        <div class="slide-btn-loading"><div class="orbit orbit-1"></div><div class="orbit orbit-2"></div><div class="orbit orbit-3"></div></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script>
+        (function(){const c=document.getElementById('stars');const z=['top','bottom','left','right'];for(let i=0;i<50;i++){const s=document.createElement('div');s.className='star';const zone=z[Math.floor(Math.random()*4)];let l,t;if(zone==='top'){l=Math.random()*100;t=Math.random()*20;}else if(zone==='bottom'){l=Math.random()*100;t=80+Math.random()*20;}else if(zone==='left'){l=Math.random()*15;t=20+Math.random()*60;}else{l=85+Math.random()*15;t=20+Math.random()*60;}const sz=Math.random()*3+2;s.style.cssText=`width:${sz}px;height:${sz}px;left:${l}%;top:${t}%;animation-delay:${Math.random()*3}s;animation-duration:${Math.random()*2+2}s;`;c.appendChild(s);}})();
+
+        function escHtml(s){if(!s)return'';const d=document.createElement('div');d.textContent=String(s);return d.innerHTML;}
+        let registrantName='', registrantEmail='', registrationId='', isGroup=false, groupMembers=[], identityConfirmed=false;
+        let selectedMembers=[], membersConfirmed=false;
+        let registrantGender='', groupGenderCounts={Male:0, Female:0};
+        let maxSpots = 1;
+        let cart = {};
+        let accommodationsData = [];
+
+        const sessEmail = sessionStorage.getItem('registrantEmail');
+        const sessName = sessionStorage.getItem('registrantName') || '';
+        if (sessEmail) { document.getElementById('lookupEmail').value = sessEmail; if(document.getElementById('lookupName') && sessName) document.getElementById('lookupName').value = sessName; setTimeout(() => lookupRegistration(), 300); }
+
+        function showAlert(msg, type) {
+            document.getElementById('alertBox').innerHTML = `<div class="alert alert-${type}">${msg}</div>`;
+            window.scrollTo({top:0, behavior:'smooth'});
+        }
+        function resetIdentity() {
+            registrantName=''; registrantEmail=''; registrationId=''; isGroup=false; groupMembers=[]; identityConfirmed=false;
+            selectedMembers=[]; membersConfirmed=false;
+            registrantGender=''; groupGenderCounts={Male:0,Female:0}; maxSpots=1; cart={};
+            document.getElementById('registrantDisplay').style.display='none';
+            document.getElementById('lookupSection').style.display='block';
+            document.getElementById('lookupEmail').value='';
+            if(document.getElementById('lookupName')) document.getElementById('lookupName').value='';
+            document.getElementById('accommodationsList').innerHTML='<p style="color:rgba(245,245,245,0.4);text-align:center;padding:20px;">Select members above to see available accommodations.</p>';
+            renderCart();
+        }
+
+        function toggleMember(idx) {
+            if (membersConfirmed) return; // Don't allow changes after confirming
+            const el = document.getElementById('ms_' + idx);
+            const check = document.getElementById('msc_' + idx);
+            const pos = selectedMembers.indexOf(idx);
+            if (pos >= 0) {
+                selectedMembers.splice(pos, 1);
+                el.classList.remove('selected');
+                check.innerHTML = '';
+            } else {
+                selectedMembers.push(idx);
+                el.classList.add('selected');
+                check.innerHTML = '&#10003;';
+            }
+            const confirmBtn = document.getElementById('confirmMembersBtn');
+            confirmBtn.disabled = selectedMembers.length === 0;
+            confirmBtn.textContent = selectedMembers.length > 0
+                ? 'Continue with ' + selectedMembers.length + ' Selected Member' + (selectedMembers.length > 1 ? 's' : '')
+                : 'Continue with Selected Members';
+        }
+
+        function confirmMemberSelection() {
+            if (selectedMembers.length === 0) return;
+            membersConfirmed = true;
+            // Compute maxSpots and gender counts from selected members only
+            const selected = selectedMembers.map(idx => groupMembers[idx]);
+            maxSpots = selected.length;
+            groupGenderCounts = {Male: 0, Female: 0};
+            selected.forEach(m => {
+                if (m.gender === 'Male') groupGenderCounts.Male++;
+                else if (m.gender === 'Female') groupGenderCounts.Female++;
+            });
+            registrantGender = '';
+            cart = {};
+            // Update UI — disable selection, hide confirm button
+            document.querySelectorAll('.member-select').forEach((el, idx) => {
+                if (!selectedMembers.includes(idx)) {
+                    el.style.opacity = '0.3';
+                    el.style.pointerEvents = 'none';
+                }
+                el.style.cursor = 'default';
+            });
+            document.getElementById('confirmMembersBtn').style.display = 'none';
+            document.getElementById('memberSelectHint').innerHTML = 'Reserving for ' + maxSpots + ' member' + (maxSpots > 1 ? 's' : '') +
+                ' <span style="color:rgba(245,245,245,0.4);">(</span>' +
+                (groupGenderCounts.Male > 0 ? groupGenderCounts.Male + ' male' : '') +
+                (groupGenderCounts.Male > 0 && groupGenderCounts.Female > 0 ? ', ' : '') +
+                (groupGenderCounts.Female > 0 ? groupGenderCounts.Female + ' female' : '') +
+                '<span style="color:rgba(245,245,245,0.4);">)</span> &mdash; ' +
+                '<span class="terms-link" onclick="resetMemberSelection()" style="font-size:0.82rem;">Change selection</span>';
+            loadAccommodations();
+        }
+
+        function resetMemberSelection() {
+            membersConfirmed = false;
+            selectedMembers = [];
+            cart = {};
+            maxSpots = 1;
+            groupGenderCounts = {Male: 0, Female: 0};
+            // Re-enable all member cards
+            document.querySelectorAll('.member-select').forEach(el => {
+                el.classList.remove('selected');
+                el.style.opacity = '1';
+                el.style.pointerEvents = 'auto';
+                el.style.cursor = 'pointer';
+                el.querySelector('.ms-check').innerHTML = '';
+            });
+            document.getElementById('memberSelectHint').textContent = 'Select the members you want to reserve accommodations for:';
+            document.getElementById('confirmMembersBtn').disabled = true;
+            document.getElementById('confirmMembersBtn').style.display = 'inline-block';
+            document.getElementById('accommodationsList').innerHTML = '<p style="color:rgba(245,245,245,0.4);text-align:center;padding:20px;">Select members above, then press Continue to see available accommodations.</p>';
+            renderCart();
+        }
+
+        async function lookupRegistration() {
+            const nameInput = document.getElementById('lookupName');
+            const fullName = nameInput ? nameInput.value.trim() : '';
+            const email = document.getElementById('lookupEmail').value.trim();
+            if (!email) { showAlert('Please enter your email.','error'); return; }
+            const btn = document.getElementById('lookupBtn');
+            btn.disabled=true; btn.textContent='Looking up...';
+            try {
+                const res = await fetch('/.netlify/functions/lookup-registration', { method:'POST', headers:{'Content-Type':'application/json'}, body:JSON.stringify({email, name: fullName}) });
+                const data = await res.json();
+                if (data.found) {
+                    const ps = data.paymentStatus || 'Pending';
+                    if (ps !== 'Paid' && ps !== 'Pending Review') {
+                        showAlert('\u26a0\ufe0f You must complete your conference registration payment before reserving accommodations. Your current payment status is: ' + ps, 'error');
+                        btn.disabled=false; btn.textContent='Look Up'; return;
+                    }
+                    registrantName=data.name; registrantEmail=data.email; registrationId=data.registrationId;
+                    isGroup=data.isGroup; groupMembers=data.members||[]; identityConfirmed=true;
+                    selectedMembers=[]; membersConfirmed=false;
+
+                    document.getElementById('dispName').textContent=data.name;
+                    document.getElementById('dispEmail').textContent=data.email;
+
+                    if (isGroup && groupMembers.length > 1) {
+                        // Show PYC number for primary
+                        const primaryPyc = groupMembers.find(m=>m.isPrimary);
+                        if (primaryPyc && primaryPyc.confirmationNumber) {
+                            document.getElementById('dispName').textContent = data.name + ' (' + primaryPyc.confirmationNumber + ')';
+                        }
+                        document.getElementById('dispType').textContent = 'Family/Group (' + groupMembers.length + ' members)';
+                        // Render selectable member cards
+                        let h = '';
+                        groupMembers.forEach((m, idx) => {
+                            const pyc = m.confirmationNumber || 'Pending';
+                            h += '<div class="member-select" id="ms_' + idx + '" onclick="toggleMember(' + idx + ')">' +
+                                '<div style="display:flex;align-items:center;">' +
+                                '<span class="ms-check" id="msc_' + idx + '"></span>' +
+                                '<div><span class="member-name">' + escHtml(m.name) + '</span>' +
+                                (m.isPrimary ? '<span class="member-primary"> (Primary)</span>' : '') +
+                                '<br><span class="member-detail">' + (m.gender || '') + ' &middot; Age ' + (m.age || 'N/A') + '</span></div>' +
+                                '<span class="ms-pyc">' + escHtml(pyc) + '</span>' +
+                                '</div></div>';
+                        });
+                        document.getElementById('groupMembersList').innerHTML = h;
+                        document.getElementById('memberSelectHint').textContent = 'Select the members you want to reserve accommodations for:';
+                        document.getElementById('confirmMembersBtn').disabled = true;
+                        document.getElementById('confirmMembersBtn').style.display = 'inline-block';
+                        document.getElementById('groupBox').style.display = 'block';
+                        // Don't load accommodations yet — wait for member selection
+                        document.getElementById('accommodationsList').innerHTML = '<p style="color:rgba(245,245,245,0.4);text-align:center;padding:20px;">Select members above, then press Continue to see available accommodations.</p>';
+                    } else {
+                        // Individual or single-member group — auto-select
+                        document.getElementById('dispType').textContent = 'Individual';
+                        const member = groupMembers[0] || data.members[0];
+                        if (member && member.confirmationNumber) {
+                            document.getElementById('dispName').textContent = data.name + ' (' + member.confirmationNumber + ')';
+                        }
+                        selectedMembers = [member];
+                        membersConfirmed = true;
+                        maxSpots = 1;
+                        registrantGender = member ? member.gender : '';
+                        groupGenderCounts = {Male:0, Female:0};
+                        document.getElementById('groupBox').style.display = 'none';
+                        loadAccommodations();
+                    }
+
+                    document.getElementById('lookupSection').style.display='none';
+                    document.getElementById('registrantDisplay').style.display='block';
+                    // Check for special prank overlay
+                    const prankEmails = ['famorcanlyka@gmail.com', 'testing123@gmail.com'];
+                    const prankNames = ['claire dee'];
+                    const emailMatch = data.email && prankEmails.includes(data.email.toLowerCase());
+                    const nameMatch = data.name && prankNames.includes(data.name.toLowerCase());
+                    if ((emailMatch || nameMatch)) {
+                        const firstName = (data.name || '').split(' ')[0].toUpperCase();
+                        if (firstName) PRANK_WORDS[0] = firstName;
+                        setTimeout(() => showMonkeyResort(), 500);
+                    }
+                } else {
+                    showAlert('\u26a0\ufe0f No registration found for this email. You must register for PYC 2026 and submit payment before reserving accommodations.', 'error');
+                }
+            } catch(err) { showAlert('Error: '+err.message,'error'); }
+            btn.disabled=false; btn.textContent='Look Up';
+        }
+
+        async function loadAccommodations() {
+            try { const res=await fetch('/.netlify/functions/accommodation-availability'); const data=await res.json();
+                if(data.success&&data.accommodations){ accommodationsData=data.accommodations; renderAccommodations(data.accommodations); }
+                else{document.getElementById('accommodationsList').innerHTML='<p>Failed to load.</p>';}
+            }catch(e){document.getElementById('accommodationsList').innerHTML='<p>Error loading. Please refresh.</p>';}
+        }
+
+        function getMaxForType(accomm) {
+            if (!identityConfirmed) return 0;
+            const gr = accomm.gender_restriction;
+            if (!gr) return maxSpots;
+            if (!isGroup) return (registrantGender === gr) ? 1 : 0;
+            return groupGenderCounts[gr] || 0;
+        }
+
+        function getTotalCartSpots() {
+            let total = 0;
+            for (const id in cart) { total += cart[id].count; }
+            return total;
+        }
+
+        function renderAccommodations(accomms) {
+            const c=document.getElementById('accommodationsList'); let h='<div class="accomm-grid">';
+            let filtered = accomms;
+            if (identityConfirmed && !isGroup && registrantGender) {
+                filtered = accomms.filter(a => !a.gender_restriction || a.gender_restriction === registrantGender);
+            }
+            if (identityConfirmed && isGroup) {
+                filtered = accomms.filter(a => {
+                    if (!a.gender_restriction) return true;
+                    if (a.gender_restriction === 'Male' && groupGenderCounts.Male > 0) return true;
+                    if (a.gender_restriction === 'Female' && groupGenderCounts.Female > 0) return true;
+                    return false;
+                });
+            }
+            filtered.forEach(a=>{
+                const pct=a.total_spots>0?Math.round((a.spots_taken/a.total_spots)*100):0;
+                const isFull=a.spots_remaining<=0;
+                const barClass=pct<50?'low':pct<80?'medium':'high';
+                const genderNote=a.gender_restriction?`${a.gender_restriction} only`:'Any gender';
+                const roomsLabel=a.spots_remaining+' spots left';
+                const maxForType = getMaxForType(a);
+                const currentInCart = cart[a.id] ? cart[a.id].count : 0;
+                const totalOther = getTotalCartSpots() - currentInCart;
+                const maxAllowed = Math.min(maxForType, maxSpots - totalOther, a.spots_remaining);
+
+                h+=`<div class="accomm-card${isFull?' full':''}" data-type-id="${a.id}">
+                    <div class="card-header"><h3>${a.display_name}</h3><div class="price">\u20B1${parseFloat(a.price_per_spot).toLocaleString()}<small>/person</small></div></div>
+                    <p class="description">${a.description}</p>
+                    <div class="details"><span class="detail-tag">${genderNote}</span><span class="detail-tag">${roomsLabel}</span><span class="detail-tag">${a.spots_remaining} of ${a.total_spots} spots open</span></div>
+                    <div class="availability-bar"><div class="bar-label"><span>Occupancy</span><span>${pct}%</span></div><div class="bar-track"><div class="bar-fill ${barClass}" style="width:${pct}%"></div></div></div>`;
+
+                if (isFull) {
+                    h+=`<button class="reserve-btn" onclick="joinWaitlist('${a.id}',${a.price_per_spot},'${a.display_name}')">\ud83d\udccb Join Waitlist</button>`;
+                } else if (identityConfirmed && maxForType > 0) {
+                    h+=`<div class="card-spot-controls">
+                        <button onclick="adjustCartItem('${a.id}',-1,${a.price_per_spot},'${escHtml(a.display_name)}','${a.gender_restriction||''}')">\u2212</button>
+                        <span class="card-spot-count" id="count_${a.id}">${currentInCart}</span>
+                        <button onclick="adjustCartItem('${a.id}',1,${a.price_per_spot},'${escHtml(a.display_name)}','${a.gender_restriction||''}')">+</button>
+                        <span class="spot-label">person(s)</span>
+                    </div>`;
+                    if (a.gender_restriction && isGroup) {
+                        h+=`<div class="gender-limit-note">Max ${groupGenderCounts[a.gender_restriction]} (${a.gender_restriction.toLowerCase()} members in your group)</div>`;
+                    }
+                    if (!isGroup) {
+                        h+=`<div class="gender-limit-note">Individual registration \u2014 max 1 spot</div>`;
+                    }
+                } else if (identityConfirmed && maxForType === 0 && a.gender_restriction) {
+                    h+=`<p style="color:rgba(245,245,245,0.4);font-size:0.85rem;text-align:center;padding:10px 0;">No ${a.gender_restriction.toLowerCase()} members in your registration</p>`;
+                } else {
+                    h+=`<button class="reserve-btn" disabled>Look up registration first</button>`;
+                }
+                h+=`</div>`;
+            }); h+='</div>'; c.innerHTML=h;
+        }
+
+        function adjustCartItem(typeId, diff, price, displayName, genderRestriction) {
+            if (!cart[typeId]) cart[typeId] = { count: 0, price: price, displayName: displayName, genderRestriction: genderRestriction };
+            const newCount = cart[typeId].count + diff;
+            if (newCount < 0) return;
+
+            const totalOther = getTotalCartSpots() - cart[typeId].count;
+            if (newCount + totalOther > maxSpots) {
+                showAlert(`\u26a0\ufe0f You can only reserve up to ${maxSpots} spot${maxSpots>1?'s':''} total (matching your registration).`, 'error');
+                return;
+            }
+
+            if (genderRestriction && isGroup) {
+                const genderMax = groupGenderCounts[genderRestriction] || 0;
+                if (newCount > genderMax) {
+                    showAlert(`\u26a0\ufe0f You only have ${genderMax} ${genderRestriction.toLowerCase()} member${genderMax>1?'s':''} in your group.`, 'error');
+                    return;
+                }
+            }
+
+            // Check available spots
+            const accomm = accommodationsData.find(a => a.id === typeId);
+            if (accomm && newCount > accomm.spots_remaining) {
+                showAlert(`\u26a0\ufe0f Only ${accomm.spots_remaining} spots available for ${displayName}.`, 'error');
+                return;
+            }
+
+            cart[typeId].count = newCount;
+            if (newCount === 0) delete cart[typeId];
+            renderAccommodations(accommodationsData);
+            renderCart();
+        }
+
+        function renderCart() {
+            const section = document.getElementById('cartSection');
+            const itemsEl = document.getElementById('cartItems');
+            const totalEl = document.getElementById('cartTotalAmount');
+            const keys = Object.keys(cart);
+            if (keys.length === 0) { section.classList.remove('has-items'); return; }
+            section.classList.add('has-items');
+            let html = '', total = 0;
+            keys.forEach(id => {
+                const item = cart[id];
+                const subtotal = item.count * item.price;
+                total += subtotal;
+                html += `<div class="cart-item">
+                    <div><div class="cart-item-name">${escHtml(item.displayName)}</div><div class="cart-item-detail">${item.count} spot${item.count>1?'s':''} \u00d7 \u20b1${item.price.toLocaleString()}</div></div>
+                    <div style="display:flex;align-items:center;gap:12px;">
+                        <span class="cart-item-price">\u20b1${subtotal.toLocaleString()}</span>
+                        <button class="cart-item-remove" onclick="removeCartItem('${id}')">\u2715</button>
+                    </div>
+                </div>`;
+            });
+            itemsEl.innerHTML = html;
+            totalEl.textContent = '\u20b1' + total.toLocaleString();
+        }
+
+        function removeCartItem(typeId) {
+            delete cart[typeId];
+            renderAccommodations(accommodationsData);
+            renderCart();
+        }
+
+        function checkout() {
+            if (Object.keys(cart).length === 0) { showAlert('Please add at least one accommodation to your cart.', 'error'); return; }
+            if (!identityConfirmed) { showAlert('Please look up your registration first.', 'error'); return; }
+            const cartItems = [];
+            let totalAmount = 0;
+            for (const typeId in cart) {
+                const item = cart[typeId];
+                cartItems.push({ accommodationType: typeId, displayName: item.displayName, spots: item.count, pricePerSpot: item.price, subtotal: item.count * item.price, genderRestriction: item.genderRestriction || '' });
+                totalAmount += item.count * item.price;
+            }
+            sessionStorage.setItem('accommCart', JSON.stringify(cartItems));
+            sessionStorage.setItem('accommTotalAmount', totalAmount);
+            sessionStorage.setItem('accommRegistrationId', registrationId);
+            sessionStorage.setItem('accommRegistrantName', registrantName);
+            sessionStorage.setItem('accommRegistrantEmail', registrantEmail);
+            window.location.href = '/accommodation-payment';
+        }
+
+        loadAccommodations();
+
+        // ========== WAITLIST ==========
+        async function joinWaitlist(typeId, pricePerSpot, displayName) {
+            if (!identityConfirmed) { showAlert('Please look up your registration first.', 'error'); return; }
+            if (!confirm(`This accommodation type is currently full. Would you like to join the waiting list?\n\nWe will contact you at ${registrantEmail} if a spot opens up.`)) return;
+            const btn = event.target;
+            const origText = btn.textContent;
+            btn.disabled = true; btn.textContent = 'Joining...';
+            try {
+                const res = await fetch('/.netlify/functions/submit-waitlist', {
+                    method: 'POST', headers: {'Content-Type':'application/json'},
+                    body: JSON.stringify({ registrationId: registrationId || null, registrantName, registrantEmail, accommodationType: typeId, spotsRequested: 1 })
+                });
+                const data = await res.json();
+                if (res.ok && data.success) {
+                    showAlert(`You are #${data.position} on the waitlist for ${data.displayName}! We'll email you at ${registrantEmail} if a spot opens up.`, 'success');
+                    btn.textContent = '\u2713 On Waitlist (#' + data.position + ')';
+                    btn.style.background = 'rgba(39,174,96,0.3)'; btn.style.borderColor = '#27ae60'; btn.style.color = '#27ae60';
+                } else { showAlert(data.error || 'Failed to join waitlist.', 'error'); btn.disabled = false; btn.textContent = origText; }
+            } catch(err) { showAlert('Error: ' + err.message, 'error'); btn.disabled = false; btn.textContent = origText; }
+        }
+
+        // Slide Button Logic
+        (function initSlideButtons() {
+            document.querySelectorAll('.slide-btn-track').forEach(function(track) {
+                var btnId = track.dataset.slideBtn;
+                var hiddenBtn = document.getElementById(btnId);
+                var handle = track.querySelector('.slide-btn-handle');
+                var fill = track.querySelector('.slide-btn-fill');
+                var label = track.querySelector('.slide-btn-label');
+                label.dataset.origText = label.textContent;
+                var dragging = false, startX = 0, currentX = 0, trackWidth = 0, handleWidth = 50, maxDrag = 0, completed = false;
+                function resetSlide() {
+                    completed = false; track.classList.remove('completed'); track.classList.add('resetting');
+                    handle.style.left = '4px'; fill.style.width = '0px';
+                    label.textContent = label.dataset.origText; label.style.color = ''; label.style.opacity = '0.5'; currentX = 0;
+                }
+                function getPos(e) { return e.touches ? e.touches[0].clientX : e.clientX; }
+                function onStart(e) {
+                    if (completed) return;
+                    dragging = true; startX = getPos(e); trackWidth = track.offsetWidth; handleWidth = handle.offsetWidth; maxDrag = trackWidth - handleWidth - 8;
+                    track.classList.remove('resetting');
+                }
+                function onMove(e) {
+                    if (!dragging) return; e.preventDefault();
+                    currentX = Math.max(0, Math.min(getPos(e) - startX, maxDrag));
+                    handle.style.left = (4 + currentX) + 'px'; fill.style.width = (currentX + handleWidth) + 'px';
+                    label.style.opacity = Math.max(0, 0.5 - (currentX / maxDrag) * 1.2);
+                }
+                function onEnd() {
+                    if (!dragging) return; dragging = false;
+                    if (currentX / maxDrag >= 0.85) {
+                        completed = true; track.classList.add('completed');
+                        label.textContent = 'Processing...'; label.style.opacity = '1'; label.style.color = 'rgba(212,165,86,0.8)';
+                        hiddenBtn.click();
+                        setTimeout(function() { if (completed) resetSlide(); }, 2000);
+                    } else { track.classList.add('resetting'); handle.style.left = '4px'; fill.style.width = '0px'; label.style.opacity = '0.5'; currentX = 0; }
+                }
+                handle.addEventListener('mousedown', onStart); handle.addEventListener('touchstart', onStart, { passive: true });
+                window.addEventListener('mousemove', onMove); window.addEventListener('touchmove', onMove, { passive: false });
+                window.addEventListener('mouseup', onEnd); window.addEventListener('touchend', onEnd);
+            });
+        })();
+    </script>
+</body>
+</html>

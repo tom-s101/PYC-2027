@@ -1,0 +1,2595 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Registration - PYC 2026</title>
+    <link rel="icon" type="image/x-icon" href="/favicon.ico">
+    <link rel="apple-touch-icon" href="/apple-touch-icon.png">
+    <meta property="og:title" content="Registration - PYC 2026">
+    <meta property="og:description" content="Register for PYC 2026 — Above and Beyond. June 3-7, Mountain View College, Mindanao, Philippines. Ephesians 3:20">
+    <meta property="og:image" content="https://philippineyouthforchrist.org/IMG_3908.jpeg">
+    <meta property="og:type" content="website">
+    <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Montserrat:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --primary-navy: #1a2332;
+            --secondary-gold: #d4a556;
+            --accent-blue: #4a7c9e;
+            --text-light: #f5f5f5;
+            --text-dark: #2c3e50;
+            --border-gold: #c9965d;
+            --background-overlay: rgba(26, 35, 50, 0.92);
+        }
+
+        html, body {
+            background-color: #0f1419;
+            background: linear-gradient(135deg, #0f1419 0%, #1a2332 50%, #2a3f5f 100%);
+        }
+        body {
+            font-family: 'Montserrat', sans-serif;
+            background-color: #0f1419;
+            background: linear-gradient(135deg, #0f1419 0%, #1a2332 50%, #2a3f5f 100%);
+            background-attachment: fixed;
+            background-size: cover;
+            overscroll-behavior: none;
+            color: var(--text-light);
+            min-height: 100vh;
+            position: relative;
+            overflow-x: hidden;
+        }
+
+        body::before {
+            content: '';
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: 
+                radial-gradient(circle at 20% 30%, rgba(74, 124, 158, 0.1) 0%, transparent 50%),
+                radial-gradient(circle at 80% 70%, rgba(212, 165, 86, 0.08) 0%, transparent 50%);
+            pointer-events: none;
+            z-index: 1;
+        }
+
+        .stars {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 0;
+        }
+
+        .star {
+            position: absolute;
+            background: white;
+            border-radius: 50%;
+            box-shadow: 0 0 3px rgba(255, 255, 255, 0.8), 
+                        0 0 6px rgba(255, 255, 255, 0.5),
+                        0 0 9px rgba(255, 255, 255, 0.3);
+            filter: blur(0.5px);
+            animation: twinkle 3s infinite;
+        }
+
+        @keyframes twinkle {
+            0%, 100% { 
+                opacity: 0.4; 
+                transform: scale(1);
+                filter: blur(0.5px);
+            }
+            50% { 
+                opacity: 1; 
+                transform: scale(1.3);
+                filter: blur(0.3px);
+            }
+        }
+
+        .container {
+            position: relative;
+            z-index: 2;
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        .banner {
+            width: 100%;
+            max-width: 100%;
+            margin: 0 0 40px 0;
+            overflow: hidden;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+            animation: fadeInDown 1s ease-out;
+        }
+
+        .banner img {
+            width: 100%;
+            height: auto;
+            display: block;
+        }
+
+        @keyframes fadeInDown {
+            from {
+                opacity: 0;
+                transform: translateY(-30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .registration-card {
+            position: relative;
+            z-index: 10;
+            background: var(--background-overlay);
+            border-radius: 20px;
+            padding: 50px 40px;
+            box-shadow: 
+                0 30px 80px rgba(0, 0, 0, 0.5),
+                inset 0 1px 0 rgba(255, 255, 255, 0.1);
+            border: 1px solid rgba(212, 165, 86, 0.3);
+            backdrop-filter: blur(10px);
+            animation: fadeInUp 1s ease-out 0.3s both;
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .section-title {
+            font-family: 'Bebas Neue', sans-serif;
+            font-size: 3rem;
+            font-weight: 400;
+            color: #d4a556;
+            text-align: center;
+            margin-bottom: 15px;
+            letter-spacing: 4px;
+            text-transform: uppercase;
+        }
+
+        .subtitle {
+            text-align: center;
+            font-size: 1.1rem;
+            color: #f5f5f5;
+            margin-bottom: 40px;
+            font-weight: 300;
+            letter-spacing: 0.5px;
+        }
+
+        /* Form styles - keeping all the existing styles */
+        .form-section {
+            margin-bottom: 35px;
+        }
+
+        .section-header {
+            font-family: 'Bebas Neue', sans-serif;
+            font-size: 1.8rem;
+            color: #d4a556;
+            margin-bottom: 20px;
+            padding-bottom: 10px;
+            border-bottom: 2px solid rgba(212, 165, 86, 0.3);
+            letter-spacing: 2px;
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        .form-row {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+        }
+
+        label {
+            display: block;
+            font-family: 'Montserrat', sans-serif;
+            font-size: 0.95rem;
+            font-weight: 500;
+            color: #f5f5f5;
+            margin-bottom: 8px;
+        }
+
+        label .required {
+            color: var(--secondary-gold);
+        }
+
+        input[type="text"],
+        input[type="email"],
+        input[type="tel"],
+        input[type="number"],
+        select {
+            position: relative;
+            z-index: 1;
+            width: 100%;
+            padding: 14px 18px;
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 1.05rem;
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(212, 165, 86, 0.3);
+            border-radius: 10px;
+            color: var(--text-light);
+            transition: all 0.3s ease;
+        }
+
+        input:focus,
+        select:focus {
+            outline: none;
+            border-color: var(--secondary-gold);
+            background: rgba(255, 255, 255, 0.08);
+            box-shadow: 0 0 20px rgba(212, 165, 86, 0.2);
+        }
+
+        select {
+            cursor: pointer;
+            appearance: none;
+            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 12 12'%3E%3Cpath fill='%23d4a556' d='M6 9L1 4h10z'/%3E%3C/svg%3E");
+            background-repeat: no-repeat;
+            background-position: right 18px center;
+            padding-right: 45px;
+        }
+
+        select option {
+            background: #1a2332;
+            color: #f5f5f5;
+            padding: 10px;
+        }
+
+        .checkbox-group {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            padding: 15px;
+            background: rgba(212, 165, 86, 0.08);
+            border-radius: 10px;
+            border: 1px solid rgba(212, 165, 86, 0.2);
+            cursor: pointer;
+        }
+
+        input[type="checkbox"] {
+            position: relative;
+            z-index: 1;
+            width: 22px;
+            height: 22px;
+            cursor: pointer;
+            accent-color: var(--secondary-gold);
+        }
+
+        .radio-group {
+            display: grid;
+            gap: 12px;
+        }
+
+        .radio-option {
+            position: relative;
+            z-index: 1;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            padding: 15px 18px;
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(212, 165, 86, 0.3);
+            border-radius: 10px;
+            cursor: pointer;
+        }
+
+        .radio-option input[type="radio"] {
+            position: relative;
+            z-index: 1;
+            width: 20px;
+            height: 20px;
+            cursor: pointer;
+            accent-color: var(--secondary-gold);
+        }
+
+        .submit-btn {
+            width: 100%;
+            padding: 18px;
+            font-family: 'Cinzel', serif;
+            font-size: 1.2rem;
+            font-weight: 700;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            background: linear-gradient(135deg, var(--secondary-gold) 0%, #c9965d 100%);
+            color: var(--primary-navy);
+            border: none;
+            border-radius: 12px;
+            cursor: pointer;
+            transition: all 0.4s ease;
+            box-shadow: 0 10px 30px rgba(212, 165, 86, 0.3);
+            margin-top: 30px;
+            position: relative;
+        }
+
+        .submit-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 15px 40px rgba(212, 165, 86, 0.4);
+        }
+
+        .submit-btn:disabled {
+            opacity: 0.6;
+            cursor: not-allowed;
+        }
+
+        .submit-btn.submitting {
+            animation: buttonBounce 0.6s ease-in-out infinite;
+        }
+
+        @keyframes buttonBounce {
+            0%, 100% {
+                transform: translateY(0) scale(1);
+            }
+            25% {
+                transform: translateY(-8px) scale(1.02);
+            }
+            50% {
+                transform: translateY(-4px) scale(1.01);
+            }
+            75% {
+                transform: translateY(-6px) scale(1.015);
+            }
+        }
+
+        .hidden {
+            display: none !important;
+        }
+        
+        .form-section {
+            animation: slideIn 0.5s ease-out;
+        }
+        
+        @keyframes slideIn {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .alert {
+            padding: 15px 20px;
+            border-radius: 10px;
+            margin-bottom: 20px;
+            font-size: 1rem;
+            border: 1px solid;
+        }
+
+        .alert-error {
+            background: rgba(231, 76, 60, 0.1);
+            border-color: #e74c3c;
+            color: #e74c3c;
+        }
+
+        .alert-success {
+            background: rgba(39, 174, 96, 0.1);
+            border-color: #27ae60;
+            color: #27ae60;
+        }
+
+        .spinner {
+            border: 3px solid rgba(26, 35, 50, 0.3);
+            border-top: 3px solid #1a2332;
+            border-radius: 50%;
+            width: 20px;
+            height: 20px;
+            animation: spin 1s linear infinite;
+            display: inline-block;
+            margin-left: 10px;
+        }
+
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+        /* Loading Overlay */
+        .loading-overlay {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(135deg, #0f1419 0%, #1a2332 50%, #2a3f5f 100%);
+            z-index: 10000;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+        }
+
+        .loading-overlay.active {
+            display: flex;
+        }
+
+        .loading-content {
+            text-align: center;
+            animation: fadeInUp 0.5s ease;
+        }
+
+        .loading-spinner {
+            width: 65px;
+            aspect-ratio: 1;
+            margin: 0 auto 30px;
+            position: relative;
+        }
+        .loading-spinner span {
+            position: absolute;
+            border-radius: 50px;
+            box-shadow: inset 0 0 0 3px #d4a556;
+            animation: loaderMorph 2.5s infinite;
+        }
+        .loading-spinner span:nth-child(2) {
+            animation-delay: -1.25s;
+        }
+        @keyframes loaderMorph {
+            0%   { inset: 0 35px 35px 0; }
+            12.5%{ inset: 0 35px 0 0; }
+            25%  { inset: 35px 35px 0 0; }
+            37.5%{ inset: 35px 0 0 0; }
+            50%  { inset: 35px 0 0 35px; }
+            62.5%{ inset: 0 0 0 35px; }
+            75%  { inset: 0 0 35px 35px; }
+            87.5%{ inset: 0 0 35px 0; }
+            100% { inset: 0 35px 35px 0; }
+        }
+
+        .loading-text {
+            font-family: 'Bebas Neue', sans-serif;
+            font-size: 2rem;
+            color: var(--secondary-gold);
+            letter-spacing: 3px;
+            margin-bottom: 10px;
+            text-transform: uppercase;
+        }
+
+        .loading-subtext {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 1rem;
+            color: rgba(245, 245, 245, 0.7);
+            font-weight: 300;
+        }
+
+        .loading-dots {
+            display: inline-block;
+        }
+
+        .loading-dots::after {
+            content: '';
+            animation: dots 1.5s steps(4, end) infinite;
+        }
+
+        @keyframes dots {
+            0%, 20% { content: ''; }
+            40% { content: '.'; }
+            60% { content: '..'; }
+            80%, 100% { content: '...'; }
+        }
+
+        @media (max-width: 768px) {
+            .registration-card {
+                padding: 35px 25px;
+            }
+            .form-row {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        .social-links {
+            margin-top: 50px;
+            padding-top: 40px;
+            border-top: 1px solid rgba(212, 165, 86, 0.2);
+            text-align: center;
+        }
+
+        .social-text {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 0.95rem;
+            color: rgba(245, 245, 245, 0.7);
+            margin-bottom: 20px;
+            letter-spacing: 0.5px;
+        }
+
+        .social-icons {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+        }
+
+        .social-icon {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 50px;
+            height: 50px;
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(212, 165, 86, 0.3);
+            border-radius: 50%;
+            color: var(--secondary-gold);
+            transition: all 0.3s ease;
+            text-decoration: none;
+        }
+
+        .social-icon:hover {
+            background: var(--secondary-gold);
+            color: var(--primary-navy);
+            transform: translateY(-3px);
+            box-shadow: 0 5px 20px rgba(212, 165, 86, 0.4);
+        }
+
+        .social-icon svg {
+            width: 24px;
+            height: 24px;
+        }
+
+        .terms-link {
+            color: var(--secondary-gold);
+            text-decoration: none;
+            font-weight: 600;
+            transition: all 0.2s ease;
+        }
+
+        .terms-link:hover {
+            color: #e0b584;
+            text-decoration: underline;
+        }
+
+        /* Pricing Summary */
+        .pricing-summary { background: rgba(26, 35, 50, 0.6); border: 1px solid rgba(212,165,86,0.2); border-radius: 12px; padding: 20px; }
+        .pricing-row { display: flex; justify-content: space-between; align-items: center; padding: 8px 0; color: rgba(245,245,245,0.8); font-size: 0.92rem; border-bottom: 1px solid rgba(255,255,255,0.05); }
+        .pricing-row:last-child { border-bottom: none; }
+        .pricing-row.total { border-top: 2px solid rgba(212,165,86,0.3); margin-top: 8px; padding-top: 14px; font-weight: 700; font-size: 1.05rem; color: var(--secondary-gold); }
+
+        /* Policy Modals */
+        .policy-modal-overlay { display:none; position:fixed; top:0; left:0; width:100%; height:100%; background:rgba(0,0,0,0.7); z-index:9999; justify-content:center; align-items:center; padding:20px; }
+        .policy-modal-overlay.active { display:flex; }
+        .policy-modal { background:#1a2332; border:2px solid rgba(212,165,86,0.3); border-radius:16px; max-width:600px; width:100%; max-height:80vh; display:flex; flex-direction:column; box-shadow:0 30px 80px rgba(0,0,0,0.6); }
+        .policy-modal-header { padding:20px 25px 15px; border-bottom:1px solid rgba(212,165,86,0.15); display:flex; justify-content:space-between; align-items:center; flex-shrink:0; }
+        .policy-modal-header h2 { font-family:'Bebas Neue',sans-serif; color:var(--secondary-gold); font-size:1.5rem; letter-spacing:1px; margin:0; }
+        .policy-modal-close { background:none; border:none; color:rgba(245,245,245,0.5); font-size:1.5rem; cursor:pointer; padding:5px 10px; border-radius:8px; transition:all 0.2s; }
+        .policy-modal-close:hover { color:#f5f5f5; background:rgba(255,255,255,0.1); }
+        .policy-modal-body { padding:20px 25px 25px; overflow-y:auto; color:rgba(245,245,245,0.85); font-size:0.92rem; line-height:1.7; -webkit-overflow-scrolling:touch; }
+        .policy-modal-body h3 { color:var(--secondary-gold); margin:18px 0 8px; font-size:1rem; }
+        .policy-modal-body ol { padding-left:22px; margin:10px 0; }
+        .policy-modal-body ol li { margin-bottom:10px; }
+        .policy-modal-body ul { padding-left:22px; margin:8px 0; list-style:disc; }
+        .policy-modal-body ul li { margin-bottom:6px; }
+        .policy-modal-body p { margin-bottom:12px; }
+        .policy-modal-body .note { background:rgba(212,165,86,0.08); border-left:3px solid var(--secondary-gold); padding:10px 14px; border-radius:0 8px 8px 0; margin:10px 0; font-size:0.88rem; }
+        .sizing-table { width:100%; border-collapse:collapse; margin:12px 0; font-size:0.85rem; }
+        .sizing-table th { background:rgba(212,165,86,0.15); color:var(--secondary-gold); padding:8px 10px; text-align:center; font-size:0.78rem; text-transform:uppercase; letter-spacing:0.5px; }
+        .sizing-table td { padding:7px 10px; text-align:center; border-bottom:1px solid rgba(255,255,255,0.05); }
+        .sizing-table tr:hover td { background:rgba(255,255,255,0.03); }
+        .sizing-link { color:var(--secondary-gold); cursor:pointer; font-size:0.85rem; text-decoration:underline; margin-left:8px; }
+        .sizing-link:hover { color:#e5b96a; }
+
+
+
+
+
+        /* Progress Stepper */
+        .pyc-progress { max-width:600px; margin:0 auto 25px; padding:15px 15px 5px; }
+        .pyc-progress-title { text-align:center; font-size:0.7rem; text-transform:uppercase; letter-spacing:2px; color:rgba(245,245,245,0.3); margin-bottom:14px; font-weight:600; }
+        .pyc-steps { display:flex; align-items:flex-start; justify-content:space-between; position:relative; }
+        .pyc-steps::before { content:''; position:absolute; top:16px; left:40px; right:40px; height:3px; background:rgba(255,255,255,0.06); border-radius:2px; }
+        .pyc-line { position:absolute; top:16px; left:40px; height:3px; background:linear-gradient(90deg,#d4a556,#e5b96a); border-radius:2px; }
+        .pyc-s { display:flex; flex-direction:column; align-items:center; flex:1; position:relative; z-index:2; }
+        .pyc-dot { width:34px; height:34px; border-radius:50%; display:flex; align-items:center; justify-content:center; font-size:0.8rem; font-weight:700; border:3px solid rgba(255,255,255,0.08); background:rgba(26,35,50,0.95); color:rgba(245,245,245,0.25); transition:all 0.3s; }
+        .pyc-s.done .pyc-dot { background:#d4a556; color:#1a2332; border-color:#d4a556; }
+        .pyc-s.now .pyc-dot { background:rgba(212,165,86,0.12); color:#d4a556; border-color:#d4a556; box-shadow:0 0 15px rgba(212,165,86,0.3); animation:pyc-glow 2s infinite; }
+        .pyc-lbl { margin-top:8px; font-size:0.68rem; color:rgba(245,245,245,0.25); text-align:center; font-weight:600; text-transform:uppercase; letter-spacing:0.5px; line-height:1.3; }
+        .pyc-s.done .pyc-lbl { color:rgba(212,165,86,0.7); }
+        .pyc-s.now .pyc-lbl { color:#f5f5f5; }
+        .pyc-hint { text-align:center; margin-top:10px; font-size:0.78rem; color:rgba(212,165,86,0.55); font-style:italic; }
+        @keyframes pyc-glow { 0%,100%{box-shadow:0 0 10px rgba(212,165,86,0.2);} 50%{box-shadow:0 0 20px rgba(212,165,86,0.45);} }
+        @media(max-width:480px) { .pyc-dot{width:28px;height:28px;font-size:0.7rem;} .pyc-lbl{font-size:0.6rem;} }
+        /* PYC Counter */
+        .pyc-counter {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0;
+            background: rgba(255,255,255,0.05);
+            border: 1px solid rgba(212,165,86,0.3);
+            border-radius: 10px;
+            overflow: hidden;
+            height: 48px;
+            max-width: 200px;
+        }
+        .pyc-counter-btn {
+            background: rgba(212,165,86,0.15);
+            border: none;
+            color: #d4a556;
+            width: 48px;
+            height: 100%;
+            font-size: 1.4rem;
+            font-weight: 700;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: background 0.15s;
+            -webkit-tap-highlight-color: transparent;
+        }
+        .pyc-counter-btn:hover:not(:disabled) { background: rgba(212,165,86,0.3); }
+        .pyc-counter-btn:disabled { opacity: 0.3; cursor: default; }
+        .pyc-counter-display {
+            min-width: 70px;
+            text-align: center;
+            font-family: 'Montserrat', sans-serif;
+            font-size: 1rem;
+            font-weight: 600;
+            color: #f5f5f5;
+            user-select: none;
+            padding: 0 4px;
+            transition: transform 0.15s ease;
+        }
+        .pyc-counter-display.bump { transform: scale(1.15); }
+
+        /* Slide Button */
+        .slide-btn-wrapper { width: 100%; margin-top: 10px; }
+        .slide-btn-track {
+            position: relative;
+            height: 58px;
+            background: rgba(255,255,255,0.04);
+            border: 1px solid rgba(212,165,86,0.3);
+            border-radius: 50px;
+            overflow: hidden;
+            touch-action: none;
+            user-select: none;
+            -webkit-user-select: none;
+        }
+        .slide-btn-track.completed { border-color: rgba(212,165,86,0.5); }
+        .slide-btn-fill {
+            position: absolute;
+            top: 0; left: 0; bottom: 0;
+            width: 0;
+            background: linear-gradient(90deg, rgba(212,165,86,0.15), rgba(212,165,86,0.25));
+            border-radius: 50px;
+            transition: none;
+        }
+        .slide-btn-track.resetting .slide-btn-fill { transition: width 0.3s ease; }
+        .slide-btn-track.completed .slide-btn-fill { background: linear-gradient(90deg, rgba(212,165,86,0.15), rgba(212,165,86,0.35)); width: 100% !important; }
+        .slide-btn-label {
+            position: absolute;
+            top: 50%; left: 50%;
+            transform: translate(-50%, -50%);
+            font-family: 'Cinzel', serif;
+            font-size: 0.95rem;
+            font-weight: 700;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            color: rgba(212,165,86,0.5);
+            white-space: nowrap;
+            pointer-events: none;
+            transition: opacity 0.2s;
+        }
+        
+        .slide-btn-handle {
+            position: absolute;
+            top: 4px; left: 4px;
+            width: 50px; height: 50px;
+            background: linear-gradient(135deg, #d4a556, #c9965d);
+            border-radius: 50%;
+            display: flex; align-items: center; justify-content: center;
+            cursor: grab;
+            z-index: 2;
+            transition: none;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.3);
+        }
+        .slide-btn-handle:active { cursor: grabbing; }
+        .slide-btn-track.resetting .slide-btn-handle { transition: left 0.3s ease; }
+        .slide-btn-handle svg { width: 22px; height: 22px; fill: none; stroke: #1a2332; stroke-width: 2.5; stroke-linecap: round; stroke-linejoin: round; }
+        .slide-btn-track.completed .slide-btn-handle {
+            background: linear-gradient(135deg, #27ae60, #2ecc71);
+            left: calc(100% - 54px) !important;
+            transition: background 0.3s, left 0.3s;
+        }
+        .slide-btn-track.completed .slide-btn-handle svg { display: none; }
+        .slide-btn-loading {
+            display: none;
+            width: 30px; height: 30px;
+            position: relative;
+        }
+        .slide-btn-loading .orbit {
+            position: absolute;
+            border: 2px solid transparent;
+            border-radius: 50%;
+        }
+        .slide-btn-loading .orbit-1 {
+            inset: 0;
+            border-top-color: #1a2332;
+            animation: spin 1s linear infinite;
+        }
+        .slide-btn-loading .orbit-2 {
+            inset: 4px;
+            border-top-color: #1a2332;
+            animation: spin-reverse 1.5s linear infinite;
+        }
+        .slide-btn-loading .orbit-3 {
+            inset: 8px;
+            border-top-color: #1a2332;
+            animation: spin 0.8s linear infinite;
+        }
+        @keyframes spin-reverse { to { transform: rotate(-360deg); } }
+        .slide-btn-track.completed .slide-btn-loading { display: block; }
+        .slide-btn-dots {
+            display: none;
+            position: absolute;
+            top: 50%; left: 50%;
+            transform: translate(-50%, -50%);
+            z-index: 1;
+            pointer-events: none;
+        }
+        .slide-btn-track.completed .slide-btn-dots { display: block; top: 72%; }
+        .slide-btn-track.completed .slide-btn-label { top: 35%; }
+        .slide-btn-check { display: none; }
+        @media (max-width: 480px) {
+            .slide-btn-track { height: 52px; }
+            .slide-btn-handle { width: 44px; height: 44px; }
+            .slide-btn-label { font-size: 0.85rem; }
+        }
+
+        /* Animated Dropdown */
+        .anim-dropdown { position: relative; display: inline-block; width: 100%; }
+        .anim-dropdown-btn {
+            width: 100%;
+            padding: 14px 18px;
+            background: rgba(255,255,255,0.05);
+            border: 1px solid rgba(212,165,86,0.3);
+            border-radius: 8px;
+            color: #f5f5f5;
+            font-family: 'Montserrat', sans-serif;
+            font-size: 0.95rem;
+            text-align: left;
+            cursor: pointer;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            transition: border-color 0.2s;
+        }
+        .anim-dropdown-btn:hover, .anim-dropdown.open .anim-dropdown-btn { border-color: rgba(212,165,86,0.6); }
+        .anim-dropdown-btn .dd-placeholder { color: rgba(245,245,245,0.4); }
+        .anim-dropdown-chevron {
+            width: 18px; height: 18px;
+            transition: transform 0.2s ease;
+            stroke: rgba(212,165,86,0.6);
+            flex-shrink: 0;
+            margin-left: 8px;
+        }
+        .anim-dropdown.open .anim-dropdown-chevron { transform: rotate(180deg); }
+        .anim-dropdown-panel {
+            position: absolute;
+            top: calc(100% + 6px);
+            left: 0; right: 0;
+            z-index: 50;
+            background: #1a2332;
+            border: 1px solid rgba(212,165,86,0.3);
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 8px 24px rgba(0,0,0,0.4);
+            opacity: 0;
+            transform: translateY(-8px) scale(0.97);
+            transition: opacity 0.2s ease, transform 0.2s ease;
+            pointer-events: none;
+        }
+        .anim-dropdown.open .anim-dropdown-panel { opacity: 1; transform: translateY(0) scale(1); pointer-events: auto; }
+        .anim-dropdown-item {
+            display: block;
+            width: 100%;
+            padding: 12px 18px;
+            font-family: 'Montserrat', sans-serif;
+            font-size: 0.9rem;
+            color: #f5f5f5;
+            border: none;
+            background: transparent;
+            text-align: left;
+            cursor: pointer;
+            border-bottom: 1px solid rgba(212,165,86,0.1);
+            transition: background 0.15s;
+            opacity: 0;
+            transform: translateX(-15px);
+        }
+        .anim-dropdown.open .anim-dropdown-item {
+            opacity: 1;
+            transform: translateX(0);
+        }
+        .anim-dropdown.open .anim-dropdown-item:nth-child(1) { transition-delay: 0.02s; }
+        .anim-dropdown.open .anim-dropdown-item:nth-child(2) { transition-delay: 0.05s; }
+        .anim-dropdown.open .anim-dropdown-item:nth-child(3) { transition-delay: 0.08s; }
+        .anim-dropdown.open .anim-dropdown-item:nth-child(4) { transition-delay: 0.11s; }
+        .anim-dropdown.open .anim-dropdown-item:nth-child(5) { transition-delay: 0.14s; }
+        .anim-dropdown.open .anim-dropdown-item:nth-child(6) { transition-delay: 0.17s; }
+        .anim-dropdown-item:last-child { border-bottom: none; }
+        .anim-dropdown-item:hover { background: rgba(212,165,86,0.15); }
+        .anim-dropdown-item.selected { color: #d4a556; font-weight: 600; }
+    </style>
+<body>
+
+    <div class="stars" id="stars"></div>
+
+    <div class="container">
+
+        <div id="preRegistrationChrome">
+        <div class="pyc-progress">
+            <div class="pyc-progress-title">Registration Progress</div>
+            <div class="pyc-steps">
+                <div class="pyc-line" style="left:0;width:calc(16.67% - 17px);"></div>
+                <div class="pyc-s now"><div class="pyc-dot">1</div><div class="pyc-lbl">Register</div></div><div class="pyc-s "><div class="pyc-dot">2</div><div class="pyc-lbl">Submit Payment</div></div><div class="pyc-s "><div class="pyc-dot">3</div><div class="pyc-lbl">Confirmed!</div></div>
+            </div>
+            <div class="pyc-hint">Step 1 of 3 — Fill in your details below</div>
+        </div>
+
+
+        <div class="banner">
+            <img src="IMG_3908.jpeg" alt="PYC 2026 - Above and Beyond">
+        </div>
+        </div>
+
+        <!-- Registration-closed overlay (hidden by default; shown when /server-time reports closed) -->
+        <div class="registration-card" id="closedOverlay" style="display:none;text-align:center;">
+            <h1 class="section-title" style="color:var(--secondary-gold);">SEE YOU IN MVC!</h1>
+            <p class="subtitle" style="font-size:1.1rem;color:rgba(245,245,245,0.85);">Registration is closed.<br>We can't wait to see you at PYC 2026!</p>
+            <p style="color:rgba(245,245,245,0.65);margin:18px 0 26px 0;line-height:1.7;">
+                Public registration ended on <strong>May 20, 2026 (Philippine Time)</strong>.<br>
+                <em>June 3-7 &middot; Mountain View College, Mindanao, Philippines</em>
+            </p>
+            <a href="/" style="display:inline-block;padding:12px 28px;background:transparent;border:2px solid var(--secondary-gold);color:var(--secondary-gold);border-radius:8px;font-weight:700;text-decoration:none;text-transform:uppercase;letter-spacing:1px;">Return Home</a>
+            <p style="margin-top:36px;font-size:0.78rem;color:rgba(245,245,245,0.35);">
+                <a href="#" id="adminBypassLink" style="color:rgba(245,245,245,0.4);text-decoration:underline;">Admin?</a>
+            </p>
+        </div>
+
+        <!-- Maintenance overlay (hidden by default; shown when MAINTENANCE_MODE is true in the gate script below) -->
+        <div class="registration-card" id="maintenanceOverlay" style="display:none;text-align:center;">
+            <h1 class="section-title" style="color:var(--secondary-gold);">UNDER MAINTENANCE</h1>
+            <p class="subtitle" style="font-size:1.1rem;color:rgba(245,245,245,0.85);">Registration is temporarily unavailable.<br>We're making some improvements &mdash; please check back soon.</p>
+            <p style="color:rgba(245,245,245,0.65);margin:18px 0 26px 0;line-height:1.7;">
+                We apologize for the inconvenience.<br>
+                <em>June 3-7 &middot; Mountain View College, Mindanao, Philippines</em>
+            </p>
+            <a href="/" style="display:inline-block;padding:12px 28px;background:transparent;border:2px solid var(--secondary-gold);color:var(--secondary-gold);border-radius:8px;font-weight:700;text-decoration:none;text-transform:uppercase;letter-spacing:1px;">Return Home</a>
+            <p style="margin-top:36px;font-size:0.78rem;color:rgba(245,245,245,0.35);">
+                <a href="#" id="maintenanceBypassLink" style="color:rgba(245,245,245,0.4);text-decoration:underline;">Admin?</a>
+            </p>
+        </div>
+
+        <div class="registration-card" id="registrationCard">
+            <h1 class="section-title">Registration</h1>
+            <p class="subtitle">June 3-7 • Mountain View College, Mindanao, Philippines</p>
+
+            <div id="alertMessage" class="hidden"></div>
+
+            <form id="registrationForm">
+                <!-- Location Type -->
+                <div class="form-section">
+                    <div class="form-group">
+                        <label for="locationType">Are you from the Philippines or International? <span class="required">*</span></label>
+                        <select id="locationType" name="locationType" required>
+                            <option value="">-- Select Option --</option>
+                            <option value="philippines">Philippines</option>
+                            <option value="international">International</option>
+                        </select>
+                    </div>
+                </div>
+
+
+                <!-- Registration Type -->
+                <div class="form-section">
+                    <h2 class="section-header">Registration Type</h2>
+                    <div class="registration-type-selector">
+                        <label class="type-card selected" id="typeIndividualCard">
+                            <input type="radio" name="registrationType" value="individual" checked>
+                            <div class="type-label">Individual</div>
+                            
+                        </label>
+                        <label class="type-card" id="typeGroupCard">
+                            <input type="radio" name="registrationType" value="group">
+                            <div class="type-label">Family / Group</div>
+                            <div class="type-desc">Register multiple people</div>
+                        </label>
+                    </div>
+                </div>
+
+                <!-- Personal Information -->
+                <div class="form-section">
+                    <h2 class="section-header">Personal Information</h2>
+                    
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="firstName">First Name <span class="required">*</span></label>
+                            <input type="text" id="firstName" name="firstName" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="lastName">Last Name <span class="required">*</span></label>
+                            <input type="text" id="lastName" name="lastName" required>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="nickname">Nickname <span class="required">*</span></label>
+                        <input type="text" id="nickname" name="nickname" required placeholder="e.g. Mike, Cess, JR">
+                        <small style="color:rgba(212,165,86,0.7);font-size:0.8rem;margin-top:4px;display:block;">This is the name that will be printed on your conference ID / name tag.</small>
+                    </div>
+
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="age">Age <span class="required">*</span></label>
+                            <select id="age" name="age" required>
+                                <option value="">-- Select Age --</option>
+                                <option value="13-17">13-17</option>
+                                <option value="18-25">18-25</option>
+                                <option value="26-35">26-35</option>
+                                <option value="36+">36+</option>
+                            </select>
+                            <small style="color:rgba(212,165,86,0.7);font-size:0.8rem;margin-top:4px;display:block;">Ages 0–12 do not need to register. They may attend but will not receive a T-shirt or conference materials.</small>
+                        </div>
+                        <div class="form-group">
+                            <label>Gender <span class="required">*</span></label>
+                            <div class="radio-group">
+                                <div class="radio-option">
+                                    <input type="radio" id="genderMale" name="gender" value="Male" required>
+                                    <label for="genderMale">Male</label>
+                                </div>
+                                <div class="radio-option">
+                                    <input type="radio" id="genderFemale" name="gender" value="Female">
+                                    <label for="genderFemale">Female</label>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="email">Email Address <span class="required">*</span></label>
+                        <input type="email" id="email" name="email" required>
+                        <small style="color:rgba(212,165,86,0.7);font-size:0.8rem;margin-top:4px;display:block;">Please use a valid email — this is where your registration confirmation and receipt will be sent.</small>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="confirmEmail">Confirm Email Address <span class="required">*</span></label>
+                        <input type="email" id="confirmEmail" name="confirmEmail" required>
+                        <div id="emailMatchMessage" style="margin-top: 8px; font-size: 0.9rem; display: none;"></div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="phone">Phone Number <span class="required">*</span></label>
+                        <input type="tel" id="phone" name="phone" required>
+                    </div>
+                </div>
+
+                <!-- Philippines Address -->
+                <div class="form-section hidden" id="philippinesAddress">
+                    <h2 class="section-header">Location (Philippines)</h2>
+                    
+                    <div class="form-group">
+                        <label for="phRegion">Region <span class="required">*</span></label>
+                        <select id="phRegion" name="phRegion">
+                            <option value="">-- Select Region --</option>
+                            <option value="Luzon">Luzon</option>
+                            <option value="Visayas">Visayas</option>
+                            <option value="Mindanao">Mindanao</option>
+                        </select>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="phCity">City <span class="required">*</span></label>
+                        <input type="text" id="phCity" name="phCity" placeholder="Enter your city">
+                    </div>
+                </div>
+
+                <!-- International Address -->
+                <div class="form-section hidden" id="internationalAddress">
+                    <h2 class="section-header">Location (International)</h2>
+                    
+                    <div class="form-group">
+                        <label for="intCountry">Country <span class="required">*</span></label>
+                        <select id="intCountry" name="intCountry">
+                            <option value="">-- Select Country --</option>
+                            <option value="United States">United States</option>
+                            <option value="Canada">Canada</option>
+                            <option value="United Kingdom">United Kingdom</option>
+                            <option value="Australia">Australia</option>
+                            <option value="New Zealand">New Zealand</option>
+                            <option value="Singapore">Singapore</option>
+                            <option value="Hong Kong">Hong Kong</option>
+                            <option value="Japan">Japan</option>
+                            <option value="South Korea">South Korea</option>
+                            <option value="China">China</option>
+                            <option value="Taiwan">Taiwan</option>
+                            <option value="Malaysia">Malaysia</option>
+                            <option value="Indonesia">Indonesia</option>
+                            <option value="Thailand">Thailand</option>
+                            <option value="Vietnam">Vietnam</option>
+                            <option value="India">India</option>
+                            <option value="United Arab Emirates">United Arab Emirates</option>
+                            <option value="Saudi Arabia">Saudi Arabia</option>
+                            <option value="Germany">Germany</option>
+                            <option value="France">France</option>
+                            <option value="Italy">Italy</option>
+                            <option value="Spain">Spain</option>
+                            <option value="Netherlands">Netherlands</option>
+                            <option value="Belgium">Belgium</option>
+                            <option value="Switzerland">Switzerland</option>
+                            <option value="Austria">Austria</option>
+                            <option value="Sweden">Sweden</option>
+                            <option value="Norway">Norway</option>
+                            <option value="Denmark">Denmark</option>
+                            <option value="Finland">Finland</option>
+                            <option value="Ireland">Ireland</option>
+                            <option value="Poland">Poland</option>
+                            <option value="Czech Republic">Czech Republic</option>
+                            <option value="Portugal">Portugal</option>
+                            <option value="Greece">Greece</option>
+                            <option value="Russia">Russia</option>
+                            <option value="Brazil">Brazil</option>
+                            <option value="Mexico">Mexico</option>
+                            <option value="Argentina">Argentina</option>
+                            <option value="Chile">Chile</option>
+                            <option value="Colombia">Colombia</option>
+                            <option value="Peru">Peru</option>
+                            <option value="South Africa">South Africa</option>
+                            <option value="Egypt">Egypt</option>
+                            <option value="Nigeria">Nigeria</option>
+                            <option value="Kenya">Kenya</option>
+                            <option value="Israel">Israel</option>
+                            <option value="Turkey">Turkey</option>
+                            <option value="Other">Other</option>
+                        </select>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="intCity">City <span class="required">*</span></label>
+                        <input type="text" id="intCity" name="intCity" placeholder="Enter your city">
+                    </div>
+                </div>
+
+                <!-- VIP Complete Address (Philippines) - shown for special users -->
+                <div class="form-section hidden" id="vipCompleteAddress">
+                    <h2 class="section-header">Complete Address (Philippines)</h2>
+                    
+                    <div class="form-group">
+                        <label for="vipStreet">Street Address / House Number <span class="required">*</span></label>
+                        <input type="text" id="vipStreet" name="vipStreet" placeholder="e.g., 123 Main Street, Blk 5 Lot 10">
+                    </div>
+
+                    <div class="form-group">
+                        <label for="vipBarangay">Barangay <span class="required">*</span></label>
+                        <input type="text" id="vipBarangay" name="vipBarangay" placeholder="Enter barangay">
+                    </div>
+
+                    <div class="form-group">
+                        <label for="vipCity">City/Municipality <span class="required">*</span></label>
+                        <input type="text" id="vipCity" name="vipCity" placeholder="Enter city or municipality">
+                    </div>
+
+                    <div class="form-group">
+                        <label for="vipProvince">Province <span class="required">*</span></label>
+                        <input type="text" id="vipProvince" name="vipProvince" placeholder="Enter province">
+                    </div>
+
+                    <div class="form-group">
+                        <label for="vipRegion">Region <span class="required">*</span></label>
+                        <select id="vipRegion" name="vipRegion">
+                            <option value="">-- Select Region --</option>
+                            <option value="Luzon">Luzon</option>
+                            <option value="Visayas">Visayas</option>
+                            <option value="Mindanao">Mindanao</option>
+                        </select>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="vipZipCode">Zip Code <span class="required">*</span></label>
+                        <input type="text" id="vipZipCode" name="vipZipCode" placeholder="Enter zip code" pattern="[0-9]{4}" maxlength="4">
+                    </div>
+                </div>
+
+                <!-- Conference Options -->
+                <div class="form-section">
+                    <h2 class="section-header">Conference Options</h2>
+                    
+                    <div class="form-group">
+                        <label for="shirtSize">T-Shirt Size <span class="required">*</span> <span class="sizing-link" onclick="openModal('sizingModal')">Sizing Guide</span></label>
+                        <select id="shirtSize" name="shirtSize" required>
+                            <option value="">-- Select Size --</option>
+                            <option value="xs">XS</option>
+                            <option value="s">S</option>
+                            <option value="m">M</option>
+                            <option value="l">L</option>
+                            <option value="xl">XL</option>
+                            <option value="2xl">2XL</option>
+                            <option value="3xl">3XL</option>
+                            <option value="4xl">4XL</option>
+                            <option value="5xl">5XL</option>
+                        </select>
+                    </div>
+
+                    <div class="form-group">
+                        <label>Meal Plan <span class="required">*</span></label>
+                        <div class="radio-group">
+                            <div class="radio-option">
+                                <input type="radio" id="mealVegan" name="mealPlan" value="vegan" required>
+                                <label for="mealVegan">Full Meal — Vegan (10 meals)</label>
+                            </div>
+                            <div class="radio-option">
+                                <input type="radio" id="mealVegetarian" name="mealPlan" value="vegetarian">
+                                <label for="mealVegetarian">Full Meal — Vegetarian (10 meals)</label>
+                            </div>
+                            <div class="radio-option">
+                                <input type="radio" id="mealNone" name="mealPlan" value="none">
+                                <label for="mealNone">No Meal Plan</label>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="pycCount">This will be my ___ PYC <span class="required">*</span></label>
+                        <input type="hidden" id="pycCount" name="pycCount" value="1st" required>
+                        <div class="pyc-counter" data-pyc-counter="pycCount">
+                            <button type="button" class="pyc-counter-btn pyc-minus" disabled>−</button>
+                            <span class="pyc-counter-display">1st</span>
+                            <button type="button" class="pyc-counter-btn pyc-plus">+</button>
+                        </div>
+                    </div>
+                </div>
+
+
+                <!-- Group Members Section (shown only for group registration) -->
+                <div class="form-section hidden" id="groupMembersSection">
+                    <h2 class="section-header">Group Members</h2>
+                    <p style="color: rgba(245,245,245,0.6); margin-bottom: 15px; font-size: 14px;">
+                        Add each person in your group below. Each person needs their own details.
+                    </p>
+                    <div id="groupMembersContainer"></div>
+                    <button type="button" class="add-member-btn" id="addMemberBtn" onclick="addGroupMember()">
+                        ➕ Add Another Person
+                    </button>
+                </div>
+
+                <!-- Pricing Summary (shown for group registrations) -->
+                <div class="form-section hidden" id="pricingSummarySection">
+                    <div class="pricing-summary">
+                        <h3 style="color:var(--secondary-gold); font-size:0.95rem; letter-spacing:2px; text-transform:uppercase; margin-bottom:15px; font-weight:600;">Payment Summary</h3>
+                        <div id="pricingBreakdown"></div>
+                    </div>
+                </div>
+
+                <!-- Referral Source -->
+                <div class="form-section">
+                    <h2 class="section-header">Additional Information</h2>
+                    
+                    <div class="form-group">
+                        <label for="referralSource">How did you hear about us? <span class="required">*</span></label>
+                        <input type="hidden" id="referralSource" name="referralSource" required>
+                        <div class="anim-dropdown" data-anim-dropdown="referralSource">
+                            <button type="button" class="anim-dropdown-btn">
+                                <span class="dd-placeholder">-- Select Option --</span>
+                                <svg class="anim-dropdown-chevron" viewBox="0 0 24 24" fill="none" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg>
+                            </button>
+                            <div class="anim-dropdown-panel">
+                                <button type="button" class="anim-dropdown-item" data-value="social_media">Social Media</button>
+                                <button type="button" class="anim-dropdown-item" data-value="friend">Friend/Family</button>
+                                <button type="button" class="anim-dropdown-item" data-value="church">Church</button>
+                                <button type="button" class="anim-dropdown-item" data-value="website">Website</button>
+                                <button type="button" class="anim-dropdown-item" data-value="email">Email</button>
+                                <button type="button" class="anim-dropdown-item" data-value="poster">Poster/Flyer</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Terms and Conditions -->
+                <div class="form-section">
+                    <div class="form-group">
+                        <div class="checkbox-group" style="align-items: flex-start;">
+                            <input type="checkbox" id="acceptTerms" name="acceptTerms" required disabled style="opacity:0.35;cursor:not-allowed;">
+                            <label for="acceptTerms" style="margin: 0;">
+                                I accept the <span class="terms-link" onclick="openModal('termsModal')">Terms and Conditions</span>
+                                and <span class="terms-link" onclick="openModal('refundModal')">Refund & Transfer Policy</span>
+                                <span class="required">*</span>
+                            </label>
+                        </div>
+                        <p id="termsScrollHint" style="color:rgba(212,165,86,0.7);font-size:0.78rem;margin-top:6px;margin-left:28px;transition:opacity 0.3s;">To accept, you must open and scroll to the bottom of both the <span class="terms-link" onclick="openModal('termsModal')" style="font-size:0.78rem;">Terms and Conditions</span> and the <span class="terms-link" onclick="openModal('refundModal')" style="font-size:0.78rem;">Refund & Transfer Policy</span></p>
+                    </div>
+                </div>
+
+                <!-- Minor Waiver Section (shown only for under 18) -->
+                <div class="form-section hidden" id="minorWaiverSection" style="background: rgba(220, 53, 69, 0.1); border: 2px solid rgba(220, 53, 69, 0.3); border-radius: 10px; padding: 20px; margin-top: 20px;">
+                    <h3 style="color: #dc3545; margin-bottom: 15px;">⚠️ Minor Participation — Waiver Required</h3>
+                    <p style="margin-bottom: 12px; line-height: 1.6;">
+                        Since there is an attendee under 18 years old, a signed <strong>Assumption of Risk, Release and Waiver of Liability for Minor Participation Form</strong> is required.
+                    </p>
+                    <div style="background:rgba(212,165,86,0.08);border:1px solid rgba(212,165,86,0.25);border-radius:10px;padding:15px;margin-bottom:15px;">
+                        <p style="margin-bottom:10px;font-weight:600;color:#d4a556;">What you need to do:</p>
+                        <ol style="padding-left:20px;margin:0;line-height:1.8;font-size:0.92rem;">
+                            <li>Download and print the <a href="/PYC_2026_Minor_Waiver.pdf" target="_blank" style="color:#d4a556;font-weight:600;">Minor Waiver Form (PDF)</a></li>
+                            <li>Have a parent or legal guardian sign the form</li>
+                            <li><strong style="color:#dc3545;">Bring the signed form to the conference</strong> — it must be submitted to the organizers during on-site registration</li>
+                        </ol>
+                    </div>
+                    <div class="form-group">
+                        <label style="display: flex; align-items: flex-start; cursor: pointer;">
+                            <input type="checkbox" id="minorWaiverAccept" name="minorWaiverAccept" style="margin-right: 10px; margin-top: 4px; width: 20px; height: 20px;">
+                            <span style="flex: 1;">
+                                I understand that a signed Minor Waiver Form must be brought to the conference, and I confirm that a parent or legal guardian has approved this registration.
+                                <span class="required" style="color: #dc3545;">*</span>
+                            </span>
+                        </label>
+                    </div>
+                </div>
+
+                <button type="submit" class="submit-btn" id="submitBtn" style="display:none;" formnovalidate>
+                    Continue to Payment →
+                </button>
+                <div class="slide-btn-wrapper">
+                    <div class="slide-btn-track" data-slide-btn="submitBtn">
+                        <div class="slide-btn-fill"></div>
+                        <span class="slide-btn-label">Slide to Continue →</span>
+                        <div class="slide-btn-dots"><svg width="40" height="24" viewBox="0 0 24 24"><circle cx="4" cy="12" r="2" fill="#d4a556"><animate id="sd1" begin="0;sd3.end+0.25s" attributeName="cy" calcMode="spline" dur="0.6s" values="12;6;12" keySplines=".33,.66,.66,1;.33,0,.66,.33"/></circle><circle cx="12" cy="12" r="2" fill="#d4a556"><animate begin="sd1.begin+0.1s" attributeName="cy" calcMode="spline" dur="0.6s" values="12;6;12" keySplines=".33,.66,.66,1;.33,0,.66,.33"/></circle><circle cx="20" cy="12" r="2" fill="#d4a556"><animate id="sd3" begin="sd1.begin+0.2s" attributeName="cy" calcMode="spline" dur="0.6s" values="12;6;12" keySplines=".33,.66,.66,1;.33,0,.66,.33"/></circle></svg></div>
+                        <div class="slide-btn-handle">
+                            <svg viewBox="0 0 24 24"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+                            <div class="slide-btn-loading"><div class="orbit orbit-1"></div><div class="orbit orbit-2"></div><div class="orbit orbit-3"></div></div>
+                        </div>
+                    </div>
+                </div>
+            </form>
+
+            <!-- Social Media Links -->
+            <div class="social-links">
+                <p class="social-text">For questions or concerns, contact us through social media</p>
+                <div class="social-icons">
+                    <a href="https://www.facebook.com/share/1D9PJw6wkq/?mibextid=wwXIfr" target="_blank" rel="noopener noreferrer" class="social-icon">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="currentColor">
+                            <path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/>
+                        </svg>
+                    </a>
+                    <a href="https://www.instagram.com/philippineyouthforchrist?igsh=c2Q0MjAwbWh1cXZ2" target="_blank" rel="noopener noreferrer" class="social-icon">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="currentColor">
+                            <path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/>
+                        </svg>
+                    </a>
+                </div>
+            </div>
+            
+            <div style="text-align: center; padding: 20px; color: rgba(245, 245, 245, 0.7); font-size: 0.95rem; margin-top: 20px;">
+                <p>Send us your prayer requests: <a href="https://docs.google.com/forms/d/e/1FAIpQLScF58bssW1NRk_1kisP1M3yrpcbyn2SBLxf8YvGI-nWFVF6vg/viewform" target="_blank" style="color: #d4a556; text-decoration: none;">Submit a Prayer Request</a></p>
+            </div>
+        </div>
+    </div>
+
+    <script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
+        // Create stars concentrated around edges - avoiding center
+        function createStars() {
+            const starsContainer = document.getElementById('stars');
+            const numberOfStars = 60; // Increased from 30, but spread around edges
+            
+            // Define zones: top, bottom, left, right edges
+            const zones = ['top', 'bottom', 'left', 'right'];
+            
+            for (let i = 0; i < numberOfStars; i++) {
+                const star = document.createElement('div');
+                star.className = 'star';
+                
+                // Randomly select a zone (edge area)
+                const zone = zones[Math.floor(Math.random() * zones.length)];
+                
+                let left, top;
+                
+                // Position stars based on zone
+                if (zone === 'top') {
+                    // Top edge: full width, top 20% of screen
+                    left = Math.random() * 100;
+                    top = Math.random() * 20;
+                } else if (zone === 'bottom') {
+                    // Bottom edge: full width, bottom 20% of screen
+                    left = Math.random() * 100;
+                    top = 80 + Math.random() * 20;
+                } else if (zone === 'left') {
+                    // Left edge: left 15%, middle 60% of screen height
+                    left = Math.random() * 15;
+                    top = 20 + Math.random() * 60;
+                } else {
+                    // Right edge: right 15%, middle 60% of screen height
+                    left = 85 + Math.random() * 15;
+                    top = 20 + Math.random() * 60;
+                }
+                
+                // Varied sizes - some much larger
+                const rand = Math.random();
+                let size;
+                if (rand > 0.95) {
+                    size = Math.random() * 6 + 8; // Large stars: 8-14px
+                } else if (rand > 0.85) {
+                    size = Math.random() * 4 + 5; // Medium stars: 5-9px
+                } else {
+                    size = Math.random() * 3 + 2; // Small stars: 2-5px
+                }
+                
+                star.style.width = size + 'px';
+                star.style.height = size + 'px';
+                star.style.left = left + '%';
+                star.style.top = top + '%';
+                star.style.animationDelay = Math.random() * 3 + 's';
+                star.style.animationDuration = (Math.random() * 2 + 2) + 's';
+                
+                starsContainer.appendChild(star);
+            }
+        }
+        createStars();
+
+        // Location type handler
+        document.getElementById('locationType').addEventListener('change', function() {
+            const phAddress = document.getElementById('philippinesAddress');
+            const intAddress = document.getElementById('internationalAddress');
+            
+            phAddress.classList.add('hidden');
+            intAddress.classList.add('hidden');
+
+            if (this.value === 'philippines') {
+                phAddress.classList.remove('hidden');
+                setRequiredFields('philippinesAddress', true);
+                setRequiredFields('internationalAddress', false);
+            } else if (this.value === 'international') {
+                intAddress.classList.remove('hidden');
+                setRequiredFields('internationalAddress', true);
+                setRequiredFields('philippinesAddress', false);
+            }
+            // Re-check VIP status to override if needed
+            checkVIPUser();
+        });
+
+        function setRequiredFields(sectionId, isRequired) {
+            const section = document.getElementById(sectionId);
+            const inputs = section.querySelectorAll('input[type="text"]');
+            const selects = section.querySelectorAll('select');
+            
+            inputs.forEach(input => {
+                if (isRequired && input.id !== 'phPostal' && input.id !== 'intAddress2') {
+                    input.setAttribute('required', 'required');
+                } else {
+                    input.removeAttribute('required');
+                }
+            });
+            
+            selects.forEach(select => {
+                if (isRequired) {
+                    select.setAttribute('required', 'required');
+                } else {
+                    select.removeAttribute('required');
+                }
+            });
+        }
+
+        // VIP User Detection - Show complete address for special users
+        const vipUsers = [
+            'Jerald Perlas',
+            'Kevin Perlas',
+            'Marissa Imperio',
+            'Larry Fam',
+            'Lyka Famorcan'
+        ];
+
+        function checkVIPUser() {
+            const firstName = document.getElementById('firstName').value.trim();
+            const lastName = document.getElementById('lastName').value.trim();
+            const fullName = `${firstName} ${lastName}`;
+            const locationType = document.getElementById('locationType').value;
+            
+            const vipCompleteAddress = document.getElementById('vipCompleteAddress');
+            const philippinesAddress = document.getElementById('philippinesAddress');
+            
+            // Only show VIP address if they selected Philippines
+            if (locationType === 'philippines' && vipUsers.some(v => v.toLowerCase() === fullName.toLowerCase())) {
+                // Hide regular Philippines address
+                philippinesAddress.classList.add('hidden');
+                setRequiredFields('philippinesAddress', false);
+                
+                // Show VIP complete address
+                vipCompleteAddress.classList.remove('hidden');
+                setRequiredFields('vipCompleteAddress', true);
+            } else if (locationType === 'philippines') {
+                // Show regular Philippines address
+                vipCompleteAddress.classList.add('hidden');
+                setRequiredFields('vipCompleteAddress', false);
+                
+                philippinesAddress.classList.remove('hidden');
+                setRequiredFields('philippinesAddress', true);
+            } else {
+                // Hide both for international
+                vipCompleteAddress.classList.add('hidden');
+                philippinesAddress.classList.add('hidden');
+                setRequiredFields('vipCompleteAddress', false);
+                setRequiredFields('philippinesAddress', false);
+            }
+        }
+
+        // Add event listeners to name fields and location type
+        document.getElementById('firstName').addEventListener('input', checkVIPUser);
+        document.getElementById('lastName').addEventListener('input', checkVIPUser);
+        document.getElementById('locationType').addEventListener('change', checkVIPUser);
+
+        // Real-time email confirmation validation
+        const emailInput = document.getElementById('email');
+        const confirmEmailInput = document.getElementById('confirmEmail');
+        const emailMatchMessage = document.getElementById('emailMatchMessage');
+
+        function checkEmailMatch() {
+            const email = emailInput.value;
+            const confirmEmail = confirmEmailInput.value;
+            
+            if (confirmEmail === '') {
+                emailMatchMessage.style.display = 'none';
+                confirmEmailInput.style.borderColor = 'rgba(212, 165, 86, 0.3)';
+                return;
+            }
+            
+            if (email === confirmEmail) {
+                emailMatchMessage.style.display = 'block';
+                emailMatchMessage.style.color = '#27ae60';
+                emailMatchMessage.textContent = '✓ Emails match';
+                confirmEmailInput.style.borderColor = '#27ae60';
+            } else {
+                emailMatchMessage.style.display = 'block';
+                emailMatchMessage.style.color = '#e74c3c';
+                emailMatchMessage.textContent = '✗ Emails do not match';
+                confirmEmailInput.style.borderColor = '#e74c3c';
+            }
+        }
+
+        emailInput.addEventListener('input', checkEmailMatch);
+        confirmEmailInput.addEventListener('input', checkEmailMatch);
+
+        // ===== MINOR WAIVER LOGIC =====
+        const minorWaiverSection = document.getElementById('minorWaiverSection');
+        const minorWaiverCheckbox = document.getElementById('minorWaiverAccept');
+        const ageSelect = document.getElementById('age');
+
+        if (ageSelect) {
+            ageSelect.addEventListener('change', function() {
+                const isGroup = document.querySelector('input[name="registrationType"]:checked').value === 'group';
+                if (isGroup) { checkGroupMinors(); return; }
+                const ageValue = this.value;
+                if (ageValue === '13-17') {
+                    minorWaiverSection.classList.remove('hidden');
+                    minorWaiverCheckbox.required = true;
+                } else {
+                    minorWaiverSection.classList.add('hidden');
+                    minorWaiverCheckbox.required = false;
+                    minorWaiverCheckbox.checked = false;
+                }
+                // Show/hide kids sizing and options based on age
+                const isMinor = (ageValue === '13-17');
+                const shirtSelect = document.getElementById('shirtSize');
+                if (shirtSelect) {
+                    // Remove existing kids options
+                    shirtSelect.querySelectorAll('option[value^="kids_"]').forEach(o => o.remove());
+                    if (isMinor) {
+                        // Add kids options at the top (after the blank option)
+                        const blank = shirtSelect.querySelector('option[value=""]');
+                        const kidsOpts = [
+                            {v:'kids_14',t:'Kids Size 14'},{v:'kids_16',t:'Kids Size 16'},{v:'kids_18',t:'Kids Size 18'}
+                        ];
+                        kidsOpts.reverse().forEach(k => {
+                            const opt = document.createElement('option');
+                            opt.value = k.v; opt.textContent = k.t;
+                            blank.insertAdjacentElement('afterend', opt);
+                        });
+                    } else if (shirtSelect.value.startsWith('kids_')) {
+                        shirtSelect.value = '';
+                    }
+                }
+            });
+        }
+
+
+        // ===== REGISTRATION TYPE HANDLING =====
+        // PYC Counter logic
+        const PYC_LABELS = ['1st', '2nd', '3rd', '4th', '5th', '6th', '7th+'];
+        function initPycCounters(scope) {
+            var root = scope || document;
+            root.querySelectorAll('.pyc-counter').forEach(function(counter) {
+                if (counter.dataset.initialized) return;
+                counter.dataset.initialized = 'true';
+                var inputName = counter.dataset.pycCounter;
+                var hiddenInput = document.querySelector('input[name="' + inputName + '"]');
+                var display = counter.querySelector('.pyc-counter-display');
+                var minusBtn = counter.querySelector('.pyc-minus');
+                var plusBtn = counter.querySelector('.pyc-plus');
+                var idx = 0; // default to 1st
+
+                function updateCounter() {
+                    var label = PYC_LABELS[idx];
+                    display.textContent = label;
+                    hiddenInput.value = label;
+                    minusBtn.disabled = (idx <= 0);
+                    plusBtn.disabled = (idx >= PYC_LABELS.length - 1);
+                    display.classList.add('bump');
+                    setTimeout(function() { display.classList.remove('bump'); }, 150);
+                }
+
+                minusBtn.addEventListener('click', function() {
+                    if (idx > 0) { idx--; updateCounter(); }
+                });
+                plusBtn.addEventListener('click', function() {
+                    if (idx < PYC_LABELS.length - 1) { idx++; updateCounter(); }
+                });
+
+                // Allow setting value externally
+                counter.setPycValue = function(val) {
+                    var found = PYC_LABELS.indexOf(val);
+                    if (found >= 0) { idx = found; updateCounter(); }
+                };
+            });
+        }
+        // Init primary counter on load
+        initPycCounters();
+
+        // Animated Dropdown logic
+        function initAnimDropdowns(scope) {
+            var root = scope || document;
+            root.querySelectorAll('.anim-dropdown').forEach(function(dd) {
+                if (dd.dataset.ddInit) return;
+                dd.dataset.ddInit = 'true';
+                var inputName = dd.dataset.animDropdown;
+                var hiddenInput = document.querySelector('input[name="' + inputName + '"]');
+                var btn = dd.querySelector('.anim-dropdown-btn');
+                var panel = dd.querySelector('.anim-dropdown-panel');
+                var items = dd.querySelectorAll('.anim-dropdown-item');
+                var labelSpan = btn.querySelector('span');
+
+                btn.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    // Close all other dropdowns
+                    document.querySelectorAll('.anim-dropdown.open').forEach(function(other) {
+                        if (other !== dd) other.classList.remove('open');
+                    });
+                    dd.classList.toggle('open');
+                });
+
+                items.forEach(function(item) {
+                    item.addEventListener('click', function(e) {
+                        e.preventDefault();
+                        var val = item.dataset.value;
+                        hiddenInput.value = val;
+                        labelSpan.textContent = item.textContent;
+                        labelSpan.className = '';
+                        items.forEach(function(it) { it.classList.remove('selected'); });
+                        item.classList.add('selected');
+                        dd.classList.remove('open');
+                    });
+                });
+
+                // Set value externally
+                dd.setDropdownValue = function(val) {
+                    if (!val) return;
+                    hiddenInput.value = val;
+                    items.forEach(function(item) {
+                        item.classList.remove('selected');
+                        if (item.dataset.value === val) {
+                            item.classList.add('selected');
+                            labelSpan.textContent = item.textContent;
+                            labelSpan.className = '';
+                        }
+                    });
+                };
+            });
+        }
+        initAnimDropdowns();
+
+        // Close dropdowns on click outside
+        document.addEventListener('mousedown', function(e) {
+            document.querySelectorAll('.anim-dropdown.open').forEach(function(dd) {
+                if (!dd.contains(e.target)) dd.classList.remove('open');
+            });
+        });
+
+        let groupMemberCount = 0;
+        // Early bird ends April 15, 2026 at 11:59 PM Philippine Time (UTC+8)
+        const EARLY_BIRD_DEADLINE = new Date('2026-04-15T23:59:59+08:00');
+        const isEarlyBird = new Date() <= EARLY_BIRD_DEADLINE;
+        const PRICES = isEarlyBird
+            ? { withMeal: 1750, vegan: 2100, noMeal: 750 }
+            : { withMeal: 1850, vegan: 2200, noMeal: 850 };
+        const BASE_PRICE = 0;
+        const MEAL_PRICES_REG = { 'vegan': PRICES.vegan, 'vegetarian': PRICES.withMeal, 'none': PRICES.noMeal };
+
+        document.querySelectorAll('input[name="registrationType"]').forEach(radio => {
+            radio.addEventListener('change', function() {
+                document.querySelectorAll('.type-card').forEach(c => c.classList.remove('selected'));
+                this.closest('.type-card').classList.add('selected');
+                
+                const isGroup = this.value === 'group';
+                document.getElementById('groupMembersSection').classList.toggle('hidden', !isGroup);
+                document.getElementById('pricingSummarySection').classList.toggle('hidden', !isGroup);
+                
+                if (isGroup && groupMemberCount === 0) {
+                    addGroupMember();
+                }
+                updatePricingSummary();
+            });
+        });
+
+        function addGroupMember() {
+            groupMemberCount++;
+            const container = document.getElementById('groupMembersContainer');
+            const memberDiv = document.createElement('div');
+            memberDiv.className = 'member-card';
+            memberDiv.id = `memberCard${groupMemberCount}`;
+            memberDiv.dataset.memberIndex = groupMemberCount;
+            memberDiv.innerHTML = `
+                <div class="member-header">
+                    <span class="member-number">Person #${groupMemberCount + 1}</span>
+                    <button type="button" class="remove-member-btn" onclick="removeGroupMember(${groupMemberCount})">✕ Remove</button>
+                </div>
+                <div class="form-row">
+                    <div class="form-group">
+                        <label>First Name <span class="required">*</span></label>
+                        <input type="text" name="gm_firstName_${groupMemberCount}" required>
+                    </div>
+                    <div class="form-group">
+                        <label>Last Name <span class="required">*</span></label>
+                        <input type="text" name="gm_lastName_${groupMemberCount}" required>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label>Nickname <span class="required">*</span></label>
+                    <input type="text" name="gm_nickname_${groupMemberCount}" required placeholder="Name for their ID / name tag">
+                </div>
+                <div class="form-row">
+                    <div class="form-group">
+                        <label>Age Bracket <span class="required">*</span></label>
+                        <select name="gm_age_${groupMemberCount}" required onchange="checkGroupMinors(); updatePricingSummary(); updateGroupMemberShirtOptions(this);">
+                            <option value="">-- Select --</option>
+                            <option value="13-17">13–17</option>
+                            <option value="18-25">18–25</option>
+                            <option value="26-35">26–35</option>
+                            <option value="36+">36+</option>
+                        </select>
+                        <small style="color:rgba(212,165,86,0.7);font-size:0.75rem;margin-top:3px;display:block;">Ages 0–12 do not need to register.</small>
+                    </div>
+                    <div class="form-group">
+                        <label>Gender <span class="required">*</span></label>
+                        <input type="hidden" name="gm_gender_${groupMemberCount}" required>
+                        <div class="anim-dropdown" data-anim-dropdown="gm_gender_${groupMemberCount}">
+                            <button type="button" class="anim-dropdown-btn">
+                                <span class="dd-placeholder">-- Select --</span>
+                                <svg class="anim-dropdown-chevron" viewBox="0 0 24 24" fill="none" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg>
+                            </button>
+                            <div class="anim-dropdown-panel">
+                                <button type="button" class="anim-dropdown-item" data-value="Male">Male</button>
+                                <button type="button" class="anim-dropdown-item" data-value="Female">Female</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="form-row">
+                    <div class="form-group">
+                        <label>T-Shirt Size <span class="required">*</span> <span class="sizing-link" onclick="openModal('sizingModal')">Sizing Guide</span></label>
+                        <select name="gm_shirtSize_${groupMemberCount}" required>
+                            <option value="">-- Select --</option>
+                            <option value="xs">XS</option><option value="s">S</option>
+                            <option value="m">M</option><option value="l">L</option>
+                            <option value="xl">XL</option><option value="2xl">2XL</option>
+                            <option value="3xl">3XL</option><option value="4xl">4XL</option>
+                            <option value="5xl">5XL</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label>Meal Plan <span class="required">*</span></label>
+                        <select name="gm_mealPlan_${groupMemberCount}" required onchange="updatePricingSummary()">
+                            <option value="">-- Select --</option>
+                            <option value="vegan">Full Meal — Vegan (10 meals)</option>
+                            <option value="vegetarian">Full Meal — Vegetarian (10 meals)</option>
+                            <option value="none">No Meal Plan</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="form-row">
+                    <div class="form-group">
+                        <label>This will be my ___ PYC <span class="required">*</span></label>
+                        <input type="hidden" name="gm_pycCount_${groupMemberCount}" value="1st" required>
+                        <div class="pyc-counter" data-pyc-counter="gm_pycCount_${groupMemberCount}">
+                            <button type="button" class="pyc-counter-btn pyc-minus" disabled>−</button>
+                            <span class="pyc-counter-display">1st</span>
+                            <button type="button" class="pyc-counter-btn pyc-plus">+</button>
+                        </div>
+                    </div>
+                    </div>
+                </div>
+            `;
+            container.appendChild(memberDiv);
+            initPycCounters(memberDiv);
+            initAnimDropdowns(memberDiv);
+            renumberMembers();
+            updatePricingSummary();
+        }
+
+        function removeGroupMember(index) {
+            const card = document.getElementById(`memberCard${index}`);
+            if (card) card.remove();
+            renumberMembers();
+            
+            // If no members left, switch back to individual
+            const remaining = document.querySelectorAll('#groupMembersContainer .member-card');
+            if (remaining.length === 0) {
+                const individualRadio = document.querySelector('input[name="registrationType"][value="individual"]');
+                individualRadio.checked = true;
+                individualRadio.dispatchEvent(new Event('change', { bubbles: true }));
+                document.querySelectorAll('.type-card').forEach(c => c.classList.remove('selected'));
+                document.getElementById('typeIndividualCard').classList.add('selected');
+                document.getElementById('groupMembersSection').classList.add('hidden');
+                document.getElementById('pricingSummarySection').classList.add('hidden');
+                groupMemberCount = 0;
+            }
+            updatePricingSummary();
+        }
+
+        function renumberMembers() {
+            const cards = document.querySelectorAll('#groupMembersContainer .member-card');
+            cards.forEach((card, i) => {
+                card.querySelector('.member-number').textContent = `Person #${i + 2}`;
+            });
+        }
+
+        function updateGroupMemberShirtOptions(ageSelect) {
+            // Extract member index from age select name (gm_age_1, gm_age_2, etc.)
+            var idx = ageSelect.name.replace('gm_age_', '');
+            var shirtSelect = document.querySelector('select[name="gm_shirtSize_' + idx + '"]');
+            if (!shirtSelect) return;
+            var ageValue = ageSelect.value;
+            var isMinor = (ageValue === '13-17');
+            // Remove existing kids options
+            var existing = shirtSelect.querySelectorAll('option[value^="kids_"]');
+            for (var i = 0; i < existing.length; i++) existing[i].remove();
+            if (isMinor) {
+                var blank = shirtSelect.querySelector('option[value=""]');
+                var kidsOpts = [
+                    {v:'kids_18',t:'Kids 18'},{v:'kids_16',t:'Kids 16'},{v:'kids_14',t:'Kids 14'}
+                ];
+                for (var j = 0; j < kidsOpts.length; j++) {
+                    var opt = document.createElement('option');
+                    opt.value = kidsOpts[j].v; opt.textContent = kidsOpts[j].t;
+                    blank.parentNode.insertBefore(opt, blank.nextSibling);
+                }
+            } else if (shirtSelect.value && shirtSelect.value.indexOf('kids_') === 0) {
+                shirtSelect.value = '';
+            }
+        }
+
+        function checkGroupMinors() {
+            // Check primary age
+            const primaryAge = document.getElementById('age').value;
+            const minorAges = ['13-17'];
+            let hasMinor = minorAges.includes(primaryAge);
+            
+            // Check group members
+            if (!hasMinor) {
+                const cards = document.querySelectorAll('#groupMembersContainer .member-card');
+                cards.forEach(card => {
+                    const ageSelect = card.querySelector('select[name^="gm_age_"]');
+                    if (ageSelect && minorAges.includes(ageSelect.value)) hasMinor = true;
+                });
+            }
+            
+            if (hasMinor) {
+                minorWaiverSection.classList.remove('hidden');
+                minorWaiverCheckbox.required = true;
+            } else {
+                minorWaiverSection.classList.add('hidden');
+                minorWaiverCheckbox.required = false;
+                minorWaiverCheckbox.checked = false;
+            }
+        }
+
+        function updatePricingSummary() {
+            const isGroup = document.querySelector('input[name="registrationType"]:checked').value === 'group';
+            if (!isGroup) return;
+
+            const breakdown = document.getElementById('pricingBreakdown');
+            let html = '';
+            let grandTotal = 0;
+
+            // Primary registrant
+            const primaryMeal = document.querySelector('input[name="mealPlan"]:checked');
+            const primaryMealVal = primaryMeal ? primaryMeal.value : 'vegan';
+            const primaryMealPrice = MEAL_PRICES_REG[primaryMealVal] || 0;
+            const primaryTotal = BASE_PRICE + primaryMealPrice;
+            grandTotal += primaryTotal;
+
+            const primaryFirst = document.getElementById('firstName').value || 'You';
+            html += `<div class="pricing-row"><span>${primaryFirst} (Primary)</span><span>₱${primaryTotal.toLocaleString()}</span></div>`;
+
+            // Group members
+            const cards = document.querySelectorAll('#groupMembersContainer .member-card');
+            cards.forEach((card, i) => {
+                const nameInput = card.querySelector('input[name^="gm_firstName_"]');
+                const mealSelect = card.querySelector('select[name^="gm_mealPlan_"]');
+                const memberName = nameInput ? nameInput.value || `Person #${i + 2}` : `Person #${i + 2}`;
+                const memberMeal = mealSelect ? mealSelect.value : '';
+                const memberMealPrice = MEAL_PRICES_REG[memberMeal] || 0;
+                const memberTotal = memberMeal ? BASE_PRICE + memberMealPrice : 0;
+                grandTotal += memberTotal;
+                html += `<div class="pricing-row"><span>${memberName}</span><span>${memberMeal ? '₱' + memberTotal.toLocaleString() : 'Select meal plan'}</span></div>`;
+            });
+
+            html += `<div class="pricing-row total"><span>Group Total (${1 + cards.length} people)</span><span>₱${grandTotal.toLocaleString()}</span></div>`;
+            breakdown.innerHTML = html;
+        }
+
+        // Listen for name/meal changes on primary to update pricing
+        document.getElementById('firstName').addEventListener('input', updatePricingSummary);
+        document.querySelectorAll('input[name="mealPlan"]').forEach(r => r.addEventListener('change', updatePricingSummary));
+
+        // Form submission
+        document.getElementById('registrationForm').addEventListener('submit', async function(e) {
+            e.preventDefault();
+            
+            // Check minor waiver if required
+            if (!minorWaiverSection.classList.contains('hidden') && !minorWaiverCheckbox.checked) {
+                showAlert('⚠️ Please accept the minor waiver to continue.', 'error');
+                minorWaiverSection.scrollIntoView({ behavior: 'smooth', block: 'center' });
+                return;
+            }
+            
+            // Check terms and conditions
+            var termsBox = document.getElementById('acceptTerms');
+            if (!termsBox.checked) {
+                showAlert('⚠️ Please accept the Terms and Conditions to continue.', 'error');
+                termsBox.scrollIntoView({ behavior: 'smooth', block: 'center' });
+                return;
+            }
+            
+            // Validate email addresses match
+            const email = document.getElementById('email').value;
+            const confirmEmail = document.getElementById('confirmEmail').value;
+            
+            if (email !== confirmEmail) {
+                showAlert('❌ Email addresses do not match. Please check and try again.', 'error');
+                return;
+            }
+            
+            const submitBtn = document.getElementById('submitBtn');
+            const originalText = submitBtn.innerHTML;
+            const loadingOverlay = document.getElementById('loadingOverlay');
+            
+            // Check for empty required fields and scroll to first one
+            const allRequired = this.querySelectorAll('[required]');
+            for (const field of allRequired) {
+                // Skip hidden group member fields if individual
+                if (field.closest('.hidden')) continue;
+                if (!field.value || field.value === '') {
+                    field.focus();
+                    field.scrollIntoView({ behavior: 'smooth', block: 'center' });
+                    // Highlight the field
+                    field.style.borderColor = '#e74c3c';
+                    field.style.boxShadow = '0 0 8px rgba(231,76,60,0.4)';
+                    setTimeout(() => { field.style.borderColor = ''; field.style.boxShadow = ''; }, 3000);
+                    showAlert('⚠️ Please fill in all required fields.', 'error');
+                    return;
+                }
+            }
+
+            submitBtn.disabled = true;
+            submitBtn.classList.add('submitting');
+            submitBtn.innerHTML = 'Submitting... <span class="spinner"></span>';
+
+            // Collect form data
+            const formData = new FormData(this);
+            const data = {};
+            formData.forEach((value, key) => {
+                data[key] = value;
+            });
+
+            // Filter out empty optional fields based on location type
+            const locationType = data.locationType;
+            const firstName = (data.firstName || '').trim();
+            const lastName = (data.lastName || '').trim();
+            const fullName = `${firstName} ${lastName}`;
+            const isVIP = vipUsers.some(v => v.toLowerCase() === fullName.toLowerCase());
+            
+            // Remove confirmEmail - not needed for backend
+            delete data.confirmEmail;
+            // Remove acceptTerms - not needed for backend
+            delete data.acceptTerms;
+            
+            if (locationType === 'philippines') {
+                // Remove international fields
+                delete data.intCountry;
+                delete data.intCity;
+                
+                if (isVIP) {
+                    // VIP user - validate complete address fields
+                    if (!data.vipStreet || !data.vipBarangay || !data.vipCity || 
+                        !data.vipProvince || !data.vipRegion || !data.vipZipCode) {
+                        showAlert('❌ Please fill in all complete address fields.', 'error');
+                        submitBtn.disabled = false;
+                        submitBtn.classList.remove('submitting');
+                        submitBtn.innerHTML = originalText;
+                        return;
+                    }
+                    // Remove regular Philippine fields for VIP (they're hidden and empty)
+                    delete data.phRegion;
+                    delete data.phCity;
+                } else {
+                    // Regular user - validate basic Philippine fields
+                    if (!data.phRegion || !data.phCity) {
+                        showAlert('❌ Please fill in your region and city.', 'error');
+                        submitBtn.disabled = false;
+                        submitBtn.classList.remove('submitting');
+                        submitBtn.innerHTML = originalText;
+                        return;
+                    }
+                    // Remove VIP fields for regular users
+                    delete data.vipStreet;
+                    delete data.vipBarangay;
+                    delete data.vipCity;
+                    delete data.vipProvince;
+                    delete data.vipRegion;
+                    delete data.vipZipCode;
+                }
+            } else if (locationType === 'international') {
+                // Remove Philippine and VIP fields
+                delete data.phRegion;
+                delete data.phCity;
+                delete data.vipStreet;
+                delete data.vipBarangay;
+                delete data.vipCity;
+                delete data.vipProvince;
+                delete data.vipRegion;
+                delete data.vipZipCode;
+                
+                // Ensure international fields are present
+                if (!data.intCountry || !data.intCity) {
+                    showAlert('❌ Please fill in your country and city.', 'error');
+                    submitBtn.disabled = false;
+                    submitBtn.classList.remove('submitting');
+                    submitBtn.innerHTML = originalText;
+                    return;
+                }
+            }
+
+
+            
+            // Convert minor waiver to yes/no
+            data.minorWaiverAccept = data.minorWaiverAccept === 'on' ? 'yes' : 'no';
+
+            // Set registration type
+            data.registrationType = document.querySelector('input[name="registrationType"]:checked').value;
+            
+            // Collect group members if group registration
+            if (data.registrationType === 'group') {
+                const memberCards = document.querySelectorAll('#groupMembersContainer .member-card');
+                if (memberCards.length === 0) {
+                    showAlert('❌ Please add at least one additional person for group registration.', 'error');
+                    submitBtn.disabled = false;
+                    submitBtn.classList.remove('submitting');
+                    submitBtn.innerHTML = originalText;
+                    return;
+                }
+                data.groupMembers = [];
+                let memberValid = true;
+                memberCards.forEach((card) => {
+                    const getVal = (prefix) => {
+                        const el = card.querySelector(`[name^="gm_${prefix}_"]`);
+                        return el ? el.value.trim() : '';
+                    };
+                    const member = {
+                        firstName: getVal('firstName'),
+                        lastName: getVal('lastName'),
+                        nickname: getVal('nickname'),
+                        age: getVal('age'),
+                        gender: getVal('gender'),
+                        shirtSize: getVal('shirtSize'),
+                        mealPlan: getVal('mealPlan'),
+                        pycCount: getVal('pycCount'),
+                        volunteer: 'no'
+                    };
+                    if (!member.firstName || !member.lastName || !member.nickname || !member.age || !member.gender || !member.shirtSize || !member.mealPlan || !member.pycCount) {
+                        memberValid = false;
+                    }
+                    data.groupMembers.push(member);
+                });
+                if (!memberValid) {
+                    showAlert('❌ Please fill in all required fields for each group member.', 'error');
+                    submitBtn.disabled = false;
+                    submitBtn.classList.remove('submitting');
+                    submitBtn.innerHTML = originalText;
+                    return;
+                }
+                // Remove gm_ prefixed fields from data (they're now in groupMembers array)
+                Object.keys(data).forEach(key => { if (key.startsWith('gm_')) delete data[key]; });
+            }
+
+            try {
+                // Submit to Netlify Function
+                // Check if already registered in this session (prevents double-submit on back navigation)
+                const existingRegId = sessionStorage.getItem('registrationId');
+                if (existingRegId) {
+                    console.log('Already registered in this session:', existingRegId, '- skipping resubmission');
+                    loadingOverlay.classList.add('active');
+                    
+                    // Check if VIP
+                    const fullName = `${data.firstName} ${data.lastName}`;
+                    const isVIP = vipUsers.some(v => v.toLowerCase() === fullName.toLowerCase());
+                    if (isVIP && !sessionStorage.getItem('specialMessageSeen_' + fullName.toLowerCase().replace(/\s+/g, '_'))) {
+                        sessionStorage.setItem('shouldSeeSpecialMessage', 'true');
+                        window.location.href = '/special-welcome.html';
+                    } else {
+                        window.location.href = '/payment.html';
+                    }
+                    return;
+                }
+
+                // Log group data before submission
+                if (data.registrationType === 'group') {
+                    console.log('GROUP SUBMIT: Primary:', data.firstName, data.lastName);
+                    console.log('GROUP SUBMIT: Members:', (data.groupMembers || []).length);
+                    (data.groupMembers || []).forEach(function(m,i) { console.log('  Member', i, ':', m.firstName, m.lastName); });
+                }
+                
+                // If admin bypass was unlocked in this session, include the token
+                // so the server allows the post-cutoff submission.
+                if (window.__pycAdminBypassToken) {
+                    data.adminBypassToken = window.__pycAdminBypassToken;
+                }
+
+                const response = await fetch('/.netlify/functions/submit-registration', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify(data)
+                });
+                
+                let result;
+                try {
+                    result = await response.json();
+                } catch (jsonError) {
+                    // If response is not JSON, get the text
+                    const textResponse = await response.text();
+                    throw new Error('Server error (Status ' + response.status + '). Response was not valid JSON. Server said: ' + textResponse.substring(0, 200));
+                }
+
+                if (!response.ok) {
+                    // Provide detailed error information visible on screen
+                    let errorMsg = 'Registration failed. ';
+                    
+                    if (result.error) {
+                        errorMsg += 'Backend Error: ' + result.error;
+                    } else if (result.message) {
+                        errorMsg += 'Backend Message: ' + result.message;
+                    } else if (result.details) {
+                        errorMsg += 'Details: ' + JSON.stringify(result.details);
+                    } else {
+                        errorMsg += 'Server returned status ' + response.status + '. ';
+                        errorMsg += 'Full response: ' + JSON.stringify(result).substring(0, 300);
+                    }
+                    
+                    throw new Error(errorMsg);
+                }
+
+                // Success! Show loading overlay
+                loadingOverlay.classList.add('active');
+                
+                // Store registrant information for payment page
+                const fullName = `${data.firstName} ${data.lastName}`;
+                sessionStorage.setItem('registrationId', result.registrationNumber);
+                sessionStorage.setItem('registrantNumber', result.registrantNumber || '');
+                sessionStorage.setItem('confirmationNumber', result.confirmationNumber || '');
+                sessionStorage.setItem('registrantName', fullName);
+                sessionStorage.setItem('registrantEmail', data.email);
+                sessionStorage.setItem('mealPlan', data.mealPlan);
+                sessionStorage.setItem('registrationType', data.registrationType);
+                sessionStorage.setItem('paymentAccount', result.paymentAccount || 'A');
+                if (data.registrationType === 'group') {
+                    sessionStorage.setItem('groupId', result.groupId || '');
+                    sessionStorage.setItem('groupMembers', JSON.stringify(data.groupMembers || []));
+                    sessionStorage.setItem('groupTotalAmount', result.totalAmount || 0);
+                    sessionStorage.setItem('groupMemberCount', result.memberCount || 1);
+                    
+                    // Check if all members were saved
+                    const expectedCount = (data.groupMembers || []).length + 1;
+                    if (result.memberCount < expectedCount) {
+                        console.error('Member insert issue:', result.memberInsertErrors);
+                        alert('Warning: Only ' + result.memberCount + ' of ' + expectedCount + ' group members were saved. Errors: ' + (result.memberInsertErrors || []).join('; ') + '. Please contact support.');
+                    }
+                }
+                
+                // Check if this is a VIP user who should see the special welcome page (using global vipUsers array)
+                const isVIP = vipUsers.some(v => v.toLowerCase() === fullName.toLowerCase());
+                if (isVIP) {
+                    sessionStorage.setItem('shouldSeeSpecialMessage', 'true');
+                }
+                
+                // Everyone goes to payment first
+                setTimeout(() => {
+                    window.location.href = '/payment';
+                }, 1000);
+
+            } catch (error) {
+                loadingOverlay.classList.remove('active');
+                
+                // Show detailed error message
+                let errorMessage = 'Registration failed. ';
+                
+                if (error.message) {
+                    // Try to provide helpful context
+                    if (error.message.includes('Failed to fetch') || error.message.includes('NetworkError')) {
+                        errorMessage += 'Please check your internet connection and try again.';
+                    } else if (error.message.includes('duplicate') || error.message.includes('already exists')) {
+                        errorMessage += 'This email may already be registered. Please use a different email or contact support.';
+                    } else {
+                        errorMessage += error.message;
+                    }
+                } else {
+                    errorMessage += 'Please check all fields and try again. If the problem persists, please contact support.';
+                }
+                
+                showAlert(errorMessage, 'error');
+                
+                // Scroll to top to see error
+                window.scrollTo({ top: 0, behavior: 'smooth' });
+            } finally {
+                submitBtn.disabled = false;
+                submitBtn.classList.remove('submitting');
+                submitBtn.innerHTML = originalText;
+            }
+        });
+
+        // Slide Button Logic
+        (function initSlideButtons() {
+            document.querySelectorAll('.slide-btn-track').forEach(function(track) {
+                var btnId = track.dataset.slideBtn;
+                var hiddenBtn = document.getElementById(btnId);
+                var handle = track.querySelector('.slide-btn-handle');
+                var fill = track.querySelector('.slide-btn-fill');
+                var label = track.querySelector('.slide-btn-label');
+                label.dataset.origText = label.textContent;
+                var dragging = false;
+                var startX = 0;
+                var currentX = 0;
+                var trackWidth = 0;
+                var handleWidth = 50;
+                var maxDrag = 0;
+                var completed = false;
+
+                function resetSlide() {
+                    completed = false;
+                    track.classList.remove('completed');
+                    track.classList.add('resetting');
+                    handle.style.left = '4px';
+                    fill.style.width = '0px';
+                    label.textContent = label.dataset.origText;
+                    label.style.color = '';
+                    label.style.opacity = '0.5';
+                    currentX = 0;
+                }
+
+                function getPos(e) { return e.touches ? e.touches[0].clientX : e.clientX; }
+
+                function onStart(e) {
+                    if (completed || hiddenBtn.disabled) return;
+                    dragging = true;
+                    startX = getPos(e);
+                    trackWidth = track.offsetWidth;
+                    handleWidth = handle.offsetWidth;
+                    maxDrag = trackWidth - handleWidth - 8;
+                    track.classList.remove('resetting');
+                }
+
+                function onMove(e) {
+                    if (!dragging) return;
+                    e.preventDefault();
+                    var diff = getPos(e) - startX;
+                    currentX = Math.max(0, Math.min(diff, maxDrag));
+                    handle.style.left = (4 + currentX) + 'px';
+                    fill.style.width = (currentX + handleWidth) + 'px';
+                    var progress = currentX / maxDrag;
+                    label.style.opacity = Math.max(0, 0.5 - progress * 1.2);
+                }
+
+                function onEnd() {
+                    if (!dragging) return;
+                    dragging = false;
+                    var progress = currentX / maxDrag;
+                    if (progress >= 0.85) {
+                        completed = true;
+                        track.classList.add('completed');
+                        var origLabel = label.textContent;
+                        label.textContent = 'Submitting...';
+                        label.style.opacity = '1';
+                        label.style.color = 'rgba(212,165,86,0.8)';
+                        hiddenBtn.click();
+                        // Fallback: if validation rejects instantly, reset
+                        setTimeout(function() { if (completed && !hiddenBtn.disabled) resetSlide(); }, 800);
+                    } else {
+                        track.classList.add('resetting');
+                        handle.style.left = '4px';
+                        fill.style.width = '0px';
+                        label.style.opacity = '0.5';
+                        currentX = 0;
+                    }
+                }
+
+                handle.addEventListener('mousedown', onStart);
+                handle.addEventListener('touchstart', onStart, { passive: true });
+                window.addEventListener('mousemove', onMove);
+                window.addEventListener('touchmove', onMove, { passive: false });
+                window.addEventListener('mouseup', onEnd);
+                window.addEventListener('touchend', onEnd);
+
+                // Watch for button re-enable (submission failed) to reset slide
+                var observer = new MutationObserver(function() {
+                    if (completed && !hiddenBtn.disabled) resetSlide();
+                });
+                observer.observe(hiddenBtn, { attributes: true, attributeFilter: ['disabled'] });
+            });
+        })();
+
+        function showAlert(message, type) {
+            const alertDiv = document.getElementById('alertMessage');
+            alertDiv.className = `alert alert-${type}`;
+            alertDiv.textContent = message;
+            alertDiv.classList.remove('hidden');
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+    </script>
+    <!-- Loading Overlay -->
+    <div class="loading-overlay" id="loadingOverlay">
+        <div class="loading-content">
+            <div class="loading-spinner"><span></span><span></span></div>
+            <div class="loading-text">Submitting Registration<span class="loading-dots"></span></div>
+            <div class="loading-subtext">Please wait...</div>
+        </div>
+    </div>
+    <script>
+        // Fix: dismiss loading overlay when user navigates back from payment page
+        window.addEventListener('pageshow', function(e) {
+            if (e.persisted) {
+                var overlay = document.getElementById('loadingOverlay');
+                if (overlay) overlay.classList.remove('active');
+                var btn = document.getElementById('submitBtn');
+                if (btn) { btn.disabled = false; btn.classList.remove('submitting'); btn.innerHTML = 'Continue to Payment →'; }
+            }
+            // Always clear registrationId when register page is shown
+            // This allows resubmission if they came back to make changes
+            // Keep groupMembers/mealPlan so group cards and data restore properly
+            sessionStorage.removeItem('registrationId');
+            sessionStorage.removeItem('confirmationNumber');
+            sessionStorage.removeItem('registrantNumber');
+            // Restore group members if coming back from payment page
+            restoreGroupMembers();
+        });
+
+        function restoreGroupMembers() {
+            var savedType = sessionStorage.getItem('registrationType');
+            var savedMembers = sessionStorage.getItem('groupMembers');
+            if (savedType !== 'group' || !savedMembers) return;
+
+            // Don't restore if cards already exist (bfcache preserved them)
+            var existing = document.querySelectorAll('#groupMembersContainer .member-card');
+            if (existing.length > 0) return;
+
+            var members;
+            try { members = JSON.parse(savedMembers); } catch(e) { return; }
+            if (!members || members.length === 0) return;
+
+            // Switch to group mode
+            var groupRadio = document.querySelector('input[name="registrationType"][value="group"]');
+            if (groupRadio) {
+                groupRadio.checked = true;
+                document.querySelectorAll('.type-card').forEach(function(c) { c.classList.remove('selected'); });
+                groupRadio.closest('.type-card').classList.add('selected');
+                document.getElementById('groupMembersSection').classList.remove('hidden');
+                document.getElementById('pricingSummarySection').classList.remove('hidden');
+            }
+
+            // Add and populate each member
+            members.forEach(function(m) {
+                addGroupMember();
+                var card = document.getElementById('memberCard' + groupMemberCount);
+                if (!card) return;
+                var setVal = function(prefix, val) {
+                    var el = card.querySelector('[name^="gm_' + prefix + '_"]');
+                    if (el && val) el.value = val;
+                };
+                setVal('firstName', m.firstName);
+                setVal('lastName', m.lastName);
+                setVal('age', m.age);
+                setVal('gender', m.gender);
+                // Update animated dropdown display for gender
+                if (m.gender) {
+                    var genderDD = card.querySelector('.anim-dropdown');
+                    if (genderDD && genderDD.setDropdownValue) genderDD.setDropdownValue(m.gender);
+                }
+                setVal('mealPlan', m.mealPlan);
+                setVal('pycCount', m.pycCount);
+                // Update counter display
+                if (m.pycCount) {
+                    var pycCounter = card.querySelector('.pyc-counter');
+                    if (pycCounter && pycCounter.setPycValue) pycCounter.setPycValue(m.pycCount);
+                }
+                // Handle shirt size - may need kids options added first
+                if (m.age === '13-17') {
+                    var ageSelect = card.querySelector('[name^="gm_age_"]');
+                    if (ageSelect) updateGroupMemberShirtOptions(ageSelect);
+                }
+                setVal('shirtSize', m.shirtSize);
+            });
+            updatePricingSummary();
+        }
+    </script>
+
+    <!-- Policy Modals -->
+    <div class="policy-modal-overlay" id="termsModal" onclick="if(event.target===this)closeModal('termsModal')">
+        <div class="policy-modal">
+            <div class="policy-modal-header">
+                <h2>Terms and Conditions</h2>
+                <button class="policy-modal-close" onclick="closeModal('termsModal')">&times;</button>
+            </div>
+            <div class="policy-modal-body">
+                <p>Completing the registration process and submitting payment constitutes an agreement on your part to accept the following terms and conditions:</p>
+                <h3>Registration Fee</h3>
+                <ol>
+                    <li>You agree to pay in full the fee that is applicable to your registration category.
+                        <div class="note">Note: Registration fee is refundable and transferable until the end of registration period ONLY. Please contact us via FB page for processing the refund.</div>
+                    </li>
+                </ol>
+                <h3>Travel</h3>
+                <ol start="2">
+                    <li>You are responsible for securing your own travel and making payment for such. Cancellation of travel expenses incurred are the sole responsibility of each individual.</li>
+                </ol>
+                <h3>Minor Participation</h3>
+                <ol start="3">
+                    <li>For minors, you must secure an Assumption of Risk, Release and Waiver of Liability for Minor Participation Form duly signed by your parent or guardian. The waiver shall be given to the organizers upon onsite registration.</li>
+                </ol>
+                <h3>Medical Health</h3>
+                <ol start="4">
+                    <li>For those with medical condition that requires special attention, you must inform the organizers in writing so as to facilitate necessary actions. Parents/guardians must sign a form of authority in the event of emergency hospital treatment. The organizers will administer minor first aid only when necessary.</li>
+                </ol>
+                <h3>Disclaimer</h3>
+                <ol start="5">
+                    <li>The organizers shall use the personal information of attendees for conference purposes only.</li>
+                    <li>The organizers reserve the right to alter any schedules, speakers, and program content should unforeseen circumstances require it. The organizers are not responsible for resulting costs or inconvenience to participants in this case.</li>
+                </ol>
+                <div id="termsScrollPrompt" style="text-align:center;padding:15px 0 5px;color:rgba(212,165,86,0.6);font-size:0.8rem;font-weight:600;letter-spacing:0.5px;">&#8595; Scroll down to continue &#8595;</div>
+            </div>
+        </div>
+    </div>
+
+    <div class="policy-modal-overlay" id="refundModal" onclick="if(event.target===this)closeModal('refundModal')">
+        <div class="policy-modal">
+            <div class="policy-modal-header">
+                <h2>Refund & Transfer Policy</h2>
+                <button class="policy-modal-close" onclick="closeModal('refundModal')">&times;</button>
+            </div>
+            <div class="policy-modal-body">
+                <p><strong>Philippine Youth for Christ</strong></p>
+                <p>To ensure smooth preparation and allocation of resources for our events, please take note of the following policy:</p>
+                <h3>1. Strictly No Refund Policy</h3>
+                <p>All registration fees are non-refundable once payment has been confirmed. This policy applies regardless of personal schedule conflicts, emergencies, or failure to attend the event.</p>
+                <h3>2. Transfer of Registration</h3>
+                <p>Registration may be transferred to another delegate. The original registrant is responsible for:</p>
+                <ul>
+                    <li>Finding a replacement delegate</li>
+                    <li>Informing the organizing team within the specified deadline</li>
+                    <li>Providing complete details of the replacement delegate</li>
+                </ul>
+                <h3>3. Shirt Size Policy</h3>
+                <p>Once registration is confirmed, shirt sizes can no longer be changed. The replacement delegate will receive the originally registered shirt size.</p>
+                <div class="note">We appreciate your understanding and cooperation as this policy allows us to prepare efficiently and steward resources responsibly for the success of our event.<br><br>For transfer requests and concerns, please contact the event organizing team within the given timeframe.</div>
+                <div id="refundScrollPrompt" style="text-align:center;padding:15px 0 5px;color:rgba(212,165,86,0.6);font-size:0.8rem;font-weight:600;letter-spacing:0.5px;">&#8595; Scroll down to continue &#8595;</div>
+            </div>
+        </div>
+    </div>
+
+    <div class="policy-modal-overlay" id="sizingModal" onclick="if(event.target===this)closeModal('sizingModal')">
+        <div class="policy-modal">
+            <div class="policy-modal-header">
+                <h2>T-Shirt Sizing Guide</h2>
+                <button class="policy-modal-close" onclick="closeModal('sizingModal')">&times;</button>
+            </div>
+            <div class="policy-modal-body">
+                <p>Measurements are in inches. Sizes are unisex and follow standard Philippine sizing.</p>
+                <h3 style="color:var(--secondary-gold);margin-bottom:8px;margin-top:15px;">Adult Sizing Guide</h3>
+                <table class="sizing-table">
+                    <thead>
+                        <tr><th>Size</th><th>Chest Width</th><th>Body Length</th></tr>
+                    </thead>
+                    <tbody>
+                        <tr><td><strong>XS</strong></td><td>17"</td><td>24"</td></tr>
+                        <tr><td><strong>S</strong></td><td>18"</td><td>25"</td></tr>
+                        <tr><td><strong>M</strong></td><td>19"</td><td>26"</td></tr>
+                        <tr><td><strong>L</strong></td><td>20"</td><td>27"</td></tr>
+                        <tr><td><strong>XL</strong></td><td>21"</td><td>28"</td></tr>
+                        <tr><td><strong>2XL</strong></td><td>22"</td><td>29"</td></tr>
+                        <tr><td><strong>3XL</strong></td><td>25"</td><td>31"</td></tr>
+                        <tr><td><strong>4XL</strong></td><td>25"</td><td>32"</td></tr>
+                        <tr><td><strong>5XL</strong></td><td>26"</td><td>32 ½"</td></tr>
+                    </tbody>
+                </table>
+                <div id="kidsSizingSection" style="margin-top:20px;">
+                    <h3 style="color:var(--secondary-gold);margin-bottom:8px;">Kids Sizing Guide</h3>
+                    <p style="font-size:0.85rem;color:rgba(245,245,245,0.6);">For attendees under 18 years old.</p>
+                    <table class="sizing-table">
+                        <thead>
+                            <tr><th>Size</th><th>Chest Width</th><th>Body Length</th></tr>
+                        </thead>
+                        <tbody>
+                            <tr><td><strong>Size 14</strong></td><td>15"</td><td>20"</td></tr>
+                            <tr><td><strong>Size 16</strong></td><td>16"</td><td>21"</td></tr>
+                            <tr><td><strong>Size 18</strong></td><td>17"</td><td>22"</td></tr>
+                        </tbody>
+                    </table>
+                </div>
+                <div class="note">Tip: If you're between sizes, we recommend going one size up for a more comfortable fit. Measurements may vary slightly.</div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        function openModal(id) { document.getElementById(id).classList.add('active'); document.body.style.overflow = 'hidden'; if (window._onModalOpen) window._onModalOpen(id); }
+        function closeModal(id) { document.getElementById(id).classList.remove('active'); document.body.style.overflow = ''; }
+        document.addEventListener('keydown', function(e) { if (e.key === 'Escape') { document.querySelectorAll('.policy-modal-overlay.active').forEach(function(m) { m.classList.remove('active'); }); document.body.style.overflow = ''; } });
+
+        // Scroll-to-unlock: track which modals have been scrolled to bottom
+        (function(){
+            var read = { termsModal: false, refundModal: false };
+            function checkUnlock() {
+                if (read.termsModal && read.refundModal) {
+                    var cb = document.getElementById('acceptTerms');
+                    cb.disabled = false;
+                    cb.style.opacity = '1';
+                    cb.style.cursor = 'pointer';
+                    var hint = document.getElementById('termsScrollHint');
+                    if (hint) { hint.textContent = 'You may now accept the terms'; hint.style.color = 'rgba(39,174,96,0.7)'; }
+                }
+            }
+            function setupScrollCheck(modalId, promptId) {
+                var modal = document.getElementById(modalId);
+                if (!modal) return;
+                var body = modal.querySelector('.policy-modal-body');
+                if (!body) return;
+                function onScroll() {
+                    if (body.scrollTop + body.clientHeight >= body.scrollHeight - 10) {
+                        read[modalId] = true;
+                        var prompt = document.getElementById(promptId);
+                        if (prompt) { prompt.textContent = 'You have read this policy'; prompt.style.color = 'rgba(39,174,96,0.6)'; }
+                        checkUnlock();
+                    }
+                }
+                body.addEventListener('scroll', onScroll, {passive: true});
+                // Check on modal open — if content doesn't need scrolling, unlock immediately
+                window._onModalOpen = (function(prevHandler) {
+                    return function(id) { if (prevHandler) prevHandler(id); if (id === modalId) setTimeout(onScroll, 100); };
+                })(window._onModalOpen);
+            }
+            setupScrollCheck('termsModal', 'termsScrollPrompt');
+            setupScrollCheck('refundModal', 'refundScrollPrompt');
+        })();
+    </script>
+
+    <!-- Registration close gate (server-time authoritative — ignores device clock) -->
+    <script>
+    (function() {
+        // ============================================================
+        // MAINTENANCE MODE TOGGLE
+        // Set to true to take registration offline for maintenance. When true,
+        // the registration form is fully hidden and replaced with an
+        // "Under Maintenance" message. Admins can still get in via the "Admin?"
+        // link on the maintenance screen (same passcode as the post-cutoff bypass).
+        // Flip this back to false and redeploy to bring registration back online.
+        var MAINTENANCE_MODE = false;
+        // ============================================================
+
+        var preChrome = document.getElementById('preRegistrationChrome');
+        var regCard = document.getElementById('registrationCard');
+        var closedOverlay = document.getElementById('closedOverlay');
+        var maintenanceOverlay = document.getElementById('maintenanceOverlay');
+        var adminLink = document.getElementById('adminBypassLink');
+        var maintenanceAdminLink = document.getElementById('maintenanceBypassLink');
+        var registrationIsClosed = false;
+
+        function hideFormShowClosed() {
+            if (preChrome) preChrome.style.display = 'none';
+            if (regCard) regCard.style.display = 'none';
+            if (maintenanceOverlay) maintenanceOverlay.style.display = 'none';
+            if (closedOverlay) closedOverlay.style.display = 'block';
+        }
+        function hideFormShowMaintenance() {
+            if (preChrome) preChrome.style.display = 'none';
+            if (regCard) regCard.style.display = 'none';
+            if (closedOverlay) closedOverlay.style.display = 'none';
+            if (maintenanceOverlay) maintenanceOverlay.style.display = 'block';
+        }
+        function showFormHideClosed() {
+            if (preChrome) preChrome.style.display = '';
+            if (regCard) regCard.style.display = '';
+            if (closedOverlay) closedOverlay.style.display = 'none';
+            if (maintenanceOverlay) maintenanceOverlay.style.display = 'none';
+        }
+
+        function revealAdminBanner(text) {
+            if (regCard && !document.getElementById('adminBypassBanner')) {
+                var banner = document.createElement('div');
+                banner.id = 'adminBypassBanner';
+                banner.style.cssText = 'background:rgba(212,165,86,0.18);border:2px solid var(--secondary-gold);border-radius:8px;padding:12px 16px;margin-bottom:18px;color:var(--secondary-gold);font-weight:600;text-align:center;';
+                banner.innerHTML = text;
+                regCard.insertBefore(banner, regCard.firstChild);
+            }
+        }
+
+        // MAINTENANCE MODE short-circuits everything: hide the form, show the
+        // maintenance screen, and don't even bother checking the cutoff. Admins
+        // can still bypass via the maintenance "Admin?" link.
+        if (MAINTENANCE_MODE) {
+            if (regCard) regCard.style.visibility = '';
+            hideFormShowMaintenance();
+            if (maintenanceAdminLink) {
+                maintenanceAdminLink.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    var pwd = prompt('Enter admin passcode to access registration during maintenance:');
+                    if (!pwd) return;
+                    window.__pycAdminBypassToken = pwd;
+                    showFormHideClosed();
+                    revealAdminBanner('Admin maintenance bypass &mdash; registration form enabled. The server will verify the passcode on submit.');
+                });
+            }
+            return; // stop here — do not run the cutoff gate
+        }
+
+        // Hide everything initially so there's no flash of the registration form
+        // before /server-time responds. We'll either show the form again (open) or
+        // show the closed overlay (closed) once we know.
+        if (regCard) regCard.style.visibility = 'hidden';
+
+        fetch('/.netlify/functions/server-time', { cache: 'no-store' })
+            .then(function(r) { return r.json(); })
+            .then(function(data) {
+                if (regCard) regCard.style.visibility = '';
+                registrationIsClosed = !!(data && data.registrationClosed);
+                if (registrationIsClosed) hideFormShowClosed();
+            })
+            .catch(function() {
+                // If the cutoff check fails, fail OPEN (let people register).
+                // The backend will still reject post-cutoff submissions, so this
+                // is safe — they'll just see the error after submit instead.
+                if (regCard) regCard.style.visibility = '';
+            });
+
+        // Admin bypass: clicking "Admin?" prompts for a passcode. If the user
+        // enters something, we stash it on window.__pycAdminBypassToken and reveal
+        // the form. The token is included with the submit payload; the server
+        // verifies it against process.env.ADMIN_REG_BYPASS_TOKEN.
+        if (adminLink) {
+            adminLink.addEventListener('click', function(e) {
+                e.preventDefault();
+                var pwd = prompt('Enter admin passcode to enable post-cutoff registration:');
+                if (!pwd) return;
+                window.__pycAdminBypassToken = pwd;
+                showFormHideClosed();
+                // Add a visible admin-mode banner so it's obvious we're in bypass mode
+                revealAdminBanner('Admin bypass mode &mdash; post-cutoff registration enabled. The server will verify the passcode on submit.');
+            });
+        }
+    })();
+    </script>
+</body>
+</html>

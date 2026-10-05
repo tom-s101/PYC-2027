@@ -1,0 +1,864 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" type="image/x-icon" href="/favicon.ico">
+    <link rel="apple-touch-icon" href="/apple-touch-icon.png">
+    <title>Thank You - PYC 2026</title>
+    <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Montserrat:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --primary-navy: #1a2332;
+            --secondary-gold: #d4a556;
+            --accent-blue: #4a7c9e;
+            --text-light: #f5f5f5;
+            --text-dark: #2c3e50;
+            --border-gold: #c9965d;
+            --background-overlay: rgba(26, 35, 50, 0.92);
+        }
+
+        body {
+            font-family: 'Montserrat', sans-serif;
+            background: linear-gradient(135deg, #0f1419 0%, #1a2332 50%, #2a3f5f 100%);
+            background-attachment: fixed;
+            background-size: cover;
+            color: var(--text-light);
+            min-height: 100vh;
+            position: relative;
+            overflow-x: hidden;
+        }
+
+        body::before {
+            content: '';
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: 
+                radial-gradient(circle at 20% 30%, rgba(74, 124, 158, 0.1) 0%, transparent 50%),
+                radial-gradient(circle at 80% 70%, rgba(212, 165, 86, 0.08) 0%, transparent 50%);
+            pointer-events: none;
+            z-index: 1;
+        }
+
+        .stars {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 1;
+        }
+
+        .star {
+            position: absolute;
+            background: white;
+            border-radius: 50%;
+            box-shadow: 0 0 3px rgba(255, 255, 255, 0.8);
+            filter: blur(0.5px);
+            animation: twinkle 3s infinite;
+        }
+
+        @keyframes twinkle {
+            0%, 100% { opacity: 0.4; }
+            50% { opacity: 1; }
+        }
+
+        .container {
+            position: relative;
+            z-index: 2;
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 40px 20px;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+        }
+
+        /* Banner removed to save space */
+
+        .content-box {
+            background: var(--background-overlay);
+            border: 2px solid rgba(212, 165, 86, 0.3);
+            padding: 50px 40px;
+            border-radius: 20px;
+            box-shadow: 0 30px 80px rgba(0, 0, 0, 0.5);
+            backdrop-filter: blur(10px);
+            text-align: center;
+            width: 100%;
+            margin-bottom: 30px;
+        }
+
+        .checkmark {
+            width: 80px;
+            height: 80px;
+            border-radius: 50%;
+            background: var(--secondary-gold);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 30px;
+            animation: scaleIn 0.5s ease-out;
+        }
+
+        @keyframes scaleIn {
+            0% { transform: scale(0); }
+            50% { transform: scale(1.1); }
+            100% { transform: scale(1); }
+        }
+
+        .checkmark::after {
+            content: '✓';
+            font-size: 50px;
+            color: var(--primary-navy);
+            font-weight: bold;
+        }
+
+        h1 {
+            font-family: 'Bebas Neue', sans-serif;
+            color: var(--secondary-gold);
+            font-size: 2.5rem;
+            margin-bottom: 20px;
+            letter-spacing: 2px;
+        }
+
+        .message {
+            font-size: 1.3rem;
+            line-height: 1.8;
+            margin-bottom: 15px;
+            color: var(--text-light);
+        }
+
+        .email-notice {
+            font-size: 1.1rem;
+            color: rgba(245, 245, 245, 0.8);
+            margin-bottom: 30px;
+            font-style: italic;
+        }
+
+        .countdown-section {
+            background: var(--background-overlay);
+            border: 2px solid rgba(212, 165, 86, 0.3);
+            padding: 40px 30px;
+            border-radius: 20px;
+            box-shadow: 0 30px 80px rgba(0, 0, 0, 0.5);
+            backdrop-filter: blur(10px);
+            width: 100%;
+            margin-bottom: 30px;
+        }
+
+        .countdown-title {
+            font-family: 'Bebas Neue', sans-serif;
+            color: var(--secondary-gold);
+            font-size: 1.8rem;
+            margin-bottom: 30px;
+            text-align: center;
+            letter-spacing: 1px;
+        }
+
+        .countdown-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+            gap: 20px;
+            margin-bottom: 20px;
+        }
+
+        .countdown-item {
+            background: rgba(255, 255, 255, 0.05);
+            padding: 25px 15px;
+            border-radius: 15px;
+            border: 1px solid rgba(212, 165, 86, 0.2);
+            text-align: center;
+        }
+
+        .countdown-number {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 3rem;
+            font-weight: 700;
+            color: var(--secondary-gold);
+            line-height: 1;
+            margin-bottom: 10px;
+        }
+
+        .countdown-label {
+            font-size: 1rem;
+            color: var(--text-light);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .event-date {
+            text-align: center;
+            font-size: 1.2rem;
+            color: rgba(245, 245, 245, 0.7);
+            margin-top: 20px;
+        }
+
+        .social-section {
+            background: rgba(255, 255, 255, 0.05);
+            padding: 30px;
+            border-radius: 15px;
+            border: 1px solid rgba(212, 165, 86, 0.2);
+            text-align: center;
+            width: 100%;
+            margin-bottom: 20px;
+        }
+
+        .social-title {
+            color: var(--secondary-gold);
+            font-size: 1.3rem;
+            margin-bottom: 15px;
+            font-weight: 600;
+        }
+
+        .social-icons {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            flex-wrap: wrap;
+        }
+
+        .social-icon {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            background: rgba(212, 165, 86, 0.1);
+            border: 2px solid rgba(212, 165, 86, 0.3);
+            color: var(--secondary-gold);
+            text-decoration: none;
+            transition: all 0.3s;
+        }
+
+        .social-icon:hover {
+            background: var(--secondary-gold);
+            color: var(--primary-navy);
+            transform: translateY(-3px);
+            box-shadow: 0 5px 15px rgba(212, 165, 86, 0.4);
+        }
+
+        .social-icon svg {
+            width: 24px;
+            height: 24px;
+        }
+
+        .contact-section {
+            text-align: center;
+            padding: 20px;
+            color: rgba(245, 245, 245, 0.7);
+            font-size: 0.95rem;
+        }
+
+        .contact-section a {
+            color: var(--secondary-gold);
+            text-decoration: none;
+        }
+
+        .contact-section a:hover {
+            text-decoration: underline;
+        }
+
+        .return-button {
+            display: inline-block;
+            padding: 12px 30px;
+            background: rgba(255, 255, 255, 0.1);
+            border: 1px solid rgba(212, 165, 86, 0.3);
+            border-radius: 8px;
+            color: var(--text-light);
+            text-decoration: none;
+            font-size: 1rem;
+            transition: all 0.3s;
+            margin-top: 10px;
+        }
+
+        .return-button:hover {
+            background: rgba(212, 165, 86, 0.2);
+            border-color: var(--secondary-gold);
+            transform: translateY(-2px);
+        }
+
+        /* ===== Share to Social Media Section ===== */
+        .share-section {
+            background: linear-gradient(135deg, rgba(212, 165, 86, 0.12) 0%, rgba(74, 124, 158, 0.1) 100%);
+            border: 2px solid rgba(212, 165, 86, 0.4);
+            padding: 35px 30px;
+            border-radius: 20px;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.4);
+            backdrop-filter: blur(10px);
+            text-align: center;
+            width: 100%;
+            margin-bottom: 30px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .share-section::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle at center, rgba(212, 165, 86, 0.05) 0%, transparent 70%);
+            animation: shimmer 4s ease-in-out infinite;
+            pointer-events: none;
+        }
+
+        @keyframes shimmer {
+            0%, 100% { transform: translate(0, 0); opacity: 0.5; }
+            50% { transform: translate(5%, 5%); opacity: 1; }
+        }
+
+        .share-section-title {
+            font-family: 'Bebas Neue', sans-serif;
+            color: var(--secondary-gold);
+            font-size: 1.6rem;
+            margin-bottom: 8px;
+            letter-spacing: 2px;
+            position: relative;
+        }
+
+        .share-section-subtitle {
+            font-size: 0.95rem;
+            color: rgba(245, 245, 245, 0.65);
+            margin-bottom: 25px;
+            font-style: italic;
+            position: relative;
+        }
+
+        .share-buttons {
+            display: flex;
+            justify-content: center;
+            gap: 14px;
+            flex-wrap: wrap;
+            position: relative;
+        }
+
+        .share-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            padding: 13px 24px;
+            border-radius: 12px;
+            text-decoration: none;
+            font-family: 'Montserrat', sans-serif;
+            font-size: 0.92rem;
+            font-weight: 600;
+            cursor: pointer;
+            border: none;
+            transition: all 0.3s ease;
+            letter-spacing: 0.3px;
+        }
+
+        .share-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.4);
+        }
+
+        .share-btn:active {
+            transform: translateY(-1px);
+        }
+
+        .share-btn svg {
+            width: 20px;
+            height: 20px;
+            flex-shrink: 0;
+        }
+
+        .share-btn-facebook {
+            background: #1877F2;
+            color: white;
+        }
+
+        .share-btn-facebook:hover {
+            background: #166FE5;
+            box-shadow: 0 8px 25px rgba(24, 119, 242, 0.4);
+        }
+
+        .share-btn-twitter {
+            background: #000000;
+            color: white;
+        }
+
+        .share-btn-twitter:hover {
+            background: #1a1a1a;
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.5);
+        }
+
+        .share-btn-copy {
+            background: rgba(255, 255, 255, 0.1);
+            color: var(--text-light);
+            border: 1px solid rgba(212, 165, 86, 0.3);
+        }
+
+        .share-btn-copy:hover {
+            background: rgba(212, 165, 86, 0.2);
+            border-color: var(--secondary-gold);
+            box-shadow: 0 8px 25px rgba(212, 165, 86, 0.2);
+        }
+
+        .share-btn-copy.copied {
+            background: rgba(46, 204, 113, 0.2);
+            border-color: #2ecc71;
+            color: #2ecc71;
+        }
+
+        .share-preview {
+            margin-top: 20px;
+            padding: 15px;
+            background: rgba(0, 0, 0, 0.3);
+            border-radius: 10px;
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            font-size: 0.85rem;
+            color: rgba(245, 245, 245, 0.55);
+            line-height: 1.5;
+            position: relative;
+        }
+
+        .share-preview-label {
+            font-size: 0.75rem;
+            text-transform: uppercase;
+            letter-spacing: 1.5px;
+            color: rgba(212, 165, 86, 0.6);
+            margin-bottom: 8px;
+        }
+
+        @media (max-width: 768px) {
+            .share-buttons {
+                flex-direction: column;
+                align-items: center;
+            }
+
+            .share-btn {
+                width: 100%;
+                max-width: 280px;
+                justify-content: center;
+            }
+        }
+            .container {
+                padding: 20px 15px;
+            }
+
+            .content-box {
+                padding: 30px 25px;
+            }
+
+            h1 {
+                font-size: 2rem;
+            }
+
+            .message {
+                font-size: 1.1rem;
+            }
+
+            .countdown-number {
+                font-size: 2.5rem;
+            }
+
+            .countdown-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+
+
+
+
+
+        /* Progress Stepper */
+        .pyc-progress { max-width:600px; margin:0 auto 25px; padding:15px 15px 5px; }
+        .pyc-progress-title { text-align:center; font-size:0.7rem; text-transform:uppercase; letter-spacing:2px; color:rgba(245,245,245,0.3); margin-bottom:14px; font-weight:600; }
+        .pyc-steps { display:flex; align-items:flex-start; justify-content:space-between; position:relative; }
+        .pyc-steps::before { content:''; position:absolute; top:16px; left:40px; right:40px; height:3px; background:rgba(255,255,255,0.06); border-radius:2px; }
+        .pyc-line { position:absolute; top:16px; left:40px; height:3px; background:linear-gradient(90deg,#d4a556,#e5b96a); border-radius:2px; }
+        .pyc-s { display:flex; flex-direction:column; align-items:center; flex:1; position:relative; z-index:2; }
+        .pyc-dot { width:34px; height:34px; border-radius:50%; display:flex; align-items:center; justify-content:center; font-size:0.8rem; font-weight:700; border:3px solid rgba(255,255,255,0.08); background:rgba(26,35,50,0.95); color:rgba(245,245,245,0.25); transition:all 0.3s; }
+        .pyc-s.done .pyc-dot { background:#d4a556; color:#1a2332; border-color:#d4a556; }
+        .pyc-s.now .pyc-dot { background:rgba(212,165,86,0.12); color:#d4a556; border-color:#d4a556; box-shadow:0 0 15px rgba(212,165,86,0.3); animation:pyc-glow 2s infinite; }
+        .pyc-lbl { margin-top:8px; font-size:0.68rem; color:rgba(245,245,245,0.25); text-align:center; font-weight:600; text-transform:uppercase; letter-spacing:0.5px; line-height:1.3; }
+        .pyc-s.done .pyc-lbl { color:rgba(212,165,86,0.7); }
+        .pyc-s.now .pyc-lbl { color:#f5f5f5; }
+        .pyc-hint { text-align:center; margin-top:10px; font-size:0.78rem; color:rgba(212,165,86,0.55); font-style:italic; }
+        @keyframes pyc-glow { 0%,100%{box-shadow:0 0 10px rgba(212,165,86,0.2);} 50%{box-shadow:0 0 20px rgba(212,165,86,0.45);} }
+        @media(max-width:480px) { .pyc-dot{width:28px;height:28px;font-size:0.7rem;} .pyc-lbl{font-size:0.6rem;} }
+    </style>
+</head>
+<body>
+    <div class="stars" id="stars"></div>
+
+    <div class="container">
+
+        <div class="pyc-progress">
+            <div class="pyc-progress-title">Registration Progress</div>
+            <div class="pyc-steps">
+                <div class="pyc-line" style="width:calc(100% - 80px);"></div>
+                <div class="pyc-s done"><div class="pyc-dot">✓</div><div class="pyc-lbl">Register</div></div><div class="pyc-s done"><div class="pyc-dot">✓</div><div class="pyc-lbl">Submit Payment</div></div><div class="pyc-s done"><div class="pyc-dot">✓</div><div class="pyc-lbl">Confirmed!</div></div>
+            </div>
+            
+        </div>
+
+
+
+        <div class="content-box">
+            <div class="checkmark"></div>
+            <h1>Thank You for Registering!</h1>
+            <p id="registrantNumberDisplay" class="message" style="display:none;font-size:1.3rem;font-weight:700;color:#d4a556;margin-bottom:5px;"></p>
+            <p id="confirmationDisplay" class="message" style="display:none;font-size:1rem;color:rgba(245,245,245,0.7);margin-bottom:10px;">Confirmation No: <strong id="confNumText" style="color:#d4a556;"></strong></p>
+            <p class="message">A confirmation email has been sent to your inbox.</p>
+            <p class="message">We look forward to seeing you!</p>
+            <p class="email-notice">Please check your email for important conference details.</p>
+        </div>
+
+        <!-- Lodging/Accommodations Box (always shown) -->
+        <!-- Accommodation Callout - HIDDEN until accommodations open -->
+        <div class="content-box" id="accommodationCallout" style="display:none; background: rgba(212, 165, 86, 0.06); border: 2px solid rgba(212, 165, 86, 0.5); margin-top: 30px; position: relative; overflow: hidden;">
+            <div style="background:rgba(212,165,86,0.12);border-bottom:1px solid rgba(212,165,86,0.25);margin:-30px -40px 20px;padding:14px 40px;text-align:center;">
+                <span style="font-size:0.78rem;text-transform:uppercase;letter-spacing:2px;font-weight:700;color:#d4a556;">⚠️ You're not done yet — 3 steps remaining</span>
+            </div>
+            <h2 style="color: var(--secondary-gold); margin-bottom: 12px; font-size: 1.5rem;">Book Your Lodging Now</h2>
+            <p style="font-size: 1rem; margin-bottom: 8px; line-height: 1.6;">
+                Your registration <strong style="color:#e74c3c;">does NOT include accommodation</strong>. You need to book your stay separately.
+            </p>
+            <p style="font-size: 0.92rem; color: rgba(245,245,245,0.6); margin-bottom: 20px;">
+                Choose from Girls/Boys Dorms or Camping. Spots are limited and fill up fast — don't wait!
+            </p>
+            <a href="/accommodations" class="return-button" style="background: var(--secondary-gold); color: var(--primary-navy); display: inline-block; font-weight: 700; padding: 16px 40px; font-size: 1.05rem; border-radius: 10px; text-decoration: none; text-transform: uppercase; letter-spacing: 1px; animation: pyc-glow 2s infinite;">
+                Reserve Accommodation Now →
+            </a>
+            <p style="font-size:0.8rem;color:rgba(245,245,245,0.35);margin-top:12px;">This is step 3 of 5 in your PYC journey</p>
+        </div>
+
+        <!-- Volunteer Message (shown if user volunteered) -->
+        <div id="volunteerMessage" class="content-box" style="display: none; background: rgba(212, 165, 86, 0.1); border: 2px solid var(--secondary-gold); margin-top: 30px;">
+            <h2 style="color: var(--secondary-gold); margin-bottom: 20px;">Thank You for Volunteering!</h2>
+            <p style="font-size: 1.1rem; margin-bottom: 20px;">
+                We're excited that you want to serve at PYC 2026! Please fill out this form to help us place you in the right volunteer role.
+            </p>
+            <a href="https://forms.gle/t1KbtXJ1RnYckwEj8" target="_blank" class="return-button" style="background: var(--secondary-gold); color: var(--primary-navy); display: inline-block; margin-top: 10px;">
+                Complete Volunteer Form →
+            </a>
+        </div>
+
+        <!-- Non-Volunteer Message (shown if user did NOT volunteer) -->
+        <div id="nonVolunteerMessage" class="content-box" style="display: none; background: rgba(255, 255, 255, 0.05); border: 2px solid rgba(212, 165, 86, 0.2); margin-top: 30px;">
+            <h2 style="color: var(--secondary-gold); margin-bottom: 20px;">Want to Serve?</h2>
+            <p style="font-size: 1.1rem; margin-bottom: 20px;">
+                We'd love to have you volunteer at PYC 2026! Fill out this form if you'd like to serve and help make this conference amazing.
+            </p>
+            <a href="https://forms.gle/t1KbtXJ1RnYckwEj8" target="_blank" class="return-button" style="background: var(--secondary-gold); color: var(--primary-navy); display: inline-block; margin-top: 10px;">
+                Volunteer Form →
+            </a>
+        </div>
+
+        <!-- ===== Share to Social Media ===== -->
+        <div class="share-section">
+            <div class="share-section-title">Post to Social Media</div>
+            <div class="share-section-subtitle">Spread the word and invite others to join you at PYC 2026!</div>
+            
+            <!-- PYC Banner for visual appeal -->
+            <div style="margin-bottom: 12px; border-radius: 14px; overflow: hidden; border: 2px solid rgba(212, 165, 86, 0.25); box-shadow: 0 8px 30px rgba(0,0,0,0.35);">
+                <img src="/IMG_3908.jpeg" alt="PYC 2026 - Above and Beyond" style="width: 100%; display: block; height: auto;">
+            </div>
+            <a href="/IMG_3908.jpeg" download="PYC_2026_Banner.jpeg" style="display:inline-flex;align-items:center;gap:8px;padding:10px 20px;background:rgba(212,165,86,0.15);border:1px solid rgba(212,165,86,0.3);border-radius:8px;color:#d4a556;font-family:'Montserrat',sans-serif;font-size:0.85rem;font-weight:600;text-decoration:none;margin-bottom:22px;transition:background 0.2s;" onmouseover="this.style.background='rgba(212,165,86,0.25)'" onmouseout="this.style.background='rgba(212,165,86,0.15)'">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+                Download Banner to Post
+            </a>
+
+            <div class="share-buttons">
+                <a href="#" id="facebookShareBtn" target="_blank" rel="noopener noreferrer" class="share-btn share-btn-facebook" onclick="shareToFacebook(event)">
+                    <svg viewBox="0 0 24 24" fill="currentColor">
+                        <path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/>
+                    </svg>
+                    Facebook
+                </a>
+                <a href="#" id="twitterShareBtn" target="_blank" rel="noopener noreferrer" class="share-btn share-btn-twitter" onclick="shareToTwitter(event)">
+                    <svg viewBox="0 0 24 24" fill="currentColor">
+                        <path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/>
+                    </svg>
+                    X / Twitter
+                </a>
+                <button class="share-btn share-btn-copy" onclick="copyShareText()">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect>
+                        <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path>
+                    </svg>
+                    <span id="copyBtnText">Copy Text</span>
+                </button>
+            </div>
+
+            <div class="share-preview">
+                <div class="share-preview-label">Preview of your post</div>
+                <div id="sharePreviewText">I just registered for PYC 2026 — Above and Beyond!<br>
+                June 3-7 · Mindanao, Philippines<br>
+                Ephesians 3:20<br><br>
+                Register now 👉 philippineyouthforchrist.org<br>
+                @Philippine Youth for Christ</div>
+            </div>
+        </div>
+
+        <div class="countdown-section">
+            <h2 class="countdown-title">Conference Begins In:</h2>
+            <div class="countdown-grid">
+                <div class="countdown-item">
+                    <div class="countdown-number" id="days">--</div>
+                    <div class="countdown-label">Days</div>
+                </div>
+                <div class="countdown-item">
+                    <div class="countdown-number" id="hours">--</div>
+                    <div class="countdown-label">Hours</div>
+                </div>
+                <div class="countdown-item">
+                    <div class="countdown-number" id="minutes">--</div>
+                    <div class="countdown-label">Minutes</div>
+                </div>
+                <div class="countdown-item">
+                    <div class="countdown-number" id="seconds">--</div>
+                    <div class="countdown-label">Seconds</div>
+                </div>
+            </div>
+            <p class="event-date">June 3-7 | Mountain View College, Mindanao, Philippines</p>
+        </div>
+
+        <div class="social-section">
+            <div class="social-title">For questions or concerns, contact us through social media</div>
+            <div class="social-icons">
+                <a href="https://www.facebook.com/share/1D9PJw6wkq/?mibextid=wwXIfr" target="_blank" rel="noopener noreferrer" class="social-icon" title="Facebook">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="currentColor">
+                        <path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/>
+                    </svg>
+                </a>
+                <a href="https://www.instagram.com/philippineyouthforchrist?igsh=c2Q0MjAwbWh1cXZ2" target="_blank" rel="noopener noreferrer" class="social-icon" title="Instagram">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="currentColor">
+                        <path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/>
+                    </svg>
+                </a>
+            </div>
+        </div>
+
+        <div class="contact-section">
+            <p>Send us your prayer requests: <a href="https://docs.google.com/forms/d/e/1FAIpQLScF58bssW1NRk_1kisP1M3yrpcbyn2SBLxf8YvGI-nWFVF6vg/viewform" target="_blank" style="color:#d4a556;">Submit a Prayer Request</a></p>
+        </div>
+
+        <a href="/" class="return-button">← Return to Registration Page</a>
+    </div>
+
+    <script>
+        // Check if this is a special person who should see the special message first
+        const registrantName = sessionStorage.getItem('registrantName') || '';
+        const registrantNumber = sessionStorage.getItem('registrantNumber') || '';
+        const confirmationNumber = sessionStorage.getItem('confirmationNumber') || '';
+        
+        // Show registrant number
+        // Derive display number from confirmation number so they always match
+        const displayNum = confirmationNumber ? parseInt(confirmationNumber.replace('PYC-', ''), 10) : registrantNumber;
+        if (displayNum) {
+            const numDisplay = document.getElementById('registrantNumberDisplay');
+            numDisplay.textContent = 'You are registrant #' + displayNum + '!';
+            if (confirmationNumber) {
+                document.getElementById('confirmationDisplay').style.display = 'block';
+                document.getElementById('confNumText').textContent = confirmationNumber;
+            }
+            numDisplay.style.display = 'block';
+            // Update share preview
+            const previewEl = document.getElementById('sharePreviewText');
+            if (previewEl) {
+                previewEl.innerHTML = 'I am #' + displayNum + ' to register for PYC 2026 — Above and Beyond!<br>June 3-7 · Mindanao, Philippines<br>Ephesians 3:20<br><br>Register now 👉 philippineyouthforchrist.org<br>@Philippine Youth for Christ';
+            }
+        }
+        const normalizedName = registrantName.toLowerCase().trim();
+        const specialMessageSeenKey = `specialMessageSeen_${normalizedName.replace(/\s+/g, '_')}`;
+        const specialMessageSeen = sessionStorage.getItem(specialMessageSeenKey);
+        const shouldSeeSpecialMessage = sessionStorage.getItem('shouldSeeSpecialMessage');
+        const specialPeople = ['marissa imperio', 'larry fam', 'jerald perlas', 'kevin perlas', 'lyka famorcan'];
+        const isSpecialPerson = specialPeople.includes(normalizedName);
+        
+        // If special person hasn't seen their message, redirect them
+        if ((shouldSeeSpecialMessage === 'true' || isSpecialPerson) && specialMessageSeen !== 'true') {
+            const nameParts = registrantName.trim().split(' ');
+            const firstName = nameParts[0] || '';
+            const lastName = nameParts.slice(1).join(' ') || '';
+            window.location.href = `/special-welcome?firstName=${encodeURIComponent(firstName)}&lastName=${encodeURIComponent(lastName)}`;
+        }
+        
+        // Check if user volunteered and show appropriate message
+        const isVolunteer = sessionStorage.getItem('isVolunteer');
+        
+        const volunteerMsg = document.getElementById('volunteerMessage');
+        const nonVolunteerMsg = document.getElementById('nonVolunteerMessage');
+        
+        if (isVolunteer === 'true') {
+            if (volunteerMsg) volunteerMsg.style.display = 'block';
+        } else {
+            if (nonVolunteerMsg) nonVolunteerMsg.style.display = 'block';
+        }
+        
+        // ===== SECURITY: Clear sensitive data from sessionStorage =====
+        // Give user time to see the page, then clean up
+        setTimeout(() => {
+            // Keep special message flags for navigation
+            const shouldKeep = [
+                'specialMessageSeen_marissa_imperio',
+                'specialMessageSeen_larry_fam',
+                'shouldSeeSpecialMessage'
+            ];
+            
+            // Clear all other sensitive data
+            const keys = Object.keys(sessionStorage);
+            keys.forEach(key => {
+                if (!shouldKeep.includes(key)) {
+                    sessionStorage.removeItem(key);
+                }
+            });
+        }, 5000);  // Clean up after 5 seconds
+        
+        // Create stars concentrated around edges
+        function createStars() {
+            const starsContainer = document.getElementById('stars');
+            const numberOfStars = 60;
+            const zones = ['top', 'bottom', 'left', 'right'];
+            
+            for (let i = 0; i < numberOfStars; i++) {
+                const star = document.createElement('div');
+                star.className = 'star';
+                
+                const zone = zones[Math.floor(Math.random() * zones.length)];
+                let left, top;
+                
+                if (zone === 'top') {
+                    left = Math.random() * 100;
+                    top = Math.random() * 20;
+                } else if (zone === 'bottom') {
+                    left = Math.random() * 100;
+                    top = 80 + Math.random() * 20;
+                } else if (zone === 'left') {
+                    left = Math.random() * 15;
+                    top = 20 + Math.random() * 60;
+                } else {
+                    left = 85 + Math.random() * 15;
+                    top = 20 + Math.random() * 60;
+                }
+                
+                const rand = Math.random();
+                let size;
+                if (rand > 0.95) {
+                    size = Math.random() * 6 + 8;
+                } else if (rand > 0.85) {
+                    size = Math.random() * 4 + 5;
+                } else {
+                    size = Math.random() * 3 + 2;
+                }
+                
+                star.style.width = size + 'px';
+                star.style.height = size + 'px';
+                star.style.left = left + '%';
+                star.style.top = top + '%';
+                star.style.animationDelay = Math.random() * 3 + 's';
+                star.style.animationDuration = (Math.random() * 2 + 2) + 's';
+                
+                starsContainer.appendChild(star);
+            }
+        }
+        createStars();
+
+        // Countdown Timer
+        // Target date: June 3, 2026 at 3:00 PM Philippine Time (UTC+8)
+        function updateCountdown() {
+            // June 3, 2026, 3:00 PM Philippine Time
+            // PHP timezone is UTC+8
+            const targetDate = new Date('2026-06-03T15:00:00+08:00');
+            const now = new Date();
+            
+            const difference = targetDate - now;
+
+            if (difference > 0) {
+                const days = Math.floor(difference / (1000 * 60 * 60 * 24));
+                const hours = Math.floor((difference % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+                const minutes = Math.floor((difference % (1000 * 60 * 60)) / (1000 * 60));
+                const seconds = Math.floor((difference % (1000 * 60)) / 1000);
+
+                document.getElementById('days').textContent = days.toString().padStart(2, '0');
+                document.getElementById('hours').textContent = hours.toString().padStart(2, '0');
+                document.getElementById('minutes').textContent = minutes.toString().padStart(2, '0');
+                document.getElementById('seconds').textContent = seconds.toString().padStart(2, '0');
+            } else {
+                // Conference has started!
+                document.getElementById('days').textContent = '00';
+                document.getElementById('hours').textContent = '00';
+                document.getElementById('minutes').textContent = '00';
+                document.getElementById('seconds').textContent = '00';
+                         }
+        }
+
+        // Update countdown every second
+        updateCountdown();
+        setInterval(updateCountdown, 1000);
+
+        // ===== Share to Social Media Functions =====
+        const regNumText = displayNum ? `I am #${displayNum} to register for PYC 2026 — Above and Beyond!` : `I just registered for PYC 2026 — Above and Beyond!`;
+        const shareText = `${regNumText}\nJune 3-7 · Mindanao, Philippines\nEphesians 3:20\n\nRegister now 👉 philippineyouthforchrist.org\n@Philippine Youth for Christ`;
+        const shareUrl = 'https://philippineyouthforchrist.org';
+        const shareHashtags = 'PYC2026,AboveAndBeyond,PhilippineYouthForChrist';
+
+        function shareToFacebook(e) {
+            e.preventDefault();
+            const fbUrl = `https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(shareUrl)}&quote=${encodeURIComponent(shareText)}`;
+            window.open(fbUrl, '_blank', 'width=600,height=400,scrollbars=yes');
+        }
+
+        function shareToTwitter(e) {
+            e.preventDefault();
+            const tweetText = `${regNumText}\nJune 3-7 · Mindanao, Philippines\nEphesians 3:20\n\nRegister now 👉`;
+            const twitterUrl = `https://twitter.com/intent/tweet?text=${encodeURIComponent(tweetText)}&url=${encodeURIComponent(shareUrl)}&hashtags=${shareHashtags}`;
+            window.open(twitterUrl, '_blank', 'width=600,height=400,scrollbars=yes');
+        }
+
+        function copyShareText() {
+            const textToCopy = `${regNumText}\nJune 3-7 · Mindanao, Philippines\nEphesians 3:20\n\nRegister now 👉 philippineyouthforchrist.org\n@Philippine Youth for Christ`;
+            
+            navigator.clipboard.writeText(textToCopy).then(() => {
+                const btn = document.querySelector('.share-btn-copy');
+                const btnText = document.getElementById('copyBtnText');
+                btn.classList.add('copied');
+                btnText.textContent = 'Copied! ✓';
+                
+                setTimeout(() => {
+                    btn.classList.remove('copied');
+                    btnText.textContent = 'Copy Text';
+                }, 2500);
+            }).catch(() => {
+                // Fallback for older browsers
+                const textarea = document.createElement('textarea');
+                textarea.value = textToCopy;
+                textarea.style.position = 'fixed';
+                textarea.style.opacity = '0';
+                document.body.appendChild(textarea);
+                textarea.select();
+                document.execCommand('copy');
+                document.body.removeChild(textarea);
+                
+                const btn = document.querySelector('.share-btn-copy');
+                const btnText = document.getElementById('copyBtnText');
+                btn.classList.add('copied');
+                btnText.textContent = 'Copied! ✓';
+                
+                setTimeout(() => {
+                    btn.classList.remove('copied');
+                    btnText.textContent = 'Copy Text';
+                }, 2500);
+            });
+        }
+    </script>
+</body>
+</html>

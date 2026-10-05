@@ -1,0 +1,905 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Welcome - PYC 2026</title>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+JP:wght@300;400;500;600&family=Pacifico&family=Cormorant+Garamond:wght@300;400;500;600&family=Zen+Maru+Gothic:wght@300;400;500&display=swap" rel="stylesheet">
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        body {
+            font-family: 'Cormorant Garamond', serif;
+            overflow: hidden;
+            background: #1a0a1a;
+            width: 100vw;
+            height: 100vh;
+        }
+
+        /* === NIGHT SKY === */
+        .sky-layer {
+            position: fixed;
+            inset: 0;
+            background: 
+                radial-gradient(ellipse at 30% 20%, rgba(90,40,80,0.6) 0%, transparent 50%),
+                radial-gradient(ellipse at 70% 30%, rgba(120,50,100,0.4) 0%, transparent 40%),
+                radial-gradient(ellipse at 50% 80%, rgba(60,20,60,0.5) 0%, transparent 50%),
+                linear-gradient(180deg, #0d0518 0%, #1a0a2e 15%, #2d1245 30%, #3d1a55 45%, #4a2060 55%, #5c2a6e 65%, #6e3478 72%, #8a4488 80%, #c06898 88%, #e8a0b8 94%, #f5c8d8 100%);
+            z-index: 0;
+        }
+
+        /* === STARS === */
+        .stars-container { position: fixed; inset: 0; height: 60%; z-index: 1; pointer-events: none; }
+        .star { position: absolute; border-radius: 50%; background: white; }
+        .star.twinkle {
+            animation: twinkle var(--duration) ease-in-out infinite;
+            animation-delay: var(--delay);
+        }
+        @keyframes twinkle {
+            0%, 100% { opacity: var(--base-opacity); transform: scale(1); }
+            50% { opacity: 1; transform: scale(1.5); }
+        }
+
+        /* === MOON — drifts slowly across sky === */
+        .moon {
+            position: fixed;
+            top: 5%;
+            width: 90px;
+            height: 90px;
+            z-index: 2;
+            opacity: 0;
+            animation: moonDrift 120s linear infinite;
+            filter: drop-shadow(0 0 30px rgba(255,230,200,0.4)) drop-shadow(0 0 60px rgba(255,200,180,0.2));
+        }
+        @keyframes moonDrift {
+            0%   { left: -10%; opacity: 0; transform: translateY(0); }
+            5%   { opacity: 1; }
+            50%  { transform: translateY(-15px); }
+            95%  { opacity: 1; }
+            100% { left: 110%; opacity: 0; transform: translateY(0); }
+        }
+        @media (max-width: 768px) {
+            .moon { width: 55px; height: 55px; top: 3%; }
+        }
+
+        /* === TORII GATE === */
+        .torii-container {
+            position: fixed; bottom: 0; left: 50%; transform: translateX(-50%);
+            width: 280px; height: 200px; z-index: 3;
+            opacity: 0; animation: toriiRise 2s ease-out forwards 1s;
+        }
+        @keyframes toriiRise {
+            0% { opacity: 0; transform: translateX(-50%) translateY(40px); }
+            100% { opacity: 0.15; transform: translateX(-50%) translateY(0); }
+        }
+        @media (max-width: 768px) { .torii-container { width: 200px; height: 150px; } }
+
+        /* === CHERRY BLOSSOM TREES (animated cycle) === */
+        .tree-left, .tree-right {
+            position: fixed; bottom: -5%; z-index: 4;
+            opacity: 0; animation: treeAppear 2.5s ease-out forwards 0.3s;
+        }
+        .tree-left { left: -5%; width: 300px; height: 500px; }
+        .tree-right { right: -5%; width: 250px; height: 420px; animation-delay: 0.6s; }
+        @keyframes treeAppear {
+            0% { opacity: 0; transform: scale(0.9); }
+            100% { opacity: 1; transform: scale(1); }
+        }
+        @media (max-width: 768px) {
+            .tree-left { width: 180px; height: 320px; left: -8%; bottom: -3%; }
+            .tree-right { width: 150px; height: 280px; right: -8%; }
+        }
+
+        /* Blossom cluster animation cycle: bloom → full → leaves → bare → bloom */
+        .blossom-cluster { animation: bloomCycle 25s ease-in-out infinite; }
+        .leaf-cluster { animation: leafCycle 25s ease-in-out infinite; }
+        @keyframes bloomCycle {
+            0%   { opacity: 0; transform: scale(0); }
+            8%   { opacity: 1; transform: scale(1.1); }
+            15%  { transform: scale(1); }
+            45%  { opacity: 1; transform: scale(1); }
+            55%  { opacity: 0; transform: scale(0.6); }
+            100% { opacity: 0; transform: scale(0); }
+        }
+        @keyframes leafCycle {
+            0%   { opacity: 0; transform: scale(0); }
+            40%  { opacity: 0; transform: scale(0); }
+            55%  { opacity: 0.9; transform: scale(1.1); }
+            65%  { transform: scale(1); }
+            85%  { opacity: 0.9; }
+            95%  { opacity: 0; transform: scale(0.5); }
+            100% { opacity: 0; transform: scale(0); }
+        }
+
+        /* === KOI — ink-wash style === */
+        .koi {
+            position: fixed; z-index: 5; opacity: 0; pointer-events: none;
+        }
+        .koi-1 { animation: koiSwim1 22s ease-in-out infinite, koiFadeIn 2s ease forwards 2s; }
+        .koi-2 { animation: koiSwim2 28s ease-in-out infinite, koiFadeIn 2s ease forwards 3s; }
+        .koi-3 { animation: koiSwim3 20s ease-in-out infinite, koiFadeIn 2s ease forwards 2.5s; }
+        @keyframes koiFadeIn { to { opacity: 0.65; } }
+        @keyframes koiSwim1 {
+            0%   { transform: translate(0,0) scaleX(1) rotate(0deg); }
+            25%  { transform: translate(90px,-45px) scaleX(1) rotate(5deg); }
+            50%  { transform: translate(170px,15px) scaleX(1) rotate(-3deg); }
+            51%  { transform: translate(170px,15px) scaleX(-1) rotate(-3deg); }
+            75%  { transform: translate(85px,-25px) scaleX(-1) rotate(4deg); }
+            100% { transform: translate(0,0) scaleX(-1) rotate(0deg); }
+        }
+        @keyframes koiSwim2 {
+            0%   { transform: translate(0,0) scaleX(-1) rotate(0deg); }
+            30%  { transform: translate(-110px,35px) scaleX(-1) rotate(-4deg); }
+            50%  { transform: translate(-65px,-25px) scaleX(-1) rotate(3deg); }
+            51%  { transform: translate(-65px,-25px) scaleX(1) rotate(3deg); }
+            80%  { transform: translate(45px,18px) scaleX(1) rotate(-2deg); }
+            100% { transform: translate(0,0) scaleX(1) rotate(0deg); }
+        }
+        @keyframes koiSwim3 {
+            0%   { transform: translate(0,0) rotate(0deg); }
+            25%  { transform: translate(65px,-55px) rotate(8deg); }
+            50%  { transform: translate(130px,5px) rotate(-4deg); }
+            75%  { transform: translate(65px,35px) rotate(6deg); }
+            100% { transform: translate(0,0) rotate(0deg); }
+        }
+
+        /* === SAKURA PETALS === */
+        .sakura-petal { position: fixed; top: -30px; pointer-events: none; z-index: 50; opacity: 0; }
+        @keyframes sakuraFall {
+            0%   { opacity: 0; transform: translateX(0) translateY(0) rotateX(0deg) rotateZ(0deg); }
+            10%  { opacity: 0.9; }
+            90%  { opacity: 0.7; }
+            100% { opacity: 0; transform: translateX(var(--drift)) translateY(110vh) rotateX(720deg) rotateZ(var(--spin)); }
+        }
+
+        /* === LANTERNS — float up from bottom === */
+        .floating-lantern {
+            position: fixed;
+            bottom: -120px;
+            z-index: 6;
+            pointer-events: none;
+            opacity: 0;
+            animation: lanternFloatUp var(--lantern-dur) ease-in-out forwards;
+            animation-delay: var(--lantern-delay);
+        }
+        @keyframes lanternFloatUp {
+            0%   { opacity: 0; transform: translateY(0) translateX(0) rotate(0deg); }
+            10%  { opacity: 0.9; }
+            30%  { transform: translateY(-35vh) translateX(15px) rotate(3deg); }
+            50%  { transform: translateY(-55vh) translateX(-10px) rotate(-2deg); }
+            70%  { transform: translateY(-75vh) translateX(12px) rotate(2deg); }
+            90%  { opacity: 0.85; }
+            100% { opacity: 0; transform: translateY(-115vh) translateX(0) rotate(0deg); }
+        }
+        .lantern-inner-glow {
+            animation: lanternPulse 3s ease-in-out infinite;
+        }
+        @keyframes lanternPulse {
+            0%, 100% { opacity: 0.4; }
+            50% { opacity: 0.8; }
+        }
+
+        /* === MAIN CONTENT === */
+        .container {
+            position: fixed; inset: 0;
+            display: flex; flex-direction: column; align-items: center; justify-content: center;
+            z-index: 100; pointer-events: none;
+        }
+        .message-box {
+            position: relative; text-align: center;
+            padding: 40px 30px; max-width: 700px; pointer-events: auto;
+        }
+        .message-box::before {
+            content: '✿'; position: absolute; top: -10px; left: 50%;
+            transform: translateX(-50%); font-size: 1.5rem;
+            color: rgba(255,182,217,0.6); letter-spacing: 20px;
+        }
+
+        .thank-you-text {
+            font-family: 'Pacifico', cursive; font-size: 3.2rem; color: #FFB6D9;
+            text-shadow: 0 0 20px rgba(255,182,217,0.5), 0 0 40px rgba(255,105,180,0.3), 2px 2px 4px rgba(0,0,0,0.3);
+            margin-bottom: 15px; opacity: 0;
+            animation: textGlow 1.2s ease forwards 0.5s;
+            transition: opacity 0.5s ease, transform 0.5s ease;
+        }
+        .thank-you-text.japanese {
+            font-family: 'Noto Serif JP', serif; font-weight: 500; letter-spacing: 8px;
+        }
+        @keyframes textGlow {
+            0%   { opacity: 0; transform: scale(0.8) translateY(10px); filter: blur(4px); }
+            60%  { transform: scale(1.05) translateY(-3px); filter: blur(0); }
+            100% { opacity: 1; transform: scale(1) translateY(0); filter: blur(0); }
+        }
+
+        .name-text {
+            font-family: 'Pacifico', cursive; font-size: 3rem; color: #FF9ECE;
+            text-shadow: 0 0 15px rgba(255,158,206,0.4), 0 0 30px rgba(255,105,180,0.2), 3px 3px 6px rgba(0,0,0,0.3);
+            margin: 15px 0; display: flex; flex-wrap: wrap; justify-content: center;
+            gap: 8px; max-width: 90%; line-height: 1.1;
+        }
+        .name-text .first-name, .name-text .last-name { display: inline-block; }
+        .name-text span { display: inline-block; opacity: 0; animation: letterFloat 0.6s ease forwards; }
+        .name-text.wave-active span {
+            animation: letterFloat 0.6s ease forwards, gentleFloat 3s ease-in-out infinite;
+        }
+        @keyframes letterFloat {
+            0%   { opacity: 0; transform: translateY(-25px) scale(0.5); filter: blur(3px); }
+            70%  { transform: translateY(3px) scale(1.05); filter: blur(0); }
+            100% { opacity: 1; transform: translateY(0) scale(1); filter: blur(0); }
+        }
+        @keyframes gentleFloat {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-8px); }
+        }
+
+        @media (max-width: 768px) {
+            .name-text {
+                font-size: 2.2rem; flex-direction: column; line-height: 1.3;
+                align-items: center; width: 100%;
+            }
+            .name-text .first-name, .name-text .last-name { text-align: center; width: 100%; }
+            .thank-you-text { font-size: 2.5rem; }
+            .message-text { font-size: 1.2rem !important; padding: 0 15px; }
+            .message-box { padding: 25px 15px; display: flex; flex-direction: column; align-items: center; }
+            .verse-text { font-size: 0.85rem !important; }
+        }
+
+        .message-text {
+            font-family: 'Cormorant Garamond', serif; font-size: 1.5rem; color: #e8c0d8;
+            font-weight: 400; font-style: italic; letter-spacing: 0.5px; line-height: 1.6;
+            opacity: 0; animation: fadeInUp 1.2s ease 2.5s forwards;
+            text-shadow: 0 0 10px rgba(255,182,217,0.3), 1px 1px 3px rgba(0,0,0,0.4);
+        }
+        .verse-text {
+            font-family: 'Zen Maru Gothic', sans-serif; font-size: 0.95rem;
+            color: rgba(255,182,217,0.5); margin-top: 15px;
+            opacity: 0; animation: fadeInUp 1s ease 3.2s forwards;
+            letter-spacing: 2px; font-weight: 300;
+        }
+        @keyframes fadeInUp {
+            0%   { opacity: 0; transform: translateY(20px); }
+            100% { opacity: 1; transform: translateY(0); }
+        }
+
+        .continue-button {
+            margin-top: 35px; padding: 16px 45px;
+            background: linear-gradient(135deg, rgba(255,105,180,0.3), rgba(255,20,147,0.3));
+            color: #FFD4EC; border: 1px solid rgba(255,182,217,0.4);
+            border-radius: 50px; font-family: 'Zen Maru Gothic', sans-serif;
+            font-size: 1.1rem; font-weight: 400; cursor: pointer;
+            backdrop-filter: blur(10px); -webkit-backdrop-filter: blur(10px);
+            transition: all 0.4s ease; opacity: 0;
+            animation: fadeInUp 1s ease 3.5s forwards; letter-spacing: 1px; pointer-events: auto;
+        }
+        .continue-button:hover {
+            background: linear-gradient(135deg, rgba(255,105,180,0.5), rgba(255,20,147,0.5));
+            border-color: rgba(255,182,217,0.7); box-shadow: 0 0 30px rgba(255,105,180,0.3);
+            transform: translateY(-3px);
+        }
+        .continue-button:active { transform: translateY(-1px); }
+
+        /* === SPARKLES === */
+        .sparkle {
+            position: fixed; width: 3px; height: 3px; background: white;
+            border-radius: 50%; pointer-events: none; z-index: 45;
+            animation: sparkleFloat 2.5s ease-in-out forwards;
+        }
+        @keyframes sparkleFloat {
+            0%   { opacity: 0; transform: scale(0) translateY(0); }
+            30%  { opacity: 1; transform: scale(1.2) translateY(-10px); }
+            100% { opacity: 0; transform: scale(0) translateY(-30px); }
+        }
+
+        /* === NEKO — sumi-e style === */
+        .neko {
+            position: fixed; bottom: 5%; z-index: 60; opacity: 0;
+            animation: nekoAppear 1.5s ease forwards 2s;
+            cursor: pointer; pointer-events: auto; transition: transform 0.3s ease;
+        }
+        .neko:hover { transform: scale(1.08); }
+        .neko img { width: 100%; height: auto; }
+        .neko-left { animation: nekoAppear 1.5s ease forwards 2s, nekoBobLeft 3s ease-in-out 3.5s infinite; }
+        .neko-right { animation: nekoAppear 1.5s ease forwards 2s, nekoBobRight 3.5s ease-in-out 3.5s infinite; }
+        @keyframes nekoBobLeft {
+            0%, 100% { transform: translateY(0) rotate(0deg); }
+            25% { transform: translateY(-8px) rotate(-3deg); }
+            75% { transform: translateY(-4px) rotate(2deg); }
+        }
+        @keyframes nekoBobRight {
+            0%, 100% { transform: translateY(0) rotate(0deg); }
+            30% { transform: translateY(-6px) rotate(3deg); }
+            60% { transform: translateY(-10px) rotate(-2deg); }
+        }
+        .neko-left { left: 5%; }
+        .neko-right { right: 5%; }
+        @media (max-width: 768px) {
+            .neko { bottom: 3%; }
+            .neko-left { left: 2%; }
+            .neko-right { right: 2%; }
+        }
+        @keyframes nekoAppear {
+            0%   { opacity: 0; transform: translateY(30px) scale(0.5); }
+            60%  { transform: translateY(-5px) scale(1.05); }
+            100% { opacity: 1; transform: translateY(0) scale(1); }
+        }
+        .waving-paw { transform-origin: 50% 85%; animation: wavePaw 1.2s ease-in-out infinite; }
+        @keyframes wavePaw {
+            0%, 100% { transform: rotate(0deg); }
+            30% { transform: rotate(25deg); }
+            70% { transform: rotate(-8deg); }
+        }
+
+        /* === FIREFLIES === */
+        .firefly { position: fixed; border-radius: 50%; pointer-events: none; z-index: 40; }
+        @keyframes fireflyDrift {
+            0%   { transform: translate(0,0); opacity: 0; }
+            15%  { opacity: 1; }
+            50%  { transform: translate(var(--fx), var(--fy)); opacity: 0.6; }
+            85%  { opacity: 1; }
+            100% { transform: translate(0,0); opacity: 0; }
+        }
+
+        /* === WATER === */
+        .water-layer {
+            position: fixed; bottom: 0; left: 0; width: 100%; height: 18%;
+            background: linear-gradient(180deg, transparent 0%, rgba(100,50,120,0.2) 30%, rgba(80,40,100,0.4) 60%, rgba(60,30,80,0.5) 100%);
+            z-index: 2; overflow: hidden;
+        }
+        .water-ripple {
+            position: absolute; width: 200%; height: 100%; left: -50%;
+            background: repeating-linear-gradient(0deg, transparent, transparent 8px, rgba(255,182,217,0.05) 8px, rgba(255,182,217,0.05) 9px);
+            animation: rippleMove 4s ease-in-out infinite;
+        }
+        @keyframes rippleMove {
+            0%, 100% { transform: translateX(0) scaleY(1); }
+            50% { transform: translateX(10px) scaleY(1.02); }
+        }
+
+        /* === SHOOTING STAR (with trail) === */
+        .shooting-star {
+            position: fixed; z-index: 2; opacity: 0; pointer-events: none;
+            width: 2px; height: 2px; background: white; border-radius: 50%;
+        }
+        .shooting-star::after {
+            content: ''; position: absolute; top: 0; right: 100%;
+            width: 50px; height: 1.5px;
+            background: linear-gradient(to left, white, rgba(255,200,230,0.5), transparent);
+            transform-origin: right center;
+        }
+        @keyframes shootAcross {
+            0%   { opacity: 0; transform: translate(0,0) rotate(var(--angle)); }
+            8%   { opacity: 1; }
+            80%  { opacity: 0.6; }
+            100% { opacity: 0; transform: translate(var(--sx), var(--sy)) rotate(var(--angle)); }
+        }
+
+        /* Easter Egg Modals */
+        .ee-overlay { display:none; position:fixed; inset:0; background:rgba(0,0,0,0.7); z-index:9999; align-items:center; justify-content:center; backdrop-filter:blur(3px); }
+        .ee-overlay.show { display:flex; }
+        .ee-modal { background:linear-gradient(135deg,#2d1245,#1a0a2e); border:2px solid rgba(255,182,217,0.3); border-radius:20px; padding:30px 25px; max-width:360px; width:90%; text-align:center; position:relative; box-shadow:0 20px 60px rgba(0,0,0,0.5); animation:eeIn 0.4s ease; }
+        @keyframes eeIn { from{transform:scale(0.8);opacity:0;} to{transform:scale(1);opacity:1;} }
+        .ee-modal p { font-family:'Cormorant Garamond',serif; color:#F5EDE0; font-size:1rem; line-height:1.6; margin-bottom:20px; }
+        .ee-close { background:linear-gradient(135deg,#FF8CAA,#E06088); color:white; border:none; padding:10px 30px; border-radius:20px; font-family:'Cormorant Garamond',serif; font-size:0.95rem; font-weight:600; cursor:pointer; }
+        .ee-close:hover { opacity:0.85; }
+        .ee-petal { position:fixed; pointer-events:none; z-index:10000; font-size:14px; }
+    </style>
+</head>
+<body>
+    <div class="sky-layer"></div>
+    <div class="stars-container" id="starsContainer"></div>
+    <div class="moon" id="moon"></div>
+    <div class="water-layer"><div class="water-ripple"></div></div>
+    <div class="torii-container" id="toriiGate"></div>
+    <div class="tree-left" id="treeLeft"></div>
+    <div class="tree-right" id="treeRight"></div>
+    <div class="koi koi-1" id="koi1" style="bottom:8%;left:15%;"></div>
+    <div class="koi koi-2" id="koi2" style="bottom:12%;right:20%;"></div>
+    <div class="koi koi-3" id="koi3" style="bottom:5%;left:50%;"></div>
+    <div class="neko neko-left" id="nekoLeft"></div>
+    <div class="neko neko-right" id="nekoRight"></div>
+
+    <div class="container" id="animationContainer">
+        <div class="message-box">
+            <div class="thank-you-text" id="thankYouText">Thank you</div>
+            <div class="name-text" id="nameText"></div>
+            <div class="message-text">
+                for registering for PYC 2026! 🌸<br>
+                <span style="font-size:0.9em;">We look forward to seeing you!</span>
+            </div>
+            <div class="verse-text">— E P H E S I A N S &nbsp; 3 : 2 0 —</div>
+            <button id="continueBtn" class="continue-button" onclick="goToSuccess()">
+                Continue to Confirmation ✿
+            </button>
+        </div>
+    </div>
+
+    <script>
+        const urlParams = new URLSearchParams(window.location.search);
+        const firstName = urlParams.get('firstName') || '';
+        const lastName = urlParams.get('lastName') || '';
+        const fullName = `${firstName} ${lastName}`.trim();
+
+        if (fullName) {
+            initPage(fullName);
+        } else {
+            window.location.href = '/monkey-welcome';
+        }
+
+        function initPage(name) {
+            createStars();
+            createMoon();
+            createToriiGate();
+            createAnimatedTrees();
+            createInkKoi();
+            createInkNeko();
+            animateName(name);
+            startSakuraPetals();
+            startFloatingLanterns();
+            startFireflies();
+            startSparkles();
+            startShootingStars();
+            cycleThankYou();
+        }
+
+        // ===================== STARS =====================
+        function createStars() {
+            const c = document.getElementById('starsContainer');
+            const n = window.innerWidth <= 768 ? 80 : 150;
+            for (let i = 0; i < n; i++) {
+                const s = document.createElement('div');
+                s.className = 'star' + (Math.random() > 0.4 ? ' twinkle' : '');
+                const sz = Math.random() * 2.5 + 0.5;
+                s.style.cssText = `left:${Math.random()*100}%;top:${Math.random()*55}%;width:${sz}px;height:${sz}px;opacity:${Math.random()*0.6+0.2};--base-opacity:${Math.random()*0.4+0.2};--duration:${Math.random()*3+2}s;--delay:${Math.random()*5}s;`;
+                if (sz > 2) s.style.boxShadow = `0 0 ${sz*2}px rgba(200,180,255,0.4)`;
+                c.appendChild(s);
+            }
+        }
+
+        // ===================== MOON =====================
+        function createMoon() {
+            document.getElementById('moon').innerHTML = `
+                <svg viewBox="0 0 100 100"><defs>
+                    <radialGradient id="mG" cx="40%" cy="40%">
+                        <stop offset="0%" stop-color="#FFF5E6"/>
+                        <stop offset="50%" stop-color="#F0E0C8"/>
+                        <stop offset="100%" stop-color="#D4C4A8"/>
+                    </radialGradient>
+                    <radialGradient id="mH" cx="35%" cy="35%">
+                        <stop offset="0%" stop-color="white"/>
+                        <stop offset="100%" stop-color="transparent"/>
+                    </radialGradient>
+                </defs>
+                <circle cx="50" cy="50" r="45" fill="url(#mG)"/>
+                <circle cx="35" cy="40" r="8" fill="#D4C4A8" opacity="0.4"/>
+                <circle cx="60" cy="55" r="12" fill="#C8B89A" opacity="0.3"/>
+                <circle cx="45" cy="65" r="6" fill="#D4C4A8" opacity="0.35"/>
+                <circle cx="65" cy="38" r="5" fill="#C8B89A" opacity="0.25"/>
+                <circle cx="50" cy="50" r="45" fill="url(#mH)" opacity="0.15"/>
+                </svg>`;
+        }
+
+        // ===================== TORII GATE =====================
+        function createToriiGate() {
+            document.getElementById('toriiGate').innerHTML = `
+                <svg viewBox="0 0 280 200">
+                    <rect x="40" y="25" width="200" height="12" rx="3" fill="#2a1020" opacity="0.9"/>
+                    <rect x="30" y="18" width="220" height="10" rx="2" fill="#2a1020" opacity="0.85"/>
+                    <path d="M20,15 Q140,-10 260,15" stroke="#2a1020" stroke-width="8" fill="none" opacity="0.9" stroke-linecap="round"/>
+                    <rect x="55" y="37" width="170" height="8" rx="2" fill="#2a1020" opacity="0.8"/>
+                    <rect x="65" y="45" width="14" height="155" fill="#2a1020" opacity="0.9"/>
+                    <rect x="201" y="45" width="14" height="155" fill="#2a1020" opacity="0.9"/>
+                </svg>`;
+        }
+
+        // ===================== ANIMATED CHERRY TREES =====================
+        function createAnimatedTrees() {
+            const branchesLeft = [
+                { d: "M140,500 Q130,400 120,350 Q100,280 80,240 Q60,200 50,170 Q45,140 60,120", w: 18 },
+                { d: "M100,300 Q70,270 50,250", w: 10 },
+                { d: "M110,260 Q130,230 150,210", w: 8 },
+                { d: "M80,220 Q50,190 30,170", w: 7 },
+                { d: "M60,170 Q80,140 110,120", w: 6 },
+                { d: "M55,150 Q30,130 10,100", w: 5 },
+            ];
+            const posLeft = [[50,120],[30,170],[60,90],[110,120],[150,210],[10,100],[80,150],[40,140],[100,100],[70,80],[130,160],[20,130],[90,180],[55,200],[120,140]];
+
+            const branchesRight = [
+                { d: "M110,420 Q120,340 130,290 Q150,230 170,190 Q185,160 190,130 Q195,100 180,80", w: 15 },
+                { d: "M150,250 Q180,230 200,210", w: 8 },
+                { d: "M160,200 Q140,170 120,150", w: 7 },
+                { d: "M185,160 Q210,140 230,120", w: 5 },
+            ];
+            const posRight = [[180,80],[200,210],[120,150],[230,120],[170,100],[150,130],[210,160],[190,180],[140,110],[160,70],[220,140]];
+
+            document.getElementById('treeLeft').innerHTML = buildTree(branchesLeft, posLeft, '0 0 300 500');
+            document.getElementById('treeRight').innerHTML = buildTree(branchesRight, posRight, '0 0 250 420');
+        }
+
+        function buildTree(branches, positions, viewBox) {
+            const pinks = ['#FFB6D9','#FFC9E3','#FF9ECE','#FFD4EC','#FF85C0','#FFADD6'];
+            const greens = ['#5A8F5A','#6BA368','#4A7A4A','#7CB87C','#3D6B3D'];
+            let svg = `<svg viewBox="${viewBox}" xmlns="http://www.w3.org/2000/svg">`;
+
+            // Branches
+            branches.forEach(b => {
+                svg += `<path d="${b.d}" stroke="#3a1a2a" stroke-width="${b.w}" fill="none" stroke-linecap="round"/>`;
+            });
+
+            // Blossoms (bloom then fade)
+            positions.forEach(([x, y], idx) => {
+                const delay = (idx * 0.4) % 6;
+                svg += `<g class="blossom-cluster" style="transform-origin:${x}px ${y}px;animation-delay:${delay}s;">`;
+                for (let i = 0; i < Math.floor(Math.random()*4)+4; i++) {
+                    const ox = x + (Math.random()-0.5)*28;
+                    const oy = y + (Math.random()-0.5)*22;
+                    const r = Math.random()*6+4;
+                    svg += `<circle cx="${ox}" cy="${oy}" r="${r}" fill="${pinks[Math.floor(Math.random()*pinks.length)]}" opacity="${(Math.random()*0.3+0.6).toFixed(2)}"/>`;
+                }
+                svg += `<circle cx="${x+3}" cy="${y-4}" r="${Math.random()*2+1}" fill="white" opacity="0.35"/>`;
+                svg += `</g>`;
+            });
+
+            // Leaves (appear after blossoms fade)
+            positions.forEach(([x, y], idx) => {
+                const delay = (idx * 0.4) % 6;
+                svg += `<g class="leaf-cluster" style="transform-origin:${x}px ${y}px;animation-delay:${delay}s;">`;
+                for (let i = 0; i < Math.floor(Math.random()*3)+3; i++) {
+                    const ox = x + (Math.random()-0.5)*24;
+                    const oy = y + (Math.random()-0.5)*20;
+                    const rx = Math.random()*5+3, ry = Math.random()*3+2;
+                    const rot = Math.random()*60-30;
+                    svg += `<ellipse cx="${ox}" cy="${oy}" rx="${rx}" ry="${ry}" fill="${greens[Math.floor(Math.random()*greens.length)]}" opacity="0.75" transform="rotate(${rot} ${ox} ${oy})"/>`;
+                }
+                svg += `</g>`;
+            });
+
+            svg += `</svg>`;
+            return svg;
+        }
+
+        // ===================== INK-WASH KOI =====================
+        function createInkKoi() {
+            const data = [
+                { id:'koi1', body:'#C84060', scales:'#E8708A', belly:'#F0C8D0', fin:'#A03050', accent:'#D4506A', size:60 },
+                { id:'koi2', body:'#E88098', scales:'#F0A8B8', belly:'#FFF0F2', fin:'#C86078', accent:'#D08090', size:55 },
+                { id:'koi3', body:'#B84858', scales:'#D87888', belly:'#F0D0D8', fin:'#983848', accent:'#C05868', size:50 },
+            ];
+            data.forEach(k => {
+                const el = document.getElementById(k.id);
+                el.style.width = k.size + 'px';
+                el.style.height = (k.size * 0.45) + 'px';
+                el.innerHTML = `
+                    <svg viewBox="0 0 100 45" xmlns="http://www.w3.org/2000/svg">
+                        <defs>
+                            <filter id="ib_${k.id}" x="-5%" y="-5%" width="110%" height="110%">
+                                <feGaussianBlur in="SourceGraphic" stdDeviation="0.5"/>
+                            </filter>
+                            <linearGradient id="bG_${k.id}" x1="0%" y1="0%" x2="100%" y2="100%">
+                                <stop offset="0%" stop-color="${k.body}"/>
+                                <stop offset="40%" stop-color="${k.scales}"/>
+                                <stop offset="100%" stop-color="${k.body}"/>
+                            </linearGradient>
+                        </defs>
+                        <g filter="url(#ib_${k.id})">
+                            <path d="M78,22 Q88,8 95,10 Q90,16 92,22 Q90,28 95,34 Q88,36 78,22Z" fill="${k.fin}" opacity="0.75"/>
+                            <path d="M85,14 Q92,6 97,8" stroke="${k.fin}" stroke-width="1.5" fill="none" opacity="0.4" stroke-linecap="round"/>
+                            <path d="M85,30 Q92,38 97,36" stroke="${k.fin}" stroke-width="1.5" fill="none" opacity="0.4" stroke-linecap="round"/>
+                            <path d="M15,22 Q10,12 25,8 Q45,2 60,8 Q75,14 80,22 Q75,30 60,36 Q45,42 25,36 Q10,32 15,22Z" fill="url(#bG_${k.id})"/>
+                            <path d="M25,26 Q40,34 60,30 Q50,36 30,32Z" fill="${k.belly}" opacity="0.4"/>
+                            <path d="M35,15 Q38,12 42,14" stroke="${k.accent}" stroke-width="0.7" fill="none" opacity="0.35"/>
+                            <path d="M42,13 Q46,10 50,12" stroke="${k.accent}" stroke-width="0.7" fill="none" opacity="0.3"/>
+                            <path d="M48,14 Q52,11 56,13" stroke="${k.accent}" stroke-width="0.7" fill="none" opacity="0.3"/>
+                            <path d="M38,19 Q42,16 46,18" stroke="${k.accent}" stroke-width="0.6" fill="none" opacity="0.25"/>
+                            <path d="M46,18 Q50,15 54,17" stroke="${k.accent}" stroke-width="0.6" fill="none" opacity="0.25"/>
+                            <path d="M54,16 Q58,13 62,15" stroke="${k.accent}" stroke-width="0.6" fill="none" opacity="0.25"/>
+                            <path d="M40,8 Q48,1 56,7" fill="${k.fin}" opacity="0.55"/>
+                            <path d="M30,28 Q25,35 20,38 Q24,32 28,28" fill="${k.fin}" opacity="0.45"/>
+                            <circle cx="20" cy="19" r="3.5" fill="#1a1015"/>
+                            <circle cx="20" cy="19" r="2.5" fill="#2a1a22"/>
+                            <circle cx="19" cy="18" r="1" fill="white" opacity="0.9"/>
+                            <circle cx="21.5" cy="19.5" r="0.5" fill="white" opacity="0.4"/>
+                            <path d="M12,21 Q14,23 16,22" stroke="#6a3040" stroke-width="0.8" fill="none" opacity="0.5"/>
+                            <path d="M26,15 Q28,20 26,25" stroke="${k.accent}" stroke-width="0.8" fill="none" opacity="0.3"/>
+                        </g>
+                    </svg>`;
+            });
+        }
+
+        // ===================== INK-WASH NEKO =====================
+        function createInkNeko() {
+            const sz = window.innerWidth <= 768 ? '60px' : '75px';
+            document.getElementById('nekoLeft').style.width = sz;
+            document.getElementById('nekoLeft').innerHTML = '<img src="/kawaii-cat.svg" alt="Cat">';
+            document.getElementById('nekoRight').style.width = sz;
+            document.getElementById('nekoRight').innerHTML = '<img src="/kawaii-cat.svg" alt="Cat" style="transform:scaleX(-1);">';
+
+            // Left cat Easter egg
+            document.getElementById('nekoLeft').addEventListener('click', () => {
+                nekoSparkle(document.getElementById('nekoLeft'));
+                document.getElementById('catLeftEE').classList.add('show');
+            });
+            // Right cat Easter egg
+            document.getElementById('nekoRight').addEventListener('click', () => {
+                nekoSparkle(document.getElementById('nekoRight'));
+                document.getElementById('catRightEE').classList.add('show');
+            });
+            function nekoSparkle(neko) {
+                for (let i = 0; i < 10; i++) {
+                    const s = document.createElement('div');
+                    s.className = 'sparkle';
+                    const r = neko.getBoundingClientRect();
+                    s.style.left = (r.left + r.width/2 + (Math.random()-0.5)*50) + 'px';
+                    s.style.top = (r.top + r.height*0.3 + (Math.random()-0.5)*30) + 'px';
+                    s.style.background = ['#FFB6D9','#FF69B4','#FFD700','white','#FFC9E3'][Math.floor(Math.random()*5)];
+                    s.style.width = s.style.height = (Math.random()*5+2) + 'px';
+                    s.style.boxShadow = `0 0 8px ${s.style.background}`;
+                    document.body.appendChild(s);
+                    setTimeout(() => s.remove(), 2500);
+                }
+            }
+
+            // Moon Easter egg
+            document.getElementById('moon').style.cursor = 'pointer';
+            document.getElementById('moon').addEventListener('click', () => {
+                document.getElementById('moonEE').classList.add('show');
+                // Pink petals + stars burst from moon
+                const moonR = document.getElementById('moon').getBoundingClientRect();
+                const cx = moonR.left + moonR.width/2;
+                const cy = moonR.top + moonR.height/2;
+                const items = ['🌸','✨','💮','⭐','🌺','✿','❀','⋆'];
+                for (let i = 0; i < 25; i++) {
+                    const p = document.createElement('div');
+                    p.className = 'ee-petal';
+                    p.textContent = items[Math.floor(Math.random()*items.length)];
+                    p.style.left = cx + 'px';
+                    p.style.top = cy + 'px';
+                    document.body.appendChild(p);
+                    const angle = Math.random()*Math.PI*2;
+                    const speed = 2 + Math.random()*4;
+                    const vx = Math.cos(angle)*speed;
+                    let vy = Math.sin(angle)*speed - 2;
+                    let x = cx, y = cy, rot = 0;
+                    function fall() {
+                        x += vx; vy += 0.08; y += vy; rot += (Math.random()-0.5)*5;
+                        p.style.left = x+'px'; p.style.top = y+'px';
+                        p.style.transform = 'rotate('+rot+'deg)';
+                        p.style.opacity = Math.max(0, 1 - (y - cy)/400);
+                        if (y < window.innerHeight + 50) requestAnimationFrame(fall);
+                        else p.remove();
+                    }
+                    setTimeout(fall, i*40);
+                }
+            });
+        }
+
+        function sumiNeko(waving, fur, shadow, outline, accent) {
+            const id = waving ? 'L' : 'R';
+            return `
+            <svg viewBox="0 0 90 120" xmlns="http://www.w3.org/2000/svg">
+                <defs>
+                    <filter id="ink_${id}" x="-3%" y="-3%" width="106%" height="106%">
+                        <feGaussianBlur in="SourceGraphic" stdDeviation="0.3"/>
+                    </filter>
+                    <radialGradient id="fG_${id}" cx="45%" cy="40%">
+                        <stop offset="0%" stop-color="${fur}"/>
+                        <stop offset="100%" stop-color="${shadow}"/>
+                    </radialGradient>
+                </defs>
+                <g filter="url(#ink_${id})">
+                    <path d="M25,115 Q20,85 22,70 Q24,55 35,50 Q28,48 25,40 Q22,30 30,22 Q35,18 38,20 Q40,14 42,10 L45,15 Q45,10 48,10 L50,15 Q52,18 55,20 Q60,18 65,22 Q72,30 70,40 Q68,48 60,50 Q70,55 72,70 Q74,85 70,115Z"
+                          fill="url(#fG_${id})" stroke="${outline}" stroke-width="0.8" opacity="0.95"/>
+                    <path d="M38,20 Q40,14 42,10 L43,16Z" fill="${accent}" opacity="0.35"/>
+                    <path d="M55,20 Q53,14 50,10 L49,16Z" fill="${accent}" opacity="0.35"/>
+                    <path d="M36,35 Q40,31 44,35 Q40,37 36,35Z" fill="#2a1a20" opacity="0.9"/>
+                    <path d="M50,35 Q54,31 58,35 Q54,37 50,35Z" fill="#2a1a20" opacity="0.9"/>
+                    <circle cx="40" cy="34.5" r="0.8" fill="white" opacity="0.85"/>
+                    <circle cx="54" cy="34.5" r="0.8" fill="white" opacity="0.85"/>
+                    <path d="M46,39 L47.5,41 L49,39Z" fill="${accent}" opacity="0.6"/>
+                    <path d="M47.5,41.5 Q44,44 41,43" stroke="#8a6070" stroke-width="0.6" fill="none" opacity="0.5"/>
+                    <path d="M47.5,41.5 Q51,44 54,43" stroke="#8a6070" stroke-width="0.6" fill="none" opacity="0.5"/>
+                    <line x1="35" y1="38" x2="18" y2="35" stroke="#a08090" stroke-width="0.5" opacity="0.4"/>
+                    <line x1="35" y1="40" x2="16" y2="41" stroke="#a08090" stroke-width="0.5" opacity="0.35"/>
+                    <line x1="35" y1="42" x2="18" y2="44" stroke="#a08090" stroke-width="0.5" opacity="0.3"/>
+                    <line x1="60" y1="38" x2="77" y2="35" stroke="#a08090" stroke-width="0.5" opacity="0.4"/>
+                    <line x1="60" y1="40" x2="79" y2="41" stroke="#a08090" stroke-width="0.5" opacity="0.35"/>
+                    <line x1="60" y1="42" x2="77" y2="44" stroke="#a08090" stroke-width="0.5" opacity="0.3"/>
+                    <path d="M30,50 Q47,55 65,50" stroke="${accent}" stroke-width="2.5" fill="none" opacity="0.7"/>
+                    <circle cx="47" cy="54" r="3" fill="#DAA520" opacity="0.8"/>
+                    <circle cx="47" cy="54" r="1.5" fill="#B8860B" opacity="0.5"/>
+                    <path d="M68,100 Q78,85 82,75 Q84,68 80,65" stroke="${outline}" stroke-width="4" fill="none" stroke-linecap="round" opacity="0.7"/>
+                    ${waving ? `
+                    <g class="waving-paw">
+                        <path d="M28,62 Q20,55 18,48 Q17,44 20,42 Q23,44 22,48 Q22,52 25,56Z" fill="${fur}" stroke="${outline}" stroke-width="0.6" opacity="0.9"/>
+                        <circle cx="20" cy="44" r="1.5" fill="${accent}" opacity="0.25"/>
+                    </g>` : `
+                    <ellipse cx="33" cy="112" rx="8" ry="4" fill="${fur}" stroke="${outline}" stroke-width="0.5" opacity="0.8"/>`}
+                    <ellipse cx="60" cy="112" rx="8" ry="4" fill="${fur}" stroke="${outline}" stroke-width="0.5" opacity="0.8"/>
+                    <circle cx="35" cy="40" r="4" fill="${accent}" opacity="0.12"/>
+                    <circle cx="59" cy="40" r="4" fill="${accent}" opacity="0.12"/>
+                </g>
+            </svg>`;
+        }
+
+        // ===================== FLOATING LANTERNS =====================
+        function startFloatingLanterns() {
+            function launch() {
+                const el = document.createElement('div');
+                el.className = 'floating-lantern';
+                const size = 30 + Math.random() * 20;
+                const dur = 14 + Math.random() * 10;
+                el.style.cssText = `left:${5+Math.random()*90}%;width:${size}px;--lantern-dur:${dur}s;--lantern-delay:${Math.random()*2}s;`;
+                const warm = Math.random()>0.5 ? '#E84030' : '#D03828';
+                const glow = Math.random()>0.5 ? '#FF8C4B' : '#FFA060';
+                const uid = 'lg_'+Date.now()+'_'+Math.floor(Math.random()*9999);
+                el.innerHTML = `
+                    <svg viewBox="0 0 44 65" xmlns="http://www.w3.org/2000/svg">
+                        <defs><radialGradient id="${uid}" cx="50%" cy="40%">
+                            <stop offset="0%" stop-color="${glow}" stop-opacity="0.7"/>
+                            <stop offset="100%" stop-color="${warm}" stop-opacity="0"/>
+                        </radialGradient></defs>
+                        <line x1="22" y1="0" x2="22" y2="10" stroke="#8B6040" stroke-width="0.8" opacity="0.5"/>
+                        <rect x="16" y="9" width="12" height="3" rx="1" fill="#7A5530" opacity="0.8"/>
+                        <path d="M16,12 Q10,25 10,35 Q10,48 16,52 L28,52 Q34,48 34,35 Q34,25 28,12Z" fill="${warm}" opacity="0.8" stroke="#8B5530" stroke-width="0.4"/>
+                        <ellipse class="lantern-inner-glow" cx="22" cy="34" rx="10" ry="16" fill="${glow}" opacity="0.5"/>
+                        <line x1="22" y1="12" x2="22" y2="52" stroke="#6B3520" stroke-width="0.4" opacity="0.25"/>
+                        <path d="M14,32 Q22,28 30,32" stroke="#6B3520" stroke-width="0.3" fill="none" opacity="0.2"/>
+                        <rect x="16" y="51" width="12" height="3" rx="1" fill="#7A5530" opacity="0.8"/>
+                        <text x="22" y="37" text-anchor="middle" font-size="8" fill="#FFE8C0" font-family="serif" opacity="0.6">福</text>
+                        <ellipse cx="22" cy="34" rx="20" ry="25" fill="${glow}" opacity="0.08"/>
+                    </svg>`;
+                document.body.appendChild(el);
+                setTimeout(() => el.remove(), (dur + 4) * 1000);
+            }
+            for (let i = 0; i < 5; i++) setTimeout(launch, i * 800);
+            setInterval(launch, 3500);
+        }
+
+        // ===================== NAME =====================
+        function animateName(name) {
+            const el = document.getElementById('nameText');
+            const parts = name.split(' ');
+            const fn = parts[0], ln = parts.slice(1).join(' ');
+
+            const fd = document.createElement('div'); fd.className = 'first-name';
+            fn.split('').forEach((ch,i) => {
+                const sp = document.createElement('span'); sp.textContent = ch;
+                sp.style.animationDelay = `${1.2+i*0.08}s`; fd.appendChild(sp);
+            });
+            el.appendChild(fd);
+
+            const ld = document.createElement('div'); ld.className = 'last-name';
+            ln.split('').forEach((ch,i) => {
+                const sp = document.createElement('span'); sp.textContent = ch;
+                sp.style.animationDelay = `${1.2+(fn.length+1+i)*0.08}s`; ld.appendChild(sp);
+            });
+            el.appendChild(ld);
+
+            const dur = 1.2 + ((fn.length+ln.length)*0.08) + 0.6;
+            setTimeout(() => {
+                el.classList.add('wave-active');
+                el.querySelectorAll('span').forEach((s,i) => { s.style.animationDelay = `${i*0.12}s`; });
+            }, dur * 1000);
+        }
+
+        // ===================== THANK YOU — English ↔ Japanese only =====================
+        function cycleThankYou() {
+            const el = document.getElementById('thankYouText');
+            let isEnglish = true;
+            setInterval(() => {
+                el.style.opacity = '0';
+                el.style.transform = 'scale(0.95) translateY(5px)';
+                setTimeout(() => {
+                    isEnglish = !isEnglish;
+                    el.textContent = isEnglish ? 'Thank you' : 'ありがとう';
+                    el.className = 'thank-you-text' + (isEnglish ? '' : ' japanese');
+                    el.style.opacity = '1';
+                    el.style.transform = 'scale(1) translateY(0)';
+                }, 400);
+            }, 3000);
+        }
+
+        // ===================== SAKURA PETALS =====================
+        function startSakuraPetals() {
+            function drop() {
+                const p = document.createElement('div');
+                p.className = 'sakura-petal';
+                p.style.left = Math.random()*100+'%';
+                const dur = Math.random()*4+5;
+                const drift = (Math.random()-0.5)*120, spin = Math.random()*720-360;
+                p.style.cssText += `;--drift:${drift}px;--spin:${spin}deg;animation:sakuraFall ${dur}s ease-in forwards;animation-delay:${Math.random()*0.5}s;`;
+                const colors = ['#FFB6D9','#FFC9E3','#FFD4EC','#FF9ECE','#FFE0EF','white'];
+                const c = colors[Math.floor(Math.random()*colors.length)];
+                const sz = Math.random()*10+8, t = Math.floor(Math.random()*3);
+                if (t===0) p.innerHTML = `<svg viewBox="0 0 20 24" width="${sz}" height="${sz*1.2}"><path d="M10,0 Q4,8 4,16 Q4,24 10,24 Q16,24 16,16 Q16,8 10,0Z" fill="${c}" opacity="0.85"/></svg>`;
+                else if (t===1) p.innerHTML = `<svg viewBox="0 0 20 20" width="${sz}" height="${sz}"><path d="M10,18 C10,18 2,12 2,7 C2,4 4,2 7,2 C9,2 10,4 10,4 C10,4 11,2 13,2 C16,2 18,4 18,7 C18,12 10,18 10,18Z" fill="${c}" opacity="0.8"/></svg>`;
+                else p.innerHTML = `<svg viewBox="0 0 18 22" width="${sz}" height="${sz*1.2}"><ellipse cx="9" cy="11" rx="7" ry="10" fill="${c}" opacity="0.85"/></svg>`;
+                document.body.appendChild(p);
+                setTimeout(() => p.remove(), (dur+1)*1000);
+            }
+            for (let i=0;i<30;i++) setTimeout(drop,i*60);
+            setInterval(drop,400);
+        }
+
+        // ===================== FIREFLIES =====================
+        function startFireflies() {
+            function spawn() {
+                const f = document.createElement('div'); f.className = 'firefly';
+                const sz = Math.random()*3+2;
+                const colors = ['#FFE8A0','#FFD700','#FFF5CC','#FFB6D9'];
+                const c = colors[Math.floor(Math.random()*colors.length)];
+                f.style.cssText = `left:${Math.random()*100}%;top:${30+Math.random()*60}%;width:${sz}px;height:${sz}px;background:${c};box-shadow:0 0 ${sz*3}px ${c},0 0 ${sz*6}px ${c}40;--fx:${(Math.random()-0.5)*100}px;--fy:${(Math.random()-0.5)*80}px;animation:fireflyDrift ${Math.random()*5+4}s ease-in-out infinite;animation-delay:${Math.random()*3}s;`;
+                document.body.appendChild(f);
+                setTimeout(() => f.remove(), 15000);
+            }
+            for (let i=0;i<12;i++) setTimeout(spawn,i*300);
+            setInterval(spawn,1200);
+        }
+
+        // ===================== SPARKLES =====================
+        function startSparkles() {
+            setInterval(() => {
+                const s = document.createElement('div'); s.className = 'sparkle';
+                s.style.left = Math.random()*100+'%'; s.style.top = Math.random()*80+'%';
+                s.style.boxShadow = '0 0 6px rgba(255,255,255,0.8)';
+                document.body.appendChild(s);
+                setTimeout(() => s.remove(), 2500);
+            }, 500);
+        }
+
+        // ===================== SHOOTING STARS (frequent, with trails) =====================
+        function startShootingStars() {
+            function shoot() {
+                const s = document.createElement('div'); s.className = 'shooting-star';
+                const startX = Math.random()*80, startY = Math.random()*30;
+                const dist = 200 + Math.random()*200;
+                const angle = 25 + Math.random()*25;
+                const rad = angle * Math.PI/180;
+                s.style.cssText = `left:${startX}%;top:${startY}%;--angle:${angle}deg;--sx:${Math.cos(rad)*dist}px;--sy:${Math.sin(rad)*dist}px;animation:shootAcross ${0.4+Math.random()*0.5}s ease-out forwards;`;
+                document.body.appendChild(s);
+                setTimeout(() => s.remove(), 1500);
+            }
+            function scheduleNext() {
+                setTimeout(() => { shoot(); scheduleNext(); }, 1500 + Math.random()*2000);
+            }
+            setTimeout(shoot,1000); setTimeout(shoot,1800); setTimeout(shoot,3000);
+            scheduleNext();
+            setInterval(() => {
+                if (Math.random()>0.6) { shoot(); setTimeout(shoot,200); if(Math.random()>0.5) setTimeout(shoot,400); }
+            }, 5000);
+        }
+
+        // ===================== GO TO SUCCESS =====================
+        function goToSuccess() {
+            const fn = `${firstName} ${lastName}`.trim().toLowerCase();
+            const key = `specialMessageSeen_${fn.replace(/\s+/g,'_')}`;
+            sessionStorage.setItem(key, 'true');
+            sessionStorage.removeItem('shouldSeeSpecialMessage');
+            window.location.href = '/monkey-welcome';
+        }
+
+        function closeMoonEE() { document.getElementById('moonEE').classList.remove('show'); }
+        function closeCatLeftEE() { document.getElementById('catLeftEE').classList.remove('show'); }
+        function closeCatRightEE() { document.getElementById('catRightEE').classList.remove('show'); }
+    </script>
+
+    <!-- Easter Egg Modals -->
+    <div class="ee-overlay" id="moonEE" onclick="if(event.target===this)closeMoonEE()">
+        <div class="ee-modal">
+            <p>Did you think there would be a hidden message here? Sorry, but I didn't place any here. But if you check the valentine's website there is another letter hidden somewhere xD</p>
+            <button class="ee-close" onclick="closeMoonEE()">Close</button>
+        </div>
+    </div>
+    <div class="ee-overlay" id="catLeftEE" onclick="if(event.target===this)closeCatLeftEE()">
+        <div class="ee-modal">
+            <p>PYC2026 is the password to unlock the letter when you find it</p>
+            <button class="ee-close" onclick="closeCatLeftEE()">Close</button>
+        </div>
+    </div>
+    <div class="ee-overlay" id="catRightEE" onclick="if(event.target===this)closeCatRightEE()">
+        <div class="ee-modal">
+            <p>That's all the hidden messages here, don't tap, and swipe too much more xD</p>
+            <button class="ee-close" onclick="closeCatRightEE()">Close</button>
+        </div>
+    </div>
+</body>
+</html>

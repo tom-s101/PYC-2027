@@ -1,0 +1,1245 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PYC 2026 Check-In</title>
+    <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Montserrat:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Montserrat', sans-serif;
+            background: linear-gradient(135deg, #0f1419 0%, #1a2332 50%, #2a3f5f 100%);
+            background-attachment: fixed;
+            color: #f5f5f5;
+            min-height: 100vh;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        /* Login Screen */
+        .login-container {
+            max-width: 450px;
+            margin: 100px auto;
+            background: rgba(26, 35, 50, 0.95);
+            padding: 40px;
+            border-radius: 15px;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.5);
+        }
+
+        .login-container h1 {
+            font-family: 'Bebas Neue', sans-serif;
+            color: #d4a556;
+            text-align: center;
+            margin-bottom: 30px;
+            font-size: 2.4rem;
+            letter-spacing: 2px;
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 8px;
+            color: #f5f5f5;
+            font-weight: 500;
+        }
+
+        .form-group input {
+            width: 100%;
+            padding: 12px;
+            background: rgba(255, 255, 255, 0.1);
+            border: 1px solid rgba(212, 165, 86, 0.3);
+            border-radius: 8px;
+            color: #f5f5f5;
+            font-size: 16px;
+        }
+
+        .form-group input:focus {
+            outline: none;
+            border-color: #d4a556;
+        }
+
+        .btn {
+            width: 100%;
+            padding: 15px;
+            background: linear-gradient(135deg, #d4a556 0%, #c9965d 100%);
+            color: #1a2332;
+            border: none;
+            border-radius: 8px;
+            font-size: 16px;
+            font-weight: 700;
+            cursor: pointer;
+            transition: transform 0.2s;
+        }
+
+        .btn:hover {
+            transform: translateY(-2px);
+        }
+
+        .btn:disabled {
+            opacity: 0.6;
+            cursor: not-allowed;
+        }
+
+        .alert {
+            padding: 12px;
+            border-radius: 8px;
+            margin-bottom: 20px;
+            display: none;
+        }
+
+        .alert.show {
+            display: block;
+        }
+
+        .alert-error {
+            background: rgba(231, 76, 60, 0.2);
+            border: 1px solid #e74c3c;
+            color: #e74c3c;
+        }
+
+        .alert-success {
+            background: rgba(39, 174, 96, 0.2);
+            border: 1px solid #27ae60;
+            color: #27ae60;
+        }
+
+        /* Check-In Screen */
+        .checkin-screen {
+            display: none;
+        }
+
+        .checkin-screen.active {
+            display: block;
+        }
+
+        .header {
+            text-align: center;
+            padding: 30px 0;
+            border-bottom: 2px solid rgba(212, 165, 86, 0.3);
+            margin-bottom: 30px;
+        }
+
+        .header h1 {
+            font-family: 'Bebas Neue', sans-serif;
+            color: #d4a556;
+            font-size: 3rem;
+            letter-spacing: 2px;
+            margin-bottom: 10px;
+        }
+
+        .header p {
+            color: rgba(245, 245, 245, 0.7);
+        }
+
+        .top-bar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 15px 20px;
+            background: rgba(26, 35, 50, 0.9);
+            border-radius: 10px;
+            margin-bottom: 30px;
+        }
+
+        .user-info {
+            color: #d4a556;
+            font-weight: 600;
+        }
+
+        .btn-logout {
+            padding: 10px 20px;
+            background: rgba(231, 76, 60, 0.8);
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-weight: 600;
+        }
+
+        .search-box {
+            background: rgba(26, 35, 50, 0.9);
+            padding: 30px;
+            border-radius: 15px;
+            margin-bottom: 30px;
+        }
+
+        .search-box h2 {
+            color: #d4a556;
+            margin-bottom: 20px;
+            font-family: 'Bebas Neue', sans-serif;
+            font-size: 1.6rem;
+            letter-spacing: 1.5px;
+        }
+
+        .search-tabs {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 8px;
+            margin-bottom: 20px;
+        }
+
+        .search-tab {
+            padding: 12px 8px;
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(212, 165, 86, 0.3);
+            border-radius: 8px;
+            color: #f5f5f5;
+            cursor: pointer;
+            text-align: center;
+            transition: all 0.2s;
+            font-size: 0.9rem;
+            line-height: 1.25;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            min-height: 48px;
+        }
+
+        .search-tab.active {
+            background: #d4a556;
+            color: #1a2332;
+            border-color: #d4a556;
+        }
+
+        .search-content {
+            display: none;
+        }
+
+        .search-content.active {
+            display: block;
+        }
+
+        .search-row {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 15px;
+        }
+
+        /* Results */
+        .results-container {
+            display: none;
+        }
+
+        .results-container.show {
+            display: block;
+        }
+
+        .results-header {
+            background: rgba(26, 35, 50, 0.9);
+            padding: 15px 20px;
+            border-radius: 10px 10px 0 0;
+            color: #d4a556;
+            font-weight: 600;
+        }
+
+        .registrant-card {
+            background: rgba(26, 35, 50, 0.9);
+            padding: 20px;
+            border-radius: 10px;
+            margin-bottom: 15px;
+            border: 2px solid rgba(212, 165, 86, 0.2);
+        }
+
+        .registrant-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 15px;
+            padding-bottom: 15px;
+            border-bottom: 1px solid rgba(212, 165, 86, 0.2);
+        }
+
+        .registrant-name {
+            font-size: 1.3rem;
+            font-weight: 700;
+            color: #d4a556;
+        }
+
+        .status-badge {
+            padding: 8px 16px;
+            border-radius: 20px;
+            font-weight: 600;
+            font-size: 0.9rem;
+        }
+
+        .status-checked-in {
+            background: rgba(39, 174, 96, 0.2);
+            color: #27ae60;
+            border: 1px solid #27ae60;
+        }
+
+        .status-paid {
+            background: rgba(52, 152, 219, 0.2);
+            color: #3498db;
+            border: 1px solid #3498db;
+        }
+
+        .status-pending {
+            background: rgba(241, 196, 15, 0.2);
+            color: #f1c40f;
+            border: 1px solid #f1c40f;
+        }
+
+        .registrant-details {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 15px;
+            margin-bottom: 20px;
+        }
+
+        .detail-item {
+            background: rgba(255, 255, 255, 0.05);
+            padding: 12px;
+            border-radius: 8px;
+            min-width: 0; /* Allows text to wrap */
+        }
+
+        .detail-label {
+            font-size: 0.85rem;
+            color: rgba(245, 245, 245, 0.6);
+            margin-bottom: 5px;
+        }
+
+        .detail-value {
+            font-size: 1rem;
+            color: #f5f5f5;
+            font-weight: 600;
+            word-wrap: break-word; /* Break long words */
+            overflow-wrap: break-word; /* Better support */
+            word-break: break-all; /* Break emails at any point if needed */
+        }
+
+        .tshirt-highlight {
+            background: linear-gradient(135deg, rgba(212, 165, 86, 0.2), rgba(212, 165, 86, 0.1));
+            padding: 15px;
+            border-radius: 8px;
+            text-align: center;
+            margin-bottom: 15px;
+            border: 2px solid rgba(212, 165, 86, 0.5);
+        }
+
+        .tshirt-size {
+            font-size: 2rem;
+            font-weight: 900;
+            color: #d4a556;
+        }
+
+        .btn-checkin {
+            width: 100%;
+            padding: 15px;
+            background: linear-gradient(135deg, #27ae60 0%, #229954 100%);
+            color: white;
+            border: none;
+            border-radius: 8px;
+            font-size: 16px;
+            font-weight: 700;
+            cursor: pointer;
+        }
+
+        .btn-checkin:hover {
+            transform: translateY(-2px);
+        }
+
+        .btn-undo {
+            background: linear-gradient(135deg, #e74c3c 0%, #c0392b 100%);
+        }
+
+        .no-results {
+            text-align: center;
+            padding: 60px 20px;
+            color: rgba(245, 245, 245, 0.6);
+        }
+
+        .no-results-icon {
+            font-size: 4rem;
+            margin-bottom: 20px;
+        }
+
+        .spinner {
+            display: inline-block;
+            width: 20px;
+            height: 20px;
+            border: 3px solid rgba(255, 255, 255, 0.3);
+            border-top-color: #fff;
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+        }
+
+        @keyframes spin {
+            to { transform: rotate(360deg); }
+        }
+
+        .hidden {
+            display: none !important;
+        }
+
+        @media (max-width: 768px) {
+            .container { padding: 12px; }
+
+            .header { padding: 18px 0; margin-bottom: 16px; }
+            .header h1 { font-size: 1.6rem; line-height: 1.15; margin-bottom: 6px; }
+            .header p { font-size: 0.85rem; }
+
+            /* Top bar stacks cleanly; buttons are full-width tappable */
+            .top-bar {
+                flex-wrap: wrap;
+                gap: 10px;
+                padding: 12px 14px;
+                margin-bottom: 16px;
+            }
+            .top-bar .user-info { width: 100%; font-size: 0.9rem; }
+            .top-bar button { flex: 1; min-height: 44px; }
+
+            .search-box { padding: 16px; margin-bottom: 16px; border-radius: 12px; }
+            .search-box h2 { font-size: 1.2rem; margin-bottom: 14px; }
+
+            /* 2x2 tab grid so nothing overflows or gets cut off */
+            .search-tabs { grid-template-columns: 1fr 1fr; gap: 8px; }
+            .search-tab { font-size: 0.88rem; padding: 12px 6px; min-height: 50px; }
+
+            .search-row { grid-template-columns: 1fr; gap: 12px; }
+            .registrant-details { grid-template-columns: 1fr; }
+
+            .registrant-card { padding: 16px; }
+            .registrant-header { flex-wrap: wrap; gap: 8px; }
+            .registrant-name { font-size: 1.15rem; }
+
+            .btn, .btn-checkin { padding: 16px; font-size: 17px; min-height: 52px; }
+
+            .form-group input { font-size: 16px; padding: 14px; min-height: 50px; }
+        }
+
+        @media (max-width: 380px) {
+            .header h1 { font-size: 1.4rem; }
+            .search-tab { font-size: 0.82rem; }
+        }
+    </style>
+</head>
+<body>
+    <!-- Login Screen -->
+    <div id="loginScreen" class="login-container">
+        <h1>🎫 PYC 2026 Check-In</h1>
+        <p style="text-align: center; color: rgba(245, 245, 245, 0.7); margin-bottom: 30px;">
+            Volunteer & Admin Access
+        </p>
+        
+        <div id="loginAlert" class="alert"></div>
+
+        <form id="loginForm">
+            <div class="form-group">
+                <label for="username">Username</label>
+                <input type="text" id="username" required autocomplete="username">
+            </div>
+
+            <div class="form-group">
+                <label for="password">Password</label>
+                <input type="password" id="password" required autocomplete="current-password">
+            </div>
+
+            <button type="submit" class="btn" id="loginBtn">Login</button>
+        </form>
+    </div>
+
+    <!-- Check-In Screen -->
+    <div id="checkinScreen" class="checkin-screen">
+        <div class="container">
+            <div class="header">
+                <h1>PYC 2026 Check-In</h1>
+                <p>June 3-7, 2026 • Valencia, Bukidnon</p>
+            </div>
+
+            <div class="top-bar">
+                <div class="user-info">
+                    Logged in as: <span id="currentUser">User</span>
+                </div>
+                <div id="checkinCounter" style="width:100%;display:flex;align-items:center;gap:10px;background:rgba(39,174,96,0.1);border:1px solid rgba(39,174,96,0.35);border-radius:10px;padding:10px 14px;">
+                    <span style="font-size:1.4rem;">✅</span>
+                    <span style="font-weight:700;color:#27ae60;font-size:1.05rem;" id="checkinCounterText">— / — checked in</span>
+                </div>
+                <button onclick="refreshCurrentSearch()" style="background:rgba(212,165,86,0.15);border:1px solid rgba(212,165,86,0.3);color:#d4a556;padding:10px 16px;border-radius:8px;cursor:pointer;font-weight:600;font-size:0.9rem;">🔄 Refresh</button>
+                <button class="btn-logout" onclick="logout()">Logout</button>
+            </div>
+
+            <div class="search-box">
+                <h2>🔍 Find Registrant</h2>
+                
+                <div class="search-tabs">
+                    <div class="search-tab active" data-tab="name">By Name</div>
+                    <div class="search-tab" data-tab="email">By Email</div>
+                    <div class="search-tab" data-tab="confirmation">By Confirmation #</div>
+                    <div class="search-tab" data-tab="groups" onclick="loadGroupCheckins()">Group Registrations</div>
+                </div>
+
+                <div id="searchAlert" class="alert"></div>
+
+                <!-- Name Search -->
+                <div id="nameSearch" class="search-content active">
+                    <div class="search-row">
+                        <div class="form-group">
+                            <label>First Name</label>
+                            <input type="text" id="firstName" placeholder="Enter first name" onkeydown="if(event.key==='Enter')searchByName();">
+                        </div>
+                        <div class="form-group">
+                            <label>Last Name</label>
+                            <input type="text" id="lastName" placeholder="Enter last name" onkeydown="if(event.key==='Enter')searchByName();">
+                        </div>
+                    </div>
+                    <button class="btn" onclick="searchByName()" style="margin-top: 15px;">Search by Name</button>
+                </div>
+
+                <!-- Email Search -->
+                <div id="emailSearch" class="search-content">
+                    <div class="form-group">
+                        <label>Email Address</label>
+                        <input type="email" id="email" placeholder="Enter email address" onkeydown="if(event.key==='Enter')searchByEmail();">
+                    </div>
+                    <button class="btn" onclick="searchByEmail()" style="margin-top: 15px;">Search by Email</button>
+                </div>
+
+                <!-- Confirmation Number Search -->
+                <div id="confirmationSearch" class="search-content">
+                    <div class="form-group">
+                        <label>Confirmation Number</label>
+                        <div style="display:flex;align-items:stretch;gap:0;">
+                            <span style="display:flex;align-items:center;padding:0 14px;background:rgba(212,165,86,0.18);border:1px solid rgba(212,165,86,0.3);border-right:none;border-radius:8px 0 0 8px;color:#d4a556;font-weight:700;font-size:16px;">PYC-</span>
+                            <input type="text" id="confirmationNumber" inputmode="numeric" placeholder="0487" style="border-radius:0 8px 8px 0;" onkeydown="if(event.key==='Enter')searchByConfirmation();">
+                        </div>
+                        <p style="margin-top:8px;color:rgba(245,245,245,0.5);font-size:0.82rem;">Just type the number — e.g. <strong style="color:#d4a556;">487</strong> finds PYC-0487.</p>
+                    </div>
+                    <button class="btn" onclick="searchByConfirmation()" style="margin-top: 15px;">Search by Confirmation</button>
+                </div>
+
+                <p style="margin-top: 15px; color: rgba(245, 245, 245, 0.6); font-size: 0.9rem;">
+                    💡 <strong>Tip:</strong> Search by email to find ALL registrations under that email address
+                </p>
+            </div>
+
+
+                <!-- Group Registrations -->
+                <div id="groupsSearch" class="search-content">
+                    <div class="form-group" style="margin-bottom:14px;">
+                        <input type="text" id="groupSearchInput" placeholder="Filter groups by any member's name or PYC..." oninput="filterGroupList()" style="width:100%;">
+                    </div>
+                    <div id="groupCheckinList"><p style="color:rgba(245,245,245,0.5);">Loading group registrations...</p></div>
+                </div>
+
+            <div id="resultsContainer" class="results-container">
+                <div class="results-header">
+                    Search Results (<span id="resultCount">0</span>)
+                </div>
+                <div id="resultsContent"></div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        let sessionToken = null;
+        let currentUsername = null;
+        let _allRegsCache = null; // cache of admin-list-all for group tab + counter
+
+        // Fetch all registrations once and update the top check-in counter.
+        // Counter = (checked-in among paid) / (Paid + Pending Review total).
+        async function updateCheckinCounter() {
+            try {
+                const response = await fetch('/.netlify/functions/admin-list-all');
+                const data = await response.json();
+                const arr = Array.isArray(data) ? data : [];
+                _allRegsCache = arr;
+                const paidish = arr.filter(function(r) {
+                    var st = (r.payment_status || '').toLowerCase();
+                    return st === 'paid' || st === 'pending review';
+                });
+                const denom = paidish.length;
+                const numer = paidish.filter(function(r) { return r.checked_in === true; }).length;
+                var el = document.getElementById('checkinCounterText');
+                if (el) el.textContent = numer.toLocaleString() + ' / ' + denom.toLocaleString() + ' checked in';
+            } catch (e) {
+                var el2 = document.getElementById('checkinCounterText');
+                if (el2) el2.textContent = 'counter unavailable';
+            }
+        }
+
+        // Check for existing session on load
+        window.addEventListener('DOMContentLoaded', function() {
+            const savedToken = localStorage.getItem('checkinSessionToken');
+            const savedUser = localStorage.getItem('checkinUsername');
+            
+            if (savedToken && savedUser) {
+                sessionToken = savedToken;
+                currentUsername = savedUser;
+                document.getElementById('currentUser').textContent = currentUsername;
+                showCheckinScreen();
+            }
+        });
+
+        // Tab switching
+        document.querySelectorAll('.search-tab').forEach(tab => {
+            tab.addEventListener('click', function() {
+                const tabName = this.dataset.tab;
+                
+                // Update active tab
+                document.querySelectorAll('.search-tab').forEach(t => t.classList.remove('active'));
+                this.classList.add('active');
+                
+                // Update active content
+                document.querySelectorAll('.search-content').forEach(c => c.classList.remove('active'));
+                document.getElementById(tabName + 'Search').classList.add('active');
+                if (tabName === 'groups') { document.getElementById('resultsContainer').classList.remove('show'); }
+                
+                // Clear results
+                hideResults();
+            });
+        });
+
+        // Login
+        document.getElementById('loginForm').addEventListener('submit', async function(e) {
+            e.preventDefault();
+            
+            const username = document.getElementById('username').value.trim();
+            const password = document.getElementById('password').value;
+            const loginBtn = document.getElementById('loginBtn');
+            
+            loginBtn.disabled = true;
+            loginBtn.innerHTML = '<span class="spinner"></span> Logging in...';
+            hideAlert('loginAlert');
+            
+            try {
+                const response = await fetch('/.netlify/functions/admin-login', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ username, password })
+                });
+
+                const result = await response.json();
+
+                if (response.ok && result.success) {
+                    sessionToken = result.sessionToken;
+                    currentUsername = username;
+                    
+                    localStorage.setItem('checkinSessionToken', sessionToken);
+                    localStorage.setItem('checkinUsername', currentUsername);
+                    
+                    document.getElementById('currentUser').textContent = currentUsername;
+                    document.getElementById('username').value = '';
+                    document.getElementById('password').value = '';
+                    
+                    showCheckinScreen();
+                } else {
+                    showAlert('loginAlert', result.message || 'Invalid credentials', 'error');
+                }
+            } catch (error) {
+                console.error('Login error:', error);
+                showAlert('loginAlert', 'Login failed. Please try again.', 'error');
+            } finally {
+                loginBtn.disabled = false;
+                loginBtn.textContent = 'Login';
+            }
+        });
+
+        function showCheckinScreen() {
+            document.getElementById('loginScreen').classList.add('hidden');
+            document.getElementById('checkinScreen').classList.add('active');
+            updateCheckinCounter();
+        }
+
+        function logout() {
+            sessionToken = null;
+            currentUsername = null;
+            localStorage.removeItem('checkinSessionToken');
+            localStorage.removeItem('checkinUsername');
+            
+            document.getElementById('loginScreen').classList.remove('hidden');
+            document.getElementById('checkinScreen').classList.remove('active');
+            hideResults();
+        }
+
+        // Search by Name
+        async function searchByName() {
+            const firstName = document.getElementById('firstName').value.trim();
+            const lastName = document.getElementById('lastName').value.trim();
+            
+            if (!firstName && !lastName) {
+                showAlert('searchAlert', 'Please enter at least a first name or last name', 'error');
+                return;
+            }
+            
+            const query = `${firstName} ${lastName}`.trim();
+            await performSearch(query, 'name');
+        }
+
+        // Search by Email
+        async function searchByEmail() {
+            const email = document.getElementById('email').value.trim();
+            
+            if (!email) {
+                showAlert('searchAlert', 'Please enter an email address', 'error');
+                return;
+            }
+            
+            await performSearch(email, 'email');
+        }
+
+        // Build a canonical PYC number from whatever the volunteer typed. The "PYC-"
+        // prefix is shown as a fixed label, so they type just the number. We strip any
+        // stray non-digits (in case they paste "PYC-487"), then zero-pad to 4 digits to
+        // match the stored format (PYC-0487).
+        function normalizePyc(raw) {
+            var digits = String(raw || '').replace(/\D/g, '');
+            if (!digits) return '';
+            // Drop leading zeros then pad to 4 so "487", "0487", "00487" all become PYC-0487
+            var n = parseInt(digits, 10);
+            if (isNaN(n)) return '';
+            return 'PYC-' + String(n).padStart(4, '0');
+        }
+
+        // Search by Confirmation
+        async function searchByConfirmation() {
+            const raw = document.getElementById('confirmationNumber').value.trim();
+
+            if (!raw) {
+                showAlert('searchAlert', 'Please enter a confirmation number', 'error');
+                return;
+            }
+
+            const pyc = normalizePyc(raw);
+            if (!pyc) {
+                showAlert('searchAlert', 'Please enter the number part of the PYC code (e.g. 487).', 'error');
+                return;
+            }
+
+            await performSearch(pyc, 'confirmation');
+        }
+
+        // Perform Search
+        async function performSearch(query, searchType) {
+            hideAlert('searchAlert');
+            showLoading();
+            
+            try {
+                const response = await fetch('/.netlify/functions/admin-search', {
+                    method: 'POST',
+                    headers: { 
+                        'Content-Type': 'application/json',
+                        'Authorization': `Bearer ${sessionToken}`
+                    },
+                    body: JSON.stringify({ query, searchType })
+                });
+
+                const data = await response.json();
+
+                if (response.ok && data.results && data.results.length > 0) {
+                    displayResults(data.results);
+                    hideAlert('searchAlert');
+                } else {
+                    showNoResults(searchType);
+                }
+            } catch (error) {
+                console.error('Search error:', error);
+                showAlert('searchAlert', 'Search failed. Please try again.', 'error');
+                hideResults();
+            }
+        }
+
+        // Returns true if this registrant counts as "actually paid" (Paid or Pending Review).
+        function isPaidStatus(reg) {
+            var st = (reg.payment_status || reg.paymentStatus || '').toLowerCase();
+            return st === 'paid' || st === 'pending review';
+        }
+
+        // Build the HTML for a single registrant card.
+        function registrantCardHtml(reg) {
+            if (!reg) return '';
+            const firstName = reg.first_name || reg.firstName || '';
+            const lastName = reg.last_name || reg.lastName || '';
+            const email = reg.email || '';
+            const phone = reg.phone || '';
+            const age = reg.age || '';
+            const mealPlan = reg.meal_plan || reg.mealPlan || '';
+            const tshirtSize = reg.tshirt_size || reg.tshirtSize || 'N/A';
+            const paymentStatus = reg.payment_status || reg.paymentStatus || 'Pending';
+            const checkedIn = reg.checked_in === true;
+            const confNum = reg.confirmation_number || reg.id || '';
+
+            // Badge: checked-in > paid/review > pending
+            var badgeClass, badgeText;
+            if (checkedIn) { badgeClass = 'status-checked-in'; badgeText = '✓ Checked In'; }
+            else if (paymentStatus === 'Paid') { badgeClass = 'status-paid'; badgeText = 'Paid'; }
+            else if (paymentStatus === 'Pending Review') { badgeClass = 'status-paid'; badgeText = 'Pending Review'; }
+            else { badgeClass = 'status-pending'; badgeText = paymentStatus || 'Pending Payment'; }
+
+            // Only allow check-in for paid/pending-review people
+            const canCheckIn = isPaidStatus(reg);
+
+            return `
+                <div class="registrant-card" data-id="${reg.id}">
+                    <div class="registrant-header">
+                        <div class="registrant-name">${firstName} ${lastName}${(reg.registration_type === 'group') ? ' <span style="background:rgba(212,165,86,0.2);color:#d4a556;padding:2px 6px;border-radius:4px;font-size:11px;">👨‍👩‍👧‍👦 Group</span>' : ''}</div>
+                        <div class="status-badge ${badgeClass}">${badgeText}</div>
+                    </div>
+
+                    <div class="detail-item" style="margin-bottom: 15px;">
+                        <div class="detail-label">Email</div>
+                        <div class="detail-value" style="word-break: break-all;">${email}</div>
+                    </div>
+
+                    <div class="registrant-details">
+                        <div class="detail-item">
+                            <div class="detail-label">Phone</div>
+                            <div class="detail-value">${phone || 'N/A'}</div>
+                        </div>
+                        <div class="detail-item">
+                            <div class="detail-label">Age</div>
+                            <div class="detail-value">${age || 'N/A'}</div>
+                        </div>
+                        <div class="detail-item">
+                            <div class="detail-label">Meal Plan</div>
+                            <div class="detail-value">${formatMealPlan(mealPlan)}</div>
+                        </div>
+                        <div class="detail-item">
+                            <div class="detail-label">Confirmation #</div>
+                            <div class="detail-value" style="word-break: break-all; font-size: 0.85rem;">${confNum}</div>
+                        </div>
+                    </div>
+
+                    <div class="tshirt-highlight">
+                        <div class="detail-label">👕 T-SHIRT SIZE</div>
+                        <div class="tshirt-size">${(tshirtSize || 'N/A').toUpperCase()}</div>
+                    </div>
+
+                    ${canCheckIn ? (!checkedIn ? `
+                        <button class="btn btn-checkin" onclick="checkIn('${reg.id}')">Check In</button>
+                    ` : `
+                        <button class="btn btn-checkin btn-undo" onclick="undoCheckIn('${reg.id}')">Undo Check-In</button>
+                    `) : `
+                        <div style="text-align:center;padding:12px;background:rgba(241,196,15,0.1);border:1px solid rgba(241,196,15,0.3);border-radius:8px;color:#f1c40f;font-size:0.88rem;font-weight:600;">⚠️ Payment not yet approved — direct to payment desk before check-in.</div>
+                    `}
+                    ${(reg.registration_type === 'group' && reg.group_id) ? `
+                        <div style="margin-top:12px;border-top:1px solid rgba(212,165,86,0.15);padding-top:12px;">
+                            <button onclick="toggleGroupMembers('${reg.group_id}','grpM_${reg.id}')" style="background:rgba(212,165,86,0.1);border:1px solid rgba(212,165,86,0.3);color:#d4a556;padding:12px 16px;border-radius:8px;cursor:pointer;font-size:0.9rem;font-weight:600;width:100%;min-height:48px;">
+                                👨‍👩‍👧‍👦 Show Group Members ▾
+                            </button>
+                            <div id="grpM_${reg.id}" style="display:none;margin-top:10px;"></div>
+                        </div>
+                    ` : ''}
+                </div>
+            `;
+        }
+
+        // Display Results — paid (Paid + Pending Review) shown first; everyone else
+        // (Pending, Rejected, etc.) tucked into a collapsible section so volunteers see
+        // the people they can actually check in, but can still expand to verify others.
+        function displayResults(results) {
+            const resultsContainer = document.getElementById('resultsContainer');
+            const resultsContent = document.getElementById('resultsContent');
+            const resultCount = document.getElementById('resultCount');
+
+            const paid = results.filter(isPaidStatus);
+            const others = results.filter(function(r) { return !isPaidStatus(r); });
+
+            resultCount.textContent = results.length;
+
+            var html = '';
+            if (paid.length > 0) {
+                html += paid.map(registrantCardHtml).join('');
+            } else {
+                html += '<div class="no-results" style="padding:30px 20px;"><div class="no-results-icon" style="font-size:2.5rem;">💳</div><p>No <strong>paid</strong> registrations match. Anyone found is still pending payment — see below.</p></div>';
+            }
+
+            if (others.length > 0) {
+                html += `
+                    <div style="margin-top:18px;">
+                        <button onclick="togglePendingResults()" id="pendingToggleBtn" style="width:100%;padding:14px;background:rgba(241,196,15,0.08);border:1px dashed rgba(241,196,15,0.4);border-radius:10px;color:#f1c40f;font-weight:600;font-size:0.9rem;cursor:pointer;min-height:50px;">
+                            ▾ Show ${others.length} pending / unapproved registration${others.length === 1 ? '' : 's'}
+                        </button>
+                        <div id="pendingResults" style="display:none;margin-top:12px;">
+                            ${others.map(registrantCardHtml).join('')}
+                        </div>
+                    </div>
+                `;
+            }
+
+            resultsContent.innerHTML = html;
+            resultsContainer.classList.add('show');
+        }
+
+        function togglePendingResults() {
+            var box = document.getElementById('pendingResults');
+            var btn = document.getElementById('pendingToggleBtn');
+            if (!box) return;
+            if (box.style.display === 'none') {
+                box.style.display = 'block';
+                if (btn) btn.innerHTML = btn.innerHTML.replace('▾ Show', '▴ Hide');
+            } else {
+                box.style.display = 'none';
+                if (btn) btn.innerHTML = btn.innerHTML.replace('▴ Hide', '▾ Show');
+            }
+        }
+
+        function formatMealPlan(mealPlan) {
+            if (!mealPlan) return 'N/A';
+            const plan = String(mealPlan).toLowerCase();
+            if (plan === 'vegan') return 'Full Meal — Vegan';
+            if (plan === 'vegetarian') return 'Full Meal — Vegetarian';
+            if (plan === 'none') return 'No Meal Plan';
+            if (plan === 'full') return 'Full Meal Plan';
+            if (plan === 'half') return 'Half Meal Plan';
+            return mealPlan;
+        }
+
+        function showNoResults(searchType) {
+            const resultsContainer = document.getElementById('resultsContainer');
+            const resultsContent = document.getElementById('resultsContent');
+            const resultCount = document.getElementById('resultCount');
+            
+            resultCount.textContent = '0';
+            
+            resultsContent.innerHTML = `
+                <div class="no-results">
+                    <div class="no-results-icon">🔍</div>
+                    <h3>No registrant found</h3>
+                    <p>Try searching with a different ${searchType === 'email' ? 'email address' : searchType === 'confirmation' ? 'confirmation number' : 'name'}</p>
+                </div>
+            `;
+            
+            resultsContainer.classList.add('show');
+        }
+
+        function showLoading() {
+            const resultsContainer = document.getElementById('resultsContainer');
+            const resultsContent = document.getElementById('resultsContent');
+            
+            resultsContent.innerHTML = `
+                <div class="no-results">
+                    <div class="spinner" style="width: 40px; height: 40px; border-width: 4px;"></div>
+                    <p style="margin-top: 20px;">Searching...</p>
+                </div>
+            `;
+            
+            resultsContainer.classList.add('show');
+        }
+
+        function hideResults() {
+            document.getElementById('resultsContainer').classList.remove('show');
+        }
+
+        // Check In
+        async function checkIn(registrantId) {
+            if (!await ciConfirm('Check in this registrant?')) return;
+            
+            try {
+                const response = await fetch('/.netlify/functions/admin-checkin', {
+                    method: 'POST',
+                    headers: { 
+                        'Content-Type': 'application/json',
+                        'Authorization': `Bearer ${sessionToken}`
+                    },
+                    body: JSON.stringify({ 
+                        registrantId,
+                        action: 'checkin'
+                    })
+                });
+
+                const result = await response.json();
+
+                if (response.ok) {
+                    // Instantly update the card UI
+                    const card = document.querySelector('[data-id="' + registrantId + '"]');
+                    if (card) {
+                        const badge = card.querySelector('.status-badge');
+                        if (badge) { badge.className = 'status-badge status-checked-in'; badge.textContent = '✓ Checked In'; }
+                        const btn = card.querySelector('.btn-checkin');
+                        if (btn) { btn.textContent = 'Undo Check-In'; btn.className = 'btn btn-checkin btn-undo'; btn.setAttribute('onclick', "undoCheckIn('" + registrantId + "')"); }
+                    }
+                    // Show group members if available
+                    if (result.groupMembers && result.groupMembers.length > 0) {
+                        let gmHtml = '<div style="margin-top:10px;padding:12px;background:rgba(212,165,86,0.08);border:1px solid rgba(212,165,86,0.3);border-radius:8px;">';
+                        gmHtml += '<div style="color:#d4a556;font-weight:600;margin-bottom:8px;">👨‍👩‍👧‍👦 Group Members:</div>';
+                        result.groupMembers.forEach(gm => {
+                            const checkedIcon = gm.checked_in ? '✅' : '⬜';
+                            gmHtml += '<div style="padding:4px 0;color:rgba(245,245,245,0.85);font-size:14px;">' + checkedIcon + ' ' + gm.first_name + ' ' + gm.last_name + ' (T-Shirt: ' + (gm.tshirt_size||'').toUpperCase() + ' | Meal: ' + formatMealPlan(gm.meal_plan) + ')</div>';
+                        });
+                        gmHtml += '</div>';
+                        // Show as alert
+                        showAlert('searchAlert', 'Checked in! This person is part of a group.', 'success');
+                        // Append group info to the card
+                        const card = document.querySelector('[data-id="' + registrantId + '"]');
+                        if (card) {
+                            const existingGroupInfo = card.querySelector('.group-members-info');
+                            if (existingGroupInfo) existingGroupInfo.remove();
+                            const div = document.createElement('div');
+                            div.className = 'group-members-info';
+                            div.innerHTML = gmHtml;
+                            card.appendChild(div);
+                        }
+                    }
+                    // Refresh the current search
+                    refreshCurrentSearch();
+                    updateCheckinCounter();
+                    showAlert('searchAlert', 'Successfully checked in!', 'success');
+                } else {
+                    showAlert('searchAlert', result.error || 'Check-in failed', 'error');
+                }
+            } catch (error) {
+                console.error('Check-in error:', error);
+                showAlert('searchAlert', 'Check-in failed. Please try again.', 'error');
+            }
+        }
+
+        // Undo Check In
+        async function undoCheckIn(registrantId) {
+            if (!await ciConfirm('Undo check-in for this registrant?')) return;
+            
+            try {
+                const response = await fetch('/.netlify/functions/admin-checkin', {
+                    method: 'POST',
+                    headers: { 
+                        'Content-Type': 'application/json',
+                        'Authorization': `Bearer ${sessionToken}`
+                    },
+                    body: JSON.stringify({ 
+                        registrantId,
+                        action: 'undo'
+                    })
+                });
+
+                const result = await response.json();
+
+                if (response.ok) {
+                    refreshCurrentSearch();
+                    updateCheckinCounter();
+                    showAlert('searchAlert', 'Check-in undone', 'success');
+                } else {
+                    showAlert('searchAlert', result.error || 'Failed to undo', 'error');
+                }
+            } catch (error) {
+                console.error('Undo error:', error);
+                showAlert('searchAlert', 'Failed to undo. Please try again.', 'error');
+            }
+        }
+
+        function refreshCurrentSearch() {
+            const activeTab = document.querySelector('.search-tab.active').dataset.tab;
+            
+            if (activeTab === 'name') {
+                searchByName();
+            } else if (activeTab === 'email') {
+                searchByEmail();
+            } else if (activeTab === 'confirmation') {
+                searchByConfirmation();
+            } else if (activeTab === 'groups') {
+                loadGroupCheckins();
+            }
+        }
+
+
+        // Toggle group members in search results
+        async function toggleGroupMembers(groupId, containerId) {
+            const container = document.getElementById(containerId);
+            if (container.style.display === 'block') {
+                container.style.display = 'none';
+                return;
+            }
+            container.innerHTML = '<p style="color:rgba(245,245,245,0.5);font-size:0.85rem;">Loading group members...</p>';
+            container.style.display = 'block';
+            try {
+                const response = await fetch('/.netlify/functions/admin-list-all');
+                const data = await response.json();
+                const arr = Array.isArray(data) ? data : [];
+                // Only show paid (Paid / Pending Review) members
+                const members = arr.filter(r => r.group_id === groupId && isPaidStatus(r)).sort((a,b) => (b.is_primary?1:0) - (a.is_primary?1:0));
+                if (members.length === 0) { container.innerHTML = '<p style="color:rgba(245,245,245,0.5);font-size:0.85rem;">No paid group members found.</p>'; return; }
+
+                const unchecked = members.filter(m => !m.checked_in);
+                let html = '';
+                if (unchecked.length > 0) {
+                    html += '<button onclick="checkInAllGroup(\'' + groupId + '\')" style="background:#d4a556;color:#1a2332;border:none;padding:14px;border-radius:8px;cursor:pointer;font-weight:700;font-size:0.9rem;width:100%;margin-bottom:12px;min-height:50px;">✅ Check In All (' + unchecked.length + ' remaining)</button>';
+                }
+                members.forEach(m => {
+                    const checked = m.checked_in === true;
+                    html += '<div style="background:rgba(255,255,255,0.03);border:1px solid rgba(255,255,255,0.06);border-radius:8px;padding:12px;margin-bottom:8px;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:8px;">';
+                    html += '<div style="min-width:0;flex:1;">';
+                    html += '<div style="font-weight:600;color:#f5f5f5;">' + (m.first_name||'') + ' ' + (m.last_name||'') + (m.is_primary ? ' <span style="color:#d4a556;font-size:0.75rem;">PRIMARY</span>' : '') + '</div>';
+                    html += '<div style="font-size:0.8rem;color:rgba(245,245,245,0.5);">👕 ' + ((m.tshirt_size||'').toUpperCase()||'N/A') + ' &middot; 🍽️ ' + formatMealPlan(m.meal_plan) + ' &middot; ' + (m.confirmation_number||m.id) + '</div>';
+                    html += '</div>';
+                    if (checked) {
+                        html += '<span style="color:#27ae60;font-weight:600;font-size:0.85rem;">✓ In</span>';
+                    } else {
+                        html += '<button onclick="checkIn(\'' + m.id + '\')" style="background:rgba(39,174,96,0.15);border:1px solid #27ae60;color:#27ae60;padding:10px 16px;border-radius:6px;cursor:pointer;font-size:0.85rem;font-weight:600;min-height:44px;">Check In</button>';
+                    }
+                    html += '</div>';
+                });
+                container.innerHTML = html;
+            } catch (e) {
+                container.innerHTML = '<p style="color:#e74c3c;">Failed to load: ' + e.message + '</p>';
+            }
+        }
+        window.toggleGroupMembers = toggleGroupMembers;
+
+        // Check in all group members
+        async function checkInAllGroup(groupId) {
+            if (!await ciConfirm('Check in ALL paid members in this group who aren\'t checked in yet?')) return;
+            try {
+                const response = await fetch('/.netlify/functions/admin-list-all');
+                const data = await response.json();
+                const arr = Array.isArray(data) ? data : [];
+                // Only check in PAID (Paid / Pending Review) unchecked members
+                const unchecked = arr.filter(r => r.group_id === groupId && isPaidStatus(r) && !r.checked_in);
+                if (unchecked.length === 0) { showAlert('searchAlert', 'No paid members left to check in for this group.', 'success'); return; }
+                for (const m of unchecked) {
+                    await fetch('/.netlify/functions/admin-checkin', {
+                        method: 'POST',
+                        headers: { 'Content-Type': 'application/json', 'Authorization': 'Bearer ' + sessionToken },
+                        body: JSON.stringify({ registrantId: m.id, action: 'checkin' })
+                    });
+                }
+                showAlert('searchAlert', 'All ' + unchecked.length + ' group members checked in!', 'success');
+                refreshCurrentSearch();
+                updateCheckinCounter();
+            } catch (e) {
+                showAlert('searchAlert', 'Error: ' + e.message, 'error');
+            }
+        }
+        window.checkInAllGroup = checkInAllGroup;
+
+        // Load group registrations tab
+        var _groupData = null; // { gid: [members] } cached for filtering
+        async function loadGroupCheckins() {
+            const container = document.getElementById('groupCheckinList');
+            container.innerHTML = '<p style="color:rgba(245,245,245,0.5);">Loading group registrations...</p>';
+            try {
+                const response = await fetch('/.netlify/functions/admin-list-all');
+                const data = await response.json();
+                const arr = Array.isArray(data) ? data : [];
+                _allRegsCache = arr;
+                const groups = {};
+                arr.forEach(r => {
+                    if (r.registration_type === 'group' && r.group_id) {
+                        if (!groups[r.group_id]) groups[r.group_id] = [];
+                        groups[r.group_id].push(r);
+                    }
+                });
+                Object.values(groups).forEach(members => {
+                    members.sort((a,b) => (b.is_primary?1:0) - (a.is_primary?1:0));
+                });
+                _groupData = groups;
+                renderGroupList();
+            } catch (e) {
+                container.innerHTML = '<p style="color:#e74c3c;">Failed: ' + e.message + '</p>';
+            }
+        }
+
+        // Filter groups by any member's name or PYC, then render.
+        function filterGroupList() { renderGroupList(); }
+
+        function renderGroupList() {
+            const container = document.getElementById('groupCheckinList');
+            if (!_groupData) return;
+            var q = (document.getElementById('groupSearchInput') || {}).value || '';
+            q = q.trim().toLowerCase();
+
+            // Only count groups that have at least one PAID (Paid/Pending Review) member.
+            var groupIds = Object.keys(_groupData).filter(function(gid) {
+                var members = _groupData[gid];
+                // Keep only paid-ish members for display
+                var paidMembers = members.filter(isPaidStatus);
+                if (paidMembers.length === 0) return false;
+                if (!q) return true;
+                // Match if ANY paid member's name or PYC contains the query
+                return paidMembers.some(function(m) {
+                    var hay = ((m.first_name||'') + ' ' + (m.last_name||'') + ' ' + (m.confirmation_number||'')).toLowerCase();
+                    return hay.indexOf(q) !== -1;
+                });
+            });
+
+            if (groupIds.length === 0) {
+                container.innerHTML = q
+                    ? '<p style="color:rgba(245,245,245,0.5);">No groups match "' + q.replace(/</g,'&lt;') + '".</p>'
+                    : '<p style="color:rgba(245,245,245,0.5);">No group registrations with paid members found.</p>';
+                return;
+            }
+
+            let html = '<p style="color:rgba(245,245,245,0.4);font-size:0.85rem;margin-bottom:15px;">' + groupIds.length + ' group(s)' + (q ? ' matching "' + q.replace(/</g,'&lt;') + '"' : '') + '</p>';
+            groupIds.forEach((gid, idx) => {
+                // Show only paid members within each group
+                const members = _groupData[gid].filter(isPaidStatus);
+                const primary = members.find(m => m.is_primary) || members[0];
+                const checkedCount = members.filter(m => m.checked_in).length;
+                const uncheckedCount = members.length - checkedCount;
+                const allIn = uncheckedCount === 0;
+                html += '<div style="background:rgba(255,255,255,0.03);border:1px solid rgba(212,165,86,0.2);border-radius:12px;margin-bottom:10px;overflow:hidden;">';
+                html += '<div onclick="document.getElementById(\'gcGrp' + idx + '\').style.display=document.getElementById(\'gcGrp' + idx + '\').style.display===\'none\'?\'block\':\'none\'" style="padding:14px 16px;cursor:pointer;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:8px;min-height:56px;">';
+                html += '<div><span style="font-weight:700;color:#d4a556;">' + (primary.first_name||'') + ' ' + (primary.last_name||'') + '</span> <span style="color:rgba(245,245,245,0.4);font-size:0.85rem;">(' + members.length + ' paid)</span></div>';
+                html += '<div style="display:flex;gap:8px;align-items:center;">';
+                html += '<span style="color:' + (allIn ? '#27ae60' : '#f1c40f') + ';font-size:0.85rem;font-weight:600;">' + checkedCount + '/' + members.length + ' in</span>';
+                html += '<span style="color:rgba(245,245,245,0.3);">▾</span>';
+                html += '</div></div>';
+                html += '<div id="gcGrp' + idx + '" style="display:none;border-top:1px solid rgba(212,165,86,0.1);padding:12px 16px;">';
+                if (uncheckedCount > 0) {
+                    html += '<button onclick="checkInAllGroup(\'' + gid + '\')" style="background:#d4a556;color:#1a2332;border:none;padding:14px;border-radius:8px;cursor:pointer;font-weight:700;font-size:0.9rem;width:100%;margin-bottom:12px;min-height:50px;">✅ Check In All (' + uncheckedCount + ' remaining)</button>';
+                }
+                members.forEach(m => {
+                    const checked = m.checked_in === true;
+                    html += '<div style="background:rgba(255,255,255,0.02);border:1px solid rgba(255,255,255,0.05);border-radius:8px;padding:12px;margin-bottom:8px;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:8px;">';
+                    html += '<div style="min-width:0;flex:1;"><span style="font-weight:600;color:#f5f5f5;">' + (m.first_name||'') + ' ' + (m.last_name||'') + '</span>' + (m.is_primary ? ' <span style="color:#d4a556;font-size:0.7rem;">PRIMARY</span>' : '') + '<br><span style="font-size:0.78rem;color:rgba(245,245,245,0.4);">👕 ' + ((m.tshirt_size||'').toUpperCase()||'N/A') + ' &middot; 🍽️ ' + formatMealPlan(m.meal_plan) + ' &middot; ' + (m.confirmation_number||'') + '</span></div>';
+                    if (checked) {
+                        html += '<span style="color:#27ae60;font-weight:600;font-size:0.82rem;">✓ In</span>';
+                    } else {
+                        html += '<button onclick="checkIn(\'' + m.id + '\')" style="background:rgba(39,174,96,0.15);border:1px solid #27ae60;color:#27ae60;padding:10px 16px;border-radius:6px;cursor:pointer;font-size:0.85rem;font-weight:600;min-height:44px;">Check In</button>';
+                    }
+                    html += '</div>';
+                });
+                html += '</div></div>';
+            });
+            container.innerHTML = html;
+        }
+        window.filterGroupList = filterGroupList;
+
+        // Alert functions
+        function showAlert(elementId, message, type) {
+            const alert = document.getElementById(elementId);
+            alert.textContent = message;
+            alert.className = `alert alert-${type} show`;
+        }
+
+        // iPad-safe confirm — native confirm() silently returns false on iPad Safari,
+        // which would make the Check In / Undo buttons appear to do nothing.
+        function ciConfirm(message) {
+            return new Promise(function(resolve) {
+                var existing = document.getElementById('ciConfirmModal');
+                if (existing) existing.remove();
+                var overlay = document.createElement('div');
+                overlay.id = 'ciConfirmModal';
+                overlay.style.cssText = 'position:fixed;inset:0;background:rgba(0,0,0,0.85);z-index:9000;display:flex;align-items:center;justify-content:center;padding:20px;';
+                overlay.innerHTML =
+                    '<div style="background:#1a2332;border:2px solid rgba(212,165,86,0.45);border-radius:14px;padding:24px;max-width:420px;width:100%;">' +
+                    '<p style="color:rgba(245,245,245,0.9);font-size:1rem;line-height:1.5;margin:0 0 22px;white-space:pre-wrap;">' + (message || '').replace(/</g,'&lt;').replace(/>/g,'&gt;') + '</p>' +
+                    '<div style="display:flex;gap:12px;">' +
+                    '<button id="ciConfirmCancel" style="flex:1;padding:14px;background:rgba(255,255,255,0.08);color:#f5f5f5;border:1px solid rgba(255,255,255,0.15);border-radius:8px;font-weight:600;font-size:16px;cursor:pointer;min-height:50px;">Cancel</button>' +
+                    '<button id="ciConfirmOk" style="flex:1;padding:14px;background:linear-gradient(135deg,#27ae60,#229954);color:#fff;border:none;border-radius:8px;font-weight:700;font-size:16px;cursor:pointer;min-height:50px;">Yes</button>' +
+                    '</div></div>';
+                document.body.appendChild(overlay);
+                document.getElementById('ciConfirmCancel').addEventListener('click', function(){ overlay.remove(); resolve(false); });
+                document.getElementById('ciConfirmOk').addEventListener('click', function(){ overlay.remove(); resolve(true); });
+            });
+        }
+
+        function hideAlert(elementId) {
+            const alert = document.getElementById(elementId);
+            alert.classList.remove('show');
+        }
+    </script>
+</body>
+</html>

@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Review Tenting Reservation - PYC 2026</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" crossorigin>
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Montserrat:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        *{margin:0;padding:0;box-sizing:border-box;}
+        :root{--primary-navy:#1a2332;--secondary-gold:#d4a556;--text-light:#f5f5f5;--background-overlay:rgba(26,35,50,0.92);}
+        html{background:#0f1419;}
+        body{font-family:'Montserrat',sans-serif;background:linear-gradient(135deg,#0f1419 0%,#1a2332 50%,#2a3f5f 100%);background-attachment:fixed;color:var(--text-light);min-height:100vh;}
+        body::before{content:'';position:fixed;top:0;left:0;width:100%;height:100%;background:radial-gradient(circle at 20% 30%,rgba(74,124,158,0.1) 0%,transparent 50%),radial-gradient(circle at 80% 70%,rgba(212,165,86,0.08) 0%,transparent 50%);pointer-events:none;z-index:1;}
+        .stars{position:fixed;top:0;left:0;width:100%;height:100%;pointer-events:none;z-index:0;}.star{position:absolute;background:white;border-radius:50%;box-shadow:0 0 3px rgba(255,255,255,0.8);filter:blur(0.5px);animation:twinkle 3s infinite;}
+        @keyframes twinkle{0%,100%{opacity:0.4;}50%{opacity:1;}}
+        .container{position:relative;z-index:2;max-width:650px;margin:0 auto;padding:30px 20px 60px;}
+        .pyc-progress{max-width:700px;margin:0 auto 25px;padding:15px 10px 5px}.pyc-progress-title{text-align:center;font-size:0.7rem;text-transform:uppercase;letter-spacing:2px;color:rgba(245,245,245,0.3);margin-bottom:14px;font-weight:600}.pyc-steps{display:flex;align-items:flex-start;justify-content:space-between;position:relative}.pyc-steps::before{content:'';position:absolute;top:16px;left:0;right:0;height:3px;background:rgba(255,255,255,0.06);border-radius:2px}.pyc-line{position:absolute;top:16px;left:0;height:3px;z-index:1;background:linear-gradient(90deg,#d4a556,#e5b96a);border-radius:2px;transition:width 0.3s}.pyc-s{display:flex;flex-direction:column;align-items:center;flex:1;position:relative;z-index:3}.pyc-dot{width:32px;height:32px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:0.75rem;font-weight:700;border:3px solid rgba(255,255,255,0.08);background:#1a2332;color:rgba(245,245,245,0.25);transition:all 0.3s}.pyc-s.done .pyc-dot{background:#d4a556;color:#1a2332;border-color:#d4a556}.pyc-s.now .pyc-dot,.pyc-s.active .pyc-dot{background:#1a2332;border-color:#d4a556;color:#d4a556;box-shadow:0 0 15px rgba(212,165,86,0.3);animation:pyc-glow 2s infinite}.pyc-lbl{margin-top:7px;font-size:0.62rem;color:rgba(245,245,245,0.2);text-align:center;font-weight:600;text-transform:uppercase;letter-spacing:0.3px;line-height:1.3;max-width:70px}.pyc-s.done .pyc-lbl,.pyc-s.now .pyc-lbl,.pyc-s.active .pyc-lbl{color:rgba(212,165,86,0.65)}.pyc-hint{text-align:center;margin-top:10px;font-size:0.78rem;color:rgba(212,165,86,0.55);font-style:italic}
+        @keyframes pyc-glow{0%,100%{box-shadow:0 0 10px rgba(212,165,86,0.2);}50%{box-shadow:0 0 20px rgba(212,165,86,0.45);}}
+        @media(max-width:480px){.pyc-dot{width:26px;height:26px;font-size:0.65rem;border-width:2px}.pyc-lbl{font-size:0.55rem;max-width:55px}}
+        .page-header{text-align:center;margin-bottom:25px;}.page-header h1{font-family:'Bebas Neue',sans-serif;color:var(--secondary-gold);font-size:clamp(2rem,5vw,2.8rem);letter-spacing:2px;}.page-header p{color:rgba(245,245,245,0.5);font-size:0.9rem;margin-top:5px;}
+        .content-box{background:var(--background-overlay);border:2px solid rgba(212,165,86,0.2);border-radius:14px;padding:25px;margin-bottom:20px;}.content-box h3{font-family:'Bebas Neue',sans-serif;color:var(--secondary-gold);font-size:1.3rem;letter-spacing:1px;margin-bottom:12px;}
+        .alert{padding:12px 16px;border-radius:8px;margin-bottom:15px;font-size:0.88rem;}.alert-error{background:rgba(231,76,60,0.1);border:1px solid rgba(231,76,60,0.3);color:#e74c3c;}
+        .review-card{background:rgba(255,255,255,0.04);border:1px solid rgba(212,165,86,0.2);border-radius:10px;padding:18px;margin-bottom:12px;}
+        .review-card h4{color:var(--secondary-gold);font-size:1rem;margin-bottom:10px;}
+        .review-member{padding:6px 0;font-size:0.88rem;color:var(--text-light);border-bottom:1px solid rgba(255,255,255,0.04);}.review-member:last-child{border-bottom:none;}
+        .review-member .rm-pyc{color:var(--secondary-gold);font-family:'Bebas Neue',sans-serif;font-size:0.82rem;margin-left:6px;}
+        .summary-row{display:flex;justify-content:space-between;padding:8px 0;font-size:0.9rem;border-bottom:1px solid rgba(255,255,255,0.05);}.summary-row:last-child{border-bottom:none;}
+        .summary-row .sr-label{color:rgba(245,245,245,0.5);}.summary-row .sr-value{color:var(--secondary-gold);font-weight:600;}
+        .btn{padding:14px 28px;border:none;border-radius:10px;font-family:'Montserrat',sans-serif;font-weight:700;font-size:0.95rem;cursor:pointer;transition:all 0.3s;display:inline-block;text-decoration:none;text-align:center;}
+        .btn:disabled{opacity:0.35;cursor:not-allowed;}
+        .btn-gold{background:var(--secondary-gold);color:var(--primary-navy);}.btn-gold:hover:not(:disabled){background:#e5b96a;}
+        .btn-outline{background:transparent;border:1px solid rgba(212,165,86,0.4);color:var(--text-light);}.btn-outline:hover{background:rgba(212,165,86,0.1);}
+        .btn-row{display:flex;gap:10px;margin-top:20px;flex-wrap:wrap;}
+        .note-box{background:rgba(212,165,86,0.06);border:1px solid rgba(212,165,86,0.2);border-radius:8px;padding:12px 14px;font-size:0.82rem;color:rgba(245,245,245,0.6);line-height:1.6;margin-top:15px;}
+        @media(max-width:480px){.content-box{padding:18px 14px;}}
+    </style>
+</head>
+<body>
+<div class="stars" id="stars"></div>
+<div class="container">
+    <div class="pyc-progress">
+        <div class="pyc-progress-title">Your Tenting Journey</div>
+        <div class="pyc-steps" id="pycSteps">
+            <div class="pyc-line" id="pycLine" style="width:0;"></div>
+            <div class="pyc-s done"><div class="pyc-dot">&#10003;</div><div class="pyc-lbl">Book Tenting</div></div>
+            <div class="pyc-s now"><div class="pyc-dot">2</div><div class="pyc-lbl">Review</div></div>
+            <div class="pyc-s"><div class="pyc-dot">3</div><div class="pyc-lbl">Pay</div></div>
+            <div class="pyc-s"><div class="pyc-dot">4</div><div class="pyc-lbl">All Done!</div></div>
+        </div>
+        <div class="pyc-hint">Step 2 of 4 &mdash; Confirm your reservation</div>
+        <script>(function(){var s=document.getElementById('pycSteps');var l=document.getElementById('pycLine');var now=s.querySelector('.pyc-s.now .pyc-dot');if(!s||!l||!now)return;function calc(){var sr=s.getBoundingClientRect();var nr=now.getBoundingClientRect();var edge=nr.left-sr.left+nr.width/2;l.style.width=edge+'px';l.style.left='0px';}calc();window.addEventListener('resize',calc);})();</script>
+    </div>
+    <div class="page-header"><h1>Review Your Reservation</h1><p>Please confirm your tenting details below</p></div>
+    <div id="alertBox"></div>
+    <div class="content-box" id="noDataBox" style="display:none;text-align:center;">
+        <p style="color:rgba(245,245,245,0.5);margin-bottom:15px;">No reservation data found. Please start from the tenting page.</p>
+        <a href="/tenting" class="btn btn-outline">Go to Tenting Page</a>
+    </div>
+    <div id="reviewContent" style="display:none;">
+        <div class="content-box">
+            <h3>Reservation Summary</h3>
+            <div class="summary-row"><span class="sr-label">Booked By</span><span class="sr-value" id="revName"></span></div>
+            <div class="summary-row"><span class="sr-label">Email</span><span class="sr-value" id="revEmail" style="font-size:0.85rem;"></span></div>
+            <div class="summary-row"><span class="sr-label">Total Tents</span><span class="sr-value" id="revTentCount"></span></div>
+            <div class="summary-row"><span class="sr-label">Total People</span><span class="sr-value" id="revPeopleCount"></span></div>
+            <div class="summary-row"><span class="sr-label">Price per Person</span><span class="sr-value">&#8369;150.00</span></div>
+            <div class="summary-row" style="border-top:1px solid rgba(212,165,86,0.3);margin-top:8px;padding-top:12px;"><span class="sr-label" style="color:var(--secondary-gold);font-weight:700;">Total Amount</span><span class="sr-value" id="revTotalAmount" style="color:var(--secondary-gold);font-weight:700;font-size:1.15rem;"></span></div>
+        </div>
+        <div id="tentCards"></div>
+        <div class="note-box">Canopy assignment is automatic and will be shown on your confirmation. Tent spaces are 2m&times;2m under a shared canopy structure. You will be taken to the payment page next.</div>
+        <div class="btn-row">
+            <a href="/tenting" class="btn btn-outline">Back to Edit</a>
+            <button class="btn btn-gold" id="confirmBtn" onclick="proceedToPayment()" style="flex:1;">Proceed to Payment &rarr;</button>
+        </div>
+    </div>
+</div>
+<script>
+(function(){var c=document.getElementById('stars');var z=['top','bottom','left','right'];for(var i=0;i<40;i++){var s=document.createElement('div');s.className='star';var zone=z[Math.floor(Math.random()*4)];var l,t;if(zone==='top'){l=Math.random()*100;t=Math.random()*20;}else if(zone==='bottom'){l=Math.random()*100;t=80+Math.random()*20;}else if(zone==='left'){l=Math.random()*15;t=20+Math.random()*60;}else{l=85+Math.random()*15;t=20+Math.random()*60;}var sz=Math.random()*3+2;s.style.cssText='width:'+sz+'px;height:'+sz+'px;left:'+l+'%;top:'+t+'%;animation-delay:'+Math.random()*3+'s;animation-duration:'+(Math.random()*2+2)+'s;';c.appendChild(s);}})();
+function esc(s){if(!s)return'';var d=document.createElement('div');d.textContent=String(s);return d.innerHTML;}
+var reviewData=null;
+try{reviewData=JSON.parse(sessionStorage.getItem('tentReview'));}catch(e){}
+var PRICE_PER_PERSON=150;
+if(!reviewData||!reviewData.tents||reviewData.tents.length===0){
+    document.getElementById('noDataBox').style.display='block';
+}else{
+    document.getElementById('reviewContent').style.display='block';
+    document.getElementById('revName').textContent=reviewData.registrantName;
+    document.getElementById('revEmail').textContent=reviewData.registrantEmail;
+    document.getElementById('revTentCount').textContent=reviewData.tents.length;
+    var totalPeople=0;
+    reviewData.tents.forEach(function(t){totalPeople+=t.members.length;});
+    document.getElementById('revPeopleCount').textContent=totalPeople;
+    var grandTotal=totalPeople*PRICE_PER_PERSON;
+    document.getElementById('revTotalAmount').textContent='\u20B1'+grandTotal.toLocaleString(undefined,{minimumFractionDigits:2});
+    var cardsH='';
+    var groupTypeLabels={married:'Married Couple',family:'Family',friends:'Friends'};
+    reviewData.tents.forEach(function(t,i){
+        var tentSubtotal=t.members.length*PRICE_PER_PERSON;
+        var gtLabel=groupTypeLabels[t.groupType]||'';
+        cardsH+='<div class="review-card"><h4>Tent '+(i+1)+' \u2014 '+t.tentSize+'-Person'+(gtLabel?' \u2014 <span style="color:var(--secondary-gold);font-size:0.85rem;">'+esc(gtLabel)+'</span>':'')+' <span style="color:var(--secondary-gold);font-size:0.85rem;float:right;">\u20B1'+tentSubtotal.toLocaleString()+'</span></h4>';
+        t.members.forEach(function(m){
+            cardsH+='<div class="review-member">'+esc(m.name)+'<span class="rm-pyc">'+esc(m.pycNumber)+'</span></div>';
+        });
+        cardsH+='</div>';
+    });
+    document.getElementById('tentCards').innerHTML=cardsH;
+}
+async function proceedToPayment(){
+    if(!reviewData)return;
+    var btn=document.getElementById('confirmBtn');
+    btn.disabled=true;btn.textContent='Creating reservation...';
+    try{
+        var res=await fetch('/.netlify/functions/submit-tent',{
+            method:'POST',headers:{'Content-Type':'application/json'},
+            body:JSON.stringify({registrationId:reviewData.registrationId,registrantName:reviewData.registrantName,registrantEmail:reviewData.registrantEmail,tents:reviewData.tents})
+        });
+        var data=await res.json();
+        if(res.ok&&data.success){
+            // Build cart items for payment page
+            var cartItems=reviewData.tents.map(function(t,i){
+                var subtotal=t.members.length*PRICE_PER_PERSON;
+                return{displayName:'Tent '+(i+1)+' ('+t.members.length+' person'+(t.members.length>1?'s':'')+')',subtotal:subtotal};
+            });
+            sessionStorage.setItem('tentingCart',JSON.stringify(cartItems));
+            sessionStorage.setItem('tentingTotalAmount',String(data.grandTotal||(totalPeople*PRICE_PER_PERSON)));
+            sessionStorage.setItem('tentingGroupId',data.groupId);
+            sessionStorage.setItem('tentingRegistrantName',reviewData.registrantName);
+            sessionStorage.setItem('tentingRegistrantEmail',reviewData.registrantEmail);
+            // Round-robin GCash A/B
+            var acctKeys=['A','B'];var acctIdx=Math.floor(Math.random()*acctKeys.length);
+            sessionStorage.setItem('tentingPaymentAccount',acctKeys[acctIdx]);
+            sessionStorage.removeItem('tentReview');
+            window.location.href='/tenting-payment';
+        }else{
+            document.getElementById('alertBox').innerHTML='<div class="alert alert-error">'+(data.error||'Reservation failed.')+'</div>';
+            window.scrollTo({top:0,behavior:'smooth'});
+            btn.disabled=false;btn.textContent='Proceed to Payment \u2192';
+        }
+    }catch(e){
+        document.getElementById('alertBox').innerHTML='<div class="alert alert-error">Error: '+e.message+'</div>';
+        btn.disabled=false;btn.textContent='Proceed to Payment \u2192';
+    }
+}
+</script>
+</body>
+</html>

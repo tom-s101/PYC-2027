@@ -1,0 +1,601 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Analytics - PYC 2026</title>
+    <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Montserrat:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Montserrat', sans-serif;
+            background: linear-gradient(135deg, #0f1419 0%, #1a2332 50%, #2a3f5f 100%);
+            color: #f5f5f5;
+            min-height: 100vh;
+        }
+
+        /* Login Screen */
+        #loginScreen {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            min-height: 100vh;
+            padding: 20px;
+        }
+
+        .login-container {
+            background: rgba(26, 35, 50, 0.95);
+            padding: 50px 40px;
+            border-radius: 20px;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.5);
+            max-width: 450px;
+            width: 100%;
+            border: 2px solid rgba(212, 165, 86, 0.3);
+        }
+
+        .login-title {
+            font-family: 'Bebas Neue', sans-serif;
+            font-size: 2.5rem;
+            color: #d4a556;
+            text-align: center;
+            margin-bottom: 10px;
+            letter-spacing: 2px;
+        }
+
+        .login-subtitle {
+            text-align: center;
+            color: rgba(245, 245, 245, 0.7);
+            margin-bottom: 30px;
+            font-size: 0.95rem;
+        }
+
+        .form-group {
+            margin-bottom: 25px;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 8px;
+            color: #d4a556;
+            font-weight: 500;
+        }
+
+        .form-group input {
+            width: 100%;
+            padding: 15px;
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(212, 165, 86, 0.3);
+            border-radius: 8px;
+            color: #f5f5f5;
+            font-size: 1rem;
+            transition: all 0.3s;
+        }
+
+        .form-group input:focus {
+            outline: none;
+            border-color: #d4a556;
+            background: rgba(255, 255, 255, 0.08);
+        }
+
+        .login-btn {
+            width: 100%;
+            padding: 15px;
+            background: #d4a556;
+            color: #1a2332;
+            border: none;
+            border-radius: 8px;
+            font-size: 1.1rem;
+            font-weight: 700;
+            cursor: pointer;
+            transition: all 0.3s;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .login-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(212, 165, 86, 0.4);
+        }
+
+        .alert {
+            padding: 12px;
+            border-radius: 8px;
+            margin-bottom: 20px;
+            display: none;
+        }
+
+        .alert-error {
+            background: rgba(231, 76, 60, 0.2);
+            border: 1px solid #e74c3c;
+            color: #e74c3c;
+        }
+
+        /* Analytics Screen */
+        #analyticsScreen {
+            display: none;
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 30px;
+            flex-wrap: wrap;
+            gap: 20px;
+        }
+
+        h1 {
+            font-family: 'Bebas Neue', sans-serif;
+            font-size: 2.5rem;
+            color: #d4a556;
+            letter-spacing: 2px;
+        }
+
+        .header-actions {
+            display: flex;
+            gap: 15px;
+        }
+
+        .btn {
+            padding: 10px 20px;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: all 0.3s;
+            font-weight: 600;
+            border: none;
+        }
+
+        .btn-refresh {
+            background: rgba(39, 174, 96, 0.2);
+            border: 1px solid #27ae60;
+            color: #27ae60;
+        }
+
+        .btn-logout {
+            background: rgba(231, 76, 60, 0.2);
+            border: 1px solid #e74c3c;
+            color: #e74c3c;
+        }
+
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+            margin-bottom: 40px;
+        }
+
+        .stat-card {
+            background: rgba(26, 35, 50, 0.8);
+            padding: 30px;
+            border-radius: 15px;
+            border: 1px solid rgba(212, 165, 86, 0.3);
+            transition: all 0.3s;
+        }
+
+        .stat-card:hover {
+            transform: translateY(-5px);
+            border-color: #d4a556;
+        }
+
+        .stat-card.highlight {
+            border: 2px solid #CE1126;
+            background: linear-gradient(135deg, rgba(206, 17, 38, 0.15), rgba(26, 35, 50, 0.9));
+        }
+
+        .stat-label {
+            font-size: 0.9rem;
+            color: rgba(245, 245, 245, 0.6);
+            margin-bottom: 10px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .stat-value {
+            font-size: 3rem;
+            color: #d4a556;
+            font-weight: 700;
+            margin-bottom: 8px;
+        }
+
+        .stat-card.highlight .stat-value {
+            color: #CE1126;
+        }
+
+        .stat-subtext {
+            font-size: 0.85rem;
+            color: rgba(245, 245, 245, 0.5);
+        }
+
+        .info-box {
+            background: rgba(52, 152, 219, 0.1);
+            border: 1px solid #3498db;
+            padding: 20px;
+            border-radius: 10px;
+            margin-bottom: 30px;
+        }
+
+        .info-box h3 {
+            color: #3498db;
+            margin-bottom: 10px;
+        }
+
+        .visitor-table-section {
+            background: rgba(26, 35, 50, 0.8);
+            padding: 30px;
+            border-radius: 15px;
+            border: 1px solid rgba(212, 165, 86, 0.3);
+        }
+
+        .section-title {
+            font-family: 'Bebas Neue', sans-serif;
+            font-size: 1.8rem;
+            color: #d4a556;
+            margin-bottom: 20px;
+            letter-spacing: 1px;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+
+        th {
+            background: rgba(212, 165, 86, 0.2);
+            color: #d4a556;
+            padding: 15px;
+            text-align: left;
+            font-weight: 600;
+            text-transform: uppercase;
+            font-size: 0.85rem;
+        }
+
+        td {
+            padding: 15px;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        tr:hover {
+            background: rgba(255, 255, 255, 0.05);
+        }
+
+        .loading {
+            text-align: center;
+            padding: 40px;
+            color: rgba(245, 245, 245, 0.6);
+        }
+
+        .error {
+            background: rgba(231, 76, 60, 0.1);
+            border: 1px solid #e74c3c;
+            padding: 20px;
+            border-radius: 10px;
+            color: #e74c3c;
+            margin-bottom: 20px;
+        }
+
+        .hidden {
+            display: none;
+        }
+
+        @media (max-width: 768px) {
+            h1 {
+                font-size: 2rem;
+            }
+
+            .stat-value {
+                font-size: 2.5rem;
+            }
+
+            table {
+                font-size: 0.85rem;
+            }
+
+            th, td {
+                padding: 10px 5px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Login Screen -->
+    <div id="loginScreen">
+        <div class="login-container">
+            <h1 class="login-title">📊 Analytics</h1>
+            <p class="login-subtitle">Simple Dashboard - Admin Access</p>
+            
+            <div id="loginAlert" class="alert alert-error"></div>
+            
+            <form id="loginForm">
+                <div class="form-group">
+                    <label for="username">Username</label>
+                    <input type="text" id="username" required autocomplete="username">
+                </div>
+                
+                <div class="form-group">
+                    <label for="password">Password</label>
+                    <input type="password" id="password" required autocomplete="current-password">
+                </div>
+                
+                <button type="submit" class="login-btn">Login</button>
+            </form>
+        </div>
+    </div>
+
+    <!-- Analytics Screen -->
+    <div id="analyticsScreen">
+        <div class="container">
+            <div class="header">
+                <h1>📊 Visitor Analytics</h1>
+                <div class="header-actions">
+                    <button class="btn btn-refresh" onclick="loadData()">🔄 Refresh</button>
+                    <button class="btn btn-logout" onclick="logout()">Logout</button>
+                </div>
+            </div>
+
+            <div id="errorBox" class="error" style="display: none;"></div>
+
+            <div class="info-box">
+                <h3>📢 Important Note</h3>
+                <p>Visitor tracking is active! However, geolocation data may be limited. We're showing all visits including those without location data.</p>
+            </div>
+
+            <!-- Stats Grid -->
+            <div class="stats-grid">
+                <div class="stat-card">
+                    <div class="stat-label">Total Visitors</div>
+                    <div class="stat-value" id="totalVisitors">--</div>
+                    <div class="stat-subtext">All time</div>
+                </div>
+
+                <div class="stat-card highlight">
+                    <div class="stat-label">🇵🇭 Philippines</div>
+                    <div class="stat-value" id="philippinesVisitors">--</div>
+                    <div class="stat-subtext" id="phPercent">--</div>
+                </div>
+
+                <div class="stat-card">
+                    <div class="stat-label">🌍 International</div>
+                    <div class="stat-value" id="internationalVisitors">--</div>
+                    <div class="stat-subtext" id="intPercent">--</div>
+                </div>
+
+                <div class="stat-card">
+                    <div class="stat-label">❓ Unknown Location</div>
+                    <div class="stat-value" id="unknownVisitors">--</div>
+                    <div class="stat-subtext">No location data</div>
+                </div>
+
+                <div class="stat-card">
+                    <div class="stat-label">📅 Today</div>
+                    <div class="stat-value" id="todayVisitors">--</div>
+                    <div class="stat-subtext">Last 24 hours</div>
+                </div>
+
+                <div class="stat-card">
+                    <div class="stat-label">📊 This Week</div>
+                    <div class="stat-value" id="weekVisitors">--</div>
+                    <div class="stat-subtext">Last 7 days</div>
+                </div>
+            </div>
+
+            <!-- Recent Visitors Table -->
+            <div class="visitor-table-section">
+                <h2 class="section-title">👥 Recent Visitors (Last 50)</h2>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>IP Address</th>
+                            <th>Country</th>
+                            <th>City</th>
+                            <th>Time</th>
+                        </tr>
+                    </thead>
+                    <tbody id="visitorsTable">
+                        <tr><td colspan="4" class="loading">Loading...</td></tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        let sessionToken = null;
+        let currentUser = null;
+
+        // Login form handler
+        document.getElementById('loginForm').addEventListener('submit', async (e) => {
+            e.preventDefault();
+            
+            const username = document.getElementById('username').value;
+            const password = document.getElementById('password').value;
+            const loginBtn = e.target.querySelector('.login-btn');
+            const originalText = loginBtn.textContent;
+            
+            loginBtn.disabled = true;
+            loginBtn.textContent = 'Logging in...';
+            
+            try {
+                const response = await fetch('/.netlify/functions/admin-login', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ username, password })
+                });
+                
+                const result = await response.json();
+                
+                if (response.ok && result.success) {
+                    if (result.role !== 'admin') {
+                        showAlert('Access denied. Admin credentials required.');
+                        loginBtn.disabled = false;
+                        loginBtn.textContent = originalText;
+                        return;
+                    }
+                    
+                    sessionToken = result.sessionToken;
+                    currentUser = result.username;
+                    
+                    localStorage.setItem('analyticsSessionToken', sessionToken);
+                    localStorage.setItem('analyticsUsername', currentUser);
+                    
+                    showDashboard();
+                } else {
+                    showAlert(result.message || 'Invalid credentials');
+                }
+            } catch (error) {
+                console.error('Login error:', error);
+                showAlert('Login failed. Please try again.');
+            } finally {
+                loginBtn.disabled = false;
+                loginBtn.textContent = originalText;
+            }
+        });
+
+        function showAlert(message) {
+            const alert = document.getElementById('loginAlert');
+            alert.textContent = message;
+            alert.style.display = 'block';
+            setTimeout(() => {
+                alert.style.display = 'none';
+            }, 5000);
+        }
+
+        // Check for existing session on load
+        window.addEventListener('load', async () => {
+            const storedToken = localStorage.getItem('analyticsSessionToken');
+            if (storedToken) {
+                const isValid = await validateSession(storedToken);
+                if (isValid) {
+                    sessionToken = storedToken;
+                    currentUser = localStorage.getItem('analyticsUsername');
+                    showDashboard();
+                } else {
+                    localStorage.removeItem('analyticsSessionToken');
+                    localStorage.removeItem('analyticsUsername');
+                }
+            }
+        });
+
+        async function validateSession(token) {
+            try {
+                const response = await fetch('/.netlify/functions/admin-validate-session', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ sessionToken: token })
+                });
+                
+                const result = await response.json();
+                return result.valid === true && result.role === 'admin';
+            } catch (error) {
+                console.error('Session validation error:', error);
+                return false;
+            }
+        }
+
+        function showDashboard() {
+            document.getElementById('loginScreen').classList.add('hidden');
+            document.getElementById('analyticsScreen').style.display = 'block';
+            loadData();
+        }
+
+        async function loadData() {
+            try {
+                showError('');
+                
+                const response = await fetch('/.netlify/functions/get-visitor-analytics', {
+                    method: 'GET',
+                    headers: {
+                        'Authorization': `Bearer ${sessionToken}`
+                    }
+                });
+
+                if (!response.ok) {
+                    const errorText = await response.text();
+                    throw new Error(`HTTP ${response.status}: ${errorText}`);
+                }
+
+                const data = await response.json();
+                console.log('Received data:', data);
+
+                // Update stats
+                document.getElementById('totalVisitors').textContent = data.totalVisitors || 0;
+                document.getElementById('philippinesVisitors').textContent = data.philippinesVisitors || 0;
+                document.getElementById('internationalVisitors').textContent = data.internationalVisitors || 0;
+                document.getElementById('unknownVisitors').textContent = data.unknownLocationVisitors || 0;
+                document.getElementById('todayVisitors').textContent = data.todayVisitors || 0;
+                document.getElementById('weekVisitors').textContent = data.weekVisitors || 0;
+
+                // Calculate percentages
+                if (data.totalVisitors > 0) {
+                    const phPercent = ((data.philippinesVisitors / data.totalVisitors) * 100).toFixed(1);
+                    const intPercent = ((data.internationalVisitors / data.totalVisitors) * 100).toFixed(1);
+                    document.getElementById('phPercent').textContent = `${phPercent}% of total`;
+                    document.getElementById('intPercent').textContent = `${intPercent}% of total`;
+                }
+
+                // Update visitors table
+                updateTable(data.recentVisitors || []);
+
+            } catch (error) {
+                console.error('Error loading analytics:', error);
+                showError(`Failed to load analytics: ${error.message}`);
+            }
+        }
+
+        function updateTable(visitors) {
+            const tbody = document.getElementById('visitorsTable');
+            
+            if (visitors.length === 0) {
+                tbody.innerHTML = '<tr><td colspan="4" style="text-align: center; color: rgba(245, 245, 245, 0.5);">No visitors yet</td></tr>';
+                return;
+            }
+
+            tbody.innerHTML = visitors.slice(0, 50).map(v => {
+                const country = v.country || 'Unknown';
+                const city = v.city || 'Unknown';
+                const time = new Date(v.visited_at).toLocaleString();
+                
+                return `
+                    <tr>
+                        <td>${v.ip_address}</td>
+                        <td>${country === 'Philippines' || country === 'PH' ? '🇵🇭 ' : ''}${country}</td>
+                        <td>${city}</td>
+                        <td>${time}</td>
+                    </tr>
+                `;
+            }).join('');
+        }
+
+        function showError(message) {
+            const errorBox = document.getElementById('errorBox');
+            if (message) {
+                errorBox.textContent = message;
+                errorBox.style.display = 'block';
+            } else {
+                errorBox.style.display = 'none';
+            }
+        }
+
+        function logout() {
+            localStorage.removeItem('analyticsSessionToken');
+            localStorage.removeItem('analyticsUsername');
+            document.getElementById('analyticsScreen').style.display = 'none';
+            document.getElementById('loginScreen').classList.remove('hidden');
+            document.getElementById('username').value = '';
+            document.getElementById('password').value = '';
+            sessionToken = null;
+            currentUser = null;
+        }
+    </script>
+</body>
+</html>

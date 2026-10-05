@@ -1,0 +1,683 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+<title>PYC 2026 Verification</title>
+<style>
+*{margin:0;padding:0;box-sizing:border-box;}
+body{
+  font-family:'Segoe UI',sans-serif;
+  background:#0a0a1a;
+  color:#fff;
+  height:100vh;
+  overflow:hidden;
+  user-select:none;
+  -webkit-user-select:none;
+}
+
+/* ===== SCREENS ===== */
+.screen{
+  position:fixed;inset:0;
+  display:flex;flex-direction:column;
+  align-items:center;justify-content:center;
+  transition:opacity 0.5s ease;
+}
+.screen.hidden{opacity:0;pointer-events:none;}
+
+/* ===== SCREEN 1: SCAN ===== */
+#scanScreen{background:linear-gradient(135deg,#0d1117 0%,#0a1628 100%);}
+.scan-wrapper{
+  width:min(90vw,480px);
+  background:rgba(15,25,50,0.95);
+  border:1px solid #1e3a5f;
+  border-radius:12px;
+  overflow:hidden;
+  box-shadow:0 0 40px rgba(0,100,255,0.2);
+}
+.scan-header{
+  background:linear-gradient(90deg,#0d1f3c,#1a3a6b);
+  padding:14px 20px;
+  display:flex;align-items:center;gap:10px;
+  border-bottom:1px solid #1e3a5f;
+}
+.scan-header .icon{font-size:1.2rem;}
+.scan-header h2{font-size:0.95rem;color:#64a8ff;letter-spacing:1px;text-transform:uppercase;}
+.scan-status{
+  margin-left:auto;font-size:0.75rem;color:#ff4444;
+  animation:blink 1s infinite;
+}
+@keyframes blink{0%,100%{opacity:1;}50%{opacity:0.3;}}
+.form-fields{padding:16px 20px;position:relative;}
+.form-row{
+  display:flex;gap:10px;margin-bottom:8px;
+}
+.form-field{
+  flex:1;background:rgba(255,255,255,0.04);
+  border:1px solid #1e3a5f;border-radius:6px;
+  padding:8px 12px;
+}
+.form-field label{display:block;font-size:0.65rem;color:#64a8ff;text-transform:uppercase;letter-spacing:0.5px;margin-bottom:3px;}
+.form-field span{font-size:0.85rem;color:#c8d8f0;}
+.laser{
+  position:absolute;left:0;right:0;
+  height:3px;
+  background:linear-gradient(90deg,transparent,#ff0000,#ff4444,#ff0000,transparent);
+  box-shadow:0 0 12px #ff0000, 0 0 24px rgba(255,0,0,0.5);
+  top:0;
+  animation:laser-scan 2.5s ease-in-out infinite;
+  pointer-events:none;
+}
+@keyframes laser-scan{
+  0%{top:0;opacity:0;}
+  10%{opacity:1;}
+  90%{opacity:1;}
+  100%{top:100%;opacity:0;}
+}
+.scan-progress{
+  width:min(90vw,480px);height:4px;
+  background:rgba(255,255,255,0.1);
+  margin-top:16px;border-radius:2px;overflow:hidden;
+}
+.scan-progress-bar{
+  height:100%;width:0;
+  background:linear-gradient(90deg,#0066ff,#00ccff);
+  transition:width 0.1s linear;
+}
+.scan-label{margin-top:12px;font-size:0.8rem;color:#64a8ff;letter-spacing:1px;text-align:center;}
+
+/* ===== SHARED FESTIVE BG ===== */
+.festive-bg{background:radial-gradient(ellipse at center,#1a0a2e 0%,#0a0a1a 100%);}
+
+/* ===== SCREEN 2 & 2B: MONKEY REVEAL ===== */
+#revealScreen,#revealScreen2{
+  background:radial-gradient(ellipse at center,#1a0a2e 0%,#0a0a1a 100%);
+}
+.monkey-area{
+  display:flex;flex-direction:column;
+  align-items:center;gap:20px;
+  padding:20px;
+  position:relative;z-index:10;
+}
+.speech-bubble{
+  background:#fff;color:#1a1a2e;
+  border-radius:20px;padding:20px 28px;
+  max-width:min(85vw,380px);
+  font-size:1rem;line-height:1.5;
+  text-align:center;
+  position:relative;
+  box-shadow:0 8px 32px rgba(0,0,0,0.4);
+  animation:bubblePop 0.5s cubic-bezier(0.175,0.885,0.32,1.275);
+}
+.speech-bubble::after{
+  content:'';position:absolute;bottom:-18px;left:50%;transform:translateX(-50%);
+  border:10px solid transparent;border-top:10px solid #fff;
+}
+@keyframes bubblePop{
+  0%{transform:scale(0.5);opacity:0;}
+  100%{transform:scale(1);opacity:1;}
+}
+.monkey-img{
+  width:min(180px,45vw);
+  animation:monkeyBob 2s ease-in-out infinite;
+  cursor:pointer;
+  -webkit-tap-highlight-color:transparent;
+}
+@keyframes monkeyBob{
+  0%,100%{transform:translateY(0) rotate(-3deg);}
+  50%{transform:translateY(-10px) rotate(3deg);}
+}
+.next-btn{
+  background:linear-gradient(135deg,#ff6b35,#f7931e);
+  color:#fff;border:none;
+  padding:14px 32px;border-radius:50px;
+  font-size:1rem;font-weight:700;
+  cursor:pointer;
+  box-shadow:0 4px 20px rgba(255,107,53,0.5);
+  transition:transform 0.15s,box-shadow 0.15s;
+  -webkit-tap-highlight-color:transparent;
+}
+.next-btn:active{transform:scale(0.95);}
+
+/* Floating confetti */
+.confetti-piece{
+  position:fixed;
+  width:10px;height:10px;
+  pointer-events:none;
+  z-index:5;
+  animation:confettiFall linear forwards;
+}
+@keyframes confettiFall{
+  0%{transform:translateY(-20px) rotate(0deg);opacity:1;}
+  100%{transform:translateY(110vh) rotate(720deg);opacity:0;}
+}
+
+/* ===== MONKEY WATERFALL ===== */
+.waterfall-monkey{
+  position:fixed;
+  font-size:2rem;
+  pointer-events:none;
+  z-index:100;
+  line-height:1;
+}
+
+/* ===== SCREEN 3: WHEEL ===== */
+#wheelScreen{
+  background:radial-gradient(ellipse at center,#1a0a2e 0%,#0a0a1a 100%);
+  gap:10px;padding:20px;
+}
+.wheel-title{
+  font-size:1.4rem;font-weight:800;
+  text-align:center;
+  background:linear-gradient(135deg,#ffd700,#ff6b35);
+  -webkit-background-clip:text;-webkit-text-fill-color:transparent;
+  letter-spacing:1px;
+}
+.wheel-subtitle{font-size:0.8rem;color:#aaa;text-align:center;}
+.wheel-container{
+  position:relative;
+  width:min(75vw,320px);
+  height:min(75vw,320px);
+}
+.wheel-container canvas{width:100%;height:100%;}
+.wheel-pointer{
+  position:absolute;top:-16px;left:50%;
+  transform:translateX(-50%);
+  width:0;height:0;
+  border-left:14px solid transparent;
+  border-right:14px solid transparent;
+  border-top:28px solid #ffd700;
+  filter:drop-shadow(0 2px 6px rgba(255,215,0,0.8));
+  z-index:10;
+}
+.spin-btn{
+  background:linear-gradient(135deg,#ffd700,#ff6b35);
+  color:#1a1a2e;border:none;
+  padding:14px 40px;border-radius:50px;
+  font-size:1.1rem;font-weight:900;
+  cursor:pointer;
+  box-shadow:0 4px 24px rgba(255,215,0,0.5);
+  transition:transform 0.15s;
+  letter-spacing:1px;
+  -webkit-tap-highlight-color:transparent;
+}
+.spin-btn:active{transform:scale(0.95);}
+.spin-btn:disabled{opacity:0.5;cursor:not-allowed;}
+.wheel-result{
+  font-size:1.1rem;font-weight:700;text-align:center;
+  min-height:30px;color:#ffd700;
+}
+.continue-btn{
+  background:linear-gradient(135deg,#27ae60,#2ecc71);
+  color:#fff;border:none;
+  padding:14px 32px;border-radius:50px;
+  font-size:1rem;font-weight:700;
+  cursor:pointer;
+  box-shadow:0 4px 20px rgba(39,174,96,0.5);
+  opacity:0;transform:translateY(20px);
+  transition:opacity 0.4s,transform 0.4s;
+  pointer-events:none;
+  -webkit-tap-highlight-color:transparent;
+}
+.continue-btn.show{opacity:1;transform:translateY(0);pointer-events:auto;}
+
+@media(max-height:700px){
+  .monkey-img{width:130px;}
+  .speech-bubble{font-size:0.88rem;padding:14px 20px;}
+  .wheel-container{width:min(60vw,260px);height:min(60vw,260px);}
+  .wheel-title{font-size:1.1rem;}
+}
+@media(max-height:600px){
+  .monkey-img{width:100px;}
+  .wheel-container{width:min(55vw,220px);height:min(55vw,220px);}
+}
+</style>
+</head>
+<body>
+
+<!-- SCREEN 1: SCAN -->
+<div id="scanScreen" class="screen">
+  <div class="scan-wrapper">
+    <div class="scan-header">
+      <span class="icon">🛡️</span>
+      <h2>PYC 2026 Verification System</h2>
+      <span class="scan-status" id="scanStatusText">Initializing...</span>
+    </div>
+    <div class="form-fields" id="formFields">
+      <div class="laser" id="laserLine"></div>
+    </div>
+  </div>
+  <div class="scan-progress"><div class="scan-progress-bar" id="progressBar"></div></div>
+  <div class="scan-label" id="scanLabel">Checking your application and genetic history...</div>
+</div>
+
+<!-- SCREEN 2: FIRST MONKEY BUBBLE -->
+<div id="revealScreen" class="screen hidden">
+  <div class="monkey-area">
+    <div class="speech-bubble" id="bubble1">
+      After a comprehensive review, our advanced AI systems has detected that <strong>you are a monkey!</strong> 🦁
+    </div>
+    <img src="/monkey.png" alt="Monkey" class="monkey-img" id="monkeyImg1" ondblclick="startWaterfall()">
+    <button class="next-btn" onclick="showReveal2()">What?! 😲</button>
+  </div>
+</div>
+
+<!-- SCREEN 2B: SECOND MONKEY BUBBLE -->
+<div id="revealScreen2" class="screen hidden">
+  <div class="monkey-area">
+    <div class="speech-bubble" id="bubble2">
+      Because you are a monkey, you get to spin our <strong>exclusive discount wheel</strong>, which may make your PYC registration <strong>completely FREE</strong> or heavily discounted! 🎉
+    </div>
+    <img src="/monkey.png" alt="Monkey" class="monkey-img" id="monkeyImg2" ondblclick="startWaterfall()">
+    <button class="next-btn" onclick="showWheelScreen()">Let me spin! 🎰</button>
+  </div>
+</div>
+
+<!-- SCREEN 3: SPIN WHEEL -->
+<div id="wheelScreen" class="screen hidden">
+  <div class="wheel-title">🎰 Monkey Discount Wheel 🎰</div>
+  <div class="wheel-subtitle">Spin to win your PYC registration discount!</div>
+  <div class="wheel-container">
+    <canvas id="wheelCanvas" width="600" height="600"></canvas>
+    <div class="wheel-pointer"></div>
+  </div>
+  <button class="spin-btn" id="spinBtn" onclick="spinWheel()">🎯 SPIN! 🎯</button>
+  <div class="wheel-result" id="wheelResult"></div>
+  <button class="continue-btn" id="continueBtn" onclick="goToNext()">Continue to Registration Details →</button>
+</div>
+
+<script>
+// ===== SESSION DATA =====
+var regName = sessionStorage.getItem('registrantName') || 'Registrant';
+var regFirst = regName.split(' ')[0] || 'Registrant';
+var regLast = regName.split(' ').slice(1).join(' ') || '';
+var regEmail = sessionStorage.getItem('registrantEmail') || 'N/A';
+var regMeal = sessionStorage.getItem('mealPlan') || 'full';
+var regId = sessionStorage.getItem('registrationId') || 'PYC-????';
+var regSeq = sessionStorage.getItem('registrationSequence') || '?';
+
+var mealNames = {full:'Full Meal Plan',half:'Half Meal Plan',sabbath:'Sabbath Only'};
+
+// ===== SCREEN TRACKING FOR WATERFALL =====
+var currentScreen = 'scan';
+var waterfallActive = false;
+var waterfallMonkeys = [];
+var waterfallInterval = null;
+var waterfallFrame = null;
+
+// ===== BUILD SCAN FORM =====
+function buildForm() {
+  var fields = document.getElementById('formFields');
+  var laser = document.getElementById('laserLine');
+  var data = [
+    [{label:'First Name', val:regFirst},{label:'Last Name', val:regLast}],
+    [{label:'Email', val:regEmail}],
+    [{label:'Registration ID', val:regId},{label:'Registrant #', val:'#'+regSeq}],
+    [{label:'Meal Plan', val:mealNames[regMeal]||regMeal},{label:'Status', val:'Registered'}],
+    [{label:'Payment', val:'Confirmed'},{label:'Genome Scan', val:'In Progress...'}]
+  ];
+  data.forEach(function(row){
+    var rowDiv = document.createElement('div');
+    rowDiv.className = 'form-row';
+    row.forEach(function(f){
+      var fd = document.createElement('div');
+      fd.className = 'form-field';
+      fd.innerHTML = '<label>'+f.label+'</label><span>'+f.val+'</span>';
+      rowDiv.appendChild(fd);
+    });
+    fields.appendChild(rowDiv);
+  });
+  fields.appendChild(laser);
+}
+
+// ===== SCAN SEQUENCE =====
+function runScan() {
+  buildForm();
+  var bar = document.getElementById('progressBar');
+  var label = document.getElementById('scanLabel');
+  var labels = [
+    'Checking your application and genetic history...',
+    'Analyzing biometric data...',
+    'Cross-referencing DNA database...',
+    'Confirming species classification...',
+    'Scan complete. Results ready!'
+  ];
+  var pct = 0;
+  var li = 0;
+  document.getElementById('scanStatusText').textContent = 'SCANNING';
+  var iv = setInterval(function(){
+    pct += 1.2;
+    bar.style.width = Math.min(pct,100) + '%';
+    var newLi = Math.floor((pct/100) * labels.length);
+    if(newLi !== li && newLi < labels.length){ li = newLi; label.textContent = labels[li]; }
+    if(pct >= 100){
+      clearInterval(iv);
+      document.getElementById('scanStatusText').textContent = 'COMPLETE';
+      setTimeout(showReveal1, 800);
+    }
+  }, 40);
+}
+
+// ===== CONFETTI =====
+var confettiColors = ['#ff6b35','#ffd700','#ff4488','#44ffaa','#4488ff','#ff44ff','#ffff44'];
+function launchConfetti(n) {
+  for(var i=0;i<(n||80);i++){
+    (function(delay){
+      setTimeout(function(){
+        var el = document.createElement('div');
+        el.className = 'confetti-piece';
+        el.style.left = Math.random()*100 + 'vw';
+        el.style.top = '-20px';
+        var size = Math.random()*10+5;
+        el.style.width = size+'px';
+        el.style.height = size+'px';
+        el.style.background = confettiColors[Math.floor(Math.random()*confettiColors.length)];
+        el.style.borderRadius = Math.random()>0.5?'50%':'2px';
+        el.style.animationDuration = (Math.random()*2+2)+'s';
+        el.style.animationDelay = '0s';
+        document.body.appendChild(el);
+        setTimeout(function(){el.remove();},4000);
+      }, delay);
+    })(i*30);
+  }
+}
+
+// ===== SHOW SCREENS =====
+function showReveal1() {
+  document.getElementById('scanScreen').classList.add('hidden');
+  document.getElementById('revealScreen').classList.remove('hidden');
+  currentScreen = 'reveal1';
+  launchConfetti(120);
+}
+function showReveal2() {
+  document.getElementById('revealScreen').classList.add('hidden');
+  document.getElementById('revealScreen2').classList.remove('hidden');
+  currentScreen = 'reveal2';
+  stopWaterfall();
+}
+function showWheelScreen() {
+  document.getElementById('revealScreen2').classList.add('hidden');
+  document.getElementById('wheelScreen').classList.remove('hidden');
+  currentScreen = 'wheel';
+  stopWaterfall();
+  initWheel();
+}
+
+// ===== WATERFALL OF MONKEYS =====
+var MONKEY_EMOJIS = ['🐒','🐵','🦧','🦍','🐒','🐵','🐒'];
+var monkeyCount = 0;
+var maxMonkeys = 600;
+var monkeyPool = [];
+
+function startWaterfall() {
+  if(waterfallActive) { stopWaterfall(); return; }
+  waterfallActive = true;
+  monkeyCount = 0;
+  monkeyPool = [];
+
+  // Spawn monkeys gradually - waterfall effect
+  var spawnInterval = setInterval(function(){
+    if(!waterfallActive){ clearInterval(spawnInterval); return; }
+    // Spawn 3-6 at a time with slight horizontal spread
+    var batch = Math.floor(Math.random()*4)+2;
+    for(var i=0;i<batch;i++){
+      if(monkeyCount >= maxMonkeys){ clearInterval(spawnInterval); return; }
+      spawnMonkey();
+    }
+  }, 60);
+
+  // Physics loop
+  function physicsLoop() {
+    if(!waterfallActive){ return; }
+    for(var i=0;i<monkeyPool.length;i++){
+      var m = monkeyPool[i];
+      if(!m.el.isConnected){ monkeyPool.splice(i,1); i--; continue; }
+      m.vy += m.gravity;
+      m.y += m.vy;
+      m.x += m.vx;
+      // Bounce off bottom
+      var floorY = window.innerHeight - m.size;
+      if(m.y >= floorY){
+        m.y = floorY;
+        m.vy = -Math.abs(m.vy) * m.bounce;
+        m.vx *= 0.98;
+        if(Math.abs(m.vy) < 0.5) m.vy = -(Math.random()*4+2); // keep bouncing
+      }
+      // Wrap horizontally
+      if(m.x < -m.size) m.x = window.innerWidth;
+      if(m.x > window.innerWidth) m.x = -m.size;
+      m.rot += m.rotSpeed;
+      m.el.style.transform = 'translate('+m.x+'px,'+m.y+'px) rotate('+m.rot+'deg)';
+    }
+    waterfallFrame = requestAnimationFrame(physicsLoop);
+  }
+  waterfallFrame = requestAnimationFrame(physicsLoop);
+
+  // Double-tap on screen to stop
+  var activeScreen = currentScreen==='reveal1'?'revealScreen':'revealScreen2';
+  document.getElementById(activeScreen).addEventListener('dblclick', function handler(e){
+    if(!e.target.classList.contains('monkey-img')){
+      stopWaterfall();
+      document.getElementById(activeScreen).removeEventListener('dblclick',handler);
+    }
+  });
+}
+
+function spawnMonkey() {
+  monkeyCount++;
+  var el = document.createElement('div');
+  el.className = 'waterfall-monkey';
+  var emoji = MONKEY_EMOJIS[Math.floor(Math.random()*MONKEY_EMOJIS.length)];
+  el.textContent = emoji;
+  var size = Math.random()*24+16; // 16-40px font size
+  el.style.fontSize = size+'px';
+  var x = Math.random()*(window.innerWidth - size);
+  var startY = -size - Math.random()*200; // staggered start heights for waterfall
+  el.style.transform = 'translate('+x+'px,'+startY+'px)';
+  document.body.appendChild(el);
+
+  var m = {
+    el: el,
+    x: x,
+    y: startY,
+    vx: (Math.random()-0.5)*3,
+    vy: Math.random()*3+1,
+    gravity: 0.15+Math.random()*0.25,
+    bounce: 0.45+Math.random()*0.4,
+    rot: Math.random()*360,
+    rotSpeed: (Math.random()-0.5)*8,
+    size: size
+  };
+  monkeyPool.push(m);
+}
+
+function stopWaterfall() {
+  waterfallActive = false;
+  if(waterfallFrame) cancelAnimationFrame(waterfallFrame);
+  // Remove all monkey elements
+  document.querySelectorAll('.waterfall-monkey').forEach(function(el){el.remove();});
+  monkeyPool = [];
+}
+
+// ===== SPIN WHEEL =====
+var wheelSegments = [
+  {label:'No Discount',color:'#c0392b',weight:1},
+  {label:'10% Off',color:'#8e44ad',weight:1},
+  {label:'No Discount',color:'#c0392b',weight:1},
+  {label:'25% Off',color:'#2980b9',weight:1},
+  {label:'No Discount',color:'#c0392b',weight:1},
+  {label:'50% Off',color:'#27ae60',weight:1},
+  {label:'No Discount',color:'#c0392b',weight:1},
+  {label:'100% FREE!',color:'#f39c12',weight:1},
+];
+var numSeg = wheelSegments.length;
+var sliceAngle = (2*Math.PI)/numSeg;
+var currentAngle = 0;
+var spinning = false;
+
+function initWheel(){
+  drawWheel(0);
+}
+
+function drawWheel(rotation){
+  var canvas = document.getElementById('wheelCanvas');
+  var ctx = canvas.getContext('2d');
+  var W = canvas.width, H = canvas.height;
+  var cx = W/2, cy = H/2;
+  var r = W/2 - 8;
+  ctx.clearRect(0,0,W,H);
+
+  // Outer ring
+  ctx.beginPath();
+  ctx.arc(cx,cy,r+6,0,2*Math.PI);
+  ctx.fillStyle='#ffd700';
+  ctx.fill();
+
+  for(var i=0;i<numSeg;i++){
+    var startA = rotation + i*sliceAngle - Math.PI/2;
+    var endA = startA + sliceAngle;
+    var seg = wheelSegments[i];
+
+    // Slice
+    ctx.beginPath();
+    ctx.moveTo(cx,cy);
+    ctx.arc(cx,cy,r,startA,endA);
+    ctx.closePath();
+    ctx.fillStyle = seg.color;
+    ctx.fill();
+    ctx.strokeStyle='rgba(255,255,255,0.3)';
+    ctx.lineWidth=2;
+    ctx.stroke();
+
+    // Label
+    ctx.save();
+    ctx.translate(cx,cy);
+    ctx.rotate(startA + sliceAngle/2);
+    ctx.textAlign='right';
+    ctx.fillStyle='#fff';
+    ctx.font='bold '+(W/22)+'px Segoe UI';
+    ctx.shadowColor='rgba(0,0,0,0.5)';
+    ctx.shadowBlur=4;
+    ctx.fillText(seg.label, r-10, 6);
+    ctx.restore();
+  }
+
+  // Center hub
+  ctx.beginPath();
+  ctx.arc(cx,cy,r*0.1,0,2*Math.PI);
+  ctx.fillStyle='#fff';
+  ctx.fill();
+  ctx.strokeStyle='#ffd700';
+  ctx.lineWidth=3;
+  ctx.stroke();
+}
+
+// Spin sound using Web Audio
+function playSpinSound(){
+  try{
+    var ctx2 = new (window.AudioContext||window.webkitAudioContext)();
+    function tick(freq,time){
+      var osc=ctx2.createOscillator();
+      var gain=ctx2.createGain();
+      osc.connect(gain);gain.connect(ctx2.destination);
+      osc.type='triangle';
+      osc.frequency.setValueAtTime(freq,time);
+      gain.gain.setValueAtTime(0.15,time);
+      gain.gain.exponentialRampToValueAtTime(0.001,time+0.08);
+      osc.start(time);osc.stop(time+0.08);
+    }
+    // Fast ticking that slows down
+    var now=ctx2.currentTime;
+    var totalDur=5;
+    var t=0;
+    var interval=0.05;
+    while(t<totalDur){
+      tick(400+Math.random()*200,now+t);
+      interval = 0.05+0.4*(t/totalDur)*(t/totalDur);
+      t+=interval;
+    }
+  }catch(e){}
+}
+
+function spinWheel(){
+  if(spinning) return;
+  spinning = true;
+  document.getElementById('spinBtn').disabled = true;
+  document.getElementById('wheelResult').textContent = '';
+  playSpinSound();
+
+  // Target: always land on "No Discount" (index 0, 2, 4, or 6)
+  // But make it LOOK like it almost hits 100% FREE (index 7) or 50% Off (index 5)
+  // The pointer is at top (12 o'clock). Segment[0] starts at top by default.
+  // We want to land on a "No Discount" segment.
+  // "100% FREE!" is index 7. Let's aim to stop just PAST it (into index 0 which is next No Discount)
+  // so it looks tantalisingly close.
+
+  // Calculate target angle: stop at index 0 (No Discount), but just barely past index 7
+  // Index 0 occupies angle [0, sliceAngle]. We want to land at about 5% into index 0
+  // = sliceAngle * 0.05 past the 0 boundary
+  // Add multiple full rotations (8-12) for drama
+  var fullSpins = (8 + Math.floor(Math.random()*4)) * 2 * Math.PI;
+  // Land just past 100% FREE into No Discount (segment 0)
+  // segment 0 center = sliceAngle/2 from top. Land near start of segment 0 (just past seg 7 boundary)
+  var landingOffset = sliceAngle * (0.05 + Math.random()*0.12); // very close to edge
+  var targetAngle = fullSpins + landingOffset;
+
+  var startAngle = currentAngle;
+  var duration = 5500;
+  var startTime = null;
+
+  function easeOut(t){ return 1 - Math.pow(1-t, 4); }
+
+  function animate(ts){
+    if(!startTime) startTime = ts;
+    var elapsed = ts - startTime;
+    var progress = Math.min(elapsed/duration, 1);
+    var eased = easeOut(progress);
+    var angle = startAngle + targetAngle * eased;
+    currentAngle = angle;
+    drawWheel(angle);
+
+    if(progress < 1){
+      requestAnimationFrame(animate);
+    } else {
+      // Done spinning
+      spinning = false;
+      showResult();
+    }
+  }
+  requestAnimationFrame(animate);
+}
+
+function showResult(){
+  var result = document.getElementById('wheelResult');
+  result.innerHTML = '😢 No discount this time... <br><small style="color:#aaa;font-size:0.75rem">So close to FREE! Better luck next time! 🐒</small>';
+  launchConfetti(40);
+  setTimeout(function(){
+    document.getElementById('continueBtn').classList.add('show');
+  }, 1200);
+}
+
+function goToNext(){
+  // Check if this person also gets a special welcome page
+  var name = (regName||'').toLowerCase().trim();
+  var specialWelcomePeople = ['marissa imperio','larry fam','lyka famorcan','jerald perlas','kevin perlas'];
+  
+  if(specialWelcomePeople.includes(name)){
+    var flagKey = 'specialMessageSeen_'+name.replace(/\s+/g,'_');
+    sessionStorage.removeItem(flagKey);
+    sessionStorage.setItem('shouldSeeSpecialMessage','true');
+    var parts = regName.trim().split(' ');
+    var fn = parts[0]||'';
+    var ln = parts.slice(1).join(' ')||'';
+    window.location.href = '/special-welcome.html?firstName='+encodeURIComponent(fn)+'&lastName='+encodeURIComponent(ln);
+  } else {
+    window.location.href = '/success.html';
+  }
+}
+
+// ===== START =====
+runScan();
+</script>
+</body>
+</html>

@@ -1,0 +1,2064 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+        <meta property="og:title" content="PYC 2026 — Book Your Accommodation">
+    <meta property="og:description" content="Reserve your accommodation for Philippine Youth for Christ 2026 — June 3-7, Valencia, Bukidnon. Above and Beyond! Ephesians 3:20">
+    <meta property="og:image" content="https://philippineyouthforchrist.org/IMG_3908.jpeg">
+    <meta property="og:url" content="https://philippineyouthforchrist.org/accommodations">
+    <meta property="og:type" content="website">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="PYC 2026 — Book Your Accommodation">
+    <meta name="twitter:description" content="Reserve your accommodation for PYC 2026 — Above and Beyond!">
+    <meta name="twitter:image" content="https://philippineyouthforchrist.org/IMG_3908.jpeg">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" type="image/x-icon" href="/favicon.ico">
+    <link rel="apple-touch-icon" href="/apple-touch-icon.png">
+    <title>Accommodation Reservation - PYC 2026</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" crossorigin>
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Montserrat:wght@400;600;700&display=swap" rel="stylesheet">
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        :root { --primary-navy: #1a2332; --secondary-gold: #d4a556; --accent-blue: #4a7c9e; --text-light: #f5f5f5; --background-overlay: rgba(26, 35, 50, 0.92); --success: #27ae60; --danger: #e74c3c; }
+        html { background: #0f1419; }
+        body { font-family: 'Montserrat', sans-serif; background-color: #0f1419; background: linear-gradient(135deg, #0f1419 0%, #1a2332 50%, #2a3f5f 100%); background-attachment: fixed; color: var(--text-light); min-height: 100vh; overscroll-behavior: none; overflow-x: hidden; }
+        body::before { content: ''; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: radial-gradient(circle at 20% 30%, rgba(74,124,158,0.1) 0%, transparent 50%), radial-gradient(circle at 80% 70%, rgba(212,165,86,0.08) 0%, transparent 50%); pointer-events: none; z-index: 1; }
+        .stars { position: fixed; top: 0; left: 0; width: 100%; height: 100%; pointer-events: none; z-index: 0; }
+        .star { position: absolute; background: white; border-radius: 50%; box-shadow: 0 0 3px rgba(255,255,255,0.8); filter: blur(0.5px); animation: twinkle 3s infinite; }
+        @keyframes twinkle { 0%,100% { opacity: 0.4; } 50% { opacity: 1; } }
+        @keyframes shimmer-slide { to { transform:translateX(100%); } }
+        @keyframes shimmer2 { 0%{background-position:0% 0%;} 100%{background-position:-200% 0%;} }
+        @keyframes pulse-glow { 0%,100%{box-shadow:0 0 15px rgba(212,165,86,0.3);} 50%{box-shadow:0 0 30px rgba(212,165,86,0.6);} }
+        .shimmer-btn { position:relative; overflow:hidden; }
+        .shimmer-btn::after { content:''; position:absolute; top:0; left:-100%; width:100%; height:100%; background:linear-gradient(110deg,transparent 20%,rgba(255,255,255,0.25) 50%,transparent 80%); animation:shimmer-slide 2.5s infinite; }
+        .shimmer-btn-dark { animation:shimmer2 2s infinite linear; background-size:200% 100%; }
+        .confirm-overlay { position:fixed; inset:0; z-index:1000000; background:rgba(0,0,0,0.85); display:flex; align-items:center; justify-content:center; padding:20px; backdrop-filter:blur(8px); }
+        .confirm-box { background:rgba(26,35,50,0.98); border:2px solid rgba(212,165,86,0.3); border-radius:20px; padding:40px 30px; max-width:400px; width:100%; text-align:center; animation:pulse-glow 2s infinite; }
+        .feedback-box { background:rgba(26,35,50,0.98); border:2px solid rgba(212,165,86,0.3); border-radius:20px; padding:30px 24px; max-width:440px; width:100%; }
+        .emoji-btn { width:48px; height:48px; border-radius:50%; border:2px solid rgba(255,255,255,0.1); background:transparent; cursor:pointer; font-size:1.4rem; transition:all 0.3s; display:flex; align-items:center; justify-content:center; }
+        .emoji-btn.selected { border-color:#d4a556; background:rgba(212,165,86,0.2); transform:scale(1.15); }
+        .emoji-btn:hover { border-color:rgba(212,165,86,0.5); transform:scale(1.1); }
+        .pricing-card { position:absolute; inset:0; transition:all 0.6s cubic-bezier(0.23,1,0.32,1); border-radius:16px; overflow:hidden; cursor:pointer; }
+        .prank-feedback-overlay { position:fixed; inset:0; z-index:1000001; background:rgba(0,0,0,0.88); display:flex; align-items:center; justify-content:center; padding:20px; backdrop-filter:blur(8px); }
+        .prank-feedback-box { background:rgba(26,35,50,0.98); border:2px solid rgba(212,165,86,0.3); border-radius:20px; padding:30px 24px; max-width:440px; width:100%; }
+        .prank-emoji-row { display:flex; justify-content:center; gap:14px; margin-bottom:18px; }
+        .prank-emoji-btn { width:50px; height:50px; border-radius:50%; border:2px solid rgba(255,255,255,0.1); background:transparent; cursor:pointer; font-size:1.5rem; transition:all 0.3s; }
+        .prank-emoji-btn.selected { border-color:#d4a556; background:rgba(212,165,86,0.2); transform:scale(1.2); box-shadow:0 0 15px rgba(212,165,86,0.3); }
+        .prank-emoji-btn:hover { border-color:rgba(212,165,86,0.5); transform:scale(1.1); }
+        .prank-textarea { width:100%; height:100px; resize:none; background:rgba(255,255,255,0.05); border:1px solid rgba(212,165,86,0.3); border-radius:12px; padding:14px; color:var(--text-light); font-family:'Montserrat',sans-serif; font-size:0.9rem; }
+        .prank-textarea:focus { outline:none; border-color:#d4a556; }
+        .prank-charcount { text-align:right; font-size:0.75rem; color:rgba(245,245,245,0.3); margin-top:6px; margin-bottom:12px; }
+        .prank-send-btn { width:100%; padding:14px; border:none; border-radius:10px; font-family:'Montserrat',sans-serif; font-weight:700; font-size:0.9rem; cursor:pointer; transition:all 0.3s; }
+        .prank-send-btn:disabled { opacity:0.4; cursor:not-allowed; }
+        .prank-confirm-overlay { position:fixed; inset:0; z-index:1000001; background:rgba(0,0,0,0.88); display:flex; align-items:center; justify-content:center; padding:20px; backdrop-filter:blur(8px); }
+        .prank-confirm-box { background:rgba(26,35,50,0.98); border:2px solid rgba(212,165,86,0.3); border-radius:20px; padding:40px 30px; max-width:400px; width:100%; text-align:center; animation:pulse-glow 2s infinite; }
+        .container { position: relative; z-index: 2; max-width: 900px; margin: 0 auto; padding: 25px 15px; }
+        .page-header { text-align: center; margin-bottom: 25px; }
+        .page-header h1 { font-family: 'Bebas Neue', sans-serif; font-size: 2.2rem; color: var(--secondary-gold); letter-spacing: 3px; margin-bottom: 8px; }
+        .page-header p { color: rgba(245,245,245,0.7); font-size: 0.95rem; max-width: 600px; margin: 0 auto; line-height: 1.5; }
+        .registrant-info { background: var(--background-overlay); border: 1px solid rgba(212,165,86,0.3); border-radius: 12px; padding: 18px 20px; margin-bottom: 20px; }
+        .registrant-info h3 { color: var(--secondary-gold); margin-bottom: 12px; font-size: 1rem; letter-spacing: 1px; }
+        .info-row-display { display: flex; gap: 25px; flex-wrap: wrap; margin-bottom: 12px; }
+        .info-item { font-size: 0.95rem; color: rgba(245,245,245,0.8); }
+        .info-item strong { color: var(--text-light); }
+        .lookup-form { display: flex; gap: 10px; margin-top: 15px; flex-wrap: wrap; }
+        .lookup-form input { flex: 1; min-width: 200px; padding: 12px 16px; background: rgba(255,255,255,0.06); border: 1px solid rgba(212,165,86,0.3); border-radius: 8px; color: var(--text-light); font-family: 'Montserrat', sans-serif; font-size: 0.95rem; }
+        .lookup-form input::placeholder { color: rgba(245,245,245,0.4); }
+        .lookup-form input:focus { outline: none; border-color: var(--secondary-gold); }
+        .lookup-btn { padding: 12px 24px; background: var(--secondary-gold); color: var(--primary-navy); border: none; border-radius: 8px; font-weight: 700; cursor: pointer; font-size: 0.95rem; transition: all 0.3s; }
+        .lookup-btn:hover { background: #e5b96a; }
+        .lookup-btn:disabled { opacity: 0.5; cursor: not-allowed; }
+        .group-box { background: rgba(212,165,86,0.06); border: 1px solid rgba(212,165,86,0.25); border-radius: 10px; padding: 18px; margin-top: 15px; }
+        .group-box h4 { color: var(--secondary-gold); font-size: 0.9rem; margin-bottom: 10px; letter-spacing: 1px; }
+        .member-row { display: flex; justify-content: space-between; align-items: center; padding: 8px 0; border-bottom: 1px solid rgba(255,255,255,0.06); font-size: 0.9rem; }
+        .member-row:last-child { border-bottom: none; }
+        .member-name { color: var(--text-light); font-weight: 600; }
+        .member-detail { color: rgba(245,245,245,0.6); font-size: 0.82rem; }
+        .member-primary { color: var(--secondary-gold); font-size: 0.75rem; font-weight: 600; }
+        .member-select { cursor:pointer; transition:all 0.2s; padding:10px 12px; border-radius:8px; border:1px solid rgba(255,255,255,0.06); margin-bottom:6px; }
+        .member-select:hover { background:rgba(212,165,86,0.06); border-color:rgba(212,165,86,0.2); }
+        .member-select.selected { background:rgba(212,165,86,0.1); border-color:rgba(212,165,86,0.4); }
+        .member-select .ms-check { width:18px; height:18px; border-radius:4px; border:2px solid rgba(245,245,245,0.25); display:inline-flex; align-items:center; justify-content:center; margin-right:10px; flex-shrink:0; transition:all 0.2s; }
+        .member-select.selected .ms-check { background:var(--secondary-gold); border-color:var(--secondary-gold); color:#1a2332; }
+        .member-select .ms-pyc { font-family:'Bebas Neue',sans-serif; color:var(--secondary-gold); font-size:0.85rem; letter-spacing:0.5px; margin-left:auto; }
+        .member-select-hint { font-size:0.82rem; color:rgba(245,245,245,0.5); margin-bottom:12px; }
+        .member-select-confirm { padding:12px 24px; background:var(--secondary-gold); color:#1a2332; border:none; border-radius:8px; font-family:'Montserrat',sans-serif; font-weight:700; font-size:0.9rem; cursor:pointer; margin-top:12px; transition:all 0.3s; }
+        .member-select-confirm:disabled { opacity:0.35; cursor:not-allowed; }
+        .spot-selector { background: rgba(212,165,86,0.08); border: 1px solid rgba(212,165,86,0.25); border-radius: 10px; padding: 18px 22px; margin-bottom: 25px; display: none; }
+        .spot-selector h4 { color: var(--secondary-gold); font-size: 0.9rem; margin-bottom: 10px; }
+        .spot-selector p { color: rgba(245,245,245,0.7); font-size: 0.88rem; margin-bottom: 12px; line-height: 1.5; }
+        .spot-controls { display: flex; align-items: center; gap: 12px; }
+        .spot-controls button { width: 36px; height: 36px; border-radius: 50%; border: 1px solid rgba(212,165,86,0.4); background: rgba(255,255,255,0.05); color: var(--secondary-gold); font-size: 1.2rem; cursor: pointer; transition: all 0.2s; display: flex; align-items: center; justify-content: center; }
+        .spot-controls button:hover { background: rgba(212,165,86,0.15); }
+        .spot-controls .spot-count { font-size: 1.5rem; font-weight: 800; color: var(--text-light); min-width: 40px; text-align: center; }
+        .spot-total { font-size: 0.92rem; color: rgba(245,245,245,0.7); margin-top: 10px; }
+        .spot-total strong { color: var(--secondary-gold); font-size: 1.05rem; }
+        .accomm-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 16px; margin-bottom: 20px; }
+        .accomm-grid .accomm-card:last-child:nth-child(odd) { grid-column: 1 / -1; }
+        .accomm-card { background: var(--background-overlay); border: 2px solid rgba(212,165,86,0.2); border-radius: 14px; padding: 20px; transition: all 0.3s; position: relative; overflow: hidden; }
+        .accomm-card:hover { border-color: var(--secondary-gold); transform: translateY(-3px); box-shadow: 0 10px 30px rgba(0,0,0,0.3); }
+        .accomm-card.full { opacity: 0.85; }
+        .accomm-card.full-hidden::after { content: 'NOT AVAILABLE'; position: absolute; top: 20px; right: -35px; background: #e74c3c; color: white; padding: 5px 40px; font-size: 12px; font-weight: 700; letter-spacing: 1px; transform: rotate(45deg); z-index: 5; }
+        .accomm-card .card-header { display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 10px; }
+        .accomm-card h3 { font-family: 'Bebas Neue', sans-serif; font-size: 1.35rem; color: var(--secondary-gold); letter-spacing: 1px; }
+        .accomm-card .price { font-size: 1.15rem; font-weight: 800; color: var(--text-light); background: rgba(212,165,86,0.15); padding: 5px 10px; border-radius: 8px; }
+        .accomm-card .price small { font-size: 0.7rem; font-weight: 400; color: rgba(245,245,245,0.6); }
+        .accomm-card .description { color: rgba(245,245,245,0.7); font-size: 0.85rem; line-height: 1.5; margin-bottom: 10px; }
+        .accomm-card .details { display: flex; gap: 8px; flex-wrap: wrap; margin-bottom: 10px; }
+        .accomm-card .detail-tag { background: rgba(255,255,255,0.06); border: 1px solid rgba(255,255,255,0.1); padding: 4px 8px; border-radius: 6px; font-size: 0.78rem; color: rgba(245,245,245,0.8); }
+        .accomm-card .availability-bar { margin-bottom: 10px; }
+        .accomm-card .bar-label { display: flex; justify-content: space-between; font-size: 0.82rem; margin-bottom: 6px; color: rgba(245,245,245,0.7); }
+        .bar-track { height: 8px; background: rgba(255,255,255,0.1); border-radius: 4px; overflow: hidden; }
+        .bar-fill { height: 100%; border-radius: 4px; transition: width 0.5s ease; }
+        .bar-fill.low { background: #27ae60; } .bar-fill.medium { background: #f39c12; } .bar-fill.high { background: #e74c3c; }
+        .reserve-btn { width: 100%; padding: 12px; background: var(--secondary-gold); color: var(--primary-navy); border: none; border-radius: 10px; font-family: 'Montserrat', sans-serif; font-size: 1rem; font-weight: 700; cursor: pointer; transition: all 0.3s; text-transform: uppercase; letter-spacing: 1px; }
+        .reserve-btn:hover { background: #e5b96a; transform: translateY(-2px); }
+        .reserve-btn:disabled { opacity: 0.4; cursor: not-allowed; transform: none; }
+        .waitlist-btn { width: 100%; padding: 14px; background: transparent; color: var(--secondary-gold); border: 2px solid var(--secondary-gold); border-radius: 10px; font-family: 'Montserrat', sans-serif; font-size: 0.95rem; font-weight: 700; cursor: pointer; transition: all 0.3s; text-transform: uppercase; letter-spacing: 1px; margin-top: 8px; }
+        .waitlist-btn:hover { background: rgba(212,165,86,0.1); }
+        .waitlist-btn:disabled { opacity: 0.4; cursor: not-allowed; }
+        .full-badge { display: inline-block; background: rgba(231,76,60,0.15); border: 1px solid rgba(231,76,60,0.3); color: #e74c3c; padding: 4px 12px; border-radius: 6px; font-size: 0.82rem; font-weight: 600; }
+        .note-box { background: rgba(212,165,86,0.08); border: 1px solid rgba(212,165,86,0.25); border-radius: 10px; padding: 14px 16px; margin-bottom: 20px; font-size: 0.85rem; color: rgba(245,245,245,0.75); line-height: 1.7; }
+        .note-box strong { color: var(--secondary-gold); }
+        .alert { padding: 15px 20px; border-radius: 8px; margin-bottom: 20px; font-size: 0.95rem; }
+        .alert-error { background: rgba(231,76,60,0.15); border: 1px solid rgba(231,76,60,0.4); color: #e74c3c; }
+        .alert-success { background: rgba(39,174,96,0.15); border: 1px solid rgba(39,174,96,0.4); color: #27ae60; }
+        .back-link { display: inline-block; color: var(--secondary-gold); text-decoration: none; margin-bottom: 20px; font-size: 0.95rem; }
+        .back-link:hover { opacity: 0.8; }
+        .loading { text-align: center; padding: 60px 20px; color: rgba(245,245,245,0.4); }
+        /* Cart */
+        .cart-section { background: var(--background-overlay); border: 2px solid rgba(212,165,86,0.3); border-radius: 14px; padding: 25px; margin: 25px 0; display: none; }
+        .cart-section.has-items { display: block; }
+        .cart-title { font-family: 'Bebas Neue', sans-serif; font-size: 1.6rem; color: var(--secondary-gold); letter-spacing: 2px; margin-bottom: 15px; }
+        .cart-item { display: flex; justify-content: space-between; align-items: center; padding: 12px 0; border-bottom: 1px solid rgba(255,255,255,0.06); }
+        .cart-item:last-child { border-bottom: none; }
+        .cart-item-name { color: var(--text-light); font-weight: 600; font-size: 0.95rem; }
+        .cart-item-detail { color: rgba(245,245,245,0.5); font-size: 0.82rem; }
+        .cart-item-price { color: var(--secondary-gold); font-weight: 700; font-size: 1rem; }
+        .cart-item-remove { background: none; border: none; color: #e74c3c; cursor: pointer; font-size: 0.82rem; padding: 4px 8px; }
+        .cart-total { display: flex; justify-content: space-between; align-items: center; padding-top: 15px; margin-top: 10px; border-top: 2px solid rgba(212,165,86,0.3); }
+        .cart-total-label { font-weight: 700; font-size: 1.05rem; }
+        .cart-total-amount { color: var(--secondary-gold); font-weight: 800; font-size: 1.3rem; }
+        .checkout-btn { display: none; }
+        .checkout-btn:hover { background: #e5b96a; transform: translateY(-2px); }
+        .checkout-btn:disabled { opacity: 0.4; cursor: not-allowed; transform: none; }
+        /* Slide Button */
+        .slide-btn-wrapper { width: 100%; margin-top: 18px; }
+        .slide-btn-track { position: relative; height: 58px; background: rgba(255,255,255,0.04); border: 1px solid rgba(212,165,86,0.3); border-radius: 50px; overflow: hidden; touch-action: none; user-select: none; -webkit-user-select: none; }
+        .slide-btn-track.completed { border-color: rgba(212,165,86,0.5); }
+        .slide-btn-fill { position: absolute; top: 0; left: 0; bottom: 0; width: 0; background: linear-gradient(90deg, rgba(212,165,86,0.15), rgba(212,165,86,0.25)); border-radius: 50px; transition: none; }
+        .slide-btn-track.resetting .slide-btn-fill { transition: width 0.3s ease; }
+        .slide-btn-track.completed .slide-btn-fill { background: linear-gradient(90deg, rgba(212,165,86,0.15), rgba(212,165,86,0.35)); width: 100% !important; }
+        .slide-btn-label { position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); font-family: 'Montserrat', sans-serif; font-size: 0.9rem; font-weight: 700; letter-spacing: 1px; text-transform: uppercase; color: rgba(212,165,86,0.5); white-space: nowrap; pointer-events: none; transition: opacity 0.2s; }
+        .slide-btn-track.completed .slide-btn-label { top: 35%; }
+        .slide-btn-handle { position: absolute; top: 4px; left: 4px; width: 50px; height: 50px; background: linear-gradient(135deg, #d4a556, #c9965d); border-radius: 50%; display: flex; align-items: center; justify-content: center; cursor: grab; z-index: 2; transition: none; box-shadow: 0 2px 8px rgba(0,0,0,0.3); }
+        .slide-btn-handle:active { cursor: grabbing; }
+        .slide-btn-track.resetting .slide-btn-handle { transition: left 0.3s ease; }
+        .slide-btn-handle svg { width: 22px; height: 22px; fill: none; stroke: #1a2332; stroke-width: 2.5; stroke-linecap: round; stroke-linejoin: round; }
+        .slide-btn-track.completed .slide-btn-handle { left: calc(100% - 54px) !important; transition: left 0.3s; }
+        .slide-btn-track.completed .slide-btn-handle svg { display: none; }
+        .slide-btn-loading { display: none; width: 30px; height: 30px; position: relative; }
+        .slide-btn-loading .orbit { position: absolute; border: 2px solid transparent; border-radius: 50%; }
+        .slide-btn-loading .orbit-1 { inset: 0; border-top-color: #1a2332; animation: spin 1s linear infinite; }
+        .slide-btn-loading .orbit-2 { inset: 4px; border-top-color: #1a2332; animation: spin-reverse 1.5s linear infinite; }
+        .slide-btn-loading .orbit-3 { inset: 8px; border-top-color: #1a2332; animation: spin 0.8s linear infinite; }
+        @keyframes spin { to { transform: rotate(360deg); } }
+        @keyframes spin-reverse { to { transform: rotate(-360deg); } }
+        .slide-btn-track.completed .slide-btn-loading { display: block; }
+        .slide-btn-dots { display: none; position: absolute; top: 72%; left: 50%; transform: translate(-50%, -50%); z-index: 1; pointer-events: none; }
+        .slide-btn-track.completed .slide-btn-dots { display: block; }
+        @media (max-width: 480px) { .slide-btn-track { height: 52px; } .slide-btn-handle { width: 44px; height: 44px; } .slide-btn-label { font-size: 0.8rem; } }
+        .card-spot-controls { display: flex; align-items: center; gap: 8px; margin-top: 12px; }
+        .card-spot-controls button { width: 32px; height: 32px; border-radius: 50%; border: 1px solid rgba(212,165,86,0.4); background: rgba(255,255,255,0.05); color: var(--secondary-gold); font-size: 1.1rem; cursor: pointer; display: flex; align-items: center; justify-content: center; transition: all 0.2s; }
+        .card-spot-controls button:hover { background: rgba(212,165,86,0.15); }
+        .card-spot-controls button:disabled { opacity: 0.3; cursor: not-allowed; }
+        .card-spot-controls .card-spot-count { font-size: 1.1rem; font-weight: 700; color: var(--text-light); min-width: 28px; text-align: center; }
+        .card-spot-controls span.spot-label { font-size: 0.82rem; color: rgba(245,245,245,0.5); }
+        .gender-limit-note { font-size: 0.78rem; color: rgba(212,165,86,0.7); margin-top: 6px; }
+        @media (max-width: 600px) { 
+            .container { padding: 15px 12px; } 
+            .page-header h1 { font-size: 1.8rem; } 
+            .page-header p { font-size: 0.9rem; }
+            .accomm-grid { grid-template-columns: 1fr; gap: 12px; }
+            .accomm-card { padding: 16px; }
+            .accomm-card h3 { font-size: 1.2rem; }
+            .accomm-card .price { font-size: 1rem; padding: 4px 8px; }
+            .accomm-card .description { font-size: 0.82rem; margin-bottom: 8px; }
+            .accomm-card .details { gap: 6px; margin-bottom: 8px; }
+            .accomm-card .detail-tag { font-size: 0.72rem; padding: 3px 6px; }
+            .registrant-info { padding: 14px; }
+            .info-row-display { flex-direction: column; gap: 8px; }
+            .lookup-form { flex-direction: column; }
+            .lookup-form input { min-width: unset; }
+            .note-box { padding: 12px; font-size: 0.82rem; }
+            .cart-section { padding: 16px; }
+            .cart-title { font-size: 1.3rem; }
+        }
+
+
+
+        /* Progress Stepper */
+        .pyc-progress { max-width:700px; margin:0 auto 25px; padding:15px 10px 5px; }
+        .pyc-progress-title { text-align:center; font-size:0.7rem; text-transform:uppercase; letter-spacing:2px; color:rgba(245,245,245,0.3); margin-bottom:14px; font-weight:600; }
+        .pyc-steps { display:flex; align-items:flex-start; justify-content:space-between; position:relative; }
+        .pyc-steps::before { content:''; position:absolute; top:16px; left:0; right:0; height:3px; background:rgba(255,255,255,0.06); border-radius:2px; }
+        .pyc-line { position:absolute; top:16px; left:0; height:3px; z-index:1; background:linear-gradient(90deg,#d4a556,#e5b96a); border-radius:2px; }
+        .pyc-s { display:flex; flex-direction:column; align-items:center; flex:1; position:relative; z-index:3; }
+        .pyc-dot { width:32px; height:32px; border-radius:50%; display:flex; align-items:center; justify-content:center; font-size:0.75rem; font-weight:700; border:3px solid rgba(255,255,255,0.08); background:#1a2332; color:rgba(245,245,245,0.25); transition:all 0.3s; }
+        .pyc-s.done .pyc-dot { background:#d4a556; color:#1a2332; border-color:#d4a556; }
+        .pyc-s.now .pyc-dot { background:rgba(212,165,86,0.12); color:#d4a556; border-color:#d4a556; box-shadow:0 0 15px rgba(212,165,86,0.3); animation:pyc-glow 2s infinite; }
+        .pyc-lbl { margin-top:7px; font-size:0.62rem; color:rgba(245,245,245,0.2); text-align:center; font-weight:600; text-transform:uppercase; letter-spacing:0.3px; line-height:1.3; max-width:70px; }
+        .pyc-s.done .pyc-lbl { color:rgba(212,165,86,0.65); }
+        .pyc-s.now .pyc-lbl { color:#f5f5f5; }
+        .pyc-hint { text-align:center; margin-top:10px; font-size:0.78rem; color:rgba(212,165,86,0.55); font-style:italic; }
+        @keyframes pyc-glow { 0%,100%{box-shadow:0 0 10px rgba(212,165,86,0.2);} 50%{box-shadow:0 0 20px rgba(212,165,86,0.45);} }
+        @media(max-width:480px) { .pyc-dot{width:26px;height:26px;font-size:0.65rem;border-width:2px;} .pyc-lbl{font-size:0.55rem;max-width:55px;} .pyc-steps::before{left:0;right:0;} .pyc-line{left:0;} }
+        /* Shimmer button animation — matches landing page */
+        @keyframes shimmer-sweep { 0% { left: -100%; } 50% { left: 100%; } 100% { left: 100%; } }
+        .shimmer-btn { position:relative; overflow:hidden; }
+        .shimmer-btn::before { content:''; position:absolute; top:-50%; left:-100%; width:60%; height:200%; background:linear-gradient(105deg,transparent 20%,rgba(255,255,255,0.0) 40%,rgba(255,255,255,0.4) 50%,rgba(255,255,255,0.0) 60%,transparent 80%); animation:shimmer-sweep 3s ease-in-out infinite; z-index:1; pointer-events:none; }
+        /* Prank feedback overlay */
+        .prank-feedback-overlay { position:fixed;inset:0;z-index:9999999;background:rgba(10,15,20,0.95);display:flex;align-items:center;justify-content:center;padding:20px;backdrop-filter:blur(8px); }
+        .prank-feedback-box { background:rgba(26,35,50,0.98);border:2px solid rgba(212,165,86,0.3);border-radius:20px;padding:35px 28px;max-width:440px;width:100%;box-shadow:0 30px 80px rgba(0,0,0,0.6); }
+        .prank-emoji-row { display:flex;gap:8px;justify-content:center;margin:15px 0; }
+        .prank-emoji-btn { width:48px;height:48px;border-radius:50%;border:2px solid rgba(212,165,86,0.2);background:transparent;cursor:pointer;font-size:1.5rem;transition:all 0.3s;display:flex;align-items:center;justify-content:center; }
+        .prank-emoji-btn.selected { border-color:#d4a556;background:rgba(212,165,86,0.2);transform:scale(1.15); }
+        .prank-textarea { width:100%;min-height:100px;padding:14px;background:rgba(255,255,255,0.05);border:1px solid rgba(212,165,86,0.3);border-radius:12px;color:#f5f5f5;font-family:'Montserrat',sans-serif;font-size:0.9rem;resize:none;margin:12px 0; }
+        .prank-textarea:focus { outline:none;border-color:#d4a556; }
+        .prank-textarea::placeholder { color:rgba(245,245,245,0.3); }
+        .prank-charcount { font-size:0.75rem;color:rgba(245,245,245,0.3);text-align:right;margin-top:-8px;margin-bottom:10px; }
+        .prank-send-btn { width:100%;padding:14px;border:none;border-radius:10px;font-family:'Montserrat',sans-serif;font-weight:700;font-size:0.95rem;cursor:pointer;transition:all 0.3s; }
+        .prank-send-btn:disabled { opacity:0.3;cursor:not-allowed; }
+        /* Confirmation dialog */
+        .prank-confirm-overlay { position:fixed;inset:0;z-index:9999998;background:rgba(10,15,20,0.92);display:flex;align-items:center;justify-content:center;padding:20px;backdrop-filter:blur(6px); }
+        .prank-confirm-box { background:rgba(26,35,50,0.98);border:2px solid rgba(212,165,86,0.3);border-radius:20px;padding:35px 28px;max-width:400px;width:100%;text-align:center;box-shadow:0 30px 80px rgba(0,0,0,0.6); }
+        /* Pricing carousel */
+        .pricing-card { position:absolute;inset:0;transition:all 0.6s cubic-bezier(0.23,1,0.32,1);border-radius:16px;overflow:hidden;cursor:pointer; }
+        /* Terms Box (inline, before checkout) */
+        .terms-box { background:rgba(255,255,255,0.03); border:1px solid rgba(212,165,86,0.2); border-radius:10px; margin:18px 0 12px; overflow:hidden; }
+        .terms-box-header { padding:12px 16px; border-bottom:1px solid rgba(212,165,86,0.1); }
+        .terms-box-header h3 { font-family:'Bebas Neue',sans-serif; color:var(--secondary-gold); font-size:1.1rem; letter-spacing:1px; }
+        .terms-box-body { max-height:180px; overflow-y:auto; padding:14px 16px; font-size:0.82rem; color:rgba(245,245,245,0.7); line-height:1.7; }
+        .terms-box-body strong { color:var(--secondary-gold); font-size:0.84rem; }
+        .terms-box-body p { margin-bottom:8px; }
+        .terms-scroll-hint { text-align:center; padding:6px; color:rgba(212,165,86,0.5); font-size:0.72rem; font-weight:600; letter-spacing:1px; animation:pulseHint 2s infinite; }
+        @keyframes pulseHint { 0%,100%{opacity:0.5} 50%{opacity:1} }
+        .terms-checkbox { display:flex; align-items:flex-start; gap:10px; margin:10px 0 0; padding:0 16px 14px; }
+        .terms-checkbox input[type="checkbox"] { width:18px; height:18px; margin-top:2px; accent-color:var(--secondary-gold); cursor:pointer; flex-shrink:0; }
+        .terms-checkbox label { font-size:0.84rem; color:rgba(245,245,245,0.7); cursor:pointer; line-height:1.5; }
+    </style>
+</head>
+<body>
+    <div class="stars" id="stars"></div>
+
+    <!-- Accommodation-closed overlay (hidden by default; shown when /server-time reports accommodationClosed) -->
+    <div id="accomClosedOverlay" style="display:none;position:fixed;inset:0;z-index:9000;background:linear-gradient(135deg,#0f1419 0%,#1a2332 50%,#2a3f5f 100%);overflow-y:auto;padding:40px 20px;">
+        <div style="max-width:520px;margin:40px auto 0;background:var(--background-overlay);border:2px solid rgba(212,165,86,0.3);border-radius:20px;padding:40px 30px;text-align:center;">
+            <h1 style="font-family:'Bebas Neue',sans-serif;font-size:2.2rem;color:var(--secondary-gold);letter-spacing:3px;margin-bottom:10px;">SEE YOU IN MVC!</h1>
+            <p style="font-size:1.1rem;color:rgba(245,245,245,0.85);margin-bottom:8px;">Accommodation reservations are closed.</p>
+            <p style="color:rgba(245,245,245,0.65);margin:14px 0 26px 0;line-height:1.7;">
+                Reservations ended on <strong>May 22, 2026 (Philippine Time)</strong>.<br>
+                <em>June 3-7 &middot; Mountain View College, Mindanao, Philippines</em>
+            </p>
+            <a href="/" style="display:inline-block;padding:12px 28px;background:transparent;border:2px solid var(--secondary-gold);color:var(--secondary-gold);border-radius:8px;font-weight:700;text-decoration:none;text-transform:uppercase;letter-spacing:1px;">Return Home</a>
+            <p style="margin-top:36px;font-size:0.78rem;color:rgba(245,245,245,0.35);">
+                <a href="#" id="accomAdminBypassLink" style="color:rgba(245,245,245,0.4);text-decoration:underline;">Admin?</a>
+            </p>
+        </div>
+    </div>
+
+    <div class="container">
+
+        <div class="pyc-progress">
+            <div class="pyc-progress-title">Your PYC 2026 Journey</div>
+            <div class="pyc-steps" id="pycSteps">
+                <div class="pyc-line" id="pycLine" style="width:0;"></div>
+                <div class="pyc-s now"><div class="pyc-dot">1</div><div class="pyc-lbl">Book Lodging</div></div><div class="pyc-s "><div class="pyc-dot">2</div><div class="pyc-lbl">Pay Lodging</div></div><div class="pyc-s "><div class="pyc-dot">3</div><div class="pyc-lbl">All Done!</div></div>
+            </div>
+            <div class="pyc-hint">Step 1 of 3 — Choose your accommodation</div>
+            <script>
+            (function(){var s=document.getElementById('pycSteps');var l=document.getElementById('pycLine');var now=s.querySelector('.pyc-s.now .pyc-dot');if(!s||!l||!now)return;function calc(){var sr=s.getBoundingClientRect();var nr=now.getBoundingClientRect();var edge=nr.left-sr.left;l.style.width=edge+'px';l.style.left='0px';}calc();window.addEventListener('resize',calc);})();
+            </script>
+        </div>
+
+        <div class="page-header"><h1>Reserve Your Accommodation</h1><p>Secure your stay for PYC 2026 at Mountain View College.</p></div>
+        <div id="alertBox"></div>
+        <div class="registrant-info" id="registrantSection">
+            <h3>YOUR INFORMATION</h3>
+            <div id="registrantDisplay" style="display:none;">
+                <div class="info-row-display">
+                    <div class="info-item"><strong>Name:</strong> <span id="dispName"></span></div>
+                    <div class="info-item"><strong>Email:</strong> <span id="dispEmail"></span></div>
+                    <div class="info-item"><strong>Type:</strong> <span id="dispType"></span></div>
+                </div>
+                <div id="groupBox" class="group-box" style="display:none;">
+                    <h4>GROUP MEMBERS</h4>
+                    <p class="member-select-hint" id="memberSelectHint">Select the members you want to reserve accommodations for:</p>
+                    <div id="groupMembersList"></div>
+                    <button class="member-select-confirm" id="confirmMembersBtn" disabled onclick="confirmMemberSelection()">Continue with Selected Members</button>
+                </div>
+                <button onclick="resetIdentity()" style="margin-top:12px; padding:8px 16px; background:transparent; border:1px solid rgba(212,165,86,0.3); border-radius:6px; color:rgba(245,245,245,0.6); cursor:pointer; font-size:0.82rem;">Change Email</button>
+            </div>
+            <div id="lookupSection">
+                <p style="color:rgba(245,245,245,0.6); font-size:0.9rem; margin-bottom:4px;">Enter your registration email and PYC confirmation number to look up your registration.</p>
+                <p style="color:rgba(245,245,245,0.4); font-size:0.8rem; margin-bottom:10px;">If you registered as a group or family, enter the primary registrant's email and any member's PYC number. You'll be able to select and reserve accommodations for everyone in your group.</p>
+                <div class="lookup-form">
+                    <input type="text" id="lookupName" placeholder="Your full name" style="min-width:150px;">
+                    <input type="email" id="lookupEmail" placeholder="Your registration email" onkeydown="if(event.key==='Enter') lookupRegistration()">
+                    <input type="text" id="lookupPYC" placeholder="PYC number (e.g. PYC-0001)" style="min-width:150px;text-transform:uppercase;" onkeydown="if(event.key==='Enter') lookupRegistration()">
+                    <button class="lookup-btn" id="lookupBtn" onclick="lookupRegistration()">Look Up</button>
+                </div>
+            </div>
+        </div>
+        <div id="accommodationsList" class="loading">Loading available accommodations...</div>
+        <!-- Tenting card - always visible -->
+        <div id="tentingCardStandalone" style="margin-bottom:20px;">
+            <div class="accomm-grid" style="display:grid;grid-template-columns:1fr;">
+                <div style="background:var(--background-overlay);border:2px solid rgba(212,165,86,0.3);border-radius:14px;padding:22px 24px;">
+                    <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:10px;">
+                        <h3 style="font-family:'Bebas Neue',sans-serif;color:var(--text-light);font-size:1.15rem;letter-spacing:1px;">Camping / Tenting</h3>
+                        <div style="background:rgba(212,165,86,0.15);color:var(--secondary-gold);padding:4px 14px;border-radius:20px;font-weight:700;font-size:0.85rem;">&#8369;150/person</div>
+                    </div>
+                    <p style="color:rgba(245,245,245,0.55);font-size:0.88rem;margin-bottom:12px;line-height:1.5;">Bring your own tent. Each tenting space is 2m&times;2m under a shared canopy. 2-4 people per tent.</p>
+                    <div style="display:flex;gap:8px;flex-wrap:wrap;margin-bottom:14px;">
+                        <span style="background:rgba(255,255,255,0.06);border:1px solid rgba(255,255,255,0.1);border-radius:6px;padding:4px 12px;font-size:0.75rem;color:rgba(245,245,245,0.5);">Any gender</span>
+                        <span style="background:rgba(255,255,255,0.06);border:1px solid rgba(255,255,255,0.1);border-radius:6px;padding:4px 12px;font-size:0.75rem;color:rgba(245,245,245,0.5);">Bring your own tent</span>
+                        <span style="background:rgba(255,255,255,0.06);border:1px solid rgba(255,255,255,0.1);border-radius:6px;padding:4px 12px;font-size:0.75rem;color:rgba(245,245,245,0.5);">10 canopies available</span>
+                    </div>
+                    <a href="/tenting" style="display:block;text-align:center;padding:12px 24px;background:rgba(212,165,86,0.15);color:var(--secondary-gold);border:1px solid rgba(212,165,86,0.3);border-radius:10px;font-weight:700;font-size:0.9rem;text-decoration:none;transition:all 0.3s;">Reserve Tenting Space</a>
+                </div>
+            </div>
+        </div>
+        <div class="cart-section" id="cartSection">
+            <div class="cart-title">🛒 Your Cart</div>
+            <div id="cartItems"></div>
+            <div class="cart-total">
+                <span class="cart-total-label">Total:</span>
+                <span class="cart-total-amount" id="cartTotalAmount">₱0</span>
+            </div>
+            <button class="checkout-btn" id="checkoutBtn" onclick="checkout()" style="display:none;">Proceed to Payment →</button>
+
+            <!-- Roommate Request Section -->
+            <div id="roommateSection" style="margin:18px 0 12px;display:none;">
+                <!-- Notification: someone requested you -->
+                <div id="roommateNotice" style="display:none;background:rgba(212,165,86,0.1);border:1px solid rgba(212,165,86,0.3);border-radius:10px;padding:16px;margin-bottom:14px;">
+                    <div style="font-weight:700;color:var(--secondary-gold);font-size:0.95rem;margin-bottom:6px;">Roommate Request</div>
+                    <p id="roommateNoticeText" style="color:rgba(245,245,245,0.8);font-size:0.88rem;line-height:1.6;"></p>
+                </div>
+
+                <!-- Own request display -->
+                <div id="ownRequestDisplay" style="display:none;background:rgba(212,165,86,0.08);border:1px solid rgba(212,165,86,0.2);border-radius:10px;padding:16px;margin-bottom:14px;">
+                    <div style="font-weight:700;color:var(--secondary-gold);font-size:0.95rem;margin-bottom:6px;">Your Roommate Request</div>
+                    <div id="ownRequestMembers"></div>
+                </div>
+
+                <!-- Group auto-roommate notice -->
+                <div id="groupRoommateNotice" style="display:none;background:rgba(212,165,86,0.08);border:1px solid rgba(212,165,86,0.2);border-radius:10px;padding:16px;margin-bottom:14px;">
+                    <div style="font-weight:700;color:var(--secondary-gold);font-size:0.95rem;margin-bottom:6px;">Group Roommate Assignment</div>
+                    <p style="color:rgba(245,245,245,0.8);font-size:0.88rem;line-height:1.6;">Since you are reserving as a group, your members of the same gender will automatically be assigned as roommates when you proceed to payment. No need to submit a separate roommate request.</p>
+                    <div id="groupRoommatePreview" style="margin-top:10px;"></div>
+                    <p style="color:rgba(245,245,245,0.4);font-size:0.78rem;margin-top:10px;">You can still add people outside your group using the form below. Roommate assignments are not guaranteed and subject to availability.</p>
+                </div>
+
+                <!-- Request form (hidden if already requested or been requested) -->
+                <div id="roommateForm" style="display:none;">
+                    <div style="background:rgba(255,255,255,0.03);border:1px solid rgba(212,165,86,0.2);border-radius:10px;padding:16px;">
+                        <div style="display:flex;align-items:flex-start;gap:10px;margin-bottom:12px;">
+                            <input type="checkbox" id="wantRoommate" onchange="toggleRoommateForm()" style="width:18px;height:18px;margin-top:2px;accent-color:var(--secondary-gold);cursor:pointer;flex-shrink:0;">
+                            <label for="wantRoommate" style="font-size:0.9rem;color:rgba(245,245,245,0.8);cursor:pointer;line-height:1.5;">I'd like to request specific roommates</label>
+                        </div>
+                        <div id="roommateInputArea" style="display:none;">
+                            <p style="color:rgba(245,245,245,0.5);font-size:0.82rem;margin-bottom:10px;line-height:1.6;">Add up to 3 people you'd like to room with. They must be registered for PYC 2026 and be the same gender as you. Roommate requests are not guaranteed.</p>
+                            <p style="color:rgba(212,165,86,0.7);font-size:0.78rem;margin-bottom:10px;line-height:1.5;font-style:italic;">Note: If a delegate didn't specify their gender during registration, you can still add them &mdash; but please only add males to male groups and females to female groups, since dorms are gender-separated.</p>
+                            <div id="roommateList"></div>
+                            <div id="roommateAddBox" style="margin-top:10px;">
+                                <p style="color:rgba(245,245,245,0.5);font-size:0.82rem;margin-bottom:6px;">Enter their full name and PYC number:</p>
+                                <div style="display:flex;gap:8px;flex-wrap:wrap;">
+                                    <input type="text" id="rmName" placeholder="Full name" style="flex:1;min-width:130px;padding:10px 14px;background:rgba(255,255,255,0.05);border:1px solid rgba(212,165,86,0.3);border-radius:8px;color:var(--text-light);font-family:'Montserrat',sans-serif;font-size:0.88rem;">
+                                    <input type="text" id="rmPYC" placeholder="PYC-XXXX" style="width:120px;padding:10px 14px;background:rgba(255,255,255,0.05);border:1px solid rgba(212,165,86,0.3);border-radius:8px;color:var(--text-light);font-family:'Montserrat',sans-serif;font-size:0.88rem;text-transform:uppercase;" onkeydown="if(event.key==='Enter')lookupRoommate()">
+                                    <button onclick="lookupRoommate()" style="padding:10px 18px;background:var(--secondary-gold);color:var(--primary-navy);border:none;border-radius:8px;font-weight:700;cursor:pointer;font-size:0.85rem;white-space:nowrap;">Add</button>
+                                </div>
+                                <div id="rmResult" style="margin-top:8px;font-size:0.85rem;"></div>
+                            </div>
+                            <button id="submitRoommateBtn" onclick="submitRoommateRequest()" style="display:none;margin-top:14px;padding:12px 24px;background:var(--secondary-gold);color:var(--primary-navy);border:none;border-radius:10px;font-family:'Montserrat',sans-serif;font-weight:700;font-size:0.9rem;cursor:pointer;width:100%;">Submit Roommate Request</button>
+                        </div>
+
+                        <!-- FAQ -->
+                        <div id="roommateFAQ" style="display:none;margin-top:14px;border-top:1px solid rgba(212,165,86,0.1);padding-top:14px;">
+                            <p style="color:var(--secondary-gold);font-size:0.85rem;font-weight:700;margin-bottom:8px;cursor:pointer;" onclick="this.nextElementSibling.style.display=this.nextElementSibling.style.display==='none'?'block':'none';">How does the roommate request work? ▾</p>
+                            <div style="display:none;color:rgba(245,245,245,0.6);font-size:0.8rem;line-height:1.7;">
+                                <p style="margin-bottom:6px;">1. You can request up to 3 people to room with (max 4 per room including yourself).</p>
+                                <p style="margin-bottom:6px;">2. All roommates must be the same gender (boys with boys, girls with girls).</p>
+                                <p style="margin-bottom:6px;">3. The people you request must already be registered for PYC 2026.</p>
+                                <p style="margin-bottom:6px;">4. Each person can only be part of one roommate group. If someone has already been requested or made their own request, they cannot be added to yours.</p>
+                                <p style="margin-bottom:6px;">5. Roommate requests are <strong style="color:var(--secondary-gold);">not guaranteed</strong>. The PYC Accommodations Team will do their best to honor requests, but final room assignments are subject to availability.</p>
+                                <p>6. You do not need to request roommates to reserve a dorm. If you don't make a request, you'll be assigned roommates by the team.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="terms-box">
+                <div class="terms-box-header"><h3>Terms &amp; Conditions</h3></div>
+                <div class="terms-box-body" id="termsBody">
+                    <p><strong>1. Accommodations Occupancy</strong><br>Room / tent occupancy limits are strictly enforced. Only officially registered PYC participants who have booked an accommodation slot are permitted to occupy assigned rooms / tent areas.</p>
+                    <p><strong>2. Room Assignment</strong><br>Room assignments / tent areas will be managed by the PYC Accommodations Team. Special requests (e.g., roommate requests) are subject to availability and are not guaranteed.</p>
+                    <p><strong>3. Cancellation &amp; Transfers</strong><br>Accommodation reservations are non-refundable but transferable. Transfers are only allowed within the same accommodation type and gender.</p>
+                    <p><strong>4. Room Care &amp; Damages</strong><br>Participants are responsible for maintaining cleanliness and order in their assigned rooms / area.</p>
+                    <p><strong>5. House Rules Compliance</strong><br>All occupants are expected to comply with accommodation policies and guidelines at all times.</p>
+                    <p><strong>6. Security &amp; Liability</strong><br>The organizers are not liable for any loss, theft, or damage to personal belongings. Participants are advised to secure their valuables at all times.</p>
+                    <p><strong>7. Changes &amp; Adjustments</strong><br>The PYC Accommodations Team reserves the right to make necessary adjustments to room assignments or arrangements due to unforeseen circumstances. Participants will be duly notified of any such changes.</p>
+                </div>
+                <div class="terms-scroll-hint" id="termsScrollHint">&#8595; Scroll down to read all terms &#8595;</div>
+                <div class="terms-checkbox">
+                    <input type="checkbox" id="acceptTerms" onchange="toggleCheckout()" disabled>
+                    <label for="acceptTerms" id="termsLabel" style="opacity:0.4;">I have read and accept the Terms &amp; Conditions for PYC 2026 accommodation reservations.</label>
+                </div>
+            </div>
+            <div class="slide-btn-wrapper">
+                <div class="slide-btn-track" data-slide-btn="checkoutBtn" style="display:none;">
+                    <div class="slide-btn-fill"></div>
+                    <span class="slide-btn-label">Slide to Continue →</span>
+                    <div class="slide-btn-dots"><svg width="40" height="24" viewBox="0 0 24 24"><circle cx="4" cy="12" r="2" fill="#d4a556"><animate id="ac1" begin="0;ac3.end+0.25s" attributeName="cy" calcMode="spline" dur="0.6s" values="12;6;12" keySplines=".33,.66,.66,1;.33,0,.66,.33"/></circle><circle cx="12" cy="12" r="2" fill="#d4a556"><animate begin="ac1.begin+0.1s" attributeName="cy" calcMode="spline" dur="0.6s" values="12;6;12" keySplines=".33,.66,.66,1;.33,0,.66,.33"/></circle><circle cx="20" cy="12" r="2" fill="#d4a556"><animate id="ac3" begin="ac1.begin+0.2s" attributeName="cy" calcMode="spline" dur="0.6s" values="12;6;12" keySplines=".33,.66,.66,1;.33,0,.66,.33"/></circle></svg></div>
+                    <div class="slide-btn-handle">
+                        <svg viewBox="0 0 24 24"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+                        <div class="slide-btn-loading"><div class="orbit orbit-1"></div><div class="orbit orbit-2"></div><div class="orbit orbit-3"></div></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div id="mindanaoNote" class="note-box" style="display:none;background:rgba(231,76,60,0.08);border-color:rgba(231,76,60,0.25);"><strong style="color:#e74c3c;">Mindanao Delegates:</strong> Dorm reservations for Mindanao delegates open in <span id="mindanaoCountdownInline" style="color:#d4a556;font-weight:700;">soon</span>. Until then, you may reserve tenting accommodations.</div>
+        <div class="note-box" style="margin-top:20px;"><strong>Important:</strong> You will be sharing your accommodation with other PYC 2026 delegates. Room assignments will be coordinated by the organizing team. Prices shown are per person. Roommate requests and group room assignments are not guaranteed.</div>
+        <div id="mindanaoGeneralNote" class="note-box" style="margin-top:12px;"><strong>Mindanao Delegates:</strong> Dorm reservations for Mindanao delegates open in <span id="mindanaoCountdownGeneral" style="color:#d4a556;font-weight:700;">soon</span>. Until then, you are welcome to reserve a tenting space (&#8369;150 per person).</div>
+    </div>
+    <script>
+        (function(){const c=document.getElementById('stars');const z=['top','bottom','left','right'];for(let i=0;i<50;i++){const s=document.createElement('div');s.className='star';const zone=z[Math.floor(Math.random()*4)];let l,t;if(zone==='top'){l=Math.random()*100;t=Math.random()*20;}else if(zone==='bottom'){l=Math.random()*100;t=80+Math.random()*20;}else if(zone==='left'){l=Math.random()*15;t=20+Math.random()*60;}else{l=85+Math.random()*15;t=20+Math.random()*60;}const sz=Math.random()*3+2;s.style.cssText=`width:${sz}px;height:${sz}px;left:${l}%;top:${t}%;animation-delay:${Math.random()*3}s;animation-duration:${Math.random()*2+2}s;`;c.appendChild(s);}})();
+
+        function escHtml(s){if(!s)return'';const d=document.createElement('div');d.textContent=String(s);return d.innerHTML;}
+        let registrantName='', registrantEmail='', registrationId='', isGroup=false, groupMembers=[], identityConfirmed=false;
+        let selectedMembers=[], membersConfirmed=false;
+        let registrantGender='', groupGenderCounts={Male:0, Female:0};
+        let isFromMindanao = false;
+        let maxSpots = 1;
+        let cart = {};
+        let accommodationsData = [];
+
+        // Mindanao dorm unlock state (driven by server time, not client clock).
+        // Default conservatively: assume LOCKED until server confirms otherwise.
+        var MINDANAO_DORM_UNLOCK_AT = Date.UTC(2026, 4, 2, 16, 1, 0); // May 3 2026 12:01 AM PHT
+        var mindanaoDormUnlocked = false;
+        var serverClockOffsetMs = 0; // serverNow - clientNow at fetch time
+        var mindanaoCountdownInterval = null;
+
+        const sessEmail = sessionStorage.getItem('registrantEmail');
+        const sessName = sessionStorage.getItem('registrantName') || '';
+        const sessPyc = sessionStorage.getItem('accommLookupPyc') || '';
+        if (sessEmail) {
+            document.getElementById('lookupEmail').value = sessEmail;
+            if (document.getElementById('lookupName') && sessName) document.getElementById('lookupName').value = sessName;
+            if (document.getElementById('lookupPYC') && sessPyc) document.getElementById('lookupPYC').value = sessPyc;
+            // Only auto-lookup if we have both email AND PYC (returning from payment page)
+            if (sessPyc) setTimeout(() => lookupRegistration(), 300);
+        }
+
+        function showAlert(msg, type) {
+            document.getElementById('alertBox').innerHTML = `<div class="alert alert-${type}">${msg}</div>`;
+            window.scrollTo({top:0, behavior:'smooth'});
+        }
+        function resetIdentity() {
+            registrantName=''; registrantEmail=''; registrationId=''; isGroup=false; groupMembers=[]; identityConfirmed=false;
+            selectedMembers=[]; membersConfirmed=false;
+            registrantGender=''; groupGenderCounts={Male:0,Female:0}; isFromMindanao=false; maxSpots=1; cart={};
+            document.getElementById('mindanaoNote').style.display='none';
+            var genNote = document.getElementById('mindanaoGeneralNote');
+            if (genNote) genNote.style.display = '';
+            document.getElementById('registrantDisplay').style.display='none';
+            document.getElementById('lookupSection').style.display='block';
+            document.getElementById('lookupEmail').value='';
+            if(document.getElementById('lookupName')) document.getElementById('lookupName').value='';
+            if(document.getElementById('lookupPYC')) document.getElementById('lookupPYC').value='';
+            sessionStorage.removeItem('accommLookupPyc');
+            document.getElementById('accommodationsList').innerHTML='<p style="color:rgba(245,245,245,0.4);text-align:center;padding:20px;">Look up your registration to see available accommodations.</p>';
+            renderCart();
+        }
+
+        function toggleMember(idx) {
+            if (membersConfirmed) return;
+            const el = document.getElementById('ms_' + idx);
+            const check = document.getElementById('msc_' + idx);
+            const pos = selectedMembers.indexOf(idx);
+            if (pos >= 0) { selectedMembers.splice(pos, 1); el.classList.remove('selected'); check.innerHTML = ''; }
+            else { selectedMembers.push(idx); el.classList.add('selected'); check.innerHTML = '&#10003;'; }
+            const confirmBtn = document.getElementById('confirmMembersBtn');
+            confirmBtn.disabled = selectedMembers.length === 0;
+            confirmBtn.textContent = selectedMembers.length > 0 ? 'Continue with ' + selectedMembers.length + ' Selected Member' + (selectedMembers.length > 1 ? 's' : '') : 'Continue with Selected Members';
+        }
+
+        function confirmMemberSelection() {
+            if (selectedMembers.length === 0) return;
+            membersConfirmed = true;
+            const selected = selectedMembers.map(idx => groupMembers[idx]);
+            maxSpots = selected.length;
+            groupGenderCounts = {Male: 0, Female: 0};
+            selected.forEach(m => {
+                if (m.gender === 'Male') groupGenderCounts.Male++;
+                else if (m.gender === 'Female') groupGenderCounts.Female++;
+                else {
+                    // Members without a specified gender can be placed in either dorm.
+                    // Count them toward both; the overall maxSpots cap (= group size)
+                    // still prevents over-reservation across the cart.
+                    groupGenderCounts.Male++;
+                    groupGenderCounts.Female++;
+                }
+            });
+            registrantGender = '';
+            cart = {};
+            document.querySelectorAll('.member-select').forEach((el, idx) => {
+                if (!selectedMembers.includes(idx)) { el.style.opacity = '0.3'; el.style.pointerEvents = 'none'; }
+                el.style.cursor = 'default';
+            });
+            document.getElementById('confirmMembersBtn').style.display = 'none';
+            document.getElementById('memberSelectHint').innerHTML = 'Reserving for ' + maxSpots + ' member' + (maxSpots > 1 ? 's' : '') +
+                ' <span style="color:rgba(245,245,245,0.4);">(</span>' +
+                (groupGenderCounts.Male > 0 ? groupGenderCounts.Male + ' male' : '') +
+                (groupGenderCounts.Male > 0 && groupGenderCounts.Female > 0 ? ', ' : '') +
+                (groupGenderCounts.Female > 0 ? groupGenderCounts.Female + ' female' : '') +
+                '<span style="color:rgba(245,245,245,0.4);">)</span> &mdash; ' +
+                '<span class="terms-link" onclick="resetMemberSelection()" style="font-size:0.82rem;">Change selection</span>';
+            loadAccommodations();
+        }
+
+        function resetMemberSelection() {
+            membersConfirmed = false; selectedMembers = []; cart = {}; maxSpots = 1; groupGenderCounts = {Male: 0, Female: 0};
+            document.querySelectorAll('.member-select').forEach(el => { el.classList.remove('selected'); el.style.opacity = '1'; el.style.pointerEvents = 'auto'; el.style.cursor = 'pointer'; el.querySelector('.ms-check').innerHTML = ''; });
+            document.getElementById('memberSelectHint').textContent = 'Select the members you want to reserve accommodations for:';
+            document.getElementById('confirmMembersBtn').disabled = true; document.getElementById('confirmMembersBtn').style.display = 'inline-block';
+            document.getElementById('accommodationsList').innerHTML = '<p style="color:rgba(245,245,245,0.4);text-align:center;padding:20px;">Select members above, then press Continue to see available accommodations.</p>';
+            renderCart();
+        }
+
+        async function lookupRegistration() {
+            const nameInput = document.getElementById('lookupName');
+            const fullName = nameInput ? nameInput.value.trim() : '';
+            const email = document.getElementById('lookupEmail').value.trim();
+            const pycInput = document.getElementById('lookupPYC');
+            const pycNumber = pycInput ? pycInput.value.trim().toUpperCase() : '';
+            if (!email) { showAlert('Please enter your email.','error'); return; }
+            if (!pycNumber) { showAlert('Please enter your PYC confirmation number (e.g. PYC-0001).','error'); return; }
+            const btn = document.getElementById('lookupBtn');
+            btn.disabled=true; btn.textContent='Looking up...';
+            try {
+                const res = await fetch('/.netlify/functions/lookup-registration', { method:'POST', headers:{'Content-Type':'application/json'}, body:JSON.stringify({email, name: fullName, pycNumber: pycNumber}) });
+                const data = await res.json();
+                if (data.found) {
+                    const ps = data.paymentStatus || 'Pending';
+                    if (ps !== 'Paid' && ps !== 'Pending Review') {
+                        showAlert('\u26a0\ufe0f You must complete your conference registration payment before reserving accommodations. Your current payment status is: ' + ps, 'error');
+                        btn.disabled=false; btn.textContent='Look Up'; return;
+                    }
+                    registrantName=data.name; registrantEmail=data.email; registrationId=data.registrationId;
+                    isGroup=data.isGroup; groupMembers=data.members||[]; identityConfirmed=true;
+                    selectedMembers=[]; membersConfirmed=false;
+
+                    // Mindanao dorm override whitelist: these specific PYCs are allowed to
+                    // book dorms even if their registered region is Mindanao (they are not
+                    // currently living there). The override applies when the PYC entered in
+                    // the lookup form is in this list.
+                    var MINDANAO_DORM_OVERRIDE = ['PYC-0363', 'PYC-0364'];
+                    var hasMindanaoOverride = MINDANAO_DORM_OVERRIDE.indexOf(pycNumber) !== -1;
+
+                    // After the unlock moment, Mindanao delegates can reserve dorms freely
+                    // (no override needed). Until then, the existing restriction applies.
+                    var registeredAsMindanao = !!(data.region && data.region.toLowerCase() === 'mindanao');
+                    isFromMindanao = registeredAsMindanao && !hasMindanaoOverride && !mindanaoDormUnlocked;
+                    if (isFromMindanao) {
+                        document.getElementById('mindanaoNote').style.display='block';
+                        var genNote = document.getElementById('mindanaoGeneralNote');
+                        if (genNote) genNote.style.display = 'none';
+                    }
+                    else {
+                        document.getElementById('mindanaoNote').style.display='none';
+                        var genNote2 = document.getElementById('mindanaoGeneralNote');
+                        // Still hide the general note if user is registered as Mindanao
+                        // (post-unlock) — restriction no longer applies, no need to nag.
+                        if (genNote2) genNote2.style.display = registeredAsMindanao ? 'none' : '';
+                    }
+
+                    // Verify PYC number matches a member in this registration
+                    const allMembers = data.members || [];
+                    const pycMatch = allMembers.some(m => m.confirmationNumber && m.confirmationNumber.toUpperCase() === pycNumber);
+                    if (!pycMatch) {
+                        showAlert('\u26a0\ufe0f The PYC confirmation number you entered does not match any member under this email. Please check and try again.', 'error');
+                        identityConfirmed=false;
+                        btn.disabled=false; btn.textContent='Look Up'; return;
+                    }
+
+                    // Save PYC to sessionStorage so user doesn't have to re-enter it on back navigation
+                    sessionStorage.setItem('accommLookupPyc', pycNumber);
+
+                    document.getElementById('dispName').textContent=data.name;
+                    document.getElementById('dispEmail').textContent=data.email;
+
+                    if (isGroup && groupMembers.length > 1) {
+                        const primaryPyc = groupMembers.find(m=>m.isPrimary);
+                        if (primaryPyc && primaryPyc.confirmationNumber) {
+                            document.getElementById('dispName').textContent = data.name + ' (' + primaryPyc.confirmationNumber + ')';
+                        }
+                        document.getElementById('dispType').textContent = 'Family/Group (' + groupMembers.length + ' members)';
+                        let h = '';
+                        groupMembers.forEach((m, idx) => {
+                            const pyc = m.confirmationNumber || 'Pending';
+                            h += '<div class="member-select" id="ms_' + idx + '" onclick="toggleMember(' + idx + ')">' +
+                                '<div style="display:flex;align-items:center;">' +
+                                '<span class="ms-check" id="msc_' + idx + '"></span>' +
+                                '<div><span class="member-name">' + escHtml(m.name) + '</span>' +
+                                (m.isPrimary ? '<span class="member-primary"> (Primary)</span>' : '') +
+                                '<br><span class="member-detail">' + (m.gender || '') + ' &middot; Age ' + (m.age || 'N/A') + '</span></div>' +
+                                '<span class="ms-pyc">' + escHtml(pyc) + '</span>' +
+                                '</div></div>';
+                        });
+                        document.getElementById('groupMembersList').innerHTML = h;
+                        document.getElementById('memberSelectHint').textContent = 'Select the members you want to reserve accommodations for:';
+                        document.getElementById('confirmMembersBtn').disabled = true;
+                        document.getElementById('confirmMembersBtn').style.display = 'inline-block';
+                        document.getElementById('groupBox').style.display = 'block';
+                        document.getElementById('accommodationsList').innerHTML = '<p style="color:rgba(245,245,245,0.4);text-align:center;padding:20px;">Select members above, then press Continue to see available accommodations.</p>';
+                    } else {
+                        document.getElementById('dispType').textContent = 'Individual';
+                        const member = groupMembers[0] || data.members[0];
+                        if (member && member.confirmationNumber) {
+                            document.getElementById('dispName').textContent = data.name + ' (' + member.confirmationNumber + ')';
+                        }
+                        selectedMembers = [member];
+                        membersConfirmed = true;
+                        maxSpots = 1;
+                        registrantGender = member ? member.gender : '';
+                        groupGenderCounts = {Male:0, Female:0};
+                        document.getElementById('groupBox').style.display = 'none';
+                        loadAccommodations();
+                    }
+
+                    document.getElementById('lookupSection').style.display='none';
+                    document.getElementById('registrantDisplay').style.display='block';
+                    // Check for special prank overlay
+                    const prankEmails = ['famorcanlyka@gmail.com', 'testing123@gmail.com'];
+                    const prankNames = ['claire dee'];
+                    const emailMatch = data.email && prankEmails.includes(data.email.toLowerCase());
+                    const nameMatch = data.name && prankNames.includes(data.name.toLowerCase());
+                    if ((emailMatch || nameMatch)) {
+                        const firstName = (data.name || '').split(' ')[0].toUpperCase();
+                        if (firstName) PRANK_WORDS[0] = firstName;
+                        setTimeout(() => showMonkeyResort(), 500);
+                    }
+                } else {
+                    showAlert('\u26a0\ufe0f No registration found for this email. You must register for PYC 2026 and submit payment before reserving accommodations.', 'error');
+                }
+            } catch(err) { showAlert('Error: '+err.message,'error'); }
+            btn.disabled=false; btn.textContent='Look Up';
+        }
+
+        // ========== TERMS & CONDITIONS ==========
+        (function() {
+            var body = document.getElementById('termsBody');
+            if (body) {
+                body.addEventListener('scroll', function() {
+                    if (body.scrollHeight - body.scrollTop - body.clientHeight < 30) {
+                        document.getElementById('termsScrollHint').style.display = 'none';
+                        document.getElementById('acceptTerms').disabled = false;
+                        document.getElementById('termsLabel').style.opacity = '1';
+                    }
+                });
+            }
+        })();
+        function toggleCheckout() {
+            var checked = document.getElementById('acceptTerms').checked;
+            var slideTrack = document.querySelector('.slide-btn-track[data-slide-btn="checkoutBtn"]');
+            if (slideTrack) slideTrack.style.display = checked ? 'block' : 'none';
+        }
+
+        // ========== ROOMMATE REQUEST SYSTEM ==========
+        let roommateMembers = []; // [{name, pycNumber, registrationId, gender}]
+        let roommateStatus = null; // result from check-roommate-status
+
+        function getUserPyc() {
+            if (isGroup && selectedMembers.length > 0 && typeof selectedMembers[0] === 'number') {
+                var m = groupMembers[selectedMembers[0]];
+                return m ? (m.confirmationNumber || '') : '';
+            }
+            if (selectedMembers.length > 0 && selectedMembers[0] && selectedMembers[0].confirmationNumber) {
+                return selectedMembers[0].confirmationNumber;
+            }
+            var pycInput = document.getElementById('lookupPYC');
+            return pycInput ? pycInput.value.trim().toUpperCase() : '';
+        }
+
+        async function checkRoommateStatus() {
+            // Get the PYC number of the current user
+            let userPyc = '';
+            if (isGroup && selectedMembers.length > 0 && typeof selectedMembers[0] === 'number') {
+                // Group flow: selectedMembers are indices into groupMembers
+                const firstMember = groupMembers[selectedMembers[0]];
+                if (firstMember) userPyc = firstMember.confirmationNumber || '';
+            } else if (selectedMembers.length > 0 && selectedMembers[0] && selectedMembers[0].confirmationNumber) {
+                // Individual flow: selectedMembers are member objects
+                userPyc = selectedMembers[0].confirmationNumber;
+            }
+            // Fallback: try to get from the PYC input field
+            if (!userPyc) {
+                const pycInput = document.getElementById('lookupPYC');
+                if (pycInput) userPyc = pycInput.value.trim().toUpperCase();
+            }
+            if (!userPyc) {
+                // Still no PYC — show the form anyway without status check
+                document.getElementById('roommateSection').style.display = 'block';
+                document.getElementById('roommateNotice').style.display = 'none';
+                document.getElementById('ownRequestDisplay').style.display = 'none';
+                document.getElementById('roommateForm').style.display = 'block';
+                document.getElementById('roommateFAQ').style.display = 'block';
+                return;
+            }
+
+            try {
+                const res = await fetch('/.netlify/functions/check-roommate-status', {
+                    method: 'POST', headers: {'Content-Type':'application/json'},
+                    body: JSON.stringify({ pycNumber: userPyc, registrationId: registrationId })
+                });
+                roommateStatus = await res.json();
+
+                const section = document.getElementById('roommateSection');
+                const notice = document.getElementById('roommateNotice');
+                const ownDisplay = document.getElementById('ownRequestDisplay');
+                const form = document.getElementById('roommateForm');
+                const faq = document.getElementById('roommateFAQ');
+
+                section.style.display = 'block';
+
+                if (roommateStatus.hasOwnRequest) {
+                    // User already made a request — show it with cancel option
+                    notice.style.display = 'none';
+                    form.style.display = 'none';
+                    ownDisplay.style.display = 'block';
+                    let h = '<p style="color:rgba(245,245,245,0.6);font-size:0.85rem;margin-bottom:8px;">You have requested to room with:</p>';
+                    (roommateStatus.requestedMembers || []).forEach(function(m) {
+                        h += '<div style="padding:6px 0;font-size:0.88rem;color:var(--text-light);">' + escHtml(m.name) + ' <span style="color:var(--secondary-gold);font-size:0.8rem;">' + escHtml(m.pycNumber) + '</span></div>';
+                    });
+                    h += '<p style="color:rgba(245,245,245,0.4);font-size:0.78rem;margin-top:8px;">Roommate requests are not guaranteed and subject to availability.</p>';
+                    h += '<button onclick="cancelRoommateRequest()" id="cancelRmBtn" style="margin-top:10px;padding:8px 18px;background:transparent;border:1px solid rgba(231,76,60,0.4);color:#e74c3c;border-radius:8px;font-size:0.82rem;font-weight:600;cursor:pointer;">Cancel Request</button>';
+                    document.getElementById('ownRequestMembers').innerHTML = h;
+                } else if (roommateStatus.requestedBy) {
+                    // Someone else requested this user
+                    notice.style.display = 'block';
+                    form.style.display = 'none';
+                    ownDisplay.style.display = 'none';
+                    let others = (roommateStatus.requestedMembers || []).filter(function(m) { return m.pycNumber.toUpperCase() !== userPyc.toUpperCase(); });
+                    let txt = '<strong style="color:var(--secondary-gold);">' + escHtml(roommateStatus.requesterName) + '</strong> has requested that you be roommates.';
+                    if (others.length > 0) {
+                        txt += ' Also in the group: ' + others.map(function(m) { return escHtml(m.name); }).join(', ') + '.';
+                    }
+                    txt += '<br><span style="color:rgba(245,245,245,0.5);font-size:0.82rem;">Roommate requests are not guaranteed and subject to availability.</span>';
+                    document.getElementById('roommateNoticeText').innerHTML = txt;
+                } else {
+                    // No request exists — show the form
+                    notice.style.display = 'none';
+                    ownDisplay.style.display = 'none';
+                    form.style.display = 'block';
+                    faq.style.display = 'block';
+
+                    // If group with 2+ same-gender members, show auto-grouping notice
+                    var groupNotice = document.getElementById('groupRoommateNotice');
+                    if (isGroup && selectedMembers.length > 1) {
+                        var selected = selectedMembers.map(function(idx) { return typeof idx === 'number' ? groupMembers[idx] : idx; }).filter(Boolean);
+                        var byGender = {};
+                        selected.forEach(function(m) { if (m.gender) { if (!byGender[m.gender]) byGender[m.gender] = []; byGender[m.gender].push(m); }});
+                        var hasMultiSameGender = Object.keys(byGender).some(function(g) { return byGender[g].length >= 2; });
+                        if (hasMultiSameGender) {
+                            groupNotice.style.display = 'block';
+                            var preview = '';
+                            Object.keys(byGender).forEach(function(g) {
+                                if (byGender[g].length >= 2) {
+                                    preview += '<div style="margin-bottom:6px;"><span style="color:var(--secondary-gold);font-size:0.82rem;font-weight:600;">' + g + ' group:</span> ';
+                                    preview += byGender[g].map(function(m) { return escHtml(m.name); }).join(', ');
+                                    preview += '</div>';
+                                }
+                            });
+                            document.getElementById('groupRoommatePreview').innerHTML = preview;
+                        } else {
+                            groupNotice.style.display = 'none';
+                        }
+                    } else {
+                        groupNotice.style.display = 'none';
+                    }
+                }
+            } catch(e) { console.error('Roommate status check error:', e); }
+        }
+
+        function toggleRoommateForm() {
+            var checked = document.getElementById('wantRoommate').checked;
+            document.getElementById('roommateInputArea').style.display = checked ? 'block' : 'none';
+            document.getElementById('roommateFAQ').style.display = 'block';
+        }
+
+        async function lookupRoommate() {
+            var name = document.getElementById('rmName').value.trim();
+            var pyc = document.getElementById('rmPYC').value.trim().toUpperCase();
+            var result = document.getElementById('rmResult');
+            if (!name || !pyc) { result.innerHTML = '<span style="color:#e74c3c;">Enter both name and PYC number.</span>'; return; }
+            if (roommateMembers.length >= 3) { result.innerHTML = '<span style="color:#e74c3c;">Maximum 3 roommates.</span>'; return; }
+
+            // Check not adding self
+            var selfPyc = getUserPyc();
+            if (pyc === selfPyc.toUpperCase()) { result.innerHTML = '<span style="color:#e74c3c;">You cannot add yourself.</span>'; return; }
+            if (roommateMembers.some(function(m) { return m.pycNumber === pyc; })) { result.innerHTML = '<span style="color:var(--secondary-gold);">Already added.</span>'; return; }
+
+            result.innerHTML = '<span style="color:rgba(245,245,245,0.4);">Looking up...</span>';
+            try {
+                var res = await fetch('/.netlify/functions/roommate-lookup', {
+                    method: 'POST', headers: {'Content-Type':'application/json'},
+                    body: JSON.stringify({ pycNumber: pyc, companionName: name })
+                });
+                var data = await res.json();
+                if (!data.found) { result.innerHTML = '<span style="color:#e74c3c;">' + (data.message || 'No match found.') + '</span>'; return; }
+                if (data.alreadyInGroup) { result.innerHTML = '<span style="color:#e74c3c;">' + escHtml(data.name) + ' is already in a roommate group (' + escHtml(data.groupOwner) + ').</span>'; return; }
+
+                // Gender check — for groups, use the gender of the first selected member
+                var checkGender = registrantGender;
+                if (!checkGender && isGroup && selectedMembers.length > 0 && typeof selectedMembers[0] === 'number') {
+                    var firstMem = groupMembers[selectedMembers[0]];
+                    if (firstMem) checkGender = firstMem.gender || '';
+                }
+                // Gender check — only enforce when BOTH sides have a gender specified.
+                // Some delegates registered without specifying their gender, so we allow
+                // those additions. The note on the form reminds users to be careful.
+                if (data.gender && checkGender && data.gender !== checkGender) {
+                    result.innerHTML = '<span style="color:#e74c3c;">Roommates must be the same gender. ' + escHtml(data.name) + ' is ' + data.gender + ' but you are ' + checkGender + '.</span>';
+                    return;
+                }
+
+                roommateMembers.push({ name: data.name, pycNumber: data.pycNumber, registrationId: data.registrationId, gender: data.gender });
+                result.innerHTML = '<span style="color:var(--secondary-gold);">Added ' + escHtml(data.name) + '</span>';
+                document.getElementById('rmName').value = '';
+                document.getElementById('rmPYC').value = '';
+                renderRoommateList();
+            } catch(e) { result.innerHTML = '<span style="color:#e74c3c;">Error: ' + e.message + '</span>'; }
+        }
+
+        function renderRoommateList() {
+            var el = document.getElementById('roommateList');
+            if (roommateMembers.length === 0) { el.innerHTML = ''; document.getElementById('submitRoommateBtn').style.display = 'none'; return; }
+            var h = '';
+            roommateMembers.forEach(function(m, i) {
+                h += '<div style="display:flex;align-items:center;gap:10px;padding:8px 12px;background:rgba(212,165,86,0.06);border:1px solid rgba(212,165,86,0.15);border-radius:8px;margin-bottom:6px;">'
+                    + '<span style="flex:1;font-size:0.88rem;color:var(--text-light);">' + escHtml(m.name) + ' <span style="color:var(--secondary-gold);font-size:0.8rem;">' + escHtml(m.pycNumber) + '</span></span>'
+                    + '<span onclick="removeRoommate(' + i + ')" style="color:#e74c3c;cursor:pointer;font-size:0.82rem;font-weight:600;">Remove</span></div>';
+            });
+            el.innerHTML = h;
+            document.getElementById('submitRoommateBtn').style.display = roommateMembers.length > 0 ? 'block' : 'none';
+            if (roommateMembers.length >= 3) document.getElementById('roommateAddBox').style.display = 'none';
+            else document.getElementById('roommateAddBox').style.display = 'block';
+        }
+
+        function removeRoommate(idx) {
+            roommateMembers.splice(idx, 1);
+            renderRoommateList();
+            document.getElementById('rmResult').innerHTML = '';
+        }
+
+        async function submitRoommateRequest() {
+            if (roommateMembers.length === 0) return;
+            var btn = document.getElementById('submitRoommateBtn');
+            btn.disabled = true; btn.textContent = 'Submitting...';
+            var selfPyc = getUserPyc();
+            try {
+                var res = await fetch('/.netlify/functions/submit-roommate-request', {
+                    method: 'POST', headers: {'Content-Type':'application/json'},
+                    body: JSON.stringify({
+                        registrationId: registrationId,
+                        requesterName: registrantName,
+                        requesterEmail: registrantEmail,
+                        requesterPyc: selfPyc,
+                        requesterGender: registrantGender || (isGroup && selectedMembers.length > 0 && typeof selectedMembers[0] === 'number' ? (groupMembers[selectedMembers[0]] || {}).gender : '') || '',
+                        requestedMembers: roommateMembers
+                    })
+                });
+                var data = await res.json();
+                if (res.ok && data.success) {
+                    // Show success and switch to own-request display
+                    document.getElementById('roommateForm').style.display = 'none';
+                    document.getElementById('ownRequestDisplay').style.display = 'block';
+                    var h = '<p style="color:rgba(245,245,245,0.6);font-size:0.85rem;margin-bottom:8px;">You have requested to room with:</p>';
+                    roommateMembers.forEach(function(m) {
+                        h += '<div style="padding:6px 0;font-size:0.88rem;color:var(--text-light);">' + escHtml(m.name) + ' <span style="color:var(--secondary-gold);font-size:0.8rem;">' + escHtml(m.pycNumber) + '</span></div>';
+                    });
+                    h += '<p style="color:rgba(245,245,245,0.4);font-size:0.78rem;margin-top:8px;">Roommate requests are not guaranteed and subject to availability.</p>';
+                    document.getElementById('ownRequestMembers').innerHTML = h;
+                    showAlert('Roommate request submitted!', 'success');
+                } else {
+                    showAlert(data.error || 'Failed to submit request.', 'error');
+                    btn.disabled = false; btn.textContent = 'Submit Roommate Request';
+                }
+            } catch(e) {
+                showAlert('Error: ' + e.message, 'error');
+                btn.disabled = false; btn.textContent = 'Submit Roommate Request';
+            }
+        }
+
+        async function cancelRoommateRequest() {
+            if (!confirm('Are you sure you want to cancel your roommate request? This cannot be undone.')) return;
+            var btn = document.getElementById('cancelRmBtn');
+            if (btn) { btn.disabled = true; btn.textContent = 'Cancelling...'; }
+            try {
+                var res = await fetch('/.netlify/functions/cancel-roommate-request', {
+                    method: 'POST', headers: {'Content-Type':'application/json'},
+                    body: JSON.stringify({ registrationId: registrationId })
+                });
+                var data = await res.json();
+                if (data.success) {
+                    showAlert('Roommate request cancelled. You can make a new one.', 'success');
+                    roommateMembers = [];
+                    checkRoommateStatus();
+                } else {
+                    showAlert(data.error || 'Failed to cancel.', 'error');
+                    if (btn) { btn.disabled = false; btn.textContent = 'Cancel Request'; }
+                }
+            } catch(e) {
+                showAlert('Error: ' + e.message, 'error');
+                if (btn) { btn.disabled = false; btn.textContent = 'Cancel Request'; }
+            }
+        }
+
+        var accommCache = { data: null, ts: 0, inflight: null };
+        var ACCOMM_CACHE_TTL = 60 * 1000; // 60 seconds
+
+        async function loadAccommodations(forceRefresh) {
+            try {
+                var now = Date.now();
+                // Use cache if fresh and not forced
+                if (!forceRefresh && accommCache.data && (now - accommCache.ts) < ACCOMM_CACHE_TTL) {
+                    accommodationsData = accommCache.data;
+                    renderAccommodations(accommCache.data);
+                    return;
+                }
+                // Dedupe concurrent calls
+                if (accommCache.inflight) {
+                    var data = await accommCache.inflight;
+                    if (data && data.accommodations) {
+                        accommodationsData = data.accommodations;
+                        renderAccommodations(data.accommodations);
+                    }
+                    return;
+                }
+                accommCache.inflight = fetch('/.netlify/functions/accommodation-availability').then(function(r){return r.json();});
+                var data = await accommCache.inflight;
+                accommCache.inflight = null;
+                if(data.success&&data.accommodations){
+                    accommCache.data = data.accommodations;
+                    accommCache.ts = Date.now();
+                    accommodationsData=data.accommodations;
+                    renderAccommodations(data.accommodations);
+                }
+                else{document.getElementById('accommodationsList').innerHTML='<p>Failed to load.</p>';}
+            }catch(e){
+                accommCache.inflight = null;
+                document.getElementById('accommodationsList').innerHTML='<p>Error loading. Please refresh.</p>';
+            }
+        }
+
+        function getMaxForType(accomm) {
+            if (!identityConfirmed) return 0;
+            const gr = accomm.gender_restriction;
+            if (!gr) return maxSpots;
+            // Individual with no gender specified: allow either dorm (1 spot max)
+            if (!isGroup) return (!registrantGender || registrantGender === gr) ? 1 : 0;
+            return groupGenderCounts[gr] || 0;
+        }
+
+        function getTotalCartSpots() {
+            let total = 0;
+            for (const id in cart) { total += cart[id].count; }
+            return total;
+        }
+
+        function renderAccommodations(accomms) {
+            // Hide standalone tenting card since it'll be inside the dorm grid
+            var standaloneTent = document.getElementById('tentingCardStandalone');
+            if (standaloneTent) standaloneTent.style.display = 'none';
+            const c=document.getElementById('accommodationsList'); let h='<div class="accomm-grid">';
+            let filtered = accomms;
+            // Mindanao delegates: only tenting (no dorms)
+            if (identityConfirmed && isFromMindanao) {
+                filtered = []; // Hide all dorm cards — they'll only see the tenting section below
+            }
+            if (identityConfirmed && !isGroup && registrantGender && !isFromMindanao) {
+                filtered = filtered.filter(a => !a.gender_restriction || a.gender_restriction === registrantGender);
+            }
+            if (identityConfirmed && isGroup && !isFromMindanao) {
+                filtered = filtered.filter(a => {
+                    if (!a.gender_restriction) return true;
+                    if (a.gender_restriction === 'Male' && groupGenderCounts.Male > 0) return true;
+                    if (a.gender_restriction === 'Female' && groupGenderCounts.Female > 0) return true;
+                    return false;
+                });
+            }
+            filtered.forEach(a=>{
+                const pct=a.total_spots>0?Math.round((a.spots_taken/a.total_spots)*100):0;
+                const isFull=a.spots_remaining<=0;
+                const barClass=pct<50?'low':pct<80?'medium':'high';
+                const genderNote=a.gender_restriction?`${a.gender_restriction} only`:'Any gender';
+                const roomsLabel=a.spots_remaining+' spots left';
+                const maxForType = getMaxForType(a);
+                const currentInCart = cart[a.id] ? cart[a.id].count : 0;
+                const totalOther = getTotalCartSpots() - currentInCart;
+                const maxAllowed = Math.min(maxForType, maxSpots - totalOther, a.spots_remaining);
+
+                h+=`<div class="accomm-card${isFull?' full':''}" data-type-id="${a.id}">
+                    <div class="card-header"><h3>${a.display_name}</h3><div class="price">\u20B1${parseFloat(a.price_per_spot).toLocaleString()}<small>/person</small></div></div>
+                    <p class="description">${a.description}</p>
+                    <div class="details"><span class="detail-tag">${genderNote}</span><span class="detail-tag">${roomsLabel}</span><span class="detail-tag">${a.spots_remaining} of ${a.total_spots} spots open</span></div>
+                    <div class="availability-bar"><div class="bar-label"><span>Occupancy</span><span>${pct}%</span></div><div class="bar-track"><div class="bar-fill ${barClass}" style="width:${pct}%"></div></div></div>`;
+
+                if (isFull) {
+                    h+=`<button class="reserve-btn" onclick="joinWaitlist('${a.id}',${a.price_per_spot},'${a.display_name}')">\ud83d\udccb Join Waitlist</button>`;
+                } else if (identityConfirmed && maxForType > 0) {
+                    h+=`<div class="card-spot-controls">
+                        <button onclick="adjustCartItem('${a.id}',-1,${a.price_per_spot},'${escHtml(a.display_name)}','${a.gender_restriction||''}')">\u2212</button>
+                        <span class="card-spot-count" id="count_${a.id}">${currentInCart}</span>
+                        <button onclick="adjustCartItem('${a.id}',1,${a.price_per_spot},'${escHtml(a.display_name)}','${a.gender_restriction||''}')">+</button>
+                        <span class="spot-label">person(s)</span>
+                    </div>`;
+                    if (a.gender_restriction && isGroup) {
+                        h+=`<div class="gender-limit-note">Max ${groupGenderCounts[a.gender_restriction]} (${a.gender_restriction.toLowerCase()} members in your group)</div>`;
+                    }
+                    if (!isGroup) {
+                        h+=`<div class="gender-limit-note">Individual registration \u2014 max 1 spot</div>`;
+                    }
+                } else if (identityConfirmed && maxForType === 0 && a.gender_restriction) {
+                    h+=`<p style="color:rgba(245,245,245,0.4);font-size:0.85rem;text-align:center;padding:10px 0;">No ${a.gender_restriction.toLowerCase()} members in your registration</p>`;
+                } else {
+                    h+=`<button class="reserve-btn" disabled>Look up registration first</button>`;
+                }
+                h+=`</div>`;
+            });
+            // Tenting card — always shown, links to separate tenting page
+            h+=`<div class="accomm-card" style="border-color:rgba(212,165,86,0.3);">
+                <div class="card-header"><h3>Camping / Tenting</h3><div class="price" style="background:rgba(212,165,86,0.15);color:var(--secondary-gold);">&#8369;150/person</div></div>
+                <p class="description">Bring your own tent. Each tenting space is 2m&times;2m under a shared canopy. 2-4 people per tent.</p>
+                <div class="details"><span class="detail-tag">Any gender</span><span class="detail-tag">Bring your own tent</span><span class="detail-tag">10 canopies available</span></div>
+                <a href="/tenting" class="reserve-btn" style="background:rgba(212,165,86,0.15);color:var(--secondary-gold);border-color:rgba(212,165,86,0.3);display:block;text-align:center;text-decoration:none;">Reserve Tenting Space</a>
+            </div>`;
+            h+='</div>'; c.innerHTML=h;
+        }
+
+        function adjustCartItem(typeId, diff, price, displayName, genderRestriction) {
+            if (!cart[typeId]) cart[typeId] = { count: 0, price: price, displayName: displayName, genderRestriction: genderRestriction };
+            const newCount = cart[typeId].count + diff;
+            if (newCount < 0) return;
+
+            const totalOther = getTotalCartSpots() - cart[typeId].count;
+            if (newCount + totalOther > maxSpots) {
+                showAlert(`\u26a0\ufe0f You can only reserve up to ${maxSpots} spot${maxSpots>1?'s':''} total (matching your registration).`, 'error');
+                return;
+            }
+
+            if (genderRestriction && isGroup) {
+                const genderMax = groupGenderCounts[genderRestriction] || 0;
+                if (newCount > genderMax) {
+                    showAlert(`\u26a0\ufe0f You only have ${genderMax} ${genderRestriction.toLowerCase()} member${genderMax>1?'s':''} in your group.`, 'error');
+                    return;
+                }
+            }
+
+            // Check available spots
+            const accomm = accommodationsData.find(a => a.id === typeId);
+            if (accomm && newCount > accomm.spots_remaining) {
+                showAlert(`\u26a0\ufe0f Only ${accomm.spots_remaining} spots available for ${displayName}.`, 'error');
+                return;
+            }
+
+            cart[typeId].count = newCount;
+            if (newCount === 0) delete cart[typeId];
+            renderAccommodations(accommodationsData);
+            renderCart();
+        }
+
+        function renderCart() {
+            const section = document.getElementById('cartSection');
+            const itemsEl = document.getElementById('cartItems');
+            const totalEl = document.getElementById('cartTotalAmount');
+            const keys = Object.keys(cart);
+            if (keys.length === 0) { section.classList.remove('has-items'); document.getElementById('roommateSection').style.display='none'; return; }
+            const wasEmpty = !section.classList.contains('has-items');
+            section.classList.add('has-items');
+            if (wasEmpty) checkRoommateStatus();
+            else if (document.getElementById('roommateSection').style.display === 'none') checkRoommateStatus();
+            let html = '', total = 0;
+            keys.forEach(id => {
+                const item = cart[id];
+                const subtotal = item.count * item.price;
+                total += subtotal;
+                html += `<div class="cart-item">
+                    <div><div class="cart-item-name">${escHtml(item.displayName)}</div><div class="cart-item-detail">${item.count} spot${item.count>1?'s':''} \u00d7 \u20b1${item.price.toLocaleString()}</div></div>
+                    <div style="display:flex;align-items:center;gap:12px;">
+                        <span class="cart-item-price">\u20b1${subtotal.toLocaleString()}</span>
+                        <button class="cart-item-remove" onclick="removeCartItem('${id}')">\u2715</button>
+                    </div>
+                </div>`;
+            });
+            itemsEl.innerHTML = html;
+            totalEl.textContent = '\u20b1' + total.toLocaleString();
+        }
+
+        function removeCartItem(typeId) {
+            delete cart[typeId];
+            renderAccommodations(accommodationsData);
+            renderCart();
+        }
+
+        var checkoutInProgress = false;
+
+        async function checkout() {
+            if (checkoutInProgress) return;
+            if (Object.keys(cart).length === 0) { showAlert('Please add at least one accommodation to your cart.', 'error'); return; }
+            if (!identityConfirmed) { showAlert('Please look up your registration first.', 'error'); return; }
+            checkoutInProgress = true;
+            const cartItems = [];
+            let totalAmount = 0;
+            for (const typeId in cart) {
+                const item = cart[typeId];
+                cartItems.push({ accommodationType: typeId, displayName: item.displayName, spots: item.count, pricePerSpot: item.price, subtotal: item.count * item.price, genderRestriction: item.genderRestriction || '' });
+                totalAmount += item.count * item.price;
+            }
+
+            // Auto-create roommate requests for group members (same gender grouped together)
+            if (isGroup && selectedMembers.length > 1) {
+                await autoGroupRoommateRequest();
+            }
+
+            sessionStorage.setItem('accommCart', JSON.stringify(cartItems));
+            sessionStorage.setItem('accommTotalAmount', totalAmount);
+            sessionStorage.setItem('accommRegistrationId', registrationId);
+            sessionStorage.setItem('accommRegistrantName', registrantName);
+            sessionStorage.setItem('accommRegistrantEmail', registrantEmail);
+            // Round-robin GCash account (A/B)
+            var acctKeys = ['A','B'];
+            var acctIdx = Math.floor(Math.random() * acctKeys.length);
+            sessionStorage.setItem('accommPaymentAccount', acctKeys[acctIdx]);
+            window.location.href = '/accommodation-payment';
+        }
+
+        async function autoGroupRoommateRequest() {
+            // Get the selected group members as objects
+            var selected = selectedMembers.map(function(idx) { return groupMembers[idx]; }).filter(Boolean);
+            if (selected.length < 2) return;
+
+            // Group by gender
+            var byGender = { Male: [], Female: [] };
+            selected.forEach(function(m) {
+                if (m.gender && byGender[m.gender]) byGender[m.gender].push(m);
+            });
+
+            for (var gender in byGender) {
+                var members = byGender[gender];
+                if (members.length < 2) continue;
+
+                // Chunk into groups of 4 (1 requester + up to 3 requested)
+                // e.g. 6 members → chunk [0,1,2,3] and [4,5]
+                var chunks = [];
+                for (var i = 0; i < members.length; i += 4) {
+                    var chunk = members.slice(i, i + 4);
+                    if (chunk.length >= 2) chunks.push(chunk);
+                    else if (chunk.length === 1 && chunks.length > 0) {
+                        // Solo leftover — add to the last chunk if it has room
+                        if (chunks[chunks.length - 1].length < 4) chunks[chunks.length - 1].push(chunk[0]);
+                        else chunks.push(chunk); // won't create a request (< 2), but safe
+                    }
+                }
+
+                for (var c = 0; c < chunks.length; c++) {
+                    var chunk = chunks[c];
+                    if (chunk.length < 2) continue;
+                    var requester = chunk[0];
+                    var requested = chunk.slice(1);
+
+                    // Check if requester already has a request or has been requested
+                    try {
+                        var checkRes = await fetch('/.netlify/functions/check-roommate-status', {
+                            method: 'POST', headers: {'Content-Type':'application/json'},
+                            body: JSON.stringify({ pycNumber: requester.confirmationNumber || '' })
+                        });
+                        var checkData = await checkRes.json();
+                        if (checkData.hasOwnRequest || checkData.requestedBy) continue;
+                    } catch(e) { continue; }
+
+                // Submit the auto-request
+                try {
+                    await fetch('/.netlify/functions/submit-roommate-request', {
+                        method: 'POST', headers: {'Content-Type':'application/json'},
+                        body: JSON.stringify({
+                            registrationId: registrationId,
+                            requesterName: requester.name,
+                            requesterEmail: registrantEmail,
+                            requesterPyc: requester.confirmationNumber || '',
+                            requesterGender: gender,
+                            requestedMembers: requested.map(function(m) {
+                                return { name: m.name, pycNumber: m.confirmationNumber || '', registrationId: m.id || '', gender: m.gender };
+                            })
+                        })
+                    });
+                } catch(e) { console.error('Auto roommate request error:', e); }
+                } // end chunks loop
+            } // end gender loop
+        }
+
+        loadAccommodations();
+
+        // ========== MINDANAO DORM UNLOCK COUNTDOWN ==========
+        // Fetch authoritative server time and start the countdown. Uses server clock
+        // (not device clock) so users can't change their device time to bypass.
+        (async function initMindanaoCountdown() {
+            // Fetch server time
+            try {
+                var t0 = Date.now();
+                var r = await fetch('/.netlify/functions/server-time', { cache: 'no-store' });
+                var t1 = Date.now();
+                if (r.ok) {
+                    var d = await r.json();
+                    if (d && typeof d.now === 'number') {
+                        // Account for round-trip latency (use midpoint as estimate)
+                        var clientMid = (t0 + t1) / 2;
+                        serverClockOffsetMs = d.now - clientMid;
+                    }
+                    if (d && typeof d.mindanaoDormUnlockAt === 'number') {
+                        MINDANAO_DORM_UNLOCK_AT = d.mindanaoDormUnlockAt;
+                    }
+                    if (d && d.mindanaoDormUnlocked === true) {
+                        mindanaoDormUnlocked = true;
+                    }
+                    // Accommodation reservations close gate. If the server says closed,
+                    // show the closed overlay (admins can bypass via the link on it).
+                    if (d && d.accommodationClosed === true && !window.__accomAdminBypass) {
+                        var ov = document.getElementById('accomClosedOverlay');
+                        if (ov) ov.style.display = 'block';
+                    }
+                }
+            } catch (e) {
+                console.warn('Could not fetch server time, using device clock as fallback');
+            }
+
+            updateMindanaoCountdown();
+            mindanaoCountdownInterval = setInterval(updateMindanaoCountdown, 1000);
+        })();
+
+        function getServerNow() {
+            return Date.now() + serverClockOffsetMs;
+        }
+
+        // Admin bypass on the accommodation-closed overlay: hides the overlay so an
+        // admin can still reserve. (The backend submit-accommodation / submit-tent
+        // also accept an admin bypass token for the actual write.)
+        (function(){
+            var lnk = document.getElementById('accomAdminBypassLink');
+            if (lnk) lnk.addEventListener('click', function(e){
+                e.preventDefault();
+                window.__accomAdminBypass = true;
+                var ov = document.getElementById('accomClosedOverlay');
+                if (ov) ov.style.display = 'none';
+            });
+        })();
+
+        function updateMindanaoCountdown() {
+            var now = getServerNow();
+            var msLeft = MINDANAO_DORM_UNLOCK_AT - now;
+            var inlineEl = document.getElementById('mindanaoCountdownInline');
+            var generalEl = document.getElementById('mindanaoCountdownGeneral');
+
+            if (msLeft <= 0) {
+                if (!mindanaoDormUnlocked) {
+                    mindanaoDormUnlocked = true;
+                    onMindanaoUnlocked();
+                }
+                if (inlineEl) inlineEl.textContent = 'now open';
+                if (generalEl) generalEl.textContent = 'now open';
+                if (mindanaoCountdownInterval) {
+                    clearInterval(mindanaoCountdownInterval);
+                    mindanaoCountdownInterval = null;
+                }
+                return;
+            }
+
+            // Format remaining time
+            var totalSec = Math.floor(msLeft / 1000);
+            var days = Math.floor(totalSec / 86400);
+            var hours = Math.floor((totalSec % 86400) / 3600);
+            var mins = Math.floor((totalSec % 3600) / 60);
+            var secs = totalSec % 60;
+            var pad = function(n) { return n < 10 ? '0' + n : '' + n; };
+            var text;
+            if (days > 0) {
+                text = days + 'd ' + pad(hours) + 'h ' + pad(mins) + 'm ' + pad(secs) + 's';
+            } else if (hours > 0) {
+                text = pad(hours) + 'h ' + pad(mins) + 'm ' + pad(secs) + 's';
+            } else {
+                text = pad(mins) + 'm ' + pad(secs) + 's';
+            }
+            if (inlineEl) inlineEl.textContent = text;
+            if (generalEl) generalEl.textContent = text;
+        }
+
+        function onMindanaoUnlocked() {
+            // Show a brief confirmation banner above the dorm grid
+            var unlockBanner = document.getElementById('mindanaoUnlockBanner');
+            if (!unlockBanner) {
+                unlockBanner = document.createElement('div');
+                unlockBanner.id = 'mindanaoUnlockBanner';
+                unlockBanner.className = 'note-box';
+                unlockBanner.style.cssText = 'background:rgba(39,174,96,0.12);border-color:rgba(39,174,96,0.4);color:#27ae60;font-weight:600;text-align:center;transition:opacity 0.6s ease;margin-bottom:16px;';
+                unlockBanner.innerHTML = '&#10003; Mindanao delegates can now reserve dorm rooms.';
+                var listEl = document.getElementById('accommodationsList');
+                if (listEl && listEl.parentNode) {
+                    listEl.parentNode.insertBefore(unlockBanner, listEl);
+                }
+            }
+            setTimeout(function() {
+                if (unlockBanner) {
+                    unlockBanner.style.opacity = '0';
+                    setTimeout(function() { if (unlockBanner && unlockBanner.parentNode) unlockBanner.parentNode.removeChild(unlockBanner); }, 800);
+                }
+            }, 6000);
+
+            // If user already looked up and was flagged as Mindanao, lift the flag
+            // and refresh the list so dorms appear without forcing them to re-lookup.
+            if (isFromMindanao) {
+                isFromMindanao = false;
+                document.getElementById('mindanaoNote').style.display = 'none';
+                var gn = document.getElementById('mindanaoGeneralNote');
+                if (gn) gn.style.display = 'none';
+                if (typeof loadAccommodations === 'function') loadAccommodations();
+            } else {
+                var gnGeneric = document.getElementById('mindanaoGeneralNote');
+                if (gnGeneric) gnGeneric.style.display = 'none';
+            }
+        }
+        // ========== END MINDANAO COUNTDOWN ==========
+
+        // Pre-warm lookup-registration function to avoid cold start when user submits
+        setTimeout(function(){
+            try{fetch('/.netlify/functions/lookup-registration',{method:'OPTIONS'}).catch(function(){});}catch(e){}
+        }, 500);
+
+        // ========== WAITLIST ==========
+        async function joinWaitlist(typeId, pricePerSpot, displayName) {
+            if (!identityConfirmed) { showAlert('Please look up your registration first.', 'error'); return; }
+            if (!confirm(`This accommodation type is currently full. Would you like to join the waiting list?\n\nWe will contact you at ${registrantEmail} if a spot opens up.`)) return;
+            const btn = event.target;
+            const origText = btn.textContent;
+            btn.disabled = true; btn.textContent = 'Joining...';
+            try {
+                const res = await fetch('/.netlify/functions/submit-waitlist', {
+                    method: 'POST', headers: {'Content-Type':'application/json'},
+                    body: JSON.stringify({ registrationId: registrationId || null, registrantName, registrantEmail, accommodationType: typeId, spotsRequested: 1 })
+                });
+                const data = await res.json();
+                if (res.ok && data.success) {
+                    showAlert(`You are #${data.position} on the waitlist for ${data.displayName}! We'll email you at ${registrantEmail} if a spot opens up.`, 'success');
+                    btn.textContent = '\u2713 On Waitlist (#' + data.position + ')';
+                    btn.style.background = 'rgba(212,165,86,0.3)'; btn.style.borderColor = 'var(--secondary-gold)'; btn.style.color = 'var(--secondary-gold)';
+                } else { showAlert(data.error || 'Failed to join waitlist.', 'error'); btn.disabled = false; btn.textContent = origText; }
+            } catch(err) { showAlert('Error: ' + err.message, 'error'); btn.disabled = false; btn.textContent = origText; }
+        }
+
+        // Slide Button Logic
+        (function initSlideButtons() {
+            document.querySelectorAll('.slide-btn-track').forEach(function(track) {
+                var btnId = track.dataset.slideBtn;
+                var hiddenBtn = document.getElementById(btnId);
+                var handle = track.querySelector('.slide-btn-handle');
+                var fill = track.querySelector('.slide-btn-fill');
+                var label = track.querySelector('.slide-btn-label');
+                label.dataset.origText = label.textContent;
+                var dragging = false, startX = 0, currentX = 0, trackWidth = 0, handleWidth = 50, maxDrag = 0, completed = false;
+                function resetSlide() {
+                    completed = false; track.classList.remove('completed'); track.classList.add('resetting');
+                    handle.style.left = '4px'; fill.style.width = '0px';
+                    label.textContent = label.dataset.origText; label.style.color = ''; label.style.opacity = '0.5'; currentX = 0;
+                }
+                function getPos(e) { return e.touches ? e.touches[0].clientX : e.clientX; }
+                function onStart(e) {
+                    if (completed) return;
+                    dragging = true; startX = getPos(e); trackWidth = track.offsetWidth; handleWidth = handle.offsetWidth; maxDrag = trackWidth - handleWidth - 8;
+                    track.classList.remove('resetting');
+                }
+                function onMove(e) {
+                    if (!dragging) return; e.preventDefault();
+                    currentX = Math.max(0, Math.min(getPos(e) - startX, maxDrag));
+                    handle.style.left = (4 + currentX) + 'px'; fill.style.width = (currentX + handleWidth) + 'px';
+                    label.style.opacity = Math.max(0, 0.5 - (currentX / maxDrag) * 1.2);
+                }
+                function onEnd() {
+                    if (!dragging) return; dragging = false;
+                    if (currentX / maxDrag >= 0.85) {
+                        completed = true; track.classList.add('completed');
+                        label.textContent = 'Processing...'; label.style.opacity = '1'; label.style.color = 'rgba(212,165,86,0.8)';
+                        hiddenBtn.click();
+                        setTimeout(function() { if (completed) resetSlide(); }, 2000);
+                    } else { track.classList.add('resetting'); handle.style.left = '4px'; fill.style.width = '0px'; label.style.opacity = '0.5'; currentX = 0; }
+                }
+                handle.addEventListener('mousedown', onStart); handle.addEventListener('touchstart', onStart, { passive: true });
+                window.addEventListener('mousemove', onMove); window.addEventListener('touchmove', onMove, { passive: false });
+                window.addEventListener('mouseup', onEnd); window.addEventListener('touchend', onEnd);
+            });
+        })();
+
+    </script>
+<!-- Monkey Resort Prank Overlay -->
+<div id="monkeyResortOverlay" style="display:none;position:fixed;inset:0;z-index:999999;background:#0a0f14;overflow-y:auto;overflow-x:hidden;">
+    <!-- Phase 1: Particle Text -->
+    <div id="particlePhase" style="position:absolute;inset:0;display:flex;align-items:center;justify-content:center;z-index:2;">
+        <canvas id="particleCanvas" style="position:absolute;inset:0;width:100%;height:100%;"></canvas>
+    </div>
+
+    <!-- Phase 2: Resort Showcase -->
+    <div id="resortPhase" style="display:none;min-height:100vh;padding:30px 15px 40px;position:relative;">
+        <div style="text-align:center;margin-bottom:8px;">
+            <div style="font-family:'Bebas Neue',sans-serif;color:#d4a556;font-size:clamp(1.1rem,3vw,1.4rem);letter-spacing:4px;text-transform:uppercase;opacity:0.6;">Exclusive Invitation</div>
+        </div>
+        <h1 style="font-family:'Bebas Neue',sans-serif;color:#f5f5f5;font-size:clamp(2rem,6vw,3.2rem);text-align:center;letter-spacing:2px;margin-bottom:5px;">The Jungle Haven Retreat</h1>
+        <p style="text-align:center;color:#d4a556;font-size:clamp(0.85rem,2vw,1rem);font-weight:600;margin-bottom:25px;">A PYC 2026 Partner Resort &bull; By Invitation Only</p>
+
+        <!-- Card Carousel -->
+        <div id="carouselWrapper" style="position:relative;max-width:420px;margin:0 auto;perspective:1000px;">
+            <div id="carouselTrack" style="position:relative;width:100%;height:520px;">
+                <div class="resort-card" data-index="0" style="position:absolute;inset:0;transition:all 0.6s cubic-bezier(0.23,1,0.32,1);border-radius:16px;overflow:hidden;box-shadow:0 20px 60px rgba(0,0,0,0.5);cursor:pointer;" onclick="nextResortCard()">
+                    <img src="/accomm-pic-1.png" style="width:100%;height:100%;object-fit:cover;display:block;" alt="Resort view">
+                    <div style="position:absolute;inset:0;background:linear-gradient(to top,rgba(0,0,0,0.85) 0%,rgba(0,0,0,0.2) 40%,transparent 60%);"></div>
+                    <div style="position:absolute;bottom:0;left:0;right:0;padding:24px;">
+                        <div style="color:#d4a556;font-size:0.75rem;font-weight:700;letter-spacing:2px;text-transform:uppercase;margin-bottom:6px;">The Grounds</div>
+                        <div style="color:#f5f5f5;font-size:1.15rem;font-weight:700;line-height:1.3;margin-bottom:8px;">Rolling Hills &amp; Lush Canopy</div>
+                        <div style="color:rgba(245,245,245,0.7);font-size:0.82rem;line-height:1.5;">Nestled in the heart of Mindanao's untouched jungle, our 50-acre estate features open-air living spaces designed exclusively for our most distinguished primate guests. Roam freely across endless green hills.</div>
+                    </div>
+                </div>
+                <div class="resort-card" data-index="1" style="position:absolute;inset:0;transition:all 0.6s cubic-bezier(0.23,1,0.32,1);border-radius:16px;overflow:hidden;box-shadow:0 20px 60px rgba(0,0,0,0.5);cursor:pointer;" onclick="nextResortCard()">
+                    <img src="/accomm-pic-2.png" style="width:100%;height:100%;object-fit:cover;display:block;" alt="Banana buffet">
+                    <div style="position:absolute;inset:0;background:linear-gradient(to top,rgba(0,0,0,0.85) 0%,rgba(0,0,0,0.2) 40%,transparent 60%);"></div>
+                    <div style="position:absolute;bottom:0;left:0;right:0;padding:24px;">
+                        <div style="color:#d4a556;font-size:0.75rem;font-weight:700;letter-spacing:2px;text-transform:uppercase;margin-bottom:6px;">All-Inclusive Dining</div>
+                        <div style="color:#f5f5f5;font-size:1.15rem;font-weight:700;line-height:1.3;margin-bottom:8px;">Banana Paradise Buffet</div>
+                        <div style="color:rgba(245,245,245,0.7);font-size:0.82rem;line-height:1.5;">Our world-renowned banana buffet is freshly stocked every morning — specifically gathered for apes and primates. From Lakatan to Saba, enjoy unlimited servings of Mindanao's finest. Fresh bananas only!</div>
+                    </div>
+                </div>
+                <div class="resort-card" data-index="2" style="position:absolute;inset:0;transition:all 0.6s cubic-bezier(0.23,1,0.32,1);border-radius:16px;overflow:hidden;box-shadow:0 20px 60px rgba(0,0,0,0.5);cursor:pointer;" onclick="nextResortCard()">
+                    <img src="/accomm-pic-3.png" style="width:100%;height:100%;object-fit:cover;display:block;" alt="Night view">
+                    <div style="position:absolute;inset:0;background:linear-gradient(to top,rgba(0,0,0,0.85) 0%,rgba(0,0,0,0.2) 40%,transparent 60%);"></div>
+                    <div style="position:absolute;bottom:0;left:0;right:0;padding:24px;">
+                        <div style="color:#d4a556;font-size:0.75rem;font-weight:700;letter-spacing:2px;text-transform:uppercase;margin-bottom:6px;">Evenings Under the Stars</div>
+                        <div style="color:#f5f5f5;font-size:1.15rem;font-weight:700;line-height:1.3;margin-bottom:8px;">Sleep Beneath the Milky Way</div>
+                        <div style="color:rgba(245,245,245,0.7);font-size:0.82rem;line-height:1.5;">As night falls, the jungle transforms. No walls, no ceilings — just you and the stars. Our open-air sleeping nests are perched among century-old trees. It is truly a once-in-a-lifetime privilege to be selected.</div>
+                    </div>
+                </div>
+            </div>
+            <div id="carouselDots" style="display:flex;justify-content:center;gap:10px;margin-top:18px;">
+                <span class="cdot active" onclick="goToResortCard(0)" style="width:10px;height:10px;border-radius:50%;background:#d4a556;cursor:pointer;transition:all 0.3s;"></span>
+                <span class="cdot" onclick="goToResortCard(1)" style="width:10px;height:10px;border-radius:50%;background:rgba(245,245,245,0.25);cursor:pointer;transition:all 0.3s;"></span>
+                <span class="cdot" onclick="goToResortCard(2)" style="width:10px;height:10px;border-radius:50%;background:rgba(245,245,245,0.25);cursor:pointer;transition:all 0.3s;"></span>
+            </div>
+        </div>
+
+        <div style="text-align:center;margin-top:25px;max-width:900px;margin-left:auto;margin-right:auto;">
+            <p style="color:rgba(245,245,245,0.5);font-size:0.8rem;font-style:italic;margin-bottom:20px;">Only 3 spots remain. You have been personally selected based on your unique... genetic profile.</p>
+            <div id="resortCTA" style="opacity:0;transition:opacity 0.8s;">
+                <button onclick="showPrankPricing()" id="seePricingBtn" class="shimmer-btn" style="padding:16px 36px;background:#d4a556;color:#1a2332;border:none;border-radius:10px;font-family:'Montserrat',sans-serif;font-size:1rem;font-weight:700;cursor:pointer;letter-spacing:0.5px;transition:all 0.3s;box-shadow:0 6px 25px rgba(212,165,86,0.3);">See Exclusive Pricing</button>
+            </div>
+
+            <!-- Pricing Cards Carousel -->
+            <div id="prankPricing" style="display:none;margin-top:30px;">
+                <h2 style="font-family:'Bebas Neue',sans-serif;color:#d4a556;font-size:clamp(1.6rem,4vw,2.2rem);letter-spacing:2px;margin-bottom:5px;">Choose Your Experience</h2>
+                <p style="color:rgba(245,245,245,0.5);font-size:0.85rem;margin-bottom:25px;">Limited-time pricing for selected guests only</p>
+
+                <div id="pricingCarouselWrap" style="position:relative;max-width:340px;margin:0 auto;perspective:1000px;">
+                    <div id="pricingCarouselTrack" style="position:relative;width:100%;min-height:580px;">
+
+                        <!-- Card 1: The Great Outdoors -->
+                        <div class="pricing-card" data-pidx="0" onclick="nextPricingCard()" style="background:rgba(20,28,40,0.95);border:1px solid rgba(212,165,86,0.25);padding:28px 22px;text-align:left;display:flex;flex-direction:column;">
+                            <div style="font-size:0.7rem;color:rgba(245,245,245,0.4);text-transform:uppercase;letter-spacing:2px;font-weight:600;margin-bottom:6px;">Basic Package</div>
+                            <h3 style="color:#f5f5f5;font-family:'Bebas Neue',sans-serif;font-size:1.5rem;letter-spacing:1px;margin-bottom:12px;">The Great Outdoors</h3>
+                            <div style="margin-bottom:16px;">
+                                <span style="color:rgba(245,245,245,0.35);text-decoration:line-through;font-size:1.1rem;">&#8369;5,000</span>
+                                <span style="color:#27ae60;font-size:0.78rem;font-weight:700;margin-left:6px;">80% OFF</span>
+                                <div style="color:#d4a556;font-size:2rem;font-weight:800;margin-top:2px;">&#8369;1,000<span style="font-size:0.8rem;font-weight:400;color:rgba(245,245,245,0.5);">/night</span></div>
+                                <div style="color:#e74c3c;font-size:0.75rem;font-weight:600;margin-top:4px;">Offer ends in <span class="prank-timer" data-seconds="600">10:00</span></div>
+                            </div>
+                            <div style="height:1px;background:rgba(255,255,255,0.08);margin-bottom:14px;"></div>
+                            <ul style="list-style:none;padding:0;margin:0 0 18px;flex:1;font-size:0.82rem;">
+                                <li style="color:rgba(245,245,245,0.75);padding:4px 0;display:flex;gap:8px;"><span style="color:#27ae60;">&#10003;</span> Unlimited banana buffet (all day)</li>
+                                <li style="color:rgba(245,245,245,0.75);padding:4px 0;display:flex;gap:8px;"><span style="color:#27ae60;">&#10003;</span> 360-degree sky view (no ceiling)</li>
+                                <li style="color:rgba(245,245,245,0.75);padding:4px 0;display:flex;gap:8px;"><span style="color:#27ae60;">&#10003;</span> Fresh open air ventilation (no walls)</li>
+                                <li style="color:rgba(245,245,245,0.75);padding:4px 0;display:flex;gap:8px;"><span style="color:#27ae60;">&#10003;</span> Natural grass mattress (organic)</li>
+                                <li style="color:rgba(245,245,245,0.75);padding:4px 0;display:flex;gap:8px;"><span style="color:#27ae60;">&#10003;</span> Complimentary mosquito encounters</li>
+                                <li style="color:rgba(245,245,245,0.75);padding:4px 0;display:flex;gap:8px;"><span style="color:#27ae60;">&#10003;</span> Tree branch swing access</li>
+                                <li style="color:rgba(245,245,245,0.75);padding:4px 0;display:flex;gap:8px;"><span style="color:#27ae60;">&#10003;</span> Wake-up call by roosters at 4 AM</li>
+                            </ul>
+                            <button onclick="event.stopPropagation();bookPrankOption('The Great Outdoors')" class="shimmer-btn" style="width:100%;padding:13px;background:rgba(212,165,86,0.15);color:#d4a556;border:1px solid rgba(212,165,86,0.3);border-radius:10px;font-family:'Montserrat',sans-serif;font-weight:700;font-size:0.9rem;cursor:pointer;">Book Now</button>
+                        </div>
+
+                        <!-- Card 2: Exclusive Monkey Residence -->
+                        <div class="pricing-card" data-pidx="1" onclick="nextPricingCard()" style="background:rgba(25,32,45,0.97);border:2px solid rgba(212,165,86,0.4);padding:28px 22px;text-align:left;display:flex;flex-direction:column;box-shadow:0 12px 40px rgba(212,165,86,0.15);">
+                            <div style="position:absolute;top:12px;right:12px;background:#d4a556;color:#1a2332;padding:4px 10px;border-radius:20px;font-size:0.65rem;font-weight:700;z-index:5;">BEST VALUE</div>
+                            <div style="position:absolute;top:12px;left:12px;background:#e74c3c;color:white;padding:4px 8px;border-radius:20px;font-size:0.6rem;font-weight:700;z-index:5;">BIGGEST SAVINGS</div>
+                            <div style="font-size:0.7rem;color:rgba(245,245,245,0.4);text-transform:uppercase;letter-spacing:2px;font-weight:600;margin-bottom:6px;margin-top:20px;">Premium Package</div>
+                            <h3 style="color:#d4a556;font-family:'Bebas Neue',sans-serif;font-size:1.5rem;letter-spacing:1px;margin-bottom:12px;">Exclusive Monkey Residence</h3>
+                            <div style="margin-bottom:16px;">
+                                <span style="color:rgba(245,245,245,0.35);text-decoration:line-through;font-size:1.1rem;">&#8369;10,000</span>
+                                <span style="color:#27ae60;font-size:0.78rem;font-weight:700;margin-left:6px;">90% OFF</span>
+                                <div style="color:#d4a556;font-size:2rem;font-weight:800;margin-top:2px;">&#8369;1,000<span style="font-size:0.8rem;font-weight:400;color:rgba(245,245,245,0.5);">/night</span></div>
+                                <div style="color:#e74c3c;font-size:0.75rem;font-weight:600;margin-top:4px;">Offer ends in <span class="prank-timer" data-seconds="300">5:00</span></div>
+                            </div>
+                            <div style="height:1px;background:rgba(212,165,86,0.2);margin-bottom:14px;"></div>
+                            <ul style="list-style:none;padding:0;margin:0 0 18px;flex:1;font-size:0.82rem;">
+                                <li style="color:rgba(245,245,245,0.75);padding:4px 0;display:flex;gap:8px;"><span style="color:#d4a556;">&#9733;</span> Presidential banana throne (hand-carved)</li>
+                                <li style="color:rgba(245,245,245,0.75);padding:4px 0;display:flex;gap:8px;"><span style="color:#d4a556;">&#9733;</span> Personal grooming monkey butler</li>
+                                <li style="color:rgba(245,245,245,0.75);padding:4px 0;display:flex;gap:8px;"><span style="color:#d4a556;">&#9733;</span> Vine-to-vine express transit system</li>
+                                <li style="color:rgba(245,245,245,0.75);padding:4px 0;display:flex;gap:8px;"><span style="color:#d4a556;">&#9733;</span> Heated treetop jacuzzi (coconut water)</li>
+                                <li style="color:rgba(245,245,245,0.75);padding:4px 0;display:flex;gap:8px;"><span style="color:#d4a556;">&#9733;</span> 24/7 banana room service (peeled)</li>
+                                <li style="color:rgba(245,245,245,0.75);padding:4px 0;display:flex;gap:8px;"><span style="color:#d4a556;">&#9733;</span> Private jungle concert (birds &amp; frogs)</li>
+                                <li style="color:rgba(245,245,245,0.75);padding:4px 0;display:flex;gap:8px;"><span style="color:#d4a556;">&#9733;</span> Banana peel facial spa</li>
+                                <li style="color:rgba(245,245,245,0.75);padding:4px 0;display:flex;gap:8px;"><span style="color:#d4a556;">&#9733;</span> VIP access to the Secret Banana Vault</li>
+                            </ul>
+                            <button onclick="event.stopPropagation();bookPrankOption('Exclusive Monkey Residence')" class="shimmer-btn" style="width:100%;padding:13px;background:#d4a556;color:#1a2332;border:none;border-radius:10px;font-family:'Montserrat',sans-serif;font-weight:700;font-size:0.9rem;cursor:pointer;box-shadow:0 4px 15px rgba(212,165,86,0.3);">Book Now</button>
+                        </div>
+
+                        <!-- Card 3: Girls Dorm -->
+                        <div class="pricing-card" data-pidx="2" onclick="nextPricingCard()" style="background:rgba(18,24,35,0.95);border:1px solid rgba(255,255,255,0.08);padding:28px 22px;text-align:left;display:flex;flex-direction:column;">
+                            <div style="position:absolute;top:12px;right:12px;background:#555;color:rgba(245,245,245,0.6);padding:4px 10px;border-radius:20px;font-size:0.6rem;font-weight:600;z-index:5;">LAST RESORT</div>
+                            <div style="font-size:0.7rem;color:rgba(245,245,245,0.25);text-transform:uppercase;letter-spacing:2px;font-weight:600;margin-bottom:6px;">Budget Package</div>
+                            <h3 style="color:rgba(245,245,245,0.5);font-family:'Bebas Neue',sans-serif;font-size:1.5rem;letter-spacing:1px;margin-bottom:12px;">Girls Dorm</h3>
+                            <div style="margin-bottom:16px;">
+                                <span style="color:rgba(245,245,245,0.3);font-size:1.1rem;">&#8369;100</span>
+                                <span style="color:#e74c3c;font-size:0.7rem;font-weight:700;margin-left:6px;">10,000% REVERSE DISCOUNT</span>
+                                <div style="color:rgba(245,245,245,0.4);font-size:2rem;font-weight:800;margin-top:2px;">&#8369;10,000<span style="font-size:0.8rem;font-weight:400;color:rgba(245,245,245,0.3);">/night</span></div>
+                                <div style="color:rgba(245,245,245,0.3);font-size:0.75rem;font-weight:600;margin-top:4px;">Reverse discount ends in <span class="prank-timer" data-seconds="31536000">365 days</span></div>
+                            </div>
+                            <div style="height:1px;background:rgba(255,255,255,0.05);margin-bottom:14px;"></div>
+                            <ul style="list-style:none;padding:0;margin:0 0 18px;flex:1;font-size:0.82rem;">
+                                <li style="color:rgba(245,245,245,0.45);padding:4px 0;display:flex;gap:8px;"><span style="color:rgba(245,245,245,0.25);">&#8226;</span> Shared room with 3 complete strangers</li>
+                                <li style="color:rgba(245,245,245,0.45);padding:4px 0;display:flex;gap:8px;"><span style="color:rgba(245,245,245,0.25);">&#8226;</span> Jail-like sleeping cells (cozy!)</li>
+                                <li style="color:rgba(245,245,245,0.45);padding:4px 0;display:flex;gap:8px;"><span style="color:rgba(245,245,245,0.25);">&#8226;</span> Mysterious dark hallways at night</li>
+                                <li style="color:rgba(245,245,245,0.45);padding:4px 0;display:flex;gap:8px;"><span style="color:rgba(245,245,245,0.25);">&#8226;</span> One (1) functioning lightbulb per floor</li>
+                                <li style="color:rgba(245,245,245,0.45);padding:4px 0;display:flex;gap:8px;"><span style="color:rgba(245,245,245,0.25);">&#8226;</span> Communal bathroom (good luck)</li>
+                                <li style="color:rgba(245,245,245,0.45);padding:4px 0;display:flex;gap:8px;"><span style="color:rgba(245,245,245,0.25);">&#8226;</span> Zero bananas (strictly prohibited)</li>
+                                <li style="color:rgba(245,245,245,0.45);padding:4px 0;display:flex;gap:8px;"><span style="color:rgba(245,245,245,0.25);">&#8226;</span> Echoing snoring surround sound</li>
+                            </ul>
+                            <button onclick="event.stopPropagation();bookDormOption()" class="shimmer-btn-alt" style="width:100%;padding:13px;background:linear-gradient(110deg,rgba(255,255,255,0.03),45%,rgba(255,255,255,0.08),55%,rgba(255,255,255,0.03));color:rgba(245,245,245,0.4);border:1px solid rgba(255,255,255,0.08);border-radius:10px;font-family:'Montserrat',sans-serif;font-weight:600;font-size:0.9rem;cursor:pointer;">Book Now (why though?)</button>
+                        </div>
+
+                    </div>
+                    <!-- Dots -->
+                    <div style="display:flex;justify-content:center;gap:10px;margin-top:18px;">
+                        <span class="pdot" onclick="goToPricingCard(0)" style="width:10px;height:10px;border-radius:50%;background:#d4a556;cursor:pointer;transition:all 0.3s;"></span>
+                        <span class="pdot" onclick="goToPricingCard(1)" style="width:10px;height:10px;border-radius:50%;background:rgba(245,245,245,0.25);cursor:pointer;transition:all 0.3s;"></span>
+                        <span class="pdot" onclick="goToPricingCard(2)" style="width:10px;height:10px;border-radius:50%;background:rgba(245,245,245,0.25);cursor:pointer;transition:all 0.3s;"></span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Prank Feedback Overlay -->
+<div id="prankFeedbackOverlay" class="prank-feedback-overlay" style="display:none;">
+    <div class="prank-feedback-box">
+        <div id="prankThankYou" style="text-align:center;margin-bottom:20px;">
+            <div style="font-size:2rem;margin-bottom:8px;">&#127881;</div>
+            <h3 id="prankThankTitle" style="color:#d4a556;font-family:'Bebas Neue',sans-serif;font-size:1.4rem;letter-spacing:1px;margin-bottom:8px;"></h3>
+            <p id="prankThankMsg" style="color:rgba(245,245,245,0.6);font-size:0.85rem;line-height:1.5;"></p>
+        </div>
+        <div style="height:1px;background:rgba(212,165,86,0.15);margin:16px 0;"></div>
+        <p style="color:rgba(245,245,245,0.5);font-size:0.82rem;text-align:center;margin-bottom:12px;">What do you think of our lodging options?</p>
+        <div class="prank-emoji-row">
+            <button class="prank-emoji-btn" onclick="selectPrankEmoji(this,'&#128557;')" data-label="Terrible">&#128557;</button>
+            <button class="prank-emoji-btn" onclick="selectPrankEmoji(this,'&#128530;')" data-label="Bad">&#128530;</button>
+            <button class="prank-emoji-btn" onclick="selectPrankEmoji(this,'&#128528;')" data-label="Okay">&#128528;</button>
+            <button class="prank-emoji-btn" onclick="selectPrankEmoji(this,'&#129321;')" data-label="Amazing">&#129321;</button>
+        </div>
+        <textarea id="prankFeedbackText" class="prank-textarea" placeholder="Share your thoughts... (minimum 20 characters)" oninput="updatePrankCharCount()"></textarea>
+        <div class="prank-charcount"><span id="prankCharNum">0</span>/20 minimum</div>
+        <p id="prankMinHint" style="color:#e74c3c;font-size:0.78rem;text-align:center;margin-bottom:12px;opacity:0;transition:opacity 0.3s;">Please select an emoji and write at least 20 characters to continue</p>
+        <button id="prankSendBtn" class="prank-send-btn shimmer-btn" style="background:#d4a556;color:#1a2332;" disabled onclick="sendPrankFeedback()">Submit Feedback to Continue</button>
+    </div>
+</div>
+
+<!-- Prank Confirmation Dialog -->
+<div id="prankConfirmOverlay" class="prank-confirm-overlay" style="display:none;">
+    <div class="prank-confirm-box">
+        <div id="prankConfirmIcon" style="font-size:2.5rem;margin-bottom:12px;"></div>
+        <h3 id="prankConfirmTitle" style="color:#d4a556;font-family:'Bebas Neue',sans-serif;font-size:1.5rem;letter-spacing:1px;margin-bottom:10px;"></h3>
+        <p id="prankConfirmMsg" style="color:rgba(245,245,245,0.6);font-size:0.9rem;line-height:1.5;margin-bottom:25px;"></p>
+        <div style="display:flex;gap:10px;justify-content:center;">
+            <button id="prankConfirmYes" class="shimmer-btn" style="padding:12px 28px;background:#d4a556;color:#1a2332;border:none;border-radius:10px;font-family:'Montserrat',sans-serif;font-weight:700;cursor:pointer;">I'm Sure</button>
+            <button id="prankConfirmNo" style="padding:12px 28px;background:transparent;color:rgba(245,245,245,0.5);border:1px solid rgba(255,255,255,0.1);border-radius:10px;font-family:'Montserrat',sans-serif;font-weight:600;cursor:pointer;">Go Back</button>
+        </div>
+    </div>
+</div>
+
+<script>
+// === Monkey Resort Prank — Particle Text Engine ===
+let resortCardIndex = 0;
+let particleAnimId = null;
+const prankParticles = [];
+const PRANK_WORDS = ['LYKA', 'SYSTEM HAS\nIDENTIFIED YOU', 'AS A\nMONKEY'];
+const PRANK_COLORS = [
+    {r:255,g:215,b:0},   // gold
+    {r:245,g:190,b:50},  // banana yellow
+    {r:212,g:165,b:86}   // PYC gold
+];
+let prankWordIndex = 0;
+let prankFrameCount = 0;
+let prankPhaseActive = false;
+
+class PrankParticle {
+    constructor() {
+        this.px=0; this.py=0; this.vx=0; this.vy=0; this.ax=0; this.ay=0;
+        this.tx=0; this.ty=0; this.killed=false;
+        this.maxSpd=1; this.maxF=0.1; this.size=3;
+        this.sr=0; this.sg=0; this.sb=0;
+        this.tr=0; this.tg=0; this.tb=0;
+        this.cw=0; this.cbr=0.01;
+        this.closeDist=80;
+    }
+    move() {
+        let pm=1;
+        const dx=this.tx-this.px, dy=this.ty-this.py;
+        const dist=Math.sqrt(dx*dx+dy*dy);
+        if(dist<this.closeDist) pm=dist/this.closeDist;
+        const mag=dist||1;
+        const dwx=(dx/mag)*this.maxSpd*pm, dwy=(dy/mag)*this.maxSpd*pm;
+        let sx=dwx-this.vx, sy=dwy-this.vy;
+        const sm=Math.sqrt(sx*sx+sy*sy)||1;
+        sx=(sx/sm)*this.maxF; sy=(sy/sm)*this.maxF;
+        this.ax+=sx; this.ay+=sy;
+        this.vx+=this.ax; this.vy+=this.ay;
+        this.px+=this.vx; this.py+=this.vy;
+        this.ax=0; this.ay=0;
+    }
+    draw(ctx) {
+        if(this.cw<1) this.cw=Math.min(this.cw+this.cbr,1);
+        const r=Math.round(this.sr+(this.tr-this.sr)*this.cw);
+        const g=Math.round(this.sg+(this.tg-this.sg)*this.cw);
+        const b=Math.round(this.sb+(this.tb-this.sb)*this.cw);
+        ctx.fillStyle=`rgb(${r},${g},${b})`;
+        ctx.fillRect(this.px, this.py, this.size, this.size);
+    }
+    kill(w,h) {
+        if(!this.killed) {
+            const ang=Math.random()*Math.PI*2;
+            const mag=(w+h)/2;
+            this.tx=w/2+Math.cos(ang)*mag;
+            this.ty=h/2+Math.sin(ang)*mag;
+            this.sr=this.sr+(this.tr-this.sr)*this.cw;
+            this.sg=this.sg+(this.tg-this.sg)*this.cw;
+            this.sb=this.sb+(this.tb-this.sb)*this.cw;
+            this.tr=0; this.tg=0; this.tb=0; this.cw=0;
+            this.killed=true;
+        }
+    }
+}
+
+function prankNextWord(word, canvas) {
+    const off=document.createElement('canvas');
+    off.width=canvas.width; off.height=canvas.height;
+    const octx=off.getContext('2d');
+    octx.fillStyle='white';
+    // Responsive font: smaller on mobile
+    const lines=word.split('\n');
+    const fontSize=lines.length>1 ? Math.min(canvas.width/6, 60) : Math.min(canvas.width/4, 100);
+    octx.font='bold '+fontSize+'px Montserrat, Arial, sans-serif';
+    octx.textAlign='center'; octx.textBaseline='middle';
+    const lineH=fontSize*1.2;
+    const startY=canvas.height/2 - ((lines.length-1)*lineH)/2;
+    lines.forEach((line,i) => { octx.fillText(line, canvas.width/2, startY+i*lineH); });
+
+    const imgData=octx.getImageData(0,0,canvas.width,canvas.height);
+    const px=imgData.data;
+    const step=Math.max(3, Math.round(4*(canvas.width/400)));
+    const col=PRANK_COLORS[prankWordIndex % PRANK_COLORS.length];
+    const coords=[];
+    for(let i=0;i<px.length;i+=step*4) coords.push(i);
+    // Shuffle
+    for(let i=coords.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[coords[i],coords[j]]=[coords[j],coords[i]];}
+
+    let pi=0;
+    for(const ci of coords){
+        if(px[ci+3]>0){
+            const x=(ci/4)%canvas.width;
+            const y=Math.floor(ci/4/canvas.width);
+            let p;
+            if(pi<prankParticles.length){
+                p=prankParticles[pi]; p.killed=false; pi++;
+            } else {
+                p=new PrankParticle();
+                const ang=Math.random()*Math.PI*2;
+                const mag=(canvas.width+canvas.height)/2;
+                p.px=canvas.width/2+Math.cos(ang)*mag;
+                p.py=canvas.height/2+Math.sin(ang)*mag;
+                p.maxSpd=Math.random()*5+3;
+                p.maxF=p.maxSpd*0.05;
+                p.size=Math.max(2,Math.round(Math.random()*3+2));
+                p.cbr=Math.random()*0.025+0.003;
+                prankParticles.push(p);
+            }
+            p.sr=p.sr+(p.tr-p.sr)*p.cw;
+            p.sg=p.sg+(p.tg-p.sg)*p.cw;
+            p.sb=p.sb+(p.tb-p.sb)*p.cw;
+            p.tr=col.r; p.tg=col.g; p.tb=col.b; p.cw=0;
+            p.tx=x; p.ty=y;
+        }
+    }
+    for(let i=pi;i<prankParticles.length;i++) prankParticles[i].kill(canvas.width,canvas.height);
+}
+
+function prankAnimate() {
+    const canvas=document.getElementById('particleCanvas');
+    if(!canvas||!prankPhaseActive) return;
+    const ctx=canvas.getContext('2d');
+    ctx.fillStyle='rgba(10,15,20,0.12)';
+    ctx.fillRect(0,0,canvas.width,canvas.height);
+    for(let i=prankParticles.length-1;i>=0;i--){
+        const p=prankParticles[i];
+        p.move(); p.draw(ctx);
+        if(p.killed&&(p.px<-50||p.px>canvas.width+50||p.py<-50||p.py>canvas.height+50)){
+            prankParticles.splice(i,1);
+        }
+    }
+    prankFrameCount++;
+    // Word timing: ~6s per word at 60fps = 360 frames
+    if(prankFrameCount===360 || prankFrameCount===720){
+        prankWordIndex++;
+        if(prankWordIndex<PRANK_WORDS.length){
+            prankNextWord(PRANK_WORDS[prankWordIndex], canvas);
+        }
+    }
+    // After all 3 words shown (~1080 frames = 18s), transition to resort
+    if(prankFrameCount>=1060){
+        prankPhaseActive=false;
+        const phase=document.getElementById('particlePhase');
+        phase.style.transition='opacity 0.8s';
+        phase.style.opacity='0';
+        setTimeout(()=>{
+            phase.style.display='none';
+            document.getElementById('resortPhase').style.display='block';
+            positionResortCards();
+            setTimeout(()=>{ document.getElementById('resortCTA').style.opacity='1'; },2000);
+        },800);
+        return;
+    }
+    particleAnimId=requestAnimationFrame(prankAnimate);
+}
+
+function showMonkeyResort() {
+    const overlay=document.getElementById('monkeyResortOverlay');
+    overlay.style.display='block';
+    document.body.style.overflow='hidden';
+    // Size canvas to screen
+    const canvas=document.getElementById('particleCanvas');
+    const dpr=window.devicePixelRatio||1;
+    canvas.width=window.innerWidth*dpr;
+    canvas.height=window.innerHeight*dpr;
+    canvas.style.width=window.innerWidth+'px';
+    canvas.style.height=window.innerHeight+'px';
+    canvas.getContext('2d').scale(dpr,dpr);
+    // Reset canvas logical size for particle coords
+    canvas.width=window.innerWidth;
+    canvas.height=window.innerHeight;
+    prankWordIndex=0;
+    prankFrameCount=0;
+    prankParticles.length=0;
+    prankPhaseActive=true;
+    prankNextWord(PRANK_WORDS[0], canvas);
+    prankAnimate();
+}
+
+function dismissMonkeyResort() {
+    prankPhaseActive=false;
+    if(particleAnimId) cancelAnimationFrame(particleAnimId);
+    stopPrankTimers();
+    document.getElementById('prankFeedbackOverlay').style.display='none';
+    document.getElementById('prankConfirmOverlay').style.display='none';
+    const overlay=document.getElementById('monkeyResortOverlay');
+    overlay.style.transition='opacity 0.5s';
+    overlay.style.opacity='0';
+    setTimeout(()=>{ overlay.style.display='none'; overlay.style.opacity='1'; document.body.style.overflow=''; },500);
+}
+
+// Prank pricing
+let prankTimerIntervals = [];
+function showPrankPricing() {
+    document.getElementById('seePricingBtn').style.display='none';
+    const pricing = document.getElementById('prankPricing');
+    pricing.style.display='block';
+    pricing.style.opacity='0';
+    pricing.style.transition='opacity 0.6s';
+    setTimeout(()=>{ pricing.style.opacity='1'; },50);
+    // Scroll down to pricing
+    setTimeout(()=>{ pricing.scrollIntoView({behavior:'smooth', block:'start'}); },200);
+    startPrankTimers();
+}
+
+function startPrankTimers() {
+    document.querySelectorAll('.prank-timer').forEach(el => {
+        let totalSec = parseInt(el.dataset.seconds) || 600;
+        function tick() {
+            if (totalSec >= 86400) {
+                // Show as days
+                const days = Math.floor(totalSec / 86400);
+                const hrs = Math.floor((totalSec % 86400) / 3600);
+                el.textContent = days + (days === 1 ? ' day ' : ' days ') + hrs + 'h';
+            } else {
+                const m = Math.floor(totalSec / 60);
+                const s = totalSec % 60;
+                el.textContent = m + ':' + String(s).padStart(2, '0');
+            }
+            if (totalSec <= 0) {
+                // Reset the timer (it always restarts)
+                totalSec = parseInt(el.dataset.seconds) || 600;
+            }
+            totalSec--;
+        }
+        tick();
+        const id = setInterval(tick, 1000);
+        prankTimerIntervals.push(id);
+    });
+}
+
+function stopPrankTimers() {
+    prankTimerIntervals.forEach(id => clearInterval(id));
+    prankTimerIntervals = [];
+}
+
+// Photo Card Carousel
+function positionResortCards() {
+    const cards = document.querySelectorAll('.resort-card');
+    cards.forEach((card, i) => {
+        const offset = i - resortCardIndex;
+        if (offset === 0) {
+            card.style.transform = 'translateX(0) scale(1)';
+            card.style.opacity = '1'; card.style.zIndex = '3'; card.style.filter = 'none';
+        } else if (offset === 1 || offset === -2) {
+            card.style.transform = 'translateX(65%) scale(0.85) rotateY(-8deg)';
+            card.style.opacity = '0.4'; card.style.zIndex = '1'; card.style.filter = 'blur(1.5px)';
+        } else {
+            card.style.transform = 'translateX(-65%) scale(0.85) rotateY(8deg)';
+            card.style.opacity = '0.4'; card.style.zIndex = '1'; card.style.filter = 'blur(1.5px)';
+        }
+    });
+    document.querySelectorAll('.cdot').forEach((d, i) => {
+        d.style.background = i === resortCardIndex ? '#d4a556' : 'rgba(245,245,245,0.25)';
+        d.style.transform = i === resortCardIndex ? 'scale(1.3)' : 'scale(1)';
+    });
+}
+function nextResortCard() { resortCardIndex = (resortCardIndex + 1) % 3; positionResortCards(); }
+function goToResortCard(i) { resortCardIndex = i; positionResortCards(); }
+
+// Photo carousel swipe
+(function(){
+    let sx=0;
+    const el = document.getElementById('carouselTrack');
+    if(!el) return;
+    el.addEventListener('touchstart', e => { sx = e.touches[0].clientX; }, {passive:true});
+    el.addEventListener('touchend', e => {
+        const dx = e.changedTouches[0].clientX - sx;
+        if (Math.abs(dx) > 50) {
+            if (dx < 0) resortCardIndex = (resortCardIndex + 1) % 3;
+            else resortCardIndex = (resortCardIndex + 2) % 3;
+            positionResortCards();
+        }
+    }, {passive:true});
+})();
+
+// === Pricing Card Carousel ===
+let pricingCardIdx = 0;
+function positionPricingCards() {
+    const cards = document.querySelectorAll('.pricing-card');
+    cards.forEach((card, i) => {
+        const offset = i - pricingCardIdx;
+        if (offset === 0) {
+            card.style.transform = 'translateX(0) scale(1)';
+            card.style.opacity = '1'; card.style.zIndex = '3'; card.style.filter = 'none';
+            card.style.pointerEvents = 'auto';
+        } else if (offset === 1 || offset === -2) {
+            card.style.transform = 'translateX(55%) scale(0.88)';
+            card.style.opacity = '0.5'; card.style.zIndex = '1'; card.style.filter = 'blur(1px)';
+            card.style.pointerEvents = 'auto';
+        } else {
+            card.style.transform = 'translateX(-55%) scale(0.88)';
+            card.style.opacity = '0.5'; card.style.zIndex = '1'; card.style.filter = 'blur(1px)';
+            card.style.pointerEvents = 'auto';
+        }
+    });
+    document.querySelectorAll('.pdot').forEach((d, i) => {
+        d.style.background = i === pricingCardIdx ? '#d4a556' : 'rgba(245,245,245,0.25)';
+        d.style.transform = i === pricingCardIdx ? 'scale(1.3)' : 'scale(1)';
+    });
+}
+function nextPricingCard() { pricingCardIdx = (pricingCardIdx + 1) % 3; positionPricingCards(); }
+function goToPricingCard(i) { pricingCardIdx = i; positionPricingCards(); }
+
+// Pricing carousel swipe
+(function(){
+    let sx=0;
+    const el = document.getElementById('pricingCarouselTrack');
+    if(!el) return;
+    el.addEventListener('touchstart', e => { sx = e.touches[0].clientX; }, {passive:true});
+    el.addEventListener('touchend', e => {
+        const dx = e.changedTouches[0].clientX - sx;
+        if (Math.abs(dx) > 50) {
+            if (dx < 0) pricingCardIdx = (pricingCardIdx + 1) % 3;
+            else pricingCardIdx = (pricingCardIdx + 2) % 3;
+            positionPricingCards();
+        }
+    }, {passive:true});
+})();
+
+// Init pricing carousel when shown
+const origShowPrankPricing = showPrankPricing;
+showPrankPricing = function() {
+    origShowPrankPricing();
+    setTimeout(positionPricingCards, 100);
+};
+
+// === Booking Flows ===
+let chosenLodging = '';
+let prankSelectedEmoji = '';
+
+function bookPrankOption(name) {
+    chosenLodging = name;
+    const overlay = document.getElementById('prankFeedbackOverlay');
+    document.getElementById('prankThankTitle').textContent = 'Booking Confirmed!';
+    document.getElementById('prankThankMsg').innerHTML = 'Thank you so much for reserving <strong style="color:#d4a556;">' + name + '</strong>! The money will be deducted from your bank account since you have linked it to our website. We sincerely hope you enjoy your stay at <strong style="color:#d4a556;">' + name + '</strong>!';
+    overlay.style.display = 'flex';
+}
+
+let dormConfirmStep = 0;
+function bookDormOption() {
+    dormConfirmStep = 0;
+    showDormConfirm();
+}
+
+function showDormConfirm() {
+    const overlay = document.getElementById('prankConfirmOverlay');
+    const icon = document.getElementById('prankConfirmIcon');
+    const title = document.getElementById('prankConfirmTitle');
+    const msg = document.getElementById('prankConfirmMsg');
+    const yesBtn = document.getElementById('prankConfirmYes');
+    const noBtn = document.getElementById('prankConfirmNo');
+
+    if (dormConfirmStep === 0) {
+        icon.textContent = '\u26A0\uFE0F';
+        title.textContent = 'Are you sure?';
+        msg.textContent = 'The other options are much better and way cheaper! Are you really going with the Girls Dorm?';
+        yesBtn.onclick = function() { dormConfirmStep = 1; showDormConfirm(); };
+        noBtn.onclick = function() { overlay.style.display = 'none'; };
+    } else if (dormConfirmStep === 1) {
+        icon.textContent = '\uD83D\uDE31';
+        title.textContent = 'Are you REALLY sure?';
+        msg.innerHTML = 'This is <strong style="color:#e74c3c;">&#8369;10,000/night</strong> with the reverse discount! The Exclusive Monkey Residence is only &#8369;1,000/night with a personal monkey butler. You\'re passing that up?';
+        yesBtn.onclick = function() {
+            overlay.style.display = 'none';
+            chosenLodging = 'Girls Dorm';
+            const fb = document.getElementById('prankFeedbackOverlay');
+            document.getElementById('prankThankTitle').textContent = 'Booking Confirmed... Really?';
+            document.getElementById('prankThankMsg').innerHTML = 'You actually chose the <strong style="color:rgba(245,245,245,0.5);">Girls Dorm</strong>. No banana buffet. No monkey butler. Just... a room. With strangers. We hope you enjoy your... experience.';
+            fb.style.display = 'flex';
+        };
+        noBtn.onclick = function() { overlay.style.display = 'none'; };
+    }
+    overlay.style.display = 'flex';
+}
+
+// === Feedback Form ===
+function selectPrankEmoji(btn, emoji) {
+    document.querySelectorAll('.prank-emoji-btn').forEach(b => b.classList.remove('selected'));
+    btn.classList.add('selected');
+    prankSelectedEmoji = btn.dataset.label || '';
+    checkFeedbackReady();
+}
+
+function updatePrankCharCount() {
+    const text = document.getElementById('prankFeedbackText').value;
+    const count = text.length;
+    const el = document.getElementById('prankCharNum');
+    el.textContent = count;
+    el.style.color = count >= 20 ? '#27ae60' : 'rgba(245,245,245,0.3)';
+    checkFeedbackReady();
+}
+
+function isGibberish(text) {
+    // Check 1: Must have at least 4 unique words
+    const words = text.toLowerCase().split(/\s+/).filter(w => w.length > 1);
+    const uniqueWords = [...new Set(words)];
+    if (uniqueWords.length < 4) return 'Please write at least 4 words';
+    // Check 2: No character repeating 4+ times in a row (e.g. "aaaa", "hhhh")
+    if (/(.)\1{3,}/i.test(text)) return 'Please write a real message (no repeated characters)';
+    // Check 3: Must contain vowels (real words have vowels)
+    const vowelCount = (text.match(/[aeiouAEIOU]/g) || []).length;
+    if (vowelCount < 3) return 'That doesn\'t look like real feedback — please try again';
+    // Check 4: Not all the same word repeated
+    if (uniqueWords.length < words.length * 0.4) return 'Please write something more substantial';
+    return null;
+}
+
+function checkFeedbackReady() {
+    const text = document.getElementById('prankFeedbackText').value.trim();
+    const btn = document.getElementById('prankSendBtn');
+    const hint = document.getElementById('prankMinHint');
+    if (text.length >= 20 && prankSelectedEmoji) {
+        const gibCheck = isGibberish(text);
+        if (gibCheck) {
+            btn.disabled = true;
+            btn.style.opacity = '0.4';
+            hint.textContent = gibCheck;
+            hint.style.opacity = '1';
+        } else {
+            btn.disabled = false;
+            btn.style.opacity = '1';
+            hint.style.opacity = '0';
+        }
+    } else {
+        btn.disabled = true;
+        btn.style.opacity = '0.4';
+        if (text.length > 0 || prankSelectedEmoji) {
+            if (!prankSelectedEmoji) hint.textContent = 'Please select an emoji and write at least 20 characters to continue';
+            else if (text.length < 20) hint.textContent = 'Please write at least 20 characters (' + (20 - text.length) + ' more needed)';
+            hint.style.opacity = '1';
+        }
+    }
+}
+
+async function sendPrankFeedback() {
+    const btn = document.getElementById('prankSendBtn');
+    const text = document.getElementById('prankFeedbackText').value.trim();
+    if (text.length < 20 || !prankSelectedEmoji) return;
+
+    btn.disabled = true;
+    btn.textContent = 'Sending...';
+
+    try {
+        await fetch('/.netlify/functions/send-feedback', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({
+                emoji: prankSelectedEmoji,
+                message: text,
+                name: registrantName || 'Unknown',
+                lodging: chosenLodging
+            })
+        });
+    } catch (e) { console.error('Feedback send error:', e); }
+
+    // Close everything and go back to real accommodation page
+    document.getElementById('prankFeedbackOverlay').style.display = 'none';
+    dismissMonkeyResort();
+}
+</script>
+
+</body>
+</html>

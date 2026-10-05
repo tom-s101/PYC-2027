@@ -1,0 +1,299 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="format-detection" content="telephone=no">
+    <title>Resubmit Payment - PYC 2026</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" crossorigin>
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Montserrat:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        :root { --primary-navy: #1a2332; --secondary-gold: #d4a556; --text-light: #f5f5f5; --background-overlay: rgba(26, 35, 50, 0.92); --danger: #e74c3c; }
+        html { background: #0f1419; }
+        body { font-family: 'Montserrat', sans-serif; background-color: #0f1419; background: linear-gradient(135deg, #0f1419 0%, #1a2332 50%, #2a3f5f 100%); background-attachment: fixed; color: var(--text-light); min-height: 100vh; overscroll-behavior: none; overflow-x: hidden; }
+        body::before { content: ''; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: radial-gradient(circle at 20% 30%, rgba(74,124,158,0.1) 0%, transparent 50%), radial-gradient(circle at 80% 70%, rgba(212,165,86,0.08) 0%, transparent 50%); pointer-events: none; z-index: 1; }
+        .stars { position: fixed; top: 0; left: 0; width: 100%; height: 100%; pointer-events: none; z-index: 0; }
+        .star { position: absolute; background: white; border-radius: 50%; box-shadow: 0 0 3px rgba(255,255,255,0.8); filter: blur(0.5px); animation: twinkle 3s infinite; }
+        @keyframes twinkle { 0%,100% { opacity: 0.4; } 50% { opacity: 1; } }
+        .container { position: relative; z-index: 2; max-width: 600px; margin: 0 auto; padding: 40px 20px; }
+        .page-header { text-align: center; margin-bottom: 30px; }
+        .page-header h1 { font-family: 'Bebas Neue', sans-serif; font-size: 2.2rem; color: var(--danger); letter-spacing: 2px; margin-bottom: 8px; }
+        .page-header p { color: rgba(245,245,245,0.6); font-size: 0.95rem; }
+        .payment-card { background: var(--background-overlay); border: 2px solid rgba(231,76,60,0.3); border-radius: 16px; padding: 30px; margin-bottom: 30px; }
+        .warning-box { background: rgba(231,76,60,0.1); border: 1px solid rgba(231,76,60,0.3); border-radius: 10px; padding: 18px; margin-bottom: 20px; font-size: 0.92rem; color: rgba(245,245,245,0.8); line-height: 1.6; }
+        .warning-box strong { color: var(--danger); }
+        .summary-row { display: flex; justify-content: space-between; padding: 10px 0; border-bottom: 1px solid rgba(255,255,255,0.06); font-size: 0.95rem; }
+        .summary-row.total { font-weight: 700; font-size: 1.15rem; color: var(--secondary-gold); border-top: 2px solid rgba(212,165,86,0.3); margin-top: 8px; padding-top: 12px; }
+        .payment-tabs { display: flex; gap: 0; margin: 20px 0; border-radius: 10px; overflow: hidden; border: 1px solid rgba(212,165,86,0.3); }
+        .tab-btn { flex: 1; padding: 12px; background: rgba(255,255,255,0.03); color: rgba(245,245,245,0.6); border: none; cursor: pointer; font-family: 'Montserrat', sans-serif; font-weight: 600; font-size: 0.9rem; transition: all 0.3s; }
+        .tab-btn.active { background: rgba(212,165,86,0.15); color: var(--secondary-gold); }
+        .payment-method { display: none; }
+        .payment-method.active { display: block; }
+        .account-box { background: rgba(212,165,86,0.1); border: 1px solid rgba(212,165,86,0.3); border-radius: 8px; padding: 15px; margin: 12px 0; }
+        .account-name { font-size: 16px; font-weight: 700; color: var(--secondary-gold); }
+        .account-number { font-size: 20px; font-weight: 800; color: var(--text-light); letter-spacing: 1px; margin-top: 4px; }
+        .account-label { font-size: 13px; color: rgba(245,245,245,0.5); margin-top: 2px; }
+        .instructions { color: rgba(245,245,245,0.75); font-size: 0.92rem; line-height: 1.7; margin-bottom: 15px; }
+        .instructions ol { padding-left: 20px; } .instructions li { margin-bottom: 6px; }
+        .form-group { margin-bottom: 18px; }
+        .form-group label { display: block; color: var(--text-light); font-weight: 600; margin-bottom: 8px; font-size: 0.92rem; }
+        input[type="file"] { width: 100%; padding: 14px; background: rgba(255,255,255,0.05); border: 1px solid rgba(212,165,86,0.3); border-radius: 8px; color: var(--text-light); font-family: 'Montserrat', sans-serif; }
+        .image-preview { display: none; margin: 10px 0; text-align: center; }
+        .image-preview img { max-width: 100%; max-height: 200px; border-radius: 8px; border: 1px solid rgba(212,165,86,0.3); }
+        .submit-btn { width: 100%; padding: 16px; background: var(--secondary-gold); color: var(--primary-navy); border: none; border-radius: 10px; font-family: 'Montserrat', sans-serif; font-size: 1rem; font-weight: 700; cursor: pointer; transition: all 0.3s; text-transform: uppercase; letter-spacing: 1px; }
+        .submit-btn:hover:not(:disabled) { background: #e5b96a; transform: translateY(-2px); }
+        .submit-btn:disabled { opacity: 0.5; cursor: not-allowed; }
+        .btn-spinner { display: inline-block; width: 18px; height: 18px; border: 3px solid rgba(26,35,50,0.3); border-top-color: var(--primary-navy); border-radius: 50%; animation: btn-spin 0.7s linear infinite; vertical-align: middle; margin-right: 8px; }
+        @keyframes btn-spin { to { transform: rotate(360deg); } }
+        .text-input { width: 100%; padding: 14px 18px; background: rgba(255,255,255,0.05); border: 1px solid rgba(212,165,86,0.3); border-radius: 10px; color: var(--text-light); font-family: 'Montserrat', sans-serif; font-size: 1rem; }
+        .text-input:focus { outline: none; border-color: var(--secondary-gold); }
+        .text-input.error { border-color: #e74c3c; box-shadow: 0 0 6px rgba(231,76,60,0.3); }
+        .verify-btn { width: 100%; padding: 16px; background: var(--secondary-gold); color: var(--primary-navy); border: none; border-radius: 10px; font-family: 'Montserrat', sans-serif; font-size: 1rem; font-weight: 700; cursor: pointer; transition: all 0.3s; text-transform: uppercase; letter-spacing: 1px; }
+        .verify-btn:hover:not(:disabled) { background: #e5b96a; }
+        .verify-btn:disabled { opacity: 0.5; cursor: not-allowed; }
+        .alert { padding: 15px 20px; border-radius: 8px; margin-bottom: 20px; font-size: 0.95rem; }
+        .alert-error { background: rgba(231,76,60,0.15); border: 1px solid rgba(231,76,60,0.4); color: #e74c3c; }
+        .alert-success { background: rgba(39,174,96,0.15); border: 1px solid rgba(39,174,96,0.4); color: #27ae60; }
+        .loading-overlay { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(15,20,25,0.95); z-index: 1000; justify-content: center; align-items: center; flex-direction: column; }
+        .loading-overlay.active { display: flex; }
+        .loading-spinner { width: 50px; height: 50px; border: 4px solid rgba(212,165,86,0.2); border-top-color: var(--secondary-gold); border-radius: 50%; animation: spin 0.8s linear infinite; }
+        @keyframes spin { to { transform: rotate(360deg); } }
+        .loading-text { color: var(--secondary-gold); margin-top: 20px; font-size: 1.1rem; font-weight: 600; }
+    </style>
+</head>
+<body>
+    <div class="stars" id="stars"></div>
+    <div class="container">
+        <div class="page-header">
+            <h1>Resubmit Payment</h1>
+            <p>Your previous payment could not be verified. Please resubmit.</p>
+        </div>
+        <div id="alertBox"></div>
+        <div id="loadingState" class="loading" style="text-align:center;padding:40px;color:rgba(245,245,245,0.5);">Loading reservation details...</div>
+        <!-- Verification Section -->
+        <div class="payment-card" id="verifySection" style="display:none;">
+            <h2 style="font-family:'Bebas Neue',sans-serif;color:var(--secondary-gold);font-size:1.4rem;letter-spacing:1px;margin-bottom:15px;">Verify Your Identity</h2>
+            <p style="color:rgba(245,245,245,0.6);font-size:0.9rem;margin-bottom:20px;">Please enter your details to verify this reservation belongs to you.</p>
+            <div id="verifyAlert"></div>
+            <div class="form-group">
+                <label>Full Name <span style="color:#e74c3c;">*</span></label>
+                <input type="text" id="verifyName" class="text-input" placeholder="Enter your full name" required>
+            </div>
+            <div class="form-group">
+                <label>Email Address <span style="color:#e74c3c;">*</span></label>
+                <input type="email" id="verifyEmail" class="text-input" placeholder="Enter your email" required>
+            </div>
+            <div class="form-group">
+                <label>Confirm Email Address <span style="color:#e74c3c;">*</span></label>
+                <input type="email" id="verifyEmailConfirm" class="text-input" placeholder="Re-enter your email" required>
+            </div>
+            <button class="verify-btn" id="verifyBtn" onclick="verifyIdentity()">Verify & Continue</button>
+        </div>
+
+        <div class="payment-card" id="paymentCard" style="display:none;">
+            <div class="warning-box">
+                <strong>Action Required:</strong> Your previous accommodation payment proof was not accepted. Please send a new payment and upload a clear screenshot below. If you do not resubmit, your accommodation may be given to another person.
+            </div>
+            <div class="summary-row"><span>Accommodation</span><span id="typeName">--</span></div>
+            <div class="summary-row"><span>Spots</span><span id="spots">--</span></div>
+            <div class="summary-row total"><span>Amount Due</span><span id="totalAmt">--</span></div>
+
+            <div class="payment-tabs">
+                <button class="tab-btn active" onclick="switchTab('gcash')">GCash</button>
+                <button class="tab-btn" onclick="switchTab('bank')">Bank Transfer</button>
+            </div>
+
+            <div class="payment-method active" id="gcashTab">
+                <div class="instructions">
+                    <div class="account-box" style="text-align:center;">
+                        <div class="account-name" id="gcashName"></div>
+                        <div class="account-number" id="gcashNumber"></div>
+                        <img id="gcashQR" src="" alt="QR" style="display:none;width:100%;max-width:220px;margin:10px auto 0;border-radius:8px;">
+                    </div>
+                    <ol>
+                        <li>Send the exact amount shown above to this GCash account</li>
+                        <li>Take a clear screenshot of the confirmation</li>
+                        <li>Upload it below</li>
+                    </ol>
+                </div>
+                <form onsubmit="submitProof(event,'GCash')">
+                    <div class="form-group">
+                        <label>GCash Reference Number <span style="color:#e74c3c;">*</span></label>
+                        <input type="text" id="gcashRefNum" placeholder="Enter your GCash reference number" required
+                            style="width:100%;padding:12px 16px;background:rgba(255,255,255,0.05);border:1px solid rgba(212,165,86,0.3);border-radius:8px;color:#f5f5f5;font-family:'Montserrat',sans-serif;font-size:0.95rem;">
+                        <small style="color:rgba(245,245,245,0.4);display:block;margin-top:4px;">Found in your GCash transaction receipt</small>
+                    </div>
+                    <div class="form-group">
+                        <label>Upload Payment Screenshot</label>
+                        <input type="file" id="gcashFile" accept="image/jpeg,image/png,image/webp" required onchange="previewFile(this,'gcashPreview')">
+                    </div>
+                    <div class="image-preview" id="gcashPreview"><img src="" alt="Preview"></div>
+                    <button type="submit" class="submit-btn">Resubmit Payment Proof</button>
+                </form>
+            </div>
+            <div class="payment-method" id="bankTab">
+                <div class="instructions">
+                    <div id="bankOptionsList" style="margin:10px 0;"></div>
+                    <div id="bankSelectedMsg" style="display:none;background:rgba(39,174,96,0.1);border:1px solid rgba(39,174,96,0.3);border-radius:8px;padding:10px;margin:8px 0;color:#4cd68a;font-weight:600;font-size:0.85rem;text-align:center;"></div>
+                    <ol>
+                        <li>Transfer the exact amount to the bank account above</li>
+                        <li>Take a screenshot of the confirmation</li>
+                        <li>Upload it below</li>
+                    </ol>
+                </div>
+                <form onsubmit="submitProof(event,'Bank Transfer')">
+                    <div class="form-group">
+                        <label>Bank Reference Number <span style="color:#e74c3c;">*</span></label>
+                        <input type="text" id="bankRefNum" placeholder="Enter your bank transaction number" required
+                            style="width:100%;padding:12px 16px;background:rgba(255,255,255,0.05);border:1px solid rgba(212,165,86,0.3);border-radius:8px;color:#f5f5f5;font-family:'Montserrat',sans-serif;font-size:0.95rem;">
+                        <small style="color:rgba(245,245,245,0.4);display:block;margin-top:4px;">From your bank confirmation</small>
+                    </div>
+                    <div class="form-group">
+                        <label>Upload Transfer Proof</label>
+                        <input type="file" id="bankFile" accept="image/jpeg,image/png,image/webp" required onchange="previewFile(this,'bankPreview')">
+                    </div>
+                    <div class="image-preview" id="bankPreview"><img src="" alt="Preview"></div>
+                    <button type="submit" class="submit-btn">Resubmit Payment Proof</button>
+                </form>
+            </div>
+        </div>
+    </div>
+    <div class="loading-overlay" id="loadingOverlay"><div class="loading-spinner"></div><div class="loading-text">Resubmitting...</div></div>
+
+    <script>
+        (function(){const c=document.getElementById('stars');const z=['top','bottom','left','right'];for(let i=0;i<40;i++){const s=document.createElement('div');s.className='star';const zone=z[Math.floor(Math.random()*4)];let l,t;if(zone==='top'){l=Math.random()*100;t=Math.random()*20;}else if(zone==='bottom'){l=Math.random()*100;t=80+Math.random()*20;}else if(zone==='left'){l=Math.random()*15;t=20+Math.random()*60;}else{l=85+Math.random()*15;t=20+Math.random()*60;}const sz=Math.random()*3+2;s.style.cssText=`width:${sz}px;height:${sz}px;left:${l}%;top:${t}%;animation-delay:${Math.random()*3}s;animation-duration:${Math.random()*2+2}s;`;c.appendChild(s);}})();
+
+        const GCASH={A:{name:'Sandra M.',number:'0951-793-5370',qr:'/accomm-qr-gcash-a.jpeg'},B:{name:'Jasmin S.',number:'0906-005-6703',qr:'/accomm-qr-gcash-b.jpeg'}};
+        const BANK_OPTIONS=[{id:'bpi',name:'Angelica P. Ibaviosa',bank:'BPI',number:'3979 466 969',qr:'/accomm-qr-bank-bpi.jpeg'},{id:'gotyme',name:'Abegail Mahaguay',bank:'GoTyme Bank',number:'0176 0967 9466',qr:'/accomm-qr-bank-gotyme.jpeg'}];
+        let selectedBankId='';
+        const TYPE_NAMES={girls_dorm:'Girls Dorm',boys_dorm:'Boys Dorm',guest_house:'Guest House',camping:'Camping'};
+
+        const params=new URLSearchParams(window.location.search);
+        const reservationId=params.get('id');
+        let paymentAccount='A';
+
+        if(!reservationId){document.getElementById('loadingState').innerHTML='<p style="color:#e74c3c;">No reservation ID provided. Check your email for the correct link.</p>';
+        }else{loadReservation();}
+
+        async function loadReservation(){
+            try{
+                const res=await fetch('/.netlify/functions/accommodation-search',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({query:reservationId,searchType:'id'})});
+                const data=await res.json();
+                if(data.results&&data.results.length>0){
+                    const r=data.results[0]; window._reservationData=r;
+                    paymentAccount=r.payment_account||'A';
+                    const gc=GCASH[paymentAccount]||GCASH['A'];
+                    document.getElementById('typeName').textContent=TYPE_NAMES[r.accommodation_type]||r.accommodation_type;
+                    document.getElementById('spots').textContent=r.spots_requested+' person(s)';
+                    document.getElementById('totalAmt').textContent='\u20B1'+parseFloat(r.total_amount).toLocaleString('en-PH',{minimumFractionDigits:2});
+                    document.getElementById('gcashName').textContent=gc.name;
+                    document.getElementById('gcashNumber').textContent=gc.number;
+                    if(gc.qr){document.getElementById('gcashQR').src=gc.qr;document.getElementById('gcashQR').style.display='block';}
+                    let bh='';BANK_OPTIONS.forEach(b=>{bh+='<div class="bopt" data-bank="'+b.id+'" onclick="selectBank(\''+b.id+'\')" style="background:rgba(255,255,255,0.03);border:2px solid rgba(212,165,86,0.2);border-radius:10px;padding:12px;margin-bottom:8px;cursor:pointer;transition:all 0.3s;"><div style="font-size:12px;color:rgba(245,245,245,0.5);">'+b.bank+'</div><div style="font-size:14px;font-weight:700;color:#d4a556;margin-top:2px;">'+b.name+'</div><div style="font-size:16px;font-weight:800;color:#f5f5f5;margin-top:2px;">'+b.number+'</div><img src="'+b.qr+'" alt="QR" class="bqr" style="display:none;width:100%;max-width:200px;margin:8px auto 0;border-radius:8px;"></div>';});
+                    document.getElementById('bankOptionsList').innerHTML=bh;
+                    document.getElementById('loadingState').style.display='none';
+                    document.getElementById('verifySection').style.display='block';
+                }else{document.getElementById('loadingState').innerHTML='<p style="color:#e74c3c;">Reservation not found.</p>';}
+            }catch(e){document.getElementById('loadingState').innerHTML='<p style="color:#e74c3c;">Error loading: '+e.message+'</p>';}
+        }
+
+        function switchTab(tab){
+            document.querySelectorAll('.tab-btn').forEach((b,i)=>b.classList.toggle('active',tab==='gcash'?i===0:i===1));
+            document.getElementById('gcashTab').classList.toggle('active',tab==='gcash');
+            document.getElementById('bankTab').classList.toggle('active',tab==='bank');
+        }
+        function previewFile(input,previewId){
+            const file=input.files[0]; const prev=document.getElementById(previewId);
+            if(file&&file.type.startsWith('image/')){const r=new FileReader();r.onload=e=>{prev.querySelector('img').src=e.target.result;prev.style.display='block';};r.readAsDataURL(file);}
+        }
+        function showAlert(msg,type){document.getElementById('alertBox').innerHTML=`<div class="alert alert-${type}">${msg}</div>`;window.scrollTo({top:0,behavior:'smooth'});}
+
+        function verifyIdentity() {
+            const name = document.getElementById('verifyName').value.trim();
+            const email = document.getElementById('verifyEmail').value.trim().toLowerCase();
+            const emailConfirm = document.getElementById('verifyEmailConfirm').value.trim().toLowerCase();
+            const alertBox = document.getElementById('verifyAlert');
+
+            alertBox.innerHTML = '';
+
+            if (!name) {
+                alertBox.innerHTML = '<div class="alert alert-error">Please enter your full name.</div>';
+                document.getElementById('verifyName').focus();
+                return;
+            }
+            if (!email) {
+                alertBox.innerHTML = '<div class="alert alert-error">Please enter your email address.</div>';
+                document.getElementById('verifyEmail').focus();
+                return;
+            }
+            if (email !== emailConfirm) {
+                alertBox.innerHTML = '<div class="alert alert-error">Email addresses do not match. Please check and try again.</div>';
+                document.getElementById('verifyEmailConfirm').focus();
+                document.getElementById('verifyEmailConfirm').classList.add('error');
+                setTimeout(() => document.getElementById('verifyEmailConfirm').classList.remove('error'), 3000);
+                return;
+            }
+
+            // Check against reservation data
+            const r = window._reservationData;
+            if (r) {
+                const rName = (r.registrant_name || '').toLowerCase();
+                const rEmail = (r.registrant_email || '').toLowerCase();
+                if (email !== rEmail) {
+                    alertBox.innerHTML = '<div class="alert alert-error">Email does not match the reservation. Please use the email you registered with.</div>';
+                    return;
+                }
+                if (!rName.includes(name.toLowerCase()) && !name.toLowerCase().includes(rName)) {
+                    // Partial match is OK - just warn but allow
+                    const nameParts = name.toLowerCase().split(/\s+/);
+                    const rParts = rName.split(/\s+/);
+                    const hasMatch = nameParts.some(p => rParts.some(rp => rp.includes(p) || p.includes(rp)));
+                    if (!hasMatch) {
+                        alertBox.innerHTML = '<div class="alert alert-error">Name does not match the reservation. Please enter the name you registered with.</div>';
+                        return;
+                    }
+                }
+            }
+
+            // Verified! Show payment form
+            document.getElementById('verifySection').style.display = 'none';
+            document.getElementById('paymentCard').style.display = 'block';
+        }
+
+        function selectBank(id){
+            selectedBankId=id;const bank=BANK_OPTIONS.find(b=>b.id===id);
+            document.querySelectorAll('.bopt').forEach(o=>{const s=o.dataset.bank===id;o.style.borderColor=s?'#d4a556':'rgba(212,165,86,0.2)';o.style.background=s?'rgba(212,165,86,0.08)':'rgba(255,255,255,0.03)';const q=o.querySelector('.bqr');if(q)q.style.display=s?'block':'none';});
+            document.getElementById('bankSelectedMsg').style.display='block';
+            document.getElementById('bankSelectedMsg').textContent='✓ '+bank.bank+' selected';
+        }
+
+        async function submitProof(e,method){
+            e.preventDefault();
+            const refInput=method==='GCash'?document.getElementById('gcashRefNum'):document.getElementById('bankRefNum');
+            const refValue=refInput?refInput.value.trim():'';
+            if(method==='Bank Transfer'&&!selectedBankId){showAlert('Please select which bank you transferred to.','error');return;}
+            if(!refValue){showAlert('Please enter your '+method+' reference number.','error');refInput.focus();return;}
+            const fileInput=method==='GCash'?document.getElementById('gcashFile'):document.getElementById('bankFile');
+            const file=fileInput.files[0];
+            if(!file){showAlert('Please upload your payment proof.','error');return;}
+            if(file.size>5*1024*1024){showAlert('File too large. Max 5MB.','error');return;}
+            const btn=e.target.querySelector('.submit-btn');btn.disabled=true;btn.innerHTML='<span class="btn-spinner"></span>Uploading...';
+            try{
+                const reader=new FileReader();
+                reader.onload=async function(ev){
+                    const res=await fetch('/.netlify/functions/upload-accommodation-proof',{method:'POST',headers:{'Content-Type':'application/json'},
+                        body:JSON.stringify({reservationId,imageBase64:ev.target.result,fileName:file.name,paymentMethod:method,paymentAccount:method==='Bank Transfer'?'bank_'+selectedBankId:paymentAccount,transactionReference:refValue})});
+                    const data=await res.json();
+                    if(res.ok&&data.success){
+                        document.getElementById('loadingOverlay').classList.add('active');
+                        setTimeout(()=>{window.location.href='/accommodation-success';},1500);
+                    }else{showAlert(data.error||'Upload failed.','error');btn.disabled=false;btn.innerHTML='Resubmit Payment Proof';}
+                };
+                reader.readAsDataURL(file);
+            }catch(err){showAlert('Error: '+err.message,'error');btn.disabled=false;btn.innerHTML='Resubmit Payment Proof';}
+        }
+    </script>
+</body>
+</html>

@@ -1,0 +1,784 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Accommodation Check-In - PYC 2026</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" crossorigin>
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Montserrat:wght@400;600;700&display=swap" rel="stylesheet">
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        :root { --primary-navy: #1a2332; --secondary-gold: #d4a556; --accent-blue: #4a7c9e; --text-light: #f5f5f5; --background-overlay: rgba(26, 35, 50, 0.92); --success: #27ae60; --danger: #e74c3c; --warning: #f39c12; }
+        html, body { font-family: 'Montserrat', sans-serif; background-color: #0f1419; background: linear-gradient(135deg, #0f1419 0%, #1a2332 50%, #2a3f5f 100%); background-attachment: fixed; background-size: cover; color: var(--text-light); min-height: 100vh; margin: 0; padding: 0; overscroll-behavior: none; }
+
+        .star { position: absolute; background: white; border-radius: 50%; box-shadow: 0 0 3px rgba(255,255,255,0.8); filter: blur(0.5px); animation: twinkle 3s infinite; }
+        @keyframes twinkle { 0%, 100% { opacity: 0.3; } 50% { opacity: 1; } }
+
+        /* Login */
+        .login-container { display: flex; justify-content: center; align-items: center; min-height: 100vh; padding: 20px; position: relative; }
+        .login-box { background: var(--background-overlay); border: 2px solid rgba(212,165,86,0.3); padding: 50px 40px; border-radius: 20px; box-shadow: 0 30px 80px rgba(0,0,0,0.5); backdrop-filter: blur(10px); width: 100%; max-width: 450px; }
+        .login-box h1 { font-family: 'Bebas Neue', sans-serif; color: var(--secondary-gold); font-size: 2rem; text-align: center; margin-bottom: 5px; letter-spacing: 2px; }
+        .login-box p { text-align: center; color: rgba(245,245,245,0.6); font-size: 0.9rem; margin-bottom: 30px; }
+        .form-group { margin-bottom: 20px; }
+        .form-group label { display: block; font-weight: 600; margin-bottom: 8px; font-size: 0.9rem; }
+        .form-group input { width: 100%; padding: 14px 18px; background: rgba(255,255,255,0.05); border: 1px solid rgba(212,165,86,0.3); border-radius: 10px; color: var(--text-light); font-family: 'Montserrat', sans-serif; font-size: 1rem; }
+        .form-group input:focus { outline: none; border-color: var(--secondary-gold); }
+        .btn-primary { width: 100%; padding: 16px; background: var(--secondary-gold); color: var(--primary-navy); border: none; border-radius: 10px; font-family: 'Montserrat', sans-serif; font-size: 1rem; font-weight: 700; cursor: pointer; transition: all 0.3s; text-transform: uppercase; letter-spacing: 1px; }
+        .btn-primary:hover { background: #e5b96a; }
+        .spinner { display: inline-block; width: 16px; height: 16px; border: 2px solid rgba(26,35,50,0.3); border-top-color: var(--primary-navy); border-radius: 50%; animation: spin 0.6s linear infinite; vertical-align: middle; margin-right: 6px; }
+        @keyframes spin { to { transform: rotate(360deg); } }
+
+        /* Dashboard */
+        .dashboard { display: none; min-height: 100vh; }
+        .dashboard.active { display: block; }
+        .dash-header { background: var(--background-overlay); border-bottom: 2px solid rgba(212,165,86,0.2); padding: 18px 30px; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 10px; }
+        .dash-header h1 { font-family: 'Bebas Neue', sans-serif; color: var(--secondary-gold); font-size: 1.6rem; letter-spacing: 2px; }
+        .btn-outline { padding: 8px 16px; background: transparent; border: 1px solid rgba(212,165,86,0.4); color: var(--text-light); border-radius: 8px; cursor: pointer; font-size: 0.85rem; font-family: 'Montserrat', sans-serif; transition: all 0.3s; }
+        .btn-outline:hover { background: rgba(212,165,86,0.1); border-color: var(--secondary-gold); }
+        .dash-body { max-width: 1100px; margin: 0 auto; padding: 25px 20px 80px; }
+
+        /* Stats bar */
+        .stats-bar { display: grid; grid-template-columns: repeat(auto-fit, minmax(160px, 1fr)); gap: 12px; margin-bottom: 25px; }
+        .stat-card { background: var(--background-overlay); border: 1px solid rgba(212,165,86,0.15); border-radius: 12px; padding: 16px; text-align: center; }
+        .stat-number { font-family: 'Bebas Neue', sans-serif; font-size: 2rem; color: var(--secondary-gold); line-height: 1; }
+        .stat-number.green { color: var(--success); }
+        .stat-number.red { color: var(--danger); }
+        .stat-number.blue { color: var(--accent-blue); }
+        .stat-label { font-size: 0.75rem; color: rgba(245,245,245,0.5); text-transform: uppercase; letter-spacing: 1px; margin-top: 4px; }
+
+        /* Breakdown table */
+        .breakdown { background: var(--background-overlay); border: 1px solid rgba(212,165,86,0.15); border-radius: 12px; padding: 20px; margin-bottom: 25px; }
+        .breakdown h3 { font-family: 'Bebas Neue', sans-serif; color: var(--secondary-gold); font-size: 1.1rem; letter-spacing: 1px; margin-bottom: 12px; }
+        .breakdown table { width: 100%; border-collapse: collapse; font-size: 0.85rem; }
+        .breakdown th { text-align: left; color: rgba(245,245,245,0.5); font-size: 0.72rem; text-transform: uppercase; letter-spacing: 1px; padding: 8px 6px; border-bottom: 1px solid rgba(212,165,86,0.15); }
+        .breakdown td { padding: 10px 6px; border-bottom: 1px solid rgba(255,255,255,0.04); }
+        .bar-container { width: 100%; height: 8px; background: rgba(255,255,255,0.08); border-radius: 4px; overflow: hidden; }
+        .bar-fill { height: 100%; border-radius: 4px; transition: width 0.5s; }
+
+        /* Search */
+        .search-box { background: var(--background-overlay); border: 1px solid rgba(212,165,86,0.2); border-radius: 16px; padding: 25px; margin-bottom: 20px; }
+        .search-box h2 { font-family: 'Bebas Neue', sans-serif; color: var(--secondary-gold); font-size: 1.3rem; letter-spacing: 1px; margin-bottom: 15px; }
+        .search-tabs { display: flex; gap: 8px; margin-bottom: 15px; }
+        .search-tab { padding: 8px 18px; background: rgba(255,255,255,0.04); border: 1px solid rgba(212,165,86,0.2); border-radius: 8px; color: rgba(245,245,245,0.6); cursor: pointer; font-size: 0.85rem; font-family: 'Montserrat', sans-serif; font-weight: 600; transition: all 0.3s; }
+        .search-tab.active { background: rgba(212,165,86,0.15); color: var(--secondary-gold); border-color: var(--secondary-gold); }
+        .search-input { width: 100%; padding: 14px 18px; background: rgba(255,255,255,0.05); border: 1px solid rgba(212,165,86,0.3); border-radius: 10px; color: var(--text-light); font-family: 'Montserrat', sans-serif; font-size: 1rem; margin-bottom: 10px; }
+        .search-input:focus { outline: none; border-color: var(--secondary-gold); }
+        .search-content { display: none; }
+        .search-content.active { display: block; }
+        .btn-search { padding: 12px 30px; background: var(--secondary-gold); color: var(--primary-navy); border: none; border-radius: 10px; font-weight: 700; cursor: pointer; font-family: 'Montserrat', sans-serif; font-size: 0.9rem; transition: all 0.3s; }
+        .btn-search:hover { background: #e5b96a; }
+
+        /* Results */
+        .results-container { display: none; margin-top: 15px; }
+        .results-container.visible { display: block; }
+        .results-header { font-family: 'Bebas Neue', sans-serif; color: var(--secondary-gold); font-size: 1.1rem; letter-spacing: 1px; margin-bottom: 12px; padding-bottom: 8px; border-bottom: 1px solid rgba(212,165,86,0.15); }
+        .result-card { background: var(--background-overlay); border: 1px solid rgba(212,165,86,0.15); border-radius: 12px; padding: 18px; margin-bottom: 12px; transition: all 0.3s; }
+        .result-card.checked-in { border-color: rgba(39,174,96,0.4); background: rgba(39,174,96,0.05); }
+        .result-top { display: flex; justify-content: space-between; align-items: flex-start; flex-wrap: wrap; gap: 10px; }
+        .result-name { font-weight: 700; font-size: 1.05rem; }
+        .result-email { color: rgba(245,245,245,0.5); font-size: 0.85rem; margin-top: 2px; }
+        .result-details { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 10px; }
+        .badge { display: inline-block; padding: 3px 10px; border-radius: 6px; font-size: 0.75rem; font-weight: 600; }
+        .badge-type { background: rgba(74,124,158,0.2); color: #6db3d6; }
+        .badge-paid { background: rgba(39,174,96,0.15); color: #4cd68a; }
+        .badge-pending { background: rgba(243,156,18,0.15); color: #f5c542; }
+        .badge-checkedin { background: rgba(39,174,96,0.2); color: #4cd68a; }
+        .badge-notchecked { background: rgba(231,76,60,0.15); color: #e88; }
+        .badge-spots { background: rgba(212,165,86,0.15); color: var(--secondary-gold); }
+        .badge-room { background: rgba(155,89,182,0.15); color: #c39bd3; }
+        .result-actions { display: flex; gap: 8px; margin-top: 12px; flex-wrap: wrap; align-items: center; }
+        .btn-checkin { padding: 10px 24px; background: var(--success); color: white; border: none; border-radius: 8px; font-weight: 700; cursor: pointer; font-family: 'Montserrat', sans-serif; font-size: 0.85rem; transition: all 0.3s; }
+        .btn-checkin:hover { background: #2ecc71; }
+        .btn-undo { padding: 10px 24px; background: transparent; border: 1px solid rgba(231,76,60,0.4); color: #e88; border-radius: 8px; font-weight: 600; cursor: pointer; font-family: 'Montserrat', sans-serif; font-size: 0.85rem; }
+        .btn-undo:hover { background: rgba(231,76,60,0.1); }
+        .room-input { padding: 8px 12px; background: rgba(255,255,255,0.05); border: 1px solid rgba(212,165,86,0.3); border-radius: 8px; color: var(--text-light); font-family: 'Montserrat', sans-serif; font-size: 0.85rem; width: 140px; }
+        .room-input::placeholder { color: rgba(245,245,245,0.3); }
+
+        .alert { padding: 12px 16px; border-radius: 8px; margin-bottom: 12px; display: none; font-size: 0.9rem; }
+        .alert.visible { display: block; }
+        .alert-error { background: rgba(231,76,60,0.15); border: 1px solid rgba(231,76,60,0.3); color: #f5a8a8; }
+        .alert-success { background: rgba(39,174,96,0.15); border: 1px solid rgba(39,174,96,0.3); color: #a8f5c8; }
+
+        .hidden { display: none !important; }
+
+        @media (max-width: 768px) {
+            .dash-header { padding: 14px 16px; }
+            .dash-header h1 { font-size: 1.2rem; }
+            .dash-body { padding: 15px 12px 60px; }
+            .stats-bar { grid-template-columns: repeat(2, 1fr); }
+            .breakdown { overflow-x: auto; }
+            .result-top { flex-direction: column; }
+            .room-input { width: 100%; }
+            .search-tabs { flex-wrap: wrap; }
+            .search-tab { flex: 1; text-align: center; min-width: 90px; }
+            .btn-search, .btn-checkin, .btn-undo { width: 100%; padding: 14px; font-size: 16px; }
+            .search-box { padding: 18px 16px; }
+            /* Room map cards stack to one column on phones */
+            #roomMapContent > div > div { grid-template-columns: 1fr !important; }
+            .btn-outline { padding: 10px 14px; }
+        }
+    </style>
+</head>
+<body>
+    <div id="stars" style="position:fixed;top:0;left:0;width:100%;height:100%;pointer-events:none;z-index:0;"></div>
+
+    <!-- Login Screen -->
+    <div id="loginScreen" class="login-container">
+        <div class="login-box" style="position:relative; z-index:1;">
+            <h1>Accommodation Check-In</h1>
+            <p>PYC 2026 · Room Assignment Team</p>
+            <div id="loginAlert" class="alert"></div>
+            <form id="loginForm">
+                <div class="form-group">
+                    <label>Username</label>
+                    <input type="text" id="username" placeholder="Username" required autocomplete="username">
+                </div>
+                <div class="form-group">
+                    <label>Password</label>
+                    <input type="password" id="password" placeholder="Password" required autocomplete="current-password">
+                </div>
+                <button type="submit" class="btn-primary" id="loginBtn">Sign In</button>
+            </form>
+        </div>
+    </div>
+
+    <!-- Dashboard -->
+    <div id="dashboard" class="dashboard">
+        <div class="dash-header">
+            <h1>Accommodation Check-In</h1>
+            <div style="display:flex;align-items:center;gap:10px;flex-wrap:wrap;">
+                <span style="color:rgba(245,245,245,0.5);font-size:0.85rem;" id="currentUser"></span>
+                <button class="btn-outline" onclick="loadStats()">Refresh</button>
+                <button class="btn-outline" onclick="logout()" style="border-color:rgba(231,76,60,0.4);color:#e88;">Logout</button>
+            </div>
+        </div>
+        <div class="dash-body">
+            <!-- Stats -->
+            <div class="stats-bar" id="statsBar">
+                <div class="stat-card"><div class="stat-number green" id="statCheckedIn">-</div><div class="stat-label">Checked In</div></div>
+                <div class="stat-card"><div class="stat-number red" id="statNotCheckedIn">-</div><div class="stat-label">Awaiting</div></div>
+                <div class="stat-card"><div class="stat-number blue" id="statConfirmed">-</div><div class="stat-label">Confirmed (Paid)</div></div>
+                <div class="stat-card"><div class="stat-number" id="statCapacity">-</div><div class="stat-label">Total Capacity</div></div>
+            </div>
+
+            <!-- Breakdown by type -->
+            <div class="breakdown" id="breakdownSection">
+                <h3>Check-In by Accommodation Type</h3>
+                <table>
+                    <thead>
+                        <tr><th>Type</th><th>Checked In</th><th>Awaiting</th><th>Confirmed</th><th>Progress</th></tr>
+                    </thead>
+                    <tbody id="breakdownBody"><tr><td colspan="5" style="text-align:center;color:rgba(245,245,245,0.4);">Loading...</td></tr></tbody>
+                </table>
+            </div>
+
+            <!-- Search -->
+            <div class="search-box">
+                <h2>Search Reservations</h2>
+                <div class="search-tabs">
+                    <div class="search-tab active" data-tab="name">By Name</div>
+                    <div class="search-tab" data-tab="email">By Email</div>
+                    <div class="search-tab" data-tab="ref">By Reference #</div>
+                </div>
+                <div id="searchAlert" class="alert"></div>
+                <div id="nameSearch" class="search-content active">
+                    <input type="text" class="search-input" id="searchName" placeholder="Enter name..." onkeydown="if(event.key==='Enter') doSearch()">
+                    <button class="btn-search" onclick="doSearch()">Search</button>
+                </div>
+                <div id="emailSearch" class="search-content">
+                    <input type="text" class="search-input" id="searchEmail" placeholder="Enter email..." onkeydown="if(event.key==='Enter') doSearch()">
+                    <button class="btn-search" onclick="doSearch()">Search</button>
+                </div>
+                <div id="refSearch" class="search-content">
+                    <input type="text" class="search-input" id="searchRef" placeholder="Enter transaction reference #..." onkeydown="if(event.key==='Enter') doSearch()">
+                    <button class="btn-search" onclick="doSearch()">Search</button>
+                </div>
+            </div>
+
+            <!-- Results -->
+            <div id="resultsContainer" class="results-container">
+                <div class="results-header">Search Results (<span id="resultCount">0</span>)</div>
+                <div id="resultsContent"></div>
+            </div>
+
+            <!-- Room Map -->
+            <div class="search-box" style="margin-top:20px;">
+                <div style="display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:10px;margin-bottom:14px;">
+                    <h2 style="margin:0;">Room Map</h2>
+                    <div style="display:flex;gap:8px;flex-wrap:wrap;">
+                        <button class="btn-outline" onclick="loadRoomMap()">Refresh Map</button>
+                        <label style="display:flex;align-items:center;gap:6px;font-size:0.82rem;color:rgba(245,245,245,0.7);cursor:pointer;">
+                            <input type="checkbox" id="freeBedsOnly" onchange="renderRoomMap()" style="width:18px;height:18px;"> Free beds only
+                        </label>
+                    </div>
+                </div>
+                <input type="text" class="search-input" id="roomMapFilter" placeholder="Filter rooms by name or PYC..." oninput="renderRoomMap()" style="margin-bottom:12px;">
+                <div id="roomMapHallProgress" style="margin-bottom:14px;"></div>
+                <div id="roomMapContent"><p style="color:rgba(245,245,245,0.4);">Tap "Refresh Map" to load room assignments.</p></div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Stars
+        (function(){const c=document.getElementById('stars');const z=['top','bottom','left','right'];for(let i=0;i<50;i++){const s=document.createElement('div');s.className='star';const zone=z[Math.floor(Math.random()*4)];let l,t;if(zone==='top'){l=Math.random()*100;t=Math.random()*20;}else if(zone==='bottom'){l=Math.random()*100;t=80+Math.random()*20;}else if(zone==='left'){l=Math.random()*15;t=20+Math.random()*60;}else{l=85+Math.random()*15;t=20+Math.random()*60;}const sz=Math.random()*3+2;s.style.cssText=`width:${sz}px;height:${sz}px;left:${l}%;top:${t}%;animation-delay:${Math.random()*3}s;animation-duration:${Math.random()*2+2}s;`;c.appendChild(s);}})();
+
+        function esc(s) { if(!s) return ''; const d = document.createElement('div'); d.textContent = String(s); return d.innerHTML; }
+
+        let sessionToken = null;
+        let currentSearchType = 'name';
+        let isAdmin = false;          // set true when logged in via admin-login (enables move/shuffle)
+        let _roomMap = null;          // cached { halls, ... } from auto-assign-rooms GET
+        let _resByRegId = {};         // registration_id -> reservation (for check-in status on the map)
+        let _resByPyc = {};           // PYC -> reservation
+
+        // ---- iPad-safe modals (native confirm/alert silently fail in iPad Safari) ----
+        function acConfirm(message, okLabel) {
+            return new Promise(function(resolve) {
+                var ex = document.getElementById('acConfirmModal'); if (ex) ex.remove();
+                var ov = document.createElement('div');
+                ov.id = 'acConfirmModal';
+                ov.style.cssText = 'position:fixed;inset:0;background:rgba(0,0,0,0.85);z-index:9000;display:flex;align-items:center;justify-content:center;padding:20px;';
+                ov.innerHTML = '<div style="background:#1a2332;border:2px solid rgba(212,165,86,0.45);border-radius:14px;padding:24px;max-width:420px;width:100%;">' +
+                    '<p style="color:#f5f5f5;font-size:1rem;line-height:1.5;margin:0 0 22px;white-space:pre-wrap;">' + esc(message) + '</p>' +
+                    '<div style="display:flex;gap:12px;"><button id="acCancelBtn" style="flex:1;padding:14px;background:rgba(255,255,255,0.08);color:#f5f5f5;border:1px solid rgba(255,255,255,0.15);border-radius:8px;font-weight:600;font-size:16px;cursor:pointer;">Cancel</button>' +
+                    '<button id="acOkBtn" style="flex:1;padding:14px;background:var(--secondary-gold);color:#1a2332;border:none;border-radius:8px;font-weight:700;font-size:16px;cursor:pointer;">' + esc(okLabel || 'Yes') + '</button></div></div>';
+                document.body.appendChild(ov);
+                document.getElementById('acCancelBtn').addEventListener('click', function(){ ov.remove(); resolve(false); });
+                document.getElementById('acOkBtn').addEventListener('click', function(){ ov.remove(); resolve(true); });
+            });
+        }
+        function acAlert(message) {
+            return new Promise(function(resolve) {
+                var ex = document.getElementById('acAlertModal'); if (ex) ex.remove();
+                var ov = document.createElement('div');
+                ov.id = 'acAlertModal';
+                ov.style.cssText = 'position:fixed;inset:0;background:rgba(0,0,0,0.85);z-index:9000;display:flex;align-items:center;justify-content:center;padding:20px;';
+                ov.innerHTML = '<div style="background:#1a2332;border:2px solid rgba(212,165,86,0.45);border-radius:14px;padding:24px;max-width:420px;width:100%;">' +
+                    '<p style="color:#f5f5f5;font-size:1rem;line-height:1.5;margin:0 0 22px;white-space:pre-wrap;">' + esc(message) + '</p>' +
+                    '<button id="acAlertOk" style="width:100%;padding:14px;background:var(--secondary-gold);color:#1a2332;border:none;border-radius:8px;font-weight:700;font-size:16px;cursor:pointer;">OK</button></div>';
+                document.body.appendChild(ov);
+                document.getElementById('acAlertOk').addEventListener('click', function(){ ov.remove(); resolve(true); });
+            });
+        }
+
+        // Safely parse a fetch response that might be a timeout/HTML error page.
+        async function acSafeJson(res) {
+            var txt = await res.text();
+            try { return { ok: true, data: JSON.parse(txt) }; }
+            catch (e) { return { ok: false, nonJson: true, status: res.status }; }
+        }
+
+        // Restore session
+        window.addEventListener('DOMContentLoaded', function() {
+            const saved = localStorage.getItem('accommCheckinToken');
+            const user = localStorage.getItem('accommCheckinUser');
+            if (saved && user) {
+                sessionToken = saved;
+                isAdmin = localStorage.getItem('accommCheckinIsAdmin') === '1';
+                document.getElementById('currentUser').textContent = user + (isAdmin ? ' (admin)' : '');
+                showDashboard();
+            }
+        });
+
+        // Tabs
+        document.querySelectorAll('.search-tab').forEach(tab => {
+            tab.addEventListener('click', function() {
+                document.querySelectorAll('.search-tab').forEach(t => t.classList.remove('active'));
+                this.classList.add('active');
+                currentSearchType = this.dataset.tab;
+                document.querySelectorAll('.search-content').forEach(c => c.classList.remove('active'));
+                document.getElementById(this.dataset.tab + 'Search').classList.add('active');
+            });
+        });
+
+        // Login
+        document.getElementById('loginForm').addEventListener('submit', async function(e) {
+            e.preventDefault();
+            const username = document.getElementById('username').value.trim();
+            const password = document.getElementById('password').value;
+            const btn = document.getElementById('loginBtn');
+            btn.disabled = true; btn.innerHTML = '<span class="spinner"></span> Logging in...';
+            hideAlert('loginAlert');
+
+            try {
+                // Try accommodation login first, then admin login
+                let viaAdmin = false;
+                let response = await fetch('/.netlify/functions/accommodation-login', {
+                    method: 'POST', headers: {'Content-Type':'application/json'},
+                    body: JSON.stringify({ username, password })
+                });
+                let result = await response.json();
+
+                if (!response.ok || !result.success) {
+                    // Try admin login as fallback (accepts ADMIN_USERNAME and CHECKIN_USERNAME)
+                    response = await fetch('/.netlify/functions/admin-login', {
+                        method: 'POST', headers: {'Content-Type':'application/json'},
+                        body: JSON.stringify({ username, password })
+                    });
+                    result = await response.json();
+                    // Both 'admin' and 'checkin' roles get full access on ac.html
+                    if (response.ok && result.success) viaAdmin = true;
+                }
+
+                if (response.ok && result.success) {
+                    sessionToken = result.sessionToken;
+                    isAdmin = viaAdmin;
+                    localStorage.setItem('accommCheckinToken', sessionToken);
+                    localStorage.setItem('accommCheckinUser', username);
+                    localStorage.setItem('accommCheckinIsAdmin', viaAdmin ? '1' : '0');
+                    document.getElementById('currentUser').textContent = username + (viaAdmin ? ' (admin)' : '');
+                    showDashboard();
+                } else {
+                    showAlert('loginAlert', result.message || result.error || 'Invalid credentials', 'error');
+                }
+            } catch (err) {
+                showAlert('loginAlert', 'Login failed. Please try again.', 'error');
+            }
+            btn.disabled = false; btn.textContent = 'Sign In';
+        });
+
+        function showDashboard() {
+            document.getElementById('loginScreen').classList.add('hidden');
+            document.getElementById('dashboard').classList.add('active');
+            loadStats();
+            loadRoomMap();
+        }
+
+        function logout() {
+            sessionToken = null;
+            isAdmin = false;
+            localStorage.removeItem('accommCheckinToken');
+            localStorage.removeItem('accommCheckinUser');
+            localStorage.removeItem('accommCheckinIsAdmin');
+            document.getElementById('loginScreen').classList.remove('hidden');
+            document.getElementById('dashboard').classList.remove('active');
+            document.getElementById('resultsContainer').classList.remove('visible');
+        }
+
+        // Stats
+        async function loadStats() {
+            try {
+                const res = await fetch('/.netlify/functions/accommodation-checkin', {
+                    method: 'POST', headers: {'Content-Type':'application/json'},
+                    body: JSON.stringify({ action: 'stats' })
+                });
+                const data = await res.json();
+                if (data.success) {
+                    const t = data.totals;
+                    document.getElementById('statCheckedIn').textContent = t.total_checked_in;
+                    document.getElementById('statNotCheckedIn').textContent = t.total_not_checked_in;
+                    document.getElementById('statConfirmed').textContent = t.total_confirmed;
+                    document.getElementById('statCapacity').textContent = t.total_capacity;
+
+                    let html = '';
+                    data.stats.forEach(s => {
+                        const pct = s.confirmed_spots > 0 ? Math.round((s.checked_in_spots / s.confirmed_spots) * 100) : 0;
+                        const barColor = pct >= 80 ? '#27ae60' : pct >= 40 ? '#f39c12' : '#e74c3c';
+                        html += `<tr>
+                            <td style="font-weight:600;">${esc(s.display_name)}</td>
+                            <td style="color:#4cd68a;font-weight:600;">${s.checked_in_spots}</td>
+                            <td style="color:#e88;">${s.not_checked_in_spots}</td>
+                            <td>${s.confirmed_spots} / ${s.total_capacity}</td>
+                            <td style="width:120px;"><div class="bar-container"><div class="bar-fill" style="width:${pct}%;background:${barColor};"></div></div><span style="font-size:0.7rem;color:rgba(245,245,245,0.4);">${pct}%</span></td>
+                        </tr>`;
+                    });
+                    document.getElementById('breakdownBody').innerHTML = html || '<tr><td colspan="5" style="text-align:center;color:rgba(245,245,245,0.4);">No data</td></tr>';
+                }
+            } catch (err) {
+                console.error('Stats error:', err);
+            }
+        }
+
+        // ===== ROOM MAP =====
+        // Loads the room assignments (person-level) AND the reservations (which hold
+        // check-in status), then cross-references them by registration_id / PYC so the
+        // map can show who is checked in, free beds, stragglers, etc.
+        async function loadRoomMap() {
+            const content = document.getElementById('roomMapContent');
+            content.innerHTML = '<p style="color:rgba(245,245,245,0.4);">Loading room map...</p>';
+            try {
+                const res = await fetch('/.netlify/functions/auto-assign-rooms', { method: 'GET' });
+                const parsed = await acSafeJson(res);
+                if (!parsed.ok) {
+                    content.innerHTML = '<p style="color:#e88;">The room map took too long to load. Tap "Refresh Map" to try again.</p>';
+                    return;
+                }
+                const data = parsed.data;
+                if (!data.success || !data.halls) {
+                    content.innerHTML = '<p style="color:rgba(245,245,245,0.5);">No room assignments yet. Run Auto-Assign Rooms on the accommodation dashboard first.</p>';
+                    _roomMap = null;
+                    return;
+                }
+                _roomMap = data.halls;
+
+                // Build check-in lookup from reservations (paid only matters for check-in).
+                // We pull everyone via the search endpoint? No — use a dedicated stats-free
+                // approach: fetch reservations through the same function the map already
+                // exposes is not available, so we derive check-in by matching PYC/regId to
+                // the reservations we cache during searches plus a full fetch here.
+                await refreshReservationIndex();
+
+                renderRoomMap();
+            } catch (e) {
+                content.innerHTML = '<p style="color:#e88;">Error loading map: ' + esc(e.message) + '</p>';
+            }
+        }
+
+        // Pull all reservations once to know check-in status per person on the map.
+        // Uses the search action with a broad match isn't reliable; instead we read the
+        // accommodation_reservations via the 'stats' endpoint? That returns aggregates.
+        // So we use a dedicated lightweight fetch: search by empty is blocked (min 2 chars).
+        // We therefore index from the room members themselves + mark check-in via a bulk
+        // search on each hall is too heavy. Practical approach: fetch reservations through
+        // a small helper action if present; otherwise fall back to per-search enrichment.
+        async function refreshReservationIndex() {
+            _resByRegId = {}; _resByPyc = {};
+            try {
+                const res = await fetch('/.netlify/functions/accommodation-checkin', {
+                    method: 'POST', headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ action: 'all_reservations' })
+                });
+                const parsed = await acSafeJson(res);
+                if (parsed.ok && parsed.data && parsed.data.success && Array.isArray(parsed.data.results)) {
+                    parsed.data.results.forEach(function(r) {
+                        if (r.registration_id) _resByRegId[r.registration_id] = r;
+                    });
+                }
+            } catch (e) { /* index stays empty; map still renders without check-in marks */ }
+        }
+
+        // Is a given room member checked in? Matched via their registrationId.
+        function memberCheckedIn(m) {
+            var r = m && m.registrationId ? _resByRegId[m.registrationId] : null;
+            return !!(r && r.checked_in === true);
+        }
+
+        function renderRoomMap() {
+            const content = document.getElementById('roomMapContent');
+            const progressEl = document.getElementById('roomMapHallProgress');
+            if (!_roomMap) return;
+
+            const filter = (document.getElementById('roomMapFilter').value || '').trim().toLowerCase();
+            const freeOnly = document.getElementById('freeBedsOnly').checked;
+
+            var hallNames = Object.keys(_roomMap).sort();
+            var progressHtml = '';
+            var bodyHtml = '';
+
+            hallNames.forEach(function(hall) {
+                var rooms = _roomMap[hall] || [];
+                // Hall progress: people checked in / total people placed
+                var hallPeople = 0, hallChecked = 0;
+                rooms.forEach(function(room) {
+                    (room.members || []).forEach(function(m) {
+                        hallPeople++;
+                        if (memberCheckedIn(m)) hallChecked++;
+                    });
+                });
+                var pct = hallPeople > 0 ? Math.round((hallChecked / hallPeople) * 100) : 0;
+                var barColor = pct >= 80 ? '#27ae60' : pct >= 40 ? '#f39c12' : '#e74c3c';
+                progressHtml += '<div style="margin-bottom:8px;">' +
+                    '<div style="display:flex;justify-content:space-between;font-size:0.8rem;margin-bottom:3px;"><span style="font-weight:600;color:var(--secondary-gold);">' + esc(hall) + '</span><span style="color:rgba(245,245,245,0.6);">' + hallChecked + '/' + hallPeople + ' checked in</span></div>' +
+                    '<div class="bar-container"><div class="bar-fill" style="width:' + pct + '%;background:' + barColor + ';"></div></div></div>';
+
+                // Rooms
+                var roomCards = '';
+                rooms.forEach(function(room) {
+                    var members = room.members || [];
+                    var cap = room.capacity || 4;
+                    var freeBeds = cap - members.length;
+
+                    // Filter: free beds only
+                    if (freeOnly && freeBeds <= 0) return;
+
+                    // Filter: text match on member name/PYC (or room number)
+                    if (filter) {
+                        var hit = ('room ' + room.room_number).toLowerCase().indexOf(filter) !== -1 ||
+                            members.some(function(m){ return ((m.name||'') + ' ' + (m.pycNumber||'')).toLowerCase().indexOf(filter) !== -1; });
+                        if (!hit) return;
+                    }
+
+                    var anyChecked = members.some(memberCheckedIn);
+                    var allChecked = members.length > 0 && members.every(memberCheckedIn);
+                    // Straggler highlight: someone checked in but not everyone
+                    var straggler = anyChecked && !allChecked;
+
+                    var border = straggler ? '#f39c12' : (allChecked ? 'rgba(39,174,96,0.5)' : 'rgba(212,165,86,0.15)');
+                    var memberRows = members.map(function(m) {
+                        var ci = memberCheckedIn(m);
+                        var moveBtn = isAdmin ? '<button class="btn-outline" style="padding:4px 10px;font-size:0.72rem;" onclick="promptMove(\'' + esc(m.pycNumber) + '\',\'' + esc(m.name).replace(/'/g,"\\'") + '\')">Move</button>' : '';
+                        return '<div style="display:flex;justify-content:space-between;align-items:center;gap:6px;padding:5px 0;border-bottom:1px solid rgba(255,255,255,0.04);">' +
+                            '<span style="font-size:0.82rem;">' + (ci ? '<span style="color:#4cd68a;">&#10003; </span>' : '') + esc(m.name) + ' <span style="color:#d4a556;font-size:0.72rem;">' + esc(m.pycNumber) + '</span></span>' +
+                            moveBtn + '</div>';
+                    }).join('');
+                    if (members.length === 0) memberRows = '<div style="font-size:0.8rem;color:rgba(245,245,245,0.3);padding:5px 0;">Empty</div>';
+
+                    var checkInRoomBtn = members.length > 0 && !allChecked
+                        ? '<button class="btn-checkin" style="width:100%;margin-top:8px;padding:8px;font-size:0.8rem;" onclick="checkInWholeRoom(\'' + esc(hall) + '\',' + room.room_number + ')">Check in whole room</button>'
+                        : '';
+
+                    roomCards += '<div style="background:rgba(255,255,255,0.03);border:1px solid ' + border + ';border-radius:10px;padding:12px;">' +
+                        '<div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:6px;">' +
+                        '<span style="font-weight:700;color:var(--secondary-gold);">Room ' + room.room_number + (room.is_locked ? ' &#128274;' : '') + '</span>' +
+                        '<span style="font-size:0.78rem;color:' + (freeBeds > 0 ? '#4cd68a' : 'rgba(245,245,245,0.4)') + ';">' + members.length + '/' + cap + (freeBeds > 0 ? ' &middot; ' + freeBeds + ' free' : ' &middot; full') + '</span></div>' +
+                        (straggler ? '<div style="font-size:0.72rem;color:#f39c12;margin-bottom:4px;">&#9888; Some checked in, some not</div>' : '') +
+                        memberRows + checkInRoomBtn + '</div>';
+                });
+
+                if (roomCards) {
+                    bodyHtml += '<div style="margin-bottom:18px;"><h3 style="font-family:\'Bebas Neue\',sans-serif;color:var(--accent-blue);font-size:1.05rem;letter-spacing:1px;margin-bottom:10px;">' + esc(hall) + '</h3>' +
+                        '<div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(240px,1fr));gap:10px;">' + roomCards + '</div></div>';
+                }
+            });
+
+            progressEl.innerHTML = progressHtml;
+            content.innerHTML = bodyHtml || '<p style="color:rgba(245,245,245,0.4);">No rooms match the current filter.</p>';
+        }
+
+        // Move a person to another room (admin only). Asks for target hall + room.
+        async function promptMove(pyc, name) {
+            if (!isAdmin) { await acAlert('Only accommodation admins can move people between rooms.'); return; }
+            // Build a simple prompt using the available halls
+            var halls = _roomMap ? Object.keys(_roomMap) : [];
+            var hallList = halls.join(', ');
+            var targetHall = window.prompt('Move ' + name + ' (' + pyc + ') to which hall?\nOptions: ' + hallList);
+            if (!targetHall) return;
+            targetHall = targetHall.trim();
+            if (halls.indexOf(targetHall) === -1) {
+                // case-insensitive match
+                var found = halls.find(function(h){ return h.toLowerCase() === targetHall.toLowerCase(); });
+                if (!found) { await acAlert('Hall "' + targetHall + '" not found. Use one of: ' + hallList); return; }
+                targetHall = found;
+            }
+            var roomNumStr = window.prompt('Move to which room number in ' + targetHall + '?');
+            if (!roomNumStr) return;
+            var roomNum = parseInt(roomNumStr, 10);
+            if (isNaN(roomNum)) { await acAlert('Please enter a valid room number.'); return; }
+
+            if (!await acConfirm('Move ' + name + ' to ' + targetHall + ' Room ' + roomNum + '?', 'Move')) return;
+
+            try {
+                const res = await fetch('/.netlify/functions/auto-assign-rooms', {
+                    method: 'POST', headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ action: 'move_member', sourcePyc: pyc, targetHall: targetHall, targetRoomNumber: roomNum })
+                });
+                const parsed = await acSafeJson(res);
+                if (parsed.ok && parsed.data && parsed.data.success) {
+                    await acAlert('Moved ' + name + ' to ' + targetHall + ' Room ' + roomNum + '.');
+                    await loadRoomMap();
+                } else {
+                    await acAlert('Move failed: ' + ((parsed.data && parsed.data.error) || 'try again'));
+                }
+            } catch (e) { await acAlert('Error: ' + e.message); }
+        }
+
+        // Check in everyone in a room who is paid and not yet checked in.
+        async function checkInWholeRoom(hall, roomNumber) {
+            if (!_roomMap || !_roomMap[hall]) return;
+            var room = _roomMap[hall].find(function(r){ return r.room_number === roomNumber; });
+            if (!room) return;
+            var members = room.members || [];
+            // Determine who needs checking in (matched to a paid reservation, not yet in)
+            var toCheck = [];
+            members.forEach(function(m) {
+                var r = m.registrationId ? _resByRegId[m.registrationId] : null;
+                if (r && r.payment_status === 'Paid' && r.checked_in !== true) toCheck.push(r);
+            });
+            if (toCheck.length === 0) { await acAlert('No one in this room needs checking in (already done, or not paid).'); return; }
+            if (!await acConfirm('Check in ' + toCheck.length + ' person(s) in ' + hall + ' Room ' + roomNumber + '?', 'Check in all')) return;
+
+            var done = 0, failed = 0;
+            for (var i = 0; i < toCheck.length; i++) {
+                try {
+                    const res = await fetch('/.netlify/functions/accommodation-checkin', {
+                        method: 'POST', headers: { 'Content-Type': 'application/json' },
+                        body: JSON.stringify({ action: 'checkin', reservationId: toCheck[i].id, roomAssignment: hall + ' Room ' + roomNumber })
+                    });
+                    const parsed = await acSafeJson(res);
+                    if (parsed.ok && parsed.data && parsed.data.success) done++; else failed++;
+                } catch (e) { failed++; }
+            }
+            await acAlert('Checked in ' + done + (failed ? ', ' + failed + ' failed' : '') + '.');
+            await refreshReservationIndex();
+            renderRoomMap();
+            loadStats();
+        }
+
+        // Find which room a reservation's people are in (for search results).
+        function findRoomsForRegId(regId) {
+            var found = [];
+            if (!_roomMap || !regId) return found;
+            Object.keys(_roomMap).forEach(function(hall) {
+                (_roomMap[hall] || []).forEach(function(room) {
+                    (room.members || []).forEach(function(m) {
+                        if (m.registrationId === regId) {
+                            found.push({ hall: hall, room: room, member: m });
+                        }
+                    });
+                });
+            });
+            return found;
+        }
+
+        // Search
+        async function doSearch() {
+            const query = currentSearchType === 'name'
+                ? document.getElementById('searchName').value.trim()
+                : currentSearchType === 'email'
+                ? document.getElementById('searchEmail').value.trim()
+                : document.getElementById('searchRef').value.trim();
+
+            if (!query || query.length < 2) {
+                showAlert('searchAlert', 'Please enter at least 2 characters.', 'error');
+                return;
+            }
+
+            hideAlert('searchAlert');
+            document.getElementById('resultsContent').innerHTML = '<p style="color:rgba(245,245,245,0.4);">Searching...</p>';
+            document.getElementById('resultsContainer').classList.add('visible');
+
+            // Make sure the room map + reservation index are loaded so results can show
+            // each person's room and roommates.
+            if (!_roomMap) { try { await loadRoomMap(); } catch (e) {} }
+
+            try {
+                const res = await fetch('/.netlify/functions/accommodation-checkin', {
+                    method: 'POST', headers: {'Content-Type':'application/json'},
+                    body: JSON.stringify({ action: 'search', query, searchType: currentSearchType })
+                });
+                const data = await res.json();
+                if (data.success) {
+                    displayResults(data.results || []);
+                } else {
+                    showAlert('searchAlert', data.error || 'Search failed', 'error');
+                }
+            } catch (err) {
+                showAlert('searchAlert', 'Search failed: ' + err.message, 'error');
+            }
+        }
+
+        function displayResults(results) {
+            document.getElementById('resultCount').textContent = results.length;
+            if (results.length === 0) {
+                document.getElementById('resultsContent').innerHTML = '<p style="color:rgba(245,245,245,0.4);padding:15px;">No reservations found.</p>';
+                return;
+            }
+
+            let html = '';
+            results.forEach(r => {
+                const isPaid = r.payment_status === 'Paid';
+                const isCheckedIn = r.checked_in === true;
+                const statusBadge = isPaid
+                    ? `<span class="badge badge-paid">Paid</span>`
+                    : `<span class="badge badge-pending">${esc(r.payment_status)}</span>`;
+                const checkinBadge = isCheckedIn
+                    ? `<span class="badge badge-checkedin">✓ Checked In</span>`
+                    : `<span class="badge badge-notchecked">Not Checked In</span>`;
+
+                // Look up this reservation's room + roommates from the cached room map.
+                var roomBlock = '';
+                var placements = findRoomsForRegId(r.registration_id);
+                if (placements.length > 0) {
+                    roomBlock = placements.map(function(p) {
+                        var roommates = (p.room.members || []).filter(function(m){ return m.registrationId !== r.registration_id; });
+                        var mateList = roommates.length > 0
+                            ? roommates.map(function(m){ return '<li style="padding:2px 0;">' + esc(m.name) + ' <span style="color:#d4a556;font-size:0.72rem;">' + esc(m.pycNumber) + '</span>' + (memberCheckedIn(m) ? ' <span style="color:#4cd68a;font-size:0.72rem;">&#10003; in</span>' : '') + '</li>'; }).join('')
+                            : '<li style="color:rgba(245,245,245,0.4);">No roommates yet</li>';
+                        var moveBtn = isAdmin ? '<button class="btn-outline" style="padding:5px 12px;font-size:0.75rem;margin-top:8px;" onclick="promptMove(\'' + esc(p.member.pycNumber) + '\',\'' + esc(p.member.name).replace(/'/g,"\\'") + '\')">Move to another room</button>' : '';
+                        return '<div style="margin-top:10px;padding:10px;background:rgba(155,89,182,0.08);border:1px solid rgba(155,89,182,0.25);border-radius:8px;">' +
+                            '<div style="font-weight:600;color:#c39bd3;font-size:0.85rem;">' + esc(p.hall) + ' &middot; Room ' + p.room.room_number + '</div>' +
+                            '<div style="font-size:0.75rem;color:rgba(245,245,245,0.5);margin:6px 0 3px;">Roommates:</div>' +
+                            '<ul style="list-style:none;font-size:0.82rem;margin:0;padding:0;">' + mateList + '</ul>' + moveBtn + '</div>';
+                    }).join('');
+                } else if (_roomMap) {
+                    roomBlock = '<div style="margin-top:10px;font-size:0.8rem;color:rgba(245,245,245,0.4);">No room assignment found. (Run Auto-Assign on the dashboard, or assign manually.)</div>';
+                } else {
+                    roomBlock = '<div style="margin-top:10px;font-size:0.8rem;color:rgba(245,245,245,0.4);">Tap "Refresh Map" above to see room &amp; roommates.</div>';
+                }
+
+                html += `<div class="result-card ${isCheckedIn ? 'checked-in' : ''}" id="card-${r.id}">
+                    <div class="result-top">
+                        <div>
+                            <div class="result-name">${esc(r.registrant_name)}</div>
+                            ${r.transaction_reference ? '<div style="color:#d4a556;font-weight:700;font-size:0.85rem;">Txn: ' + esc(r.transaction_reference) + '</div>' : ''}
+                            <div class="result-email">${esc(r.registrant_email)}</div>
+                        </div>
+                        ${checkinBadge}
+                    </div>
+                    <div class="result-details">
+                        <span class="badge badge-type">${esc(r.accommodation_display || r.accommodation_type)}</span>
+                        <span class="badge badge-spots">${r.spots_requested} spot${r.spots_requested > 1 ? 's' : ''}</span>
+                        ${statusBadge}
+                        ${r.room_assignment ? `<span class="badge badge-room">Room: ${esc(r.room_assignment)}</span>` : ''}
+                    </div>
+                    ${roomBlock}
+                    ${isPaid ? `
+                    <div class="result-actions">
+                        ${!isCheckedIn ? `
+                            <input type="text" class="room-input" id="room-${r.id}" placeholder="Room # (optional)">
+                            <button class="btn-checkin" onclick="doCheckin('${r.id}')">Check In</button>
+                        ` : `
+                            <button class="btn-undo" onclick="undoCheckin('${r.id}')">Undo Check-In</button>
+                        `}
+                    </div>
+                    ` : `<p style="margin-top:10px;font-size:0.82rem;color:rgba(245,245,245,0.4);">Payment not confirmed — cannot check in</p>`}
+                </div>`;
+            });
+            document.getElementById('resultsContent').innerHTML = html;
+        }
+
+        async function doCheckin(id) {
+            const roomInput = document.getElementById('room-' + id);
+            const roomAssignment = roomInput ? roomInput.value.trim() : '';
+
+            try {
+                const res = await fetch('/.netlify/functions/accommodation-checkin', {
+                    method: 'POST', headers: {'Content-Type':'application/json'},
+                    body: JSON.stringify({ action: 'checkin', reservationId: id, roomAssignment })
+                });
+                const data = await res.json();
+                if (data.success) {
+                    showAlert('searchAlert', '✓ ' + (data.record?.registrant_name || '') + ' checked in!', 'success');
+                    // Refresh the card in-place
+                    doSearch();
+                    loadStats();
+                } else {
+                    showAlert('searchAlert', data.error || 'Check-in failed', 'error');
+                }
+            } catch (err) {
+                showAlert('searchAlert', 'Error: ' + err.message, 'error');
+            }
+        }
+
+        async function undoCheckin(id) {
+            if (!await acConfirm('Undo check-in for this reservation?', 'Undo')) return;
+            try {
+                const res = await fetch('/.netlify/functions/accommodation-checkin', {
+                    method: 'POST', headers: {'Content-Type':'application/json'},
+                    body: JSON.stringify({ action: 'undo', reservationId: id })
+                });
+                const data = await res.json();
+                if (data.success) {
+                    showAlert('searchAlert', 'Check-in undone.', 'success');
+                    doSearch();
+                    loadStats();
+                } else {
+                    showAlert('searchAlert', data.error || 'Failed', 'error');
+                }
+            } catch (err) {
+                showAlert('searchAlert', 'Error: ' + err.message, 'error');
+            }
+        }
+
+        function showAlert(id, msg, type) {
+            const el = document.getElementById(id);
+            el.className = `alert visible alert-${type}`;
+            el.textContent = msg;
+            if (type === 'success') setTimeout(() => { el.classList.remove('visible'); }, 4000);
+        }
+        function hideAlert(id) { document.getElementById(id).classList.remove('visible'); }
+    </script>
+</body>
+</html>

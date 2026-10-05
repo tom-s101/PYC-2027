@@ -1,0 +1,60 @@
+[build]
+  publish = "public"
+  functions = "netlify/functions"
+
+# Enable asset optimization (minify HTML/CSS/JS)
+[build.processing]
+  skip_processing = false
+
+[build.processing.css]
+  bundle = true
+  minify = true
+
+[build.processing.js]
+  bundle = true
+  minify = true
+
+[build.processing.html]
+  pretty_urls = false
+
+[build.processing.images]
+  compress = true
+
+# Function configuration
+[functions]
+  # Set Node.js version for functions
+  node_bundler = "esbuild"
+  
+  # Increase function timeout for payment processing
+  [functions."confirm-payment"]
+    external_node_modules = ["@supabase/supabase-js", "sib-api-v3-sdk", "stripe"]
+
+  [functions."upload-payment-proof"]
+    external_node_modules = ["@supabase/supabase-js", "sib-api-v3-sdk"]
+
+  [functions."submit-registration"]
+    external_node_modules = ["@supabase/supabase-js", "sib-api-v3-sdk"]
+
+# Headers for all pages
+[[headers]]
+  for = "/*"
+  [headers.values]
+    X-Frame-Options = "SAMEORIGIN"
+    X-Content-Type-Options = "nosniff"
+    Referrer-Policy = "strict-origin-when-cross-origin"
+
+# Aggressive cache for images
+[[headers]]
+  for = "*.jpeg"
+  [headers.values]
+    Cache-Control = "public, max-age=31536000, immutable"
+
+[[headers]]
+  for = "*.jpg"
+  [headers.values]
+    Cache-Control = "public, max-age=31536000, immutable"
+
+[[headers]]
+  for = "*.png"
+  [headers.values]
+    Cache-Control = "public, max-age=31536000, immutable"

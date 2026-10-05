@@ -1,0 +1,1355 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PYC 2026 - Above and Beyond | June 3-7, Mountain View College</title>
+    <link rel="icon" type="image/x-icon" href="/favicon.ico">
+    <link rel="apple-touch-icon" href="/apple-touch-icon.png">
+    <meta property="og:title" content="PYC 2026 — Above and Beyond">
+    <meta property="og:description" content="Philippine Youth for Christ 2026 — June 3-7, Mountain View College, Mindanao. Join hundreds of young people for an unforgettable spiritual experience. Ephesians 3:20">
+    <meta property="og:image" content="https://philippineyouthforchrist.org/IMG_3908.jpeg">
+    <meta property="og:url" content="https://philippineyouthforchrist.org">
+    <meta property="og:type" content="website">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="PYC 2026 — Above and Beyond">
+    <meta name="twitter:description" content="Philippine Youth for Christ 2026 — June 3-7, Mountain View College, Mindanao.">
+    <meta name="twitter:image" content="https://philippineyouthforchrist.org/IMG_3908.jpeg">
+    <meta name="description" content="Philippine Youth for Christ 2026 - Join us for an unforgettable conference experience. June 3-7 at Mountain View College, Mindanao.">
+    <link rel="preconnect" href="https://fonts.googleapis.com" crossorigin>
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Montserrat:wght@400;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --primary-navy: #1a2332;
+            --secondary-gold: #d4a556;
+            --text-light: #f5f5f5;
+            --text-dark: #2c3e50;
+        }
+
+        body {
+            font-family: 'Montserrat', sans-serif;
+            color: var(--text-dark);
+            overflow-x: hidden;
+        }
+
+        /* Navigation */
+        nav {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            background: rgba(26, 35, 50, 0.95);
+            backdrop-filter: blur(10px);
+            z-index: 1000;
+            padding: 15px 0;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+
+        .nav-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0 20px;
+        }
+
+        .logo {
+            font-family: 'Bebas Neue', sans-serif;
+            font-size: 2rem;
+            color: var(--secondary-gold);
+            letter-spacing: 3px;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 30px;
+            list-style: none;
+        }
+
+        .nav-links a {
+            color: var(--text-light);
+            text-decoration: none;
+            font-weight: 500;
+            transition: color 0.3s;
+        }
+
+        .nav-links a:hover {
+            color: var(--secondary-gold);
+        }
+
+        .register-btn-nav {
+            background: var(--secondary-gold);
+            color: var(--primary-navy);
+            padding: 10px 25px;
+            border-radius: 25px;
+            font-weight: 700;
+            text-decoration: none;
+            transition: transform 0.3s, box-shadow 0.3s;
+            position: relative;
+            overflow: hidden;
+        }
+        .register-btn-nav::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -100%;
+            width: 60%;
+            height: 200%;
+            background: linear-gradient(105deg, transparent 20%, rgba(255,255,255,0.0) 40%, rgba(255,255,255,0.4) 50%, rgba(255,255,255,0.0) 60%, transparent 80%);
+            animation: shimmer-sweep 3s ease-in-out infinite;
+            pointer-events: none;
+        }
+
+        .register-btn-nav:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(212, 165, 86, 0.4);
+        }
+
+        /* Hero Section */
+        .hero {
+            min-height: 100vh;
+            background: linear-gradient(135deg, #0f1419 0%, #1a2332 50%, #2a3f5f 100%);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            overflow: visible;
+            width: 100%;
+            padding: 120px 20px 150px 20px;
+        }
+
+        .stars {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+        }
+
+        .star {
+            position: absolute;
+            background: white;
+            border-radius: 50%;
+            animation: twinkle 3s infinite;
+        }
+
+        @keyframes twinkle {
+            0%, 100% { opacity: 0.3; }
+            50% { opacity: 1; }
+        }
+
+        .hero-content {
+            text-align: center;
+            z-index: 10;
+            padding: 20px;
+            animation: fadeInUp 1s ease;
+            width: 100%;
+            max-width: 100%;
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .hero-logo {
+            max-width: 900px;
+            width: 95%;
+            margin-bottom: 30px;
+            animation: fadeIn 1.5s ease;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        .hero h1 {
+            font-family: 'Bebas Neue', sans-serif;
+            font-size: 4rem;
+            color: var(--secondary-gold);
+            letter-spacing: 5px;
+            margin-bottom: 20px;
+        }
+
+        .hero-subtitle {
+            font-size: 1.5rem;
+            color: var(--text-light);
+            margin-bottom: 10px;
+        }
+
+        .hero-date {
+            font-size: 1.2rem;
+            color: rgba(245, 245, 245, 0.8);
+            margin-bottom: 40px;
+        }
+
+        .cta-buttons {
+            display: flex;
+            gap: 20px;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
+        .btn-primary {
+            background: var(--secondary-gold);
+            color: var(--primary-navy);
+            padding: 18px 40px;
+            border-radius: 30px;
+            font-size: 1.2rem;
+            font-weight: 700;
+            text-decoration: none;
+            transition: transform 0.3s, box-shadow 0.3s;
+            display: inline-block;
+            font-family: 'Bebas Neue', sans-serif;
+            letter-spacing: 2px;
+            position: relative;
+            overflow: hidden;
+            z-index: 0;
+        }
+        .btn-primary::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -100%;
+            width: 60%;
+            height: 200%;
+            background: linear-gradient(105deg, transparent 20%, rgba(255,255,255,0.0) 40%, rgba(255,255,255,0.4) 50%, rgba(255,255,255,0.0) 60%, transparent 80%);
+            animation: shimmer-sweep 3s ease-in-out infinite;
+            z-index: 1;
+            pointer-events: none;
+        }
+        .btn-primary::after {
+            content: '';
+            position: absolute;
+            inset: 0;
+            border-radius: 30px;
+            box-shadow: inset 0 -8px 10px rgba(255,255,255,0.12);
+            transition: box-shadow 0.3s;
+            pointer-events: none;
+            z-index: 1;
+        }
+        .btn-primary:hover::after {
+            box-shadow: inset 0 -6px 10px rgba(255,255,255,0.25);
+        }
+        @keyframes shimmer-sweep {
+            0% { left: -100%; }
+            50% { left: 100%; }
+            100% { left: 100%; }
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 25px rgba(212, 165, 86, 0.5);
+        }
+
+        .btn-secondary {
+            background: transparent;
+            color: var(--text-light);
+            padding: 18px 40px;
+            border: 2px solid var(--secondary-gold);
+            border-radius: 30px;
+            font-size: 1.2rem;
+            font-weight: 700;
+            text-decoration: none;
+            transition: all 0.3s;
+            display: inline-block;
+            font-family: 'Bebas Neue', sans-serif;
+            letter-spacing: 2px;
+        }
+
+        .btn-secondary:hover {
+            background: var(--secondary-gold);
+            color: var(--primary-navy);
+            transform: translateY(-3px);
+        }
+
+        /* Countdown Section */
+        .countdown-section {
+            padding: 60px 20px 80px 20px;
+            background: linear-gradient(135deg, rgba(15, 20, 25, 0.95) 0%, rgba(26, 35, 50, 0.95) 100%);
+            margin-top: 0;
+        }
+
+        .countdown-box {
+            max-width: 900px;
+            margin: 0 auto;
+            background: rgba(26, 35, 50, 0.8);
+            border: 2px solid rgba(212, 165, 86, 0.3);
+            padding: 40px 20px;
+            border-radius: 20px;
+            box-shadow: 0 30px 80px rgba(0, 0, 0, 0.5);
+            backdrop-filter: blur(10px);
+        }
+
+        .countdown-title {
+            font-family: 'Bebas Neue', sans-serif;
+            color: #d4a556;
+            font-size: 2.2rem;
+            margin-bottom: 30px;
+            text-align: center;
+            letter-spacing: 2px;
+        }
+
+        .countdown-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 12px;
+            margin-bottom: 20px;
+            max-width: 750px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        /* Mobile - stack countdown items */
+        @media (max-width: 768px) {
+            .countdown-grid {
+                grid-template-columns: repeat(2, 1fr);
+                gap: 12px;
+                max-width: 100%;
+            }
+            
+            .countdown-box {
+                padding: 30px 15px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .countdown-grid {
+                grid-template-columns: repeat(2, 1fr);
+                gap: 10px;
+            }
+            
+            .countdown-title {
+                font-size: 1.8rem;
+            }
+        }
+
+        .countdown-item {
+            background: rgba(255, 255, 255, 0.05);
+            padding: 25px 15px;
+            border-radius: 15px;
+            border: 1px solid rgba(212, 165, 86, 0.2);
+            text-align: center;
+            transition: all 0.3s ease;
+        }
+
+        .countdown-item:hover {
+            transform: translateY(-5px);
+            border-color: #d4a556;
+            background: rgba(212, 165, 86, 0.1);
+        }
+
+        .countdown-number {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 3rem;
+            font-weight: 700;
+            color: #d4a556;
+            line-height: 1;
+            margin-bottom: 10px;
+        }
+
+        .countdown-label {
+            font-size: 1rem;
+            color: #f5f5f5;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            font-weight: 500;
+        }
+
+        .event-date {
+            text-align: center;
+            font-size: 1.3rem;
+            color: rgba(245, 245, 245, 0.8);
+            margin-top: 30px;
+        }
+
+        /* Event Info Section */
+        .event-info {
+            background: white;
+            padding: 80px 20px;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .info-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 40px;
+            text-align: center;
+        }
+
+        .info-card h3 {
+            font-family: 'Bebas Neue', sans-serif;
+            font-size: 2rem;
+            color: var(--secondary-gold);
+            margin-bottom: 15px;
+            letter-spacing: 2px;
+        }
+
+        .info-card p {
+            font-size: 1.1rem;
+            color: var(--text-dark);
+            line-height: 1.8;
+        }
+
+        /* Theme Section */
+        .theme-section {
+            background: linear-gradient(135deg, #1a2332 0%, #2a3f5f 100%);
+            padding: 0;
+            text-align: center;
+            color: var(--text-light);
+        }
+
+        .section-title {
+            font-family: 'Bebas Neue', sans-serif;
+            font-size: 3.5rem;
+            color: var(--secondary-gold);
+            margin-bottom: 30px;
+            letter-spacing: 4px;
+        }
+
+        .theme-content {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .theme-verse {
+            font-size: 1.5rem;
+            font-style: italic;
+            margin: 30px 0;
+            color: rgba(245, 245, 245, 0.9);
+        }
+
+        .theme-description {
+            font-size: 1.1rem;
+            line-height: 1.8;
+            color: rgba(245, 245, 245, 0.8);
+        }
+
+        /* Experience Section */
+        .experience-section {
+            background: white;
+            padding: 100px 20px;
+        }
+
+        .experience-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 50px;
+            margin-top: 50px;
+        }
+
+        .experience-card {
+            text-align: center;
+            padding: 30px;
+        }
+
+        .experience-icon {
+            font-size: 4rem;
+            margin-bottom: 20px;
+        }
+
+        .experience-card h3 {
+            font-family: 'Bebas Neue', sans-serif;
+            font-size: 2rem;
+            color: var(--primary-navy);
+            margin-bottom: 15px;
+            letter-spacing: 2px;
+        }
+
+        .experience-card p {
+            font-size: 1rem;
+            line-height: 1.8;
+            color: var(--text-dark);
+        }
+
+        /* Video Section */
+        .video-section {
+            background: #f8f9fa;
+            padding: 100px 20px;
+            text-align: center;
+        }
+
+        .video-container {
+            max-width: 700px;
+            margin: 30px auto 0;
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.2);
+            background: #000;
+            position: relative;
+            aspect-ratio: 16/9;
+        }
+
+        .video-container .fb-video,
+        .video-container .fb-video span,
+        .video-container .fb-video iframe {
+            width: 100% !important;
+            max-width: 100% !important;
+        }
+
+        .video-container iframe {
+            width: 100%;
+            height: 100%;
+            display: block;
+            position: absolute;
+            top: 0;
+            left: 0;
+            border-radius: 15px;
+        }
+
+        /* Speakers Section */
+        .speakers-section {
+            background: white;
+            padding: 100px 20px;
+            text-align: center;
+        }
+
+        .speakers-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 40px;
+            margin-top: 50px;
+        }
+
+        .speaker-card {
+            background: #f8f9fa;
+            padding: 30px;
+            border-radius: 15px;
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+
+        .speaker-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+        }
+
+        .speaker-card h4 {
+            font-family: 'Bebas Neue', sans-serif;
+            font-size: 1.8rem;
+            color: var(--primary-navy);
+            margin: 15px 0 10px;
+            letter-spacing: 1px;
+        }
+
+        .speaker-card p {
+            color: var(--text-dark);
+            font-size: 0.95rem;
+        }
+
+        /* Quote Section */
+        .quote-section {
+            background: linear-gradient(135deg, #d4a556 0%, #c9965d 100%);
+            padding: 0;
+            text-align: center;
+        }
+
+        .quote-content {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .quote-text {
+            font-size: 1.8rem;
+            font-style: italic;
+            color: white;
+            line-height: 1.6;
+            margin-bottom: 20px;
+        }
+
+        .quote-author {
+            font-size: 1.2rem;
+            color: rgba(255, 255, 255, 0.9);
+            font-weight: 600;
+        }
+
+        /* Steps Section */
+        .steps-section {
+            background: white;
+            padding: 100px 20px;
+            text-align: center;
+        }
+
+        .steps-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 50px;
+            margin-top: 50px;
+        }
+
+        .step-card {
+            position: relative;
+        }
+
+        .step-number {
+            font-family: 'Bebas Neue', sans-serif;
+            font-size: 5rem;
+            color: rgba(212, 165, 86, 0.2);
+            margin-bottom: 20px;
+        }
+
+        .step-card h3 {
+            font-family: 'Bebas Neue', sans-serif;
+            font-size: 1.8rem;
+            color: var(--primary-navy);
+            margin-bottom: 15px;
+            letter-spacing: 2px;
+        }
+
+        /* Final CTA Section */
+        .final-cta {
+            background: linear-gradient(135deg, #0f1419 0%, #1a2332 50%, #2a3f5f 100%);
+            padding: 100px 20px;
+            text-align: center;
+            color: var(--text-light);
+        }
+
+        .countdown-box {
+            background: rgba(212, 165, 86, 0.1);
+            border: 2px solid var(--secondary-gold);
+            border-radius: 15px;
+            padding: 40px;
+            max-width: 600px;
+            margin: 50px auto;
+        }
+
+        .countdown-title {
+            font-family: 'Bebas Neue', sans-serif;
+            font-size: 2rem;
+            color: var(--secondary-gold);
+            margin-bottom: 20px;
+            letter-spacing: 2px;
+        }
+
+        .countdown-text {
+            font-size: 1.5rem;
+            margin-bottom: 30px;
+        }
+
+        /* Footer */
+        footer {
+            background: var(--primary-navy);
+            color: var(--text-light);
+            padding: 60px 20px 30px;
+        }
+
+        .footer-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 40px;
+            margin-bottom: 40px;
+        }
+
+        .footer-section h3 {
+            font-family: 'Bebas Neue', sans-serif;
+            font-size: 1.5rem;
+            color: var(--secondary-gold);
+            margin-bottom: 20px;
+            letter-spacing: 2px;
+        }
+
+        .footer-section p,
+        .footer-section a {
+            color: rgba(245, 245, 245, 0.8);
+            text-decoration: none;
+            line-height: 1.8;
+            display: block;
+            margin-bottom: 10px;
+        }
+
+        .footer-section a:hover {
+            color: var(--secondary-gold);
+        }
+
+        .social-links {
+            display: flex;
+            gap: 20px;
+            margin-top: 20px;
+        }
+
+        .social-icon {
+            width: 40px;
+            height: 40px;
+            background: rgba(212, 165, 86, 0.2);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--secondary-gold);
+            text-decoration: none;
+            font-size: 1.2rem;
+            transition: all 0.3s;
+        }
+
+        .social-icon:hover {
+            background: var(--secondary-gold);
+            color: var(--primary-navy);
+            transform: translateY(-3px);
+        }
+
+        .footer-bottom {
+            text-align: center;
+            padding-top: 30px;
+            border-top: 1px solid rgba(212, 165, 86, 0.2);
+            color: rgba(245, 245, 245, 0.6);
+        }
+
+        /* Mobile Responsive */
+        @media (max-width: 768px) {
+            .nav-links {
+                display: none;
+            }
+
+            .hero h1 {
+                font-size: 2.5rem;
+            }
+
+            .hero-subtitle {
+                font-size: 1.2rem;
+            }
+
+            .section-title {
+                font-size: 2.5rem;
+            }
+
+            .cta-buttons {
+                flex-direction: column;
+                align-items: center;
+            }
+
+            .btn-primary,
+            .btn-secondary {
+                width: 100%;
+                max-width: 300px;
+            }
+
+        }
+        /* Scroll Reveal Animation */
+        .scroll-reveal-wrapper {
+            min-height: 280vh;
+            position: relative;
+        }
+        .scroll-reveal-sticky {
+            position: sticky;
+            top: 0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            min-height: 100vh;
+            padding: 60px 20px;
+        }
+        .scroll-reveal-sticky .theme-content,
+        .scroll-reveal-sticky .quote-content {
+            max-width: 900px;
+            margin: 0 auto;
+        }
+        .reveal-word {
+            opacity: 0.12;
+            display: inline;
+        }
+        .quote-section .reveal-word {
+            opacity: 0.15;
+        }
+        @media (max-width: 768px) {
+            .scroll-reveal-wrapper {
+                min-height: 220vh;
+            }
+        }
+        /* Container Scroll Animation */
+        .container-scroll-wrapper {
+            position: relative;
+            padding: 20px 0;
+        }
+        .container-scroll-title {
+            will-change: transform;
+        }
+        .container-scroll-card {
+            will-change: transform;
+            transform-style: preserve-3d;
+            -webkit-backface-visibility: hidden;
+            backface-visibility: hidden;
+        }
+    </style>
+</head>
+<body>
+
+<!-- ============================================ -->
+<!-- CONSTRUCTION OVERLAY - PASTE AFTER <body>   -->
+<!-- ============================================ -->
+
+
+    <!-- Navigation -->
+    <nav>
+        <div class="nav-container">
+            <div class="logo"><img src="/pyc-logo-white.png" alt="PYC" style="height:65px;display:block;mix-blend-mode:screen;"></div>
+            <ul class="nav-links">
+                <li><a href="#about">About</a></li>
+                <li><a href="#theme">Theme</a></li>
+                <li><a href="#video">Video</a></li>
+                <li><a href="#contact">Contact</a></li>
+            </ul>
+            <a href="/register" class="register-btn-nav" id="navRegBtn" style="opacity:0;pointer-events:none;transition:opacity 0.3s;">REGISTER NOW</a>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="stars" id="stars"></div>
+        <div class="hero-content">
+            <img src="/IMG_3908.jpeg" alt="PYC 2026 - Above and Beyond" class="hero-logo">
+            <p class="hero-subtitle">An unforgettable conference experience</p>
+            <p class="hero-date">June 3-7, 2026 • Mountain View College, Mindanao</p>
+            <div class="cta-buttons" id="heroCtaButtons">
+                <a href="/register" class="btn-primary">
+                    <i class="fa-solid fa-ticket" style="margin-right: 10px;"></i>REGISTER NOW
+                </a>
+                <a href="/accommodations" class="btn-primary" style="background:transparent;border:2px solid var(--secondary-gold);color:var(--secondary-gold);">
+                    <i class="fa-solid fa-bed" style="margin-right: 10px;"></i>RESERVE ACCOMMODATIONS
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Countdown Section -->
+    <section class="countdown-section">
+        <div class="countdown-box">
+            <h2 class="countdown-title">CONFERENCE BEGINS IN:</h2>
+            <div class="countdown-grid">
+                <div class="countdown-item">
+                    <div class="countdown-number" id="days">--</div>
+                    <div class="countdown-label">Days</div>
+                </div>
+                <div class="countdown-item">
+                    <div class="countdown-number" id="hours">--</div>
+                    <div class="countdown-label">Hours</div>
+                </div>
+                <div class="countdown-item">
+                    <div class="countdown-number" id="minutes">--</div>
+                    <div class="countdown-label">Minutes</div>
+                </div>
+                <div class="countdown-item">
+                    <div class="countdown-number" id="seconds">--</div>
+                    <div class="countdown-label">Seconds</div>
+                </div>
+            </div>
+            <p class="event-date">June 3-7, 2026 | Mountain View College, Mindanao, Philippines</p>
+        </div>
+    </section>
+
+    <!-- Event Info -->
+    <section class="event-info" id="about">
+        <div class="container">
+            <div class="info-grid">
+                <div class="info-card">
+                    <h3><i class="fa-regular fa-calendar" style="margin-right: 10px;"></i>WHEN</h3>
+                    <p>June 3-7, 2026<br>Wednesday to Sunday</p>
+                </div>
+                <div class="info-card">
+                    <h3><i class="fa-solid fa-location-dot" style="margin-right: 10px;"></i>WHERE</h3>
+                    <p>Mountain View College<br>Valencia, Bukidnon<br>Mindanao, Philippines</p>
+                </div>
+                <div class="info-card">
+                    <h3><i class="fa-solid fa-ticket" style="margin-right: 10px;"></i>REGISTRATION</h3>
+                    <p>Early Bird (until April 15)<br>From ₱750<br>Regular: From ₱850<br><small style="color:rgba(245,245,245,0.5);">Registration closes May 20</small></p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Theme Section -->
+    <section class="theme-section" id="theme">
+        <div class="scroll-reveal-wrapper" data-scroll-reveal>
+            <div class="scroll-reveal-sticky">
+                <div class="theme-content" style="text-align:center;">
+                    <h2 class="section-title">ABOVE AND BEYOND</h2>
+                    <p class="theme-verse" data-reveal-text>
+                        "Now to him who is able to do immeasurably more than all we ask or imagine, 
+                        according to his power that is at work within us"
+                    </p>
+                    <p style="color: var(--secondary-gold); font-weight: 600; margin-bottom: 30px;" data-reveal-text>— Ephesians 3:20</p>
+                    <p class="theme-description" data-reveal-text>
+                        Join us as we explore God's limitless power and discover how He can work above and beyond 
+                        anything we could ever dream or imagine. This year's theme challenges us to step out in faith, 
+                        trust in His infinite wisdom, and witness the extraordinary things He can accomplish through 
+                        surrendered hearts.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Experience Section -->
+    <section class="experience-section">
+        <div class="container">
+            <h2 class="section-title" style="text-align: center; color: var(--primary-navy);">WHO WE ARE</h2>
+            <div class="experience-grid">
+                <div class="experience-card">
+                    <div class="experience-icon"><i class="fa-solid fa-fingerprint"></i></div>
+                    <h3>IDENTITY</h3>
+                    <p>Philippine Youth for Christ (PYC) is a youth-initiated and youth-led supporting ministry within the Seventh-day Adventist Church, committed to working closely with Adventist Youth Ministries in leading young people to Christ, nurturing, and equipping them for evangelism.</p>
+                </div>
+                <div class="experience-card">
+                    <div class="experience-icon"><i class="fa-solid fa-eye"></i></div>
+                    <h3>VISION</h3>
+                    <p>PYC envisions a generation of youth upholding the distinctive message of the Seventh-day Adventist Church; aspiring to excel in all aspects of their lives — academic, professional, and spiritual; embracing the call to radical discipleship and a life of missionary service.</p>
+                </div>
+                <div class="experience-card">
+                    <div class="experience-icon"><i class="fa-solid fa-bullseye"></i></div>
+                    <h3>MISSION</h3>
+                    <p>PYC seeks to galvanize young people towards radical commitment to Christ and to mobilize youth and young adults to be fully committed to the distinctive message and mission of the Adventist church towards the proclamation of the Three Angels' Messages.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Video Section -->
+    <section class="video-section" id="video">
+        <div class="container container-scroll-wrapper" data-container-scroll>
+            <div class="container-scroll-title" data-scroll-title>
+                <h2 class="section-title" style="color: var(--primary-navy);">DISCOVER PYC</h2>
+                <p style="font-size: 1.2rem; color: var(--text-dark); margin-bottom: 20px;">
+                    Watch this video to learn more about who we are and what PYC is all about
+                </p>
+            </div>
+            <div class="container-scroll-card" data-scroll-card style="perspective:1000px;">
+                <div class="video-container">
+                <!-- Facebook Video Embed with CORRECT URL -->
+                <iframe 
+                    src="https://www.facebook.com/plugins/video.php?height=314&href=https%3A%2F%2Fwww.facebook.com%2Fphilippineyouthforchrist%2Fvideos%2F586692164264114%2F&show_text=false&width=560&t=0" 
+                    width="560" 
+                    height="314" 
+                    style="border:none;overflow:hidden;width:100%;height:100%;border-radius:15px;" 
+                    scrolling="no" 
+                    frameborder="0" 
+                    allowfullscreen="true" 
+                    allow="autoplay; clipboard-write; encrypted-media; picture-in-picture; web-share"
+                    loading="lazy">
+                </iframe>
+            </div>
+            </div>
+            <p style="margin-top: 20px; color: #666; font-size: 0.9rem;">
+                Having trouble playing the video? <a href="https://www.facebook.com/philippineyouthforchrist/videos/586692164264114/" target="_blank" style="color: var(--secondary-gold);">Watch on Facebook</a>
+            </p>
+        </div>
+    </section>
+
+    <!-- Speakers Section -->
+    <!-- Quote Section -->
+    <section class="quote-section">
+        <div class="scroll-reveal-wrapper" data-scroll-reveal>
+            <div class="scroll-reveal-sticky">
+                <div class="quote-content" style="text-align:center;">
+                    <p class="quote-text" data-reveal-text>
+                        "As you empty the heart of self, you must accept the righteousness of Christ. Lay hold of it by faith; for you must have the mind and spirit of Christ, that you may work the works of Christ. If you open the door of the heart, Jesus will supply the vacuum by the gift of his Spirit, and then you can be a living preacher in your home, in the church, and in the world."
+                    </p>
+                    <p class="quote-author" data-reveal-text>— Review and Herald</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Steps Section -->
+    <!-- Final CTA -->
+    <section class="final-cta">
+        <div class="container container-scroll-wrapper" data-container-scroll>
+            <div class="container-scroll-title" data-scroll-title>
+                <h2 class="section-title">SEE YOU IN MVC!</h2>
+            </div>
+            <div class="container-scroll-card" data-scroll-card style="perspective:1000px;">
+            <div class="countdown-box" id="bottomCountdownBox">
+                <div class="countdown-title">PYC 2026 IS COMING</div>
+                <p class="countdown-text">Join us in seeking to know more about our Saviour</p>
+                <a href="/register" class="btn-primary" style="display: inline-block;">REGISTER NOW →</a>
+            </div>
+            </div>
+            <p style="font-size: 1.2rem; margin-top: 30px; color: rgba(245, 245, 245, 0.8);">
+                Have questions? Contact us through social media!
+            </p>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer id="contact">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h3>SPIRIT OF PYC</h3>
+                    <p style="margin-bottom:10px;">The Spirit of PYC describes the core guiding principles of this movement. All PYC participants are expected to uphold these values:</p>
+                    <p style="font-size:0.85rem;line-height:1.8;color:rgba(245,245,245,0.7);">
+                        A respect for Scripture · An appreciation for the Spirit of Prophecy · A quest for Biblical holiness · A vibrant worship experience · A passion for lost souls · A cultivation of godly relationships · An exemplary and abundant lifestyle · An enthusiasm for service · A commitment to the Seventh-day Adventist Church · An attitude of humility and cordiality
+                    </p>
+                </div>
+                <div class="footer-section">
+                    <h3>QUICK LINKS</h3>
+                    <a href="/register">Register</a>
+                    <!-- <a href="/accommodations">Lodging</a> --> <!-- Hidden until accommodations open -->
+                    <a href="/PYC_2026_Minor_Waiver.pdf" target="_blank">Minor Waiver Form</a>
+                    <a href="#about">About</a>
+                    <a href="#theme">Theme</a>
+                    <a href="#video">Video</a>
+                </div>
+                <div class="footer-section">
+                    <h3>CONTACT</h3>
+                    <p>For questions or concerns, contact us through social media:</p>
+                    <div style="display: flex; gap: 15px; margin-top: 20px;">
+                        <a href="https://www.facebook.com/share/1D9PJw6wkq/?mibextid=wwXIfr" target="_blank" 
+                           style="display: flex; align-items: center; justify-content: center; width: 50px; height: 50px; 
+                                  background: rgba(255, 255, 255, 0.05); border: 1px solid rgba(212, 165, 86, 0.3); 
+                                  border-radius: 50%; color: var(--secondary-gold); text-decoration: none; 
+                                  transition: all 0.3s ease; font-size: 1.3rem;"
+                           title="Facebook"
+                           onmouseover="this.style.background='var(--secondary-gold)'; this.style.color='var(--primary-navy)';"
+                           onmouseout="this.style.background='rgba(255, 255, 255, 0.05)'; this.style.color='var(--secondary-gold)';">
+                            <i class="fa-brands fa-facebook-f"></i>
+                        </a>
+                        <a href="https://www.instagram.com/philippineyouthforchrist?igsh=c2Q0MjAwbWh1cXZ2" target="_blank" 
+                           style="display: flex; align-items: center; justify-content: center; width: 50px; height: 50px; 
+                                  background: rgba(255, 255, 255, 0.05); border: 1px solid rgba(212, 165, 86, 0.3); 
+                                  border-radius: 50%; color: var(--secondary-gold); text-decoration: none; 
+                                  transition: all 0.3s ease; font-size: 1.3rem;"
+                           title="Instagram"
+                           onmouseover="this.style.background='var(--secondary-gold)'; this.style.color='var(--primary-navy)';"
+                           onmouseout="this.style.background='rgba(255, 255, 255, 0.05)'; this.style.color='var(--secondary-gold)';">
+                            <i class="fa-brands fa-instagram"></i>
+                        </a>
+                    </div>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>© 2026 Philippine Youth for Christ. All rights reserved.</p>
+                <p style="margin-top: 10px;">June 3-7, 2026 | Mountain View College, Mindanao, Philippines</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Create stars
+        const starsContainer = document.getElementById('stars');
+        for (let i = 0; i < 100; i++) {
+            const star = document.createElement('div');
+            star.className = 'star';
+            star.style.width = Math.random() * 3 + 'px';
+            star.style.height = star.style.width;
+            star.style.left = Math.random() * 100 + '%';
+            star.style.top = Math.random() * 100 + '%';
+            star.style.animationDelay = Math.random() * 3 + 's';
+            starsContainer.appendChild(star);
+        }
+
+        // Smooth scroll
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                }
+            });
+        });
+
+        // Unified scroll handler registry
+        window._scrollHandlers = [];
+        var _scrollTicking = false;
+        window.addEventListener('scroll', function() {
+            if (!_scrollTicking) {
+                requestAnimationFrame(function() {
+                    for (var i = 0; i < window._scrollHandlers.length; i++) {
+                        window._scrollHandlers[i]();
+                    }
+                    _scrollTicking = false;
+                });
+                _scrollTicking = true;
+            }
+        }, { passive: true });
+
+        // Navbar background on scroll + show/hide register button
+        (function() {
+            const nav = document.querySelector('nav');
+            const navRegBtn = document.getElementById('navRegBtn');
+            const ctaButtons = document.querySelector('.cta-buttons');
+            window._scrollHandlers.push(function updateNavbar() {
+                if (window.scrollY > 100) {
+                    nav.style.background = 'rgba(26, 35, 50, 1)';
+                } else {
+                    nav.style.background = 'rgba(26, 35, 50, 0.95)';
+                }
+                if (ctaButtons && navRegBtn) {
+                    const ctaRect = ctaButtons.getBoundingClientRect();
+                    if (ctaRect.bottom < 0) {
+                        navRegBtn.style.opacity = '1';
+                        navRegBtn.style.pointerEvents = 'auto';
+                    } else {
+                        navRegBtn.style.opacity = '0';
+                        navRegBtn.style.pointerEvents = 'none';
+                    }
+                }
+            });
+        })();
+
+        // Countdown Timer
+        function updateCountdown() {
+            const conferenceDate = new Date('June 3, 2026 16:00:00').getTime();
+            const now = new Date().getTime();
+            const distance = conferenceDate - now;
+
+            if (distance > 0) {
+                const days = Math.floor(distance / (1000 * 60 * 60 * 24));
+                const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+                const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+                const seconds = Math.floor((distance % (1000 * 60)) / 1000);
+
+                document.getElementById('days').textContent = days;
+                document.getElementById('hours').textContent = hours.toString().padStart(2, '0');
+                document.getElementById('minutes').textContent = minutes.toString().padStart(2, '0');
+                document.getElementById('seconds').textContent = seconds.toString().padStart(2, '0');
+            } else {
+                document.getElementById('days').textContent = '0';
+                document.getElementById('hours').textContent = '00';
+                document.getElementById('minutes').textContent = '00';
+                document.getElementById('seconds').textContent = '00';
+            }
+        }
+
+        // Update countdown every second
+        updateCountdown();
+        setInterval(updateCountdown, 1000);
+
+        // Visitor tracking (non-blocking)
+        (function() {
+            try {
+                fetch('/.netlify/functions/track-visitor', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' }
+                }).catch(err => console.log('Tracking:', err));
+            } catch(e) {}
+        })();
+    </script>
+
+    <script>
+    // Scroll Reveal by Word
+    (function() {
+        // Wrap each word in a span
+        document.querySelectorAll('[data-reveal-text]').forEach(function(el) {
+            var text = el.textContent.trim();
+            var words = text.split(/\s+/);
+            el.innerHTML = words.map(function(word) {
+                return '<span class="reveal-word">' + word + '</span>';
+            }).join(' ');
+        });
+
+        // Track scroll progress for each reveal wrapper
+        var wrappers = document.querySelectorAll('[data-scroll-reveal]');
+
+        function updateReveal() {
+            wrappers.forEach(function(wrapper) {
+                var rect = wrapper.getBoundingClientRect();
+                var wrapperHeight = wrapper.offsetHeight;
+                var viewH = window.innerHeight;
+
+                // Progress: 0 when top of wrapper hits bottom of viewport, 1 when bottom hits top
+                var progress = (viewH - rect.top) / (wrapperHeight + viewH);
+                progress = Math.max(0, Math.min(1, progress));
+
+                // Smooth per-word opacity based on scroll position
+                var words = wrapper.querySelectorAll('.reveal-word');
+                var total = words.length;
+                if (total === 0) return;
+
+                var isQuote = wrapper.closest('.quote-section');
+                var baseOpacity = isQuote ? 0.15 : 0.12;
+
+                words.forEach(function(word, i) {
+                    var wordStart = 0.15 + (i / total) * 0.7;
+                    var wordEnd = wordStart + (1 / total) * 0.7;
+                    var wordProgress;
+
+                    if (progress <= wordStart) {
+                        wordProgress = 0;
+                    } else if (progress >= wordEnd) {
+                        wordProgress = 1;
+                    } else {
+                        wordProgress = (progress - wordStart) / (wordEnd - wordStart);
+                    }
+
+                    word.style.opacity = baseOpacity + wordProgress * (1 - baseOpacity);
+                });
+            });
+        }
+
+        window._scrollHandlers.push(updateReveal);
+        updateReveal();
+    })();
+
+    // Container Scroll Animation (perspective tilt + scale)
+    (function() {
+        var isMobile = window.innerWidth <= 768;
+        window.addEventListener('resize', function() { isMobile = window.innerWidth <= 768; });
+
+        var containers = document.querySelectorAll('[data-container-scroll]');
+        if (containers.length === 0) return;
+
+        function lerp(start, end, t) { return start + (end - start) * t; }
+        function easeOut(t) { return 1 - Math.pow(1 - t, 3); }
+
+        function updateContainerScroll() {
+            containers.forEach(function(wrapper) {
+                var rect = wrapper.getBoundingClientRect();
+                var viewH = window.innerHeight;
+                // Slower progress - complete animation over full viewport scroll
+                var progress = (viewH - rect.top) / (viewH * 1.2);
+                progress = Math.max(0, Math.min(1, progress));
+                // Smooth easing for less abrupt motion
+                var ep = progress * progress * (3 - 2 * progress); // smoothstep
+
+                var title = wrapper.querySelector('[data-scroll-title]');
+                var card = wrapper.querySelector('[data-scroll-card]');
+                if (!card) return;
+
+                var rotateX = lerp(12, 0, ep);
+                var scaleVal = isMobile ? lerp(0.85, 1, ep) : lerp(1.03, 1, ep);
+                var translateY = lerp(0, -30, ep);
+
+                card.style.transform = 'perspective(1000px) rotateX(' + rotateX.toFixed(2) + 'deg) scale(' + scaleVal.toFixed(4) + ')';
+
+                if (title) {
+                    title.style.transform = 'translateY(' + translateY.toFixed(2) + 'px)';
+                }
+            });
+        }
+
+        window._scrollHandlers.push(updateContainerScroll);
+        updateContainerScroll();
+    })();
+
+    // Card Reveal on scroll
+    (function() {
+        var cards = document.querySelectorAll('.experience-card');
+        if (cards.length === 0) return;
+
+        cards.forEach(function(card) {
+            card.style.opacity = '0';
+            card.style.transform = 'translateY(40px) scale(0.98)';
+            card.style.transition = 'opacity 1s ease, transform 1s ease';
+        });
+
+        var observer = new IntersectionObserver(function(entries) {
+            entries.forEach(function(entry) {
+                var card = entry.target;
+                var idx = Array.prototype.indexOf.call(cards, card);
+                var delay = idx * 200;
+                if (entry.isIntersecting) {
+                    setTimeout(function() {
+                        card.style.opacity = '1';
+                        card.style.transform = 'translateY(0) scale(1)';
+                    }, delay);
+                } else {
+                    card.style.opacity = '0';
+                    card.style.transform = 'translateY(40px) scale(0.98)';
+                }
+            });
+        }, { threshold: 0.15 });
+
+        cards.forEach(function(card) { observer.observe(card); });
+    })();
+    </script>
+
+    <!-- Registration close check (server-time authoritative; ignores device clock) -->
+    <script>
+    (function() {
+        // Hide register buttons + show "See you in MVC" message once registration closes.
+        // Fail-open: if /server-time fails, leave the page as-is (better to allow than to falsely block).
+        fetch('/.netlify/functions/server-time', { cache: 'no-store' })
+            .then(function(r) { return r.json(); })
+            .then(function(data) {
+                if (!data) return;
+                var regClosed = !!data.registrationClosed;
+                var accomClosed = !!data.accommodationClosed;
+                if (regClosed) applyRegistrationClosedUI();
+                if (accomClosed) applyAccommodationClosedUI(regClosed);
+            })
+            .catch(function() { /* network failed — leave page as-is */ });
+
+        // When accommodation reservations are closed, turn any "Reserve Accommodations"
+        // button/link into a disabled "Accommodations Closed" state. Handles both the
+        // normal hero button and the one injected by applyRegistrationClosedUI().
+        function applyAccommodationClosedUI(regAlsoClosed) {
+            function disableAccomLink(a) {
+                if (!a) return;
+                a.removeAttribute('href');
+                a.style.opacity = '0.5';
+                a.style.cursor = 'default';
+                a.style.pointerEvents = 'none';
+                a.innerHTML = '<i class="fa-solid fa-bed" style="margin-right:10px;"></i>ACCOMMODATIONS CLOSED';
+            }
+            // Any accommodations links in the hero / page
+            document.querySelectorAll('a[href="/accommodations"]').forEach(disableAccomLink);
+            // Footer accommodations link (if present/uncommented)
+            document.querySelectorAll('footer a[href="/accommodations"], .footer a[href="/accommodations"]').forEach(function(a) {
+                a.removeAttribute('href');
+                a.style.opacity = '0.5';
+                a.style.cursor = 'default';
+                a.textContent = 'Accommodations Closed';
+            });
+        }
+
+        function applyRegistrationClosedUI() {
+            // 1) Navbar register button
+            var navBtn = document.getElementById('navRegBtn');
+            if (navBtn) { navBtn.style.display = 'none'; }
+
+            // 2) Hero CTA buttons — replace REGISTER NOW with "See you in MVC", keep accommodations
+            var heroCta = document.getElementById('heroCtaButtons');
+            if (heroCta) {
+                heroCta.innerHTML =
+                    '<div style="display:flex;flex-direction:column;align-items:center;gap:20px;">' +
+                        '<div style="background:rgba(212,165,86,0.12);border:2px solid var(--secondary-gold);border-radius:12px;padding:18px 28px;color:var(--secondary-gold);font-weight:700;font-size:1.15rem;letter-spacing:1px;text-align:center;">' +
+                            '<i class="fa-solid fa-mountain-sun" style="margin-right:10px;"></i>SEE YOU IN MVC!' +
+                            '<div style="font-weight:400;font-size:0.85rem;color:rgba(245,245,245,0.7);margin-top:6px;letter-spacing:0;">Registration is closed. We can\'t wait to see you at PYC 2026.</div>' +
+                        '</div>' +
+                        '<a href="/accommodations" class="btn-primary" style="background:transparent;border:2px solid var(--secondary-gold);color:var(--secondary-gold);">' +
+                            '<i class="fa-solid fa-bed" style="margin-right:10px;"></i>RESERVE ACCOMMODATIONS' +
+                        '</a>' +
+                    '</div>';
+            }
+
+            // 3) Bottom CTA section
+            var bottomBox = document.getElementById('bottomCountdownBox');
+            if (bottomBox) {
+                bottomBox.innerHTML =
+                    '<div class="countdown-title">SEE YOU IN MVC!</div>' +
+                    '<p class="countdown-text">Registration is closed. We can\'t wait to see you at PYC 2026.</p>';
+            }
+
+            // 4) Footer link
+            var footerLinks = document.querySelectorAll('footer a[href="/register"], .footer a[href="/register"]');
+            footerLinks.forEach(function(a) {
+                a.removeAttribute('href');
+                a.style.opacity = '0.5';
+                a.style.cursor = 'default';
+                a.textContent = 'Registration Closed';
+            });
+        }
+    })();
+    </script>
+
+</body>
+</html>

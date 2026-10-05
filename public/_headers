@@ -1,0 +1,21 @@
+# Cache static assets aggressively
+/IMG_3908.jpeg
+  Cache-Control: public, max-age=31536000, immutable
+
+/*.css
+  Cache-Control: public, max-age=604800
+
+/*.js
+  Cache-Control: public, max-age=604800
+
+# HTML pages - short cache with revalidation
+/*.html
+  Cache-Control: public, max-age=300, must-revalidate
+
+# Root page
+/
+  Cache-Control: public, max-age=300, must-revalidate
+
+# Netlify Functions - no cache
+/.netlify/functions/*
+  Cache-Control: no-store

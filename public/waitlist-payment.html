@@ -1,0 +1,273 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="format-detection" content="telephone=no">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta property="og:title" content="PYC 2026 — Reserve Your Accommodation">
+    <meta property="og:description" content="Complete your payment to secure your accommodation for PYC 2026.">
+    <meta property="og:image" content="https://philippineyouthforchrist.org/IMG_3908.jpeg">
+    <link rel="preconnect" href="https://fonts.googleapis.com" crossorigin>
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Montserrat:wght@400;600;700&display=swap" rel="stylesheet">
+    <title>Waitlist Payment — PYC 2026</title>
+    <style>
+        :root { --primary-navy: #1a2332; --secondary-gold: #d4a556; --text-light: #f5f5f5; --background-overlay: rgba(26, 35, 50, 0.92); }
+        html, body { font-family: 'Montserrat', sans-serif; background-color: #0f1419; background: linear-gradient(135deg, #0f1419 0%, #1a2332 50%, #2a3f5f 100%); background-attachment: fixed; background-size: cover; color: var(--text-light); min-height: 100vh; margin: 0; padding: 0; overscroll-behavior: none; }
+        .stars { position: fixed; top: 0; left: 0; width: 100%; height: 100%; pointer-events: none; z-index: 0; }
+        .star { position: absolute; background: white; border-radius: 50%; box-shadow: 0 0 3px rgba(255,255,255,0.8); filter: blur(0.5px); animation: twinkle 3s infinite; }
+        @keyframes twinkle { 0%, 100% { opacity: 0.3; } 50% { opacity: 1; } }
+        .container { max-width: 650px; margin: 0 auto; padding: 30px 20px 60px; position: relative; z-index: 1; }
+        h1 { font-family: 'Bebas Neue', sans-serif; font-size: 2.2rem; color: var(--secondary-gold); letter-spacing: 2px; margin-bottom: 5px; }
+        .subtitle { color: rgba(245,245,245,0.5); margin-bottom: 25px; font-size: 0.9rem; }
+        .card { background: var(--background-overlay); border: 2px solid rgba(212,165,86,0.2); border-radius: 16px; padding: 30px; margin-bottom: 25px; backdrop-filter: blur(10px); }
+        .info-row { display: flex; justify-content: space-between; padding: 10px 0; border-bottom: 1px solid rgba(255,255,255,0.05); font-size: 0.92rem; }
+        .info-row .label { color: rgba(245,245,245,0.5); } .info-row .value { font-weight: 600; }
+        .info-row.total { border-top: 2px solid rgba(212,165,86,0.3); margin-top: 8px; padding-top: 15px; border-bottom: none; }
+        .info-row.total .value { color: var(--secondary-gold); font-size: 1.2rem; }
+        .timer-bar { background: rgba(231,76,60,0.15); border: 1px solid rgba(231,76,60,0.3); border-radius: 10px; padding: 18px; text-align: center; margin-bottom: 25px; }
+        .timer-bar .timer-label { color: #e74c3c; font-weight: 700; font-size: 0.95rem; margin-bottom: 5px; }
+        .timer-bar .timer-value { font-size: 1.5rem; font-weight: 800; color: var(--text-light); letter-spacing: 2px; }
+        .expired-msg { background: rgba(231,76,60,0.15); border: 1px solid rgba(231,76,60,0.3); border-radius: 10px; padding: 25px; text-align: center; }
+        .expired-msg h2 { color: #e74c3c; }
+        .method-tabs { display: flex; gap: 12px; margin-bottom: 20px; }
+        .method-tab { flex: 1; padding: 14px; background: rgba(255,255,255,0.05); border: 2px solid rgba(212,165,86,0.3); border-radius: 12px; color: rgba(245,245,245,0.7); cursor: pointer; font-family: 'Montserrat', sans-serif; font-weight: 600; font-size: 1rem; text-align: center; transition: all 0.3s; }
+        .method-tab.active { background: rgba(212,165,86,0.15); border-color: var(--secondary-gold); color: var(--secondary-gold); }
+        .payment-section { display: none; }
+        .payment-section.active { display: block; }
+        .account-box { background: rgba(212,165,86,0.08); border: 2px solid rgba(212,165,86,0.25); border-radius: 12px; padding: 18px; margin-bottom: 20px; }
+        .account-name { font-weight: 700; color: var(--secondary-gold); font-size: 1rem; }
+        .account-number { font-size: 20px; font-weight: 800; color: var(--text-light) !important; letter-spacing: 1px; margin-top: 4px; }
+        .account-number a, .account-number a:visited, .account-number a:link { color: var(--text-light) !important; text-decoration: none !important; }
+        .instructions { padding: 0 0 0 20px; margin: 15px 0; color: rgba(245,245,245,0.7); font-size: 0.92rem; line-height: 2; }
+        .instructions strong { color: var(--secondary-gold); }
+        .upload-area { margin-top: 20px; }
+        .upload-area label { display: block; margin-bottom: 8px; font-weight: 600; font-size: 0.95rem; }
+        .file-input-wrap { border: 2px dashed rgba(212,165,86,0.3); border-radius: 10px; padding: 20px; text-align: center; }
+        .file-hint { font-size: 0.8rem; color: rgba(245,245,245,0.4); margin-top: 8px; }
+        .submit-btn { width: 100%; padding: 16px; background: var(--secondary-gold); color: var(--primary-navy); border: none; border-radius: 10px; font-family: 'Montserrat', sans-serif; font-size: 1rem; font-weight: 700; cursor: pointer; transition: all 0.3s; text-transform: uppercase; letter-spacing: 1px; margin-top: 20px; }
+        .submit-btn:hover:not(:disabled) { background: #e5b96a; transform: translateY(-2px); }
+        .submit-btn:disabled { opacity: 0.7; cursor: not-allowed; }
+        .btn-spinner { display: inline-block; width: 18px; height: 18px; border: 3px solid rgba(26,35,50,0.3); border-top-color: var(--primary-navy); border-radius: 50%; animation: btn-spin 0.7s linear infinite; vertical-align: middle; margin-right: 8px; }
+        @keyframes btn-spin { 0% { transform: rotate(0deg); } 100% { transform: rotate(360deg); } }
+        .alert { padding: 15px 20px; border-radius: 8px; margin-bottom: 20px; font-size: 0.95rem; }
+        .alert-error { background: rgba(231,76,60,0.15); border: 1px solid rgba(231,76,60,0.4); color: #e74c3c; }
+        .alert-success { background: rgba(39,174,96,0.15); border: 1px solid rgba(39,174,96,0.4); color: #27ae60; }
+        .loading-overlay { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(15,20,25,0.95); display: none; align-items: center; justify-content: center; flex-direction: column; z-index: 999; }
+        .loading-overlay.active { display: flex; }
+        .loading-spinner { width: 50px; height: 50px; border: 4px solid rgba(212,165,86,0.2); border-top-color: var(--secondary-gold); border-radius: 50%; animation: btn-spin 0.8s linear infinite; }
+        .loading-text { color: var(--secondary-gold); margin-top: 20px; font-size: 1.1rem; font-weight: 600; }
+        @media (max-width: 600px) { h1 { font-size: 1.8rem; } .method-tabs { flex-direction: column; gap: 8px; } }
+    </style>
+</head>
+<body>
+    <div class="stars" id="stars"></div>
+    <div class="container">
+        <a href="/accommodations" style="display:inline-block;color:var(--secondary-gold);text-decoration:none;margin-bottom:20px;font-size:0.95rem;">&larr; Back to Accommodations</a>
+        <h1>WAITLIST PAYMENT</h1>
+        <p class="subtitle">A spot has opened up! Complete your payment to secure it.</p>
+        <div id="alertBox"></div>
+        <div id="mainContent">
+            <div class="card" id="detailsCard">
+                <div class="info-row"><span class="label">Name</span><span class="value" id="dispName">Loading...</span></div>
+                <div class="info-row"><span class="label">Email</span><span class="value" id="dispEmail">Loading...</span></div>
+                <div class="info-row"><span class="label">Accommodation</span><span class="value" id="dispType">Loading...</span></div>
+                <div class="info-row"><span class="label">Spots</span><span class="value" id="dispSpots">-</span></div>
+                <div class="info-row"><span class="label">Price per Spot</span><span class="value" id="dispPrice">-</span></div>
+                <div class="info-row total"><span class="label">Total Amount</span><span class="value" id="dispTotal">-</span></div>
+            </div>
+            <div class="timer-bar" id="timerBar">
+                <div class="timer-label">⏰ TIME REMAINING TO PAY</div>
+                <div class="timer-value" id="countdown">Loading...</div>
+            </div>
+            <div class="card">
+                <h3 style="font-family:'Bebas Neue',sans-serif;color:var(--secondary-gold);font-size:1.3rem;letter-spacing:1px;margin-bottom:20px;">PAYMENT</h3>
+                <div class="method-tabs">
+                    <button class="method-tab active" onclick="switchMethod('gcash')">GCash</button>
+                    <button class="method-tab" onclick="switchMethod('bank')">Bank Transfer</button>
+                </div>
+                <div class="payment-section active" id="gcashSection">
+                    <div class="account-box">
+                        <div class="account-name" id="gcashName">Loading...</div>
+                        <div class="account-number" id="gcashNumber">Loading...</div>
+                    </div>
+                    <ol class="instructions">
+                        <li>Send <strong id="gcashAmount">₱0</strong> to the GCash account above</li>
+                        <li>Take a screenshot of the payment confirmation</li>
+                        <li>Upload the screenshot below</li>
+                        <li>Click "Submit Payment Proof"</li>
+                    </ol>
+                    <form id="gcashForm" onsubmit="submitProof(event,'GCash')">
+                        <div class="form-group" style="margin-bottom:15px;">
+                            <label style="font-weight:600;display:block;margin-bottom:6px;">GCash Reference # <span style="color:#e74c3c;">*</span></label>
+                            <input type="text" id="gcashRefNum" placeholder="Enter GCash reference number" required
+                                style="width:100%;padding:12px;background:rgba(255,255,255,0.05);border:1px solid rgba(212,165,86,0.3);border-radius:8px;color:#f5f5f5;font-family:'Montserrat',sans-serif;">
+                        </div>
+                        <div class="upload-area">
+                            <label>Upload Payment Screenshot</label>
+                            <div class="file-input-wrap"><input type="file" id="gcashFile" accept="image/*" required></div>
+                            <div class="file-hint">Maximum file size: 5MB (JPG, PNG, WebP)</div>
+                        </div>
+                        <button type="submit" class="submit-btn">Submit Payment Proof</button>
+                    </form>
+                </div>
+                <div class="payment-section" id="bankSection">
+                    <div class="account-box">
+                        <div class="account-name" id="bankName">Loading...</div>
+                        <div style="font-size:0.85rem;color:rgba(245,245,245,0.5);margin:2px 0;" id="bankLabel">Bank</div>
+                        <div class="account-number" id="bankNumber">Loading...</div>
+                    </div>
+                    <ol class="instructions">
+                        <li>Transfer <strong id="bankAmount">₱0</strong> to the bank account above</li>
+                        <li>Take a screenshot of the transfer confirmation</li>
+                        <li>Upload the screenshot below</li>
+                        <li>Click "Submit Payment Proof"</li>
+                    </ol>
+                    <form id="bankForm" onsubmit="submitProof(event,'Bank Transfer')">
+                        <div class="upload-area">
+                            <label>Upload Payment Screenshot</label>
+                            <div class="file-input-wrap"><input type="file" id="bankFile" accept="image/*" required></div>
+                            <div class="file-hint">Maximum file size: 5MB (JPG, PNG, WebP)</div>
+                        </div>
+                        <button type="submit" class="submit-btn">Submit Payment Proof</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+        <div id="expiredContent" style="display:none;">
+            <div class="expired-msg">
+                <h2>⏰ Time Expired</h2>
+                <p style="color:rgba(245,245,245,0.7);margin-top:10px;">Your 48-hour payment window has expired. The spot has been released. You may rejoin the waiting list.</p>
+                <a href="/accommodations" style="display:inline-block;margin-top:20px;background:var(--secondary-gold);color:var(--primary-navy);padding:14px 30px;border-radius:10px;font-weight:700;text-decoration:none;">Back to Accommodations</a>
+            </div>
+        </div>
+    </div>
+    <div class="loading-overlay" id="loadingOverlay"><div class="loading-spinner"></div><div class="loading-text">Processing your payment...</div></div>
+    <script>
+        (function(){const c=document.getElementById('stars');for(let i=0;i<50;i++){const s=document.createElement('div');s.className='star';const sz=Math.random()*3+1;s.style.cssText=`width:${sz}px;height:${sz}px;left:${Math.random()*100}%;top:${Math.random()*100}%;animation-delay:${Math.random()*3}s;animation-duration:${Math.random()*2+2}s;`;c.appendChild(s);}})();
+
+        const GCASH = { A:{name:'Febie Gemere Gacusan',number:'0975-243-5839',qr:'/qr-gcash-a.jpeg'}, B:{name:'Alpha Beth Fofue',number:'0943-473-6234',qr:'/qr-gcash-b.jpeg'}, C:{name:'Ydjean Joy Dela Cruz',number:'0935-114-9442',qr:'/qr-gcash-c.jpeg'}, D:{name:'Dorothy Claire Manata',number:'0919-526-9551',qr:'/qr-gcash-d.jpeg'}, E:{name:'Georgia Sanchez',number:'0917-444-1693',qr:'/qr-gcash-e.jpeg'} };
+        const BANK_OPTIONS = [{id:'bdo',name:'Alpha Beth Fofue',bank:'BDO',number:'0068 9031 4963',qr:'/qr-bank-bdo.jpeg'},{id:'bpi',name:'Febie Gemere Gacusan',bank:'BPI',number:'8989382005',qr:'/qr-bank-bpi.jpeg'}];
+        let selectedBankId='';
+
+        const params = new URLSearchParams(window.location.search);
+        const waitlistId = params.get('id');
+        let waitlistData = null;
+        let countdownInterval = null;
+
+        function showAlert(msg,type){document.getElementById('alertBox').innerHTML=`<div class="alert alert-${type}">${msg}</div>`;window.scrollTo({top:0,behavior:'smooth'});}
+
+        function switchMethod(m) {
+            document.querySelectorAll('.method-tab').forEach(t=>t.classList.remove('active'));
+            document.querySelectorAll('.payment-section').forEach(s=>s.classList.remove('active'));
+            if(m==='gcash'){document.querySelector('.method-tab:first-child').classList.add('active');document.getElementById('gcashSection').classList.add('active');}
+            else{document.querySelector('.method-tab:last-child').classList.add('active');document.getElementById('bankSection').classList.add('active');}
+        }
+
+        async function loadWaitlistEntry() {
+            if (!waitlistId) { showAlert('No waitlist ID provided.','error'); return; }
+            try {
+                const res = await fetch(`/.netlify/functions/waitlist-list?filter=notified`);
+                const result = await res.json();
+                if (!result.success) { showAlert('Failed to load entry.','error'); return; }
+                const entry = (result.waitlist||[]).find(w=>w.id===waitlistId);
+                if (!entry) { showAlert('Waitlist entry not found or not yet notified.','error'); return; }
+                if (entry.status==='Converted') { showAlert('This spot has already been paid for!','success'); return; }
+
+                waitlistData = entry;
+                document.getElementById('dispName').textContent = entry.registrant_name;
+                document.getElementById('dispEmail').textContent = entry.registrant_email;
+
+                // Get accommodation pricing
+                const acRes = await fetch('/.netlify/functions/accommodation-availability');
+                const acData = await acRes.json();
+                const accomm = (acData.accommodations||[]).find(a=>a.id===entry.accommodation_type);
+                const typeName = accomm ? accomm.display_name : entry.accommodation_type;
+                const pricePerSpot = accomm ? parseFloat(accomm.price_per_spot) : 0;
+                const total = pricePerSpot * entry.spots_requested;
+
+                document.getElementById('dispType').textContent = typeName;
+                document.getElementById('dispSpots').textContent = entry.spots_requested;
+                document.getElementById('dispPrice').textContent = `₱${pricePerSpot.toLocaleString()}`;
+                document.getElementById('dispTotal').textContent = `₱${total.toLocaleString()}`;
+
+                const amountStr = `₱${total.toLocaleString()}`;
+                document.querySelectorAll('#gcashAmount,#bankAmount').forEach(el=>el.textContent=amountStr);
+
+                // Payment accounts - use A by default for waitlist
+                const pa = 'A';
+                const gc=GCASH[pa]||GCASH['A'];
+                document.getElementById('gcashName').textContent=gc.name;
+                document.getElementById('gcashNumber').textContent=gc.number;
+                if(gc.qr){const qimg=document.createElement('img');qimg.src=gc.qr;qimg.style.cssText='width:100%;max-width:220px;margin:10px auto 0;display:block;border-radius:8px;';document.getElementById('gcashName').parentNode.appendChild(qimg);}
+                let bh='';BANK_OPTIONS.forEach(b=>{bh+='<div class="bopt" data-bank="'+b.id+'" onclick="selectBk(\''+b.id+'\',this)" style="background:rgba(255,255,255,0.03);border:2px solid rgba(212,165,86,0.2);border-radius:10px;padding:12px;margin-bottom:8px;cursor:pointer;"><div style="font-size:12px;color:rgba(245,245,245,0.5);">'+b.bank+'</div><div style="font-size:14px;font-weight:700;color:#d4a556;">'+b.name+'</div><div style="font-size:16px;font-weight:800;color:#f5f5f5;">'+b.number+'</div><img src="'+b.qr+'" class="bqr" style="display:none;width:100%;max-width:200px;margin:8px auto 0;border-radius:8px;"></div>';});
+                document.getElementById('bankName').innerHTML='<p style="margin-bottom:8px;color:rgba(245,245,245,0.6);font-size:0.9rem;">Tap to select a bank:</p>'+bh+'<div id="bankSelectedMsg" style="display:none;background:rgba(39,174,96,0.1);border:1px solid rgba(39,174,96,0.3);border-radius:8px;padding:8px;margin-top:8px;color:#4cd68a;font-weight:600;font-size:0.85rem;text-align:center;"></div>';
+
+                // Countdown timer
+                if (entry.notified_expires_at) {
+                    const expires = new Date(entry.notified_expires_at).getTime();
+                    function tick(){
+                        const diff = expires - Date.now();
+                        if(diff<=0){clearInterval(countdownInterval);document.getElementById('mainContent').style.display='none';document.getElementById('expiredContent').style.display='block';return;}
+                        const h=Math.floor(diff/3600000),m=Math.floor((diff%3600000)/60000),s=Math.floor((diff%60000)/1000);
+                        document.getElementById('countdown').textContent=`${h}h ${String(m).padStart(2,'0')}m ${String(s).padStart(2,'0')}s`;
+                    }
+                    tick();
+                    countdownInterval=setInterval(tick,1000);
+                }
+            } catch(err) { showAlert('Error loading: '+err.message,'error'); }
+        }
+
+        function selectBk(id){
+            selectedBankId=id;const bank=BANK_OPTIONS.find(b=>b.id===id);
+            document.querySelectorAll('.bopt').forEach(o=>{const s=o.dataset.bank===id;o.style.borderColor=s?'#d4a556':'rgba(212,165,86,0.2)';o.style.background=s?'rgba(212,165,86,0.08)':'rgba(255,255,255,0.03)';const q=o.querySelector('.bqr');if(q)q.style.display=s?'block':'none';});
+            const m=document.getElementById('bankSelectedMsg');if(m){m.style.display='block';m.textContent='✓ '+bank.bank+' selected';}
+        }
+
+        async function submitProof(e, method) {
+            e.preventDefault();
+            if(!waitlistData){showAlert('No waitlist data loaded.','error');return;}
+            const refInput=method==='GCash'?document.getElementById('gcashRefNum'):document.getElementById('bankRefNum');
+            const refValue=refInput?refInput.value.trim():'';
+            if(!refValue){showAlert('Please enter your '+method+' reference number.','error');refInput.focus();return;}
+            const fileInput = method==='GCash' ? document.getElementById('gcashFile') : document.getElementById('bankFile');
+            const file = fileInput.files[0];
+            if(!file){showAlert('Please upload your payment proof.','error');return;}
+            if(file.size>5*1024*1024){showAlert('File too large. Max 5MB.','error');return;}
+
+            const btn = e.target.querySelector('.submit-btn');
+            btn.disabled=true; btn.innerHTML='<span class="btn-spinner"></span>Uploading...';
+
+            try {
+                const reader = new FileReader();
+                reader.onload = async function(ev) {
+                    const res = await fetch('/.netlify/functions/upload-accommodation-proof', {
+                        method:'POST', headers:{'Content-Type':'application/json'},
+                        body: JSON.stringify({
+                            reservationId: 'waitlist_'+waitlistId,
+                            imageBase64: ev.target.result,
+                            fileName: file.name,
+                            transactionReference: refValue,
+                            paymentMethod: method,
+                            paymentAccount: 'A',
+                            isWaitlist: true,
+                            waitlistId: waitlistId
+                        })
+                    });
+                    const data = await res.json();
+                    if(res.ok && data.success){
+                        document.getElementById('loadingOverlay').classList.add('active');
+                        setTimeout(()=>{window.location.href='/accommodation-success';},1500);
+                    }else{
+                        showAlert(data.error||'Upload failed.','error');
+                        btn.disabled=false; btn.innerHTML='Submit Payment Proof';
+                    }
+                };
+                reader.readAsDataURL(file);
+            }catch(err){showAlert('Error: '+err.message,'error');btn.disabled=false;btn.innerHTML='Submit Payment Proof';}
+        }
+
+        loadWaitlistEntry();
+    </script>
+</body>
+</html>

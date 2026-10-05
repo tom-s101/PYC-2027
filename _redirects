@@ -1,0 +1,11 @@
+# Clean URLs - remove .html extension
+/register    /register.html    200
+/payment     /payment.html     200
+/success     /success.html     200
+/checkin     /checkin.html      200
+/resubmit-payment  /resubmit-payment.html  200
+/special-welcome   /special-welcome.html   200
+/monkey-welcome    /monkey-welcome.html    200
+/monkey-wheel      /monkey-wheel.html      200
+/admin-dashboard   /admin-dashboard.html   200
+/analytics-simple  /analytics-simple.html  200

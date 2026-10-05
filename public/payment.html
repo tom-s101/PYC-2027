@@ -1,0 +1,1414 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="format-detection" content="telephone=no">
+    <link rel="icon" type="image/x-icon" href="/favicon.ico">
+    <link rel="apple-touch-icon" href="/apple-touch-icon.png">
+    <title>Payment - PYC 2026</title>
+    <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Montserrat:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+    
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --primary-navy: #1a2332;
+            --secondary-gold: #d4a556;
+            --accent-blue: #4a7c9e;
+            --text-light: #f5f5f5;
+            --text-dark: #2c3e50;
+            --border-gold: #c9965d;
+            --background-overlay: rgba(26, 35, 50, 0.92);
+        }
+
+        body {
+            font-family: 'Montserrat', sans-serif;
+            background: linear-gradient(135deg, #0f1419 0%, #1a2332 50%, #2a3f5f 100%);
+            color: var(--text-light);
+            min-height: 100vh;
+            position: relative;
+            overflow-x: hidden;
+        }
+
+        body::before {
+            content: '';
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: 
+                radial-gradient(circle at 20% 30%, rgba(74, 124, 158, 0.1) 0%, transparent 50%),
+                radial-gradient(circle at 80% 70%, rgba(212, 165, 86, 0.08) 0%, transparent 50%);
+            pointer-events: none;
+            z-index: 1;
+        }
+
+        .stars {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 0;
+        }
+
+        .star {
+            position: absolute;
+            background: white;
+            border-radius: 50%;
+            box-shadow: 0 0 3px rgba(255, 255, 255, 0.8), 
+                        0 0 6px rgba(255, 255, 255, 0.5),
+                        0 0 9px rgba(255, 255, 255, 0.3);
+            filter: blur(0.5px);
+            animation: twinkle 3s infinite;
+        }
+
+        @keyframes twinkle {
+            0%, 100% { 
+                opacity: 0.4; 
+                transform: scale(1);
+                filter: blur(0.5px);
+            }
+            50% { 
+                opacity: 1; 
+                transform: scale(1.3);
+                filter: blur(0.3px);
+            }
+        }
+
+        .container {
+            position: relative;
+            z-index: 2;
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        .payment-card {
+            position: relative;
+            z-index: 10;
+            background: var(--background-overlay);
+            border-radius: 20px;
+            padding: 50px 40px;
+            box-shadow: 
+                0 30px 80px rgba(0, 0, 0, 0.5),
+                inset 0 1px 0 rgba(255, 255, 255, 0.1);
+            border: 1px solid rgba(212, 165, 86, 0.3);
+            backdrop-filter: blur(10px);
+            animation: fadeInUp 1s ease-out 0.3s both;
+            margin-top: 40px;
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .section-title {
+            font-family: 'Bebas Neue', sans-serif;
+            font-size: 2.2rem;
+            font-weight: 400;
+            color: #d4a556;
+            text-align: center;
+            margin-bottom: 15px;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+        }
+
+        .subtitle {
+            text-align: center;
+            font-size: 1.1rem;
+            color: #f5f5f5;
+            margin-bottom: 40px;
+            font-weight: 300;
+            letter-spacing: 0.5px;
+        }
+
+        .registrant-info {
+            background: rgba(212, 165, 86, 0.08);
+            border: 1px solid rgba(212, 165, 86, 0.3);
+            border-radius: 15px;
+            padding: 25px 30px;
+            margin-bottom: 35px;
+        }
+
+        .info-row {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 12px 0;
+            font-size: 1.05rem;
+        }
+
+        .info-row:not(:last-child) {
+            border-bottom: 1px solid rgba(212, 165, 86, 0.15);
+        }
+
+        .info-label {
+            font-family: 'Montserrat', sans-serif;
+            font-weight: 600;
+            color: var(--secondary-gold);
+        }
+
+        .info-value {
+            font-family: 'Cormorant Garamond', serif;
+            color: var(--text-light);
+        }
+
+        .section-header {
+            font-family: 'Bebas Neue', sans-serif;
+            font-size: 1.4rem;
+            color: #d4a556;
+            margin-bottom: 20px;
+            padding-bottom: 10px;
+            border-bottom: 2px solid rgba(212, 165, 86, 0.3);
+        }
+
+        .payment-summary {
+            background: rgba(212, 165, 86, 0.08);
+            border: 1px solid rgba(212, 165, 86, 0.3);
+            border-radius: 15px;
+            padding: 30px;
+            margin-bottom: 25px;
+        }
+
+        .cc-notice {
+            background: rgba(255, 193, 7, 0.1);
+            border: 1px solid rgba(255, 193, 7, 0.3);
+            border-radius: 12px;
+            padding: 15px 20px;
+            margin-bottom: 30px;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            font-size: 0.95rem;
+            color: rgba(245, 245, 245, 0.9);
+        }
+
+        .cc-notice svg {
+            flex-shrink: 0;
+            color: var(--secondary-gold);
+        }
+
+        .summary-row {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 15px;
+            font-size: 1.1rem;
+            color: var(--text-light);
+        }
+
+        .summary-row:last-child {
+            margin-top: 20px;
+            padding-top: 20px;
+            border-top: 2px solid rgba(212, 165, 86, 0.3);
+            font-size: 1.4rem;
+            font-weight: 600;
+            color: var(--secondary-gold);
+        }
+
+        .payment-methods {
+            margin-bottom: 30px;
+        }
+
+        .payment-tabs {
+            display: flex;
+            gap: 15px;
+            margin-bottom: 30px;
+        }
+
+        .tab-btn {
+            flex: 1;
+            padding: 16px;
+            font-family: 'Montserrat', sans-serif;
+            font-size: 1rem;
+            font-weight: 600;
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(212, 165, 86, 0.3);
+            border-radius: 12px;
+            color: var(--text-light);
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .tab-btn.active {
+            background: linear-gradient(135deg, var(--secondary-gold) 0%, #c9965d 100%);
+            color: var(--primary-navy);
+            border-color: var(--secondary-gold);
+            box-shadow: 0 5px 20px rgba(212, 165, 86, 0.3);
+        }
+
+        .payment-method-content {
+            display: none;
+        }
+
+        .payment-method-content.active {
+            display: block;
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        label {
+            display: block;
+            font-family: 'Montserrat', sans-serif;
+            font-size: 0.95rem;
+            font-weight: 500;
+            color: #f5f5f5;
+            margin-bottom: 8px;
+        }
+
+
+        input[type="file"] {
+            width: 100%;
+            padding: 14px 18px;
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 1.05rem;
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(212, 165, 86, 0.3);
+            border-radius: 10px;
+            color: var(--text-light);
+            cursor: pointer;
+        }
+
+        input[type="file"]::file-selector-button {
+            padding: 10px 20px;
+            font-family: 'Montserrat', sans-serif;
+            font-weight: 600;
+            background: var(--secondary-gold);
+            color: var(--primary-navy);
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            margin-right: 15px;
+        }
+
+        .upload-instructions {
+            background: rgba(212, 165, 86, 0.08);
+            border: 1px solid rgba(212, 165, 86, 0.3);
+            border-radius: 12px;
+            padding: 25px;
+            margin-bottom: 25px;
+        }
+
+        .upload-instructions strong {
+            font-family: 'Bebas Neue', sans-serif;
+            color: var(--secondary-gold);
+            font-size: 1.2rem;
+            display: block;
+            margin-bottom: 15px;
+        }
+
+        .upload-instructions ol {
+            margin-left: 25px;
+            font-size: 1.05rem;
+            line-height: 1.8;
+        }
+
+        .upload-instructions li {
+            margin-bottom: 10px;
+        }
+
+        .submit-btn {
+            width: 100%;
+            padding: 18px;
+            font-family: 'Bebas Neue', sans-serif;
+            font-size: 1.2rem;
+            font-weight: 700;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            background: linear-gradient(135deg, var(--secondary-gold) 0%, #c9965d 100%);
+            color: var(--primary-navy);
+            border: none;
+            border-radius: 12px;
+            cursor: pointer;
+            transition: all 0.4s ease;
+            box-shadow: 0 10px 30px rgba(212, 165, 86, 0.3);
+            margin-top: 10px;
+        }
+
+        .submit-btn:hover:not(:disabled) {
+            transform: translateY(-2px);
+            box-shadow: 0 15px 40px rgba(212, 165, 86, 0.4);
+        }
+
+        .submit-btn:disabled {
+            opacity: 0.6;
+            cursor: not-allowed;
+        }
+
+        .alert {
+            padding: 15px 20px;
+            border-radius: 10px;
+            margin-bottom: 20px;
+            font-size: 1rem;
+            border: 1px solid;
+        }
+
+        .alert-error {
+            background: rgba(231, 76, 60, 0.1);
+            border-color: #e74c3c;
+            color: #e74c3c;
+        }
+
+        .image-preview {
+            margin-top: 20px;
+            display: none;
+            text-align: center;
+        }
+
+        .image-preview img {
+            max-width: 100%;
+            max-height: 400px;
+            border-radius: 12px;
+            border: 2px solid rgba(212, 165, 86, 0.3);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+        }
+
+        .spinner {
+            border: 3px solid rgba(26, 35, 50, 0.3);
+            border-top: 3px solid #1a2332;
+            border-radius: 50%;
+            width: 20px;
+            height: 20px;
+            animation: spin 1s linear infinite;
+            display: inline-block;
+            margin-left: 10px;
+        }
+
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+        
+        /* Animated loading dots */
+        .loading-dots {
+            display: inline-block;
+        }
+        
+        .loading-dots::after {
+            content: '.';
+            animation: dots 1.5s steps(3, end) infinite;
+        }
+        
+        @keyframes dots {
+            0%, 20% { content: '.'; }
+            40% { content: '..'; }
+            60%, 100% { content: '...'; }
+        }
+
+        /* Loading Overlay */
+        .loading-overlay {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(135deg, #0f1419 0%, #1a2332 50%, #2a3f5f 100%);
+            z-index: 10000;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+        }
+
+        .loading-overlay.active {
+            display: flex;
+        }
+
+        .loading-content {
+            text-align: center;
+            animation: fadeInUp 0.5s ease;
+        }
+
+        .loading-spinner {
+            width: 65px;
+            aspect-ratio: 1;
+            margin: 0 auto 30px;
+            position: relative;
+        }
+        .loading-spinner span {
+            position: absolute;
+            border-radius: 50px;
+            box-shadow: inset 0 0 0 3px #d4a556;
+            animation: loaderMorph 2.5s infinite;
+        }
+        .loading-spinner span:nth-child(2) {
+            animation-delay: -1.25s;
+        }
+        @keyframes loaderMorph {
+            0%   { inset: 0 35px 35px 0; }
+            12.5%{ inset: 0 35px 0 0; }
+            25%  { inset: 35px 35px 0 0; }
+            37.5%{ inset: 35px 0 0 0; }
+            50%  { inset: 35px 0 0 35px; }
+            62.5%{ inset: 0 0 0 35px; }
+            75%  { inset: 0 0 35px 35px; }
+            87.5%{ inset: 0 0 35px 0; }
+            100% { inset: 0 35px 35px 0; }
+        }
+
+        .loading-text {
+            font-family: 'Bebas Neue', sans-serif;
+            font-size: 2rem;
+            color: var(--secondary-gold);
+            letter-spacing: 3px;
+            margin-bottom: 10px;
+            text-transform: uppercase;
+        }
+
+        .loading-subtext {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 1rem;
+            color: rgba(245, 245, 245, 0.7);
+            font-weight: 300;
+        }
+
+        .loading-dots {
+            display: inline-block;
+        }
+
+        .loading-dots::after {
+            content: '';
+            animation: dots 1.5s steps(4, end) infinite;
+        }
+
+        @keyframes dots {
+            0%, 20% { content: ''; }
+            40% { content: '.'; }
+            60% { content: '..'; }
+            80%, 100% { content: '...'; }
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .hidden {
+            display: none !important;
+        }
+
+        @media (max-width: 768px) {
+            .payment-card {
+                padding: 35px 25px;
+            }
+            .payment-tabs {
+                flex-direction: column;
+            }
+        }
+        /* Prevent Safari auto-linking phone numbers */
+        a[href^="tel"], a[x-apple-data-detectors] { color: #f5f5f5 !important; text-decoration: none !important; pointer-events: none; }
+
+
+
+
+
+        /* Progress Stepper */
+        .pyc-progress { max-width:600px; margin:0 auto 25px; padding:15px 15px 5px; }
+        .pyc-progress-title { text-align:center; font-size:0.7rem; text-transform:uppercase; letter-spacing:2px; color:rgba(245,245,245,0.3); margin-bottom:14px; font-weight:600; }
+        .pyc-steps { display:flex; align-items:flex-start; justify-content:space-between; position:relative; }
+        .pyc-steps::before { content:''; position:absolute; top:16px; left:40px; right:40px; height:3px; background:rgba(255,255,255,0.06); border-radius:2px; }
+        .pyc-line { position:absolute; top:16px; left:40px; height:3px; background:linear-gradient(90deg,#d4a556,#e5b96a); border-radius:2px; }
+        .pyc-s { display:flex; flex-direction:column; align-items:center; flex:1; position:relative; z-index:2; }
+        .pyc-dot { width:34px; height:34px; border-radius:50%; display:flex; align-items:center; justify-content:center; font-size:0.8rem; font-weight:700; border:3px solid rgba(255,255,255,0.08); background:rgba(26,35,50,0.95); color:rgba(245,245,245,0.25); transition:all 0.3s; }
+        .pyc-s.done .pyc-dot { background:#d4a556; color:#1a2332; border-color:#d4a556; }
+        .pyc-s.now .pyc-dot { background:rgba(212,165,86,0.12); color:#d4a556; border-color:#d4a556; box-shadow:0 0 15px rgba(212,165,86,0.3); animation:pyc-glow 2s infinite; }
+        .pyc-lbl { margin-top:8px; font-size:0.68rem; color:rgba(245,245,245,0.25); text-align:center; font-weight:600; text-transform:uppercase; letter-spacing:0.5px; line-height:1.3; }
+        .pyc-s.done .pyc-lbl { color:rgba(212,165,86,0.7); }
+        .pyc-s.now .pyc-lbl { color:#f5f5f5; }
+        .pyc-hint { text-align:center; margin-top:10px; font-size:0.78rem; color:rgba(212,165,86,0.55); font-style:italic; }
+        @keyframes pyc-glow { 0%,100%{box-shadow:0 0 10px rgba(212,165,86,0.2);} 50%{box-shadow:0 0 20px rgba(212,165,86,0.45);} }
+        @media(max-width:480px) { .pyc-dot{width:28px;height:28px;font-size:0.7rem;} .pyc-lbl{font-size:0.6rem;} }
+
+        /* Slide Button */
+        .slide-btn-wrapper { width: 100%; margin-top: 10px; }
+        .slide-btn-track { position: relative; height: 58px; background: rgba(255,255,255,0.04); border: 1px solid rgba(212,165,86,0.3); border-radius: 50px; overflow: hidden; touch-action: none; user-select: none; -webkit-user-select: none; }
+        .slide-btn-track.completed { border-color: rgba(212,165,86,0.5); }
+        .slide-btn-fill { position: absolute; top: 0; left: 0; bottom: 0; width: 0; background: linear-gradient(90deg, rgba(212,165,86,0.15), rgba(212,165,86,0.25)); border-radius: 50px; transition: none; }
+        .slide-btn-track.resetting .slide-btn-fill { transition: width 0.3s ease; }
+        .slide-btn-track.completed .slide-btn-fill { background: linear-gradient(90deg, rgba(212,165,86,0.15), rgba(212,165,86,0.35)); width: 100% !important; }
+        .slide-btn-label { position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); font-family: 'Montserrat', sans-serif; font-size: 0.9rem; font-weight: 700; letter-spacing: 1px; text-transform: uppercase; color: rgba(212,165,86,0.5); white-space: nowrap; pointer-events: none; transition: opacity 0.2s; }
+        
+        .slide-btn-handle { position: absolute; top: 4px; left: 4px; width: 50px; height: 50px; background: linear-gradient(135deg, #d4a556, #c9965d); border-radius: 50%; display: flex; align-items: center; justify-content: center; cursor: grab; z-index: 2; transition: none; box-shadow: 0 2px 8px rgba(0,0,0,0.3); }
+        .slide-btn-handle:active { cursor: grabbing; }
+        .slide-btn-track.resetting .slide-btn-handle { transition: left 0.3s ease; }
+        .slide-btn-handle svg { width: 22px; height: 22px; fill: none; stroke: #1a2332; stroke-width: 2.5; stroke-linecap: round; stroke-linejoin: round; }
+        .slide-btn-track.completed .slide-btn-handle { background: linear-gradient(135deg, #d4a556, #c9965d); left: calc(100% - 54px) !important; transition: left 0.3s; }
+        .slide-btn-track.completed .slide-btn-handle svg { display: none; }
+        .slide-btn-loading { display: none; width: 30px; height: 30px; position: relative; }
+        .slide-btn-loading .orbit { position: absolute; border: 2px solid transparent; border-radius: 50%; }
+        .slide-btn-loading .orbit-1 { inset: 0; border-top-color: #1a2332; animation: spin 1s linear infinite; }
+        .slide-btn-loading .orbit-2 { inset: 4px; border-top-color: #1a2332; animation: spin-reverse 1.5s linear infinite; }
+        .slide-btn-loading .orbit-3 { inset: 8px; border-top-color: #1a2332; animation: spin 0.8s linear infinite; }
+        @keyframes spin-reverse { to { transform: rotate(-360deg); } }
+        .slide-btn-track.completed .slide-btn-loading { display: block; }
+        .slide-btn-dots { display: none; position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); z-index: 1; pointer-events: none; }
+        .slide-btn-track.completed .slide-btn-dots { display: block; top: 72%; }
+        .slide-btn-track.completed .slide-btn-label { top: 35%; }
+        @media (max-width: 480px) { .slide-btn-track { height: 52px; } .slide-btn-handle { width: 44px; height: 44px; } .slide-btn-label { font-size: 0.8rem; } }
+    </style>
+</head>
+<body>
+    <div class="stars" id="stars"></div>
+
+    <div class="container">
+
+        <div class="pyc-progress">
+            <div class="pyc-progress-title">Registration Progress</div>
+            <div class="pyc-steps">
+                <div class="pyc-line" style="width:calc(50% - 55px);"></div>
+                <div class="pyc-s done"><div class="pyc-dot">✓</div><div class="pyc-lbl">Register</div></div><div class="pyc-s now"><div class="pyc-dot">2</div><div class="pyc-lbl">Submit Payment</div></div><div class="pyc-s "><div class="pyc-dot">3</div><div class="pyc-lbl">Confirmed!</div></div>
+            </div>
+            <div class="pyc-hint">Step 2 of 3 — Upload your payment proof</div>
+        </div>
+
+
+        <div class="payment-card">
+            <h1 class="section-title">Complete Your Payment</h1>
+            <p class="subtitle">PYC 2026 - Above and Beyond</p>
+
+            <!-- Registrant Information -->
+            <div class="registrant-info">
+                <div class="info-row">
+                    <span class="info-label">Name:</span>
+                    <span class="info-value" id="registrantName">Loading...</span>
+                </div>
+                <div class="info-row">
+                    <span class="info-label">Email:</span>
+                    <span class="info-value" id="registrantEmail">Loading...</span>
+                </div>
+            </div>
+
+            <div id="alertMessage" class="hidden"></div>
+
+            <h2 class="section-header">📋 Registration Summary</h2>
+            
+            <!-- Group Members Display -->
+            <div id="groupInfoSection" style="display:none; margin-bottom:20px;">
+                <h3 style="color:#d4a556; margin-bottom:12px; font-size:16px;">👨‍👩‍👧‍👦 Group Registration</h3>
+                <div id="groupMembersList" style="background:rgba(255,255,255,0.03); border:1px solid rgba(212,165,86,0.2); border-radius:8px; padding:15px;"></div>
+            </div>
+
+            <div class="payment-summary">
+                <div class="summary-row" style="font-weight:700;font-size:1.1rem;color:var(--secondary-gold);">
+                    <span>Total Amount Due</span>
+                    <span id="totalAmount">₱0.00</span>
+                </div>
+            </div>
+
+            <div class="payment-methods">
+                <div class="payment-tabs">
+                    <button class="tab-btn active" data-method="mobile">GCash</button>
+                    <button class="tab-btn" data-method="bank">Bank Transfer</button>
+                </div>
+
+                <div id="mobilePayment" class="payment-method-content active">
+                    <div class="upload-instructions">
+                        <strong>GCash Payment Instructions:</strong>
+                        <div style="background:rgba(212,165,86,0.1); border:1px solid rgba(212,165,86,0.3); border-radius:8px; padding:15px; margin:12px 0; text-align:center;">
+                            <div style="font-size:16px; font-weight:700; color:#d4a556;" id="gcashAccountName">Loading...</div>
+                            <div style="font-size:20px; font-weight:800; color:#f5f5f5; letter-spacing:1px; margin-top:4px;" id="gcashAccountNumber">Loading...</div>
+                            <img id="gcashQR" src="" alt="GCash QR Code" style="display:none;width:100%;max-width:280px;margin:12px auto 0;border-radius:8px;border:1px solid rgba(212,165,86,0.2);">
+                        </div>
+                        <ol>
+                            <li>Send <strong><span id="totalAmount2">₱0.00</span></strong> to the GCash account shown above</li>
+                            <li>Take a screenshot of the payment confirmation</li>
+                            <li>Upload the screenshot below</li>
+                            <li>Click "Submit Payment Proof"</li>
+                        </ol>
+                        <div style="margin-top:15px;">
+                            <label style="font-weight:600;font-size:0.9rem;display:block;margin-bottom:6px;">GCash Reference Number <span style="color:#e74c3c;">*</span></label>
+                            <input type="text" id="gcashRefNumber" placeholder="Enter your GCash reference/transaction number" required
+                                style="width:100%;padding:12px 16px;background:rgba(255,255,255,0.05);border:1px solid rgba(212,165,86,0.3);border-radius:8px;color:#f5f5f5;font-family:'Montserrat',sans-serif;font-size:0.95rem;">
+                            <p style="font-size:0.78rem;color:rgba(245,245,245,0.4);margin-top:4px;">Found in your GCash transaction receipt</p>
+                        </div>
+                    </div>
+                    <form id="mobile-payment-form" novalidate autocomplete="off">
+                        <div class="form-group">
+                            <label>Upload Payment Screenshot</label>
+                            <input type="file" id="paymentProof" accept="image/jpeg,image/jpg,image/png,image/webp" required>
+                            <small style="color: #999; display: block; margin-top: 5px;">Maximum file size: 5MB (JPG, PNG, WebP)</small>
+                        </div>
+                        <div class="image-preview" id="imagePreview">
+                            <img id="previewImg" src="" alt="Payment proof preview">
+                        </div>
+                        <button type="submit" class="submit-btn" id="mobileSubmitBtn" style="display:none;" formnovalidate>
+                            Submit Payment Proof
+                        </button>
+                        <div class="slide-btn-wrapper">
+                            <div class="slide-btn-track" data-slide-btn="mobileSubmitBtn">
+                                <div class="slide-btn-fill"></div>
+                                <span class="slide-btn-label">Slide to Submit →</span>
+                            <div class="slide-btn-dots"><svg width="40" height="24" viewBox="0 0 24 24"><circle cx="4" cy="12" r="2" fill="#d4a556"><animate id="sb1" begin="0;sb3.end+0.25s" attributeName="cy" calcMode="spline" dur="0.6s" values="12;6;12" keySplines=".33,.66,.66,1;.33,0,.66,.33"/></circle><circle cx="12" cy="12" r="2" fill="#d4a556"><animate begin="sb1.begin+0.1s" attributeName="cy" calcMode="spline" dur="0.6s" values="12;6;12" keySplines=".33,.66,.66,1;.33,0,.66,.33"/></circle><circle cx="20" cy="12" r="2" fill="#d4a556"><animate id="sb3" begin="sb1.begin+0.2s" attributeName="cy" calcMode="spline" dur="0.6s" values="12;6;12" keySplines=".33,.66,.66,1;.33,0,.66,.33"/></circle></svg></div>
+                            <div class="slide-btn-dots"><svg width="40" height="24" viewBox="0 0 24 24"><circle cx="4" cy="12" r="2" fill="#d4a556"><animate id="sg1" begin="0;sg3.end+0.25s" attributeName="cy" calcMode="spline" dur="0.6s" values="12;6;12" keySplines=".33,.66,.66,1;.33,0,.66,.33"/></circle><circle cx="12" cy="12" r="2" fill="#d4a556"><animate begin="sg1.begin+0.1s" attributeName="cy" calcMode="spline" dur="0.6s" values="12;6;12" keySplines=".33,.66,.66,1;.33,0,.66,.33"/></circle><circle cx="20" cy="12" r="2" fill="#d4a556"><animate id="sg3" begin="sg1.begin+0.2s" attributeName="cy" calcMode="spline" dur="0.6s" values="12;6;12" keySplines=".33,.66,.66,1;.33,0,.66,.33"/></circle></svg></div>
+                                <div class="slide-btn-handle">
+                                    <svg viewBox="0 0 24 24"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+                                    <div class="slide-btn-loading"><div class="orbit orbit-1"></div><div class="orbit orbit-2"></div><div class="orbit orbit-3"></div></div>
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+
+                <!-- Bank Transfer Payment -->
+                <div id="bankPayment" class="payment-method-content">
+                    <div class="upload-instructions">
+                        <strong>Choose a Bank Account:</strong>
+                        <p style="color:rgba(245,245,245,0.6);font-size:0.9rem;margin:8px 0 15px;">Transfer <strong style="color:#d4a556;"><span id="totalAmount3">₱0.00</span></strong> to one of the accounts below. Tap to select.</p>
+                        <div id="bankOptionsList"></div>
+                        <div id="bankSelectedMsg" style="display:none;background:rgba(39,174,96,0.1);border:1px solid rgba(39,174,96,0.3);border-radius:8px;padding:12px;margin:10px 0;color:#4cd68a;font-weight:600;font-size:0.9rem;text-align:center;"></div>
+                        <ol style="margin-top:12px;">
+                            <li>Transfer the exact amount to your selected bank</li>
+                            <li>Take a screenshot of the transfer confirmation</li>
+                            <li>Upload it below</li>
+                        </ol>
+                    </div>
+                    <div style="margin:15px 0;">
+                        <label style="font-weight:600;font-size:0.9rem;display:block;margin-bottom:6px;">Bank Reference/Transaction Number <span style="color:#e74c3c;">*</span></label>
+                        <input type="text" id="bankRefNumber" placeholder="Enter your bank reference/transaction number" required
+                            style="width:100%;padding:12px 16px;background:rgba(255,255,255,0.05);border:1px solid rgba(212,165,86,0.3);border-radius:8px;color:#f5f5f5;font-family:'Montserrat',sans-serif;font-size:0.95rem;">
+                        <p style="font-size:0.78rem;color:rgba(245,245,245,0.4);margin-top:4px;">Found on your bank transfer confirmation</p>
+                    </div>
+                    <form id="bank-payment-form" novalidate autocomplete="off">
+                        <div class="form-group">
+                            <label>Upload Transfer Proof</label>
+                            <input type="file" id="bankPaymentProof" accept="image/jpeg,image/jpg,image/png,image/webp" required>
+                            <small style="color: #999; display: block; margin-top: 5px;">Maximum file size: 5MB (JPG, PNG, WebP)</small>
+                        </div>
+                        <div class="image-preview" id="bankImagePreview">
+                            <img id="bankPreviewImg" src="" alt="Payment proof preview">
+                        </div>
+                        <button type="submit" class="submit-btn" id="bankSubmitBtn" style="display:none;" formnovalidate>
+                            Submit Payment Proof
+                        </button>
+                        <div class="slide-btn-wrapper">
+                            <div class="slide-btn-track" data-slide-btn="bankSubmitBtn">
+                                <div class="slide-btn-fill"></div>
+                                <span class="slide-btn-label">Slide to Submit →</span>
+                                <div class="slide-btn-handle">
+                                    <svg viewBox="0 0 24 24"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+                                    <div class="slide-btn-loading"><div class="orbit orbit-1"></div><div class="orbit orbit-2"></div><div class="orbit orbit-3"></div></div>
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Footer with Social Links -->
+        <div style="max-width: 600px; margin: 30px auto 0; text-align: center; padding: 0 20px;">
+            <p style="color: rgba(245, 245, 245, 0.7); margin-bottom: 20px;">For questions or concerns, contact us through social media</p>
+            <div style="display: flex; justify-content: center; gap: 20px; margin-bottom: 20px;">
+                <a href="https://www.facebook.com/share/1D9PJw6wkq/?mibextid=wwXIfr" target="_blank" rel="noopener noreferrer" style="display: inline-flex; align-items: center; justify-content: center; width: 50px; height: 50px; border-radius: 50%; background: rgba(212, 165, 86, 0.1); border: 2px solid rgba(212, 165, 86, 0.3); color: #d4a556; text-decoration: none; transition: all 0.3s;" onmouseover="this.style.background='#d4a556'; this.style.color='#1a2332';" onmouseout="this.style.background='rgba(212, 165, 86, 0.1)'; this.style.color='#d4a556';">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="currentColor">
+                        <path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/>
+                    </svg>
+                </a>
+                <a href="https://www.instagram.com/philippineyouthforchrist?igsh=c2Q0MjAwbWh1cXZ2" target="_blank" rel="noopener noreferrer" style="display: inline-flex; align-items: center; justify-content: center; width: 50px; height: 50px; border-radius: 50%; background: rgba(212, 165, 86, 0.1); border: 2px solid rgba(212, 165, 86, 0.3); color: #d4a556; text-decoration: none; transition: all 0.3s;" onmouseover="this.style.background='#d4a556'; this.style.color='#1a2332';" onmouseout="this.style.background='rgba(212, 165, 86, 0.1)'; this.style.color='#d4a556';">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="currentColor">
+                        <path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/>
+                    </svg>
+                </a>
+            </div>
+            <p style="color: rgba(245, 245, 245, 0.7); font-size: 0.95rem; margin-bottom: 30px;">
+                Send us your prayer requests: <a href="https://docs.google.com/forms/d/e/1FAIpQLScF58bssW1NRk_1kisP1M3yrpcbyn2SBLxf8YvGI-nWFVF6vg/viewform" target="_blank" style="color: #d4a556; text-decoration: none;">Submit a Prayer Request</a>
+            </p>
+        </div>
+    </div>
+
+    <script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
+        // ===== SECURITY: FILE VERIFICATION =====
+        // Verify uploaded files are actually images by checking file headers
+        async function verifyImageFile(file) {
+            // Skip check if FileReader unavailable (some Safari/iOS contexts)
+            if (typeof FileReader === 'undefined') {
+                return Promise.resolve('Skipped');
+            }
+            return new Promise((resolve, reject) => {
+                const reader = new FileReader();
+                reader.onloadend = (e) => {
+                    // Read first 4 bytes (file signature/magic number)
+                    const arr = new Uint8Array(e.target.result).subarray(0, 4);
+                    let header = '';
+                    for (let i = 0; i < arr.length; i++) {
+                        header += arr[i].toString(16).padStart(2, '0');
+                    }
+                    
+                    // Check if file header matches any valid image type
+                    let isValid = false;
+                    let fileType = 'Unknown';
+                    
+                    if (header.startsWith('ffd8ff')) {
+                        isValid = true; fileType = 'JPEG';
+                    } else if (header.startsWith('89504e47')) {
+                        isValid = true; fileType = 'PNG';
+                    } else if (header.startsWith('52494646')) {
+                        isValid = true; fileType = 'WEBP';
+                    }
+                    
+                    if (!isValid) {
+                        reject(new Error('File is not a valid image. Security check failed.'));
+                    } else {
+                        resolve(fileType);
+                    }
+                };
+                reader.onerror = () => reject(new Error('Failed to read file'));
+                reader.readAsArrayBuffer(file.slice(0, 4));
+            });
+        }
+        
+        // Create stars concentrated around edges - avoiding center
+        function createStars() {
+            const starsContainer = document.getElementById('stars');
+            const numberOfStars = 30; // Reduced from 60 for faster loading
+            
+            // Define zones: top, bottom, left, right edges
+            const zones = ['top', 'bottom', 'left', 'right'];
+            
+            // Create stars in batches to not block rendering
+            let created = 0;
+            const batchSize = 10;
+            
+            function createBatch() {
+                const end = Math.min(created + batchSize, numberOfStars);
+                for (let i = created; i < end; i++) {
+                    const star = document.createElement('div');
+                    star.className = 'star';
+                    
+                    // Randomly select a zone (edge area)
+                    const zone = zones[Math.floor(Math.random() * zones.length)];
+                    
+                    let left, top;
+                    
+                    // Position stars based on zone
+                    if (zone === 'top') {
+                        left = Math.random() * 100;
+                        top = Math.random() * 20;
+                    } else if (zone === 'bottom') {
+                        left = Math.random() * 100;
+                        top = 80 + Math.random() * 20;
+                    } else if (zone === 'left') {
+                        left = Math.random() * 15;
+                        top = 20 + Math.random() * 60;
+                    } else {
+                        left = 85 + Math.random() * 15;
+                        top = 20 + Math.random() * 60;
+                    }
+                    
+                    // Varied sizes
+                    const rand = Math.random();
+                    let size;
+                    if (rand > 0.95) {
+                        size = Math.random() * 6 + 8;
+                    } else if (rand > 0.85) {
+                        size = Math.random() * 4 + 5;
+                    } else {
+                        size = Math.random() * 3 + 2;
+                    }
+                    
+                    star.style.width = size + 'px';
+                    star.style.height = size + 'px';
+                    star.style.left = left + '%';
+                    star.style.top = top + '%';
+                    star.style.animationDelay = Math.random() * 3 + 's';
+                    star.style.animationDuration = (Math.random() * 2 + 2) + 's';
+                
+                    starsContainer.appendChild(star);
+                }
+                created = end;
+                
+                // Create next batch if needed
+                if (created < numberOfStars) {
+                    requestAnimationFrame(createBatch);
+                }
+            }
+            
+            // Start creating stars in batches
+            createBatch();
+        }
+        
+        // Defer star creation slightly to let page render first
+        setTimeout(createStars, 100);
+
+        // Check for registration ID
+        const registrationId = sessionStorage.getItem('registrationId');
+        if (!registrationId) {
+            showAlert('No registration found. Please complete the registration form first.', 'error');
+            setTimeout(() => {
+                window.location.href = '/';
+            }, 2000);
+        }
+
+        // Display registrant information
+        const registrantName = sessionStorage.getItem('registrantName') || 'Not available';
+        const registrantEmail = sessionStorage.getItem('registrantEmail') || 'Not available';
+        const mealPlan = sessionStorage.getItem('mealPlan') || 'full';
+        
+        document.getElementById('registrantName').textContent = registrantName;
+        document.getElementById('registrantEmail').textContent = registrantEmail;
+
+        // Prevent browser validation errors on page load
+        document.addEventListener('DOMContentLoaded', function() {
+            // Disable browser autofill on all forms
+            const forms = document.querySelectorAll('form');
+            forms.forEach(form => {
+                form.setAttribute('autocomplete', 'off');
+                form.setAttribute('novalidate', 'true');
+            });
+            
+            // Suppress any validation messages on page load
+            const inputs = document.querySelectorAll('input, select, textarea');
+            inputs.forEach(input => {
+                input.addEventListener('invalid', function(e) {
+                    // Only show validation on actual form submit, not on load
+                    if (!this.form.classList.contains('submitted')) {
+                        e.preventDefault();
+                    }
+                });
+            });
+        });
+
+        // Calculate total based on meal plan
+        const EARLY_BIRD_DEADLINE = new Date('2026-04-15T23:59:59+08:00');
+        const isEarlyBird = new Date() <= EARLY_BIRD_DEADLINE;
+        const PRICES = isEarlyBird
+            ? { withMeal: 1750, vegan: 2100, noMeal: 750 }
+            : { withMeal: 1850, vegan: 2200, noMeal: 850 };
+        const BASE_PRICE = 0;
+        const MEAL_PRICES = {
+            'vegan': PRICES.vegan,
+            'vegetarian': PRICES.withMeal,
+            'none': PRICES.noMeal
+        };
+        
+        const registrationType = sessionStorage.getItem('registrationType') || 'individual';
+        const isGroupReg = registrationType === 'group';
+        const groupTotalStored = parseFloat(sessionStorage.getItem('groupTotalAmount')) || 0;
+        const groupMemberCount = parseInt(sessionStorage.getItem('groupMemberCount')) || 1;
+        
+        // === Payment Account Assignment (round-robin) ===
+        // TEMPORARY: Account 'E' (Georgia Sanchez) is disabled. If backend assigned E,
+        // pick one of A/B/C/D using a deterministic hash so the same person always sees
+        // the same account on retry. To re-enable Georgia, delete the redirect block below.
+        var paymentAccount = sessionStorage.getItem('paymentAccount') || 'A';
+        if (paymentAccount === 'E') {
+            var seed = sessionStorage.getItem('registrationId') || sessionStorage.getItem('registrantEmail') || '';
+            var hash = 0;
+            for (var i = 0; i < seed.length; i++) hash = (hash * 31 + seed.charCodeAt(i)) | 0;
+            var fallback = ['A', 'B', 'C', 'D'][Math.abs(hash) % 4];
+            paymentAccount = fallback;
+            sessionStorage.setItem('paymentAccount', fallback); // persist so all later code sees it
+        }
+        
+        const GCASH_ACCOUNTS = {
+            'A': { name: 'Febie Gemere Gacusan', number: '0975-243-5839', qr: '/qr-gcash-a.jpeg' },
+            'B': { name: 'Alpha Beth Fofue', number: '0943-473-6234', qr: '/qr-gcash-b.jpeg' },
+            'C': { name: 'Ydjean Joy Dela Cruz', number: '0935-114-9442', qr: '/qr-gcash-c.jpeg' },
+            'D': { name: 'Dorothy Claire Manata', number: '0919-526-9551', qr: '/qr-gcash-d.jpeg' }
+            // 'E' (Georgia Sanchez) temporarily disabled — re-add when ready:
+            // 'E': { name: 'Georgia Sanchez', number: '0917-444-1693', qr: '/qr-gcash-e.jpeg' }
+        };
+        const BANK_OPTIONS = [
+            { id: 'bdo', name: 'Alpha Beth Fofue', bank: 'BDO', accountNumber: '0068 9031 4963', qr: '/qr-bank-bdo.jpeg' },
+            { id: 'bpi', name: 'Febie Gemere Gacusan', bank: 'BPI', accountNumber: '8989382005', qr: '/qr-bank-bpi.jpeg' }
+        ];
+        let selectedBankId = '';
+        
+        const assignedGcash = GCASH_ACCOUNTS[paymentAccount] || GCASH_ACCOUNTS['A'];
+
+        // For group: calculate total from stored members; for individual: calculate from meal
+        const mealPrice = MEAL_PRICES[mealPlan] || 0;
+        let subtotal = BASE_PRICE + mealPrice;
+        
+        // Show group members if group registration
+        if (isGroupReg) {
+            document.getElementById('groupInfoSection').style.display = 'block';
+            const groupMembers = JSON.parse(sessionStorage.getItem('groupMembers') || '[]');
+            const primaryMealPrice = MEAL_PRICES[mealPlan] || PRICES.withMeal;
+            let groupCalcTotal = primaryMealPrice;
+            const totalPeople = 1 + groupMembers.length;
+            
+            let membersHtml = `<div style="padding:6px 0; border-bottom:1px solid rgba(255,255,255,0.08); display:flex; justify-content:space-between;">
+                <span style="color:#d4a556; font-weight:600;">${registrantName} (Primary)</span>
+                <span style="color:rgba(245,245,245,0.7);">₱${primaryMealPrice.toLocaleString()}</span>
+            </div>`;
+            groupMembers.forEach(m => {
+                const mp = MEAL_PRICES[m.mealPlan] || PRICES.withMeal;
+                groupCalcTotal += mp;
+                membersHtml += `<div style="padding:6px 0; border-bottom:1px solid rgba(255,255,255,0.08); display:flex; justify-content:space-between;">
+                    <span style="color:rgba(245,245,245,0.9);">${m.firstName} ${m.lastName}</span>
+                    <span style="color:rgba(245,245,245,0.7);">₱${mp.toLocaleString()}</span>
+                </div>`;
+            });
+            membersHtml += `<div style="padding:8px 0; display:flex; justify-content:space-between; font-weight:700; color:#d4a556; font-size:16px; margin-top:4px;">
+                <span>Group Total (${totalPeople} people)</span>
+                <span>₱${groupCalcTotal.toLocaleString()}</span>
+            </div>`;
+            document.getElementById('groupMembersList').innerHTML = membersHtml;
+            subtotal = groupCalcTotal;
+        }
+        let currentTotal = subtotal;
+        
+        // Format currency
+        const formatCurrency = (amount) => {
+            return '₱' + amount.toLocaleString('en-PH', { minimumFractionDigits: 2, maximumFractionDigits: 2 });
+        };
+
+        // Update payment summary
+        document.getElementById('totalAmount').textContent = formatCurrency(subtotal);
+        document.getElementById('totalAmount2').textContent = formatCurrency(subtotal);
+        
+        
+        function getMealPlanName(plan) {
+            const names = {
+                'vegan': 'Full Meal — Vegan',
+                'vegetarian': 'Full Meal — Vegetarian',
+                'none': 'No Meal Plan',
+                'full': 'Full Meal Plan',
+                'half': 'Half Meal Plan'
+            };
+            return names[plan] || plan || 'N/A';
+        }
+
+        // Function to update totals based on payment method
+        // Populate account details from assignment
+        document.getElementById('gcashAccountName').textContent = assignedGcash.name;
+        document.getElementById('gcashAccountNumber').innerHTML = '<span style="color:#f5f5f5 !important;text-decoration:none;">' + assignedGcash.number.replace(/-/g,'\u2011') + '</span>';
+        if (assignedGcash.qr) {
+            document.getElementById('gcashQR').src = assignedGcash.qr;
+            document.getElementById('gcashQR').style.display = 'block';
+        }
+        // Render bank options
+        let bankHtml = '';
+        BANK_OPTIONS.forEach((b, i) => {
+            bankHtml += '<div class="bank-option" data-bank="' + b.id + '" onclick="selectBank(\'' + b.id + '\')" style="background:rgba(255,255,255,0.03);border:2px solid rgba(212,165,86,0.2);border-radius:12px;padding:15px;margin-bottom:12px;cursor:pointer;transition:all 0.3s;">'
+                + '<div style="display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:8px;">'
+                + '<div>'
+                + '<div style="font-size:14px;color:rgba(245,245,245,0.6);">' + b.bank + '</div>'
+                + '<div style="font-size:16px;font-weight:700;color:#d4a556;margin-top:2px;">' + b.name + '</div>'
+                + '<div style="font-size:18px;font-weight:800;color:#f5f5f5;letter-spacing:1px;margin-top:2px;">' + b.accountNumber + '</div>'
+                + '</div>'
+                + '<div style="background:rgba(212,165,86,0.15);color:#d4a556;padding:6px 14px;border-radius:8px;font-weight:600;font-size:0.85rem;">Select</div>'
+                + '</div>'
+                + '<img src="' + b.qr + '" alt="QR Code" style="display:none;width:100%;max-width:280px;margin:12px auto 0;border-radius:8px;border:1px solid rgba(212,165,86,0.2);" class="bank-qr">'
+                + '</div>';
+        });
+        document.getElementById('bankOptionsList').innerHTML = bankHtml;
+
+        function updateTotalsForPaymentMethod(method) {
+            const totalAmountDisplay = document.getElementById('totalAmount');
+            const totalAmount2Display = document.getElementById('totalAmount2');
+            const totalAmount3Display = document.getElementById('totalAmount3');
+            
+        // No fees for GCash or Bank Transfer
+            currentTotal = subtotal;
+            totalAmountDisplay.textContent = formatCurrency(currentTotal);
+            totalAmount2Display.textContent = formatCurrency(currentTotal);
+            if (totalAmount3Display) totalAmount3Display.textContent = formatCurrency(currentTotal);
+        }
+
+        // Bank selection (must be in global scope for onclick)
+        function selectBank(bankId) {
+            selectedBankId = bankId;
+            const bank = BANK_OPTIONS.find(b => b.id === bankId);
+            // Highlight selected
+            document.querySelectorAll('.bank-option').forEach(el => {
+                const isSelected = el.dataset.bank === bankId;
+                el.style.borderColor = isSelected ? '#d4a556' : 'rgba(212,165,86,0.2)';
+                el.style.background = isSelected ? 'rgba(212,165,86,0.08)' : 'rgba(255,255,255,0.03)';
+                const selectBtn = el.querySelector('div:last-child > div:last-child');
+                if (selectBtn) selectBtn.textContent = isSelected ? '✓ Selected' : 'Select';
+                // Show/hide QR
+                const qr = el.querySelector('.bank-qr');
+                if (qr) qr.style.display = isSelected ? 'block' : 'none';
+            });
+            document.getElementById('bankSelectedMsg').style.display = 'block';
+            document.getElementById('bankSelectedMsg').textContent = '✓ ' + bank.bank + ' — ' + bank.name + ' selected';
+        }
+        window.selectBank = selectBank; // expose to onclick
+
+        // Payment method tabs
+        const tabBtns = document.querySelectorAll('.tab-btn');
+        const paymentContents = document.querySelectorAll('.payment-method-content');
+
+        tabBtns.forEach(btn => {
+            btn.addEventListener('click', () => {
+                tabBtns.forEach(b => b.classList.remove('active'));
+                paymentContents.forEach(c => c.classList.remove('active'));
+                
+                btn.classList.add('active');
+                const method = btn.dataset.method;
+                document.getElementById(`${method}Payment`).classList.add('active');
+                
+                // Update fee note based on method
+                const feeNote = document.querySelector('.payment-summary + div span') || null;
+                
+                // Update totals based on selected payment method
+                updateTotalsForPaymentMethod(method);
+            });
+        });
+
+        // Initialize with GCash (default)
+        updateTotalsForPaymentMethod('mobile');
+
+        // Image preview with 5MB validation
+        document.getElementById('paymentProof').addEventListener('change', function(e) {
+            const file = e.target.files[0];
+            if (file) {
+                // Check file size (5MB = 5 * 1024 * 1024 bytes)
+                const maxSize = 5 * 1024 * 1024;
+                if (file.size > maxSize) {
+                    showAlert('❌ File too large! Maximum size is 5MB. Your file is ' + (file.size / (1024 * 1024)).toFixed(2) + 'MB', 'error');
+                    e.target.value = ''; // Clear the input
+                    document.getElementById('imagePreview').style.display = 'none';
+                    return;
+                }
+                
+                // Check file type (MIME type - can be spoofed)
+                const allowedTypes = ['image/jpeg', 'image/jpg', 'image/png', 'image/webp'];
+                if (!allowedTypes.includes(file.type)) {
+                    showAlert('❌ Invalid file type! Please upload JPG, PNG, or WebP images only.', 'error');
+                    e.target.value = '';
+                    document.getElementById('imagePreview').style.display = 'none';
+                    return;
+                }
+                
+                // ===== SECURITY: Verify file header (magic numbers) =====
+                verifyImageFile(file).then((fileType) => {
+                    // File is valid, show preview
+                    const reader = new FileReader();
+                    reader.onload = function(e) {
+                        document.getElementById('previewImg').src = e.target.result;
+                        document.getElementById('imagePreview').style.display = 'block';
+                    };
+                    reader.readAsDataURL(file);
+                }).catch((error) => {
+                    // File failed security check
+                    showAlert('❌ Security check failed: ' + error.message + ' Please upload a genuine image file.', 'error');
+                    e.target.value = '';
+                    document.getElementById('imagePreview').style.display = 'none';
+                });
+            }
+        });
+
+        // Mobile payment form
+        const mobileForm = document.getElementById('mobile-payment-form');
+        mobileForm.addEventListener('submit', async (e) => {
+            e.preventDefault();
+            const submitBtn = document.getElementById('mobileSubmitBtn');
+            const originalText = submitBtn.innerHTML;
+            
+            const file = document.getElementById('paymentProof').files[0];
+            
+            // Check reference number
+            const gcashRef = document.getElementById('gcashRefNumber').value.trim();
+            if (!gcashRef) {
+                showAlert('❌ Please enter your GCash reference number', 'error');
+                document.getElementById('gcashRefNumber').focus();
+                document.getElementById('gcashRefNumber').scrollIntoView({ behavior: 'smooth', block: 'center' });
+                return;
+            }
+
+            // Check if file is selected
+            if (!file) {
+                showAlert('❌ Please upload your GCash payment proof screenshot', 'error');
+                return;
+            }
+            
+            // Check file size (5MB max)
+            const maxSize = 5 * 1024 * 1024;
+            if (file.size > maxSize) {
+                showAlert('❌ File too large! Maximum size is 5MB. Your file is ' + (file.size / (1024 * 1024)).toFixed(2) + 'MB. Please compress or choose a smaller image.', 'error');
+                return;
+            }
+            
+            // Check file type
+            const allowedTypes = ['image/jpeg', 'image/jpg', 'image/png', 'image/webp'];
+            if (!allowedTypes.includes(file.type)) {
+                showAlert('❌ Invalid file type! Please upload JPG, PNG, or WebP images only.', 'error');
+                return;
+            }
+            
+            // ===== SECURITY: Verify file is actually an image =====
+            try {
+                await verifyImageFile(file);
+            } catch (error) {
+                showAlert('❌ Security check failed: ' + error.message + ' Please upload a genuine image file.', 'error');
+                return;
+            }
+            
+            submitBtn.disabled = true;
+            submitBtn.innerHTML = 'Uploading<span class="loading-dots"></span> <span class="spinner"></span>';
+
+            try {
+                const reader = new FileReader();
+                reader.onload = async function(e) {
+                    const base64Image = e.target.result;
+
+                    const response = await fetch('/.netlify/functions/upload-payment-proof', {
+                        method: 'POST',
+                        headers: { 'Content-Type': 'application/json' },
+                        body: JSON.stringify({
+                            registrationId,
+                            imageBase64: base64Image,
+                            fileName: file.name,
+                            paymentMethod: 'GCash',
+                            paymentAccount: paymentAccount,
+                            transactionReference: gcashRef
+                        })
+                    });
+
+                    const data = await response.json();
+
+                    if (response.ok) {
+                        // Store the PYC confirmation number assigned at payment
+                        if (data.confirmationNumber) sessionStorage.setItem('confirmationNumber', data.confirmationNumber);
+                        // Show loading overlay
+                        document.getElementById('loadingOverlay').classList.add('active');
+                        
+                        // Check if this is a special person who gets custom animation
+                        const registrantName = sessionStorage.getItem('registrantName') || '';
+                        
+                        const specialPeople = ['marissa imperio', 'larry fam', 'lyka famorcan', 'jerald perlas', 'kevin perlas'];
+                        const normalizedName = registrantName.toLowerCase().trim();
+                        const isSpecialPerson = specialPeople.includes(normalizedName);
+                        
+                        // Short delay then redirect
+                        setTimeout(() => {
+                            if (isSpecialPerson) {
+                                // Clear any old special message flags for this person (from previous registrations)
+                                const flagKey = `specialMessageSeen_${normalizedName.replace(/\s+/g, '_')}`;
+                                sessionStorage.removeItem(flagKey);
+                                
+                                // Set flag that this person should see special message
+                                sessionStorage.setItem('shouldSeeSpecialMessage', 'true');
+                                
+                                const nameParts = registrantName.trim().split(' ');
+                                const firstName = nameParts[0] || '';
+                                const lastName = nameParts.slice(1).join(' ') || '';
+                                window.location.href = `/special-welcome?firstName=${encodeURIComponent(firstName)}&lastName=${encodeURIComponent(lastName)}`;
+                            } else {
+                                window.location.href = '/success';
+                            }
+                        }, 1500);
+                    } else {
+                        throw new Error(data.error || 'Payment submission failed');
+                    }
+                };
+                reader.readAsDataURL(file);
+            } catch (error) {
+                showAlert('❌ ' + error.message, 'error');
+                submitBtn.disabled = false;
+                submitBtn.innerHTML = originalText;
+            }
+        });
+
+        function showAlert(message, type) {
+            // Filter out browser validation errors that aren't relevant
+            if (message && message.includes('did not match the expected pattern')) {
+                // Suppress this browser validation error silently
+                return; // Don't show this error to users
+            }
+            
+            const alertDiv = document.getElementById('alertMessage');
+            alertDiv.className = `alert alert-${type}`;
+            alertDiv.textContent = message;
+            alertDiv.classList.remove('hidden');
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+    
+        // === Bank Transfer: File Preview ===
+        const bankProofInput = document.getElementById('bankPaymentProof');
+        if (bankProofInput) {
+            bankProofInput.addEventListener('change', function(e) {
+                const file = e.target.files[0];
+                const preview = document.getElementById('bankImagePreview');
+                const previewImg = document.getElementById('bankPreviewImg');
+                if (file && file.type.startsWith('image/')) {
+                    const reader = new FileReader();
+                    reader.onload = function(ev) {
+                        previewImg.src = ev.target.result;
+                        preview.style.display = 'block';
+                    };
+                    reader.readAsDataURL(file);
+                } else {
+                    preview.style.display = 'none';
+                }
+            });
+        }
+
+        // === Bank Transfer: Form Submission ===
+        const bankForm = document.getElementById('bank-payment-form');
+        if (bankForm) {
+            bankForm.addEventListener('submit', async (e) => {
+                e.preventDefault();
+                const submitBtn = document.getElementById('bankSubmitBtn');
+                const originalText = submitBtn.innerHTML;
+                
+                // Check bank selection
+                if (!selectedBankId) {
+                    showAlert('❌ Please select which bank account you transferred to', 'error');
+                    document.getElementById('bankOptionsList').scrollIntoView({ behavior: 'smooth', block: 'center' });
+                    return;
+                }
+
+                // Check bank reference number
+                const bankRef = document.getElementById('bankRefNumber').value.trim();
+                if (!bankRef) {
+                    showAlert('❌ Please enter your bank reference/transaction number', 'error');
+                    document.getElementById('bankRefNumber').focus();
+                    document.getElementById('bankRefNumber').scrollIntoView({ behavior: 'smooth', block: 'center' });
+                    return;
+                }
+
+                const file = document.getElementById('bankPaymentProof').files[0];
+                
+                if (!file) {
+                    showAlert('❌ Please upload your bank transfer proof.', 'error');
+                    return;
+                }
+                
+                const maxSize = 5 * 1024 * 1024;
+                if (file.size > maxSize) {
+                    showAlert('❌ File too large! Maximum size is 5MB.', 'error');
+                    return;
+                }
+                
+                const allowedTypes = ['image/jpeg', 'image/jpg', 'image/png', 'image/webp'];
+                if (!allowedTypes.includes(file.type)) {
+                    showAlert('❌ Invalid file type! Please upload JPG, PNG, or WebP images only.', 'error');
+                    return;
+                }
+                
+                try {
+                    await verifyImageFile(file);
+                } catch (error) {
+                    showAlert('❌ Security check failed: ' + error.message, 'error');
+                    return;
+                }
+                
+                submitBtn.disabled = true;
+                submitBtn.innerHTML = 'Uploading<span class="loading-dots"></span> <span class="spinner"></span>';
+                
+                try {
+                    const reader = new FileReader();
+                    reader.onload = async function(ev) {
+                        const base64Image = ev.target.result;
+                        
+                        const response = await fetch('/.netlify/functions/upload-payment-proof', {
+                            method: 'POST',
+                            headers: { 'Content-Type': 'application/json' },
+                            body: JSON.stringify({
+                                registrationId,
+                                imageBase64: base64Image,
+                                fileName: file.name,
+                                paymentMethod: 'Bank Transfer',
+                                paymentAccount: 'bank_' + selectedBankId,
+                                transactionReference: bankRef
+                            })
+                        });
+                        
+                        const data = await response.json();
+                        
+                        if (response.ok) {
+                            if (data.confirmationNumber) sessionStorage.setItem('confirmationNumber', data.confirmationNumber);
+                            document.getElementById('loadingOverlay').classList.add('active');
+                            const registrantName = sessionStorage.getItem('registrantName') || '';
+                            const specialPeople = ['marissa imperio', 'larry fam', 'lyka famorcan', 'jerald perlas', 'kevin perlas'];
+                            const normalizedName = registrantName.toLowerCase().trim();
+                            const isSpecialPerson = specialPeople.includes(normalizedName);
+                            
+                            setTimeout(() => {
+                                if (isSpecialPerson) {
+                                    window.location.href = '/special-welcome';
+                                } else {
+                                    window.location.href = '/success';
+                                }
+                            }, 1500);
+                        } else {
+                            showAlert('❌ Upload failed: ' + (data.error || 'Please try again'), 'error');
+                            submitBtn.disabled = false;
+                            submitBtn.innerHTML = originalText;
+                        }
+                    };
+                    reader.readAsDataURL(file);
+                } catch (error) {
+                    showAlert('❌ Upload failed: ' + error.message, 'error');
+                    submitBtn.disabled = false;
+                    submitBtn.innerHTML = originalText;
+                }
+            });
+        }
+
+        // === Also send paymentAccount with GCash upload ===
+
+        // Slide Button Logic
+        (function initSlideButtons() {
+            document.querySelectorAll('.slide-btn-track').forEach(function(track) {
+                var btnId = track.dataset.slideBtn;
+                var hiddenBtn = document.getElementById(btnId);
+                var handle = track.querySelector('.slide-btn-handle');
+                var fill = track.querySelector('.slide-btn-fill');
+                var label = track.querySelector('.slide-btn-label');
+                label.dataset.origText = label.textContent; var dragging = false, startX = 0, currentX = 0, trackWidth = 0, handleWidth = 50, maxDrag = 0, completed = false;
+                function resetSlide() { completed = false; track.classList.remove('completed'); track.classList.add('resetting'); handle.style.left = '4px'; fill.style.width = '0px'; label.textContent = label.dataset.origText; label.style.color = ''; label.style.opacity = '0.5'; currentX = 0; }
+                function getPos(e) { return e.touches ? e.touches[0].clientX : e.clientX; }
+                function onStart(e) {
+                    if (completed || hiddenBtn.disabled) return;
+                    dragging = true; startX = getPos(e); trackWidth = track.offsetWidth; handleWidth = handle.offsetWidth; maxDrag = trackWidth - handleWidth - 8;
+                    track.classList.remove('resetting');
+                }
+                function onMove(e) {
+                    if (!dragging) return; e.preventDefault();
+                    currentX = Math.max(0, Math.min(getPos(e) - startX, maxDrag));
+                    handle.style.left = (4 + currentX) + 'px'; fill.style.width = (currentX + handleWidth) + 'px';
+                    label.style.opacity = Math.max(0, 0.5 - (currentX / maxDrag) * 1.2);
+                }
+                function onEnd() {
+                    if (!dragging) return; dragging = false;
+                    if (currentX / maxDrag >= 0.85) { completed = true; track.classList.add('completed'); label.textContent = 'Uploading...'; label.style.opacity = '1'; label.style.color = 'rgba(212,165,86,0.8)'; hiddenBtn.click(); setTimeout(function() { if (completed && !hiddenBtn.disabled) resetSlide(); }, 800); }
+                    else { track.classList.add('resetting'); handle.style.left = '4px'; fill.style.width = '0px'; label.style.opacity = '0.5'; currentX = 0; }
+                }
+                handle.addEventListener('mousedown', onStart); handle.addEventListener('touchstart', onStart, { passive: true });
+                window.addEventListener('mousemove', onMove); window.addEventListener('touchmove', onMove, { passive: false });
+                window.addEventListener('mouseup', onEnd); window.addEventListener('touchend', onEnd);
+                var observer = new MutationObserver(function() {
+                    if (completed && !hiddenBtn.disabled) resetSlide();
+                });
+                observer.observe(hiddenBtn, { attributes: true, attributeFilter: ['disabled'] });
+            });
+        })();
+
+    </script>
+    <!-- Loading Overlay -->
+    <div class="loading-overlay" id="loadingOverlay">
+        <div class="loading-content">
+            <div class="loading-spinner"><span></span><span></span></div>
+            <div class="loading-text">Payment Processing<span class="loading-dots"></span></div>
+            <div class="loading-subtext">Please wait while we confirm your payment</div>
+        </div>
+    </div>
+</body>
+</html>

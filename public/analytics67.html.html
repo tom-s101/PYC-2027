@@ -1,0 +1,1304 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Visitor Analytics - PYC 2026</title>
+    <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Montserrat:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --primary-navy: #1a2332;
+            --secondary-gold: #d4a556;
+            --text-light: #f5f5f5;
+            --success-green: #27ae60;
+            --info-blue: #3498db;
+            --philippines-red: #CE1126;
+            --philippines-blue: #0038A8;
+        }
+
+        body {
+            font-family: 'Montserrat', sans-serif;
+            background: linear-gradient(135deg, #0f1419 0%, #1a2332 50%, #2a3f5f 100%);
+            color: var(--text-light);
+            min-height: 100vh;
+        }
+
+        #loginScreen {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            min-height: 100vh;
+            padding: 20px;
+        }
+
+        .login-container {
+            background: rgba(26, 35, 50, 0.95);
+            padding: 50px 40px;
+            border-radius: 20px;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.5);
+            max-width: 450px;
+            width: 100%;
+            border: 2px solid rgba(212, 165, 86, 0.3);
+        }
+
+        .login-title {
+            font-family: 'Bebas Neue', sans-serif;
+            font-size: 2.5rem;
+            color: var(--secondary-gold);
+            text-align: center;
+            margin-bottom: 10px;
+            letter-spacing: 2px;
+        }
+
+        .login-subtitle {
+            text-align: center;
+            color: rgba(245, 245, 245, 0.7);
+            margin-bottom: 30px;
+            font-size: 0.95rem;
+        }
+
+        .form-group {
+            margin-bottom: 25px;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 8px;
+            color: var(--secondary-gold);
+            font-weight: 500;
+        }
+
+        .form-group input {
+            width: 100%;
+            padding: 15px;
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(212, 165, 86, 0.3);
+            border-radius: 8px;
+            color: var(--text-light);
+            font-size: 1rem;
+            transition: all 0.3s;
+        }
+
+        .form-group input:focus {
+            outline: none;
+            border-color: var(--secondary-gold);
+            background: rgba(255, 255, 255, 0.08);
+        }
+
+        .login-btn {
+            width: 100%;
+            padding: 15px;
+            background: var(--secondary-gold);
+            color: var(--primary-navy);
+            border: none;
+            border-radius: 8px;
+            font-size: 1.1rem;
+            font-weight: 700;
+            cursor: pointer;
+            transition: all 0.3s;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .login-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(212, 165, 86, 0.4);
+        }
+
+        .alert {
+            padding: 12px;
+            border-radius: 8px;
+            margin-bottom: 20px;
+            display: none;
+        }
+
+        .alert-error {
+            background: rgba(231, 76, 60, 0.2);
+            border: 1px solid #e74c3c;
+            color: #e74c3c;
+        }
+
+        #analyticsScreen {
+            display: none;
+            padding: 20px;
+            max-width: 1600px;
+            margin: 0 auto;
+        }
+
+        .header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 30px;
+            flex-wrap: wrap;
+            gap: 20px;
+        }
+
+        .header h1 {
+            font-family: 'Bebas Neue', sans-serif;
+            font-size: 2.5rem;
+            color: var(--secondary-gold);
+            letter-spacing: 2px;
+        }
+
+        .header-actions {
+            display: flex;
+            gap: 15px;
+            align-items: center;
+        }
+
+        .user-info {
+            color: rgba(245, 245, 245, 0.7);
+            font-size: 0.9rem;
+        }
+
+        .logout-btn, .refresh-btn {
+            padding: 10px 20px;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: all 0.3s;
+            font-weight: 600;
+            border: none;
+        }
+
+        .logout-btn {
+            background: rgba(231, 76, 60, 0.2);
+            border: 1px solid #e74c3c;
+            color: #e74c3c;
+        }
+
+        .refresh-btn {
+            background: rgba(39, 174, 96, 0.2);
+            border: 1px solid #27ae60;
+            color: #27ae60;
+        }
+
+        .logout-btn:hover {
+            background: rgba(231, 76, 60, 0.3);
+        }
+
+        .refresh-btn:hover {
+            background: rgba(39, 174, 96, 0.3);
+        }
+
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+            gap: 20px;
+            margin-bottom: 30px;
+        }
+
+        .stat-card {
+            background: rgba(26, 35, 50, 0.8);
+            padding: 25px;
+            border-radius: 15px;
+            border: 1px solid rgba(212, 165, 86, 0.3);
+            transition: all 0.3s;
+        }
+
+        .stat-card:hover {
+            transform: translateY(-5px);
+            border-color: var(--secondary-gold);
+        }
+
+        .stat-card.philippines {
+            border: 2px solid var(--philippines-red);
+            background: linear-gradient(135deg, rgba(206, 17, 38, 0.15), rgba(26, 35, 50, 0.9));
+        }
+
+        .stat-label {
+            color: rgba(245, 245, 245, 0.6);
+            font-size: 0.85rem;
+            margin-bottom: 10px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .stat-value {
+            font-size: 2.5rem;
+            color: var(--secondary-gold);
+            font-weight: 700;
+            margin-bottom: 5px;
+        }
+
+        .stat-card.philippines .stat-value {
+            color: var(--philippines-red);
+            font-size: 3rem;
+        }
+
+        .stat-change {
+            font-size: 0.85rem;
+            display: flex;
+            align-items: center;
+            gap: 5px;
+        }
+
+        .stat-change.positive {
+            color: var(--success-green);
+        }
+
+        .stat-change.neutral {
+            color: rgba(245, 245, 245, 0.5);
+        }
+
+        .philippines-section {
+            background: linear-gradient(135deg, rgba(206, 17, 38, 0.1) 0%, rgba(0, 56, 168, 0.1) 100%);
+            padding: 30px;
+            border-radius: 15px;
+            border: 2px solid var(--philippines-red);
+            margin-bottom: 30px;
+        }
+
+        .philippines-header {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            margin-bottom: 25px;
+        }
+
+        .philippines-flag {
+            font-size: 3rem;
+        }
+
+        .philippines-title {
+            font-family: 'Bebas Neue', sans-serif;
+            font-size: 2rem;
+            color: var(--philippines-red);
+            letter-spacing: 2px;
+        }
+
+        .philippines-stats {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 20px;
+        }
+
+        .ph-stat-card {
+            background: rgba(255, 255, 255, 0.05);
+            padding: 20px;
+            border-radius: 10px;
+            border-left: 4px solid var(--philippines-red);
+        }
+
+        .ph-stat-label {
+            font-size: 0.9rem;
+            color: rgba(245, 245, 245, 0.7);
+            margin-bottom: 8px;
+        }
+
+        .ph-stat-value {
+            font-size: 2rem;
+            font-weight: 700;
+            color: var(--philippines-red);
+        }
+
+        .charts-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(450px, 1fr));
+            gap: 20px;
+            margin-bottom: 30px;
+        }
+
+        .chart-card {
+            background: rgba(26, 35, 50, 0.8);
+            padding: 25px;
+            border-radius: 15px;
+            border: 1px solid rgba(212, 165, 86, 0.3);
+        }
+
+        .chart-card.featured {
+            grid-column: span 2;
+        }
+
+        .chart-title {
+            font-family: 'Bebas Neue', sans-serif;
+            font-size: 1.5rem;
+            color: var(--secondary-gold);
+            margin-bottom: 20px;
+            letter-spacing: 1px;
+        }
+
+        .chart-container {
+            position: relative;
+            height: 300px;
+        }
+
+        .chart-card.featured .chart-container {
+            height: 350px;
+        }
+
+        .map-section {
+            background: rgba(26, 35, 50, 0.8);
+            padding: 30px;
+            border-radius: 15px;
+            border: 2px solid var(--philippines-red);
+            margin-bottom: 30px;
+        }
+
+        .map-title {
+            font-family: 'Bebas Neue', sans-serif;
+            font-size: 1.8rem;
+            color: var(--secondary-gold);
+            margin-bottom: 20px;
+            letter-spacing: 1px;
+        }
+
+        .map-subtitle {
+            color: rgba(245, 245, 245, 0.6);
+            font-size: 0.9rem;
+            margin-bottom: 15px;
+        }
+
+        #map {
+            width: 100%;
+            height: 600px;
+            background: rgba(15, 20, 25, 0.5);
+            border-radius: 10px;
+            position: relative;
+        }
+
+        .top-cities-section {
+            background: rgba(26, 35, 50, 0.8);
+            padding: 30px;
+            border-radius: 15px;
+            border: 1px solid rgba(212, 165, 86, 0.3);
+            margin-bottom: 30px;
+        }
+
+        .cities-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+            gap: 15px;
+        }
+
+        .city-item {
+            background: rgba(255, 255, 255, 0.05);
+            padding: 15px;
+            border-radius: 10px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-left: 3px solid var(--philippines-red);
+            transition: all 0.3s;
+        }
+
+        .city-item:hover {
+            background: rgba(206, 17, 38, 0.1);
+            border-color: var(--philippines-red);
+        }
+
+        .city-name {
+            font-weight: 600;
+        }
+
+        .city-count {
+            color: var(--philippines-red);
+            font-weight: 700;
+            font-size: 1.2rem;
+        }
+
+        .visitors-section {
+            background: rgba(26, 35, 50, 0.8);
+            padding: 30px;
+            border-radius: 15px;
+            border: 1px solid rgba(212, 165, 86, 0.3);
+        }
+
+        .visitors-title {
+            font-family: 'Bebas Neue', sans-serif;
+            font-size: 1.8rem;
+            color: var(--secondary-gold);
+            margin-bottom: 20px;
+            letter-spacing: 1px;
+        }
+
+        .time-filter {
+            display: flex;
+            gap: 10px;
+            margin-bottom: 20px;
+            flex-wrap: wrap;
+        }
+
+        .filter-btn {
+            padding: 8px 16px;
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(212, 165, 86, 0.3);
+            color: var(--text-light);
+            border-radius: 6px;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+
+        .filter-btn:hover, .filter-btn.active {
+            background: rgba(212, 165, 86, 0.2);
+            border-color: var(--secondary-gold);
+        }
+
+        .visitor-table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+
+        .visitor-table th {
+            background: rgba(212, 165, 86, 0.2);
+            color: var(--secondary-gold);
+            padding: 15px;
+            text-align: left;
+            font-weight: 600;
+            text-transform: uppercase;
+            font-size: 0.85rem;
+            letter-spacing: 1px;
+        }
+
+        .visitor-table td {
+            padding: 15px;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .visitor-table tr:hover {
+            background: rgba(255, 255, 255, 0.05);
+        }
+
+        .visitor-table tr.philippines {
+            background: rgba(206, 17, 38, 0.08);
+            border-left: 3px solid var(--philippines-red);
+        }
+
+        .loading {
+            text-align: center;
+            padding: 40px;
+            color: rgba(245, 245, 245, 0.6);
+        }
+
+        .hidden {
+            display: none;
+        }
+
+        @media (max-width: 1200px) {
+            .chart-card.featured {
+                grid-column: span 1;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .header h1 {
+                font-size: 2rem;
+            }
+
+            #map {
+                height: 400px;
+            }
+
+            .charts-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .visitor-table {
+                font-size: 0.85rem;
+            }
+
+            .visitor-table th,
+            .visitor-table td {
+                padding: 10px 5px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Login Screen -->
+    <div id="loginScreen">
+        <div class="login-container">
+            <h1 class="login-title">🇵🇭 PYC Analytics</h1>
+            <p class="login-subtitle">Admin Access Only</p>
+            
+            <div id="loginAlert" class="alert alert-error"></div>
+            
+            <form id="loginForm">
+                <div class="form-group">
+                    <label for="username">Username</label>
+                    <input type="text" id="username" required autocomplete="username">
+                </div>
+                
+                <div class="form-group">
+                    <label for="password">Password</label>
+                    <input type="password" id="password" required autocomplete="current-password">
+                </div>
+                
+                <button type="submit" class="login-btn">Login</button>
+            </form>
+        </div>
+    </div>
+
+    <!-- Analytics Dashboard -->
+    <div id="analyticsScreen">
+        <div class="header">
+            <h1>🇵🇭 PYC 2026 Visitor Analytics</h1>
+            <div class="header-actions">
+                <span class="user-info">Logged in as: <strong id="currentUser"></strong></span>
+                <button class="refresh-btn" id="refreshBtn">🔄 Refresh</button>
+                <button class="logout-btn" id="logoutBtn">Logout</button>
+            </div>
+        </div>
+
+        <!-- Stats Cards -->
+        <div class="stats-grid">
+            <div class="stat-card philippines">
+                <div class="stat-label">🇵🇭 Philippines Visitors</div>
+                <div class="stat-value" id="philippinesVisitors">--</div>
+                <div class="stat-change neutral" id="philippinesPercent">--</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-label">Total Visitors</div>
+                <div class="stat-value" id="totalVisitors">--</div>
+                <div class="stat-change neutral">All time</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-label">🌍 International</div>
+                <div class="stat-value" id="internationalVisitors">--</div>
+                <div class="stat-change neutral" id="internationalPercent">--</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-label">📅 Today</div>
+                <div class="stat-value" id="todayVisitors">--</div>
+                <div class="stat-change positive">Last 24 hours</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-label">📊 This Week</div>
+                <div class="stat-value" id="weekVisitors">--</div>
+                <div class="stat-change positive">Last 7 days</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-label">🏴 Countries</div>
+                <div class="stat-value" id="uniqueCountries">--</div>
+                <div class="stat-change neutral">Unique</div>
+            </div>
+        </div>
+
+        <!-- Philippines Focus Section -->
+        <div class="philippines-section">
+            <div class="philippines-header">
+                <span class="philippines-flag">🇵🇭</span>
+                <h2 class="philippines-title">Philippines Visitor Breakdown</h2>
+            </div>
+            <div class="philippines-stats">
+                <div class="ph-stat-card">
+                    <div class="ph-stat-label">Total PH Visitors</div>
+                    <div class="ph-stat-value" id="phTotal">--</div>
+                </div>
+                <div class="ph-stat-card">
+                    <div class="ph-stat-label">PH Cities</div>
+                    <div class="ph-stat-value" id="phCities">--</div>
+                </div>
+                <div class="ph-stat-card">
+                    <div class="ph-stat-label">PH Today</div>
+                    <div class="ph-stat-value" id="phToday">--</div>
+                </div>
+                <div class="ph-stat-card">
+                    <div class="ph-stat-label">PH This Week</div>
+                    <div class="ph-stat-value" id="phWeek">--</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Charts -->
+        <div class="charts-grid">
+            <div class="chart-card featured">
+                <h3 class="chart-title">📈 Visitor Growth (Philippines vs Total)</h3>
+                <div class="chart-container">
+                    <canvas id="visitorsChart"></canvas>
+                </div>
+            </div>
+            
+            <div class="chart-card">
+                <h3 class="chart-title">🇵🇭 Philippines vs International</h3>
+                <div class="chart-container">
+                    <canvas id="geographicChart"></canvas>
+                </div>
+            </div>
+
+            <div class="chart-card">
+                <h3 class="chart-title">🏆 Top Philippine Cities</h3>
+                <div class="chart-container">
+                    <canvas id="citiesChart"></canvas>
+                </div>
+            </div>
+
+            <div class="chart-card">
+                <h3 class="chart-title">📅 Hourly Activity</h3>
+                <div class="chart-container">
+                    <canvas id="dailyChart"></canvas>
+                </div>
+            </div>
+
+            <div class="chart-card">
+                <h3 class="chart-title">🌍 International Countries</h3>
+                <div class="chart-container">
+                    <canvas id="internationalChart"></canvas>
+                </div>
+            </div>
+        </div>
+
+        <!-- Map (Philippines-focused) -->
+        <div class="map-section">
+            <h2 class="map-title">🗺️ Visitor Location Map</h2>
+            <p class="map-subtitle">Focused on Philippines • Red markers = PH visitors • Blue markers = International</p>
+            <div id="map">
+                <div class="loading">Loading map...</div>
+            </div>
+        </div>
+
+        <!-- Top Philippine Cities -->
+        <div class="top-cities-section">
+            <h2 class="map-title">🏙️ Top Philippine Cities</h2>
+            <div class="cities-grid" id="topCitiesGrid">
+                <div class="loading">Loading...</div>
+            </div>
+        </div>
+
+        <!-- Recent Visitors -->
+        <div class="visitors-section">
+            <h2 class="visitors-title">👥 Recent Visitors</h2>
+            <div class="time-filter">
+                <button class="filter-btn active" data-filter="all">All Time</button>
+                <button class="filter-btn" data-filter="today">Today</button>
+                <button class="filter-btn" data-filter="week">This Week</button>
+                <button class="filter-btn" data-filter="month">This Month</button>
+                <button class="filter-btn" data-filter="philippines">🇵🇭 Philippines Only</button>
+            </div>
+            <table class="visitor-table">
+                <thead>
+                    <tr>
+                        <th>Country</th>
+                        <th>City</th>
+                        <th>IP Address</th>
+                        <th>Timestamp</th>
+                    </tr>
+                </thead>
+                <tbody id="visitorsTableBody">
+                    <tr><td colspan="4" class="loading">Loading visitors...</td></tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+    <script>
+        let sessionToken = null;
+        let currentUser = null;
+        let map = null;
+        let markers = [];
+        let allVisitors = [];
+        let charts = {};
+
+        // Login functionality
+        document.getElementById('loginForm').addEventListener('submit', async (e) => {
+            e.preventDefault();
+            
+            const username = document.getElementById('username').value;
+            const password = document.getElementById('password').value;
+            const loginBtn = e.target.querySelector('.login-btn');
+            const originalText = loginBtn.textContent;
+            
+            loginBtn.disabled = true;
+            loginBtn.textContent = 'Logging in...';
+            
+            try {
+                const response = await fetch('/.netlify/functions/admin-login', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ username, password })
+                });
+                
+                const result = await response.json();
+                
+                if (response.ok && result.success) {
+                    if (result.role !== 'admin') {
+                        showAlert('Access denied. Admin credentials required.');
+                        loginBtn.disabled = false;
+                        loginBtn.textContent = originalText;
+                        return;
+                    }
+                    
+                    sessionToken = result.sessionToken;
+                    currentUser = result.username;
+                    
+                    localStorage.setItem('analyticsSessionToken', sessionToken);
+                    localStorage.setItem('analyticsUsername', currentUser);
+                    
+                    showAnalyticsDashboard();
+                } else {
+                    showAlert(result.message || 'Invalid credentials');
+                }
+            } catch (error) {
+                console.error('Login error:', error);
+                showAlert('Login failed. Please try again.');
+            } finally {
+                loginBtn.disabled = false;
+                loginBtn.textContent = originalText;
+            }
+        });
+
+        function showAlert(message) {
+            const alert = document.getElementById('loginAlert');
+            alert.textContent = message;
+            alert.style.display = 'block';
+            setTimeout(() => {
+                alert.style.display = 'none';
+            }, 5000);
+        }
+
+        window.addEventListener('load', async () => {
+            const storedToken = localStorage.getItem('analyticsSessionToken');
+            if (storedToken) {
+                const isValid = await validateSession(storedToken);
+                if (isValid) {
+                    sessionToken = storedToken;
+                    currentUser = localStorage.getItem('analyticsUsername');
+                    showAnalyticsDashboard();
+                } else {
+                    localStorage.removeItem('analyticsSessionToken');
+                    localStorage.removeItem('analyticsUsername');
+                }
+            }
+        });
+
+        async function validateSession(token) {
+            try {
+                const response = await fetch('/.netlify/functions/admin-validate-session', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ sessionToken: token })
+                });
+                
+                const result = await response.json();
+                return result.valid === true && result.role === 'admin';
+            } catch (error) {
+                console.error('Session validation error:', error);
+                return false;
+            }
+        }
+
+        function showAnalyticsDashboard() {
+            document.getElementById('loginScreen').classList.add('hidden');
+            document.getElementById('analyticsScreen').style.display = 'block';
+            document.getElementById('currentUser').textContent = currentUser;
+            
+            initializeMap();
+            loadAnalyticsData();
+        }
+
+        function initializeMap() {
+            // Center on Philippines with appropriate zoom
+            map = L.map('map').setView([12.8797, 121.7740], 6);
+            
+            L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+                attribution: '© OpenStreetMap contributors',
+                maxZoom: 18,
+                minZoom: 5
+            }).addTo(map);
+            
+            // Highlight Philippines with red border
+            const philippinesBounds = [[4.5, 116], [21, 127]];
+            L.rectangle(philippinesBounds, {
+                color: '#CE1126',
+                weight: 3,
+                fillColor: '#CE1126',
+                fillOpacity: 0.15
+            }).addTo(map);
+        }
+
+        async function loadAnalyticsData() {
+            try {
+                const response = await fetch('/.netlify/functions/get-visitor-analytics', {
+                    method: 'GET',
+                    headers: {
+                        'Authorization': `Bearer ${sessionToken}`
+                    }
+                });
+                
+                if (!response.ok) {
+                    throw new Error('Failed to load analytics');
+                }
+                
+                const data = await response.json();
+                allVisitors = data.visitors || [];
+                
+                updateStats(data);
+                updatePhilippinesStats(allVisitors);
+                updateCharts(allVisitors);
+                updateMap(allVisitors);
+                updateTopCities(allVisitors);
+                updateVisitorTable(data.recentVisitors || []);
+                
+            } catch (error) {
+                console.error('Error loading analytics:', error);
+            }
+        }
+
+        function updateStats(data) {
+            document.getElementById('totalVisitors').textContent = data.totalVisitors || 0;
+            document.getElementById('philippinesVisitors').textContent = data.philippinesVisitors || 0;
+            document.getElementById('internationalVisitors').textContent = data.internationalVisitors || 0;
+            document.getElementById('uniqueCountries').textContent = data.uniqueCountries || 0;
+            document.getElementById('todayVisitors').textContent = data.todayVisitors || 0;
+            document.getElementById('weekVisitors').textContent = data.weekVisitors || 0;
+            
+            if (data.totalVisitors > 0) {
+                const phPercent = ((data.philippinesVisitors / data.totalVisitors) * 100).toFixed(1);
+                const intPercent = ((data.internationalVisitors / data.totalVisitors) * 100).toFixed(1);
+                document.getElementById('philippinesPercent').textContent = `${phPercent}% of total`;
+                document.getElementById('internationalPercent').textContent = `${intPercent}% of total`;
+            }
+        }
+
+        function updatePhilippinesStats(visitors) {
+            const phVisitors = visitors.filter(v => v.country === 'Philippines' || v.country === 'PH');
+            
+            document.getElementById('phTotal').textContent = phVisitors.length;
+            
+            const phCities = new Set(phVisitors.filter(v => v.city).map(v => v.city));
+            document.getElementById('phCities').textContent = phCities.size;
+            
+            const today = new Date();
+            today.setHours(0, 0, 0, 0);
+            const phToday = phVisitors.filter(v => new Date(v.visited_at) >= today).length;
+            document.getElementById('phToday').textContent = phToday;
+            
+            const weekAgo = new Date(Date.now() - 7 * 24 * 60 * 60 * 1000);
+            const phWeek = phVisitors.filter(v => new Date(v.visited_at) >= weekAgo).length;
+            document.getElementById('phWeek').textContent = phWeek;
+        }
+        function updateCharts(visitors) {
+            createVisitorsOverTimeChart(visitors);
+            createGeographicChart(visitors);
+            createPhilippineCitiesChart(visitors);
+            createDailyActivityChart(visitors);
+            createInternationalChart(visitors);
+        }
+
+        function createVisitorsOverTimeChart(visitors) {
+            const ctx = document.getElementById('visitorsChart');
+            if (charts.visitors) charts.visitors.destroy();
+            
+            const dateGroups = {};
+            const phDateGroups = {};
+            
+            visitors.forEach(v => {
+                const date = new Date(v.visited_at).toLocaleDateString();
+                dateGroups[date] = (dateGroups[date] || 0) + 1;
+                
+                if (v.country === 'Philippines' || v.country === 'PH') {
+                    phDateGroups[date] = (phDateGroups[date] || 0) + 1;
+                }
+            });
+            
+            const dates = Object.keys(dateGroups).slice(-14);
+            const totalCounts = dates.map(d => dateGroups[d]);
+            const phCounts = dates.map(d => phDateGroups[d] || 0);
+            
+            charts.visitors = new Chart(ctx, {
+                type: 'line',
+                data: {
+                    labels: dates,
+                    datasets: [
+                        {
+                            label: '🇵🇭 Philippines',
+                            data: phCounts,
+                            borderColor: '#CE1126',
+                            backgroundColor: 'rgba(206, 17, 38, 0.2)',
+                            tension: 0.4,
+                            fill: true,
+                            borderWidth: 3,
+                            pointRadius: 5,
+                            pointBackgroundColor: '#CE1126'
+                        },
+                        {
+                            label: 'Total Visitors',
+                            data: totalCounts,
+                            borderColor: '#d4a556',
+                            backgroundColor: 'rgba(212, 165, 86, 0.1)',
+                            tension: 0.4,
+                            fill: true,
+                            borderWidth: 2,
+                            pointRadius: 4,
+                            pointBackgroundColor: '#d4a556'
+                        }
+                    ]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    plugins: {
+                        legend: {
+                            display: true,
+                            position: 'top',
+                            labels: { 
+                                color: '#f5f5f5',
+                                font: { size: 13 }
+                            }
+                        }
+                    },
+                    scales: {
+                        y: { 
+                            beginAtZero: true,
+                            ticks: { color: '#f5f5f5' },
+                            grid: { color: 'rgba(245, 245, 245, 0.1)' }
+                        },
+                        x: {
+                            ticks: { color: '#f5f5f5' },
+                            grid: { color: 'rgba(245, 245, 245, 0.1)' }
+                        }
+                    }
+                }
+            });
+        }
+
+        function createGeographicChart(visitors) {
+            const ctx = document.getElementById('geographicChart');
+            if (charts.geographic) charts.geographic.destroy();
+            
+            const philippines = visitors.filter(v => v.country === 'Philippines' || v.country === 'PH').length;
+            const international = visitors.length - philippines;
+            
+            charts.geographic = new Chart(ctx, {
+                type: 'doughnut',
+                data: {
+                    labels: ['🇵🇭 Philippines', '🌍 International'],
+                    datasets: [{
+                        data: [philippines, international],
+                        backgroundColor: ['#CE1126', '#3498db'],
+                        borderWidth: 0,
+                        hoverOffset: 10
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    plugins: {
+                        legend: {
+                            position: 'bottom',
+                            labels: { 
+                                color: '#f5f5f5',
+                                font: { size: 14 },
+                                padding: 20
+                            }
+                        }
+                    }
+                }
+            });
+        }
+
+        function createPhilippineCitiesChart(visitors) {
+            const ctx = document.getElementById('citiesChart');
+            if (charts.cities) charts.cities.destroy();
+            
+            const phVisitors = visitors.filter(v => v.country === 'Philippines' || v.country === 'PH');
+            const cityCount = {};
+            
+            phVisitors.forEach(v => {
+                if (v.city) {
+                    cityCount[v.city] = (cityCount[v.city] || 0) + 1;
+                }
+            });
+            
+            const sorted = Object.entries(cityCount).sort((a, b) => b[1] - a[1]).slice(0, 10);
+            const cities = sorted.map(s => s[0]);
+            const counts = sorted.map(s => s[1]);
+            
+            charts.cities = new Chart(ctx, {
+                type: 'bar',
+                data: {
+                    labels: cities,
+                    datasets: [{
+                        label: 'Visitors',
+                        data: counts,
+                        backgroundColor: '#CE1126',
+                        borderRadius: 5
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    indexAxis: 'y',
+                    plugins: {
+                        legend: { display: false }
+                    },
+                    scales: {
+                        y: { 
+                            ticks: { color: '#f5f5f5' },
+                            grid: { display: false }
+                        },
+                        x: {
+                            beginAtZero: true,
+                            ticks: { color: '#f5f5f5' },
+                            grid: { color: 'rgba(245, 245, 245, 0.1)' }
+                        }
+                    }
+                }
+            });
+        }
+
+        function createDailyActivityChart(visitors) {
+            const ctx = document.getElementById('dailyChart');
+            if (charts.daily) charts.daily.destroy();
+            
+            const hourCounts = new Array(24).fill(0);
+            visitors.forEach(v => {
+                const hour = new Date(v.visited_at).getHours();
+                hourCounts[hour]++;
+            });
+            
+            charts.daily = new Chart(ctx, {
+                type: 'bar',
+                data: {
+                    labels: Array.from({length: 24}, (_, i) => {
+                        if (i === 0) return '12 AM';
+                        if (i === 12) return '12 PM';
+                        return i < 12 ? `${i} AM` : `${i-12} PM`;
+                    }),
+                    datasets: [{
+                        label: 'Visits',
+                        data: hourCounts,
+                        backgroundColor: '#d4a556',
+                        borderRadius: 3
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    plugins: {
+                        legend: { display: false }
+                    },
+                    scales: {
+                        y: { 
+                            beginAtZero: true,
+                            ticks: { color: '#f5f5f5' },
+                            grid: { color: 'rgba(245, 245, 245, 0.1)' }
+                        },
+                        x: {
+                            ticks: { color: '#f5f5f5', maxRotation: 45, minRotation: 45 },
+                            grid: { display: false }
+                        }
+                    }
+                }
+            });
+        }
+
+        function createInternationalChart(visitors) {
+            const ctx = document.getElementById('internationalChart');
+            if (charts.international) charts.international.destroy();
+            
+            const intVisitors = visitors.filter(v => v.country !== 'Philippines' && v.country !== 'PH');
+            const countryCount = {};
+            
+            intVisitors.forEach(v => {
+                if (v.country) {
+                    countryCount[v.country] = (countryCount[v.country] || 0) + 1;
+                }
+            });
+            
+            const sorted = Object.entries(countryCount).sort((a, b) => b[1] - a[1]).slice(0, 8);
+            const countries = sorted.map(s => s[0]);
+            const counts = sorted.map(s => s[1]);
+            
+            charts.international = new Chart(ctx, {
+                type: 'bar',
+                data: {
+                    labels: countries,
+                    datasets: [{
+                        label: 'Visitors',
+                        data: counts,
+                        backgroundColor: '#3498db',
+                        borderRadius: 5
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    plugins: {
+                        legend: { display: false }
+                    },
+                    scales: {
+                        y: { 
+                            beginAtZero: true,
+                            ticks: { color: '#f5f5f5' },
+                            grid: { color: 'rgba(245, 245, 245, 0.1)' }
+                        },
+                        x: {
+                            ticks: { color: '#f5f5f5' },
+                            grid: { display: false }
+                        }
+                    }
+                }
+            });
+        }
+        function updateMap(visitors) {
+            markers.forEach(m => map.removeLayer(m));
+            markers = [];
+            
+            const phVisitors = visitors.filter(v => v.country === 'Philippines' || v.country === 'PH');
+            const intVisitors = visitors.filter(v => v.country !== 'Philippines' && v.country !== 'PH');
+            
+            // Add Philippines markers (larger red markers)
+            phVisitors.forEach(visitor => {
+                if (visitor.latitude && visitor.longitude) {
+                    const marker = L.circleMarker([visitor.latitude, visitor.longitude], {
+                        radius: 7,
+                        fillColor: '#CE1126',
+                        color: '#fff',
+                        weight: 2,
+                        fillOpacity: 0.9
+                    }).addTo(map);
+                    
+                    marker.bindPopup(`
+                        <strong>🇵🇭 ${visitor.city || 'Unknown'}, Philippines</strong><br>
+                        ${visitor.region || ''}<br>
+                        ${visitor.ip_address}<br>
+                        ${new Date(visitor.visited_at).toLocaleString()}
+                    `);
+                    markers.push(marker);
+                }
+            });
+            
+            // Add international markers (smaller blue markers)
+            intVisitors.forEach(visitor => {
+                if (visitor.latitude && visitor.longitude) {
+                    const marker = L.circleMarker([visitor.latitude, visitor.longitude], {
+                        radius: 5,
+                        fillColor: '#3498db',
+                        color: '#fff',
+                        weight: 2,
+                        fillOpacity: 0.7
+                    }).addTo(map);
+                    
+                    marker.bindPopup(`
+                        <strong>🌍 ${visitor.city || 'Unknown'}, ${visitor.country}</strong><br>
+                        ${visitor.ip_address}<br>
+                        ${new Date(visitor.visited_at).toLocaleString()}
+                    `);
+                    markers.push(marker);
+                }
+            });
+        }
+
+        function updateTopCities(visitors) {
+            const phVisitors = visitors.filter(v => v.country === 'Philippines' || v.country === 'PH');
+            const cityCount = {};
+            
+            phVisitors.forEach(v => {
+                if (v.city) {
+                    cityCount[v.city] = (cityCount[v.city] || 0) + 1;
+                }
+            });
+            
+            const sorted = Object.entries(cityCount)
+                .map(([city, count]) => ({ city, count }))
+                .sort((a, b) => b.count - a.count);
+            
+            const grid = document.getElementById('topCitiesGrid');
+            
+            if (sorted.length === 0) {
+                grid.innerHTML = '<div class="loading">No Philippine cities yet</div>';
+                return;
+            }
+            
+            grid.innerHTML = sorted.slice(0, 15).map(c => `
+                <div class="city-item">
+                    <span class="city-name">🇵🇭 ${c.city}</span>
+                    <span class="city-count">${c.count}</span>
+                </div>
+            `).join('');
+        }
+
+        function updateVisitorTable(visitors) {
+            const tbody = document.getElementById('visitorsTableBody');
+            
+            if (visitors.length === 0) {
+                tbody.innerHTML = '<tr><td colspan="4" style="text-align: center; color: rgba(245, 245, 245, 0.5);">No visitors yet</td></tr>';
+                return;
+            }
+            
+            tbody.innerHTML = visitors.map(visitor => {
+                const isPhilippines = visitor.country === 'Philippines' || visitor.country === 'PH';
+                return `
+                    <tr class="${isPhilippines ? 'philippines' : ''}">
+                        <td>${isPhilippines ? '🇵🇭 ' : ''}${visitor.country || 'Unknown'}</td>
+                        <td>${visitor.city || 'Unknown'}</td>
+                        <td>${visitor.ip_address}</td>
+                        <td>${new Date(visitor.visited_at).toLocaleString()}</td>
+                    </tr>
+                `;
+            }).join('');
+        }
+
+        // Refresh button
+        document.getElementById('refreshBtn').addEventListener('click', () => {
+            loadAnalyticsData();
+        });
+
+        // Logout
+        document.getElementById('logoutBtn').addEventListener('click', async () => {
+            try {
+                await fetch('/.netlify/functions/admin-logout', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ sessionToken })
+                });
+            } catch (error) {
+                console.error('Logout error:', error);
+            }
+            
+            localStorage.removeItem('analyticsSessionToken');
+            localStorage.removeItem('analyticsUsername');
+            
+            document.getElementById('analyticsScreen').style.display = 'none';
+            document.getElementById('loginScreen').classList.remove('hidden');
+            document.getElementById('username').value = '';
+            document.getElementById('password').value = '';
+            
+            sessionToken = null;
+            currentUser = null;
+        });
+
+        // Time filter buttons
+        document.querySelectorAll('.filter-btn').forEach(btn => {
+            btn.addEventListener('click', (e) => {
+                document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+                e.target.classList.add('active');
+                
+                const filter = e.target.dataset.filter;
+                filterVisitors(filter);
+            });
+        });
+
+        function filterVisitors(filter) {
+            let filtered = allVisitors;
+            const now = new Date();
+            
+            if (filter === 'today') {
+                filtered = allVisitors.filter(v => {
+                    const vDate = new Date(v.visited_at);
+                    return vDate.toDateString() === now.toDateString();
+                });
+            } else if (filter === 'week') {
+                const weekAgo = new Date(now.getTime() - 7 * 24 * 60 * 60 * 1000);
+                filtered = allVisitors.filter(v => new Date(v.visited_at) > weekAgo);
+            } else if (filter === 'month') {
+                const monthAgo = new Date(now.getTime() - 30 * 24 * 60 * 60 * 1000);
+                filtered = allVisitors.filter(v => new Date(v.visited_at) > monthAgo);
+            } else if (filter === 'philippines') {
+                filtered = allVisitors.filter(v => v.country === 'Philippines' || v.country === 'PH');
+            }
+            
+            updateVisitorTable(filtered.slice(0, 100));
+        }
+    </script>
+</body>
+</html>

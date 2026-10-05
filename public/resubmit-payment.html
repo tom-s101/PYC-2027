@@ -1,0 +1,580 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Resubmit Payment - PYC 2026</title>
+    <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Cinzel:wght@400;700&family=Montserrat:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --primary-navy: #1a2332;
+            --secondary-gold: #d4a556;
+            --text-light: #f5f5f5;
+        }
+
+        body {
+            font-family: 'Montserrat', sans-serif;
+            background: linear-gradient(135deg, #0f1419 0%, #1a2332 50%, #2a3f5f 100%);
+            color: var(--text-light);
+            min-height: 100vh;
+            padding: 40px 20px;
+        }
+
+        .container {
+            max-width: 600px;
+            margin: 0 auto;
+            background: rgba(26, 35, 50, 0.95);
+            border-radius: 15px;
+            padding: 40px;
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+        }
+
+        h1 {
+            font-family: 'Bebas Neue', sans-serif;
+            font-size: 2.5rem;
+            color: var(--secondary-gold);
+            text-align: center;
+            margin-bottom: 10px;
+            letter-spacing: 2px;
+        }
+
+        .subtitle {
+            text-align: center;
+            color: rgba(245, 245, 245, 0.7);
+            margin-bottom: 30px;
+            font-size: 0.9rem;
+        }
+
+        .alert {
+            padding: 15px;
+            border-radius: 8px;
+            margin-bottom: 20px;
+            display: none;
+        }
+
+        .alert-error {
+            background: rgba(231, 76, 60, 0.2);
+            border: 1px solid rgba(231, 76, 60, 0.5);
+            color: #ff6b6b;
+        }
+
+        .alert-success {
+            background: rgba(46, 204, 113, 0.2);
+            border: 1px solid rgba(46, 204, 113, 0.5);
+            color: #51cf66;
+        }
+
+        .form-section {
+            margin-bottom: 30px;
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 500;
+            color: rgba(245, 245, 245, 0.9);
+        }
+
+        input[type="text"],
+        input[type="email"],
+        input[type="file"] {
+            width: 100%;
+            padding: 12px 15px;
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(212, 165, 86, 0.3);
+            border-radius: 8px;
+            color: var(--text-light);
+            font-size: 1rem;
+            font-family: 'Montserrat', sans-serif;
+            transition: all 0.3s;
+        }
+
+        input:focus {
+            outline: none;
+            border-color: var(--secondary-gold);
+            background: rgba(255, 255, 255, 0.08);
+        }
+
+        input[type="file"] {
+            padding: 10px;
+            cursor: pointer;
+        }
+
+        .file-info {
+            font-size: 0.85rem;
+            color: rgba(245, 245, 245, 0.6);
+            margin-top: 5px;
+        }
+
+        .preview-container {
+            margin-top: 15px;
+            display: none;
+        }
+
+        .preview-container img {
+            max-width: 100%;
+            border-radius: 8px;
+            border: 2px solid rgba(212, 165, 86, 0.3);
+        }
+
+        .submit-btn {
+            width: 100%;
+            padding: 18px;
+            font-family: 'Cinzel', serif;
+            font-size: 1.2rem;
+            font-weight: 700;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            background: linear-gradient(135deg, var(--secondary-gold) 0%, #c9965d 100%);
+            color: var(--primary-navy);
+            border: none;
+            border-radius: 12px;
+            cursor: pointer;
+            transition: all 0.4s ease;
+            box-shadow: 0 10px 30px rgba(212, 165, 86, 0.3);
+            margin-top: 30px;
+        }
+
+        .submit-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 15px 40px rgba(212, 165, 86, 0.4);
+        }
+
+        .submit-btn:disabled {
+            opacity: 0.6;
+            cursor: not-allowed;
+            transform: none;
+        }
+
+        .spinner {
+            border: 3px solid rgba(26, 35, 50, 0.3);
+            border-top: 3px solid #1a2332;
+            border-radius: 50%;
+            width: 20px;
+            height: 20px;
+            animation: spin 1s linear infinite;
+            display: inline-block;
+            margin-left: 10px;
+        }
+
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+        .info-box {
+            background: rgba(212, 165, 86, 0.1);
+            border-left: 4px solid var(--secondary-gold);
+            padding: 15px;
+            border-radius: 4px;
+            margin-bottom: 20px;
+        }
+
+        .info-box ul {
+            margin: 10px 0;
+            padding-left: 20px;
+        }
+
+        .info-box li {
+            margin: 5px 0;
+            color: rgba(245, 245, 245, 0.8);
+        }
+
+        /* Loading Overlay */
+        .loading-overlay {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(135deg, #0f1419 0%, #1a2332 50%, #2a3f5f 100%);
+            z-index: 10000;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+        }
+
+        .loading-overlay.active {
+            display: flex;
+        }
+
+        .loading-spinner {
+            width: 65px;
+            aspect-ratio: 1;
+            margin: 0 auto 30px;
+            position: relative;
+        }
+        .loading-spinner span {
+            position: absolute;
+            border-radius: 50px;
+            box-shadow: inset 0 0 0 3px #d4a556;
+            animation: loaderMorph 2.5s infinite;
+        }
+        .loading-spinner span:nth-child(2) {
+            animation-delay: -1.25s;
+        }
+        @keyframes loaderMorph {
+            0%   { inset: 0 35px 35px 0; }
+            12.5%{ inset: 0 35px 0 0; }
+            25%  { inset: 35px 35px 0 0; }
+            37.5%{ inset: 35px 0 0 0; }
+            50%  { inset: 35px 0 0 35px; }
+            62.5%{ inset: 0 0 0 35px; }
+            75%  { inset: 0 0 35px 35px; }
+            87.5%{ inset: 0 0 35px 0; }
+            100% { inset: 0 35px 35px 0; }
+        }
+
+        .loading-text {
+            font-family: 'Bebas Neue', sans-serif;
+            font-size: 2rem;
+            color: var(--secondary-gold);
+            letter-spacing: 3px;
+            margin-bottom: 10px;
+        }
+
+        .loading-subtext {
+            color: rgba(245, 245, 245, 0.7);
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* Slide Button */
+        .slide-btn-wrapper { width: 100%; margin-top: 10px; }
+        .slide-btn-track { position: relative; height: 58px; background: rgba(255,255,255,0.04); border: 1px solid rgba(212,165,86,0.3); border-radius: 50px; overflow: hidden; touch-action: none; user-select: none; -webkit-user-select: none; }
+        .slide-btn-track.completed { border-color: rgba(212,165,86,0.5); }
+        .slide-btn-fill { position: absolute; top: 0; left: 0; bottom: 0; width: 0; background: linear-gradient(90deg, rgba(212,165,86,0.15), rgba(212,165,86,0.25)); border-radius: 50px; transition: none; }
+        .slide-btn-track.resetting .slide-btn-fill { transition: width 0.3s ease; }
+        .slide-btn-track.completed .slide-btn-fill { background: linear-gradient(90deg, rgba(212,165,86,0.15), rgba(212,165,86,0.35)); width: 100% !important; }
+        .slide-btn-label { position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); font-family: 'Montserrat', sans-serif; font-size: 0.9rem; font-weight: 700; letter-spacing: 1px; text-transform: uppercase; color: rgba(212,165,86,0.5); white-space: nowrap; pointer-events: none; transition: opacity 0.2s; }
+        
+        .slide-btn-handle { position: absolute; top: 4px; left: 4px; width: 50px; height: 50px; background: linear-gradient(135deg, #d4a556, #c9965d); border-radius: 50%; display: flex; align-items: center; justify-content: center; cursor: grab; z-index: 2; transition: none; box-shadow: 0 2px 8px rgba(0,0,0,0.3); }
+        .slide-btn-handle:active { cursor: grabbing; }
+        .slide-btn-track.resetting .slide-btn-handle { transition: left 0.3s ease; }
+        .slide-btn-handle svg { width: 22px; height: 22px; fill: none; stroke: #1a2332; stroke-width: 2.5; stroke-linecap: round; stroke-linejoin: round; }
+        .slide-btn-track.completed .slide-btn-handle { background: linear-gradient(135deg, #d4a556, #c9965d); left: calc(100% - 54px) !important; transition: left 0.3s; }
+        .slide-btn-track.completed .slide-btn-handle svg { display: none; }
+        .slide-btn-loading { display: none; width: 30px; height: 30px; position: relative; }
+        .slide-btn-loading .orbit { position: absolute; border: 2px solid transparent; border-radius: 50%; }
+        .slide-btn-loading .orbit-1 { inset: 0; border-top-color: #1a2332; animation: spin 1s linear infinite; }
+        .slide-btn-loading .orbit-2 { inset: 4px; border-top-color: #1a2332; animation: spin-reverse 1.5s linear infinite; }
+        .slide-btn-loading .orbit-3 { inset: 8px; border-top-color: #1a2332; animation: spin 0.8s linear infinite; }
+        @keyframes spin-reverse { to { transform: rotate(-360deg); } }
+        .slide-btn-track.completed .slide-btn-loading { display: block; }
+        .slide-btn-dots { display: none; position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); z-index: 1; pointer-events: none; }
+        .slide-btn-track.completed .slide-btn-dots { display: block; top: 72%; }
+        .slide-btn-track.completed .slide-btn-label { top: 35%; }
+        @media (max-width: 480px) { .slide-btn-track { height: 52px; } .slide-btn-handle { width: 44px; height: 44px; } .slide-btn-label { font-size: 0.8rem; } }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>RESUBMIT PAYMENT</h1>
+        <p class="subtitle">PYC 2026 - Mountain View College, Mindanao</p>
+
+        <div id="alertMessage" class="alert"></div>
+
+        <div class="info-box">
+            <p><strong>Your previous payment submission was not accepted.</strong></p>
+            <p style="margin-top: 10px;">Please resubmit a clear screenshot showing:</p>
+            <ul>
+                <li>Complete GCash transaction details</li>
+                <li>Full transaction amount</li>
+                <li>Transaction date and reference number</li>
+                <li>Clear, unedited screenshot (max 5MB)</li>
+            </ul>
+        </div>
+
+        <form id="resubmitForm">
+            <div class="form-section">
+                <div class="form-group">
+                    <label for="firstName">First Name *</label>
+                    <input type="text" id="firstName" name="firstName" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="lastName">Last Name *</label>
+                    <input type="text" id="lastName" name="lastName" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="email">Email Address *</label>
+                    <input type="email" id="email" name="email" required>
+                    <div class="file-info">Use the same email from your original registration</div>
+                </div>
+
+                <div class="form-group">
+                    <label for="confirmEmail">Confirm Email Address *</label>
+                    <input type="email" id="confirmEmail" name="confirmEmail" required>
+                    <div id="emailMatchMessage" style="margin-top: 8px; font-size: 0.9rem; display: none;"></div>
+                </div>
+            </div>
+
+            <div class="form-section">
+                <div class="form-group">
+                    <label for="transactionRef">Transaction Reference Number *</label>
+                    <input type="text" id="transactionRef" placeholder="Enter your GCash or bank reference number" required
+                        style="width:100%;padding:14px 18px;background:rgba(255,255,255,0.05);border:1px solid rgba(212,165,86,0.3);border-radius:10px;color:#f5f5f5;font-family:'Montserrat',sans-serif;font-size:1rem;">
+                    <div class="file-info">Found in your payment receipt or bank confirmation</div>
+                </div>
+                <div class="form-group">
+                    <label for="paymentProof">Upload New Payment Screenshot *</label>
+                    <input type="file" id="paymentProof" accept="image/jpeg,image/jpg,image/png,image/webp" required>
+                    <div class="file-info">Maximum file size: 5MB (JPG, PNG, WebP)</div>
+                </div>
+
+                <div class="preview-container" id="previewContainer">
+                    <img id="previewImg" src="" alt="Payment proof preview">
+                </div>
+            </div>
+
+            <button type="submit" class="submit-btn" id="submitBtn" style="display:none;" formnovalidate>
+                Submit New Payment Proof
+            </button>
+            <div class="slide-btn-wrapper">
+                <div class="slide-btn-track" data-slide-btn="submitBtn">
+                    <div class="slide-btn-fill"></div>
+                    <span class="slide-btn-label">Slide to Resubmit →</span>
+                    <div class="slide-btn-dots"><svg width="40" height="24" viewBox="0 0 24 24"><circle cx="4" cy="12" r="2" fill="#d4a556"><animate id="sr1" begin="0;sr3.end+0.25s" attributeName="cy" calcMode="spline" dur="0.6s" values="12;6;12" keySplines=".33,.66,.66,1;.33,0,.66,.33"/></circle><circle cx="12" cy="12" r="2" fill="#d4a556"><animate begin="sr1.begin+0.1s" attributeName="cy" calcMode="spline" dur="0.6s" values="12;6;12" keySplines=".33,.66,.66,1;.33,0,.66,.33"/></circle><circle cx="20" cy="12" r="2" fill="#d4a556"><animate id="sr3" begin="sr1.begin+0.2s" attributeName="cy" calcMode="spline" dur="0.6s" values="12;6;12" keySplines=".33,.66,.66,1;.33,0,.66,.33"/></circle></svg></div>
+                    <div class="slide-btn-handle">
+                        <svg viewBox="0 0 24 24"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+                        <div class="slide-btn-loading"><div class="orbit orbit-1"></div><div class="orbit orbit-2"></div><div class="orbit orbit-3"></div></div>
+                    </div>
+                </div>
+            </div>
+        </form>
+    </div>
+
+    <!-- Loading Overlay -->
+    <div class="loading-overlay" id="loadingOverlay">
+        <div class="loading-content" style="text-align: center; animation: fadeInUp 0.5s ease;">
+            <div class="loading-spinner"><span></span><span></span></div>
+            <div class="loading-text">Processing...</div>
+            <div class="loading-subtext">Your payment is being resubmitted</div>
+        </div>
+    </div>
+
+    <script>
+        // Preview image
+        document.getElementById('paymentProof').addEventListener('change', function(e) {
+            const file = e.target.files[0];
+            if (file) {
+                // Check file size (5MB)
+                const maxSize = 5 * 1024 * 1024;
+                if (file.size > maxSize) {
+                    showAlert('File too large! Maximum size is 5MB. Your file is ' + (file.size / (1024 * 1024)).toFixed(2) + 'MB', 'error');
+                    e.target.value = '';
+                    document.getElementById('previewContainer').style.display = 'none';
+                    return;
+                }
+                
+                // Check file type
+                const allowedTypes = ['image/jpeg', 'image/jpg', 'image/png', 'image/webp'];
+                if (!allowedTypes.includes(file.type)) {
+                    showAlert('Invalid file type! Please upload JPG, PNG, or WebP images only.', 'error');
+                    e.target.value = '';
+                    document.getElementById('previewContainer').style.display = 'none';
+                    return;
+                }
+                
+                // Show preview
+                const reader = new FileReader();
+                reader.onload = function(e) {
+                    document.getElementById('previewImg').src = e.target.result;
+                    document.getElementById('previewContainer').style.display = 'block';
+                };
+                reader.readAsDataURL(file);
+            }
+        });
+
+        // Real-time email confirmation validation
+        const emailInput = document.getElementById('email');
+        const confirmEmailInput = document.getElementById('confirmEmail');
+        const emailMatchMessage = document.getElementById('emailMatchMessage');
+
+        function checkEmailMatch() {
+            const email = emailInput.value;
+            const confirmEmail = confirmEmailInput.value;
+            
+            if (confirmEmail === '') {
+                emailMatchMessage.style.display = 'none';
+                confirmEmailInput.style.borderColor = 'rgba(212, 165, 86, 0.3)';
+                return;
+            }
+            
+            if (email === confirmEmail) {
+                emailMatchMessage.style.display = 'block';
+                emailMatchMessage.style.color = '#27ae60';
+                emailMatchMessage.textContent = '✓ Emails match';
+                confirmEmailInput.style.borderColor = '#27ae60';
+            } else {
+                emailMatchMessage.style.display = 'block';
+                emailMatchMessage.style.color = '#e74c3c';
+                emailMatchMessage.textContent = '✗ Emails do not match';
+                confirmEmailInput.style.borderColor = '#e74c3c';
+            }
+        }
+
+        emailInput.addEventListener('input', checkEmailMatch);
+        confirmEmailInput.addEventListener('input', checkEmailMatch);
+
+        // Form submission
+        document.getElementById('resubmitForm').addEventListener('submit', async (e) => {
+            e.preventDefault();
+            
+            const submitBtn = document.getElementById('submitBtn');
+            const originalText = submitBtn.innerHTML;
+            const transactionRef = document.getElementById('transactionRef').value.trim();
+            if (!transactionRef) {
+                showAlert('Please enter your transaction reference number.', 'error');
+                document.getElementById('transactionRef').focus();
+                document.getElementById('transactionRef').scrollIntoView({ behavior: 'smooth', block: 'center' });
+                return;
+            }
+            const file = document.getElementById('paymentProof').files[0];
+            
+            if (!file) {
+                showAlert('Please upload your payment screenshot', 'error');
+                return;
+            }
+
+            // Validate email match
+            const email = document.getElementById('email').value;
+            const confirmEmail = document.getElementById('confirmEmail').value;
+            
+            if (email !== confirmEmail) {
+                showAlert('Email addresses do not match', 'error');
+                return;
+            }
+            
+            submitBtn.disabled = true;
+            submitBtn.innerHTML = 'Processing... <span class="spinner"></span>';
+
+            try {
+                // Get form data
+                const firstName = document.getElementById('firstName').value;
+                const lastName = document.getElementById('lastName').value;
+                
+                // Convert file to base64
+                const reader = new FileReader();
+                reader.onerror = function() {
+                    showAlert('Failed to read the file. Please try again.', 'error');
+                    submitBtn.disabled = false;
+                    submitBtn.innerHTML = originalText;
+                };
+                reader.onload = async function(e) {
+                    try {
+                        const base64Image = e.target.result;
+
+                        const response = await fetch('/.netlify/functions/resubmit-payment', {
+                            method: 'POST',
+                            headers: { 'Content-Type': 'application/json' },
+                            body: JSON.stringify({
+                                firstName,
+                                lastName,
+                                email,
+                                imageBase64: base64Image,
+                                transactionReference: transactionRef,
+                                fileName: file.name
+                            })
+                        });
+
+                        const data = await response.json();
+
+                        if (response.ok) {
+                            // Show loading overlay
+                            document.getElementById('loadingOverlay').classList.add('active');
+                            
+                            setTimeout(() => {
+                                window.location.href = '/success';
+                            }, 1500);
+                        } else {
+                            throw new Error(data.error || 'Submission failed');
+                        }
+                    } catch (fetchError) {
+                        showAlert(fetchError.message, 'error');
+                        submitBtn.disabled = false;
+                        submitBtn.innerHTML = originalText;
+                    }
+                };
+                reader.readAsDataURL(file);
+            } catch (error) {
+                showAlert(error.message, 'error');
+                submitBtn.disabled = false;
+                submitBtn.innerHTML = originalText;
+            }
+        });
+
+        // Slide Button Logic
+        (function initSlideButtons() {
+            document.querySelectorAll('.slide-btn-track').forEach(function(track) {
+                var btnId = track.dataset.slideBtn;
+                var hiddenBtn = document.getElementById(btnId);
+                var handle = track.querySelector('.slide-btn-handle');
+                var fill = track.querySelector('.slide-btn-fill');
+                var label = track.querySelector('.slide-btn-label');
+                label.dataset.origText = label.textContent; var dragging = false, startX = 0, currentX = 0, trackWidth = 0, handleWidth = 50, maxDrag = 0, completed = false;
+                function resetSlide() { completed = false; track.classList.remove('completed'); track.classList.add('resetting'); handle.style.left = '4px'; fill.style.width = '0px'; label.textContent = label.dataset.origText; label.style.color = ''; label.style.opacity = '0.5'; currentX = 0; }
+                function getPos(e) { return e.touches ? e.touches[0].clientX : e.clientX; }
+                function onStart(e) {
+                    if (completed || hiddenBtn.disabled) return;
+                    dragging = true; startX = getPos(e); trackWidth = track.offsetWidth; handleWidth = handle.offsetWidth; maxDrag = trackWidth - handleWidth - 8;
+                    track.classList.remove('resetting');
+                }
+                function onMove(e) {
+                    if (!dragging) return; e.preventDefault();
+                    currentX = Math.max(0, Math.min(getPos(e) - startX, maxDrag));
+                    handle.style.left = (4 + currentX) + 'px'; fill.style.width = (currentX + handleWidth) + 'px';
+                    label.style.opacity = Math.max(0, 0.5 - (currentX / maxDrag) * 1.2);
+                }
+                function onEnd() {
+                    if (!dragging) return; dragging = false;
+                    if (currentX / maxDrag >= 0.85) { completed = true; track.classList.add('completed'); label.textContent = 'Resubmitting...'; label.style.opacity = '1'; label.style.color = 'rgba(212,165,86,0.8)'; hiddenBtn.click(); setTimeout(function() { if (completed && !hiddenBtn.disabled) resetSlide(); }, 800); }
+                    else { track.classList.add('resetting'); handle.style.left = '4px'; fill.style.width = '0px'; label.style.opacity = '0.5'; currentX = 0; }
+                }
+                handle.addEventListener('mousedown', onStart); handle.addEventListener('touchstart', onStart, { passive: true });
+                window.addEventListener('mousemove', onMove); window.addEventListener('touchmove', onMove, { passive: false });
+                window.addEventListener('mouseup', onEnd); window.addEventListener('touchend', onEnd);
+                var observer = new MutationObserver(function() {
+                    if (completed && !hiddenBtn.disabled) { completed = false; track.classList.remove('completed'); track.classList.add('resetting'); handle.style.left = '4px'; fill.style.width = '0px'; label.textContent = label.dataset.origText || 'Slide to Submit →'; label.style.color = ''; label.style.opacity = '0.5'; currentX = 0; }
+                });
+                observer.observe(hiddenBtn, { attributes: true, attributeFilter: ['disabled'] });
+            });
+        })();
+
+        function showAlert(message, type) {
+            const alertDiv = document.getElementById('alertMessage');
+            alertDiv.className = `alert alert-${type}`;
+            alertDiv.textContent = message;
+            alertDiv.style.display = 'block';
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+            
+            if (type === 'success') {
+                setTimeout(() => {
+                    alertDiv.style.display = 'none';
+                }, 5000);
+            }
+        }
+    </script>
+</body>
+</html>

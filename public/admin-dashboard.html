@@ -1,0 +1,2042 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PYC 2026 Admin Dashboard</title>
+    <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Montserrat:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --primary-navy: #1a2332;
+            --secondary-gold: #d4a556;
+            --accent-blue: #4a7c9e;
+            --text-light: #f5f5f5;
+            --text-dark: #2c3e50;
+            --border-gold: #c9965d;
+            --background-overlay: rgba(26, 35, 50, 0.92);
+            --success: #27ae60;
+            --danger: #e74c3c;
+            --warning: #f39c12;
+        }
+
+        body {
+            font-family: 'Montserrat', sans-serif;
+            background: linear-gradient(135deg, #0f1419 0%, #1a2332 50%, #2a3f5f 100%);
+            color: var(--text-light);
+            min-height: 100vh;
+            position: relative;
+        }
+
+        .stars {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 0;
+        }
+
+        .star {
+            position: absolute;
+            background: white;
+            border-radius: 50%;
+            box-shadow: 0 0 3px rgba(255, 255, 255, 0.8);
+            filter: blur(0.5px);
+            animation: twinkle 3s infinite;
+        }
+
+        @keyframes twinkle {
+            0%, 100% { opacity: 0.4; }
+            50% { opacity: 1; }
+        }
+
+        .login-container {
+            position: relative;
+            z-index: 2;
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+        }
+
+        .login-box {
+            background: var(--background-overlay);
+            border: 2px solid rgba(212, 165, 86, 0.3);
+            padding: 50px 40px;
+            border-radius: 20px;
+            box-shadow: 0 30px 80px rgba(0, 0, 0, 0.5);
+            backdrop-filter: blur(10px);
+            width: 100%;
+            max-width: 450px;
+        }
+
+        .login-box h1 {
+            font-family: 'Bebas Neue', sans-serif;
+            color: var(--secondary-gold);
+            margin-bottom: 10px;
+            font-size: 2rem;
+            text-align: center;
+            letter-spacing: 2px;
+        }
+
+        .login-box p {
+            text-align: center;
+            color: rgba(245, 245, 245, 0.7);
+            margin-bottom: 30px;
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 8px;
+            color: var(--secondary-gold);
+            font-weight: 500;
+        }
+
+        .form-group input {
+            width: 100%;
+            padding: 12px 15px;
+            background: rgba(255, 255, 255, 0.1);
+            border: 1px solid rgba(212, 165, 86, 0.3);
+            border-radius: 8px;
+            color: var(--text-light);
+            font-size: 1rem;
+        }
+
+        .form-group input:focus {
+            outline: none;
+            border-color: var(--secondary-gold);
+            background: rgba(255, 255, 255, 0.15);
+        }
+
+        .btn {
+            width: 100%;
+            padding: 15px;
+            background: var(--secondary-gold);
+            color: var(--primary-navy);
+            border: none;
+            border-radius: 8px;
+            font-size: 1.1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+
+        .btn:hover {
+            background: #e0b566;
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(212, 165, 86, 0.4);
+        }
+
+        .dashboard-container {
+            position: relative;
+            z-index: 2;
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        .dashboard-header {
+            background: var(--background-overlay);
+            padding: 30px;
+            border-radius: 15px;
+            margin-bottom: 30px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border: 2px solid rgba(212, 165, 86, 0.3);
+        }
+
+        .dashboard-header h1 {
+            font-family: 'Bebas Neue', sans-serif;
+            color: var(--secondary-gold);
+            font-size: 2.5rem;
+            letter-spacing: 2px;
+        }
+
+        .user-info {
+            display: flex;
+            align-items: center;
+            gap: 20px;
+        }
+
+        .user-info span {
+            color: var(--text-light);
+        }
+
+        .logout-btn {
+            padding: 10px 20px;
+            background: var(--danger);
+            color: white;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            font-weight: 600;
+        }
+
+        .reminder-btn {
+            padding: 10px 20px;
+            background: var(--warning);
+            color: white;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            font-weight: 600;
+            margin-right: 10px;
+        }
+
+        .reminder-btn:hover {
+            background: #e67e22;
+        }
+
+        .reminder-btn:disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+        }
+
+        .tabs {
+            display: flex;
+            gap: 10px;
+            margin-bottom: 30px;
+            flex-wrap: wrap;
+        }
+
+        .tab-btn {
+            padding: 15px 30px;
+            background: rgba(255, 255, 255, 0.1);
+            border: 2px solid rgba(212, 165, 86, 0.3);
+            border-radius: 10px;
+            color: var(--text-light);
+            cursor: pointer;
+            font-size: 1.1rem;
+            font-weight: 600;
+            transition: all 0.3s;
+        }
+
+        .tab-btn.active {
+            background: var(--secondary-gold);
+            color: var(--primary-navy);
+        }
+
+        .tab-content {
+            display: none;
+        }
+
+        .tab-content.active {
+            display: block;
+        }
+
+        .content-box {
+            background: var(--background-overlay);
+            padding: 30px;
+            border-radius: 15px;
+            border: 2px solid rgba(212, 165, 86, 0.3);
+        }
+
+        .content-box h2 {
+            font-family: 'Bebas Neue', sans-serif;
+            color: var(--secondary-gold);
+            margin-bottom: 20px;
+            font-size: 2rem;
+        }
+
+        .search-box {
+            display: flex;
+            gap: 10px;
+            margin-bottom: 30px;
+        }
+
+        .search-box input {
+            flex: 1;
+            padding: 15px;
+            background: rgba(255, 255, 255, 0.1);
+            border: 1px solid rgba(212, 165, 86, 0.3);
+            border-radius: 8px;
+            color: var(--text-light);
+            font-size: 1rem;
+        }
+
+        .search-btn {
+            padding: 15px 30px;
+            background: var(--secondary-gold);
+            color: var(--primary-navy);
+            border: none;
+            border-radius: 8px;
+            font-weight: 600;
+            cursor: pointer;
+        }
+
+        .reg-filter-select {
+            padding: 10px 12px;
+            background: rgba(255, 255, 255, 0.1);
+            border: 1px solid rgba(212, 165, 86, 0.3);
+            border-radius: 8px;
+            color: var(--text-light);
+            font-size: 0.9rem;
+            cursor: pointer;
+        }
+        .reg-filter-select option { background: #1a2332; color: #f5f5f5; }
+
+        .result-card {
+            background: rgba(255, 255, 255, 0.05);
+            padding: 25px;
+            border-radius: 10px;
+            border: 1px solid rgba(212, 165, 86, 0.2);
+            margin-bottom: 20px;
+        }
+
+        .result-row {
+            display: flex;
+            justify-content: space-between;
+            padding: 10px 0;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .result-row:last-child {
+            border-bottom: none;
+        }
+
+        .result-label {
+            font-weight: 600;
+            color: var(--secondary-gold);
+        }
+
+        .result-value {
+            color: var(--text-light);
+        }
+
+        .status-badge {
+            padding: 5px 15px;
+            border-radius: 20px;
+            font-size: 0.9rem;
+            font-weight: 600;
+        }
+
+        .status-paid {
+            background: var(--success);
+            color: white;
+        }
+
+        .status-pending {
+            background: var(--warning);
+            color: white;
+        }
+
+        .status-checked {
+            background: var(--success);
+            color: white;
+        }
+
+        .status-not-checked {
+            background: var(--danger);
+            color: white;
+        }
+
+        .checkin-btn {
+            padding: 12px 25px;
+            background: var(--success);
+            color: white;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            font-weight: 600;
+            margin-top: 15px;
+        }
+
+        .checkin-btn:disabled {
+            background: #95a5a6;
+            cursor: not-allowed;
+        }
+
+        .approve-btn {
+            padding: 12px 25px;
+            background: var(--success);
+            color: white;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            font-weight: 600;
+            margin-right: 10px;
+        }
+
+        .reject-btn {
+            padding: 12px 25px;
+            background: var(--danger);
+            color: white;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            font-weight: 600;
+        }
+
+        .payment-proof-image {
+            max-width: 100%;
+            border-radius: 10px;
+            margin: 20px 0;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3);
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+        }
+
+        thead {
+            background: rgba(212, 165, 86, 0.2);
+        }
+
+        th, td {
+            padding: 15px;
+            text-align: left;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        th {
+            color: var(--secondary-gold);
+            font-weight: 600;
+        }
+
+        tr:hover {
+            background: rgba(255, 255, 255, 0.05);
+        }
+
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+            margin-top: 20px;
+        }
+
+        .stat-card {
+            background: rgba(255, 255, 255, 0.05);
+            padding: 25px;
+            border-radius: 10px;
+            border: 1px solid rgba(212, 165, 86, 0.2);
+            text-align: center;
+        }
+
+        .stat-number {
+            font-size: 3rem;
+            font-weight: 700;
+            color: var(--secondary-gold);
+            margin: 10px 0;
+        }
+
+        .stat-label {
+            color: var(--text-light);
+            font-size: 1.1rem;
+        }
+
+        .alert {
+            padding: 15px 20px;
+            border-radius: 8px;
+            margin-bottom: 20px;
+            display: none;
+        }
+
+        .alert.show {
+            display: block;
+        }
+
+        .alert-success {
+            background: rgba(39, 174, 96, 0.2);
+            border: 1px solid var(--success);
+            color: var(--success);
+        }
+
+        .alert-error {
+            background: rgba(231, 76, 60, 0.2);
+            border: 1px solid var(--danger);
+            color: var(--danger);
+        }
+
+        .hidden {
+            display: none !important;
+        }
+
+        .spinner {
+            border: 3px solid rgba(255, 255, 255, 0.3);
+            border-top: 3px solid var(--secondary-gold);
+            border-radius: 50%;
+            width: 30px;
+            height: 30px;
+            animation: spin 1s linear infinite;
+            display: inline-block;
+            margin-left: 10px;
+        }
+
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+        .proof-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+            gap: 20px;
+            margin-top: 20px;
+        }
+
+        .proof-card {
+            background: rgba(255, 255, 255, 0.05);
+            padding: 20px;
+            border-radius: 10px;
+            border: 1px solid rgba(212, 165, 86, 0.2);
+        }
+
+        .proof-card img {
+            width: 100%;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: transform 0.3s;
+        }
+
+        .proof-card img:hover {
+            transform: scale(1.05);
+        }
+
+        @media (max-width: 768px) {
+            .tabs {
+                overflow-x: auto;
+                flex-wrap: nowrap;
+            }
+            
+            .tab-btn {
+                white-space: nowrap;
+            }
+        }
+    </style>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.18.5/xlsx.full.min.js"></script>
+</head>
+<body>
+    <div class="stars" id="stars"></div>
+
+    <!-- Login Screen -->
+    <div id="loginScreen" class="login-container">
+        <div class="login-box">
+            <h1>PYC 2026 Dashboard</h1>
+            <p>Admin Access Only</p>
+            <form id="loginForm">
+                <div class="form-group">
+                    <label>Username</label>
+                    <input type="text" id="username" required>
+                </div>
+                <div class="form-group">
+                    <label>Password</label>
+                    <input type="password" id="password" required>
+                </div>
+                <button type="submit" class="btn">Login</button>
+            </form>
+            <div id="loginError" class="alert alert-error"></div>
+        </div>
+    </div>
+
+    <!-- Dashboard Screen -->
+    <div id="dashboardScreen" class="dashboard-container hidden">
+        <div class="dashboard-header">
+            <h1>PYC 2026 DASHBOARD</h1>
+            <div class="user-info">
+                <span id="currentUser">Admin</span>
+                <button class="reminder-btn" onclick="sendReminderEmails()" id="reminderBtn">📧 Send Reminder Emails</button>
+                <button class="logout-btn" onclick="logout()">Logout</button>
+            </div>
+        </div>
+
+        <div class="tabs">
+            <button class="tab-btn active" onclick="switchTab('checkin')">Check-In</button>
+            <button class="tab-btn" onclick="switchTab('paymentProofs')">Payment Proofs</button>
+            <button class="tab-btn" onclick="switchTab('resubmissions')">Resubmissions</button>
+            <button class="tab-btn" onclick="switchTab('registrations')">All Registrations</button>
+            <button class="tab-btn" onclick="switchTab('payments')">Payments</button>
+            <button class="tab-btn" onclick="switchTab('statistics')">Statistics</button>
+        </div>
+
+        <!-- Check-In Tab -->
+        <div id="checkin" class="tab-content active">
+            <div class="content-box">
+                <h2>Conference Check-In</h2>
+                <div class="search-box">
+                    <input type="text" id="searchQuery" placeholder="Enter email or registration number...">
+                    <button class="search-btn" onclick="searchRegistration()">Search</button>
+                </div>
+                <div id="checkinAlert" class="alert"></div>
+                <div id="searchResult"></div>
+            </div>
+        </div>
+
+        <!-- Payment Proofs Tab (NEW) -->
+        <div id="paymentProofs" class="tab-content">
+            <div class="content-box">
+                <h2>GCash Payment Proofs</h2>
+                <p style="margin-bottom: 20px; color: rgba(245, 245, 245, 0.7);">Review and approve GCash payment submissions</p>
+                <div style="display:flex;gap:8px;flex-wrap:wrap;margin-bottom:16px;align-items:flex-end;">
+                    <div>
+                        <label style="display:block;font-size:0.78rem;color:rgba(245,245,245,0.6);margin-bottom:4px;">Filter by receiving account</label>
+                        <select id="proofsReceiverFilter" onchange="applyProofsFilter()" class="reg-filter-select" style="min-width:200px;">
+                            <option value="all">All accounts</option>
+                        </select>
+                    </div>
+                </div>
+                <div id="proofsAlert" class="alert"></div>
+                <div id="proofsList"></div>
+            </div>
+        </div>
+
+        <!-- Resubmissions Tab (NEW) -->
+        <div id="resubmissions" class="tab-content">
+            <div class="content-box">
+                <h2>Payment Resubmissions</h2>
+                <p style="color: rgba(245, 245, 245, 0.7); margin-bottom: 20px;">
+                    Review and approve resubmitted payment proofs
+                </p>
+                <div id="resubmissionsAlert" class="alert"></div>
+                
+                <div id="resubmissionsGrid" class="proofs-grid">
+                    <!-- Resubmissions will be loaded here -->
+                </div>
+            </div>
+        </div>
+
+        <!-- All Registrations Tab -->
+        <div id="registrations" class="tab-content">
+            <div class="content-box">
+                <h2>All Registrations</h2>
+                <div style="margin-bottom:14px;">
+                    <button class="checkin-btn" style="padding:10px 18px;font-size:0.85rem;" onclick="exportRegistrations()">📥 Export to Excel</button>
+                    <button class="checkin-btn" style="padding:10px 18px;font-size:0.85rem;background:rgba(39,174,96,0.2);border-color:rgba(39,174,96,0.4);" onclick="exportCheckinList()">📋 Export Check-In List</button>
+                </div>
+                <div id="registrationsAlert" class="alert"></div>
+                <div style="display:flex;gap:10px;flex-wrap:wrap;margin-bottom:14px;">
+                    <input type="text" id="regListSearch" placeholder="Filter by name, email, or PYC..." oninput="applyRegListFilters()" style="flex:1;min-width:220px;padding:12px 14px;background:rgba(255,255,255,0.1);border:1px solid rgba(212,165,86,0.3);border-radius:8px;color:var(--text-light);font-size:0.95rem;">
+                </div>
+                <div style="display:flex;gap:8px;flex-wrap:wrap;margin-bottom:18px;">
+                    <select id="regListPayFilter" onchange="applyRegListFilters()" class="reg-filter-select">
+                        <option value="all">All payment statuses</option>
+                        <option value="paidonly">Paid only</option>
+                        <option value="reviewonly">Pending Review only</option>
+                        <option value="actuallypaid">Paid + Pending Review (paid)</option>
+                        <option value="pending">Pending only</option>
+                        <option value="resubmitted">Resubmitted only</option>
+                    </select>
+                    <select id="regListRegionFilter" onchange="applyRegListFilters()" class="reg-filter-select">
+                        <option value="all">All regions</option>
+                        <option value="Luzon">Luzon</option>
+                        <option value="Visayas">Visayas</option>
+                        <option value="Mindanao">Mindanao</option>
+                        <option value="international">International</option>
+                    </select>
+                    <select id="regListCheckinFilter" onchange="applyRegListFilters()" class="reg-filter-select">
+                        <option value="all">All (checked in or not)</option>
+                        <option value="in">Checked in only</option>
+                        <option value="out">Not checked in only</option>
+                    </select>
+                </div>
+                <div id="registrationsList"></div>
+            </div>
+        </div>
+
+        <!-- Payments Tab -->
+        <div id="payments" class="tab-content">
+            <div class="content-box">
+                <h2>Payments</h2>
+                <p style="margin-bottom: 16px; color: rgba(245, 245, 245, 0.7);">GCash and bank-transfer payments, filterable by receiving account and the date the proof was submitted.</p>
+                <div id="paymentsAlert" class="alert"></div>
+                <div style="display:flex;gap:8px;flex-wrap:wrap;margin-bottom:14px;align-items:flex-end;">
+                    <div>
+                        <label style="display:block;font-size:0.78rem;color:rgba(245,245,245,0.6);margin-bottom:4px;">Receiver / Account</label>
+                        <select id="payReceiverFilter" onchange="applyPaymentsFilters()" class="reg-filter-select" style="min-width:180px;">
+                            <option value="all">All accounts</option>
+                        </select>
+                    </div>
+                    <div>
+                        <label style="display:block;font-size:0.78rem;color:rgba(245,245,245,0.6);margin-bottom:4px;">Method</label>
+                        <select id="payMethodFilter" onchange="applyPaymentsFilters()" class="reg-filter-select" style="min-width:130px;">
+                            <option value="all">All methods</option>
+                            <option value="gcash">GCash</option>
+                            <option value="bank">Bank transfer</option>
+                        </select>
+                    </div>
+                    <div>
+                        <label style="display:block;font-size:0.78rem;color:rgba(245,245,245,0.6);margin-bottom:4px;">Status</label>
+                        <select id="payStatusFilter" onchange="applyPaymentsFilters()" class="reg-filter-select" style="min-width:150px;">
+                            <option value="all">All statuses</option>
+                            <option value="Paid">Paid</option>
+                            <option value="Pending Review">Pending Review</option>
+                            <option value="Resubmitted">Resubmitted</option>
+                            <option value="Rejected">Rejected</option>
+                        </select>
+                    </div>
+                    <div>
+                        <label style="display:block;font-size:0.78rem;color:rgba(245,245,245,0.6);margin-bottom:4px;">From date</label>
+                        <input type="date" id="payDateFrom" onchange="applyPaymentsFilters()" class="reg-filter-select">
+                    </div>
+                    <div>
+                        <label style="display:block;font-size:0.78rem;color:rgba(245,245,245,0.6);margin-bottom:4px;">To date</label>
+                        <input type="date" id="payDateTo" onchange="applyPaymentsFilters()" class="reg-filter-select">
+                    </div>
+                    <button class="checkin-btn" style="padding:10px 16px;font-size:0.82rem;" onclick="clearPaymentsFilters()">Clear</button>
+                </div>
+                <div id="paymentsSummary" style="margin-bottom:14px;color:rgba(245,245,245,0.75);font-size:0.9rem;"></div>
+                <div id="paymentsList"></div>
+            </div>
+        </div>
+
+        <!-- Statistics Tab -->
+        <div id="statistics" class="tab-content">
+            <div class="content-box">
+                <h2>Conference Statistics</h2>
+                <div id="statisticsAlert" class="alert"></div>
+                <div id="statsDisplay"></div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Create stars
+        function createStars() {
+            const starsContainer = document.getElementById('stars');
+            const numberOfStars = 60;
+            const zones = ['top', 'bottom', 'left', 'right'];
+            
+            for (let i = 0; i < numberOfStars; i++) {
+                const star = document.createElement('div');
+                star.className = 'star';
+                const zone = zones[Math.floor(Math.random() * zones.length)];
+                let left, top;
+                
+                if (zone === 'top') {
+                    left = Math.random() * 100;
+                    top = Math.random() * 20;
+                } else if (zone === 'bottom') {
+                    left = Math.random() * 100;
+                    top = 80 + Math.random() * 20;
+                } else if (zone === 'left') {
+                    left = Math.random() * 15;
+                    top = 20 + Math.random() * 60;
+                } else {
+                    left = 85 + Math.random() * 15;
+                    top = 20 + Math.random() * 60;
+                }
+                
+                const size = Math.random() * 3 + 1;
+                star.style.width = size + 'px';
+                star.style.height = size + 'px';
+                star.style.left = left + '%';
+                star.style.top = top + '%';
+                star.style.animationDelay = Math.random() * 3 + 's';
+                starsContainer.appendChild(star);
+            }
+        }
+        createStars();
+
+        // Session management
+        let currentUser = null;
+        let sessionToken = null;
+        let allRegistrations = [];
+
+        // Check for existing session on page load
+        window.addEventListener('load', async function() {
+            const storedToken = localStorage.getItem('adminSessionToken');
+            if (storedToken) {
+                const isValid = await validateSession(storedToken);
+                if (isValid) {
+                    sessionToken = storedToken;
+                    currentUser = localStorage.getItem('adminUsername');
+                    document.getElementById('currentUser').textContent = currentUser;
+                    document.getElementById('loginScreen').classList.add('hidden');
+                    document.getElementById('dashboardScreen').classList.remove('hidden');
+                    loadAllRegistrations();
+                } else {
+                    // Clear invalid session
+                    localStorage.removeItem('adminSessionToken');
+                    localStorage.removeItem('adminUsername');
+                }
+            }
+        });
+
+        // Validate session
+        async function validateSession(token) {
+            try {
+                const response = await fetch('/.netlify/functions/admin-validate-session', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ sessionToken: token })
+                });
+
+                const result = await response.json();
+                // Check if valid AND user has admin role
+                return result.valid === true && result.role === 'admin';
+            } catch (error) {
+                console.error('Session validation error:', error);
+                return false;
+            }
+        }
+
+        // Login
+        document.getElementById('loginForm').addEventListener('submit', async function(e) {
+            e.preventDefault();
+            
+            const username = document.getElementById('username').value;
+            const password = document.getElementById('password').value;
+            const loginBtn = document.querySelector('#loginForm button[type="submit"]');
+            const originalText = loginBtn.textContent;
+            
+            // Disable button and show loading
+            loginBtn.disabled = true;
+            loginBtn.textContent = 'Logging in...';
+            
+            try {
+                const response = await fetch('/.netlify/functions/admin-login', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ username, password })
+                });
+
+                const result = await response.json();
+
+                if (response.status === 429) {
+                    // Rate limited
+                    showAlert('loginError', result.message, 'error');
+                } else if (response.ok && result.success) {
+                    // Check if user has admin role
+                    if (result.role !== 'admin') {
+                        showAlert('loginError', 'Access denied. Admin credentials required.', 'error');
+                        return;
+                    }
+                    
+                    // Successful login with admin role
+                    sessionToken = result.sessionToken;
+                    currentUser = result.username;
+                    
+                    // Store session
+                    localStorage.setItem('adminSessionToken', sessionToken);
+                    localStorage.setItem('adminUsername', currentUser);
+                    
+                    // Update UI
+                    document.getElementById('currentUser').textContent = currentUser;
+                    document.getElementById('loginScreen').classList.add('hidden');
+                    document.getElementById('dashboardScreen').classList.remove('hidden');
+                    
+                    // Clear form
+                    document.getElementById('username').value = '';
+                    document.getElementById('password').value = '';
+                    
+                    // Load data
+                    loadAllRegistrations();
+                } else {
+                    // Invalid credentials
+                    const message = result.remainingAttempts !== undefined 
+                        ? `Invalid credentials. ${result.remainingAttempts} attempts remaining.`
+                        : 'Invalid credentials';
+                    showAlert('loginError', message, 'error');
+                }
+            } catch (error) {
+                console.error('Login error:', error);
+                showAlert('loginError', 'Login failed. Please try again.', 'error');
+            } finally {
+                loginBtn.disabled = false;
+                loginBtn.textContent = originalText;
+            }
+        });
+
+        // Logout
+        async function logout() {
+            if (sessionToken) {
+                try {
+                    await fetch('/.netlify/functions/admin-logout', {
+                        method: 'POST',
+                        headers: { 'Content-Type': 'application/json' },
+                        body: JSON.stringify({ sessionToken })
+                    });
+                } catch (error) {
+                    console.error('Logout error:', error);
+                }
+            }
+            
+            // Clear session
+            sessionToken = null;
+            currentUser = null;
+            localStorage.removeItem('adminSessionToken');
+            localStorage.removeItem('adminUsername');
+            
+            // Update UI
+            document.getElementById('loginScreen').classList.remove('hidden');
+            document.getElementById('dashboardScreen').classList.add('hidden');
+            document.getElementById('username').value = '';
+            document.getElementById('password').value = '';
+        }
+
+        // iPad-safe confirm (native confirm() silently returns false on iPad Safari).
+        function adminConfirm(message, okLabel) {
+            return new Promise(function(resolve) {
+                var existing = document.getElementById('adminConfirmModal');
+                if (existing) existing.remove();
+                var ov = document.createElement('div');
+                ov.id = 'adminConfirmModal';
+                ov.style.cssText = 'position:fixed;inset:0;background:rgba(0,0,0,0.85);z-index:9000;display:flex;align-items:center;justify-content:center;padding:20px;';
+                ov.innerHTML = '<div style="background:#1a2332;border:2px solid rgba(212,165,86,0.45);border-radius:14px;padding:24px;max-width:440px;width:100%;">' +
+                    '<p style="color:#f5f5f5;font-size:1rem;line-height:1.5;margin:0 0 22px;white-space:pre-wrap;max-height:50vh;overflow-y:auto;">' + (message||'').replace(/</g,'&lt;') + '</p>' +
+                    '<div style="display:flex;gap:12px;"><button id="acCancel" style="flex:1;padding:14px;background:rgba(255,255,255,0.08);color:#f5f5f5;border:1px solid rgba(255,255,255,0.15);border-radius:8px;font-weight:600;font-size:16px;cursor:pointer;">Cancel</button>' +
+                    '<button id="acOk" style="flex:1;padding:14px;background:var(--secondary-gold,#d4a556);color:#1a2332;border:none;border-radius:8px;font-weight:700;font-size:16px;cursor:pointer;">' + (okLabel || 'Yes') + '</button></div></div>';
+                document.body.appendChild(ov);
+                document.getElementById('acCancel').addEventListener('click', function(){ ov.remove(); resolve(false); });
+                document.getElementById('acOk').addEventListener('click', function(){ ov.remove(); resolve(true); });
+            });
+        }
+
+        // Send Reminder Emails — RESUMABLE BATCH SENDER.
+        // Calls the function repeatedly, ~25 emails per call, until everyone paid has
+        // been emailed. Each person is stamped 'reminder_sent_at' on the server the
+        // moment their email goes out, so:
+        //   - it never times out (each call is small)
+        //   - a crash/refresh/close mid-run loses nothing
+        //   - clicking again RESUMES and skips anyone already emailed (no doubles)
+        let _reminderRunning = false;
+        async function sendReminderEmails() {
+            if (_reminderRunning) return;
+
+            const ok = await adminConfirm('Send reminder emails to all PAID registrations who have not received one yet?\n\nThis sends in safe batches and can be stopped/resumed. Anyone already emailed will be skipped.', 'Yes, send');
+            if (!ok) return;
+
+            const btn = document.getElementById('reminderBtn');
+            const originalText = btn.innerHTML;
+            _reminderRunning = true;
+            btn.disabled = true;
+
+            let totalSentThisRun = 0;
+            let totalFailedThisRun = 0;
+            const allFailedEmails = [];
+            let safetyCounter = 0; // hard cap on loop iterations as a backstop
+
+            try {
+                while (true) {
+                    safetyCounter++;
+                    if (safetyCounter > 500) { // 500 * 25 = 12,500 emails max — far above need
+                        throw new Error('Stopped after too many batches as a safety measure. Click again to resume.');
+                    }
+
+                    const response = await fetch('/.netlify/functions/send-reminder', {
+                        method: 'POST',
+                        headers: { 'Content-Type': 'application/json' },
+                        body: JSON.stringify({ batchSize: 25 })
+                    });
+
+                    // Robust parse — a timeout could return non-JSON
+                    const raw = await response.text();
+                    let data;
+                    try { data = JSON.parse(raw); }
+                    catch (e) {
+                        throw new Error('Server returned an unexpected response (possibly a timeout). Progress is saved — click "Send Reminder Emails" again to resume.');
+                    }
+
+                    if (!response.ok || !data.success) {
+                        throw new Error(data.error || data.message || 'Failed to send a batch.');
+                    }
+
+                    totalSentThisRun += (data.sent || 0);
+                    totalFailedThisRun += (data.failed || 0);
+                    if (Array.isArray(data.failedEmails)) allFailedEmails.push.apply(allFailedEmails, data.failedEmails);
+
+                    // Live progress on the button
+                    const totalPaid = data.totalPaid || 0;
+                    const totalSent = data.totalSent || 0;
+                    btn.innerHTML = 'Sending… ' + totalSent + ' / ' + totalPaid + ' done';
+
+                    if (data.done || (data.sent === 0 && data.remaining === 0)) {
+                        break;
+                    }
+                    // If a batch sent 0 but still reports remaining, all of them failed —
+                    // stop to avoid an infinite loop hammering a broken send.
+                    if (data.sent === 0 && data.remaining > 0) {
+                        throw new Error('A batch failed to send (' + data.failed + ' errors). Stopped to avoid a loop. Check Brevo, then click to resume. Failed: ' + (data.failedEmails||[]).slice(0,5).join(', '));
+                    }
+
+                    // Tiny pause between batches to be gentle on Brevo's rate limit
+                    await new Promise(r => setTimeout(r, 400));
+                }
+
+                let msg = 'Done. ' + totalSentThisRun + ' reminder email(s) sent this run.';
+                if (totalFailedThisRun > 0) {
+                    msg += '\n' + totalFailedThisRun + ' failed' + (allFailedEmails.length ? ' (e.g. ' + allFailedEmails.slice(0,5).join(', ') + ')' : '') + '. Click again to retry just those.';
+                }
+                alert(msg);
+            } catch (error) {
+                alert('Stopped: ' + error.message + '\n\nSent this run before stopping: ' + totalSentThisRun + '. Your progress is saved — click the button again to resume where it left off.');
+            } finally {
+                _reminderRunning = false;
+                btn.disabled = false;
+                btn.innerHTML = originalText;
+            }
+        }
+
+        // Switch tabs
+        function switchTab(tabName) {
+            document.querySelectorAll('.tab-btn').forEach(btn => btn.classList.remove('active'));
+            event.target.classList.add('active');
+            
+            document.querySelectorAll('.tab-content').forEach(content => content.classList.remove('active'));
+            document.getElementById(tabName).classList.add('active');
+            
+            if (tabName === 'registrations') {
+                loadAllRegistrations();
+            } else if (tabName === 'statistics') {
+                loadStatistics();
+            } else if (tabName === 'paymentProofs') {
+                loadPaymentProofs();
+            } else if (tabName === 'resubmissions') {
+                loadResubmissions();
+            } else if (tabName === 'payments') {
+                loadPayments();
+            }
+        }
+
+        // Maps the stored payment_account CODES to the real receiver names so the
+        // dashboard shows "Dorothy Claire Manata" instead of "D". Mirror of the
+        // GCASH_ACCOUNTS / BANK_OPTIONS in payment.html. If a new account is added
+        // there, add it here too.
+        var PAYMENT_ACCOUNT_LABELS = {
+            'A': 'Febie Gemere Gacusan (GCash)',
+            'B': 'Alpha Beth Fofue (GCash)',
+            'C': 'Ydjean Joy Dela Cruz (GCash)',
+            'D': 'Dorothy Claire Manata (GCash)',
+            'E': 'Georgia Sanchez (GCash)',
+            'bank_bdo': 'Alpha Beth Fofue (BDO)',
+            'bank_bpi': 'Febie Gemere Gacusan (BPI)'
+        };
+        function accountLabel(code) {
+            if (!code) return '';
+            var c = String(code).trim();
+            return PAYMENT_ACCOUNT_LABELS[c] || c;
+        }
+
+        // Show alert
+        function showAlert(elementId, message, type) {
+            const alert = document.getElementById(elementId);
+            alert.textContent = message;
+            alert.className = `alert alert-${type} show`;
+            setTimeout(() => alert.classList.remove('show'), 5000);
+        }
+
+        // Search registration
+        async function searchRegistration() {
+            const query = document.getElementById('searchQuery').value.trim();
+            if (!query) {
+                showAlert('checkinAlert', 'Please enter an email or registration number', 'error');
+                return;
+            }
+
+            try {
+                const response = await fetch('/.netlify/functions/admin-search', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ query })
+                });
+
+                const data = await response.json();
+
+                if (response.ok && data) {
+                    displaySearchResult(data);
+                } else {
+                    document.getElementById('searchResult').innerHTML = `
+                        <div class="result-card">
+                            <h3 style="color: var(--danger);">❌ Not Found</h3>
+                            <p>No registration found for: ${query}</p>
+                        </div>
+                    `;
+                }
+            } catch (error) {
+                console.error('Error:', error);
+                showAlert('checkinAlert', 'Search failed: ' + error.message, 'error');
+            }
+        }
+
+        // Display search result
+        function displaySearchResult(record) {
+            const checkedInStatus = record.checked_in ? 'Already Checked In' : 'Not Checked In';
+            const checkedInClass = record.checked_in ? 'status-checked' : 'status-not-checked';
+            const paymentClass = record.payment_status === 'Paid' ? 'status-paid' : 'status-pending';
+            
+            const html = `
+                <div class="result-card">
+                    <div class="result-row">
+                        <span class="result-label">Name:</span>
+                        <span class="result-value">${record.first_name} ${record.last_name}</span>
+                    </div>
+                    <div class="result-row">
+                        <span class="result-label">Email:</span>
+                        <span class="result-value">${record.email}</span>
+                    </div>
+                    <div class="result-row">
+                        <span class="result-label">Registration #:</span>
+                        <span class="result-value">${record.id}</span>
+                    </div>
+                    <div class="result-row">
+                        <span class="result-label">Payment Status:</span>
+                        <span class="status-badge ${paymentClass}">${record.payment_status}</span>
+                    </div>
+                    <div class="result-row">
+                        <span class="result-label">Check-In Status:</span>
+                        <span class="status-badge ${checkedInClass}">${checkedInStatus}</span>
+                    </div>
+                    <div class="result-row">
+                        <span class="result-label">T-Shirt Size:</span>
+                        <span class="result-value">${record.tshirt_size.toUpperCase()}</span>
+                    </div>
+                    <div class="result-row">
+                        <span class="result-label">Meal Plan:</span>
+                        <span class="result-value">${record.meal_plan}</span>
+                    </div>
+                    ${!record.checked_in && record.payment_status === 'Paid' ? `
+                        <button class="checkin-btn" onclick="checkIn('${record.id}')">Check In</button>
+                    ` : ''}
+                    ${record.payment_status !== 'Paid' ? `
+                        <p style="color: var(--warning); margin-top: 15px;">⚠️ Payment not confirmed. Cannot check in.</p>
+                    ` : ''}
+                </div>
+            `;
+            
+            document.getElementById('searchResult').innerHTML = html;
+        }
+
+        // Check in attendee
+        async function checkIn(registrationId) {
+            try {
+                const response = await fetch('/.netlify/functions/admin-checkin', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ recordId: registrationId })
+                });
+
+                const data = await response.json();
+
+                if (response.ok) {
+                    showAlert('checkinAlert', '✅ Checked in successfully!', 'success');
+                    setTimeout(() => searchRegistration(), 1000);
+                } else {
+                    showAlert('checkinAlert', '❌ ' + (data.error || 'Check-in failed'), 'error');
+                }
+            } catch (error) {
+                console.error('Error:', error);
+                showAlert('checkinAlert', '❌ Check-in failed: ' + error.message, 'error');
+            }
+        }
+
+        // Load payment proofs (NEW)
+        var _allProofs = null; // cache of pending GCash proofs for client-side account filtering
+        async function loadPaymentProofs() {
+            try {
+                document.getElementById('proofsList').innerHTML = '<p>Loading payment proofs...</p>';
+                
+                const response = await fetch('/.netlify/functions/admin-list-all');
+                const data = await response.json();
+
+                if (response.ok) {
+                    // Filter for pending GCash payments with proof
+                    const pendingProofs = data.filter(reg => 
+                        reg.payment_status === 'Pending Review' && 
+                        reg.payment_proof_url
+                    );
+                    _allProofs = pendingProofs;
+
+                    // Populate the receiver/account dropdown from the accounts present.
+                    const accounts = {};
+                    pendingProofs.forEach(function(p) {
+                        var a = (p.payment_account || '').trim();
+                        if (a) accounts[a] = true;
+                    });
+                    const sel = document.getElementById('proofsReceiverFilter');
+                    const current = sel.value;
+                    var opts = '<option value="all">All accounts</option>';
+                    Object.keys(accounts).sort().forEach(function(a) {
+                        opts += '<option value="' + a.replace(/"/g, '&quot;') + '">' + accountLabel(a) + '</option>';
+                    });
+                    opts += '<option value="__none__">(no account recorded)</option>';
+                    sel.innerHTML = opts;
+                    if (current) sel.value = current;
+
+                    applyProofsFilter();
+                } else {
+                    showAlert('proofsAlert', 'Failed to load payment proofs', 'error');
+                }
+            } catch (error) {
+                console.error('Error:', error);
+                showAlert('proofsAlert', 'Failed to load payment proofs: ' + error.message, 'error');
+            }
+        }
+
+        // Filter the cached proofs by receiving account, then display.
+        function applyProofsFilter() {
+            if (!_allProofs) return;
+            const receiver = (document.getElementById('proofsReceiverFilter') || {}).value || 'all';
+            var filtered = _allProofs;
+            if (receiver !== 'all') {
+                filtered = _allProofs.filter(function(p) {
+                    var a = (p.payment_account || '').trim();
+                    return receiver === '__none__' ? !a : a === receiver;
+                });
+            }
+            displayPaymentProofs(filtered);
+        }
+
+        // Display payment proofs
+        function displayPaymentProofs(proofs) {
+            if (!proofs || proofs.length === 0) {
+                document.getElementById('proofsList').innerHTML = '<p>No pending payment proofs to review.</p>';
+                return;
+            }
+
+            const countLine = '<p style="color:rgba(245,245,245,0.6);font-size:0.9rem;margin-bottom:14px;"><strong style="color:var(--secondary-gold);">' + proofs.length + '</strong> pending proof' + (proofs.length === 1 ? '' : 's') + ' to review</p>';
+
+            const html = countLine + `
+                <div class="proof-grid">
+                    ${proofs.map(proof => `
+                        <div class="proof-card">
+                            <h3 style="color: var(--secondary-gold); margin-bottom: 15px;">${proof.first_name} ${proof.last_name}</h3>
+                            <div style="margin-bottom: 15px;">
+                                <strong>Email:</strong> ${proof.email}<br>
+                                <strong>Amount:</strong> ₱${proof.total_amount.toFixed(2)}<br>
+                                <strong>Registration #:</strong> ${proof.id}<br>
+                                <strong>Paid to:</strong> <span style="color:var(--secondary-gold);font-weight:600;">${proof.payment_account ? accountLabel(proof.payment_account) : '(no account recorded)'}</span>${proof.payment_method ? ' &middot; ' + proof.payment_method : ''}<br>
+                                <strong>Ref #:</strong> ${proof.transaction_reference || '--'}<br>
+                                <strong>Uploaded:</strong> ${proof.payment_proof_uploaded_at ? new Date(proof.payment_proof_uploaded_at).toLocaleDateString() : '--'}
+                            </div>
+                            <img src="${proof.payment_proof_url}" alt="Payment Proof" class="payment-proof-image" onclick="window.open('${proof.payment_proof_url}', '_blank')">
+                            <div style="margin-top: 15px;">
+                                <button class="approve-btn" onclick="approvePayment('${proof.id}')">✅ Approve</button>
+                                <button class="reject-btn" onclick="rejectPayment('${proof.id}')">❌ Reject</button>
+                            </div>
+                        </div>
+                    `).join('')}
+                </div>
+            `;
+            
+            document.getElementById('proofsList').innerHTML = html;
+        }
+
+        // Approve payment
+        async function approvePayment(registrationId) {
+            if (!await adminConfirm('Approve this payment? A confirmation email will be sent to the registrant.', 'Approve')) return;
+
+            try {
+                const response = await fetch('/.netlify/functions/approve-payment', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ registrationId, approve: true })
+                });
+
+                const data = await response.json();
+
+                if (response.ok) {
+                    showAlert('proofsAlert', '✅ Payment approved and confirmation email sent!', 'success');
+                    setTimeout(() => loadPaymentProofs(), 2000);
+                } else {
+                    showAlert('proofsAlert', '❌ ' + (data.error || 'Approval failed'), 'error');
+                }
+            } catch (error) {
+                console.error('Error:', error);
+                showAlert('proofsAlert', '❌ Approval failed: ' + error.message, 'error');
+            }
+        }
+
+        // Reject payment
+        async function rejectPayment(registrationId) {
+            if (!await adminConfirm('Reject this payment? The registrant will need to resubmit their proof.', 'Reject')) return;
+
+            try {
+                const response = await fetch('/.netlify/functions/approve-payment', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ registrationId, approve: false })
+                });
+
+                const data = await response.json();
+
+                if (response.ok) {
+                    showAlert('proofsAlert', '⚠️ Payment rejected', 'success');
+                    setTimeout(() => loadPaymentProofs(), 2000);
+                } else {
+                    showAlert('proofsAlert', '❌ ' + (data.error || 'Rejection failed'), 'error');
+                }
+            } catch (error) {
+                console.error('Error:', error);
+                showAlert('proofsAlert', '❌ Rejection failed: ' + error.message, 'error');
+            }
+        }
+
+        // Load resubmissions
+        async function loadResubmissions() {
+            try {
+                document.getElementById('resubmissionsGrid').innerHTML = '<p>Loading resubmissions...</p>';
+                
+                const response = await fetch('/.netlify/functions/get-resubmissions');
+                const data = await response.json();
+
+                if (!response.ok) {
+                    throw new Error(data.error || 'Failed to load resubmissions');
+                }
+
+                const resubmissions = data.resubmissions || [];
+                const gridContainer = document.getElementById('resubmissionsGrid');
+
+                if (resubmissions.length === 0) {
+                    gridContainer.innerHTML = '<p style="text-align: center; color: rgba(245, 245, 245, 0.6);">No payment resubmissions to review</p>';
+                    return;
+                }
+
+                gridContainer.innerHTML = resubmissions.map(reg => `
+                    <div class="proof-card">
+                        <div class="proof-info">
+                            <h3>${reg.first_name} ${reg.last_name}</h3>
+                            <p><strong>Email:</strong> ${reg.email}</p>
+                            <p><strong>Registration #:</strong> ${reg.id}</p>
+                            <p><strong>Amount:</strong> ₱${reg.total_amount.toFixed(2)}</p>
+                            <p><strong>Uploaded:</strong> ${new Date(reg.created_at).toLocaleDateString()}</p>
+                        </div>
+                        <div class="proof-image-container">
+                            <img src="${reg.payment_proof_url}" alt="Payment Proof" class="proof-image">
+                        </div>
+                        <div class="proof-actions">
+                            <button class="approve-btn" onclick="approveResubmission('${reg.id}')">
+                                ✓ Approve
+                            </button>
+                            <button class="reject-btn" onclick="rejectResubmission('${reg.id}')">
+                                ✗ Reject
+                            </button>
+                        </div>
+                    </div>
+                `).join('');
+
+            } catch (error) {
+                console.error('Load resubmissions error:', error);
+                showAlert('resubmissionsAlert', 'Failed to load resubmissions: ' + error.message, 'error');
+            }
+        }
+
+        // Approve resubmission
+        async function approveResubmission(registrationId) {
+            if (!await adminConfirm('Approve this resubmitted payment? A confirmation email will be sent.', 'Approve')) {
+                return;
+            }
+
+            try {
+                const response = await fetch('/.netlify/functions/approve-resubmission', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({
+                        registrationId: registrationId,
+                        approve: true
+                    })
+                });
+
+                const result = await response.json();
+
+                if (!response.ok) {
+                    throw new Error(result.error || 'Failed to approve resubmission');
+                }
+
+                showAlert('resubmissionsAlert', result.message, 'success');
+                loadResubmissions(); // Reload the list
+            } catch (error) {
+                showAlert('resubmissionsAlert', error.message, 'error');
+            }
+        }
+
+        // Reject resubmission
+        async function rejectResubmission(registrationId) {
+            if (!await adminConfirm('Reject this resubmitted payment? The registrant will need to resubmit again.', 'Reject')) {
+                return;
+            }
+
+            try {
+                const response = await fetch('/.netlify/functions/approve-resubmission', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({
+                        registrationId: registrationId,
+                        approve: false
+                    })
+                });
+
+                const result = await response.json();
+
+                if (!response.ok) {
+                    throw new Error(result.error || 'Failed to reject resubmission');
+                }
+
+                showAlert('resubmissionsAlert', result.message, 'success');
+                loadResubmissions(); // Reload the list
+            } catch (error) {
+                showAlert('resubmissionsAlert', error.message, 'error');
+            }
+        }
+
+        // Load all registrations
+        async function loadAllRegistrations() {
+            try {
+                document.getElementById('registrationsList').innerHTML = '<p>Loading registrations...</p>';
+                
+                const response = await fetch('/.netlify/functions/admin-list-all');
+                const data = await response.json();
+
+                if (response.ok) {
+                    allRegistrations = data;
+                    // If any filter/search is active, respect it; otherwise show all.
+                    if (typeof applyRegListFilters === 'function' &&
+                        (document.getElementById('regListSearch') ||
+                         document.getElementById('regListPayFilter'))) {
+                        applyRegListFilters();
+                    } else {
+                        displayRegistrations(data);
+                    }
+                } else {
+                    showAlert('registrationsAlert', 'Failed to load registrations', 'error');
+                }
+            } catch (error) {
+                console.error('Error:', error);
+                showAlert('registrationsAlert', 'Failed to load registrations: ' + error.message, 'error');
+            }
+        }
+
+        // Format a t-shirt size code into a readable label for export.
+        function formatShirtSize(size) {
+            if (!size) return '';
+            const map = {
+                xs: 'XS', s: 'S', m: 'M', l: 'L', xl: 'XL',
+                xxl: '2XL', '2xl': '2XL', xxxl: '3XL', '3xl': '3XL'
+            };
+            const key = String(size).toLowerCase().trim();
+            return map[key] || String(size).toUpperCase();
+        }
+
+        // Export registrations to a real .xlsx file with auto-filter dropdowns.
+        // Exports everyone who has actually paid (Paid or Pending Review) — these are
+        // the people who need meals and t-shirts. It reports exact counts so you can
+        // verify nothing is missing against the Statistics tab.
+        async function exportRegistrations() {
+            if (!allRegistrations || allRegistrations.length === 0) { showAlert('registrationsAlert', 'No registrations loaded yet. Open the All Registrations tab first, then export.', 'error'); return; }
+
+            // Tally every status so we can show a full breakdown and catch surprises.
+            const byStatus = {};
+            allRegistrations.forEach(function(r) {
+                var st = (r.payment_status || 'Unknown');
+                byStatus[st] = (byStatus[st] || 0) + 1;
+            });
+
+            // Export people who have submitted/confirmed payment (Paid or Pending Review).
+            const exportable = allRegistrations.filter(function(r) {
+                var st = (r.payment_status || '');
+                return st === 'Paid' || st === 'Pending Review';
+            });
+            if (exportable.length === 0) { showAlert('registrationsAlert', 'No paid registrations to export.', 'error'); return; }
+
+            // Build a human-readable breakdown for the confirmation prompt.
+            var breakdown = Object.keys(byStatus).sort().map(function(k){ return '  ' + k + ': ' + byStatus[k]; }).join('\n');
+            var paidCount = byStatus['Paid'] || 0;
+            var reviewCount = byStatus['Pending Review'] || 0;
+            var confirmMsg = 'Exporting ' + exportable.length + ' registration(s) (Paid + Pending Review).\n\n' +
+                'Loaded from database: ' + allRegistrations.length + ' total\n' +
+                'Breakdown by status:\n' + breakdown + '\n\n' +
+                'Paid: ' + paidCount + '  |  Pending Review: ' + reviewCount + '\n\n' +
+                'These ' + exportable.length + ' people will be in the file (for meal & t-shirt counts). Continue?';
+            if (!await adminConfirm(confirmMsg, 'Export')) return;
+
+            const headers = ['Registration #','First Name','Last Name','Email','Phone','Gender','Age','T-Shirt Size','Meal Plan','PYC Count','Location Type','Region/Country','City','Registration Type','Group ID','Is Primary','Payment Status','Payment Method','Payment Account','Txn Reference','Total Amount','Checked In','Created'];
+
+            const rows = exportable.map(r => [
+                r.confirmation_number || r.id || '',
+                r.first_name || '',
+                r.last_name || '',
+                r.email || '',
+                r.phone || '',
+                r.gender || '',
+                r.age || '',
+                formatShirtSize(r.tshirt_size),
+                r.meal_plan || '',
+                r.pyc_count || '',
+                r.location_type || '',
+                r.region || r.country || '',
+                r.city || '',
+                r.registration_type || 'individual',
+                r.group_id || '',
+                r.is_primary ? 'Yes' : 'No',
+                r.payment_status || '',
+                r.payment_method || '',
+                r.payment_account || '',
+                r.transaction_reference || '',
+                r.total_amount || 0,
+                r.checked_in ? 'Yes' : 'No',
+                r.created_at ? new Date(r.created_at).toLocaleDateString() : ''
+            ]);
+
+            const data = [headers, ...rows];
+            const ws = XLSX.utils.aoa_to_sheet(data);
+
+            // Column widths for readability
+            ws['!cols'] = [
+                {wch:14},{wch:14},{wch:14},{wch:28},{wch:16},{wch:8},{wch:8},{wch:14},{wch:12},{wch:10},{wch:14},{wch:16},{wch:16},{wch:14},{wch:38},{wch:10},{wch:16},{wch:14},{wch:10},{wch:18},{wch:12},{wch:10},{wch:12}
+            ];
+
+            // Auto-filter dropdowns across all columns
+            ws['!autofilter'] = { ref: XLSX.utils.encode_range({ s:{r:0,c:0}, e:{r:rows.length, c:headers.length-1} }) };
+
+            const wb = XLSX.utils.book_new();
+            XLSX.utils.book_append_sheet(wb, ws, 'Registrations');
+
+            // ===== Second sheet: meal plan and t-shirt size totals for ordering =====
+            const mealCounts = {};
+            const shirtCounts = {};
+            exportable.forEach(function(r) {
+                var meal = (r.meal_plan || 'Unspecified');
+                mealCounts[meal] = (mealCounts[meal] || 0) + 1;
+                var shirt = formatShirtSize(r.tshirt_size) || 'Unspecified';
+                shirtCounts[shirt] = (shirtCounts[shirt] || 0) + 1;
+            });
+            const summaryData = [['SUMMARY (Paid + Pending Review)', ''], ['Total people', exportable.length], ['', '']];
+            summaryData.push(['MEAL PLAN', 'Count']);
+            Object.keys(mealCounts).sort().forEach(function(k){ summaryData.push([k, mealCounts[k]]); });
+            summaryData.push(['', '']);
+            summaryData.push(['T-SHIRT SIZE', 'Count']);
+            Object.keys(shirtCounts).sort().forEach(function(k){ summaryData.push([k, shirtCounts[k]]); });
+            const summaryWs = XLSX.utils.aoa_to_sheet(summaryData);
+            summaryWs['!cols'] = [{wch:28},{wch:10}];
+            XLSX.utils.book_append_sheet(wb, summaryWs, 'Meal & Shirt Totals');
+
+            XLSX.writeFile(wb, 'PYC2026_Registrations_' + new Date().toISOString().split('T')[0] + '.xlsx');
+
+            showAlert('registrationsAlert', 'Exported ' + exportable.length + ' registration(s). The second sheet "Meal & Shirt Totals" has the counts for ordering.', 'success');
+        }
+
+        // Export a focused check-in list: name, shirt size, phone, check-in status.
+        // Paid + Pending Review only. One sheet sorted A-Z by last name for easy
+        // manual reference on check-in day.
+        async function exportCheckinList() {
+            if (!allRegistrations || allRegistrations.length === 0) {
+                showAlert('registrationsAlert', 'No registrations loaded yet. Open the All Registrations tab first, then export.', 'error');
+                return;
+            }
+
+            const exportable = allRegistrations.filter(function(r) {
+                var st = r.payment_status || '';
+                return st === 'Paid' || st === 'Pending Review';
+            });
+            if (exportable.length === 0) {
+                showAlert('registrationsAlert', 'No paid registrations to export.', 'error');
+                return;
+            }
+
+            // Sort A-Z by last name for easy lookup on check-in day
+            const sorted = exportable.slice().sort(function(a, b) {
+                var la = (a.last_name || '').toLowerCase();
+                var lb = (b.last_name || '').toLowerCase();
+                return la < lb ? -1 : la > lb ? 1 : 0;
+            });
+
+            const headers = ['Last Name', 'First Name', 'PYC #', 'Phone', 'T-Shirt Size', 'Check-In Status', 'Payment Status'];
+            const rows = sorted.map(function(r) {
+                return [
+                    r.last_name || '',
+                    r.first_name || '',
+                    r.confirmation_number || '',
+                    r.phone || '',
+                    formatShirtSize(r.tshirt_size),
+                    r.checked_in ? 'Checked In' : 'Not Checked In',
+                    r.payment_status || ''
+                ];
+            });
+
+            const ws = XLSX.utils.aoa_to_sheet([headers].concat(rows));
+            ws['!cols'] = [{wch:16},{wch:16},{wch:12},{wch:16},{wch:12},{wch:14},{wch:14}];
+            ws['!autofilter'] = { ref: XLSX.utils.encode_range({ s:{r:0,c:0}, e:{r:rows.length, c:headers.length-1} }) };
+
+            const wb = XLSX.utils.book_new();
+            XLSX.utils.book_append_sheet(wb, ws, 'Check-In List');
+            XLSX.writeFile(wb, 'PYC2026_CheckIn_' + new Date().toISOString().split('T')[0] + '.xlsx');
+
+            showAlert('registrationsAlert', 'Exported ' + sorted.length + ' registrant(s) to Check-In List.', 'success');
+        }
+
+        // Display registrations
+        function displayRegistrations(registrations) {
+            if (!registrations || registrations.length === 0) {
+                document.getElementById('registrationsList').innerHTML = '<p>No registrations match the current filters.</p>';
+                return;
+            }
+
+            const countLine = '<p style="color:rgba(245,245,245,0.6);font-size:0.9rem;margin-bottom:12px;"><strong style="color:var(--secondary-gold);">' + registrations.length + '</strong> registration' + (registrations.length === 1 ? '' : 's') + ' shown</p>';
+
+            const html = countLine + `
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Name</th>
+                            <th>Email</th>
+                            <th>Region</th>
+                            <th>Payment</th>
+                            <th>Checked In</th>
+                            <th>Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        ${registrations.map(reg => {
+                            const regionLabel = (reg.location_type === 'international') ? 'International' : (reg.region || '--');
+                            return `
+                            <tr>
+                                <td>${reg.first_name} ${reg.last_name}</td>
+                                <td>${reg.email}</td>
+                                <td>${regionLabel}</td>
+                                <td><span class="status-badge ${reg.payment_status === 'Paid' ? 'status-paid' : 'status-pending'}">${reg.payment_status}</span></td>
+                                <td><span class="status-badge ${reg.checked_in ? 'status-checked' : 'status-not-checked'}">${reg.checked_in ? 'Yes' : 'No'}</span></td>
+                                <td>
+                                    ${reg.checked_in ?
+                                        `<button class="checkin-btn" style="padding: 8px 15px; margin: 0; background:#e74c3c;" onclick="uncheckFromList('${reg.id}')">Uncheck</button>` :
+                                        (reg.payment_status === 'Paid' || reg.payment_status === 'Pending Review' ?
+                                            `<button class="checkin-btn" style="padding: 8px 15px; margin: 0;" onclick="checkInFromList('${reg.id}')">Check In</button>` :
+                                            '-')
+                                    }
+                                </td>
+                            </tr>
+                        `;}).join('')}
+                    </tbody>
+                </table>
+            `;
+            
+            document.getElementById('registrationsList').innerHTML = html;
+        }
+
+        // Filter the cached registrations list by text + payment + region + check-in.
+        function applyRegListFilters() {
+            if (!allRegistrations) return;
+            var text = (document.getElementById('regListSearch') || {}).value || '';
+            text = text.trim().toLowerCase();
+            var pay = (document.getElementById('regListPayFilter') || {}).value || 'all';
+            var region = (document.getElementById('regListRegionFilter') || {}).value || 'all';
+            var checkin = (document.getElementById('regListCheckinFilter') || {}).value || 'all';
+
+            var filtered = allRegistrations.filter(function(reg) {
+                // Text match: name, email, or PYC/confirmation number
+                if (text) {
+                    var hay = ((reg.first_name || '') + ' ' + (reg.last_name || '') + ' ' +
+                               (reg.email || '') + ' ' + (reg.confirmation_number || '')).toLowerCase();
+                    if (hay.indexOf(text) === -1) return false;
+                }
+                var st = reg.payment_status || '';
+                if (pay === 'paidonly' && st !== 'Paid') return false;
+                if (pay === 'reviewonly' && st !== 'Pending Review') return false;
+                if (pay === 'actuallypaid' && !(st === 'Paid' || st === 'Pending Review')) return false;
+                if (pay === 'pending' && st !== 'Pending') return false;
+                if (pay === 'resubmitted' && st !== 'Resubmitted') return false;
+
+                if (region !== 'all') {
+                    if (region === 'international') {
+                        if ((reg.location_type || '') !== 'international') return false;
+                    } else {
+                        if ((reg.region || '') !== region) return false;
+                    }
+                }
+
+                if (checkin === 'in' && !reg.checked_in) return false;
+                if (checkin === 'out' && reg.checked_in) return false;
+
+                return true;
+            });
+
+            displayRegistrations(filtered);
+        }
+
+        // Check in from list
+        async function checkInFromList(registrationId) {
+            await checkIn(registrationId);
+            loadAllRegistrations();
+        }
+
+        // Undo a check-in from the All Registrations list (for accidental check-ins).
+        async function uncheckFromList(registrationId) {
+            const ok = await adminConfirm('Undo check-in for this person? They will be marked as NOT checked in.');
+            if (!ok) return;
+            try {
+                const response = await fetch('/.netlify/functions/admin-checkin', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ registrantId: registrationId, action: 'undo' })
+                });
+                const raw = await response.text();
+                let data; try { data = JSON.parse(raw); } catch (e) { data = {}; }
+                if (response.ok && data.success !== false) {
+                    showAlert('registrationsAlert', 'Check-in undone.', 'success');
+                    loadAllRegistrations();
+                } else {
+                    showAlert('registrationsAlert', 'Failed to undo: ' + (data.error || 'unknown error'), 'error');
+                }
+            } catch (e) {
+                showAlert('registrationsAlert', 'Error: ' + e.message, 'error');
+            }
+        }
+
+        // ===== PAYMENTS TAB =====
+        // Shows GCash + bank-transfer payments, filterable by receiving account,
+        // method, status, and the date the payment proof was submitted.
+        var _allPayments = null; // cached list of registrations that have a payment record
+
+        async function loadPayments() {
+            const listEl = document.getElementById('paymentsList');
+            listEl.innerHTML = '<p>Loading payments...</p>';
+            try {
+                const response = await fetch('/.netlify/functions/admin-list-all');
+                const data = await response.json();
+                if (!response.ok || !Array.isArray(data)) {
+                    showAlert('paymentsAlert', 'Failed to load payments', 'error');
+                    listEl.innerHTML = '';
+                    return;
+                }
+                // Only registrations that actually have a payment (GCash or bank): they
+                // either submitted proof, have a method set, or have an amount.
+                _allPayments = data.filter(function(r) {
+                    return r.payment_proof_url || r.payment_method || r.payment_account ||
+                           (r.total_amount && r.total_amount > 0 && r.payment_status && r.payment_status !== 'Pending');
+                });
+
+                // Build the receiver dropdown dynamically from the accounts actually present.
+                const accounts = {};
+                _allPayments.forEach(function(r) {
+                    var acct = (r.payment_account || '').trim();
+                    if (acct) accounts[acct] = true;
+                });
+                const sel = document.getElementById('payReceiverFilter');
+                const current = sel.value;
+                var opts = '<option value="all">All accounts</option>';
+                Object.keys(accounts).sort().forEach(function(a) {
+                    opts += '<option value="' + a.replace(/"/g, '&quot;') + '">' + accountLabel(a) + '</option>';
+                });
+                opts += '<option value="__none__">(no account recorded)</option>';
+                sel.innerHTML = opts;
+                if (current) sel.value = current;
+
+                applyPaymentsFilters();
+            } catch (e) {
+                showAlert('paymentsAlert', 'Error: ' + e.message, 'error');
+                listEl.innerHTML = '';
+            }
+        }
+
+        function clearPaymentsFilters() {
+            document.getElementById('payReceiverFilter').value = 'all';
+            document.getElementById('payMethodFilter').value = 'all';
+            document.getElementById('payStatusFilter').value = 'all';
+            document.getElementById('payDateFrom').value = '';
+            document.getElementById('payDateTo').value = '';
+            applyPaymentsFilters();
+        }
+
+        // Normalize a payment method value to 'gcash' / 'bank' / other.
+        function payMethodKey(m) {
+            var s = (m || '').toLowerCase();
+            if (s.indexOf('gcash') !== -1) return 'gcash';
+            if (s.indexOf('bank') !== -1 || s.indexOf('bdo') !== -1 || s.indexOf('bpi') !== -1 || s.indexOf('gotyme') !== -1 || s.indexOf('transfer') !== -1) return 'bank';
+            return s;
+        }
+
+        function applyPaymentsFilters() {
+            if (!_allPayments) return;
+            const receiver = document.getElementById('payReceiverFilter').value;
+            const method = document.getElementById('payMethodFilter').value;
+            const status = document.getElementById('payStatusFilter').value;
+            const fromStr = document.getElementById('payDateFrom').value;
+            const toStr = document.getElementById('payDateTo').value;
+
+            // Date range built with Date.UTC for cross-browser (Safari) safety.
+            var fromMs = null, toMs = null;
+            if (fromStr) { var f = fromStr.split('-'); fromMs = Date.UTC(+f[0], +f[1] - 1, +f[2], 0, 0, 0); }
+            if (toStr) { var t = toStr.split('-'); toMs = Date.UTC(+t[0], +t[1] - 1, +t[2], 23, 59, 59); }
+
+            const filtered = _allPayments.filter(function(r) {
+                if (receiver !== 'all') {
+                    var acct = (r.payment_account || '').trim();
+                    if (receiver === '__none__') { if (acct) return false; }
+                    else if (acct !== receiver) return false;
+                }
+                if (method !== 'all' && payMethodKey(r.payment_method) !== method) return false;
+                if (status !== 'all' && (r.payment_status || '') !== status) return false;
+                if (fromMs !== null || toMs !== null) {
+                    var dRaw = r.payment_proof_uploaded_at || r.created_at;
+                    if (!dRaw) return false;
+                    var dMs = new Date(dRaw).getTime();
+                    if (isNaN(dMs)) return false;
+                    if (fromMs !== null && dMs < fromMs) return false;
+                    if (toMs !== null && dMs > toMs) return false;
+                }
+                return true;
+            });
+
+            renderPayments(filtered);
+        }
+
+        function renderPayments(rows) {
+            const listEl = document.getElementById('paymentsList');
+            const summaryEl = document.getElementById('paymentsSummary');
+
+            var totalAmount = 0;
+            rows.forEach(function(r) { totalAmount += (parseFloat(r.total_amount) || 0); });
+            summaryEl.innerHTML = '<strong style="color:var(--secondary-gold);">' + rows.length + '</strong> payment' + (rows.length === 1 ? '' : 's') +
+                ' &middot; Total: <strong style="color:var(--secondary-gold);">&#8369;' + totalAmount.toLocaleString(undefined, {minimumFractionDigits: 2, maximumFractionDigits: 2}) + '</strong>';
+
+            if (rows.length === 0) {
+                listEl.innerHTML = '<p>No payments match the current filters.</p>';
+                return;
+            }
+
+            // Sort newest-submitted first
+            rows.sort(function(a, b) {
+                var da = new Date(a.payment_proof_uploaded_at || a.created_at || 0).getTime();
+                var db = new Date(b.payment_proof_uploaded_at || b.created_at || 0).getTime();
+                return db - da;
+            });
+
+            var html = '<table><thead><tr>' +
+                '<th>Name</th><th>PYC</th><th>Method</th><th>Account</th><th>Amount</th><th>Status</th><th>Submitted</th><th>Proof</th>' +
+                '</tr></thead><tbody>';
+            rows.forEach(function(r) {
+                var dRaw = r.payment_proof_uploaded_at || r.created_at;
+                var dStr = dRaw ? new Date(dRaw).toLocaleDateString() : '--';
+                var amt = (parseFloat(r.total_amount) || 0).toLocaleString(undefined, {minimumFractionDigits: 2, maximumFractionDigits: 2});
+                html += '<tr>' +
+                    '<td>' + (r.first_name || '') + ' ' + (r.last_name || '') + '</td>' +
+                    '<td>' + (r.confirmation_number || r.id || '') + '</td>' +
+                    '<td>' + (r.payment_method || '--') + '</td>' +
+                    '<td>' + (r.payment_account ? accountLabel(r.payment_account) : '--') + '</td>' +
+                    '<td>&#8369;' + amt + '</td>' +
+                    '<td><span class="status-badge ' + (r.payment_status === 'Paid' ? 'status-paid' : 'status-pending') + '">' + (r.payment_status || '--') + '</span></td>' +
+                    '<td>' + dStr + '</td>' +
+                    '<td>' + (r.payment_proof_url ? '<a href="' + r.payment_proof_url + '" target="_blank" style="color:var(--secondary-gold);">View</a>' : '--') + '</td>' +
+                    '</tr>';
+            });
+            html += '</tbody></table>';
+            listEl.innerHTML = html;
+        }
+
+        // Load statistics
+        async function loadStatistics() {
+            try {
+                document.getElementById('statsDisplay').innerHTML = '<p>Loading statistics...</p>';
+                
+                const response = await fetch('/.netlify/functions/admin-stats');
+                const stats = await response.json();
+
+                if (response.ok) {
+                    displayStatistics(stats);
+                } else {
+                    showAlert('statisticsAlert', 'Failed to load statistics', 'error');
+                }
+            } catch (error) {
+                console.error('Error:', error);
+                showAlert('statisticsAlert', 'Failed to load statistics: ' + error.message, 'error');
+            }
+        }
+
+        // Display statistics
+        function displayStatistics(stats) {
+            const html = `
+                <div class="stats-grid">
+                    <div class="stat-card">
+                        <div class="stat-label">Total Registrations</div>
+                        <div class="stat-number">${stats.total}</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-label">Paid</div>
+                        <div class="stat-number">${stats.paid}</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-label">Pending Review</div>
+                        <div class="stat-number">${stats.pendingReview != null ? stats.pendingReview : 0}</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-label">Checked In</div>
+                        <div class="stat-number">${stats.checkedIn}</div>
+                    </div>
+                </div>
+
+                <h3 style="color: var(--secondary-gold); margin-top: 40px; margin-bottom: 20px;">Gender Distribution</h3>
+                <div class="stats-grid">
+                    <div class="stat-card">
+                        <div class="stat-label">Male</div>
+                        <div class="stat-number">${stats.genders.male}</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-label">Female</div>
+                        <div class="stat-number">${stats.genders.female}</div>
+                    </div>
+                </div>
+
+                <h3 style="color: var(--secondary-gold); margin-top: 40px; margin-bottom: 20px;">Attendee Locations</h3>
+                <div class="stats-grid">
+                    <div class="stat-card">
+                        <div class="stat-label">Luzon</div>
+                        <div class="stat-number">${stats.locations.luzon}</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-label">Visayas</div>
+                        <div class="stat-number">${stats.locations.visayas}</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-label">Mindanao</div>
+                        <div class="stat-number">${stats.locations.mindanao}</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-label">International</div>
+                        <div class="stat-number">${stats.locations.international}</div>
+                    </div>
+                </div>
+
+                <h3 style="color: var(--secondary-gold); margin-top: 40px; margin-bottom: 20px;">PYC Attendance History</h3>
+                <div class="stats-grid">
+                    <div class="stat-card">
+                        <div class="stat-label">1st PYC</div>
+                        <div class="stat-number">${stats.pycAttendance['1st']}</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-label">2nd PYC</div>
+                        <div class="stat-number">${stats.pycAttendance['2nd']}</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-label">3rd PYC</div>
+                        <div class="stat-number">${stats.pycAttendance['3rd']}</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-label">4th PYC</div>
+                        <div class="stat-number">${stats.pycAttendance['4th']}</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-label">5th PYC</div>
+                        <div class="stat-number">${stats.pycAttendance['5th']}</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-label">6th PYC</div>
+                        <div class="stat-number">${stats.pycAttendance['6th']}</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-label">7th+ PYC</div>
+                        <div class="stat-number">${stats.pycAttendance['7th+']}</div>
+                    </div>
+                </div>
+
+                <h3 style="color: var(--secondary-gold); margin-top: 40px; margin-bottom: 20px;">Age Groups</h3>
+                <div class="stats-grid">
+                    <div class="stat-card">
+                        <div class="stat-label">0-8 years</div>
+                        <div class="stat-number">${(stats.ageGroups && stats.ageGroups['0-8']) || 0}</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-label">9-13 years</div>
+                        <div class="stat-number">${(stats.ageGroups && stats.ageGroups['9-13']) || 0}</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-label">14-17 years</div>
+                        <div class="stat-number">${(stats.ageGroups && stats.ageGroups['14-17']) || 0}</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-label">18-25 years</div>
+                        <div class="stat-number">${(stats.ageGroups && stats.ageGroups['18-25']) || 0}</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-label">26-35 years</div>
+                        <div class="stat-number">${(stats.ageGroups && stats.ageGroups['26-35']) || 0}</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-label">36+ years</div>
+                        <div class="stat-number">${(stats.ageGroups && stats.ageGroups['36+']) || 0}</div>
+                    </div>
+                </div>
+                
+                <h3 style="color: var(--secondary-gold); margin-top: 40px; margin-bottom: 20px;">Meal Plans</h3>
+                <div class="stats-grid">
+                    <div class="stat-card">
+                        <div class="stat-label">Full Meal Plan</div>
+                        <div class="stat-number">${stats.mealPlans.full}</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-label">Half Meal Plan</div>
+                        <div class="stat-number">${stats.mealPlans.half}</div>
+                    </div>
+                </div>
+
+                <h3 style="color: var(--secondary-gold); margin-top: 40px; margin-bottom: 20px;">T-Shirt Sizes</h3>
+                <div class="stats-grid">
+                    <div class="stat-card">
+                        <div class="stat-label">XS</div>
+                        <div class="stat-number">${stats.tshirtSizes.xs}</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-label">S</div>
+                        <div class="stat-number">${stats.tshirtSizes.s}</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-label">M</div>
+                        <div class="stat-number">${stats.tshirtSizes.m}</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-label">L</div>
+                        <div class="stat-number">${stats.tshirtSizes.l}</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-label">XL</div>
+                        <div class="stat-number">${stats.tshirtSizes.xl}</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-label">2XL</div>
+                        <div class="stat-number">${stats.tshirtSizes['2xl']}</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-label">3XL</div>
+                        <div class="stat-number">${stats.tshirtSizes['3xl']}</div>
+                    </div>
+                </div>
+
+                <h3 style="color: var(--secondary-gold); margin-top: 40px; margin-bottom: 20px;">How Did You Hear About Us</h3>
+                <div class="stats-grid">
+                    <div class="stat-card">
+                        <div class="stat-label">Social Media</div>
+                        <div class="stat-number">${stats.hearAboutUs?.['social-media'] || 0}</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-label">Friend/Family</div>
+                        <div class="stat-number">${stats.hearAboutUs?.['friend'] || 0}</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-label">Church</div>
+                        <div class="stat-number">${stats.hearAboutUs?.['church'] || 0}</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-label">Website</div>
+                        <div class="stat-number">${stats.hearAboutUs?.['website'] || 0}</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-label">Email</div>
+                        <div class="stat-number">${stats.hearAboutUs?.['email'] || 0}</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-label">Poster/Flyer</div>
+                        <div class="stat-number">${stats.hearAboutUs?.['poster'] || 0}</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-label">Other</div>
+                        <div class="stat-number">${stats.hearAboutUs?.['other'] || 0}</div>
+                    </div>
+                </div>
+            `;
+            
+            document.getElementById('statsDisplay').innerHTML = html;
+        }
+    </script>
+</body>
+</html>

@@ -1,0 +1,333 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Reserve Tenting - PYC 2026</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" crossorigin>
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Montserrat:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        *{margin:0;padding:0;box-sizing:border-box;}
+        :root{--primary-navy:#1a2332;--secondary-gold:#d4a556;--text-light:#f5f5f5;--background-overlay:rgba(26,35,50,0.92);}
+        html{background:#0f1419;}
+        body{font-family:'Montserrat',sans-serif;background:linear-gradient(135deg,#0f1419 0%,#1a2332 50%,#2a3f5f 100%);background-attachment:fixed;color:var(--text-light);min-height:100vh;}
+        body::before{content:'';position:fixed;top:0;left:0;width:100%;height:100%;background:radial-gradient(circle at 20% 30%,rgba(74,124,158,0.1) 0%,transparent 50%),radial-gradient(circle at 80% 70%,rgba(212,165,86,0.08) 0%,transparent 50%);pointer-events:none;z-index:1;}
+        .stars{position:fixed;top:0;left:0;width:100%;height:100%;pointer-events:none;z-index:0;}.star{position:absolute;background:white;border-radius:50%;box-shadow:0 0 3px rgba(255,255,255,0.8);filter:blur(0.5px);animation:twinkle 3s infinite;}
+        @keyframes twinkle{0%,100%{opacity:0.4;}50%{opacity:1;}}
+        .container{position:relative;z-index:2;max-width:700px;margin:0 auto;padding:30px 20px 60px;}
+        .pyc-progress{max-width:700px;margin:0 auto 25px;padding:15px 10px 5px}.pyc-progress-title{text-align:center;font-size:0.7rem;text-transform:uppercase;letter-spacing:2px;color:rgba(245,245,245,0.3);margin-bottom:14px;font-weight:600}.pyc-steps{display:flex;align-items:flex-start;justify-content:space-between;position:relative}.pyc-steps::before{content:'';position:absolute;top:16px;left:0;right:0;height:3px;background:rgba(255,255,255,0.06);border-radius:2px}.pyc-line{position:absolute;top:16px;left:0;height:3px;z-index:1;background:linear-gradient(90deg,#d4a556,#e5b96a);border-radius:2px;transition:width 0.3s}.pyc-s{display:flex;flex-direction:column;align-items:center;flex:1;position:relative;z-index:3}.pyc-dot{width:32px;height:32px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:0.75rem;font-weight:700;border:3px solid rgba(255,255,255,0.08);background:#1a2332;color:rgba(245,245,245,0.25);transition:all 0.3s}.pyc-s.done .pyc-dot{background:#d4a556;color:#1a2332;border-color:#d4a556}.pyc-s.now .pyc-dot,.pyc-s.active .pyc-dot{background:#1a2332;border-color:#d4a556;color:#d4a556;box-shadow:0 0 15px rgba(212,165,86,0.3);animation:pyc-glow 2s infinite}.pyc-lbl{margin-top:7px;font-size:0.62rem;color:rgba(245,245,245,0.2);text-align:center;font-weight:600;text-transform:uppercase;letter-spacing:0.3px;line-height:1.3;max-width:70px}.pyc-s.done .pyc-lbl,.pyc-s.now .pyc-lbl,.pyc-s.active .pyc-lbl{color:rgba(212,165,86,0.65)}.pyc-hint{text-align:center;margin-top:10px;font-size:0.78rem;color:rgba(212,165,86,0.55);font-style:italic}
+        @keyframes pyc-glow{0%,100%{box-shadow:0 0 10px rgba(212,165,86,0.2);}50%{box-shadow:0 0 20px rgba(212,165,86,0.45);}}
+        @media(max-width:480px){.pyc-dot{width:26px;height:26px;font-size:0.65rem;border-width:2px}.pyc-lbl{font-size:0.55rem;max-width:55px}}
+        .page-header{text-align:center;margin-bottom:25px;}.page-header h1{font-family:'Bebas Neue',sans-serif;color:var(--secondary-gold);font-size:clamp(2rem,5vw,2.8rem);letter-spacing:2px;}.page-header p{color:rgba(245,245,245,0.5);font-size:0.9rem;margin-top:5px;}
+        .content-box{background:var(--background-overlay);border:2px solid rgba(212,165,86,0.2);border-radius:14px;padding:25px;margin-bottom:20px;}.content-box h3{font-family:'Bebas Neue',sans-serif;color:var(--secondary-gold);font-size:1.3rem;letter-spacing:1px;margin-bottom:12px;}
+        .alert{padding:12px 16px;border-radius:8px;margin-bottom:15px;font-size:0.88rem;}.alert-error{background:rgba(231,76,60,0.1);border:1px solid rgba(231,76,60,0.3);color:#e74c3c;}.alert-success{background:rgba(212,165,86,0.1);border:1px solid rgba(212,165,86,0.3);color:var(--secondary-gold);}
+        .lookup-form{display:flex;flex-wrap:wrap;gap:10px;}.lookup-form input{flex:1;min-width:140px;padding:12px 16px;background:rgba(255,255,255,0.05);border:1px solid rgba(212,165,86,0.3);border-radius:8px;color:var(--text-light);font-family:'Montserrat',sans-serif;font-size:0.9rem;}.lookup-form input:focus{outline:none;border-color:#d4a556;}.lookup-form input::placeholder{color:rgba(245,245,245,0.3);}
+        .lookup-btn{padding:12px 24px;background:var(--secondary-gold);color:var(--primary-navy);border:none;border-radius:8px;font-family:'Montserrat',sans-serif;font-weight:700;font-size:0.9rem;cursor:pointer;}
+        .info-row{display:flex;gap:15px;flex-wrap:wrap;margin-bottom:8px;}.info-item{font-size:0.88rem;color:rgba(245,245,245,0.7);}.info-item strong{color:var(--secondary-gold);}
+        .avail-stats{display:flex;gap:12px;flex-wrap:wrap;margin-bottom:18px;}.avail-stat{background:rgba(255,255,255,0.04);border:1px solid rgba(212,165,86,0.2);border-radius:8px;padding:12px 16px;text-align:center;flex:1;min-width:90px;}.avail-stat .av-num{font-size:1.5rem;font-weight:700;color:var(--secondary-gold);}.avail-stat .av-label{font-size:0.7rem;color:rgba(245,245,245,0.4);text-transform:uppercase;letter-spacing:1px;margin-top:2px;}
+        .size-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(120px,1fr));gap:10px;margin:12px 0 18px;}.size-opt{background:rgba(255,255,255,0.04);border:2px solid rgba(212,165,86,0.15);border-radius:10px;padding:18px 10px;text-align:center;cursor:pointer;transition:all 0.2s;}.size-opt:hover{border-color:rgba(212,165,86,0.4);}.size-opt.selected{border-color:var(--secondary-gold);background:rgba(212,165,86,0.08);}.size-opt .so-label{font-weight:700;font-size:0.95rem;}.size-opt .so-desc{font-size:0.72rem;color:rgba(245,245,245,0.4);margin-top:3px;}
+        .member-row{display:flex;align-items:center;gap:10px;padding:10px 12px;background:rgba(255,255,255,0.03);border:1px solid rgba(255,255,255,0.06);border-radius:8px;margin-bottom:6px;cursor:pointer;transition:all 0.2s;}.member-row:hover{border-color:rgba(212,165,86,0.3);}.member-row.selected{border-color:var(--secondary-gold);background:rgba(212,165,86,0.06);}.member-row.assigned{opacity:0.35;pointer-events:none;cursor:default;}
+        .member-row .mr-check{width:18px;height:18px;border-radius:4px;border:2px solid rgba(245,245,245,0.2);display:flex;align-items:center;justify-content:center;flex-shrink:0;font-size:0.7rem;}.member-row.selected .mr-check{background:var(--secondary-gold);border-color:var(--secondary-gold);color:var(--primary-navy);}.member-row .mr-name{flex:1;font-size:0.88rem;}.member-row .mr-pyc{color:var(--secondary-gold);font-family:'Bebas Neue',sans-serif;font-size:0.85rem;}
+        .companion-box{background:rgba(255,255,255,0.03);border:1px solid rgba(212,165,86,0.15);border-radius:10px;padding:14px;margin-top:12px;}.companion-input{display:flex;gap:8px;margin-top:8px;}.companion-input input{flex:1;padding:10px 14px;background:rgba(255,255,255,0.05);border:1px solid rgba(212,165,86,0.3);border-radius:8px;color:var(--text-light);font-family:'Montserrat',sans-serif;font-size:0.9rem;text-transform:uppercase;}.companion-input input:focus{outline:none;border-color:#d4a556;}.companion-input button{padding:10px 18px;background:var(--secondary-gold);color:var(--primary-navy);border:none;border-radius:8px;font-weight:700;cursor:pointer;font-size:0.85rem;white-space:nowrap;}
+        .tent-added{background:rgba(212,165,86,0.06);border:1px solid rgba(212,165,86,0.2);border-radius:10px;padding:14px;margin-bottom:8px;display:flex;justify-content:space-between;align-items:center;}.tent-added .ta-info{font-size:0.88rem;}.tent-added .ta-info small{color:rgba(245,245,245,0.4);font-size:0.78rem;}.tent-added .ta-remove{color:#e74c3c;cursor:pointer;font-size:0.8rem;font-weight:600;}
+        .btn{padding:14px 28px;border:none;border-radius:10px;font-family:'Montserrat',sans-serif;font-weight:700;font-size:0.95rem;cursor:pointer;transition:all 0.3s;}.btn:disabled{opacity:0.35;cursor:not-allowed;}.btn-gold{background:var(--secondary-gold);color:var(--primary-navy);}.btn-gold:hover:not(:disabled){background:#e5b96a;}
+        .member-count{font-size:0.82rem;color:var(--secondary-gold);font-weight:600;margin-bottom:8px;}
+        .note-box{background:rgba(212,165,86,0.06);border:1px solid rgba(212,165,86,0.2);border-radius:8px;padding:12px 14px;font-size:0.82rem;color:rgba(245,245,245,0.6);line-height:1.6;margin-top:15px;}
+        @media(max-width:480px){.content-box{padding:18px 14px;}.size-grid{grid-template-columns:repeat(3,1fr);gap:8px;}.size-opt{padding:14px 6px;}}
+        /* Terms Box (inline) */
+        .terms-box{background:rgba(255,255,255,0.03);border:1px solid rgba(212,165,86,0.2);border-radius:10px;overflow:hidden;margin-bottom:12px;}
+        .terms-box-header{padding:12px 16px;border-bottom:1px solid rgba(212,165,86,0.1);}.terms-box-header h3{font-family:'Bebas Neue',sans-serif;color:var(--secondary-gold);font-size:1.1rem;letter-spacing:1px;}
+        .terms-box-body{max-height:180px;overflow-y:auto;padding:14px 16px;font-size:0.82rem;color:rgba(245,245,245,0.7);line-height:1.7;}.terms-box-body strong{color:var(--secondary-gold);font-size:0.84rem;}.terms-box-body p{margin-bottom:8px;}
+        .terms-scroll-hint{text-align:center;padding:6px;color:rgba(212,165,86,0.5);font-size:0.72rem;font-weight:600;letter-spacing:1px;animation:pulseHint 2s infinite;}@keyframes pulseHint{0%,100%{opacity:0.5}50%{opacity:1}}
+        .terms-checkbox{display:flex;align-items:flex-start;gap:10px;margin:10px 0 0;padding:0 16px 14px;}.terms-checkbox input[type="checkbox"]{width:18px;height:18px;margin-top:2px;accent-color:var(--secondary-gold);cursor:pointer;flex-shrink:0;}.terms-checkbox label{font-size:0.84rem;color:rgba(245,245,245,0.7);cursor:pointer;line-height:1.5;}
+    </style>
+</head>
+<body>
+<div class="stars" id="stars"></div>
+
+<!-- Accommodation-closed overlay (hidden by default; shown when /server-time reports accommodationClosed) -->
+<div id="accomClosedOverlay" style="display:none;position:fixed;inset:0;z-index:9000;background:linear-gradient(135deg,#0f1419 0%,#1a2332 50%,#2a3f5f 100%);overflow-y:auto;padding:40px 20px;">
+    <div style="max-width:520px;margin:40px auto 0;background:var(--background-overlay);border:2px solid rgba(212,165,86,0.3);border-radius:20px;padding:40px 30px;text-align:center;">
+        <h1 style="font-family:'Bebas Neue',sans-serif;font-size:2.2rem;color:var(--secondary-gold);letter-spacing:3px;margin-bottom:10px;">SEE YOU IN MVC!</h1>
+        <p style="font-size:1.1rem;color:rgba(245,245,245,0.85);margin-bottom:8px;">Tenting reservations are closed.</p>
+        <p style="color:rgba(245,245,245,0.65);margin:14px 0 26px 0;line-height:1.7;">
+            Reservations ended on <strong>May 22, 2026 (Philippine Time)</strong>.<br>
+            <em>June 3-7 &middot; Mountain View College, Mindanao, Philippines</em>
+        </p>
+        <a href="/" style="display:inline-block;padding:12px 28px;background:transparent;border:2px solid var(--secondary-gold);color:var(--secondary-gold);border-radius:8px;font-weight:700;text-decoration:none;text-transform:uppercase;letter-spacing:1px;">Return Home</a>
+        <p style="margin-top:36px;font-size:0.78rem;color:rgba(245,245,245,0.35);">
+            <a href="#" id="accomAdminBypassLink" style="color:rgba(245,245,245,0.4);text-decoration:underline;">Admin?</a>
+        </p>
+    </div>
+</div>
+
+<div class="container">
+    <div class="pyc-progress">
+        <div class="pyc-progress-title">Your Tenting Journey</div>
+        <div class="pyc-steps" id="pycSteps">
+            <div class="pyc-line" id="pycLine" style="width:0;"></div>
+            <div class="pyc-s now"><div class="pyc-dot">1</div><div class="pyc-lbl">Book Tenting</div></div>
+            <div class="pyc-s"><div class="pyc-dot">2</div><div class="pyc-lbl">Review</div></div>
+            <div class="pyc-s"><div class="pyc-dot">3</div><div class="pyc-lbl">Pay</div></div>
+            <div class="pyc-s"><div class="pyc-dot">4</div><div class="pyc-lbl">All Done!</div></div>
+        </div>
+        <div class="pyc-hint">Step 1 of 3 &mdash; Book your tenting space</div>
+        <script>(function(){var s=document.getElementById('pycSteps');var l=document.getElementById('pycLine');var now=s.querySelector('.pyc-s.now .pyc-dot');if(!s||!l||!now)return;function calc(){var sr=s.getBoundingClientRect();var nr=now.getBoundingClientRect();var edge=nr.left-sr.left+nr.width/2;l.style.width=edge+'px';l.style.left='0px';}calc();window.addEventListener('resize',calc);})();</script>
+    </div>
+    <div class="page-header"><h1>Reserve Tenting Space</h1><p>Camping &mdash; ₱150 per person &mdash; bring your own tent to PYC 2026</p></div>
+    <div id="alertBox"></div>
+    <div class="content-box" id="lookupBox">
+        <h3>Your Information</h3>
+        <p style="color:rgba(245,245,245,0.5);font-size:0.85rem;margin-bottom:4px;">Enter your registration details to reserve a tenting space.</p>
+        <p style="color:rgba(245,245,245,0.35);font-size:0.78rem;margin-bottom:12px;">For groups or families, enter the primary registrant's email and any member's PYC number.</p>
+        <div class="lookup-form">
+            <input type="text" id="lookupName" placeholder="Full name">
+            <input type="email" id="lookupEmail" placeholder="Registration email" onkeydown="if(event.key==='Enter') lookupReg()">
+            <input type="text" id="lookupPYC" placeholder="PYC-XXXX" style="text-transform:uppercase;" onkeydown="if(event.key==='Enter') lookupReg()">
+            <button class="lookup-btn" id="lookupBtn" onclick="lookupReg()">Look Up</button>
+        </div>
+    </div>
+    <div class="content-box" id="identityBox" style="display:none;">
+        <h3>Your Information</h3>
+        <div class="info-row">
+            <div class="info-item"><strong>Name:</strong> <span id="dispName"></span></div>
+            <div class="info-item"><strong>Email:</strong> <span id="dispEmail"></span></div>
+            <div class="info-item"><strong>Type:</strong> <span id="dispType"></span></div>
+        </div>
+        <button onclick="resetIdentity()" style="margin-top:10px;padding:6px 14px;background:transparent;border:1px solid rgba(212,165,86,0.3);border-radius:6px;color:rgba(245,245,245,0.5);cursor:pointer;font-size:0.8rem;">Change</button>
+    </div>
+    <div id="tentingForm" style="display:none;">
+        <div class="avail-stats" id="availStats"></div>
+        <div id="addedTentsList"></div>
+        <div class="content-box" id="step1">
+            <div id="multiTentNotice" style="display:none;background:rgba(212,165,86,0.1);border:1px solid rgba(212,165,86,0.35);border-radius:10px;padding:14px 16px;margin-bottom:18px;">
+                <div style="color:var(--secondary-gold);font-weight:700;font-size:0.95rem;margin-bottom:6px;" id="multiTentNoticeTitle">⚠️ Your Group Needs 2 Tents</div>
+                <p style="color:rgba(245,245,245,0.75);font-size:0.85rem;line-height:1.5;" id="multiTentNoticeBody">Since you have <span id="groupSizeText">5 or more</span> members and the maximum tent size is 4 people, your group will need to reserve <strong>2 tents</strong>. After adding your first tent, you'll be prompted to add a second tent for the remaining members.</p>
+            </div>
+            <h3>Who's Tenting Together?</h3>
+            <p style="color:rgba(245,245,245,0.5);font-size:0.85rem;margin-bottom:8px;">Tell us about your tent group so we can place similar groups together.</p>
+            <select id="tentGroupType" onchange="onGroupTypeChange();" style="width:100%;padding:12px 14px;background:rgba(255,255,255,0.05);border:1px solid rgba(212,165,86,0.3);border-radius:8px;color:var(--text-light);font-family:'Montserrat',sans-serif;font-size:0.95rem;margin-bottom:18px;cursor:pointer;">
+                <option value="">-- Select group type --</option>
+                <option value="solo">Solo (just me)</option>
+                <option value="married">Married Couple</option>
+                <option value="family">Family (parents, children, relatives)</option>
+                <option value="friends">Friends</option>
+            </select>
+            <h3>Choose Your Tent Size</h3>
+            <p style="color:rgba(245,245,245,0.5);font-size:0.85rem;margin-bottom:4px;">How many people will fit in your tent?</p>
+            <div class="size-grid">
+                <div class="size-opt" id="sizeOpt1" style="display:none;border-color:rgba(212,165,86,0.5);" onclick="pickSize(1)"><div class="so-label">1-Person</div><div class="so-desc" style="color:var(--secondary-gold);">Solo &#9733;</div></div>
+                <div class="size-opt" onclick="pickSize(2)"><div class="so-label">2-Person</div><div class="so-desc">Small</div></div>
+                <div class="size-opt" onclick="pickSize(3)"><div class="so-label">3-Person</div><div class="so-desc">Standard</div></div>
+                <div class="size-opt" onclick="pickSize(4)"><div class="so-label">4-Person</div><div class="so-desc">Family</div></div>
+            </div>
+            <p id="soloNotice" style="display:none;color:var(--secondary-gold);font-size:0.82rem;margin-top:8px;background:rgba(212,165,86,0.1);border:1px solid rgba(212,165,86,0.3);border-radius:8px;padding:8px 12px;">&#9733; Pick the 1-Person option to reserve a tent by yourself.</p>
+            <h3 style="margin-top:18px;">Assign Members</h3>
+            <p class="member-count" id="memberCount">0 selected (min 1)</p>
+            <div id="memberList"></div>
+            <div class="companion-box">
+                <p style="color:rgba(245,245,245,0.5);font-size:0.82rem;">Add someone outside your group by their name and PYC number:</p>
+                <div class="companion-input" style="flex-wrap:wrap;">
+                    <input type="text" id="companionName" placeholder="Full name" style="text-transform:none;min-width:140px;">
+                    <input type="text" id="companionPYC" placeholder="PYC-XXXX">
+                    <button onclick="lookupCompanion()">Add</button>
+                </div>
+                <div id="companionResult" style="margin-top:8px;font-size:0.85rem;"></div>
+            </div>
+            <div style="margin-top:18px;"><button class="btn btn-gold" id="addTentBtn" disabled onclick="addTent()">Add Tent to Reservation</button></div>
+        </div>
+        <div id="submitSection" style="display:none;margin-top:20px;">
+            <div class="terms-box">
+                <div class="terms-box-header"><h3>Terms &amp; Conditions</h3></div>
+                <div class="terms-box-body" id="termsBody">
+                    <p><strong>1. Accommodations Occupancy</strong><br>Room / tent occupancy limits are strictly enforced. Only officially registered PYC participants who have booked an accommodation slot are permitted to occupy assigned rooms / tent areas.</p>
+                    <p><strong>2. Room Assignment</strong><br>Room assignments / tent areas will be managed by the PYC Accommodations Team. Special requests (e.g., roommate requests) are subject to availability and are not guaranteed.</p>
+                    <p><strong>3. Cancellation &amp; Transfers</strong><br>Accommodation reservations are non-refundable but transferable. Transfers are only allowed within the same accommodation type and gender.</p>
+                    <p><strong>4. Room Care &amp; Damages</strong><br>Participants are responsible for maintaining cleanliness and order in their assigned rooms / area.</p>
+                    <p><strong>5. House Rules Compliance</strong><br>All occupants are expected to comply with accommodation policies and guidelines at all times.</p>
+                    <p><strong>6. Security &amp; Liability</strong><br>The organizers are not liable for any loss, theft, or damage to personal belongings. Participants are advised to secure their valuables at all times.</p>
+                    <p><strong>7. Changes &amp; Adjustments</strong><br>The PYC Accommodations Team reserves the right to make necessary adjustments to room assignments or arrangements due to unforeseen circumstances. Participants will be duly notified of any such changes.</p>
+                </div>
+                <div class="terms-scroll-hint" id="termsScrollHint">&#8595; Scroll down to read all terms &#8595;</div>
+                <div class="terms-checkbox">
+                    <input type="checkbox" id="acceptTerms" onchange="document.getElementById('reviewBtn').style.display=this.checked?'block':'none';" disabled>
+                    <label for="acceptTerms" id="termsLabel" style="opacity:0.4;">I have read and accept the Terms &amp; Conditions for PYC 2026 accommodation reservations.</label>
+                </div>
+            </div>
+            <button class="btn btn-gold" id="reviewBtn" onclick="goToReview()" style="width:100%;display:none;margin-top:12px;">Review &amp; Confirm Reservation</button>
+        </div>
+        <div class="note-box">Tenting is ₱150 per person. Each tent space is 2m&times;2m under a shared canopy. 2-4 people per tent. Canopy assignment is automatic. You can reserve 1 tent per group (2 tents if your group has 5 or more members).</div>
+    </div>
+    <div style="text-align:center;margin-top:20px;"><a href="/accommodations" style="color:rgba(245,245,245,0.4);font-size:0.82rem;text-decoration:none;">&larr; Back to Accommodations</a></div>
+</div>
+<script>
+(function(){var c=document.getElementById('stars');var z=['top','bottom','left','right'];for(var i=0;i<40;i++){var s=document.createElement('div');s.className='star';var zone=z[Math.floor(Math.random()*4)];var l,t;if(zone==='top'){l=Math.random()*100;t=Math.random()*20;}else if(zone==='bottom'){l=Math.random()*100;t=80+Math.random()*20;}else if(zone==='left'){l=Math.random()*15;t=20+Math.random()*60;}else{l=85+Math.random()*15;t=20+Math.random()*60;}var sz=Math.random()*3+2;s.style.cssText='width:'+sz+'px;height:'+sz+'px;left:'+l+'%;top:'+t+'%;animation-delay:'+Math.random()*3+'s;animation-duration:'+(Math.random()*2+2)+'s;';c.appendChild(s);}})();
+function esc(s){if(!s)return'';var d=document.createElement('div');d.textContent=String(s);return d.innerHTML;}
+function showAlert(msg,type){document.getElementById('alertBox').innerHTML='<div class="alert alert-'+type+'">'+msg+'</div>';window.scrollTo({top:0,behavior:'smooth'});}
+var regName='',regEmail='',regId='',isGroup=false,groupMembers=[];
+var chosenSize=0,selectedMembers=[],tentQueue=[],assignedPycs=[];
+var bookerIsWhitelisted=false;
+var bookerIsMultiTent=false;
+
+// Solo-tent whitelist: these PYCs can reserve a tent by themselves (no companion required).
+// Must match the list in submit-tent.js backend.
+var SOLO_TENT_WHITELIST=['PYC-0688','PYC-0760','PYC-0721','PYC-0622','PYC-0970','PYC-0971'];
+// Multi-tent whitelist: these PYCs can appear in more than one tent in a single submission.
+// They won't be greyed out after tent 1 is added and can be selected for tent 2.
+// maxTents is automatically set to 2 when the booker's PYC matches this list.
+// Must match MULTI_TENT_WHITELIST in submit-tent.js backend.
+var MULTI_TENT_WHITELIST=['PYC-1029'];
+function isMultiTentPyc(pyc){return MULTI_TENT_WHITELIST.indexOf((pyc||'').toUpperCase())!==-1;}
+function hasWhitelistedMember(members){
+    if(!members||!members.length)return false;
+    return members.some(function(m){
+        var pyc=(m&&m.pycNumber?String(m.pycNumber):'').toUpperCase();
+        return SOLO_TENT_WHITELIST.indexOf(pyc)!==-1;
+    });
+}
+function minRequiredMembers(){return 1;}
+var maxTents=1;
+async function lookupReg(){
+    var name=document.getElementById('lookupName').value.trim();
+    var email=document.getElementById('lookupEmail').value.trim();
+    var pyc=document.getElementById('lookupPYC').value.trim().toUpperCase();
+    if(!email){showAlert('Please enter your email.','error');return;}
+    if(!pyc){showAlert('Please enter your PYC number.','error');return;}
+    var btn=document.getElementById('lookupBtn');btn.disabled=true;btn.textContent='Looking up...';
+    try{
+        var res=await fetch('/.netlify/functions/lookup-registration',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({email:email,name:name,pycNumber:pyc})});
+        var data=await res.json();
+        if(data.found){
+            var ps=data.paymentStatus||'Pending';
+            if(ps!=='Paid'&&ps!=='Pending Review'){showAlert('You must complete your conference registration payment first. Status: '+ps,'error');btn.disabled=false;btn.textContent='Look Up';return;}
+            var allMembers=data.members||[];
+            var pycMatch=allMembers.some(function(m){return m.confirmationNumber&&m.confirmationNumber.toUpperCase()===pyc;});
+            if(!pycMatch){showAlert('PYC number does not match any member under this email.','error');btn.disabled=false;btn.textContent='Look Up';return;}
+            // Save PYC so user doesn't have to re-enter on back navigation
+            sessionStorage.setItem('tentingLookupPyc', pyc);
+            regName=data.name;regEmail=data.email;regId=data.registrationId;
+            isGroup=data.isGroup;groupMembers=data.members||[];
+            // Solo tenting is open to everyone — always show the 1-Person option.
+            // (No longer gated by SOLO_TENT_WHITELIST.) The special "approved" notice
+            // is no longer shown since solo is now universal.
+            bookerIsWhitelisted=true;
+            document.getElementById('sizeOpt1').style.display='';
+            // Check if booker is on the multi-tent whitelist (allowed 2 tents, one payment)
+            bookerIsMultiTent=isMultiTentPyc(pyc);
+            maxTents=(isGroup&&groupMembers.length>=5)?2:1;
+            if(bookerIsMultiTent)maxTents=2;
+            if(maxTents>1){
+                document.getElementById('multiTentNotice').style.display='block';
+                if(bookerIsMultiTent&&!(isGroup&&groupMembers.length>=5)){
+                    // Multi-tent whitelist: approved to split into 2 smaller tents
+                    document.getElementById('multiTentNoticeTitle').textContent='✅ You Can Reserve 2 Tents';
+                    document.getElementById('multiTentNoticeBody').innerHTML='You\'re approved to reserve <strong>2 separate tents</strong> in one booking. Add your first tent below, then add a second tent for the other group. You\'ll check out once and pay for both together.';
+                } else {
+                    // Large group needs 2 tents
+                    document.getElementById('multiTentNoticeTitle').textContent='⚠️ Your Group Needs 2 Tents';
+                    document.getElementById('multiTentNoticeBody').innerHTML='Since you have <strong>'+groupMembers.length+' members</strong> and the maximum tent size is 4 people, your group will need to reserve <strong>2 tents</strong>. After adding your first tent, you\'ll be prompted to add a second tent for the remaining members.';
+                }
+            }
+            document.getElementById('dispName').textContent=data.name;
+            document.getElementById('dispEmail').textContent=data.email;
+            document.getElementById('dispType').textContent=isGroup?'Group ('+groupMembers.length+' members)':'Individual';
+            document.getElementById('lookupBox').style.display='none';
+            document.getElementById('identityBox').style.display='block';
+            document.getElementById('tentingForm').style.display='block';
+            document.getElementById('alertBox').innerHTML='';
+            loadAvailability();renderMembers();
+        }else{showAlert('No registration found for this email.','error');}
+    }catch(e){showAlert('Error: '+e.message,'error');}
+    btn.disabled=false;btn.textContent='Look Up';
+}
+function resetIdentity(){
+    regName='';regEmail='';regId='';isGroup=false;groupMembers=[];
+    chosenSize=0;selectedMembers=[];tentQueue=[];assignedPycs=[];maxTents=1;
+    bookerIsWhitelisted=false;bookerIsMultiTent=false;
+    sessionStorage.removeItem('tentingLookupPyc');
+    document.getElementById('lookupBox').style.display='block';
+    document.getElementById('identityBox').style.display='none';
+    document.getElementById('tentingForm').style.display='none';
+    document.getElementById('addedTentsList').innerHTML='';
+    document.getElementById('submitSection').style.display='none';
+    document.querySelectorAll('.size-opt').forEach(function(o){o.classList.remove('selected');});
+    var sOpt1=document.getElementById('sizeOpt1');if(sOpt1)sOpt1.style.display='none';
+    var sNotice=document.getElementById('soloNotice');if(sNotice)sNotice.style.display='none';
+}
+async function loadAvailability(){
+    try{var res=await fetch('/.netlify/functions/tent-availability');var data=await res.json();
+    if(data.success){document.getElementById('availStats').innerHTML='<div class="avail-stat"><div class="av-num">'+data.totalSpacesAvailable+'</div><div class="av-label">Spaces Left</div></div><div class="avail-stat"><div class="av-num">'+data.totalPeople+'</div><div class="av-label">People Camping</div></div><div class="avail-stat"><div class="av-num">'+data.totalTentsUsed+'</div><div class="av-label">Tents Reserved</div></div>';}}catch(e){}
+}
+function pickSize(n){chosenSize=n;document.querySelectorAll('.size-opt').forEach(function(o){o.classList.remove('selected');});event.currentTarget.classList.add('selected');selectedMembers=[];syncGroupTypeWithSize();renderMembers();updateAddBtn();}
+// Keep group type and tent size consistent:
+//  - 1-Person tent => group type is forced to "solo" (no group to describe).
+//  - 2-4 person tent => if "solo" was selected, clear it so they pick a real group type.
+function syncGroupTypeWithSize(){
+    var gt=document.getElementById('tentGroupType');if(!gt)return;
+    if(chosenSize===1){
+        gt.value='solo';gt.disabled=true;gt.style.opacity='0.6';
+    }else{
+        gt.disabled=false;gt.style.opacity='';
+        if(gt.value==='solo')gt.value='';
+    }
+}
+// When the dropdown changes: picking "Solo" auto-selects the 1-Person size.
+function onGroupTypeChange(){
+    var gt=document.getElementById('tentGroupType');if(!gt)return;
+    if(gt.value==='solo'&&chosenSize!==1){
+        var opt1=document.getElementById('sizeOpt1');
+        if(opt1){document.querySelectorAll('.size-opt').forEach(function(o){o.classList.remove('selected');});opt1.classList.add('selected');chosenSize=1;selectedMembers=[];gt.disabled=true;gt.style.opacity='0.6';renderMembers();}
+    }
+    updateAddBtn();
+}
+function renderMembers(){
+    var list=document.getElementById('memberList');var h='';
+    if(isGroup&&groupMembers.length>0){groupMembers.forEach(function(m){var pyc=m.confirmationNumber||'Pending';var isA=assignedPycs.includes(pyc)&&!isMultiTentPyc(pyc);var isSel=selectedMembers.some(function(sm){return sm.pycNumber===pyc;});h+='<div class="member-row'+(isSel?' selected':'')+(isA?' assigned':'')+'" onclick="toggleMember(\''+esc(pyc)+'\',\''+esc(m.name)+'\',\''+(m.id||'')+'\')"><span class="mr-check">'+(isSel?'&#10003;':'')+'</span><span class="mr-name">'+esc(m.name)+(isA?' <span style="color:rgba(212,165,86,0.7);font-size:0.72rem;">(in a tent)</span>':'')+'</span><span class="mr-pyc">'+esc(pyc)+'</span></div>';});}
+    else{var sm0=groupMembers[0]||{};var sp=sm0.confirmationNumber||'';var isSS=selectedMembers.some(function(x){return x.pycNumber===sp;});var isA=assignedPycs.includes(sp)&&!isMultiTentPyc(sp);h+='<div class="member-row'+(isSS?' selected':'')+(isA?' assigned':'')+'" onclick="toggleMember(\''+esc(sp)+'\',\''+esc(regName)+'\',\''+(regId||'')+'\')"><span class="mr-check">'+(isSS?'&#10003;':'')+'</span><span class="mr-name">'+esc(regName)+'</span><span class="mr-pyc">'+esc(sp)+'</span></div>';}
+    selectedMembers.forEach(function(sm){var isGM=isGroup&&groupMembers.some(function(m){return m.confirmationNumber===sm.pycNumber;});var isSelf=!isGroup&&groupMembers[0]&&groupMembers[0].confirmationNumber===sm.pycNumber;if(!isGM&&!isSelf){h+='<div class="member-row selected" style="border-color:rgba(212,165,86,0.3);"><span class="mr-check" style="background:var(--secondary-gold);border-color:var(--secondary-gold);color:var(--primary-navy);">&#10003;</span><span class="mr-name">'+esc(sm.name)+' <span style="color:rgba(245,245,245,0.35);font-size:0.72rem;">(companion)</span></span><span class="mr-pyc">'+esc(sm.pycNumber)+'</span></div>';}});
+    list.innerHTML=h;updateMemberCount();
+}
+function toggleMember(pyc,name,rid){if(!pyc||pyc==='Pending')return;if(assignedPycs.includes(pyc)&&!isMultiTentPyc(pyc))return;var idx=selectedMembers.findIndex(function(m){return m.pycNumber===pyc;});if(idx>=0){selectedMembers.splice(idx,1);}else{if(chosenSize&&selectedMembers.length>=chosenSize){var msg='This tent fits '+chosenSize+' people max.';if(maxTents>1&&tentQueue.length===0)msg+=' Click "Add Tent" to save this one, then add another tent for the rest.';showAlert(msg,'error');return;}selectedMembers.push({pycNumber:pyc,name:name,registrationId:rid});}document.getElementById('alertBox').innerHTML='';renderMembers();updateAddBtn();}
+function updateMemberCount(){var c=selectedMembers.length;var min=minRequiredMembers();document.getElementById('memberCount').textContent=c+' of '+(chosenSize||'?')+' selected (min '+min+')';}
+function updateAddBtn(){var min=minRequiredMembers();var gt=document.getElementById('tentGroupType');var hasGroupType=(chosenSize===1)||(gt&&gt.value);var minSize=1;document.getElementById('addTentBtn').disabled=!(chosenSize>=minSize&&selectedMembers.length>=min&&selectedMembers.length<=chosenSize&&hasGroupType);}
+async function lookupCompanion(){var pyc=document.getElementById('companionPYC').value.trim().toUpperCase();var cname=document.getElementById('companionName').value.trim();if(!pyc||!cname){document.getElementById('companionResult').innerHTML='<span style="color:#e74c3c;">Enter both name and PYC number.</span>';return;}var result=document.getElementById('companionResult');result.innerHTML='<span style="color:rgba(245,245,245,0.4);">Looking up...</span>';try{var res=await fetch('/.netlify/functions/tent-lookup-member',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({pycNumber:pyc,companionName:cname})});var data=await res.json();if(!data.found){result.innerHTML='<span style="color:#e74c3c;">'+(data.message||'No match found. Check the name and PYC number.')+'</span>';return;}if(data.alreadyReserved){result.innerHTML='<span style="color:#e74c3c;">'+esc(data.name)+' already has a tent reserved by '+esc(data.reservedBy)+'</span>';return;}if(data.hasAccommodation){result.innerHTML='<span style="color:#e74c3c;">'+esc(data.name)+' already has an accommodation reservation.</span>';return;}if(selectedMembers.some(function(m){return m.pycNumber===pyc;})){result.innerHTML='<span style="color:var(--secondary-gold);">'+esc(data.name)+' already added</span>';return;}if(chosenSize&&selectedMembers.length>=chosenSize){result.innerHTML='<span style="color:#e74c3c;">Tent full ('+chosenSize+' max). '+(maxTents>1&&tentQueue.length===0?'Add this tent, then add a 2nd for the rest.':'')+'</span>';return;}selectedMembers.push({pycNumber:data.pycNumber,name:data.name,registrationId:data.registrationId});result.innerHTML='<span style="color:var(--secondary-gold);">Added '+esc(data.name)+'</span>';document.getElementById('companionPYC').value='';document.getElementById('companionName').value='';renderMembers();updateAddBtn();}catch(e){result.innerHTML='<span style="color:#e74c3c;">Error: '+e.message+'</span>';}}
+function addTent(){if(tentQueue.length>=maxTents){showAlert('You can reserve up to '+maxTents+' tent(s).','error');return;}var gtEl=document.getElementById('tentGroupType');var groupType=gtEl?gtEl.value:'';if(chosenSize===1)groupType='solo';if(!groupType){showAlert('Please select a group type (Solo, Married, Family, or Friends).','error');if(gtEl){gtEl.focus();gtEl.scrollIntoView({behavior:'smooth',block:'center'});}return;}tentQueue.push({tentSize:chosenSize,members:selectedMembers.slice(),groupType:groupType});selectedMembers.forEach(function(m){if(!assignedPycs.includes(m.pycNumber)&&!isMultiTentPyc(m.pycNumber))assignedPycs.push(m.pycNumber);});selectedMembers=[];chosenSize=0;document.querySelectorAll('.size-opt').forEach(function(o){o.classList.remove('selected');});if(gtEl){gtEl.value='';gtEl.disabled=false;gtEl.style.opacity='';}renderAddedTents();renderMembers();updateAddBtn();document.getElementById('submitSection').style.display='block';showAlert('Tent added!'+(tentQueue.length<maxTents?' You can add 1 more or proceed to review.':' Proceed to review.'),'success');if(tentQueue.length>=maxTents)document.getElementById('step1').style.display='none';}
+function renderAddedTents(){var el=document.getElementById('addedTentsList');if(tentQueue.length===0){el.innerHTML='';return;}var labels={solo:'Solo',married:'Married Couple',family:'Family',friends:'Friends'};var h='<div class="content-box" style="border-color:rgba(212,165,86,0.3);"><h3 style="color:var(--secondary-gold);">Tents Added ('+tentQueue.length+')</h3>';tentQueue.forEach(function(t,i){var names=t.members.map(function(m){return m.name;}).join(', ');var gtLabel=labels[t.groupType]||'';h+='<div class="tent-added"><div class="ta-info">'+t.tentSize+'-person tent'+(gtLabel?' &mdash; <span style="color:var(--secondary-gold);">'+esc(gtLabel)+'</span>':'')+'<br><small>'+esc(names)+'</small></div><span class="ta-remove" onclick="removeTent('+i+')">Remove</span></div>';});h+='</div>';el.innerHTML=h;}
+function removeTent(idx){var removed=tentQueue.splice(idx,1)[0];if(removed){removed.members.forEach(function(m){var pi=assignedPycs.indexOf(m.pycNumber);if(pi>=0)assignedPycs.splice(pi,1);});}renderAddedTents();renderMembers();if(tentQueue.length===0)document.getElementById('submitSection').style.display='none';if(tentQueue.length<maxTents)document.getElementById('step1').style.display='block';document.getElementById('alertBox').innerHTML='';}
+function goToReview(){if(tentQueue.length===0)return;sessionStorage.setItem('tentReview',JSON.stringify({registrationId:regId,registrantName:regName,registrantEmail:regEmail,tents:tentQueue}));window.location.href='/tenting-review';}
+(function(){var b=document.getElementById('termsBody');if(b){b.addEventListener('scroll',function(){if(b.scrollHeight-b.scrollTop-b.clientHeight<30){var h=document.getElementById('termsScrollHint');if(h)h.style.display='none';document.getElementById('acceptTerms').disabled=false;document.getElementById('termsLabel').style.opacity='1';}});}})();
+var sessEmail=sessionStorage.getItem('registrantEmail');var sessName=sessionStorage.getItem('registrantName')||'';var sessPyc=sessionStorage.getItem('tentingLookupPyc')||'';
+if(sessEmail){
+    document.getElementById('lookupEmail').value=sessEmail;
+    if(sessName)document.getElementById('lookupName').value=sessName;
+    if(sessPyc)document.getElementById('lookupPYC').value=sessPyc;
+    // Only auto-lookup if both email AND PYC are saved (returning from payment/review page)
+    if(sessPyc)setTimeout(function(){lookupReg();},300);
+}
+
+// ===== ACCOMMODATION (TENTING) CLOSE GATE =====
+// Fetches authoritative server time; if reservations are closed, shows the
+// closed overlay. Admins can bypass via the "Admin?" link on the overlay.
+(function(){
+    fetch('/.netlify/functions/server-time', { cache: 'no-store' })
+        .then(function(r){ return r.json(); })
+        .then(function(d){
+            if (d && d.accommodationClosed === true && !window.__accomAdminBypass) {
+                var ov = document.getElementById('accomClosedOverlay');
+                if (ov) ov.style.display = 'block';
+            }
+        })
+        .catch(function(){ /* fail open — backend still enforces the cutoff */ });
+
+    var lnk = document.getElementById('accomAdminBypassLink');
+    if (lnk) lnk.addEventListener('click', function(e){
+        e.preventDefault();
+        window.__accomAdminBypass = true;
+        var ov = document.getElementById('accomClosedOverlay');
+        if (ov) ov.style.display = 'none';
+    });
+})();
+</script>
+</body>
+</html>

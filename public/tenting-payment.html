@@ -1,0 +1,473 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="format-detection" content="telephone=no">
+    <link rel="icon" type="image/x-icon" href="/favicon.ico">
+    <link rel="apple-touch-icon" href="/apple-touch-icon.png">
+    <title>Tenting Payment - PYC 2026</title>
+    <meta property="og:title" content="PYC 2026 — Tenting Payment">
+    <meta property="og:description" content="Complete your accommodation payment for Philippine Youth for Christ 2026 — June 3-7, Valencia, Bukidnon.">
+    <meta property="og:image" content="https://philippineyouthforchrist.org/IMG_3908.jpeg">
+    <meta property="og:url" content="https://philippineyouthforchrist.org/accommodation-payment">
+    <meta property="og:type" content="website">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="PYC 2026 — Tenting Payment">
+    <meta name="twitter:image" content="https://philippineyouthforchrist.org/IMG_3908.jpeg">
+    <link rel="preconnect" href="https://fonts.googleapis.com" crossorigin>
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Montserrat:wght@400;600;700&display=swap" rel="stylesheet">
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        :root {
+            --primary-navy: #1a2332; --secondary-gold: #d4a556;
+            --text-light: #f5f5f5; --background-overlay: rgba(26, 35, 50, 0.92);
+        }
+        html { background: #0f1419; }
+        body {
+            font-family: 'Montserrat', sans-serif;
+            background-color: #0f1419; background: linear-gradient(135deg, #0f1419 0%, #1a2332 50%, #2a3f5f 100%);
+            background-attachment: fixed; color: var(--text-light); min-height: 100vh; overscroll-behavior: none; overflow-x: hidden;
+        }
+        body::before {
+            content: ''; position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+            background: radial-gradient(circle at 20% 30%, rgba(74,124,158,0.1) 0%, transparent 50%),
+                        radial-gradient(circle at 80% 70%, rgba(212,165,86,0.08) 0%, transparent 50%);
+            pointer-events: none; z-index: 1;
+        }
+        .stars { position: fixed; top: 0; left: 0; width: 100%; height: 100%; pointer-events: none; z-index: 0; }
+        .star { position: absolute; background: white; border-radius: 50%; box-shadow: 0 0 3px rgba(255,255,255,0.8); filter: blur(0.5px); animation: twinkle 3s infinite; }
+        @keyframes twinkle { 0%,100% { opacity: 0.4; } 50% { opacity: 1; } }
+
+        .container { position: relative; z-index: 2; max-width: 600px; margin: 0 auto; padding: 40px 20px; }
+        .page-header { text-align: center; margin-bottom: 30px; }
+        .page-header h1 { font-family: 'Bebas Neue', sans-serif; font-size: 2.2rem; color: var(--secondary-gold); letter-spacing: 2px; margin-bottom: 8px; }
+        .page-header p { color: rgba(245,245,245,0.6); font-size: 0.95rem; }
+
+        .payment-card {
+            background: var(--background-overlay); border: 2px solid rgba(212,165,86,0.3);
+            border-radius: 16px; padding: 30px; margin-bottom: 30px;
+        }
+        .summary-section { margin-bottom: 25px; }
+        .summary-row { display: flex; justify-content: space-between; padding: 10px 0; border-bottom: 1px solid rgba(255,255,255,0.06); font-size: 0.95rem; }
+        .summary-row:last-child { border-bottom: none; }
+        .summary-row.total { font-weight: 700; font-size: 1.15rem; color: var(--secondary-gold); border-top: 2px solid rgba(212,165,86,0.3); margin-top: 8px; padding-top: 12px; }
+
+        .payment-tabs { display: flex; gap: 0; margin-bottom: 20px; border-radius: 10px; overflow: hidden; border: 1px solid rgba(212,165,86,0.3); }
+        .tab-btn {
+            flex: 1; padding: 12px; background: rgba(255,255,255,0.03); color: rgba(245,245,245,0.6);
+            border: none; cursor: pointer; font-family: 'Montserrat', sans-serif; font-weight: 600; font-size: 0.9rem; transition: all 0.3s;
+        }
+        .tab-btn.active { background: rgba(212,165,86,0.15); color: var(--secondary-gold); }
+        .tab-btn:hover:not(.active) { background: rgba(255,255,255,0.06); }
+
+        .payment-method { display: none; }
+        .payment-method.active { display: block; }
+
+        .account-box {
+            background: rgba(212,165,86,0.1); border: 1px solid rgba(212,165,86,0.3);
+            border-radius: 8px; padding: 15px; margin: 12px 0;
+        }
+        .account-name { font-size: 16px; font-weight: 700; color: var(--secondary-gold); }
+        .account-number { font-size: 20px; font-weight: 800; color: var(--text-light) !important; letter-spacing: 1px; margin-top: 4px; }
+        .account-number a, .account-number a:visited, .account-number a:link { color: var(--text-light) !important; text-decoration: none !important; }
+        .account-label { font-size: 13px; color: rgba(245,245,245,0.5); margin-top: 2px; }
+
+        .instructions { color: rgba(245,245,245,0.75); font-size: 0.92rem; line-height: 1.7; margin-bottom: 15px; }
+        .instructions ol { padding-left: 20px; }
+        .instructions li { margin-bottom: 6px; }
+
+        .form-group { margin-bottom: 18px; }
+        .form-group label { display: block; color: var(--text-light); font-weight: 600; margin-bottom: 8px; font-size: 0.92rem; }
+        input[type="file"] {
+            width: 100%; padding: 14px; background: rgba(255,255,255,0.05);
+            border: 1px solid rgba(212,165,86,0.3); border-radius: 8px; color: var(--text-light);
+            font-family: 'Montserrat', sans-serif;
+        }
+
+        .image-preview { display: none; margin: 10px 0; text-align: center; }
+        .image-preview img { max-width: 100%; max-height: 200px; border-radius: 8px; border: 1px solid rgba(212,165,86,0.3); }
+
+        .submit-btn { display: none; }
+        /* Slide Button */
+        .slide-btn-wrapper { width: 100%; margin-top: 10px; }
+        .slide-btn-track { position: relative; height: 58px; background: rgba(255,255,255,0.04); border: 1px solid rgba(212,165,86,0.3); border-radius: 50px; overflow: hidden; touch-action: none; user-select: none; -webkit-user-select: none; }
+        .slide-btn-track.completed { border-color: rgba(212,165,86,0.5); }
+        .slide-btn-fill { position: absolute; top: 0; left: 0; bottom: 0; width: 0; background: linear-gradient(90deg, rgba(212,165,86,0.15), rgba(212,165,86,0.25)); border-radius: 50px; transition: none; }
+        .slide-btn-track.resetting .slide-btn-fill { transition: width 0.3s ease; }
+        .slide-btn-track.completed .slide-btn-fill { background: linear-gradient(90deg, rgba(212,165,86,0.15), rgba(212,165,86,0.35)); width: 100% !important; }
+        .slide-btn-label { position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); font-family: 'Montserrat', sans-serif; font-size: 0.9rem; font-weight: 700; letter-spacing: 1px; text-transform: uppercase; color: rgba(212,165,86,0.5); white-space: nowrap; pointer-events: none; transition: opacity 0.2s; }
+        .slide-btn-track.completed .slide-btn-label { top: 35%; }
+        .slide-btn-handle { position: absolute; top: 4px; left: 4px; width: 50px; height: 50px; background: linear-gradient(135deg, #d4a556, #c9965d); border-radius: 50%; display: flex; align-items: center; justify-content: center; cursor: grab; z-index: 2; transition: none; box-shadow: 0 2px 8px rgba(0,0,0,0.3); }
+        .slide-btn-handle:active { cursor: grabbing; }
+        .slide-btn-track.resetting .slide-btn-handle { transition: left 0.3s ease; }
+        .slide-btn-handle svg { width: 22px; height: 22px; fill: none; stroke: #1a2332; stroke-width: 2.5; stroke-linecap: round; stroke-linejoin: round; }
+        .slide-btn-track.completed .slide-btn-handle { left: calc(100% - 54px) !important; transition: left 0.3s; }
+        .slide-btn-track.completed .slide-btn-handle svg { display: none; }
+        .slide-btn-loading { display: none; width: 30px; height: 30px; position: relative; }
+        .slide-btn-loading .orbit { position: absolute; border: 2px solid transparent; border-radius: 50%; }
+        .slide-btn-loading .orbit-1 { inset: 0; border-top-color: #1a2332; animation: spin 1s linear infinite; }
+        .slide-btn-loading .orbit-2 { inset: 4px; border-top-color: #1a2332; animation: spin-reverse 1.5s linear infinite; }
+        .slide-btn-loading .orbit-3 { inset: 8px; border-top-color: #1a2332; animation: spin 0.8s linear infinite; }
+        @keyframes spin-reverse { to { transform: rotate(-360deg); } }
+        .slide-btn-track.completed .slide-btn-loading { display: block; }
+        .slide-btn-dots { display: none; position: absolute; top: 72%; left: 50%; transform: translate(-50%, -50%); z-index: 1; pointer-events: none; }
+        .slide-btn-track.completed .slide-btn-dots { display: block; }
+        @media (max-width: 480px) { .slide-btn-track { height: 52px; } .slide-btn-handle { width: 44px; height: 44px; } .slide-btn-label { font-size: 0.8rem; } }
+
+        .alert { padding: 15px 20px; border-radius: 8px; margin-bottom: 20px; display: none; font-size: 0.95rem; }
+        .alert-error { background: rgba(231,76,60,0.15); border: 1px solid rgba(231,76,60,0.4); color: #e74c3c; }
+        .alert-success { background: rgba(39,174,96,0.15); border: 1px solid rgba(39,174,96,0.4); color: #27ae60; }
+
+        .back-link { display: inline-block; color: var(--secondary-gold); text-decoration: none; margin-bottom: 20px; font-size: 0.95rem; }
+
+        .loading-overlay {
+            display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+            background: rgba(15,20,25,0.95); z-index: 1000;
+            justify-content: center; align-items: center; flex-direction: column;
+        }
+        .loading-overlay.active { display: flex; }
+        .loading-spinner { width: 65px; aspect-ratio: 1; margin: 0 auto 20px; position: relative; }
+        .loading-spinner span { position: absolute; border-radius: 50px; box-shadow: inset 0 0 0 3px #d4a556; animation: loaderMorph 2.5s infinite; }
+        .loading-spinner span:nth-child(2) { animation-delay: -1.25s; }
+        @keyframes loaderMorph { 0%{inset:0 35px 35px 0;} 12.5%{inset:0 35px 0 0;} 25%{inset:35px 35px 0 0;} 37.5%{inset:35px 0 0 0;} 50%{inset:35px 0 0 35px;} 62.5%{inset:0 0 0 35px;} 75%{inset:0 0 35px 35px;} 87.5%{inset:0 0 35px 0;} 100%{inset:0 35px 35px 0;} }
+        @keyframes spin { to { transform: rotate(360deg); } }
+        .loading-text { color: var(--secondary-gold); margin-top: 20px; font-size: 1.1rem; font-weight: 600; }
+
+        @media (max-width: 600px) { .container { padding: 20px 15px; } .page-header h1 { font-size: 1.8rem; } }
+
+
+
+        /* Progress Stepper */
+        .pyc-progress { max-width:700px; margin:0 auto 25px; padding:15px 10px 5px; }
+        .pyc-progress-title { text-align:center; font-size:0.7rem; text-transform:uppercase; letter-spacing:2px; color:rgba(245,245,245,0.3); margin-bottom:14px; font-weight:600; }
+        .pyc-steps { display:flex; align-items:flex-start; justify-content:space-between; position:relative; }
+        .pyc-steps::before { content:''; position:absolute; top:16px; left:0; right:0; height:3px; background:rgba(255,255,255,0.06); border-radius:2px; }
+        .pyc-line { position:absolute; top:16px; left:0; height:3px; z-index:1; background:linear-gradient(90deg,#d4a556,#e5b96a); border-radius:2px; }
+        .pyc-s { display:flex; flex-direction:column; align-items:center; flex:1; position:relative; z-index:3; }
+        .pyc-dot { width:32px; height:32px; border-radius:50%; display:flex; align-items:center; justify-content:center; font-size:0.75rem; font-weight:700; border:3px solid rgba(255,255,255,0.08); background:#1a2332; color:rgba(245,245,245,0.25); transition:all 0.3s; }
+        .pyc-s.done .pyc-dot { background:#d4a556; color:#1a2332; border-color:#d4a556; }
+        .pyc-s.now .pyc-dot { background:rgba(212,165,86,0.12); color:#d4a556; border-color:#d4a556; box-shadow:0 0 15px rgba(212,165,86,0.3); animation:pyc-glow 2s infinite; }
+        .pyc-lbl { margin-top:7px; font-size:0.62rem; color:rgba(245,245,245,0.2); text-align:center; font-weight:600; text-transform:uppercase; letter-spacing:0.3px; line-height:1.3; max-width:70px; }
+        .pyc-s.done .pyc-lbl { color:rgba(212,165,86,0.65); }
+        .pyc-s.now .pyc-lbl { color:#f5f5f5; }
+        .pyc-hint { text-align:center; margin-top:10px; font-size:0.78rem; color:rgba(212,165,86,0.55); font-style:italic; }
+        @keyframes pyc-glow { 0%,100%{box-shadow:0 0 10px rgba(212,165,86,0.2);} 50%{box-shadow:0 0 20px rgba(212,165,86,0.45);} }
+        @media(max-width:480px) { .pyc-dot{width:26px;height:26px;font-size:0.65rem;border-width:2px;} .pyc-lbl{font-size:0.55rem;max-width:55px;} .pyc-steps::before{left:0;right:0;} .pyc-line{left:0;} }
+    </style>
+</head>
+<body>
+    <div class="stars" id="stars"></div>
+    <div class="container">
+
+        <div class="pyc-progress">
+            <div class="pyc-progress-title">Your Tenting Journey</div>
+            <div class="pyc-steps" id="pycSteps">
+                <div class="pyc-line" id="pycLine" style="width:0;"></div>
+                <div class="pyc-s done"><div class="pyc-dot">✓</div><div class="pyc-lbl">Book Tenting</div></div><div class="pyc-s done"><div class="pyc-dot">✓</div><div class="pyc-lbl">Review</div></div><div class="pyc-s now"><div class="pyc-dot">3</div><div class="pyc-lbl">Pay</div></div><div class="pyc-s "><div class="pyc-dot">4</div><div class="pyc-lbl">All Done!</div></div>
+            </div>
+            <div class="pyc-hint">Step 3 of 4 — Upload your tenting payment proof</div>
+            <script>
+            (function(){var s=document.getElementById('pycSteps');var l=document.getElementById('pycLine');var now=s.querySelector('.pyc-s.now .pyc-dot');if(!s||!l||!now)return;function calc(){var sr=s.getBoundingClientRect();var nr=now.getBoundingClientRect();var edge=nr.left-sr.left;l.style.width=edge+'px';l.style.left='0px';}calc();window.addEventListener('resize',calc);})();
+            </script>
+        </div>
+
+        <a href="/tenting" class="back-link">&larr; Back to Tenting</a>
+
+        <div class="page-header">
+            <h1>Tenting Payment</h1>
+            <p>Complete your payment to confirm your tenting reservation.</p>
+        </div>
+
+        <div id="alertBox" class="alert"></div>
+
+        <div class="payment-card">
+            <div class="summary-section">
+                <div id="cartSummary"></div>
+                <div class="summary-row total"><span>Total</span><span id="accommTotal">₱0.00</span></div>
+            </div>
+
+            <div class="payment-tabs">
+                <button class="tab-btn active" onclick="switchTab('gcash')">GCash</button>
+                <button class="tab-btn" onclick="switchTab('bank')">Bank Transfer</button>
+            </div>
+
+            <!-- GCash -->
+            <div class="payment-method active" id="gcashTab">
+                <div class="instructions">
+                    <strong>GCash Payment Instructions:</strong>
+                    <div class="account-box" style="text-align:center;">
+                        <div class="account-name" id="gcashName">Loading...</div>
+                        <div class="account-number" id="gcashNumber">Loading...</div>
+                        <img id="gcashQR" src="" alt="GCash QR" style="display:none;width:100%;max-width:250px;margin:12px auto 0;border-radius:8px;">
+                    </div>
+                    <ol>
+                        <li>Send <strong><span class="totalDisplay">₱0</span></strong> to the GCash account above</li>
+                        <li>Take a screenshot of the confirmation</li>
+                        <li>Upload it below and submit</li>
+                    </ol>
+                </div>
+                <form id="gcashForm" onsubmit="submitProof(event, 'GCash')">
+                    <div class="form-group">
+                        <label>GCash Reference Number <span style="color:#e74c3c;">*</span></label>
+                        <input type="text" id="gcashRefNum" placeholder="Enter your GCash reference number" required
+                            style="width:100%;padding:12px 16px;background:rgba(255,255,255,0.05);border:1px solid rgba(212,165,86,0.3);border-radius:8px;color:#f5f5f5;font-family:'Montserrat',sans-serif;font-size:0.95rem;">
+                        <small style="color:rgba(245,245,245,0.4);display:block;margin-top:4px;">Found in your GCash transaction receipt</small>
+                    </div>
+                    <div class="form-group">
+                        <label>Upload Payment Screenshot</label>
+                        <input type="file" id="gcashFile" accept="image/jpeg,image/png,image/webp" required onchange="previewFile(this, 'gcashPreview')">
+                        <small style="color:rgba(245,245,245,0.4); display:block; margin-top:5px;">Max 5MB (JPG, PNG, WebP)</small>
+                    </div>
+                    <div class="image-preview" id="gcashPreview"><img src="" alt="Preview"></div>
+                    <button type="submit" class="submit-btn" id="gcashSubmitBtn" formnovalidate>Submit Payment Proof</button>
+                <div class="slide-btn-wrapper">
+                    <div class="slide-btn-track" data-slide-btn="gcashSubmitBtn">
+                        <div class="slide-btn-fill"></div>
+                        <span class="slide-btn-label">Slide to Submit →</span>
+                        <div class="slide-btn-dots"><svg width="40" height="24" viewBox="0 0 24 24"><circle cx="4" cy="12" r="2" fill="#d4a556"><animate id="ag1" begin="0;ag3.end+0.25s" attributeName="cy" calcMode="spline" dur="0.6s" values="12;6;12" keySplines=".33,.66,.66,1;.33,0,.66,.33"/></circle><circle cx="12" cy="12" r="2" fill="#d4a556"><animate begin="ag1.begin+0.1s" attributeName="cy" calcMode="spline" dur="0.6s" values="12;6;12" keySplines=".33,.66,.66,1;.33,0,.66,.33"/></circle><circle cx="20" cy="12" r="2" fill="#d4a556"><animate id="ag3" begin="ag1.begin+0.2s" attributeName="cy" calcMode="spline" dur="0.6s" values="12;6;12" keySplines=".33,.66,.66,1;.33,0,.66,.33"/></circle></svg></div>
+                        <div class="slide-btn-handle">
+                            <svg viewBox="0 0 24 24"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+                            <div class="slide-btn-loading"><div class="orbit orbit-1"></div><div class="orbit orbit-2"></div><div class="orbit orbit-3"></div></div>
+                        </div>
+                    </div>
+                </div>
+                </form>
+            </div>
+
+            <!-- Bank Transfer -->
+            <div class="payment-method" id="bankTab">
+                <div class="instructions">
+                    <strong>Choose a Bank Account:</strong>
+                    <p style="color:rgba(245,245,245,0.6);font-size:0.9rem;margin:8px 0 12px;">Transfer <strong style="color:#d4a556;"><span class="totalDisplay">₱0</span></strong> to one of the accounts below. Tap to select.</p>
+                    <div id="bankOptionsList"></div>
+                    <div id="bankSelectedMsg" style="display:none;background:rgba(39,174,96,0.1);border:1px solid rgba(39,174,96,0.3);border-radius:8px;padding:10px;margin:10px 0;color:#4cd68a;font-weight:600;font-size:0.85rem;text-align:center;"></div>
+                    <ol style="margin-top:10px;">
+                        <li>Transfer to your selected bank</li>
+                        <li>Take a screenshot of the confirmation</li>
+                        <li>Upload it below</li>
+                    </ol>
+                </div>
+                <form id="bankForm" onsubmit="submitProof(event, 'Bank Transfer')">
+                    <div class="form-group">
+                        <label>Bank Reference Number <span style="color:#e74c3c;">*</span></label>
+                        <input type="text" id="bankRefNum" placeholder="Enter your bank transaction/reference number" required
+                            style="width:100%;padding:12px 16px;background:rgba(255,255,255,0.05);border:1px solid rgba(212,165,86,0.3);border-radius:8px;color:#f5f5f5;font-family:'Montserrat',sans-serif;font-size:0.95rem;">
+                        <small style="color:rgba(245,245,245,0.4);display:block;margin-top:4px;">Found on your bank transfer confirmation</small>
+                    </div>
+                    <div class="form-group">
+                        <label>Upload Transfer Proof</label>
+                        <input type="file" id="bankFile" accept="image/jpeg,image/png,image/webp" required onchange="previewFile(this, 'bankPreview')">
+                        <small style="color:rgba(245,245,245,0.4); display:block; margin-top:5px;">Max 5MB (JPG, PNG, WebP)</small>
+                    </div>
+                    <div class="image-preview" id="bankPreview"><img src="" alt="Preview"></div>
+                    <button type="submit" class="submit-btn" id="bankSubmitBtn" formnovalidate>Submit Payment Proof</button>
+                <div class="slide-btn-wrapper">
+                    <div class="slide-btn-track" data-slide-btn="bankSubmitBtn">
+                        <div class="slide-btn-fill"></div>
+                        <span class="slide-btn-label">Slide to Submit →</span>
+                        <div class="slide-btn-dots"><svg width="40" height="24" viewBox="0 0 24 24"><circle cx="4" cy="12" r="2" fill="#d4a556"><animate id="ab1" begin="0;ab3.end+0.25s" attributeName="cy" calcMode="spline" dur="0.6s" values="12;6;12" keySplines=".33,.66,.66,1;.33,0,.66,.33"/></circle><circle cx="12" cy="12" r="2" fill="#d4a556"><animate begin="ab1.begin+0.1s" attributeName="cy" calcMode="spline" dur="0.6s" values="12;6;12" keySplines=".33,.66,.66,1;.33,0,.66,.33"/></circle><circle cx="20" cy="12" r="2" fill="#d4a556"><animate id="ab3" begin="ab1.begin+0.2s" attributeName="cy" calcMode="spline" dur="0.6s" values="12;6;12" keySplines=".33,.66,.66,1;.33,0,.66,.33"/></circle></svg></div>
+                        <div class="slide-btn-handle">
+                            <svg viewBox="0 0 24 24"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+                            <div class="slide-btn-loading"><div class="orbit orbit-1"></div><div class="orbit orbit-2"></div><div class="orbit orbit-3"></div></div>
+                        </div>
+                    </div>
+                </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <div class="loading-overlay" id="loadingOverlay">
+        <div class="loading-spinner"><span></span><span></span></div>
+        <div class="loading-text">Processing your payment...</div>
+    </div>
+
+    <script>
+        // Stars
+        (function(){const c=document.getElementById('stars');const z=['top','bottom','left','right'];for(let i=0;i<40;i++){const s=document.createElement('div');s.className='star';const zone=z[Math.floor(Math.random()*4)];let l,t;if(zone==='top'){l=Math.random()*100;t=Math.random()*20;}else if(zone==='bottom'){l=Math.random()*100;t=80+Math.random()*20;}else if(zone==='left'){l=Math.random()*15;t=20+Math.random()*60;}else{l=85+Math.random()*15;t=20+Math.random()*60;}const sz=Math.random()*3+2;s.style.cssText=`width:${sz}px;height:${sz}px;left:${l}%;top:${t}%;animation-delay:${Math.random()*3}s;animation-duration:${Math.random()*2+2}s;`;c.appendChild(s);}})();
+
+        // Get session data (tenting)
+        const cartJson = sessionStorage.getItem('tentingCart');
+        const cartItems = cartJson ? JSON.parse(cartJson) : [];
+        const totalAmount = parseFloat(sessionStorage.getItem('tentingTotalAmount')) || 0;
+        const cartName = sessionStorage.getItem('tentingRegistrantName') || '';
+        const cartEmail = sessionStorage.getItem('tentingRegistrantEmail') || '';
+        const groupId = sessionStorage.getItem('tentingGroupId') || '';
+        const paymentAccount = sessionStorage.getItem('tentingPaymentAccount') || 'A';
+
+        if (!cartItems.length || !groupId) {
+            document.getElementById('alertBox').className = 'alert alert-error';
+            document.getElementById('alertBox').textContent = 'No tenting reservation found. Please go back and select a tent.';
+            document.getElementById('alertBox').style.display = 'block';
+        }
+
+        // Render cart summary
+        let summaryHtml = '';
+        cartItems.forEach(item => {
+            summaryHtml += `<div class="summary-row"><span>${item.displayName}</span><span>₱${item.subtotal.toLocaleString()}</span></div>`;
+        });
+        document.getElementById('cartSummary').innerHTML = summaryHtml;
+
+        // Account details (same as registration payment)
+        const GCASH = { A: {name:'Sandra M.', number:'0951-793-5370', qr:'/accomm-qr-gcash-a.jpeg'}, B: {name:'Jasmin S.', number:'0906-005-6703', qr:'/accomm-qr-gcash-b.jpeg'} };
+        const BANK_OPTIONS = [
+            { id:'bpi', name:'Angelica P. Ibaviosa', bank:'BPI', number:'3979 466 969', qr:'/accomm-qr-bank-bpi.jpeg' },
+            { id:'gotyme', name:'Abegail Mahaguay', bank:'GoTyme Bank', number:'0176 0967 9466', qr:'/accomm-qr-bank-gotyme.jpeg' }
+        ];
+        let selectedBankId = '';
+
+        const gc = GCASH[paymentAccount] || GCASH['A'];
+
+        // Populate
+        document.getElementById('accommTotal').textContent = '₱' + totalAmount.toLocaleString('en-PH', {minimumFractionDigits:2});
+        document.querySelectorAll('.totalDisplay').forEach(el => el.textContent = '₱' + totalAmount.toLocaleString());
+        document.getElementById('gcashName').textContent = gc.name;
+        document.getElementById('gcashNumber').innerHTML = '<span style="color:#f5f5f5 !important; text-decoration:none;">' + gc.number.replace(/-/g,'\u2011') + '</span>';
+        if (gc.qr) { document.getElementById('gcashQR').src = gc.qr; document.getElementById('gcashQR').style.display = 'block'; }
+        // Render bank options
+        let bhtml = '';
+        BANK_OPTIONS.forEach(b => {
+            var numStyle = b.number === 'QR Code Only' ? 'font-size:13px;font-weight:600;color:rgba(245,245,245,0.5);font-style:italic;margin-top:2px;' : 'font-size:16px;font-weight:800;color:#f5f5f5;letter-spacing:1px;margin-top:2px;';
+            bhtml += '<div class="bank-opt" data-bank="'+b.id+'" onclick="selectBank(\''+b.id+'\',this)" style="background:rgba(255,255,255,0.03);border:2px solid rgba(212,165,86,0.2);border-radius:10px;padding:12px;margin-bottom:10px;cursor:pointer;transition:all 0.3s;">'
+                + '<div style="font-size:12px;color:rgba(245,245,245,0.5);">'+b.bank+'</div>'
+                + '<div style="font-size:14px;font-weight:700;color:#d4a556;margin-top:2px;">'+b.name+'</div>'
+                + '<div style="'+numStyle+'">'+b.number+'</div>'
+                + '<img src="'+b.qr+'" alt="QR" style="display:none;width:100%;max-width:220px;margin:10px auto 0;border-radius:8px;" class="bqr">'
+                + '</div>';
+        });
+        document.getElementById('bankOptionsList').innerHTML = bhtml;
+
+        function switchTab(tab) {
+            document.querySelectorAll('.tab-btn').forEach((b,i) => b.classList.toggle('active', (tab==='gcash'?i===0:i===1)));
+            document.getElementById('gcashTab').classList.toggle('active', tab==='gcash');
+            document.getElementById('bankTab').classList.toggle('active', tab==='bank');
+        }
+
+        function previewFile(input, previewId) {
+            const file = input.files[0];
+            const prev = document.getElementById(previewId);
+            if (file && file.type.startsWith('image/')) {
+                const r = new FileReader();
+                r.onload = e => { prev.querySelector('img').src = e.target.result; prev.style.display = 'block'; };
+                r.readAsDataURL(file);
+            }
+        }
+
+        function showAlert(msg, type) {
+            const el = document.getElementById('alertBox');
+            el.className = 'alert alert-' + type;
+            el.textContent = msg;
+            el.style.display = 'block';
+            window.scrollTo({top:0, behavior:'smooth'});
+        }
+
+        function selectBank(id, el) {
+            selectedBankId = id;
+            const bank = BANK_OPTIONS.find(b => b.id === id);
+            document.querySelectorAll('.bank-opt').forEach(o => {
+                const sel = o.dataset.bank === id;
+                o.style.borderColor = sel ? '#d4a556' : 'rgba(212,165,86,0.2)';
+                o.style.background = sel ? 'rgba(212,165,86,0.08)' : 'rgba(255,255,255,0.03)';
+                const qr = o.querySelector('.bqr');
+                if (qr) qr.style.display = sel ? 'block' : 'none';
+            });
+            document.getElementById('bankSelectedMsg').style.display = 'block';
+            document.getElementById('bankSelectedMsg').textContent = '✓ ' + bank.bank + ' selected';
+        }
+
+        async function submitProof(e, method) {
+            e.preventDefault();
+            if (method === 'Bank Transfer' && !selectedBankId) { showAlert('Please select which bank account you transferred to.', 'error'); document.getElementById('bankOptionsList').scrollIntoView({behavior:'smooth',block:'center'}); return; }
+            const refInput = method === 'GCash' ? document.getElementById('gcashRefNum') : document.getElementById('bankRefNum');
+            const refValue = refInput ? refInput.value.trim() : '';
+            if (!refValue) { showAlert('Please enter your ' + method + ' reference/transaction number.', 'error'); refInput.focus(); refInput.scrollIntoView({behavior:'smooth',block:'center'}); return; }
+            const fileInput = method === 'GCash' ? document.getElementById('gcashFile') : document.getElementById('bankFile');
+            const file = fileInput.files[0];
+            if (!file) { showAlert('Please upload your payment proof.', 'error'); return; }
+            if (file.size > 5*1024*1024) { showAlert('File too large. Max 5MB.', 'error'); return; }
+
+            const btn = e.target.querySelector('.submit-btn');
+            btn.disabled = true; btn.innerHTML = '<span class="btn-spinner"></span>Uploading...';
+
+            try {
+                const reader = new FileReader();
+                reader.onload = async function(ev) {
+                    // Extract base64 part (strip "data:image/...;base64," prefix)
+                    const base64Data = ev.target.result.split(',')[1] || ev.target.result;
+                    const res = await fetch('/.netlify/functions/upload-tent-proof', {
+                        method: 'POST',
+                        headers: {'Content-Type':'application/json'},
+                        body: JSON.stringify({
+                            groupId: groupId,
+                            imageBase64: base64Data,
+                            fileName: file.name,
+                            paymentMethod: method,
+                            paymentAccount: method === 'Bank Transfer' ? 'bank_' + selectedBankId : paymentAccount,
+                            transactionReference: refValue
+                        })
+                    });
+                    const data = await res.json();
+                    if (res.ok && data.success) {
+                        document.getElementById('loadingOverlay').classList.add('active');
+                        setTimeout(() => { window.location.href = '/tenting-success'; }, 1500);
+                    } else {
+                        showAlert(data.error || 'Upload failed.', 'error');
+                        btn.disabled = false; btn.innerHTML = 'Submit Payment Proof';
+                    }
+                };
+                reader.readAsDataURL(file);
+            } catch (err) {
+                showAlert('Error: ' + err.message, 'error');
+                btn.disabled = false; btn.innerHTML = 'Submit Payment Proof';
+            }
+        }
+        // Slide Button Logic
+        (function initSlideButtons() {
+            document.querySelectorAll('.slide-btn-track').forEach(function(track) {
+                var btnId = track.dataset.slideBtn;
+                var hiddenBtn = document.getElementById(btnId);
+                var handle = track.querySelector('.slide-btn-handle');
+                var fill = track.querySelector('.slide-btn-fill');
+                var label = track.querySelector('.slide-btn-label');
+                label.dataset.origText = label.textContent;
+                var dragging = false, startX = 0, currentX = 0, trackWidth = 0, handleWidth = 50, maxDrag = 0, completed = false;
+                function resetSlide() {
+                    completed = false; track.classList.remove('completed'); track.classList.add('resetting');
+                    handle.style.left = '4px'; fill.style.width = '0px';
+                    label.textContent = label.dataset.origText; label.style.color = ''; label.style.opacity = '0.5'; currentX = 0;
+                }
+                function getPos(e) { return e.touches ? e.touches[0].clientX : e.clientX; }
+                function onStart(e) {
+                    if (completed || hiddenBtn.disabled) return;
+                    dragging = true; startX = getPos(e); trackWidth = track.offsetWidth; handleWidth = handle.offsetWidth; maxDrag = trackWidth - handleWidth - 8;
+                    track.classList.remove('resetting');
+                }
+                function onMove(e) {
+                    if (!dragging) return; e.preventDefault();
+                    currentX = Math.max(0, Math.min(getPos(e) - startX, maxDrag));
+                    handle.style.left = (4 + currentX) + 'px'; fill.style.width = (currentX + handleWidth) + 'px';
+                    label.style.opacity = Math.max(0, 0.5 - (currentX / maxDrag) * 1.2);
+                }
+                function onEnd() {
+                    if (!dragging) return; dragging = false;
+                    if (currentX / maxDrag >= 0.85) {
+                        completed = true; track.classList.add('completed');
+                        label.textContent = 'Uploading...'; label.style.opacity = '1'; label.style.color = 'rgba(212,165,86,0.8)';
+                        hiddenBtn.click();
+                        setTimeout(function() { if (completed && !hiddenBtn.disabled) resetSlide(); }, 800);
+                    } else { track.classList.add('resetting'); handle.style.left = '4px'; fill.style.width = '0px'; label.style.opacity = '0.5'; currentX = 0; }
+                }
+                handle.addEventListener('mousedown', onStart); handle.addEventListener('touchstart', onStart, { passive: true });
+                window.addEventListener('mousemove', onMove); window.addEventListener('touchmove', onMove, { passive: false });
+                window.addEventListener('mouseup', onEnd); window.addEventListener('touchend', onEnd);
+                var observer = new MutationObserver(function() {
+                    if (completed && !hiddenBtn.disabled) resetSlide();
+                });
+                observer.observe(hiddenBtn, { attributes: true, attributeFilter: ['disabled'] });
+            });
+        })();
+    </script>
+</body>
+</html>
