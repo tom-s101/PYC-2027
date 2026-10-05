@@ -14,7 +14,7 @@
 
         :root {
             --primary-navy: #1c1c1e;
-            --secondary-gold: #d4a556;
+            --secondary-gold: #c9b897;
             --text-light: #f5f5f5;
         }
 
@@ -91,7 +91,7 @@
             width: 100%;
             padding: 12px 15px;
             background: rgba(255, 255, 255, 0.05);
-            border: 1px solid rgba(212, 165, 86, 0.3);
+            border: 1px solid rgba(201, 184, 151, 0.3);
             border-radius: 8px;
             color: var(--text-light);
             font-size: 1rem;
@@ -124,7 +124,7 @@
         .preview-container img {
             max-width: 100%;
             border-radius: 8px;
-            border: 2px solid rgba(212, 165, 86, 0.3);
+            border: 2px solid rgba(201, 184, 151, 0.3);
         }
 
         .submit-btn {
@@ -135,19 +135,19 @@
             font-weight: 700;
             letter-spacing: 2px;
             text-transform: uppercase;
-            background: linear-gradient(135deg, var(--secondary-gold) 0%, #c9965d 100%);
+            background: linear-gradient(135deg, var(--secondary-gold) 0%, #b5a27f 100%);
             color: var(--primary-navy);
             border: none;
             border-radius: 12px;
             cursor: pointer;
             transition: all 0.4s ease;
-            box-shadow: 0 10px 30px rgba(212, 165, 86, 0.3);
+            box-shadow: 0 10px 30px rgba(201, 184, 151, 0.3);
             margin-top: 30px;
         }
 
         .submit-btn:hover {
             transform: translateY(-2px);
-            box-shadow: 0 15px 40px rgba(212, 165, 86, 0.4);
+            box-shadow: 0 15px 40px rgba(201, 184, 151, 0.4);
         }
 
         .submit-btn:disabled {
@@ -173,7 +173,7 @@
         }
 
         .info-box {
-            background: rgba(212, 165, 86, 0.1);
+            background: rgba(201, 184, 151, 0.1);
             border-left: 4px solid var(--secondary-gold);
             padding: 15px;
             border-radius: 4px;
@@ -218,7 +218,7 @@
         .loading-spinner span {
             position: absolute;
             border-radius: 50px;
-            box-shadow: inset 0 0 0 3px #d4a556;
+            box-shadow: inset 0 0 0 3px #c9b897;
             animation: loaderMorph 2.5s infinite;
         }
         .loading-spinner span:nth-child(2) {
@@ -261,18 +261,18 @@
 
         /* Slide Button */
         .slide-btn-wrapper { width: 100%; margin-top: 10px; }
-        .slide-btn-track { position: relative; height: 58px; background: rgba(255,255,255,0.04); border: 1px solid rgba(212,165,86,0.3); border-radius: 50px; overflow: hidden; touch-action: none; user-select: none; -webkit-user-select: none; }
-        .slide-btn-track.completed { border-color: rgba(212,165,86,0.5); }
-        .slide-btn-fill { position: absolute; top: 0; left: 0; bottom: 0; width: 0; background: linear-gradient(90deg, rgba(212,165,86,0.15), rgba(212,165,86,0.25)); border-radius: 50px; transition: none; }
+        .slide-btn-track { position: relative; height: 58px; background: rgba(255,255,255,0.04); border: 1px solid rgba(201, 184, 151,0.3); border-radius: 50px; overflow: hidden; touch-action: none; user-select: none; -webkit-user-select: none; }
+        .slide-btn-track.completed { border-color: rgba(201, 184, 151,0.5); }
+        .slide-btn-fill { position: absolute; top: 0; left: 0; bottom: 0; width: 0; background: linear-gradient(90deg, rgba(201, 184, 151,0.15), rgba(201, 184, 151,0.25)); border-radius: 50px; transition: none; }
         .slide-btn-track.resetting .slide-btn-fill { transition: width 0.3s ease; }
-        .slide-btn-track.completed .slide-btn-fill { background: linear-gradient(90deg, rgba(212,165,86,0.15), rgba(212,165,86,0.35)); width: 100% !important; }
-        .slide-btn-label { position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); font-family: 'Montserrat', sans-serif; font-size: 0.9rem; font-weight: 700; letter-spacing: 1px; text-transform: uppercase; color: rgba(212,165,86,0.5); white-space: nowrap; pointer-events: none; transition: opacity 0.2s; }
+        .slide-btn-track.completed .slide-btn-fill { background: linear-gradient(90deg, rgba(201, 184, 151,0.15), rgba(201, 184, 151,0.35)); width: 100% !important; }
+        .slide-btn-label { position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); font-family: 'Montserrat', sans-serif; font-size: 0.9rem; font-weight: 700; letter-spacing: 1px; text-transform: uppercase; color: rgba(201, 184, 151,0.5); white-space: nowrap; pointer-events: none; transition: opacity 0.2s; }
         
-        .slide-btn-handle { position: absolute; top: 4px; left: 4px; width: 50px; height: 50px; background: linear-gradient(135deg, #d4a556, #c9965d); border-radius: 50%; display: flex; align-items: center; justify-content: center; cursor: grab; z-index: 2; transition: none; box-shadow: 0 2px 8px rgba(0,0,0,0.3); }
+        .slide-btn-handle { position: absolute; top: 4px; left: 4px; width: 50px; height: 50px; background: linear-gradient(135deg, #c9b897, #b5a27f); border-radius: 50%; display: flex; align-items: center; justify-content: center; cursor: grab; z-index: 2; transition: none; box-shadow: 0 2px 8px rgba(0,0,0,0.3); }
         .slide-btn-handle:active { cursor: grabbing; }
         .slide-btn-track.resetting .slide-btn-handle { transition: left 0.3s ease; }
         .slide-btn-handle svg { width: 22px; height: 22px; fill: none; stroke: #1c1c1e; stroke-width: 2.5; stroke-linecap: round; stroke-linejoin: round; }
-        .slide-btn-track.completed .slide-btn-handle { background: linear-gradient(135deg, #d4a556, #c9965d); left: calc(100% - 54px) !important; transition: left 0.3s; }
+        .slide-btn-track.completed .slide-btn-handle { background: linear-gradient(135deg, #c9b897, #b5a27f); left: calc(100% - 54px) !important; transition: left 0.3s; }
         .slide-btn-track.completed .slide-btn-handle svg { display: none; }
         .slide-btn-loading { display: none; width: 30px; height: 30px; position: relative; }
         .slide-btn-loading .orbit { position: absolute; border: 2px solid transparent; border-radius: 50%; }
@@ -335,7 +335,7 @@
                 <div class="form-group">
                     <label for="transactionRef">Transaction Reference Number *</label>
                     <input type="text" id="transactionRef" placeholder="Enter your GCash or bank reference number" required
-                        style="width:100%;padding:14px 18px;background:rgba(255,255,255,0.05);border:1px solid rgba(212,165,86,0.3);border-radius:10px;color:#f5f5f5;font-family:'Montserrat',sans-serif;font-size:1rem;">
+                        style="width:100%;padding:14px 18px;background:rgba(255,255,255,0.05);border:1px solid rgba(201, 184, 151,0.3);border-radius:10px;color:#f5f5f5;font-family:'Montserrat',sans-serif;font-size:1rem;">
                     <div class="file-info">Found in your payment receipt or bank confirmation</div>
                 </div>
                 <div class="form-group">
@@ -356,7 +356,7 @@
                 <div class="slide-btn-track" data-slide-btn="submitBtn">
                     <div class="slide-btn-fill"></div>
                     <span class="slide-btn-label">Slide to Resubmit →</span>
-                    <div class="slide-btn-dots"><svg width="40" height="24" viewBox="0 0 24 24"><circle cx="4" cy="12" r="2" fill="#d4a556"><animate id="sr1" begin="0;sr3.end+0.25s" attributeName="cy" calcMode="spline" dur="0.6s" values="12;6;12" keySplines=".33,.66,.66,1;.33,0,.66,.33"/></circle><circle cx="12" cy="12" r="2" fill="#d4a556"><animate begin="sr1.begin+0.1s" attributeName="cy" calcMode="spline" dur="0.6s" values="12;6;12" keySplines=".33,.66,.66,1;.33,0,.66,.33"/></circle><circle cx="20" cy="12" r="2" fill="#d4a556"><animate id="sr3" begin="sr1.begin+0.2s" attributeName="cy" calcMode="spline" dur="0.6s" values="12;6;12" keySplines=".33,.66,.66,1;.33,0,.66,.33"/></circle></svg></div>
+                    <div class="slide-btn-dots"><svg width="40" height="24" viewBox="0 0 24 24"><circle cx="4" cy="12" r="2" fill="#c9b897"><animate id="sr1" begin="0;sr3.end+0.25s" attributeName="cy" calcMode="spline" dur="0.6s" values="12;6;12" keySplines=".33,.66,.66,1;.33,0,.66,.33"/></circle><circle cx="12" cy="12" r="2" fill="#c9b897"><animate begin="sr1.begin+0.1s" attributeName="cy" calcMode="spline" dur="0.6s" values="12;6;12" keySplines=".33,.66,.66,1;.33,0,.66,.33"/></circle><circle cx="20" cy="12" r="2" fill="#c9b897"><animate id="sr3" begin="sr1.begin+0.2s" attributeName="cy" calcMode="spline" dur="0.6s" values="12;6;12" keySplines=".33,.66,.66,1;.33,0,.66,.33"/></circle></svg></div>
                     <div class="slide-btn-handle">
                         <svg viewBox="0 0 24 24"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
                         <div class="slide-btn-loading"><div class="orbit orbit-1"></div><div class="orbit orbit-2"></div><div class="orbit orbit-3"></div></div>
@@ -419,7 +419,7 @@
             
             if (confirmEmail === '') {
                 emailMatchMessage.style.display = 'none';
-                confirmEmailInput.style.borderColor = 'rgba(212, 165, 86, 0.3)';
+                confirmEmailInput.style.borderColor = 'rgba(201, 184, 151, 0.3)';
                 return;
             }
             
@@ -550,7 +550,7 @@
                 }
                 function onEnd() {
                     if (!dragging) return; dragging = false;
-                    if (currentX / maxDrag >= 0.85) { completed = true; track.classList.add('completed'); label.textContent = 'Resubmitting...'; label.style.opacity = '1'; label.style.color = 'rgba(212,165,86,0.8)'; hiddenBtn.click(); setTimeout(function() { if (completed && !hiddenBtn.disabled) resetSlide(); }, 800); }
+                    if (currentX / maxDrag >= 0.85) { completed = true; track.classList.add('completed'); label.textContent = 'Resubmitting...'; label.style.opacity = '1'; label.style.color = 'rgba(201, 184, 151,0.8)'; hiddenBtn.click(); setTimeout(function() { if (completed && !hiddenBtn.disabled) resetSlide(); }, 800); }
                     else { track.classList.add('resetting'); handle.style.left = '4px'; fill.style.width = '0px'; label.style.opacity = '0.5'; currentX = 0; }
                 }
                 handle.addEventListener('mousedown', onStart); handle.addEventListener('touchstart', onStart, { passive: true });

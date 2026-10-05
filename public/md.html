@@ -13,11 +13,11 @@
 
 :root {
     --primary-navy: #1c1c1e;
-    --secondary-gold: #d4a556;
+    --secondary-gold: #c9b897;
     --accent-blue: #4a7c9e;
     --text-light: #f5f5f5;
     --text-dark: #2c3e50;
-    --border-gold: #c9965d;
+    --border-gold: #b5a27f;
     --background-overlay: rgba(28, 28, 30, 0.92);
     --success: #27ae60;
     --danger: #e74c3c;
@@ -66,7 +66,7 @@ body {
 }
 .login-box {
     background: var(--background-overlay);
-    border: 2px solid rgba(212, 165, 86, 0.3);
+    border: 2px solid rgba(201, 184, 151, 0.3);
     padding: 50px 40px;
     border-radius: 20px;
     box-shadow: 0 30px 80px rgba(0, 0, 0, 0.5);
@@ -98,7 +98,7 @@ body {
     width: 100%;
     padding: 12px 15px;
     background: rgba(255, 255, 255, 0.1);
-    border: 1px solid rgba(212, 165, 86, 0.3);
+    border: 1px solid rgba(201, 184, 151, 0.3);
     border-radius: 8px;
     color: var(--text-light);
     font-size: 1rem;
@@ -123,19 +123,19 @@ body {
     font-family: 'Montserrat', sans-serif;
 }
 .btn:hover:not(:disabled) {
-    background: #e0b566;
+    background: #d9cbb0;
     transform: translateY(-1px);
-    box-shadow: 0 5px 15px rgba(212, 165, 86, 0.4);
+    box-shadow: 0 5px 15px rgba(201, 184, 151, 0.4);
 }
 .btn:disabled { opacity: 0.5; cursor: not-allowed; }
 .btn-gold { background: var(--secondary-gold); color: var(--primary-navy); }
 .btn-outline {
     background: rgba(255,255,255,0.1);
     color: var(--text-light);
-    border: 1px solid rgba(212,165,86,0.3);
+    border: 1px solid rgba(201, 184, 151,0.3);
 }
 .btn-outline:hover:not(:disabled) {
-    background: rgba(212,165,86,0.15);
+    background: rgba(201, 184, 151,0.15);
     border-color: var(--secondary-gold);
 }
 .btn-danger { background: var(--danger); color: white; }
@@ -169,7 +169,7 @@ body {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    border: 2px solid rgba(212, 165, 86, 0.3);
+    border: 2px solid rgba(201, 184, 151, 0.3);
 }
 .dashboard-header h1 {
     font-family: 'Bebas Neue', sans-serif;
@@ -208,7 +208,7 @@ body {
 .tab-btn {
     padding: 15px 30px;
     background: rgba(255, 255, 255, 0.1);
-    border: 2px solid rgba(212, 165, 86, 0.3);
+    border: 2px solid rgba(201, 184, 151, 0.3);
     border-radius: 10px;
     color: var(--text-light);
     cursor: pointer;
@@ -245,7 +245,7 @@ body {
 .sub-tab-btn {
     padding: 10px 18px;
     background: rgba(255,255,255,0.05);
-    border: 1px solid rgba(212,165,86,0.25);
+    border: 1px solid rgba(201, 184, 151,0.25);
     border-radius: 8px;
     color: var(--text-light);
     cursor: pointer;
@@ -260,7 +260,7 @@ body {
     border-color: var(--secondary-gold);
 }
 .sub-tab-btn:hover:not(.active) {
-    background: rgba(212,165,86,0.15);
+    background: rgba(201, 184, 151,0.15);
     border-color: var(--secondary-gold);
 }
 .sub-tab-btn .badge {
@@ -282,7 +282,7 @@ body {
     background: var(--background-overlay);
     padding: 30px;
     border-radius: 15px;
-    border: 2px solid rgba(212, 165, 86, 0.3);
+    border: 2px solid rgba(201, 184, 151, 0.3);
     margin-bottom: 20px;
 }
 .content-box h2 {
@@ -306,14 +306,14 @@ body {
     padding: 8px 16px;
     background: rgba(255, 255, 255, 0.08);
     color: rgba(245, 245, 245, 0.85);
-    border: 1px solid rgba(212, 165, 86, 0.3);
+    border: 1px solid rgba(201, 184, 151, 0.3);
     border-radius: 6px;
     font-size: 0.82rem;
     cursor: pointer;
     font-weight: 600;
 }
 .refresh-btn:hover {
-    background: rgba(212, 165, 86, 0.15);
+    background: rgba(201, 184, 151, 0.15);
     color: var(--text-light);
 }
 
@@ -328,7 +328,7 @@ body {
     background: rgba(255, 255, 255, 0.05);
     padding: 25px;
     border-radius: 10px;
-    border: 1px solid rgba(212, 165, 86, 0.2);
+    border: 1px solid rgba(201, 184, 151, 0.2);
     text-align: center;
 }
 .stat-number {
@@ -357,7 +357,7 @@ body {
     min-width: 240px;
     padding: 15px;
     background: rgba(255, 255, 255, 0.1);
-    border: 1px solid rgba(212, 165, 86, 0.3);
+    border: 1px solid rgba(201, 184, 151, 0.3);
     border-radius: 8px;
     color: var(--text-light);
     font-size: 1rem;
@@ -378,14 +378,14 @@ body {
     cursor: pointer;
     font-family: 'Montserrat', sans-serif;
 }
-.search-btn:hover { background: #e0b566; }
+.search-btn:hover { background: #d9cbb0; }
 
 /* Result & match cards */
 .result-card {
     background: rgba(255, 255, 255, 0.05);
     padding: 25px;
     border-radius: 10px;
-    border: 1px solid rgba(212, 165, 86, 0.2);
+    border: 1px solid rgba(201, 184, 151, 0.2);
     margin-bottom: 20px;
 }
 .result-row {
@@ -403,13 +403,13 @@ body {
     background: rgba(255, 255, 255, 0.05);
     padding: 20px 25px;
     border-radius: 10px;
-    border: 1px solid rgba(212, 165, 86, 0.2);
+    border: 1px solid rgba(201, 184, 151, 0.2);
     margin-bottom: 12px;
     cursor: pointer;
     transition: all 0.2s;
 }
 .match-card:hover {
-    background: rgba(212,165,86,0.12);
+    background: rgba(201, 184, 151,0.12);
     border-color: var(--secondary-gold);
     transform: translateX(4px);
 }
@@ -439,7 +439,7 @@ body {
 /* Detail view sections */
 .detail-section {
     background: rgba(0, 0, 0, 0.25);
-    border: 1px solid rgba(212, 165, 86, 0.2);
+    border: 1px solid rgba(201, 184, 151, 0.2);
     border-radius: 10px;
     padding: 20px;
     margin-bottom: 16px;
@@ -483,8 +483,8 @@ body {
     margin: 4px;
 }
 .person-chip.highlight {
-    background: rgba(212, 165, 86, 0.2);
-    border-color: rgba(212, 165, 86, 0.55);
+    background: rgba(201, 184, 151, 0.2);
+    border-color: rgba(201, 184, 151, 0.55);
 }
 .person-chip .pc-pyc {
     color: var(--secondary-gold);
@@ -521,7 +521,7 @@ body {
     border-radius: 6px;
     font-size: 0.8rem;
     font-weight: 600;
-    background: rgba(212, 165, 86, 0.18);
+    background: rgba(201, 184, 151, 0.18);
     color: var(--secondary-gold);
 }
 
@@ -571,7 +571,7 @@ body {
     background: rgba(255, 255, 255, 0.05);
     padding: 20px;
     border-radius: 10px;
-    border: 1px solid rgba(212, 165, 86, 0.2);
+    border: 1px solid rgba(201, 184, 151, 0.2);
     margin-bottom: 15px;
 }
 .proof-card h3 {
@@ -596,7 +596,7 @@ body {
     cursor: pointer;
     transition: transform 0.3s;
     margin-top: 10px;
-    border: 1px solid rgba(212,165,86,0.3);
+    border: 1px solid rgba(201, 184, 151,0.3);
 }
 .proof-card img:hover { transform: scale(1.03); }
 .proof-card .btn-row {
@@ -617,7 +617,7 @@ table {
     border-collapse: collapse;
     margin-top: 10px;
 }
-thead { background: rgba(212, 165, 86, 0.2); }
+thead { background: rgba(201, 184, 151, 0.2); }
 th, td {
     padding: 14px 15px;
     text-align: left;
@@ -1000,7 +1000,7 @@ select option { background: #1c1c1e; color: #f5f5f5; padding: 10px; }
                 <p style="color:rgba(245,245,245,0.7);margin-bottom:14px;">Search for a registrant by name, email, or PYC. Edit their gender and/or meal plan. Gender changes are blocked if they conflict with an existing dorm reservation or room assignment &mdash; clear those up first if needed. Meal plan changes do NOT recalculate the total amount.</p>
                 <div id="fixGenderAlert"></div>
                 <div style="display:flex;gap:8px;flex-wrap:wrap;margin-bottom:14px;">
-                    <input type="text" id="fixGenderSearch" placeholder="Search name, email, or PYC..." style="flex:1;min-width:240px;padding:10px 14px;background:rgba(0,0,0,0.3);border:1px solid rgba(212,165,86,0.3);border-radius:7px;color:var(--text-light);font-size:0.95rem;">
+                    <input type="text" id="fixGenderSearch" placeholder="Search name, email, or PYC..." style="flex:1;min-width:240px;padding:10px 14px;background:rgba(0,0,0,0.3);border:1px solid rgba(201, 184, 151,0.3);border-radius:7px;color:var(--text-light);font-size:0.95rem;">
                     <button class="btn btn-gold" onclick="runFixGenderSearch()">Search</button>
                     <button class="btn btn-outline" onclick="findMissingPycs()" title="Find registrants who uploaded payment proof but never got assigned a PYC number">Find Missing PYCs</button>
                     <button class="btn btn-outline" onclick="findMissingGenders()" title="Find paid registrants with no gender set so you can assign one">Find Missing Genders</button>
@@ -1097,7 +1097,7 @@ select option { background: #1c1c1e; color: #f5f5f5; padding: 10px; }
                     <button class="btn btn-gold" onclick="toggleCreateRoommateForm()" id="createRoommateBtn">+ Create Roommate Request</button>
                     <button class="refresh-btn" onclick="loadAccRoommates()">Refresh</button>
                 </div>
-                <div id="createRoommateForm" style="display:none;background:rgba(255,255,255,0.03);border:1px solid rgba(212,165,86,0.3);border-radius:10px;padding:18px;margin-bottom:18px;">
+                <div id="createRoommateForm" style="display:none;background:rgba(255,255,255,0.03);border:1px solid rgba(201, 184, 151,0.3);border-radius:10px;padding:18px;margin-bottom:18px;">
                     <h3>Create New Roommate Request</h3>
                     <p style="color:rgba(245,245,245,0.55);font-size:0.82rem;margin-bottom:14px;">Requester and all members need paid or pending-review registration + accommodation reservation with proof uploaded.</p>
                     <div style="margin-bottom:12px;">
@@ -1139,7 +1139,7 @@ select option { background: #1c1c1e; color: #f5f5f5; padding: 10px; }
                 <div style="overflow-x:auto;-webkit-overflow-scrolling:touch;margin-bottom:14px;">
                 <table id="volunteersGrid" style="width:100%;border-collapse:collapse;font-size:0.85rem;min-width:780px;">
                     <thead>
-                        <tr style="background:rgba(212,165,86,0.1);">
+                        <tr style="background:rgba(201, 184, 151,0.1);">
                             <th style="text-align:left;padding:8px;color:var(--secondary-gold);font-size:0.78rem;text-transform:uppercase;letter-spacing:0.5px;">PYC *</th>
                             <th style="text-align:left;padding:8px;color:var(--secondary-gold);font-size:0.78rem;text-transform:uppercase;letter-spacing:0.5px;">Name</th>
                             <th style="text-align:left;padding:8px;color:var(--secondary-gold);font-size:0.78rem;text-transform:uppercase;letter-spacing:0.5px;">Email</th>
@@ -1215,9 +1215,9 @@ select option { background: #1c1c1e; color: #f5f5f5; padding: 10px; }
         <p style="color:rgba(245,245,245,0.7);margin-bottom:14px;">Resend emails that failed during the Brevo IP-block outage. Default window: <strong>May 7, 2026 6:40 AM Philippine Time</strong> onward. Each email type is processed independently &mdash; click Preview first to see exactly who would receive the email, then click Send.</p>
         <div id="emailRecoveryAlert"></div>
 
-        <div style="background:rgba(255,255,255,0.03);border:1px solid rgba(212,165,86,0.15);border-radius:8px;padding:14px;margin-bottom:16px;">
+        <div style="background:rgba(255,255,255,0.03);border:1px solid rgba(201, 184, 151,0.15);border-radius:8px;padding:14px;margin-bottom:16px;">
             <label style="display:block;color:var(--text-light);font-size:0.85rem;font-weight:600;margin-bottom:6px;">Window Start (UTC) &mdash; optional</label>
-            <input type="text" id="erWindowStart" value="" placeholder="Leave blank to send to ALL matching records" style="width:100%;max-width:380px;padding:8px 12px;background:rgba(0,0,0,0.3);border:1px solid rgba(212,165,86,0.3);border-radius:6px;color:var(--text-light);font-size:0.88rem;">
+            <input type="text" id="erWindowStart" value="" placeholder="Leave blank to send to ALL matching records" style="width:100%;max-width:380px;padding:8px 12px;background:rgba(0,0,0,0.3);border:1px solid rgba(201, 184, 151,0.3);border-radius:6px;color:var(--text-light);font-size:0.88rem;">
             <p style="color:rgba(245,245,245,0.5);font-size:0.75rem;margin-top:6px;">Leave blank to target ALL matching records (recommended &mdash; the updated_at field isn't reliably bumped so a time filter can miss people). To restrict by registration date: <code style="background:rgba(0,0,0,0.3);padding:1px 5px;border-radius:3px;color:var(--secondary-gold);">2026-05-06T22:40:00.000Z</code> = May 7, 2026 6:40 AM Philippine Time.</p>
         </div>
 
@@ -1238,29 +1238,29 @@ select option { background: #1c1c1e; color: #f5f5f5; padding: 10px; }
             <div id="erResults"></div>
         </div>
 
-        <hr style="margin:30px 0 24px 0;border:0;border-top:1px solid rgba(212,165,86,0.2);">
+        <hr style="margin:30px 0 24px 0;border:0;border-top:1px solid rgba(201, 184, 151,0.2);">
 
         <!-- Manual targeted send -->
         <h3 style="color:var(--secondary-gold);margin-bottom:6px;">Manual Send to Specific Recipients</h3>
         <p style="color:rgba(245,245,245,0.6);font-size:0.85rem;margin-bottom:12px;">Send to specific people only &mdash; paste PYC numbers and/or email addresses below, separated by commas, spaces, or new lines. Uses the email type selected above (currently: <strong id="erManualSelectedType">none selected</strong>).</p>
-        <textarea id="erManualInput" rows="4" placeholder="PYC-0123, PYC-0456&#10;john@example.com&#10;jane@example.com PYC-0789" style="width:100%;padding:10px 12px;background:rgba(0,0,0,0.3);border:1px solid rgba(212,165,86,0.3);border-radius:7px;color:var(--text-light);font-size:0.88rem;font-family:'SF Mono','Monaco','Menlo',monospace;margin-bottom:12px;resize:vertical;"></textarea>
+        <textarea id="erManualInput" rows="4" placeholder="PYC-0123, PYC-0456&#10;john@example.com&#10;jane@example.com PYC-0789" style="width:100%;padding:10px 12px;background:rgba(0,0,0,0.3);border:1px solid rgba(201, 184, 151,0.3);border-radius:7px;color:var(--text-light);font-size:0.88rem;font-family:'SF Mono','Monaco','Menlo',monospace;margin-bottom:12px;resize:vertical;"></textarea>
         <div style="display:flex;gap:10px;flex-wrap:wrap;margin-bottom:14px;">
             <button class="btn btn-outline" onclick="erManualPreview()">Preview</button>
             <button class="btn btn-gold" onclick="erManualSend()">Send to These</button>
         </div>
         <div id="erManualResults"></div>
 
-        <hr style="margin:30px 0 24px 0;border:0;border-top:1px solid rgba(212,165,86,0.2);">
+        <hr style="margin:30px 0 24px 0;border:0;border-top:1px solid rgba(201, 184, 151,0.2);">
 
         <!-- Fix Missing PYC Numbers -->
         <h3 style="color:var(--secondary-gold);margin-bottom:6px;">Fix Missing PYC Numbers</h3>
         <p style="color:rgba(245,245,245,0.6);font-size:0.85rem;margin-bottom:12px;line-height:1.5;">Assigns confirmation numbers to <strong>Paid</strong> / <strong>Pending Review</strong> registrations that are missing one (caused by the old numbering bug), then emails each person a correction notice with their new number. Leave the boxes empty to fix <strong>everyone</strong> missing a number, or paste a specific list to limit it. Always Preview first.</p>
 
         <label style="display:block;color:var(--text-light);font-size:0.82rem;font-weight:600;margin-bottom:5px;">Specific Registration IDs (optional — comma/space/newline separated)</label>
-        <textarea id="fpIds" rows="2" placeholder="leave empty to fix ALL missing" style="width:100%;padding:9px 12px;background:rgba(0,0,0,0.3);border:1px solid rgba(212,165,86,0.3);border-radius:7px;color:var(--text-light);font-size:0.85rem;font-family:'SF Mono','Menlo',monospace;margin-bottom:10px;resize:vertical;"></textarea>
+        <textarea id="fpIds" rows="2" placeholder="leave empty to fix ALL missing" style="width:100%;padding:9px 12px;background:rgba(0,0,0,0.3);border:1px solid rgba(201, 184, 151,0.3);border-radius:7px;color:var(--text-light);font-size:0.85rem;font-family:'SF Mono','Menlo',monospace;margin-bottom:10px;resize:vertical;"></textarea>
 
         <label style="display:block;color:var(--text-light);font-size:0.82rem;font-weight:600;margin-bottom:5px;">Specific Emails (optional)</label>
-        <textarea id="fpEmails" rows="2" placeholder="leave empty to fix ALL missing" style="width:100%;padding:9px 12px;background:rgba(0,0,0,0.3);border:1px solid rgba(212,165,86,0.3);border-radius:7px;color:var(--text-light);font-size:0.85rem;font-family:'SF Mono','Menlo',monospace;margin-bottom:12px;resize:vertical;"></textarea>
+        <textarea id="fpEmails" rows="2" placeholder="leave empty to fix ALL missing" style="width:100%;padding:9px 12px;background:rgba(0,0,0,0.3);border:1px solid rgba(201, 184, 151,0.3);border-radius:7px;color:var(--text-light);font-size:0.85rem;font-family:'SF Mono','Menlo',monospace;margin-bottom:12px;resize:vertical;"></textarea>
 
         <label style="display:flex;align-items:center;gap:10px;margin-bottom:6px;cursor:pointer;">
             <input type="checkbox" id="fpApprove" style="width:18px;height:18px;">
@@ -1694,10 +1694,10 @@ function renderFullDetails(d) {
     var h = '<div style="margin-bottom:14px;"><button class="btn btn-outline btn-sm" onclick="document.getElementById(\'searchInput\').focus();runSearch(document.getElementById(\'searchInput\').value)">&larr; Back to results</button></div>';
 
     // Header card
-    h += '<div class="content-box" style="border:2px solid rgba(212,165,86,0.4);">';
+    h += '<div class="content-box" style="border:2px solid rgba(201, 184, 151,0.4);">';
     h += '<h2>' + esc(r.first_name) + ' ' + esc(r.last_name) + (r.nickname ? ' <span style="color:rgba(245,245,245,0.4);font-weight:400;font-size:1rem;">"' + esc(r.nickname) + '"</span>' : '') + '</h2>';
     h += '<div style="display:flex;gap:8px;flex-wrap:wrap;margin-bottom:12px;">';
-    if (r.confirmation_number) h += '<span style="background:rgba(212,165,86,0.15);color:var(--secondary-gold);padding:4px 12px;border-radius:14px;font-weight:700;font-size:0.85rem;">' + esc(r.confirmation_number) + '</span>';
+    if (r.confirmation_number) h += '<span style="background:rgba(201, 184, 151,0.15);color:var(--secondary-gold);padding:4px 12px;border-radius:14px;font-weight:700;font-size:0.85rem;">' + esc(r.confirmation_number) + '</span>';
     h += statusBadge(r.payment_status);
     if (r.checked_in) {
         h += '<span class="status-badge status-paid">&#10003; Conference Checked In</span>';
@@ -1777,7 +1777,7 @@ function renderFullDetails(d) {
     if (d.dormReservations && d.dormReservations.length > 0) {
         h += '<div class="detail-section"><h4>Dorm Reservations (' + d.dormReservations.length + ')</h4>';
         d.dormReservations.forEach(function(res) {
-            h += '<div style="background:rgba(255,255,255,0.03);border:1px solid rgba(212,165,86,0.1);border-radius:8px;padding:12px;margin-bottom:8px;">';
+            h += '<div style="background:rgba(255,255,255,0.03);border:1px solid rgba(201, 184, 151,0.1);border-radius:8px;padding:12px;margin-bottom:8px;">';
             h += '<div style="display:flex;gap:8px;flex-wrap:wrap;align-items:center;margin-bottom:6px;">';
             h += typeBadge(res.accommodation_type);
             h += '<span style="color:rgba(245,245,245,0.7);font-size:0.85rem;">' + (res.spots_requested || 1) + ' spot(s)</span>';
@@ -1815,10 +1815,10 @@ function renderFullDetails(d) {
         h += '<div class="detail-section"><h4>Tent Reservations (' + d.tentReservations.length + ')</h4>';
         d.tentReservations.forEach(function(t) {
             var isBookedBy = t.registrant_email && r.email && t.registrant_email.toLowerCase() === r.email.toLowerCase();
-            h += '<div style="background:rgba(255,255,255,0.03);border:1px solid rgba(212,165,86,0.1);border-radius:8px;padding:12px;margin-bottom:8px;">';
+            h += '<div style="background:rgba(255,255,255,0.03);border:1px solid rgba(201, 184, 151,0.1);border-radius:8px;padding:12px;margin-bottom:8px;">';
             h += '<div style="display:flex;gap:8px;flex-wrap:wrap;align-items:center;margin-bottom:6px;">';
             h += '<span style="color:var(--text-light);font-weight:600;font-size:0.9rem;">' + (t.tent_size || '?') + '-person tent</span>';
-            if (t.tent_size === 1) h += '<span style="padding:2px 8px;border-radius:4px;font-size:0.72rem;font-weight:700;background:rgba(212,165,86,0.3);color:var(--secondary-gold);">&#9733; SOLO (whitelisted)</span>';
+            if (t.tent_size === 1) h += '<span style="padding:2px 8px;border-radius:4px;font-size:0.72rem;font-weight:700;background:rgba(201, 184, 151,0.3);color:var(--secondary-gold);">&#9733; SOLO (whitelisted)</span>';
             if (t.tent_group_type) h += '<span class="type-badge">' + esc(t.tent_group_type) + '</span>';
             h += '<span style="color:rgba(245,245,245,0.6);font-size:0.82rem;">Canopy ' + (t.canopy_number || '?') + '</span>';
             h += '<span style="color:var(--secondary-gold);font-weight:700;">' + fmtMoney(t.total_amount) + '</span>';
@@ -1880,7 +1880,7 @@ function buildAccomEmailButtons(res) {
       { key: 'accommodation_approved', label: 'Send "Accommodation Confirmed" Email',   requires: 'Paid' },
       { key: 'accommodation_rejected', label: 'Send "Accommodation Rejected" Email',    requires: 'Rejected' }
     ];
-    var html = '<div style="margin-top:10px;padding-top:10px;border-top:1px dashed rgba(212,165,86,0.15);">';
+    var html = '<div style="margin-top:10px;padding-top:10px;border-top:1px dashed rgba(201, 184, 151,0.15);">';
     html += '<div style="color:rgba(245,245,245,0.5);font-size:0.74rem;margin-bottom:6px;">Manually send email for this reservation:</div>';
     html += '<div style="display:flex;flex-direction:column;gap:6px;">';
     rows.forEach(function(row) {
@@ -2166,7 +2166,7 @@ function renderRegAll(arr) {
         h += '<td><span style="color:var(--secondary-gold);font-size:0.8rem;">' + esc(r.confirmation_number || '--') + '</span></td>';
         h += '<td style="color:rgba(245,245,245,0.6);font-size:0.82rem;">' + esc(r.email) + '</td>';
         h += '<td>' + (r.registration_type === 'group' ? '<span class="type-badge">Group</span>' : 'Individual') + '</td>';
-        h += '<td><span style="margin-right:6px;">' + esc(r.gender || '--') + '</span><button onclick="openReservationEditor(\'' + r.id + '\',\'' + fullNameEsc + '\',\'' + (r.gender || '') + '\',\'' + (r.meal_plan || '') + '\')" title="Edit gender / meal plan" style="padding:3px 8px;background:rgba(212,165,86,0.12);color:var(--secondary-gold);border:1px solid rgba(212,165,86,0.3);border-radius:4px;cursor:pointer;font-size:0.72rem;font-weight:600;">Edit</button></td>';
+        h += '<td><span style="margin-right:6px;">' + esc(r.gender || '--') + '</span><button onclick="openReservationEditor(\'' + r.id + '\',\'' + fullNameEsc + '\',\'' + (r.gender || '') + '\',\'' + (r.meal_plan || '') + '\')" title="Edit gender / meal plan" style="padding:3px 8px;background:rgba(201, 184, 151,0.12);color:var(--secondary-gold);border:1px solid rgba(201, 184, 151,0.3);border-radius:4px;cursor:pointer;font-size:0.72rem;font-weight:600;">Edit</button></td>';
         h += '<td>' + statusBadge(r.payment_status) + '</td>';
         h += '<td style="text-align:center;">' + (r.checked_in ? '<span style="color:var(--success);">&#10003;</span>' : '--') + '</td>';
         h += '<td>' + fmtMoney(r.total_amount) + '</td>';
@@ -2582,7 +2582,7 @@ function renderAccTents(arr) {
     var h = '<div style="color:rgba(245,245,245,0.6);font-size:0.82rem;margin-bottom:10px;">Showing <strong>' + arr.length + '</strong> tent(s)</div>';
     arr.forEach(function(t) {
         var gt = t.tent_group_type || 'Not set';
-        var soloBadge = t.tent_size === 1 ? ' <span style="padding:2px 8px;border-radius:4px;font-size:0.7rem;font-weight:700;background:rgba(212,165,86,0.3);color:var(--secondary-gold);vertical-align:middle;">&#9733; SOLO</span>' : '';
+        var soloBadge = t.tent_size === 1 ? ' <span style="padding:2px 8px;border-radius:4px;font-size:0.7rem;font-weight:700;background:rgba(201, 184, 151,0.3);color:var(--secondary-gold);vertical-align:middle;">&#9733; SOLO</span>' : '';
         h += '<div class="proof-card">';
         h += '<h3>' + esc(t.registrant_name) + ' <span style="color:rgba(245,245,245,0.5);font-size:0.82rem;">(' + t.tent_size + '-person tent, Canopy ' + t.canopy_number + ')</span>' + soloBadge + '</h3>';
         h += '<div class="info-line"><strong>Email:</strong> ' + esc(t.registrant_email) + '</div>';
@@ -2840,19 +2840,19 @@ function renderRoomMap(halls, summary) {
             var cap = room.capacity || 4;
             var isFull = members.length >= cap;
             var isLocked = !!room.is_locked;
-            var border = isLocked ? '2px solid #d4a556' : '1px solid ' + (isFull ? 'rgba(39,174,96,0.3)' : 'rgba(212,165,86,0.15)');
-            var bg = isLocked ? 'rgba(212,165,86,0.10)' : 'rgba(255,255,255,0.03)';
-            var boxShadow = isLocked ? 'box-shadow:0 0 0 1px rgba(212,165,86,0.3) inset;' : '';
+            var border = isLocked ? '2px solid #c9b897' : '1px solid ' + (isFull ? 'rgba(39,174,96,0.3)' : 'rgba(201, 184, 151,0.15)');
+            var bg = isLocked ? 'rgba(201, 184, 151,0.10)' : 'rgba(255,255,255,0.03)';
+            var boxShadow = isLocked ? 'box-shadow:0 0 0 1px rgba(201, 184, 151,0.3) inset;' : '';
             var lockIconHtml = isLocked
-                ? '<svg width="14" height="16" viewBox="0 0 14 16" fill="none" xmlns="http://www.w3.org/2000/svg" style="vertical-align:middle;"><rect x="2" y="7" width="10" height="7" rx="1.2" fill="#d4a556" stroke="#d4a556" stroke-width="0.6"/><path d="M4 7V4.5C4 2.84 5.34 1.5 7 1.5C8.66 1.5 10 2.84 10 4.5V7" stroke="#d4a556" stroke-width="1.6" fill="none" stroke-linecap="round"/><circle cx="7" cy="10.2" r="1.1" fill="#1c1c1e"/><rect x="6.55" y="10.5" width="0.9" height="2" fill="#1c1c1e"/></svg>'
+                ? '<svg width="14" height="16" viewBox="0 0 14 16" fill="none" xmlns="http://www.w3.org/2000/svg" style="vertical-align:middle;"><rect x="2" y="7" width="10" height="7" rx="1.2" fill="#c9b897" stroke="#c9b897" stroke-width="0.6"/><path d="M4 7V4.5C4 2.84 5.34 1.5 7 1.5C8.66 1.5 10 2.84 10 4.5V7" stroke="#c9b897" stroke-width="1.6" fill="none" stroke-linecap="round"/><circle cx="7" cy="10.2" r="1.1" fill="#1c1c1e"/><rect x="6.55" y="10.5" width="0.9" height="2" fill="#1c1c1e"/></svg>'
                 : '<svg width="14" height="16" viewBox="0 0 14 16" fill="none" xmlns="http://www.w3.org/2000/svg" style="vertical-align:middle;opacity:0.55;"><rect x="2" y="7" width="10" height="7" rx="1.2" fill="none" stroke="#aaa" stroke-width="1.4"/><path d="M4 7V4.5C4 2.84 5.34 1.5 7 1.5C8.66 1.5 10 2.84 10 4.5V5.5" stroke="#aaa" stroke-width="1.4" fill="none" stroke-linecap="round"/></svg>';
             var cls = 'room-card' + (isLocked ? ' room-card-locked' : '');
             h += '<div class="' + cls + '" data-hall="' + esc(hallName) + '" data-room="' + room.room_number + '" style="background:' + bg + ';border:' + border + ';border-radius:8px;padding:10px 12px;' + boxShadow + 'transition:all 0.2s ease;">';
             h += '<div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:6px;gap:6px;">';
-            h += '<span style="font-weight:700;color:var(--secondary-gold);font-size:0.85rem;display:inline-flex;align-items:center;gap:6px;">Room ' + esc(room.room_number) + '<span class="room-card-badge" style="' + (isLocked ? '' : 'display:none;') + 'background:#d4a556;color:#1c1c1e;padding:1px 7px;border-radius:3px;font-size:0.65rem;font-weight:800;letter-spacing:0.5px;">LOCKED</span></span>';
+            h += '<span style="font-weight:700;color:var(--secondary-gold);font-size:0.85rem;display:inline-flex;align-items:center;gap:6px;">Room ' + esc(room.room_number) + '<span class="room-card-badge" style="' + (isLocked ? '' : 'display:none;') + 'background:#c9b897;color:#1c1c1e;padding:1px 7px;border-radius:3px;font-size:0.65rem;font-weight:800;letter-spacing:0.5px;">LOCKED</span></span>';
             h += '<span style="display:flex;align-items:center;gap:6px;">';
             h += '<span style="font-size:0.72rem;color:' + (isFull ? '#27ae60' : 'rgba(245,245,245,0.4)') + ';">' + members.length + '/' + cap + '</span>';
-            h += '<button class="room-card-lockbtn" onclick="toggleRoomLock(\'' + esc(hallName) + '\', ' + (room.room_number || 0) + ', ' + (isLocked ? 'false' : 'true') + ')" style="background:rgba(0,0,0,0.2);border:1px solid ' + (isLocked ? '#d4a556' : 'rgba(245,245,245,0.2)') + ';border-radius:5px;cursor:pointer;padding:3px 6px;line-height:1;display:inline-flex;align-items:center;justify-content:center;transition:all 0.15s;" title="' + (isLocked ? 'Unlock' : 'Lock') + ' this room">' + lockIconHtml + '</button>';
+            h += '<button class="room-card-lockbtn" onclick="toggleRoomLock(\'' + esc(hallName) + '\', ' + (room.room_number || 0) + ', ' + (isLocked ? 'false' : 'true') + ')" style="background:rgba(0,0,0,0.2);border:1px solid ' + (isLocked ? '#c9b897' : 'rgba(245,245,245,0.2)') + ';border-radius:5px;cursor:pointer;padding:3px 6px;line-height:1;display:inline-flex;align-items:center;justify-content:center;transition:all 0.15s;" title="' + (isLocked ? 'Unlock' : 'Lock') + ' this room">' + lockIconHtml + '</button>';
             h += '</span></div>';
             members.forEach(function(m) {
                 h += '<div style="font-size:0.78rem;color:var(--text-light);padding:2px 0;">' + esc(m.name) + ' <span style="color:var(--secondary-gold);font-size:0.7rem;">' + esc(m.pycNumber || '') + '</span></div>';
@@ -2926,13 +2926,13 @@ function applyLockVisualToCard(hall, roomNumber, locked) {
     var card = document.querySelector('.room-card[data-hall="' + cssEsc(hall) + '"][data-room="' + roomNumber + '"]');
     if (!card) return;
     if (locked) {
-        card.style.background = 'rgba(212,165,86,0.10)';
-        card.style.border = '2px solid #d4a556';
-        card.style.boxShadow = '0 0 0 1px rgba(212,165,86,0.3) inset';
+        card.style.background = 'rgba(201, 184, 151,0.10)';
+        card.style.border = '2px solid #c9b897';
+        card.style.boxShadow = '0 0 0 1px rgba(201, 184, 151,0.3) inset';
         card.classList.add('room-card-locked');
     } else {
         card.style.background = 'rgba(255,255,255,0.03)';
-        card.style.border = '1px solid rgba(212,165,86,0.15)';
+        card.style.border = '1px solid rgba(201, 184, 151,0.15)';
         card.style.boxShadow = '';
         card.classList.remove('room-card-locked');
     }
@@ -2941,9 +2941,9 @@ function applyLockVisualToCard(hall, roomNumber, locked) {
     var btn = card.querySelector('.room-card-lockbtn');
     if (btn) {
         btn.title = locked ? 'Unlock this room' : 'Lock this room';
-        btn.style.borderColor = locked ? '#d4a556' : 'rgba(245,245,245,0.2)';
+        btn.style.borderColor = locked ? '#c9b897' : 'rgba(245,245,245,0.2)';
         btn.innerHTML = locked
-            ? '<svg width="14" height="16" viewBox="0 0 14 16" fill="none" xmlns="http://www.w3.org/2000/svg" style="vertical-align:middle;"><rect x="2" y="7" width="10" height="7" rx="1.2" fill="#d4a556" stroke="#d4a556" stroke-width="0.6"/><path d="M4 7V4.5C4 2.84 5.34 1.5 7 1.5C8.66 1.5 10 2.84 10 4.5V7" stroke="#d4a556" stroke-width="1.6" fill="none" stroke-linecap="round"/><circle cx="7" cy="10.2" r="1.1" fill="#1c1c1e"/><rect x="6.55" y="10.5" width="0.9" height="2" fill="#1c1c1e"/></svg>'
+            ? '<svg width="14" height="16" viewBox="0 0 14 16" fill="none" xmlns="http://www.w3.org/2000/svg" style="vertical-align:middle;"><rect x="2" y="7" width="10" height="7" rx="1.2" fill="#c9b897" stroke="#c9b897" stroke-width="0.6"/><path d="M4 7V4.5C4 2.84 5.34 1.5 7 1.5C8.66 1.5 10 2.84 10 4.5V7" stroke="#c9b897" stroke-width="1.6" fill="none" stroke-linecap="round"/><circle cx="7" cy="10.2" r="1.1" fill="#1c1c1e"/><rect x="6.55" y="10.5" width="0.9" height="2" fill="#1c1c1e"/></svg>'
             : '<svg width="14" height="16" viewBox="0 0 14 16" fill="none" xmlns="http://www.w3.org/2000/svg" style="vertical-align:middle;opacity:0.55;"><rect x="2" y="7" width="10" height="7" rx="1.2" fill="none" stroke="#aaa" stroke-width="1.4"/><path d="M4 7V4.5C4 2.84 5.34 1.5 7 1.5C8.66 1.5 10 2.84 10 4.5V5.5" stroke="#aaa" stroke-width="1.4" fill="none" stroke-linecap="round"/></svg>';
         btn.setAttribute('onclick', "toggleRoomLock('" + hall.replace(/'/g, "\\'") + "', " + roomNumber + ", " + (locked ? 'false' : 'true') + ')');
     }
@@ -3188,12 +3188,12 @@ function addVolunteerRow() {
     var tr = document.createElement('tr');
     tr.style.cssText = 'border-bottom:1px solid rgba(255,255,255,0.05);';
     tr.innerHTML =
-        '<td style="padding:6px 4px;"><div style="display:flex;align-items:center;gap:6px;"><input type="text" class="vol-pyc" placeholder="PYC-1234" onblur="lookupVolunteerPyc(this)" style="flex:1;min-width:110px;padding:8px 10px;background:rgba(0,0,0,0.3);border:1px solid rgba(212,165,86,0.2);border-radius:5px;color:var(--text-light);font-size:0.85rem;text-transform:uppercase;"><span class="vol-pyc-status" style="width:18px;display:inline-flex;justify-content:center;font-weight:700;font-size:1rem;line-height:1;">&nbsp;</span></div></td>' +
-        '<td style="padding:6px 4px;"><input type="text" class="vol-name" placeholder="Full name" style="width:100%;padding:8px 10px;background:rgba(0,0,0,0.3);border:1px solid rgba(212,165,86,0.2);border-radius:5px;color:var(--text-light);font-size:0.85rem;"></td>' +
-        '<td style="padding:6px 4px;"><input type="email" class="vol-email" placeholder="email@example.com" style="width:100%;padding:8px 10px;background:rgba(0,0,0,0.3);border:1px solid rgba(212,165,86,0.2);border-radius:5px;color:var(--text-light);font-size:0.85rem;"></td>' +
-        '<td style="padding:6px 4px;"><select class="vol-gender" onchange="onVolGenderChange(this)" style="width:100%;padding:8px 8px;background:rgba(0,0,0,0.3);border:1px solid rgba(212,165,86,0.2);border-radius:5px;color:var(--text-light);font-size:0.85rem;"><option value="">--</option><option value="Male">Male</option><option value="Female">Female</option></select></td>' +
-        '<td style="padding:6px 4px;"><select class="vol-type" style="width:100%;padding:8px 8px;background:rgba(0,0,0,0.3);border:1px solid rgba(212,165,86,0.2);border-radius:5px;color:var(--text-light);font-size:0.85rem;"><option value="">--</option><option value="girls_dorm">Girls\' Dorm</option><option value="boys_dorm">Boys\' Dorm</option><option value="camping">Camping</option></select></td>' +
-        '<td style="padding:6px 4px;"><input type="number" class="vol-spots" min="1" max="10" value="1" style="width:60px;padding:8px 8px;background:rgba(0,0,0,0.3);border:1px solid rgba(212,165,86,0.2);border-radius:5px;color:var(--text-light);font-size:0.85rem;text-align:center;"></td>' +
+        '<td style="padding:6px 4px;"><div style="display:flex;align-items:center;gap:6px;"><input type="text" class="vol-pyc" placeholder="PYC-1234" onblur="lookupVolunteerPyc(this)" style="flex:1;min-width:110px;padding:8px 10px;background:rgba(0,0,0,0.3);border:1px solid rgba(201, 184, 151,0.2);border-radius:5px;color:var(--text-light);font-size:0.85rem;text-transform:uppercase;"><span class="vol-pyc-status" style="width:18px;display:inline-flex;justify-content:center;font-weight:700;font-size:1rem;line-height:1;">&nbsp;</span></div></td>' +
+        '<td style="padding:6px 4px;"><input type="text" class="vol-name" placeholder="Full name" style="width:100%;padding:8px 10px;background:rgba(0,0,0,0.3);border:1px solid rgba(201, 184, 151,0.2);border-radius:5px;color:var(--text-light);font-size:0.85rem;"></td>' +
+        '<td style="padding:6px 4px;"><input type="email" class="vol-email" placeholder="email@example.com" style="width:100%;padding:8px 10px;background:rgba(0,0,0,0.3);border:1px solid rgba(201, 184, 151,0.2);border-radius:5px;color:var(--text-light);font-size:0.85rem;"></td>' +
+        '<td style="padding:6px 4px;"><select class="vol-gender" onchange="onVolGenderChange(this)" style="width:100%;padding:8px 8px;background:rgba(0,0,0,0.3);border:1px solid rgba(201, 184, 151,0.2);border-radius:5px;color:var(--text-light);font-size:0.85rem;"><option value="">--</option><option value="Male">Male</option><option value="Female">Female</option></select></td>' +
+        '<td style="padding:6px 4px;"><select class="vol-type" style="width:100%;padding:8px 8px;background:rgba(0,0,0,0.3);border:1px solid rgba(201, 184, 151,0.2);border-radius:5px;color:var(--text-light);font-size:0.85rem;"><option value="">--</option><option value="girls_dorm">Girls\' Dorm</option><option value="boys_dorm">Boys\' Dorm</option><option value="camping">Camping</option></select></td>' +
+        '<td style="padding:6px 4px;"><input type="number" class="vol-spots" min="1" max="10" value="1" style="width:60px;padding:8px 8px;background:rgba(0,0,0,0.3);border:1px solid rgba(201, 184, 151,0.2);border-radius:5px;color:var(--text-light);font-size:0.85rem;text-align:center;"></td>' +
         '<td style="padding:6px 4px;text-align:center;"><button onclick="removeVolunteerRow(this)" style="background:rgba(231,76,60,0.15);color:#e74c3c;border:1px solid rgba(231,76,60,0.3);border-radius:5px;padding:6px 9px;cursor:pointer;font-size:0.85rem;font-weight:700;line-height:1;">&times;</button></td>';
     body.appendChild(tr);
 }
@@ -3384,7 +3384,7 @@ async function loadAdminAddedReservations() {
 
         var typeNames = { girls_dorm: "Girls' Dorm", boys_dorm: "Boys' Dorm", camping: 'Camping' };
         var h = '<div style="overflow-x:auto;-webkit-overflow-scrolling:touch;"><table style="width:100%;border-collapse:collapse;font-size:0.85rem;">';
-        h += '<thead><tr style="background:rgba(212,165,86,0.08);"><th style="text-align:left;padding:9px;color:var(--secondary-gold);font-size:0.75rem;text-transform:uppercase;letter-spacing:0.5px;">Name</th><th style="text-align:left;padding:9px;color:var(--secondary-gold);font-size:0.75rem;text-transform:uppercase;letter-spacing:0.5px;">Email</th><th style="text-align:left;padding:9px;color:var(--secondary-gold);font-size:0.75rem;text-transform:uppercase;letter-spacing:0.5px;">PYC</th><th style="text-align:left;padding:9px;color:var(--secondary-gold);font-size:0.75rem;text-transform:uppercase;letter-spacing:0.5px;">Type</th><th style="text-align:center;padding:9px;color:var(--secondary-gold);font-size:0.75rem;text-transform:uppercase;letter-spacing:0.5px;">Spots</th><th style="text-align:left;padding:9px;color:var(--secondary-gold);font-size:0.75rem;text-transform:uppercase;letter-spacing:0.5px;">Created</th><th style="padding:9px;width:40px;"></th></tr></thead><tbody>';
+        h += '<thead><tr style="background:rgba(201, 184, 151,0.08);"><th style="text-align:left;padding:9px;color:var(--secondary-gold);font-size:0.75rem;text-transform:uppercase;letter-spacing:0.5px;">Name</th><th style="text-align:left;padding:9px;color:var(--secondary-gold);font-size:0.75rem;text-transform:uppercase;letter-spacing:0.5px;">Email</th><th style="text-align:left;padding:9px;color:var(--secondary-gold);font-size:0.75rem;text-transform:uppercase;letter-spacing:0.5px;">PYC</th><th style="text-align:left;padding:9px;color:var(--secondary-gold);font-size:0.75rem;text-transform:uppercase;letter-spacing:0.5px;">Type</th><th style="text-align:center;padding:9px;color:var(--secondary-gold);font-size:0.75rem;text-transform:uppercase;letter-spacing:0.5px;">Spots</th><th style="text-align:left;padding:9px;color:var(--secondary-gold);font-size:0.75rem;text-transform:uppercase;letter-spacing:0.5px;">Created</th><th style="padding:9px;width:40px;"></th></tr></thead><tbody>';
         arr.forEach(function(r) {
             var pyc = (r.registration_id && pycMap[r.registration_id]) ? pycMap[r.registration_id] : '--';
             h += '<tr style="border-bottom:1px solid rgba(255,255,255,0.05);">';
@@ -3436,13 +3436,13 @@ function openReservationEditor(regId, fullName, currentGender, currentMealPlan) 
     overlay.id = 'reservationEditorModal';
     overlay.style.cssText = 'position:fixed;top:0;left:0;right:0;bottom:0;background:rgba(0,0,0,0.85);z-index:2000;display:flex;align-items:center;justify-content:center;padding:20px;';
     overlay.innerHTML =
-        '<div style="background:var(--primary-navy);border:2px solid rgba(212,165,86,0.4);border-radius:12px;padding:26px;max-width:480px;width:100%;box-shadow:0 20px 60px rgba(0,0,0,0.5);">' +
+        '<div style="background:var(--primary-navy);border:2px solid rgba(201, 184, 151,0.4);border-radius:12px;padding:26px;max-width:480px;width:100%;box-shadow:0 20px 60px rgba(0,0,0,0.5);">' +
         '<h3 style="color:var(--secondary-gold);font-size:1.15rem;margin-bottom:6px;">Edit Reservation</h3>' +
         '<p style="color:rgba(245,245,245,0.7);font-size:0.88rem;margin-bottom:16px;">' + fullName + '</p>' +
 
         '<label style="display:block;color:var(--text-light);font-size:0.85rem;font-weight:600;margin-bottom:6px;">Gender</label>' +
         '<p style="color:rgba(245,245,245,0.55);font-size:0.78rem;margin-bottom:6px;">Current: <strong>' + (currentGender || '(unset)') + '</strong></p>' +
-        '<select id="resEditorGender" style="width:100%;padding:10px 12px;background:rgba(0,0,0,0.3);border:1px solid rgba(212,165,86,0.3);border-radius:7px;color:var(--text-light);font-size:0.95rem;margin-bottom:14px;">' +
+        '<select id="resEditorGender" style="width:100%;padding:10px 12px;background:rgba(0,0,0,0.3);border:1px solid rgba(201, 184, 151,0.3);border-radius:7px;color:var(--text-light);font-size:0.95rem;margin-bottom:14px;">' +
         '<option value="">-- (no change)</option>' +
         '<option value="Male"' + (currentGender === 'Male' ? ' selected' : '') + '>Male</option>' +
         '<option value="Female"' + (currentGender === 'Female' ? ' selected' : '') + '>Female</option>' +
@@ -3450,7 +3450,7 @@ function openReservationEditor(regId, fullName, currentGender, currentMealPlan) 
 
         '<label style="display:block;color:var(--text-light);font-size:0.85rem;font-weight:600;margin-bottom:6px;">Meal Plan</label>' +
         '<p style="color:rgba(245,245,245,0.55);font-size:0.78rem;margin-bottom:6px;">Current: <strong>' + currentMealLabel + '</strong></p>' +
-        '<select id="resEditorMeal" style="width:100%;padding:10px 12px;background:rgba(0,0,0,0.3);border:1px solid rgba(212,165,86,0.3);border-radius:7px;color:var(--text-light);font-size:0.95rem;margin-bottom:6px;">' +
+        '<select id="resEditorMeal" style="width:100%;padding:10px 12px;background:rgba(0,0,0,0.3);border:1px solid rgba(201, 184, 151,0.3);border-radius:7px;color:var(--text-light);font-size:0.95rem;margin-bottom:6px;">' +
         '<option value="">-- (no change)</option>' +
         '<option value="vegetarian"' + (currentMealPlan === 'vegetarian' ? ' selected' : '') + '>Full Meal — Vegetarian</option>' +
         '<option value="vegan"' + (currentMealPlan === 'vegan' ? ' selected' : '') + '>Full Meal — Vegan</option>' +
@@ -3589,7 +3589,7 @@ async function runFixGenderSearch() {
             html += '<td style="font-size:0.84rem;color:rgba(245,245,245,0.7);">' + esc(r.email) + '</td>';
             html += '<td style="color:var(--secondary-gold);font-size:0.84rem;">' + esc(r.confirmation_number || '--') + '</td>';
             html += '<td><strong>' + esc(r.gender || '(unset)') + '</strong></td>';
-            html += '<td style="text-align:right;"><button onclick="openReservationEditor(\'' + r.id + '\',\'' + fullNameEsc + '\',\'' + (r.gender || '') + '\',\'' + (r.meal_plan || '') + '\')" style="padding:7px 14px;background:rgba(212,165,86,0.12);color:var(--secondary-gold);border:1px solid rgba(212,165,86,0.3);border-radius:6px;cursor:pointer;font-size:0.82rem;font-weight:600;">Edit</button></td>';
+            html += '<td style="text-align:right;"><button onclick="openReservationEditor(\'' + r.id + '\',\'' + fullNameEsc + '\',\'' + (r.gender || '') + '\',\'' + (r.meal_plan || '') + '\')" style="padding:7px 14px;background:rgba(201, 184, 151,0.12);color:var(--secondary-gold);border:1px solid rgba(201, 184, 151,0.3);border-radius:6px;cursor:pointer;font-size:0.82rem;font-weight:600;">Edit</button></td>';
             html += '</tr>';
         });
         html += '</tbody></table></div>';
@@ -3712,13 +3712,13 @@ function renderPreview(data) {
         el.innerHTML = msg;
         return;
     }
-    var html = '<div style="background:rgba(212,165,86,0.08);border:1px solid rgba(212,165,86,0.3);border-radius:8px;padding:14px;margin-bottom:14px;">';
+    var html = '<div style="background:rgba(201, 184, 151,0.08);border:1px solid rgba(201, 184, 151,0.3);border-radius:8px;padding:14px;margin-bottom:14px;">';
     html += '<strong style="color:var(--secondary-gold);">' + data.total + ' recipient(s) match' + (data.windowApplied ? ' the window' : '') + '</strong>';
     html += '<p style="color:rgba(245,245,245,0.6);font-size:0.82rem;margin-top:6px;">Click "Send Emails" to send. Sends are chunked at 50 per call &mdash; for large batches, click Send and the tool will loop until done.</p>';
     html += diagLine;
     html += '</div>';
     html += '<div style="overflow-x:auto;max-height:480px;overflow-y:auto;"><table style="width:100%;border-collapse:collapse;font-size:0.85rem;">';
-    html += '<thead><tr style="background:rgba(212,165,86,0.06);position:sticky;top:0;"><th style="text-align:left;padding:9px;color:var(--secondary-gold);font-size:0.74rem;text-transform:uppercase;letter-spacing:0.5px;">#</th><th style="text-align:left;padding:9px;color:var(--secondary-gold);font-size:0.74rem;text-transform:uppercase;letter-spacing:0.5px;">Name</th><th style="text-align:left;padding:9px;color:var(--secondary-gold);font-size:0.74rem;text-transform:uppercase;letter-spacing:0.5px;">Email</th>';
+    html += '<thead><tr style="background:rgba(201, 184, 151,0.06);position:sticky;top:0;"><th style="text-align:left;padding:9px;color:var(--secondary-gold);font-size:0.74rem;text-transform:uppercase;letter-spacing:0.5px;">#</th><th style="text-align:left;padding:9px;color:var(--secondary-gold);font-size:0.74rem;text-transform:uppercase;letter-spacing:0.5px;">Name</th><th style="text-align:left;padding:9px;color:var(--secondary-gold);font-size:0.74rem;text-transform:uppercase;letter-spacing:0.5px;">Email</th>';
     if (data.emailType && data.emailType.indexOf('conference') === 0) {
         html += '<th style="text-align:left;padding:9px;color:var(--secondary-gold);font-size:0.74rem;text-transform:uppercase;letter-spacing:0.5px;">PYC</th>';
     } else {
@@ -3966,7 +3966,7 @@ async function erManualPreview() {
         return;
     }
 
-    var summary = '<div style="background:rgba(255,255,255,0.03);border:1px solid rgba(212,165,86,0.15);border-radius:8px;padding:12px;margin-bottom:10px;font-size:0.85rem;color:rgba(245,245,245,0.75);">';
+    var summary = '<div style="background:rgba(255,255,255,0.03);border:1px solid rgba(201, 184, 151,0.15);border-radius:8px;padding:12px;margin-bottom:10px;font-size:0.85rem;color:rgba(245,245,245,0.75);">';
     summary += 'Parsed: <strong>' + parsed.pycs.length + ' PYC number(s)</strong>, <strong>' + parsed.emails.length + ' email(s)</strong>';
     if (parsed.unknown.length > 0) summary += '. <span style="color:#e74c3c;">Could not parse: ' + parsed.unknown.map(esc).join(', ') + '</span>';
     summary += '</div>';
@@ -4005,7 +4005,7 @@ function renderManualPreview(summary, data, parsed) {
         resultsEl.innerHTML = html;
         return;
     }
-    html += '<div style="background:rgba(212,165,86,0.08);border:1px solid rgba(212,165,86,0.3);border-radius:8px;padding:14px;margin-bottom:14px;">';
+    html += '<div style="background:rgba(201, 184, 151,0.08);border:1px solid rgba(201, 184, 151,0.3);border-radius:8px;padding:14px;margin-bottom:14px;">';
     html += '<strong style="color:var(--secondary-gold);">' + data.total + ' recipient(s) matched</strong>';
     if ((data.notFound || []).length > 0) {
         html += '<p style="color:#e74c3c;font-size:0.82rem;margin-top:6px;">Not found: ' + data.notFound.map(esc).join(', ') + '</p>';
@@ -4013,7 +4013,7 @@ function renderManualPreview(summary, data, parsed) {
     html += '<p style="color:rgba(245,245,245,0.6);font-size:0.82rem;margin-top:6px;">Click "Send to These" to send.</p>';
     html += '</div>';
     html += '<div style="overflow-x:auto;"><table style="width:100%;border-collapse:collapse;font-size:0.85rem;">';
-    html += '<thead><tr style="background:rgba(212,165,86,0.06);"><th style="text-align:left;padding:9px;color:var(--secondary-gold);font-size:0.74rem;text-transform:uppercase;letter-spacing:0.5px;">#</th><th style="text-align:left;padding:9px;color:var(--secondary-gold);font-size:0.74rem;text-transform:uppercase;letter-spacing:0.5px;">Name</th><th style="text-align:left;padding:9px;color:var(--secondary-gold);font-size:0.74rem;text-transform:uppercase;letter-spacing:0.5px;">Email</th>';
+    html += '<thead><tr style="background:rgba(201, 184, 151,0.06);"><th style="text-align:left;padding:9px;color:var(--secondary-gold);font-size:0.74rem;text-transform:uppercase;letter-spacing:0.5px;">#</th><th style="text-align:left;padding:9px;color:var(--secondary-gold);font-size:0.74rem;text-transform:uppercase;letter-spacing:0.5px;">Name</th><th style="text-align:left;padding:9px;color:var(--secondary-gold);font-size:0.74rem;text-transform:uppercase;letter-spacing:0.5px;">Email</th>';
     if (data.emailType.indexOf('conference') === 0) {
         html += '<th style="text-align:left;padding:9px;color:var(--secondary-gold);font-size:0.74rem;text-transform:uppercase;letter-spacing:0.5px;">PYC</th>';
     } else {
@@ -4222,7 +4222,7 @@ async function fpRun(commit) {
 // Renders the result/report block for fpRun (shared by dry-run and commit).
 function fpRenderReport(data, commit) {
     var s = data.summary || {};
-    var html = '<div style="background:' + (commit ? 'rgba(39,174,96,0.1)' : 'rgba(212,165,86,0.1)') + ';border:1px solid ' + (commit ? 'rgba(39,174,96,0.3)' : 'rgba(212,165,86,0.3)') + ';border-radius:8px;padding:14px;margin-bottom:14px;">';
+    var html = '<div style="background:' + (commit ? 'rgba(39,174,96,0.1)' : 'rgba(201, 184, 151,0.1)') + ';border:1px solid ' + (commit ? 'rgba(39,174,96,0.3)' : 'rgba(201, 184, 151,0.3)') + ';border-radius:8px;padding:14px;margin-bottom:14px;">';
     html += '<strong style="color:' + (commit ? '#27ae60' : 'var(--secondary-gold)') + ';">' + (commit ? '&#10003; Done' : 'Preview') + ' &mdash; ' + esc(data.mode) + '</strong>';
     html += '<div style="display:flex;gap:14px;flex-wrap:wrap;margin-top:10px;">';
     html += '<span style="color:rgba(245,245,245,0.8);">Matched: <strong>' + (data.matched||0) + '</strong></span>';
@@ -4304,7 +4304,7 @@ async function findMissingPycs() {
         missing.forEach(function(r) { window._missingPycCache[r.id] = r; });
 
         var h = '<div id="pycDiagLog" style="margin-bottom:14px;"></div>';
-        h += '<div style="background:rgba(212,165,86,0.08);border:1px solid rgba(212,165,86,0.3);border-radius:8px;padding:12px 14px;margin-bottom:14px;color:var(--secondary-gold);font-weight:600;">' + missing.length + ' registrant(s) missing a PYC number</div>';
+        h += '<div style="background:rgba(201, 184, 151,0.08);border:1px solid rgba(201, 184, 151,0.3);border-radius:8px;padding:12px 14px;margin-bottom:14px;color:var(--secondary-gold);font-weight:600;">' + missing.length + ' registrant(s) missing a PYC number</div>';
         h += '<div class="table-wrapper"><table id="missingPycTable">';
         h += '<thead><tr><th>Name</th><th>Email</th><th>Status</th><th>Registered</th><th>Action</th></tr></thead><tbody>';
         missing.forEach(function(r, idx) {
@@ -4351,7 +4351,7 @@ function pycCustomConfirm(message) {
         overlay.id = 'pycConfirmModal';
         overlay.style.cssText = 'position:fixed;top:0;left:0;right:0;bottom:0;background:rgba(0,0,0,0.85);z-index:5000;display:flex;align-items:center;justify-content:center;padding:20px;';
         overlay.innerHTML =
-            '<div style="background:var(--primary-navy);border:2px solid rgba(212,165,86,0.4);border-radius:12px;padding:26px;max-width:440px;width:100%;box-shadow:0 20px 60px rgba(0,0,0,0.5);">' +
+            '<div style="background:var(--primary-navy);border:2px solid rgba(201, 184, 151,0.4);border-radius:12px;padding:26px;max-width:440px;width:100%;box-shadow:0 20px 60px rgba(0,0,0,0.5);">' +
             '<h3 style="color:var(--secondary-gold);font-size:1.1rem;margin-bottom:14px;">Confirm</h3>' +
             '<p style="color:rgba(245,245,245,0.85);font-size:0.95rem;line-height:1.5;margin-bottom:20px;white-space:pre-wrap;">' + (message || '').replace(/</g, '&lt;').replace(/>/g, '&gt;') + '</p>' +
             '<div style="display:flex;gap:10px;justify-content:flex-end;">' +
@@ -4398,7 +4398,7 @@ function pycCustomAlert(message) {
         overlay.id = 'pycAlertModal';
         overlay.style.cssText = 'position:fixed;top:0;left:0;right:0;bottom:0;background:rgba(0,0,0,0.85);z-index:5000;display:flex;align-items:center;justify-content:center;padding:20px;';
         overlay.innerHTML =
-            '<div style="background:var(--primary-navy);border:2px solid rgba(212,165,86,0.4);border-radius:12px;padding:26px;max-width:480px;width:100%;box-shadow:0 20px 60px rgba(0,0,0,0.5);">' +
+            '<div style="background:var(--primary-navy);border:2px solid rgba(201, 184, 151,0.4);border-radius:12px;padding:26px;max-width:480px;width:100%;box-shadow:0 20px 60px rgba(0,0,0,0.5);">' +
             '<p style="color:rgba(245,245,245,0.85);font-size:0.95rem;line-height:1.5;margin-bottom:20px;white-space:pre-wrap;">' + (message || '').replace(/</g, '&lt;').replace(/>/g, '&gt;') + '</p>' +
             '<div style="display:flex;gap:10px;justify-content:flex-end;">' +
             '<button type="button" id="pycAlertOk" style="padding:10px 20px;background:var(--secondary-gold);color:var(--primary-navy);border:none;border-radius:7px;font-weight:700;cursor:pointer;">OK</button>' +
@@ -4521,7 +4521,7 @@ async function findMissingGenders() {
         missing.forEach(function(r) { window._missingGenderCache[r.id] = r; });
 
         var h = '<div id="genderDiagLog" style="margin-bottom:14px;"></div>';
-        h += '<div style="background:rgba(212,165,86,0.08);border:1px solid rgba(212,165,86,0.3);border-radius:8px;padding:12px 14px;margin-bottom:14px;color:var(--secondary-gold);font-weight:600;">' + missing.length + ' registrant(s) missing a gender</div>';
+        h += '<div style="background:rgba(201, 184, 151,0.08);border:1px solid rgba(201, 184, 151,0.3);border-radius:8px;padding:12px 14px;margin-bottom:14px;color:var(--secondary-gold);font-weight:600;">' + missing.length + ' registrant(s) missing a gender</div>';
         h += '<div class="table-wrapper"><table id="missingGenderTable">';
         h += '<thead><tr><th>Name</th><th>Email</th><th>PYC</th><th>Status</th><th>Registered</th><th>Action</th></tr></thead><tbody>';
         missing.forEach(function(r, idx) {

@@ -10,7 +10,7 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.18.5/xlsx.full.min.js"></script>
     <style>
         * { margin: 0; padding: 0; box-sizing: border-box; }
-        :root { --primary-navy: #1c1c1e; --secondary-gold: #d4a556; --accent-blue: #4a7c9e; --text-light: #f5f5f5; --text-dark: #2c3e50; --border-gold: #c9965d; --background-overlay: rgba(28, 28, 30, 0.92); --success: #27ae60; --danger: #e74c3c; --warning: #f39c12; }
+        :root { --primary-navy: #1c1c1e; --secondary-gold: #c9b897; --accent-blue: #4a7c9e; --text-light: #f5f5f5; --text-dark: #2c3e50; --border-gold: #b5a27f; --background-overlay: rgba(28, 28, 30, 0.92); --success: #27ae60; --danger: #e74c3c; --warning: #f39c12; }
         body { font-family: 'Montserrat', sans-serif; background: linear-gradient(135deg, #000000 0%, #1c1c1e 50%, #2c2c2e 100%); color: var(--text-light); min-height: 100vh; position: relative; }
         .stars { position: fixed; top: 0; left: 0; width: 100%; height: 100%; pointer-events: none; z-index: 0; }
         .star { position: absolute; background: white; border-radius: 50%; box-shadow: 0 0 3px rgba(255,255,255,0.8); filter: blur(0.5px); animation: twinkle 3s infinite; }
@@ -18,43 +18,43 @@
 
         /* Login */
         .login-container { position: relative; z-index: 2; min-height: 100vh; display: flex; align-items: center; justify-content: center; padding: 20px; }
-        .login-box { background: var(--background-overlay); border: 2px solid rgba(212,165,86,0.3); padding: 50px 40px; border-radius: 20px; box-shadow: 0 30px 80px rgba(0,0,0,0.5); backdrop-filter: blur(10px); width: 100%; max-width: 450px; }
+        .login-box { background: var(--background-overlay); border: 2px solid rgba(201, 184, 151,0.3); padding: 50px 40px; border-radius: 20px; box-shadow: 0 30px 80px rgba(0,0,0,0.5); backdrop-filter: blur(10px); width: 100%; max-width: 450px; }
         .login-box h1 { font-family: 'Bebas Neue', sans-serif; color: var(--secondary-gold); margin-bottom: 10px; font-size: 2rem; text-align: center; letter-spacing: 2px; }
         .login-box .subtitle { text-align: center; color: rgba(245,245,245,0.7); margin-bottom: 30px; font-size: 0.88rem; }
         .form-group { margin-bottom: 20px; }
         .form-group label { display: block; margin-bottom: 8px; color: var(--secondary-gold); font-weight: 500; }
-        .form-group input { width: 100%; padding: 12px 15px; background: rgba(255,255,255,0.1); border: 1px solid rgba(212,165,86,0.3); border-radius: 8px; color: var(--text-light); font-size: 1rem; }
+        .form-group input { width: 100%; padding: 12px 15px; background: rgba(255,255,255,0.1); border: 1px solid rgba(201, 184, 151,0.3); border-radius: 8px; color: var(--text-light); font-size: 1rem; }
         .form-group input:focus { outline: none; border-color: var(--secondary-gold); background: rgba(255,255,255,0.15); }
         .btn-primary { width: 100%; padding: 15px; background: var(--secondary-gold); color: var(--primary-navy); border: none; border-radius: 8px; font-size: 1.1rem; font-weight: 600; cursor: pointer; transition: all 0.3s; }
-        .btn-primary:hover { background: #e0b566; transform: translateY(-2px); box-shadow: 0 5px 15px rgba(212,165,86,0.4); }
+        .btn-primary:hover { background: #d9cbb0; transform: translateY(-2px); box-shadow: 0 5px 15px rgba(201, 184, 151,0.4); }
         .btn-primary:disabled { opacity: 0.5; cursor: not-allowed; }
 
         /* Dashboard Layout */
         .dashboard { display: none; position: relative; z-index: 2; }
         .dashboard-container { max-width: 1400px; margin: 0 auto; padding: 20px; }
-        .dashboard-header { background: var(--background-overlay); padding: 30px; border-radius: 15px; margin-bottom: 30px; display: flex; justify-content: space-between; align-items: center; border: 2px solid rgba(212,165,86,0.3); }
+        .dashboard-header { background: var(--background-overlay); padding: 30px; border-radius: 15px; margin-bottom: 30px; display: flex; justify-content: space-between; align-items: center; border: 2px solid rgba(201, 184, 151,0.3); }
         .dashboard-header h1 { font-family: 'Bebas Neue', sans-serif; color: var(--secondary-gold); font-size: 2.5rem; letter-spacing: 2px; }
         .user-info { display: flex; align-items: center; gap: 15px; }
         .user-info span { color: var(--text-light); }
         .logout-btn { padding: 10px 20px; background: var(--danger); color: white; border: none; border-radius: 8px; cursor: pointer; font-weight: 600; }
-        .refresh-btn { padding: 10px 20px; background: transparent; border: 1px solid rgba(212,165,86,0.4); color: var(--text-light); border-radius: 8px; cursor: pointer; font-weight: 600; font-size: 0.85rem; transition: all 0.3s; }
-        .refresh-btn:hover { background: rgba(212,165,86,0.1); border-color: var(--secondary-gold); }
+        .refresh-btn { padding: 10px 20px; background: transparent; border: 1px solid rgba(201, 184, 151,0.4); color: var(--text-light); border-radius: 8px; cursor: pointer; font-weight: 600; font-size: 0.85rem; transition: all 0.3s; }
+        .refresh-btn:hover { background: rgba(201, 184, 151,0.1); border-color: var(--secondary-gold); }
 
         /* Tabs - matching admin dashboard */
         .tabs { display: flex; gap: 10px; margin-bottom: 30px; flex-wrap: wrap; }
-        .tab-btn { padding: 15px 30px; background: rgba(255,255,255,0.1); border: 2px solid rgba(212,165,86,0.3); border-radius: 10px; color: var(--text-light); cursor: pointer; font-size: 1.1rem; font-weight: 600; transition: all 0.3s; }
+        .tab-btn { padding: 15px 30px; background: rgba(255,255,255,0.1); border: 2px solid rgba(201, 184, 151,0.3); border-radius: 10px; color: var(--text-light); cursor: pointer; font-size: 1.1rem; font-weight: 600; transition: all 0.3s; }
         .tab-btn.active { background: var(--secondary-gold); color: var(--primary-navy); }
         .tab-btn .badge { display: inline-block; background: var(--danger); color: white; font-size: 0.7rem; padding: 2px 7px; border-radius: 10px; margin-left: 4px; font-weight: 700; }
         .tab-content { display: none; }
         .tab-content.active { display: block; }
 
         /* Content Box - matching admin dashboard */
-        .content-box { background: var(--background-overlay); padding: 30px; border-radius: 15px; border: 2px solid rgba(212,165,86,0.3); }
+        .content-box { background: var(--background-overlay); padding: 30px; border-radius: 15px; border: 2px solid rgba(201, 184, 151,0.3); }
         .content-box h2 { font-family: 'Bebas Neue', sans-serif; color: var(--secondary-gold); margin-bottom: 20px; font-size: 2rem; }
 
         /* Stats */
         .stats-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 20px; margin-top: 20px; }
-        .stat-card { background: rgba(255,255,255,0.05); padding: 25px; border-radius: 10px; border: 1px solid rgba(212,165,86,0.2); text-align: center; }
+        .stat-card { background: rgba(255,255,255,0.05); padding: 25px; border-radius: 10px; border: 1px solid rgba(201, 184, 151,0.2); text-align: center; }
         .stat-card .stat-label { font-size: 0.78rem; color: rgba(245,245,245,0.5); text-transform: uppercase; letter-spacing: 1px; margin-bottom: 8px; }
         .stat-card .stat-value { font-size: 2.5rem; font-weight: 700; color: var(--secondary-gold); margin: 10px 0; }
         .stat-card .stat-sub { font-size: 0.82rem; color: rgba(245,245,245,0.6); margin-top: 4px; }
@@ -68,7 +68,7 @@
 
         /* Search */
         .search-box { display: flex; gap: 10px; margin-bottom: 30px; }
-        .search-box input, .search-box select { flex: 1; padding: 15px; background: rgba(255,255,255,0.1); border: 1px solid rgba(212,165,86,0.3); border-radius: 8px; color: var(--text-light); font-size: 1rem; }
+        .search-box input, .search-box select { flex: 1; padding: 15px; background: rgba(255,255,255,0.1); border: 1px solid rgba(201, 184, 151,0.3); border-radius: 8px; color: var(--text-light); font-size: 1rem; }
         .search-box input::placeholder { color: rgba(245,245,245,0.4); }
         .search-box input:focus, .search-box select:focus { outline: none; border-color: var(--secondary-gold); }
         .search-box select { background: rgba(255,255,255,0.1); }
@@ -77,12 +77,12 @@
 
         /* Proof cards */
         .proof-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(350px, 1fr)); gap: 20px; margin-top: 20px; }
-        .proof-card { background: rgba(255,255,255,0.05); padding: 20px; border-radius: 10px; border: 1px solid rgba(212,165,86,0.2); }
+        .proof-card { background: rgba(255,255,255,0.05); padding: 20px; border-radius: 10px; border: 1px solid rgba(201, 184, 151,0.2); }
         .proof-card.resubmitted { border-color: rgba(243,156,18,0.4); background: rgba(243,156,18,0.04); }
         .proof-card h3 { color: var(--secondary-gold); margin-bottom: 12px; font-size: 1rem; }
         .proof-card .info-line { font-size: 0.86rem; color: rgba(245,245,245,0.7); margin-bottom: 4px; }
         .proof-card .info-line strong { color: var(--text-light); }
-        .proof-card img { width: 80px; height: 80px; object-fit: cover; border-radius: 8px; cursor: pointer; border: 1px solid rgba(212,165,86,0.3); float: right; margin: 0 0 10px 15px; transition: transform 0.2s; }
+        .proof-card img { width: 80px; height: 80px; object-fit: cover; border-radius: 8px; cursor: pointer; border: 1px solid rgba(201, 184, 151,0.3); float: right; margin: 0 0 10px 15px; transition: transform 0.2s; }
         .proof-card img:hover { transform: scale(1.1); box-shadow: 0 4px 12px rgba(0,0,0,0.4); }
         .proof-card .actions { display: flex; gap: 8px; margin-top: 12px; flex-wrap: wrap; }
 
@@ -98,7 +98,7 @@
         /* Table */
         .table-wrapper { overflow-x: auto; }
         table { width: 100%; border-collapse: collapse; margin-top: 20px; }
-        thead { background: rgba(212,165,86,0.2); }
+        thead { background: rgba(201, 184, 151,0.2); }
         th, td { padding: 15px; text-align: left; border-bottom: 1px solid rgba(255,255,255,0.1); }
         th { color: var(--secondary-gold); font-weight: 600; }
         tr:hover { background: rgba(255,255,255,0.05); }
@@ -111,7 +111,7 @@
         .status-rejected { background: var(--danger); color: white; }
         .status-resubmitted { background: #3498db; color: white; }
         .status-volunteer { background: #9b59b6; color: white; }
-        .type-badge { display: inline-block; padding: 3px 8px; border-radius: 5px; font-size: 0.76rem; font-weight: 600; background: rgba(212,165,86,0.1); color: var(--secondary-gold); }
+        .type-badge { display: inline-block; padding: 3px 8px; border-radius: 5px; font-size: 0.76rem; font-weight: 600; background: rgba(201, 184, 151,0.1); color: var(--secondary-gold); }
         .acct-badge { font-size: 0.76rem; }
 
         /* Alerts */
@@ -209,8 +209,8 @@
                     <p style="color:rgba(245,245,245,0.6);font-size:0.88rem;margin-bottom:15px;">Dorm and tenting GCash payment proofs pending review.</p>
                     <div style="display:flex;gap:8px;flex-wrap:wrap;margin-bottom:16px;" id="gcashAccountFilters">
                         <button onclick="filterProofsByAccount('gcash','all')" class="acct-filter-btn active" data-acct="all" style="padding:8px 16px;background:var(--secondary-gold);color:var(--primary-navy);border:none;border-radius:8px;font-weight:600;cursor:pointer;font-size:0.85rem;">All <span class="count" id="gcashCountAll">0</span></button>
-                        <button onclick="filterProofsByAccount('gcash','A')" class="acct-filter-btn" data-acct="A" style="padding:8px 16px;background:rgba(255,255,255,0.05);color:var(--text-light);border:1px solid rgba(212,165,86,0.3);border-radius:8px;font-weight:600;cursor:pointer;font-size:0.85rem;">Sandra M. (GCash A) <span class="count" id="gcashCountA">0</span></button>
-                        <button onclick="filterProofsByAccount('gcash','B')" class="acct-filter-btn" data-acct="B" style="padding:8px 16px;background:rgba(255,255,255,0.05);color:var(--text-light);border:1px solid rgba(212,165,86,0.3);border-radius:8px;font-weight:600;cursor:pointer;font-size:0.85rem;">Jasmin S. (GCash B) <span class="count" id="gcashCountB">0</span></button>
+                        <button onclick="filterProofsByAccount('gcash','A')" class="acct-filter-btn" data-acct="A" style="padding:8px 16px;background:rgba(255,255,255,0.05);color:var(--text-light);border:1px solid rgba(201, 184, 151,0.3);border-radius:8px;font-weight:600;cursor:pointer;font-size:0.85rem;">Sandra M. (GCash A) <span class="count" id="gcashCountA">0</span></button>
+                        <button onclick="filterProofsByAccount('gcash','B')" class="acct-filter-btn" data-acct="B" style="padding:8px 16px;background:rgba(255,255,255,0.05);color:var(--text-light);border:1px solid rgba(201, 184, 151,0.3);border-radius:8px;font-weight:600;cursor:pointer;font-size:0.85rem;">Jasmin S. (GCash B) <span class="count" id="gcashCountB">0</span></button>
                     </div>
                     <div id="gcashAlert"></div>
                     <div id="gcashList" class="empty-state">Loading...</div>
@@ -224,8 +224,8 @@
                     <p style="color:rgba(245,245,245,0.6);font-size:0.88rem;margin-bottom:15px;">Dorm and tenting bank transfer proofs pending review.</p>
                     <div style="display:flex;gap:8px;flex-wrap:wrap;margin-bottom:16px;" id="bankAccountFilters">
                         <button onclick="filterProofsByAccount('bank','all')" class="acct-filter-btn active" data-acct="all" style="padding:8px 16px;background:var(--secondary-gold);color:var(--primary-navy);border:none;border-radius:8px;font-weight:600;cursor:pointer;font-size:0.85rem;">All <span class="count" id="bankCountAll">0</span></button>
-                        <button onclick="filterProofsByAccount('bank','bank_bpi')" class="acct-filter-btn" data-acct="bank_bpi" style="padding:8px 16px;background:rgba(255,255,255,0.05);color:var(--text-light);border:1px solid rgba(212,165,86,0.3);border-radius:8px;font-weight:600;cursor:pointer;font-size:0.85rem;">Angelica I. (BPI) <span class="count" id="bankCountBPI">0</span></button>
-                        <button onclick="filterProofsByAccount('bank','bank_gotyme')" class="acct-filter-btn" data-acct="bank_gotyme" style="padding:8px 16px;background:rgba(255,255,255,0.05);color:var(--text-light);border:1px solid rgba(212,165,86,0.3);border-radius:8px;font-weight:600;cursor:pointer;font-size:0.85rem;">Abegail M. (GoTyme) <span class="count" id="bankCountGotyme">0</span></button>
+                        <button onclick="filterProofsByAccount('bank','bank_bpi')" class="acct-filter-btn" data-acct="bank_bpi" style="padding:8px 16px;background:rgba(255,255,255,0.05);color:var(--text-light);border:1px solid rgba(201, 184, 151,0.3);border-radius:8px;font-weight:600;cursor:pointer;font-size:0.85rem;">Angelica I. (BPI) <span class="count" id="bankCountBPI">0</span></button>
+                        <button onclick="filterProofsByAccount('bank','bank_gotyme')" class="acct-filter-btn" data-acct="bank_gotyme" style="padding:8px 16px;background:rgba(255,255,255,0.05);color:var(--text-light);border:1px solid rgba(201, 184, 151,0.3);border-radius:8px;font-weight:600;cursor:pointer;font-size:0.85rem;">Abegail M. (GoTyme) <span class="count" id="bankCountGotyme">0</span></button>
                     </div>
                     <div id="bankAlert"></div>
                     <div id="bankList" class="empty-state">Loading...</div>
@@ -261,13 +261,13 @@
                 <div class="content-box">
                     <h2>All Reservations</h2>
                     <div style="margin-bottom:15px;display:flex;gap:10px;align-items:center;flex-wrap:wrap;">
-                        <input type="text" id="allSearchInput" placeholder="Search by Name, Email, or PYC number..." oninput="handleAllSearchInput()" style="flex:1;min-width:220px;padding:10px 14px;background:rgba(0,0,0,0.3);border:1px solid rgba(212,165,86,0.3);border-radius:8px;color:var(--text-light);font-size:0.9rem;">
+                        <input type="text" id="allSearchInput" placeholder="Search by Name, Email, or PYC number..." oninput="handleAllSearchInput()" style="flex:1;min-width:220px;padding:10px 14px;background:rgba(0,0,0,0.3);border:1px solid rgba(201, 184, 151,0.3);border-radius:8px;color:var(--text-light);font-size:0.9rem;">
                         <button onclick="clearAllSearch()" id="allSearchClearBtn" style="padding:10px 16px;background:rgba(255,255,255,0.06);color:var(--text-light);border:1px solid rgba(255,255,255,0.15);border-radius:8px;font-weight:600;cursor:pointer;font-size:0.85rem;display:none;">Clear</button>
                     </div>
                     <div id="allSearchResults" style="display:none;margin-bottom:20px;"></div>
-                    <div id="allSearchResultsSeparator" style="display:none;margin-bottom:20px;padding-top:16px;border-top:1px solid rgba(212,165,86,0.15);"><p style="color:rgba(245,245,245,0.5);font-size:0.85rem;margin:0;">Full reservation list below:</p></div>
+                    <div id="allSearchResultsSeparator" style="display:none;margin-bottom:20px;padding-top:16px;border-top:1px solid rgba(201, 184, 151,0.15);"><p style="color:rgba(245,245,245,0.5);font-size:0.85rem;margin:0;">Full reservation list below:</p></div>
                     <div style="margin-bottom:15px;display:flex;gap:10px;align-items:center;flex-wrap:wrap;">
-                        <select id="filterStatus" onchange="loadAllReservations()" style="padding:10px 15px;background:rgba(255,255,255,0.1);border:1px solid rgba(212,165,86,0.3);border-radius:8px;color:var(--text-light);font-size:0.9rem;">
+                        <select id="filterStatus" onchange="loadAllReservations()" style="padding:10px 15px;background:rgba(255,255,255,0.1);border:1px solid rgba(201, 184, 151,0.3);border-radius:8px;color:var(--text-light);font-size:0.9rem;">
                             <option value="all">All Statuses</option>
                             <option value="paid">Paid</option>
                             <option value="pending_review">Pending Review</option>
@@ -301,21 +301,21 @@
                     <h2>Tenting Reservations</h2>
                     <p style="color:rgba(245,245,245,0.7); margin-bottom:12px;">Canopy-by-canopy breakdown and all tent reservations.</p>
                     <div style="margin-bottom:15px;display:flex;gap:10px;align-items:center;flex-wrap:wrap;">
-                        <input type="text" id="tentSearchInput" placeholder="Search by Name, Email, or PYC number..." oninput="handleTentSearchInput()" style="flex:1;min-width:220px;padding:10px 14px;background:rgba(0,0,0,0.3);border:1px solid rgba(212,165,86,0.3);border-radius:8px;color:var(--text-light);font-size:0.9rem;">
+                        <input type="text" id="tentSearchInput" placeholder="Search by Name, Email, or PYC number..." oninput="handleTentSearchInput()" style="flex:1;min-width:220px;padding:10px 14px;background:rgba(0,0,0,0.3);border:1px solid rgba(201, 184, 151,0.3);border-radius:8px;color:var(--text-light);font-size:0.9rem;">
                         <button onclick="clearTentSearch()" id="tentSearchClearBtn" style="padding:10px 16px;background:rgba(255,255,255,0.06);color:var(--text-light);border:1px solid rgba(255,255,255,0.15);border-radius:8px;font-weight:600;cursor:pointer;font-size:0.85rem;display:none;">Clear</button>
                     </div>
                     <div id="tentSearchResults" style="display:none;margin-bottom:20px;"></div>
-                    <div id="tentSearchResultsSeparator" style="display:none;margin-bottom:20px;padding-top:16px;border-top:1px solid rgba(212,165,86,0.15);"><p style="color:rgba(245,245,245,0.5);font-size:0.85rem;margin:0;">Full tent list below:</p></div>
+                    <div id="tentSearchResultsSeparator" style="display:none;margin-bottom:20px;padding-top:16px;border-top:1px solid rgba(201, 184, 151,0.15);"><p style="color:rgba(245,245,245,0.5);font-size:0.85rem;margin:0;">Full tent list below:</p></div>
                     <div style="display:flex;gap:10px;flex-wrap:wrap;margin-bottom:16px;align-items:center;">
                         <button onclick="reassignTentsByType()" style="padding:10px 18px;background:var(--secondary-gold);color:var(--primary-navy);border:none;border-radius:8px;font-weight:700;cursor:pointer;font-size:0.85rem;">Reassign Tents by Group Type</button>
                         <button onclick="exportTentsToExcel()" class="checkin-btn" style="padding:10px 18px;font-size:0.85rem;margin-top:0;">Export to Excel</button>
                         <div style="flex:1;"></div>
                         <div style="display:flex;gap:6px;flex-wrap:wrap;" id="tentGroupTypeFilters">
                             <button onclick="filterTentsByGroupType('all')" class="tent-filter-btn active" data-ft="all" style="padding:6px 12px;background:var(--secondary-gold);color:var(--primary-navy);border:none;border-radius:6px;font-weight:600;cursor:pointer;font-size:0.78rem;">All <span id="tentFilterCountAll">0</span></button>
-                            <button onclick="filterTentsByGroupType('married')" class="tent-filter-btn" data-ft="married" style="padding:6px 12px;background:rgba(255,255,255,0.05);color:var(--text-light);border:1px solid rgba(212,165,86,0.3);border-radius:6px;font-weight:600;cursor:pointer;font-size:0.78rem;">Married <span id="tentFilterCountMarried">0</span></button>
-                            <button onclick="filterTentsByGroupType('family')" class="tent-filter-btn" data-ft="family" style="padding:6px 12px;background:rgba(255,255,255,0.05);color:var(--text-light);border:1px solid rgba(212,165,86,0.3);border-radius:6px;font-weight:600;cursor:pointer;font-size:0.78rem;">Family <span id="tentFilterCountFamily">0</span></button>
-                            <button onclick="filterTentsByGroupType('friends')" class="tent-filter-btn" data-ft="friends" style="padding:6px 12px;background:rgba(255,255,255,0.05);color:var(--text-light);border:1px solid rgba(212,165,86,0.3);border-radius:6px;font-weight:600;cursor:pointer;font-size:0.78rem;">Friends <span id="tentFilterCountFriends">0</span></button>
-                            <button onclick="filterTentsByGroupType('unknown')" class="tent-filter-btn" data-ft="unknown" style="padding:6px 12px;background:rgba(255,255,255,0.05);color:var(--text-light);border:1px solid rgba(212,165,86,0.3);border-radius:6px;font-weight:600;cursor:pointer;font-size:0.78rem;">Not Set <span id="tentFilterCountUnknown">0</span></button>
+                            <button onclick="filterTentsByGroupType('married')" class="tent-filter-btn" data-ft="married" style="padding:6px 12px;background:rgba(255,255,255,0.05);color:var(--text-light);border:1px solid rgba(201, 184, 151,0.3);border-radius:6px;font-weight:600;cursor:pointer;font-size:0.78rem;">Married <span id="tentFilterCountMarried">0</span></button>
+                            <button onclick="filterTentsByGroupType('family')" class="tent-filter-btn" data-ft="family" style="padding:6px 12px;background:rgba(255,255,255,0.05);color:var(--text-light);border:1px solid rgba(201, 184, 151,0.3);border-radius:6px;font-weight:600;cursor:pointer;font-size:0.78rem;">Family <span id="tentFilterCountFamily">0</span></button>
+                            <button onclick="filterTentsByGroupType('friends')" class="tent-filter-btn" data-ft="friends" style="padding:6px 12px;background:rgba(255,255,255,0.05);color:var(--text-light);border:1px solid rgba(201, 184, 151,0.3);border-radius:6px;font-weight:600;cursor:pointer;font-size:0.78rem;">Friends <span id="tentFilterCountFriends">0</span></button>
+                            <button onclick="filterTentsByGroupType('unknown')" class="tent-filter-btn" data-ft="unknown" style="padding:6px 12px;background:rgba(255,255,255,0.05);color:var(--text-light);border:1px solid rgba(201, 184, 151,0.3);border-radius:6px;font-weight:600;cursor:pointer;font-size:0.78rem;">Not Set <span id="tentFilterCountUnknown">0</span></button>
                         </div>
                     </div>
                     <div id="tentReassignAlert"></div>
@@ -331,8 +331,8 @@
                     <h2>Import Room Assignments</h2>
                     <p style="color:rgba(245,245,245,0.7);margin-bottom:20px;">Upload your <strong>PYC2026_RoomAssignments</strong> Google Sheet (exported as .xlsx or .csv) to import room assignments into the system. People are matched by PYC number.</p>
 
-                    <div style="background:rgba(212,165,86,0.08);border:1px solid rgba(212,165,86,0.3);border-radius:10px;padding:16px;margin-bottom:20px;">
-                        <p style="color:#d4a556;font-weight:600;margin-bottom:8px;">How to export from Google Sheets:</p>
+                    <div style="background:rgba(201, 184, 151,0.08);border:1px solid rgba(201, 184, 151,0.3);border-radius:10px;padding:16px;margin-bottom:20px;">
+                        <p style="color:#c9b897;font-weight:600;margin-bottom:8px;">How to export from Google Sheets:</p>
                         <ol style="color:rgba(245,245,245,0.75);font-size:0.88rem;padding-left:18px;line-height:1.8;">
                             <li>Open your PYC2026_RoomAssignments Google Sheet</li>
                             <li>File → Download → Microsoft Excel (.xlsx) <strong>or</strong> Comma Separated Values (.csv)</li>
@@ -341,12 +341,12 @@
                     </div>
 
                     <!-- Drop zone -->
-                    <div id="importDropZone" onclick="document.getElementById('importFileInput').click()" style="border:2px dashed rgba(212,165,86,0.4);border-radius:12px;padding:40px 20px;text-align:center;cursor:pointer;transition:border-color 0.2s;margin-bottom:20px;"
-                        ondragover="event.preventDefault();this.style.borderColor='#d4a556';"
-                        ondragleave="this.style.borderColor='rgba(212,165,86,0.4)';"
-                        ondrop="event.preventDefault();this.style.borderColor='rgba(212,165,86,0.4)';handleImportFile(event.dataTransfer.files[0]);">
+                    <div id="importDropZone" onclick="document.getElementById('importFileInput').click()" style="border:2px dashed rgba(201, 184, 151,0.4);border-radius:12px;padding:40px 20px;text-align:center;cursor:pointer;transition:border-color 0.2s;margin-bottom:20px;"
+                        ondragover="event.preventDefault();this.style.borderColor='#c9b897';"
+                        ondragleave="this.style.borderColor='rgba(201, 184, 151,0.4)';"
+                        ondrop="event.preventDefault();this.style.borderColor='rgba(201, 184, 151,0.4)';handleImportFile(event.dataTransfer.files[0]);">
                         <div style="font-size:2.5rem;margin-bottom:10px;">📂</div>
-                        <p style="color:#d4a556;font-weight:600;font-size:1rem;">Tap to choose file</p>
+                        <p style="color:#c9b897;font-weight:600;font-size:1rem;">Tap to choose file</p>
                         <p style="color:rgba(245,245,245,0.45);font-size:0.82rem;margin-top:4px;">or drag and drop here</p>
                         <p style="color:rgba(245,245,245,0.35);font-size:0.78rem;margin-top:8px;">Accepts .xlsx or .csv</p>
                     </div>
@@ -381,17 +381,17 @@
                     <div style="margin-bottom:20px;">
                         <button onclick="toggleCreateRoommateForm()" id="createRoommateBtn" style="padding:10px 20px;background:var(--secondary-gold);color:var(--primary-navy);border:none;border-radius:8px;font-weight:700;cursor:pointer;font-size:0.9rem;">+ Create Roommate Request</button>
                     </div>
-                    <div id="createRoommateForm" style="display:none;background:rgba(255,255,255,0.03);border:1px solid rgba(212,165,86,0.3);border-radius:10px;padding:20px;margin-bottom:20px;">
+                    <div id="createRoommateForm" style="display:none;background:rgba(255,255,255,0.03);border:1px solid rgba(201, 184, 151,0.3);border-radius:10px;padding:20px;margin-bottom:20px;">
                         <h3 style="color:var(--secondary-gold);font-size:1.05rem;margin-bottom:6px;">Create New Roommate Request</h3>
                         <p style="color:rgba(245,245,245,0.55);font-size:0.82rem;margin-bottom:16px;">Enter PYC numbers only. Requester and all members must have paid for registration and uploaded accommodation payment proof.</p>
                         <div style="margin-bottom:14px;">
                             <label style="display:block;color:var(--text-light);font-size:0.85rem;font-weight:600;margin-bottom:5px;">Requester PYC</label>
-                            <input type="text" id="createRequesterPyc" placeholder="PYC-XXXX" style="width:100%;max-width:260px;padding:10px 12px;background:rgba(0,0,0,0.3);border:1px solid rgba(212,165,86,0.25);border-radius:6px;color:var(--text-light);font-size:0.9rem;text-transform:uppercase;">
+                            <input type="text" id="createRequesterPyc" placeholder="PYC-XXXX" style="width:100%;max-width:260px;padding:10px 12px;background:rgba(0,0,0,0.3);border:1px solid rgba(201, 184, 151,0.25);border-radius:6px;color:var(--text-light);font-size:0.9rem;text-transform:uppercase;">
                         </div>
                         <div style="margin-bottom:14px;">
                             <label style="display:block;color:var(--text-light);font-size:0.85rem;font-weight:600;margin-bottom:5px;">Member PYC(s) <span style="color:rgba(245,245,245,0.4);font-weight:400;font-size:0.78rem;">(1-3 people)</span></label>
                             <div id="createMemberList" style="display:flex;flex-direction:column;gap:8px;"></div>
-                            <button onclick="addMemberPycInput()" id="addMemberPycBtn" style="margin-top:8px;padding:6px 12px;background:rgba(212,165,86,0.12);color:var(--secondary-gold);border:1px solid rgba(212,165,86,0.3);border-radius:6px;font-size:0.8rem;font-weight:600;cursor:pointer;">+ Add another member</button>
+                            <button onclick="addMemberPycInput()" id="addMemberPycBtn" style="margin-top:8px;padding:6px 12px;background:rgba(201, 184, 151,0.12);color:var(--secondary-gold);border:1px solid rgba(201, 184, 151,0.3);border-radius:6px;font-size:0.8rem;font-weight:600;cursor:pointer;">+ Add another member</button>
                         </div>
                         <div id="createRoommateResult" style="font-size:0.85rem;margin-bottom:12px;"></div>
                         <div style="display:flex;gap:8px;flex-wrap:wrap;">
@@ -411,8 +411,8 @@
                     <p style="color:rgba(245,245,245,0.7); margin-bottom:12px;">Auto-assign delegates to rooms based on roommate requests and availability.</p>
                     <div style="display:flex;gap:10px;flex-wrap:wrap;margin-bottom:20px;">
                         <button onclick="runAutoAssign()" style="padding:12px 24px;background:var(--secondary-gold);color:var(--primary-navy);border:none;border-radius:8px;font-weight:700;cursor:pointer;font-size:0.9rem;">Auto-Assign Rooms</button>
-                        <button onclick="loadRoomMap()" style="padding:12px 24px;background:rgba(255,255,255,0.1);color:var(--text-light);border:1px solid rgba(212,165,86,0.3);border-radius:8px;font-weight:600;cursor:pointer;font-size:0.9rem;">Refresh Map</button>
-                        <button onclick="exportRoomAssignments()" style="padding:12px 24px;background:rgba(255,255,255,0.1);color:var(--text-light);border:1px solid rgba(212,165,86,0.3);border-radius:8px;font-weight:600;cursor:pointer;font-size:0.9rem;">Export Excel</button>
+                        <button onclick="loadRoomMap()" style="padding:12px 24px;background:rgba(255,255,255,0.1);color:var(--text-light);border:1px solid rgba(201, 184, 151,0.3);border-radius:8px;font-weight:600;cursor:pointer;font-size:0.9rem;">Refresh Map</button>
+                        <button onclick="exportRoomAssignments()" style="padding:12px 24px;background:rgba(255,255,255,0.1);color:var(--text-light);border:1px solid rgba(201, 184, 151,0.3);border-radius:8px;font-weight:600;cursor:pointer;font-size:0.9rem;">Export Excel</button>
                         <button onclick="resetRoomAssignments()" style="padding:12px 24px;background:rgba(231,76,60,0.12);color:#e74c3c;border:1px solid rgba(231,76,60,0.4);border-radius:8px;font-weight:600;cursor:pointer;font-size:0.9rem;">Reset Assignments</button>
                         <button onclick="clearAllLocks()" style="padding:12px 24px;background:rgba(231,76,60,0.12);color:#e74c3c;border:1px solid rgba(231,76,60,0.4);border-radius:8px;font-weight:600;cursor:pointer;font-size:0.9rem;">&#128275; Clear All Locks</button>
                     </div>
@@ -432,7 +432,7 @@
                     <div style="overflow-x:auto;-webkit-overflow-scrolling:touch;margin-bottom:14px;">
                     <table id="volunteersGrid" style="width:100%;border-collapse:collapse;font-size:0.85rem;min-width:780px;">
                         <thead>
-                            <tr style="background:rgba(212,165,86,0.1);">
+                            <tr style="background:rgba(201, 184, 151,0.1);">
                                 <th style="text-align:left;padding:8px;color:var(--secondary-gold);font-size:0.78rem;text-transform:uppercase;letter-spacing:0.5px;">PYC *</th>
                                 <th style="text-align:left;padding:8px;color:var(--secondary-gold);font-size:0.78rem;text-transform:uppercase;letter-spacing:0.5px;">Name</th>
                                 <th style="text-align:left;padding:8px;color:var(--secondary-gold);font-size:0.78rem;text-transform:uppercase;letter-spacing:0.5px;">Email</th>
@@ -446,7 +446,7 @@
                     </table>
                     </div>
                     <div style="display:flex;gap:10px;flex-wrap:wrap;align-items:center;margin-bottom:18px;">
-                        <button onclick="addVolunteerRow()" style="padding:8px 14px;background:rgba(212,165,86,0.12);color:var(--secondary-gold);border:1px solid rgba(212,165,86,0.3);border-radius:6px;font-size:0.82rem;font-weight:600;cursor:pointer;">+ Add Row</button>
+                        <button onclick="addVolunteerRow()" style="padding:8px 14px;background:rgba(201, 184, 151,0.12);color:var(--secondary-gold);border:1px solid rgba(201, 184, 151,0.3);border-radius:6px;font-size:0.82rem;font-weight:600;cursor:pointer;">+ Add Row</button>
                         <button onclick="submitVolunteers()" id="submitVolunteersBtn" style="padding:10px 22px;background:var(--secondary-gold);color:var(--primary-navy);border:none;border-radius:8px;font-weight:700;cursor:pointer;font-size:0.88rem;">Submit Batch</button>
                         <button onclick="clearVolunteersGrid()" style="padding:10px 18px;background:rgba(255,255,255,0.06);color:var(--text-light);border:1px solid rgba(255,255,255,0.15);border-radius:8px;font-weight:600;cursor:pointer;font-size:0.85rem;">Clear All</button>
                     </div>
@@ -569,11 +569,11 @@ function getStatusBadge(s) {
 }
 
 function getAccountLabel(a) {
-    if (a==='A') return '<span class="acct-badge" style="color:#d4a556;">GCash A - Sandra M.</span>';
-    if (a==='B') return '<span class="acct-badge" style="color:#d4a556;">GCash B - Jasmin S.</span>';
-    if (a==='C') return '<span class="acct-badge" style="color:#d4a556;">GCash C (legacy)</span>';
-    if (a==='D') return '<span class="acct-badge" style="color:#d4a556;">GCash D (legacy)</span>';
-    if (a==='E') return '<span class="acct-badge" style="color:#d4a556;">GCash E (legacy)</span>';
+    if (a==='A') return '<span class="acct-badge" style="color:#c9b897;">GCash A - Sandra M.</span>';
+    if (a==='B') return '<span class="acct-badge" style="color:#c9b897;">GCash B - Jasmin S.</span>';
+    if (a==='C') return '<span class="acct-badge" style="color:#c9b897;">GCash C (legacy)</span>';
+    if (a==='D') return '<span class="acct-badge" style="color:#c9b897;">GCash D (legacy)</span>';
+    if (a==='E') return '<span class="acct-badge" style="color:#c9b897;">GCash E (legacy)</span>';
     if (a==='bank_unionbank') return '<span class="acct-badge" style="color:#e67e22;">UnionBank (legacy)</span>';
     if (a==='bank_bdo') return '<span class="acct-badge" style="color:#e67e22;">BDO (legacy)</span>';
     if (a==='bank_bpi') return '<span class="acct-badge" style="color:#e67e22;">BPI - Angelica I.</span>';
@@ -720,7 +720,7 @@ function renderProofCards(proofs, containerId, isResub) {
     proofs.forEach(p => {
         html += `<div class="proof-card ${isResub ? 'resubmitted' : ''}" id="proof-${p.id}">
             <h3>${esc(p.registrant_name)}</h3>
-            <div class="info-line"><strong>Txn Ref #:</strong> <span style="color:#d4a556;font-weight:700;">${p.transaction_reference || '<em style="opacity:0.4;">Not provided</em>'}</span></div>
+            <div class="info-line"><strong>Txn Ref #:</strong> <span style="color:#c9b897;font-weight:700;">${p.transaction_reference || '<em style="opacity:0.4;">Not provided</em>'}</span></div>
             <div class="info-line"><strong>Email:</strong> ${esc(p.registrant_email)}</div>
             <div class="info-line"><strong>Type:</strong> <span class="type-badge">${getTypeName(p.accommodation_type)}</span></div>
             <div class="info-line"><strong>Spots:</strong> ${p.spots_requested} person(s)</div>
@@ -771,8 +771,8 @@ function renderCombinedProofCards(proofs, containerId, isResub) {
             const tentLines = (p.tents || []).map(t => {
                 const names = (t.members || []).map(m => esc(m.name) + ' (' + esc(m.pycNumber || '') + ')').join(', ');
                 const gt = t.tent_group_type ? groupTypeLabels[t.tent_group_type] || t.tent_group_type : null;
-                const gtBadge = gt ? ` <span style="background:rgba(212,165,86,0.2);color:#d4a556;padding:2px 6px;border-radius:4px;font-size:0.7rem;font-weight:700;">${esc(gt)}</span>` : '';
-                const soloBadge = t.tent_size === 1 ? ` <span style="background:rgba(212,165,86,0.3);color:#d4a556;padding:2px 6px;border-radius:4px;font-size:0.7rem;font-weight:700;">&#9733; SOLO (whitelisted)</span>` : '';
+                const gtBadge = gt ? ` <span style="background:rgba(201, 184, 151,0.2);color:#c9b897;padding:2px 6px;border-radius:4px;font-size:0.7rem;font-weight:700;">${esc(gt)}</span>` : '';
+                const soloBadge = t.tent_size === 1 ? ` <span style="background:rgba(201, 184, 151,0.3);color:#c9b897;padding:2px 6px;border-radius:4px;font-size:0.7rem;font-weight:700;">&#9733; SOLO (whitelisted)</span>` : '';
                 return `<div style="font-size:0.8rem;padding:4px 0;"><strong>${t.tent_size}-person tent (Canopy ${t.canopy_number}):</strong>${gtBadge}${soloBadge} ${names}</div>`;
             }).join('');
             detailsBlock = `
@@ -789,7 +789,7 @@ function renderCombinedProofCards(proofs, containerId, isResub) {
             const dormLines = reservations.map(r => {
                 return `<div style="font-size:0.82rem;padding:4px 0;"><strong>${getTypeName(r.accommodation_type)}:</strong> ${r.spots_requested} person(s) &mdash; &#8369;${parseFloat(r.total_amount || 0).toLocaleString()}</div>`;
             }).join('');
-            const countBadge = reservations.length > 1 ? `<span style="background:rgba(212,165,86,0.2);color:#d4a556;padding:2px 8px;border-radius:10px;font-size:0.7rem;font-weight:700;margin-left:6px;">${reservations.length} DORMS</span>` : '';
+            const countBadge = reservations.length > 1 ? `<span style="background:rgba(201, 184, 151,0.2);color:#c9b897;padding:2px 8px;border-radius:10px;font-size:0.7rem;font-weight:700;margin-left:6px;">${reservations.length} DORMS</span>` : '';
             detailsBlock = `
                 <div class="info-line"><strong>Accommodations:</strong>${countBadge}</div>
                 <div class="info-line"><strong>Total Spots:</strong> ${p.total_spots || p.spots_requested || 0} person(s)</div>
@@ -808,7 +808,7 @@ function renderCombinedProofCards(proofs, containerId, isResub) {
                 <h3 style="margin:0;">${esc(p.registrant_name)}</h3>
                 ${typeLabel}
             </div>
-            <div class="info-line"><strong>Txn Ref #:</strong> <span style="color:#d4a556;font-weight:700;">${p.transaction_reference || '<em style="opacity:0.4;">Not provided</em>'}</span></div>
+            <div class="info-line"><strong>Txn Ref #:</strong> <span style="color:#c9b897;font-weight:700;">${p.transaction_reference || '<em style="opacity:0.4;">Not provided</em>'}</span></div>
             <div class="info-line"><strong>Email:</strong> ${esc(p.registrant_email)}</div>
             ${detailsBlock}
             <div class="info-line"><strong>Amount:</strong> \u20B1${parseFloat(p.total_amount || 0).toLocaleString()}</div>
@@ -900,7 +900,7 @@ function filterProofsByAccount(method, account) {
             btn.classList.toggle('active', isActive);
             btn.style.background = isActive ? 'var(--secondary-gold)' : 'rgba(255,255,255,0.05)';
             btn.style.color = isActive ? 'var(--primary-navy)' : 'var(--text-light)';
-            btn.style.border = isActive ? 'none' : '1px solid rgba(212,165,86,0.3)';
+            btn.style.border = isActive ? 'none' : '1px solid rgba(201, 184, 151,0.3)';
         });
     }
     applyAccountFilter(method);
@@ -1109,7 +1109,7 @@ function renderAllTable(reservations) {
             ? ''
             : '<button class="reject-btn" style="padding:6px 10px;font-size:0.76rem;margin-top:4px;" onclick="openCancelReservationModal(\'' + r.id + '\')">Cancel</button>';
         html += `<tr>
-            <td><strong>${esc(r.registrant_name)}</strong>${r.transaction_reference ? '<br><span style="font-size:0.76rem;color:#d4a556;">Txn: ' + r.transaction_reference + '</span>' : ''}<br><span style="font-size:0.76rem;opacity:0.6;">${esc(r.registrant_email)}</span></td>
+            <td><strong>${esc(r.registrant_name)}</strong>${r.transaction_reference ? '<br><span style="font-size:0.76rem;color:#c9b897;">Txn: ' + r.transaction_reference + '</span>' : ''}<br><span style="font-size:0.76rem;opacity:0.6;">${esc(r.registrant_email)}</span></td>
             <td><span class="type-badge">${getTypeName(r.accommodation_type)}</span></td>
             <td>${r.spots_requested}</td>
             <td>\u20B1${parseFloat(r.total_amount).toLocaleString()}</td>
@@ -1185,7 +1185,7 @@ function openCancelReservationModal(reservationId) {
             '</ul>' +
         '</div>' +
         '<label style="display:block;font-size:0.82rem;color:rgba(245,245,245,0.7);margin-bottom:6px;">Reason (optional, for the record):</label>' +
-        '<input type="text" id="cancelReasonInput" placeholder="e.g. Family emergency, double-booked, etc." maxlength="200" style="width:100%;padding:9px 12px;background:rgba(0,0,0,0.3);border:1px solid rgba(212,165,86,0.2);border-radius:6px;color:var(--text-light);font-size:0.88rem;margin-bottom:12px;">' +
+        '<input type="text" id="cancelReasonInput" placeholder="e.g. Family emergency, double-booked, etc." maxlength="200" style="width:100%;padding:9px 12px;background:rgba(0,0,0,0.3);border:1px solid rgba(201, 184, 151,0.2);border-radius:6px;color:var(--text-light);font-size:0.88rem;margin-bottom:12px;">' +
         '<div style="display:flex;gap:8px;justify-content:flex-end;">' +
             '<button id="cancelStep1Back" type="button" style="padding:9px 18px;background:rgba(255,255,255,0.06);color:var(--text-light);border:1px solid rgba(255,255,255,0.15);border-radius:7px;font-weight:600;cursor:pointer;">Back</button>' +
             '<button id="cancelStep1Continue" type="button" style="padding:9px 18px;background:#e74c3c;color:white;border:none;border-radius:7px;font-weight:700;cursor:pointer;">Continue &rarr;</button>' +
@@ -1334,11 +1334,11 @@ async function runAllSearch(query) {
                 // If zero reservation matches, still show the person with "no reservations" note
                 if (matches.length === 0) {
                     resultsEl.innerHTML = renderSearchResultsHeader(0, query) +
-                        '<div style="background:rgba(255,255,255,0.03);border:1px solid rgba(212,165,86,0.15);border-radius:10px;padding:16px;">' +
+                        '<div style="background:rgba(255,255,255,0.03);border:1px solid rgba(201, 184, 151,0.15);border-radius:10px;padding:16px;">' +
                         '<div style="color:var(--text-light);font-weight:700;">' + esc(regData.registrant.first_name) + ' ' + esc(regData.registrant.last_name) + ' <span style="color:var(--secondary-gold);font-size:0.82rem;">' + esc(regData.registrant.confirmation_number || '') + '</span></div>' +
                         '<div style="color:rgba(245,245,245,0.55);font-size:0.82rem;margin-top:4px;">' + esc(regData.registrant.email || '') + '</div>' +
                         '<div style="color:rgba(231,76,60,0.8);font-size:0.82rem;margin-top:8px;">No dorm reservations found for this person.</div>' +
-                        '<button onclick="expandSearchDetails(\'all\',\'' + regData.registrant.id + '\')" style="margin-top:10px;padding:6px 12px;background:rgba(212,165,86,0.12);color:var(--secondary-gold);border:1px solid rgba(212,165,86,0.3);border-radius:6px;font-size:0.78rem;cursor:pointer;">&#9656; Show related info</button>' +
+                        '<button onclick="expandSearchDetails(\'all\',\'' + regData.registrant.id + '\')" style="margin-top:10px;padding:6px 12px;background:rgba(201, 184, 151,0.12);color:var(--secondary-gold);border:1px solid rgba(201, 184, 151,0.3);border-radius:6px;font-size:0.78rem;cursor:pointer;">&#9656; Show related info</button>' +
                         '<div id="searchDetails-all-' + regData.registrant.id + '" style="display:none;margin-top:10px;"></div>' +
                         '</div>';
                     return;
@@ -1378,7 +1378,7 @@ function renderResSearchCard(r, sourceTab) {
     const status = r.payment_status || 'Pending';
     const statusClass = status === 'Paid' ? 'status-paid' : status === 'Pending Review' ? 'status-review' : status === 'Rejected' || status === 'Cancelled' ? 'status-rejected' : status === 'Resubmitted' ? 'status-resubmitted' : 'status-pending';
     const amount = r.total_amount ? '&#8369;' + parseFloat(r.total_amount).toLocaleString() : '--';
-    return '<div style="background:rgba(255,255,255,0.03);border:1px solid rgba(212,165,86,0.15);border-radius:10px;padding:16px;margin-bottom:10px;">' +
+    return '<div style="background:rgba(255,255,255,0.03);border:1px solid rgba(201, 184, 151,0.15);border-radius:10px;padding:16px;margin-bottom:10px;">' +
         '<div style="display:flex;justify-content:space-between;align-items:flex-start;gap:12px;flex-wrap:wrap;">' +
             '<div style="flex:1;min-width:220px;">' +
                 '<div style="color:var(--text-light);font-weight:700;font-size:0.95rem;">' + esc(r.registrant_name) + '</div>' +
@@ -1392,7 +1392,7 @@ function renderResSearchCard(r, sourceTab) {
             '</div>' +
             '<div style="font-size:0.78rem;color:rgba(245,245,245,0.4);">' + fmtDate(r.created_at) + '</div>' +
         '</div>' +
-        (r.registration_id ? '<button onclick="expandSearchDetails(\'' + sourceTab + '\',\'' + r.registration_id + '\',\'' + r.id + '\')" id="expandBtn-' + sourceTab + '-' + r.registration_id + '-' + r.id + '" style="margin-top:12px;padding:6px 12px;background:rgba(212,165,86,0.12);color:var(--secondary-gold);border:1px solid rgba(212,165,86,0.3);border-radius:6px;font-size:0.78rem;cursor:pointer;font-weight:600;">&#9656; Show related info</button>' : '<div style="margin-top:10px;color:rgba(245,245,245,0.4);font-size:0.78rem;font-style:italic;">No linked registration (older reservation)</div>') +
+        (r.registration_id ? '<button onclick="expandSearchDetails(\'' + sourceTab + '\',\'' + r.registration_id + '\',\'' + r.id + '\')" id="expandBtn-' + sourceTab + '-' + r.registration_id + '-' + r.id + '" style="margin-top:12px;padding:6px 12px;background:rgba(201, 184, 151,0.12);color:var(--secondary-gold);border:1px solid rgba(201, 184, 151,0.3);border-radius:6px;font-size:0.78rem;cursor:pointer;font-weight:600;">&#9656; Show related info</button>' : '<div style="margin-top:10px;color:rgba(245,245,245,0.4);font-size:0.78rem;font-style:italic;">No linked registration (older reservation)</div>') +
         '<div id="' + detailsId + '" style="display:none;margin-top:12px;"></div>' +
     '</div>';
 }
@@ -1442,7 +1442,7 @@ async function expandSearchDetails(sourceTab, registrationId, reservationId) {
 }
 
 function renderRelatedInfo(data) {
-    let h = '<div style="background:rgba(0,0,0,0.25);border:1px solid rgba(212,165,86,0.15);border-radius:8px;padding:14px;">';
+    let h = '<div style="background:rgba(0,0,0,0.25);border:1px solid rgba(201, 184, 151,0.15);border-radius:8px;padding:14px;">';
 
     // Registration group
     if (data.registrationGroup && data.registrationGroup.length > 1) {
@@ -1451,8 +1451,8 @@ function renderRelatedInfo(data) {
         h += '<div style="display:flex;flex-wrap:wrap;gap:6px;">';
         data.registrationGroup.forEach(function(m) {
             const isCurrent = m.id === data.registrant.id;
-            const bgColor = isCurrent ? 'rgba(212,165,86,0.2)' : 'rgba(255,255,255,0.04)';
-            const borderColor = isCurrent ? 'rgba(212,165,86,0.5)' : 'rgba(255,255,255,0.08)';
+            const bgColor = isCurrent ? 'rgba(201, 184, 151,0.2)' : 'rgba(255,255,255,0.04)';
+            const borderColor = isCurrent ? 'rgba(201, 184, 151,0.5)' : 'rgba(255,255,255,0.08)';
             h += '<span style="display:inline-flex;align-items:center;gap:5px;background:' + bgColor + ';border:1px solid ' + borderColor + ';border-radius:14px;padding:5px 11px;font-size:0.8rem;">';
             h += '<span style="color:var(--text-light);">' + esc(m.first_name) + ' ' + esc(m.last_name) + '</span>';
             if (m.confirmation_number) {
@@ -1462,7 +1462,7 @@ function renderRelatedInfo(data) {
                 h += '<span style="color:rgba(245,245,245,0.45);font-size:0.68rem;">(primary)</span>';
             }
             if (isCurrent) {
-                h += '<span style="color:rgba(212,165,86,0.7);font-size:0.68rem;">(this person)</span>';
+                h += '<span style="color:rgba(201, 184, 151,0.7);font-size:0.68rem;">(this person)</span>';
             }
             h += '</span>';
         });
@@ -1478,7 +1478,7 @@ function renderRelatedInfo(data) {
         h += '<div style="margin-bottom:14px;">';
         h += '<div style="color:var(--secondary-gold);font-size:0.82rem;font-weight:700;margin-bottom:8px;text-transform:uppercase;letter-spacing:0.5px;">Roommate Request (as requester)</div>';
         h += '<div style="display:flex;flex-wrap:wrap;gap:6px;">';
-        h += '<span style="display:inline-flex;align-items:center;gap:5px;background:rgba(212,165,86,0.2);border:1px solid rgba(212,165,86,0.5);border-radius:14px;padding:5px 11px;font-size:0.8rem;">';
+        h += '<span style="display:inline-flex;align-items:center;gap:5px;background:rgba(201, 184, 151,0.2);border:1px solid rgba(201, 184, 151,0.5);border-radius:14px;padding:5px 11px;font-size:0.8rem;">';
         h += '<span style="color:var(--text-light);">' + esc(req.requester_name) + '</span>';
         h += '<span style="color:var(--secondary-gold);font-size:0.72rem;">' + esc(req.requester_pyc || '') + '</span>';
         h += '<span style="color:rgba(245,245,245,0.45);font-size:0.68rem;">(requester)</span></span>';
@@ -1504,12 +1504,12 @@ function renderRelatedInfo(data) {
         h += '<span style="color:rgba(245,245,245,0.45);font-size:0.68rem;">(requester)</span></span>';
         members.forEach(function(m) {
             const isCurrent = data.registrant.confirmation_number && m.pycNumber && m.pycNumber.toUpperCase() === data.registrant.confirmation_number.toUpperCase();
-            const bgColor = isCurrent ? 'rgba(212,165,86,0.2)' : 'rgba(255,255,255,0.04)';
-            const borderColor = isCurrent ? 'rgba(212,165,86,0.5)' : 'rgba(255,255,255,0.08)';
+            const bgColor = isCurrent ? 'rgba(201, 184, 151,0.2)' : 'rgba(255,255,255,0.04)';
+            const borderColor = isCurrent ? 'rgba(201, 184, 151,0.5)' : 'rgba(255,255,255,0.08)';
             h += '<span style="display:inline-flex;align-items:center;gap:5px;background:' + bgColor + ';border:1px solid ' + borderColor + ';border-radius:14px;padding:5px 11px;font-size:0.8rem;">';
             h += '<span style="color:var(--text-light);">' + esc(m.name || '') + '</span>';
             h += '<span style="color:var(--secondary-gold);font-size:0.72rem;">' + esc(m.pycNumber || '') + '</span>';
-            if (isCurrent) h += '<span style="color:rgba(212,165,86,0.7);font-size:0.68rem;">(this person)</span>';
+            if (isCurrent) h += '<span style="color:rgba(201, 184, 151,0.7);font-size:0.68rem;">(this person)</span>';
             h += '</span>';
         });
         h += '</div></div>';
@@ -1601,7 +1601,7 @@ function renderTentSearchCard(t) {
     const groupTypeLabels = { married: 'Married', family: 'Family', friends: 'Friends' };
     const gt = t.tent_group_type ? (groupTypeLabels[t.tent_group_type] || t.tent_group_type) : null;
 
-    let h = '<div style="background:rgba(255,255,255,0.03);border:1px solid rgba(212,165,86,0.15);border-radius:10px;padding:16px;margin-bottom:10px;">';
+    let h = '<div style="background:rgba(255,255,255,0.03);border:1px solid rgba(201, 184, 151,0.15);border-radius:10px;padding:16px;margin-bottom:10px;">';
     h += '<div style="display:flex;justify-content:space-between;align-items:flex-start;gap:12px;flex-wrap:wrap;">';
     h += '<div style="flex:1;min-width:220px;">';
     h += '<div style="color:var(--text-light);font-weight:700;font-size:0.95rem;">' + esc(t.registrant_name) + ' <span style="color:rgba(245,245,245,0.4);font-size:0.78rem;font-weight:500;">(booker)</span></div>';
@@ -1609,8 +1609,8 @@ function renderTentSearchCard(t) {
     h += '<div style="margin-top:8px;display:flex;gap:8px;flex-wrap:wrap;align-items:center;">';
     h += '<span style="color:rgba(245,245,245,0.5);font-size:0.82rem;">' + t.tent_size + '-person tent</span>';
     h += '<span style="color:rgba(245,245,245,0.5);font-size:0.82rem;">Canopy ' + t.canopy_number + '</span>';
-    if (t.tent_size === 1) h += '<span style="padding:2px 8px;border-radius:4px;font-size:0.72rem;font-weight:700;background:rgba(212,165,86,0.3);color:var(--secondary-gold);">&#9733; SOLO (whitelisted)</span>';
-    if (gt) h += '<span style="padding:2px 8px;border-radius:4px;font-size:0.72rem;font-weight:700;background:rgba(212,165,86,0.15);color:var(--secondary-gold);">' + gt + '</span>';
+    if (t.tent_size === 1) h += '<span style="padding:2px 8px;border-radius:4px;font-size:0.72rem;font-weight:700;background:rgba(201, 184, 151,0.3);color:var(--secondary-gold);">&#9733; SOLO (whitelisted)</span>';
+    if (gt) h += '<span style="padding:2px 8px;border-radius:4px;font-size:0.72rem;font-weight:700;background:rgba(201, 184, 151,0.15);color:var(--secondary-gold);">' + gt + '</span>';
     h += '<span style="color:var(--secondary-gold);font-size:0.82rem;font-weight:600;">' + amount + '</span>';
     h += '<span class="status-badge ' + statusClass + '">' + status + '</span>';
     h += '</div>';
@@ -1633,7 +1633,7 @@ function renderTentSearchCard(t) {
 
     // Expand button — only if the booker has a registration_id we can look up
     if (t.registration_id) {
-        h += '<button onclick="expandSearchDetails(\'tent\',\'' + t.registration_id + '\',\'' + t.id + '\')" id="expandBtn-tent-' + t.registration_id + '-' + t.id + '" style="margin-top:12px;padding:6px 12px;background:rgba(212,165,86,0.12);color:var(--secondary-gold);border:1px solid rgba(212,165,86,0.3);border-radius:6px;font-size:0.78rem;cursor:pointer;font-weight:600;">&#9656; Show booker\'s related info</button>';
+        h += '<button onclick="expandSearchDetails(\'tent\',\'' + t.registration_id + '\',\'' + t.id + '\')" id="expandBtn-tent-' + t.registration_id + '-' + t.id + '" style="margin-top:12px;padding:6px 12px;background:rgba(201, 184, 151,0.12);color:var(--secondary-gold);border:1px solid rgba(201, 184, 151,0.3);border-radius:6px;font-size:0.78rem;cursor:pointer;font-weight:600;">&#9656; Show booker\'s related info</button>';
     } else {
         h += '<div style="margin-top:10px;color:rgba(245,245,245,0.4);font-size:0.78rem;font-style:italic;">No linked registration for booker.</div>';
     }
@@ -1731,7 +1731,7 @@ async function loadTenting() {
             (availData.canopies || []).forEach(function(c) {
                 var pct = Math.round((c.tentsUsed / c.totalSpaces) * 100);
                 var fillClass = pct < 50 ? 'low' : pct < 80 ? 'medium' : 'high';
-                cb += '<div style="background:rgba(255,255,255,0.03);border:1px solid rgba(212,165,86,0.15);border-radius:8px;padding:12px;margin-bottom:8px;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:8px;">'
+                cb += '<div style="background:rgba(255,255,255,0.03);border:1px solid rgba(201, 184, 151,0.15);border-radius:8px;padding:12px;margin-bottom:8px;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:8px;">'
                     + '<div><strong style="color:var(--secondary-gold);">Canopy ' + c.canopyNumber + '</strong> <span style="color:rgba(245,245,245,0.5);font-size:0.82rem;">' + c.tentsUsed + '/' + c.totalSpaces + ' spaces &middot; ' + c.people + ' people</span></div>'
                     + '<div style="width:120px;height:8px;background:rgba(255,255,255,0.1);border-radius:4px;overflow:hidden;"><div class="bar-fill ' + fillClass + '" style="width:' + pct + '%;height:100%;border-radius:4px;"></div></div>'
                     + '</div>';
@@ -1773,7 +1773,7 @@ function filterTentsByGroupType(type) {
             btn.classList.toggle('active', isActive);
             btn.style.background = isActive ? 'var(--secondary-gold)' : 'rgba(255,255,255,0.05)';
             btn.style.color = isActive ? 'var(--primary-navy)' : 'var(--text-light)';
-            btn.style.border = isActive ? 'none' : '1px solid rgba(212,165,86,0.3)';
+            btn.style.border = isActive ? 'none' : '1px solid rgba(201, 184, 151,0.3)';
         });
     }
     renderFilteredTents();
@@ -1794,7 +1794,7 @@ function renderFilteredTents() {
 
     const groupTypeLabels = { married: 'Married', family: 'Family', friends: 'Friends' };
     let th = '<table style="width:100%;border-collapse:collapse;font-size:0.85rem;">';
-    th += '<thead><tr style="border-bottom:2px solid rgba(212,165,86,0.2);"><th style="text-align:left;padding:10px 8px;color:var(--secondary-gold);">Name</th><th style="text-align:left;padding:10px 8px;color:var(--secondary-gold);">Email</th><th style="padding:10px 8px;color:var(--secondary-gold);">Size</th><th style="padding:10px 8px;color:var(--secondary-gold);">Group Type</th><th style="text-align:left;padding:10px 8px;color:var(--secondary-gold);">Members</th><th style="padding:10px 8px;color:var(--secondary-gold);">Canopy</th><th style="padding:10px 8px;color:var(--secondary-gold);">Amount</th><th style="padding:10px 8px;color:var(--secondary-gold);">Payment</th><th style="padding:10px 8px;color:var(--secondary-gold);">Date</th></tr></thead><tbody>';
+    th += '<thead><tr style="border-bottom:2px solid rgba(201, 184, 151,0.2);"><th style="text-align:left;padding:10px 8px;color:var(--secondary-gold);">Name</th><th style="text-align:left;padding:10px 8px;color:var(--secondary-gold);">Email</th><th style="padding:10px 8px;color:var(--secondary-gold);">Size</th><th style="padding:10px 8px;color:var(--secondary-gold);">Group Type</th><th style="text-align:left;padding:10px 8px;color:var(--secondary-gold);">Members</th><th style="padding:10px 8px;color:var(--secondary-gold);">Canopy</th><th style="padding:10px 8px;color:var(--secondary-gold);">Amount</th><th style="padding:10px 8px;color:var(--secondary-gold);">Payment</th><th style="padding:10px 8px;color:var(--secondary-gold);">Date</th></tr></thead><tbody>';
     filtered.forEach(function(t) {
         var members = Array.isArray(t.members) ? t.members : [];
         var memberNames = members.map(function(m) { return esc(m.name) + ' <span style="color:var(--secondary-gold);font-size:0.75rem;">' + esc(m.pycNumber||'') + '</span>'; }).join(', ');
@@ -1805,7 +1805,7 @@ function renderFilteredTents() {
         var gtLabel = t.tent_group_type ? (groupTypeLabels[t.tent_group_type] || t.tent_group_type) : '<span style="color:rgba(245,245,245,0.3);font-style:italic;">Not set</span>';
         var gtBg = t.tent_group_type === 'married' ? 'rgba(231,76,60,0.15);color:#e74c3c;' : t.tent_group_type === 'family' ? 'rgba(74,124,158,0.15);color:#4a7c9e;' : t.tent_group_type === 'friends' ? 'rgba(39,174,96,0.15);color:#27ae60;' : 'transparent;';
         var gtCell = t.tent_group_type ? '<span style="padding:2px 8px;border-radius:4px;font-size:0.72rem;font-weight:700;background:' + gtBg + '">' + gtLabel + '</span>' : gtLabel;
-        var sizeCell = t.tent_size + (t.tent_size === 1 ? ' <span style="padding:1px 5px;border-radius:3px;font-size:0.65rem;font-weight:700;background:rgba(212,165,86,0.3);color:var(--secondary-gold);">&#9733;SOLO</span>' : '');
+        var sizeCell = t.tent_size + (t.tent_size === 1 ? ' <span style="padding:1px 5px;border-radius:3px;font-size:0.65rem;font-weight:700;background:rgba(201, 184, 151,0.3);color:var(--secondary-gold);">&#9733;SOLO</span>' : '');
         th += '<tr style="border-bottom:1px solid rgba(255,255,255,0.05);"><td style="padding:10px 8px;">' + esc(t.registrant_name) + '</td><td style="padding:10px 8px;font-size:0.82rem;color:rgba(245,245,245,0.6);">' + esc(t.registrant_email) + '</td><td style="padding:10px 8px;text-align:center;">' + sizeCell + '</td><td style="padding:10px 8px;text-align:center;">' + gtCell + '</td><td style="padding:10px 8px;font-size:0.82rem;max-width:200px;">' + memberNames + '</td><td style="padding:10px 8px;text-align:center;">' + t.canopy_number + '</td><td style="padding:10px 8px;text-align:center;">' + amount + '</td><td style="padding:10px 8px;"><span class="status-badge ' + psClass + '">' + ps + '</span></td><td style="padding:10px 8px;font-size:0.82rem;">' + date + '</td></tr>';
     });
     th += '</tbody></table>';
@@ -2062,8 +2062,8 @@ async function handleImportFile(file) {
 function showImportPreview(data, totalRows) {
     var s = data.summary;
     var statsHtml = [
-        { label: 'Rows in file', value: totalRows, color: '#d4a556' },
-        { label: 'Rooms found', value: s.totalRooms, color: '#d4a556' },
+        { label: 'Rows in file', value: totalRows, color: '#c9b897' },
+        { label: 'Rooms found', value: s.totalRooms, color: '#c9b897' },
         { label: 'PYC matched', value: s.matched, color: '#4cd68a' },
         { label: 'PYC not found', value: s.unmatched, color: s.unmatched > 0 ? '#f39c12' : '#4cd68a' }
     ].map(function(c) {
@@ -2090,7 +2090,7 @@ function showImportPreview(data, totalRows) {
     var sampHtml = '<p style="font-size:0.82rem;color:rgba(245,245,245,0.55);margin-bottom:8px;">Sample rooms from file:</p>';
     (data.sampleRooms || []).forEach(function(rm) {
         sampHtml += '<div style="background:rgba(255,255,255,0.03);border:1px solid rgba(255,255,255,0.07);border-radius:6px;padding:10px;margin-bottom:6px;font-size:0.82rem;">' +
-            '<span style="color:#d4a556;font-weight:600;">' + rm.hall + ' Room ' + rm.room_number + '</span> (' + rm.memberCount + ' person(s)): ' +
+            '<span style="color:#c9b897;font-weight:600;">' + rm.hall + ' Room ' + rm.room_number + '</span> (' + rm.memberCount + ' person(s)): ' +
             rm.members.join(', ') + '</div>';
     });
     document.getElementById('importSampleRooms').innerHTML = sampHtml;
@@ -2126,7 +2126,7 @@ async function runImport() {
                 statCard('Rooms updated', s.updated, '#4cd68a') +
                 statCard('PYC matched', s.matched, '#4cd68a') +
                 statCard('PYC not found', s.unmatched, s.unmatched > 0 ? '#f39c12' : '#4cd68a') +
-                statCard('Locked (skipped)', s.skippedLocked, '#d4a556') +
+                statCard('Locked (skipped)', s.skippedLocked, '#c9b897') +
                 '</div>' +
                 (data.unmatched && data.unmatched.length > 0 ? '<p style="font-size:0.8rem;color:#f39c12;margin-bottom:8px;">Unmatched PYCs: ' + data.unmatched.map(function(u){return u.pyc;}).join(', ') + '</p>' : '') +
                 '<p style="font-size:0.82rem;color:rgba(245,245,245,0.6);">Room assignments saved. You can now check people in on the accommodation check-in page.</p>' +
@@ -2197,7 +2197,7 @@ async function loadRoommateRequests() {
             const genderColor = r.requester_gender === 'Male' ? '#3498db' : '#e91e8a';
             const groupSize = 1 + members.length;
             const canAdd = members.length < 3; // max 4 total (1 requester + 3 requested)
-            h += `<div style="background:rgba(255,255,255,0.03);border:1px solid rgba(212,165,86,0.2);border-radius:10px;padding:16px;margin-bottom:12px;">
+            h += `<div style="background:rgba(255,255,255,0.03);border:1px solid rgba(201, 184, 151,0.2);border-radius:10px;padding:16px;margin-bottom:12px;">
                 <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:10px;flex-wrap:wrap;gap:8px;">
                     <div>
                         <span style="font-weight:700;color:var(--text-light);font-size:0.95rem;">${esc(r.requester_name)}</span>
@@ -2205,11 +2205,11 @@ async function loadRoommateRequests() {
                     </div>
                     <div style="display:flex;gap:6px;align-items:center;">
                         <span style="background:${genderColor}22;color:${genderColor};padding:3px 10px;border-radius:12px;font-size:0.75rem;font-weight:700;">${r.requester_gender}</span>
-                        <span style="background:rgba(212,165,86,0.15);color:var(--secondary-gold);padding:3px 10px;border-radius:12px;font-size:0.75rem;font-weight:700;">Group of ${groupSize}</span>
+                        <span style="background:rgba(201, 184, 151,0.15);color:var(--secondary-gold);padding:3px 10px;border-radius:12px;font-size:0.75rem;font-weight:700;">Group of ${groupSize}</span>
                     </div>
                 </div>
                 <div style="display:flex;flex-wrap:wrap;gap:6px;">
-                    <span style="display:inline-flex;align-items:center;gap:4px;background:rgba(212,165,86,0.1);border:1px solid rgba(212,165,86,0.2);border-radius:16px;padding:5px 12px;font-size:0.82rem;">
+                    <span style="display:inline-flex;align-items:center;gap:4px;background:rgba(201, 184, 151,0.1);border:1px solid rgba(201, 184, 151,0.2);border-radius:16px;padding:5px 12px;font-size:0.82rem;">
                         <span style="color:var(--text-light);">${esc(r.requester_name)}</span>
                         <span style="color:var(--secondary-gold);font-size:0.75rem;">${esc(r.requester_pyc)}</span>
                         <span style="color:rgba(245,245,245,0.4);font-size:0.7rem;">(requester)</span>
@@ -2226,14 +2226,14 @@ async function loadRoommateRequests() {
             h += `</div>
                 <div style="display:flex;justify-content:space-between;align-items:center;margin-top:10px;gap:8px;flex-wrap:wrap;">
                     <div style="color:rgba(245,245,245,0.35);font-size:0.72rem;">${fmtDate(r.created_at)}</div>
-                    ${canAdd ? `<button onclick="toggleAddMemberForm('${r.id}')" id="addBtn-${r.id}" style="padding:6px 12px;background:rgba(212,165,86,0.15);color:var(--secondary-gold);border:1px solid rgba(212,165,86,0.3);border-radius:6px;font-size:0.78rem;cursor:pointer;font-weight:600;">+ Add Member</button>`
+                    ${canAdd ? `<button onclick="toggleAddMemberForm('${r.id}')" id="addBtn-${r.id}" style="padding:6px 12px;background:rgba(201, 184, 151,0.15);color:var(--secondary-gold);border:1px solid rgba(201, 184, 151,0.3);border-radius:6px;font-size:0.78rem;cursor:pointer;font-weight:600;">+ Add Member</button>`
                     : `<span style="color:rgba(245,245,245,0.35);font-size:0.72rem;">Group full (max 4)</span>`}
                 </div>
-                <div id="addForm-${r.id}" style="display:none;margin-top:10px;padding:12px;background:rgba(255,255,255,0.02);border:1px solid rgba(212,165,86,0.15);border-radius:8px;">
+                <div id="addForm-${r.id}" style="display:none;margin-top:10px;padding:12px;background:rgba(255,255,255,0.02);border:1px solid rgba(201, 184, 151,0.15);border-radius:8px;">
                     <div style="color:rgba(245,245,245,0.7);font-size:0.8rem;margin-bottom:8px;">Add a registered delegate (they must have an accommodation reservation):</div>
                     <div style="display:flex;gap:6px;flex-wrap:wrap;margin-bottom:8px;">
-                        <input type="text" id="addPyc-${r.id}" placeholder="PYC-XXXX" style="flex:1;min-width:120px;padding:8px 10px;background:rgba(0,0,0,0.3);border:1px solid rgba(212,165,86,0.2);border-radius:6px;color:var(--text-light);font-size:0.85rem;text-transform:uppercase;">
-                        <input type="text" id="addName-${r.id}" placeholder="Name (optional)" style="flex:2;min-width:140px;padding:8px 10px;background:rgba(0,0,0,0.3);border:1px solid rgba(212,165,86,0.2);border-radius:6px;color:var(--text-light);font-size:0.85rem;">
+                        <input type="text" id="addPyc-${r.id}" placeholder="PYC-XXXX" style="flex:1;min-width:120px;padding:8px 10px;background:rgba(0,0,0,0.3);border:1px solid rgba(201, 184, 151,0.2);border-radius:6px;color:var(--text-light);font-size:0.85rem;text-transform:uppercase;">
+                        <input type="text" id="addName-${r.id}" placeholder="Name (optional)" style="flex:2;min-width:140px;padding:8px 10px;background:rgba(0,0,0,0.3);border:1px solid rgba(201, 184, 151,0.2);border-radius:6px;color:var(--text-light);font-size:0.85rem;">
                         <button onclick="submitAddMember('${r.id}')" id="submitAdd-${r.id}" style="padding:8px 16px;background:var(--secondary-gold);color:var(--primary-navy);border:none;border-radius:6px;font-size:0.85rem;font-weight:700;cursor:pointer;">Add</button>
                     </div>
                     <div id="addResult-${r.id}" style="font-size:0.78rem;"></div>
@@ -2265,7 +2265,7 @@ function arCustomConfirm(message) {
         overlay.id = 'arConfirmModal';
         overlay.style.cssText = 'position:fixed;inset:0;background:rgba(0,0,0,0.85);z-index:6000;display:flex;align-items:center;justify-content:center;padding:20px;';
         overlay.innerHTML =
-            '<div style="background:#1c1c1e;border:2px solid rgba(212,165,86,0.45);border-radius:12px;padding:24px;max-width:440px;width:100%;">' +
+            '<div style="background:#1c1c1e;border:2px solid rgba(201, 184, 151,0.45);border-radius:12px;padding:24px;max-width:440px;width:100%;">' +
             '<h3 style="color:var(--secondary-gold);font-size:1.05rem;margin:0 0 12px;">Confirm</h3>' +
             '<p style="color:rgba(245,245,245,0.85);font-size:0.92rem;line-height:1.5;margin:0 0 20px;white-space:pre-wrap;">' + (message || '').replace(/</g,'&lt;').replace(/>/g,'&gt;') + '</p>' +
             '<div style="display:flex;gap:10px;justify-content:flex-end;">' +
@@ -2287,7 +2287,7 @@ function arCustomAlert(message) {
         overlay.id = 'arAlertModal';
         overlay.style.cssText = 'position:fixed;inset:0;background:rgba(0,0,0,0.85);z-index:6000;display:flex;align-items:center;justify-content:center;padding:20px;';
         overlay.innerHTML =
-            '<div style="background:#1c1c1e;border:2px solid rgba(212,165,86,0.45);border-radius:12px;padding:24px;max-width:440px;width:100%;">' +
+            '<div style="background:#1c1c1e;border:2px solid rgba(201, 184, 151,0.45);border-radius:12px;padding:24px;max-width:440px;width:100%;">' +
             '<p style="color:rgba(245,245,245,0.9);font-size:0.95rem;line-height:1.5;margin:0 0 20px;white-space:pre-wrap;">' + (message || '').replace(/</g,'&lt;').replace(/>/g,'&gt;') + '</p>' +
             '<div style="display:flex;justify-content:flex-end;">' +
             '<button id="arAlertOk" style="padding:9px 20px;background:var(--secondary-gold);color:#1c1c1e;border:none;border-radius:7px;font-weight:700;cursor:pointer;">OK</button>' +
@@ -2405,7 +2405,7 @@ function addMemberPycInput() {
     const idx = list.children.length;
     const wrap = document.createElement('div');
     wrap.style.cssText = 'display:flex;gap:6px;align-items:center;';
-    wrap.innerHTML = '<input type="text" class="create-member-pyc" placeholder="PYC-XXXX (member ' + (idx + 1) + ')" style="flex:1;max-width:260px;padding:10px 12px;background:rgba(0,0,0,0.3);border:1px solid rgba(212,165,86,0.25);border-radius:6px;color:var(--text-light);font-size:0.9rem;text-transform:uppercase;">'
+    wrap.innerHTML = '<input type="text" class="create-member-pyc" placeholder="PYC-XXXX (member ' + (idx + 1) + ')" style="flex:1;max-width:260px;padding:10px 12px;background:rgba(0,0,0,0.3);border:1px solid rgba(201, 184, 151,0.25);border-radius:6px;color:var(--text-light);font-size:0.9rem;text-transform:uppercase;">'
         + '<button onclick="removeMemberPycInput(this)" style="padding:8px 10px;background:rgba(231,76,60,0.1);color:#e74c3c;border:1px solid rgba(231,76,60,0.3);border-radius:6px;font-size:0.82rem;cursor:pointer;">×</button>';
     list.appendChild(wrap);
     updateAddMemberBtn();
@@ -2604,15 +2604,15 @@ function renderRoomMap(halls, summary, ghostSpots) {
             const isFull = members.length >= (room.capacity || 4);
             const isLocked = !!room.is_locked;
             const lockIconHtml = isLocked
-                ? '<svg width="14" height="16" viewBox="0 0 14 16" fill="none" xmlns="http://www.w3.org/2000/svg" style="vertical-align:middle;"><rect x="2" y="7" width="10" height="7" rx="1.2" fill="#d4a556" stroke="#d4a556" stroke-width="0.6"/><path d="M4 7V4.5C4 2.84 5.34 1.5 7 1.5C8.66 1.5 10 2.84 10 4.5V7" stroke="#d4a556" stroke-width="1.6" fill="none" stroke-linecap="round"/><circle cx="7" cy="10.2" r="1.1" fill="#1c1c1e"/><rect x="6.55" y="10.5" width="0.9" height="2" fill="#1c1c1e"/></svg>'
+                ? '<svg width="14" height="16" viewBox="0 0 14 16" fill="none" xmlns="http://www.w3.org/2000/svg" style="vertical-align:middle;"><rect x="2" y="7" width="10" height="7" rx="1.2" fill="#c9b897" stroke="#c9b897" stroke-width="0.6"/><path d="M4 7V4.5C4 2.84 5.34 1.5 7 1.5C8.66 1.5 10 2.84 10 4.5V7" stroke="#c9b897" stroke-width="1.6" fill="none" stroke-linecap="round"/><circle cx="7" cy="10.2" r="1.1" fill="#1c1c1e"/><rect x="6.55" y="10.5" width="0.9" height="2" fill="#1c1c1e"/></svg>'
                 : '<svg width="14" height="16" viewBox="0 0 14 16" fill="none" xmlns="http://www.w3.org/2000/svg" style="vertical-align:middle;opacity:0.55;"><rect x="2" y="7" width="10" height="7" rx="1.2" fill="none" stroke="#aaa" stroke-width="1.4"/><path d="M4 7V4.5C4 2.84 5.34 1.5 7 1.5C8.66 1.5 10 2.84 10 4.5V5.5" stroke="#aaa" stroke-width="1.4" fill="none" stroke-linecap="round"/></svg>';
             const cardClass = 'room-card' + (isLocked ? ' room-card-locked' : '');
-            h += `<div class="${cardClass}" data-hall="${esc(hallName)}" data-room="${room.room_number}" style="background:${isLocked ? 'rgba(212,165,86,0.10)' : 'rgba(255,255,255,0.03)'};border:${isLocked ? '2px solid #d4a556' : '1px solid ' + (isFull ? 'rgba(39,174,96,0.3)' : 'rgba(212,165,86,0.15)')};border-radius:8px;padding:10px 12px;position:relative;${isLocked ? 'box-shadow:0 0 0 1px rgba(212,165,86,0.3) inset;' : ''}transition:all 0.2s ease;">
+            h += `<div class="${cardClass}" data-hall="${esc(hallName)}" data-room="${room.room_number}" style="background:${isLocked ? 'rgba(201, 184, 151,0.10)' : 'rgba(255,255,255,0.03)'};border:${isLocked ? '2px solid #c9b897' : '1px solid ' + (isFull ? 'rgba(39,174,96,0.3)' : 'rgba(201, 184, 151,0.15)')};border-radius:8px;padding:10px 12px;position:relative;${isLocked ? 'box-shadow:0 0 0 1px rgba(201, 184, 151,0.3) inset;' : ''}transition:all 0.2s ease;">
                 <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:6px;gap:6px;">
-                    <span style="font-weight:700;color:var(--secondary-gold);font-size:0.82rem;display:inline-flex;align-items:center;gap:6px;">Room ${room.room_number}<span class="room-card-badge" style="${isLocked ? '' : 'display:none;'}background:#d4a556;color:#1c1c1e;padding:1px 7px;border-radius:3px;font-size:0.65rem;font-weight:800;letter-spacing:0.5px;">LOCKED</span></span>
+                    <span style="font-weight:700;color:var(--secondary-gold);font-size:0.82rem;display:inline-flex;align-items:center;gap:6px;">Room ${room.room_number}<span class="room-card-badge" style="${isLocked ? '' : 'display:none;'}background:#c9b897;color:#1c1c1e;padding:1px 7px;border-radius:3px;font-size:0.65rem;font-weight:800;letter-spacing:0.5px;">LOCKED</span></span>
                     <span style="display:flex;align-items:center;gap:6px;">
                         <span style="font-size:0.7rem;color:${isFull ? '#27ae60' : 'rgba(245,245,245,0.4)'};">${members.length}/${room.capacity || 4}</span>
-                        <button class="room-card-lockbtn" onclick="toggleRoomLock('${esc(hallName)}', ${room.room_number}, ${isLocked ? 'false' : 'true'})" style="background:rgba(0,0,0,0.2);border:1px solid ${isLocked ? '#d4a556' : 'rgba(245,245,245,0.2)'};border-radius:5px;cursor:pointer;padding:3px 6px;line-height:1;display:inline-flex;align-items:center;justify-content:center;transition:all 0.15s;" title="${isLocked ? 'Unlock' : 'Lock'} this room">${lockIconHtml}</button>
+                        <button class="room-card-lockbtn" onclick="toggleRoomLock('${esc(hallName)}', ${room.room_number}, ${isLocked ? 'false' : 'true'})" style="background:rgba(0,0,0,0.2);border:1px solid ${isLocked ? '#c9b897' : 'rgba(245,245,245,0.2)'};border-radius:5px;cursor:pointer;padding:3px 6px;line-height:1;display:inline-flex;align-items:center;justify-content:center;transition:all 0.15s;" title="${isLocked ? 'Unlock' : 'Lock'} this room">${lockIconHtml}</button>
                     </span>
                 </div>`;
             members.forEach(m => {
@@ -2620,7 +2620,7 @@ function renderRoomMap(halls, summary, ghostSpots) {
                 var displayName = (m.name || '').replace(/&#39;/g, "'");
                 h += '<div style="display:flex;align-items:center;justify-content:space-between;gap:6px;padding:2px 0;">' +
                      '<span style="font-size:0.78rem;color:var(--text-light);flex:1;min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;">' + esc(m.name) + ' <span style="color:var(--secondary-gold);font-size:0.7rem;">' + esc(m.pycNumber) + '</span></span>' +
-                     '<button class="room-member-move-btn" data-pyc="' + esc(pyc) + '" data-name="' + esc(displayName) + '" title="Move to another room" style="background:rgba(212,165,86,0.12);border:1px solid rgba(212,165,86,0.3);border-radius:4px;color:var(--secondary-gold);font-size:0.65rem;font-weight:700;padding:2px 6px;cursor:pointer;line-height:1;flex-shrink:0;">MOVE</button>' +
+                     '<button class="room-member-move-btn" data-pyc="' + esc(pyc) + '" data-name="' + esc(displayName) + '" title="Move to another room" style="background:rgba(201, 184, 151,0.12);border:1px solid rgba(201, 184, 151,0.3);border-radius:4px;color:var(--secondary-gold);font-size:0.65rem;font-weight:700;padding:2px 6px;cursor:pointer;line-height:1;flex-shrink:0;">MOVE</button>' +
                      '</div>';
             });
             // Room contact: first member who has a phone number (stable per render).
@@ -2629,7 +2629,7 @@ function renderRoomMap(halls, summary, ghostSpots) {
                 if (members[ci] && members[ci].phone) { roomContact = members[ci].phone; break; }
             }
             if (roomContact) {
-                h += '<div style="margin-top:5px;padding-top:5px;border-top:1px dashed rgba(212,165,86,0.2);font-size:0.72rem;color:rgba(245,245,245,0.6);">&#128222; Contact: <span style="color:var(--secondary-gold);">' + esc(roomContact) + '</span></div>';
+                h += '<div style="margin-top:5px;padding-top:5px;border-top:1px dashed rgba(201, 184, 151,0.2);font-size:0.72rem;color:rgba(245,245,245,0.6);">&#128222; Contact: <span style="color:var(--secondary-gold);">' + esc(roomContact) + '</span></div>';
             }
             if (members.length === 0) h += '<div style="font-size:0.78rem;color:rgba(245,245,245,0.3);">Empty</div>';
             h += '</div>';
@@ -2846,11 +2846,11 @@ function openMoveMemberModal(pyc, name) {
     overlay.id = 'moveMemberModal';
     overlay.style.cssText = 'position:fixed;top:0;left:0;right:0;bottom:0;background:rgba(0,0,0,0.85);z-index:5000;display:flex;align-items:center;justify-content:center;padding:20px;';
     overlay.innerHTML =
-        '<div style="background:var(--primary-navy);border:2px solid rgba(212,165,86,0.4);border-radius:12px;padding:26px;max-width:520px;width:100%;box-shadow:0 20px 60px rgba(0,0,0,0.5);">' +
+        '<div style="background:var(--primary-navy);border:2px solid rgba(201, 184, 151,0.4);border-radius:12px;padding:26px;max-width:520px;width:100%;box-shadow:0 20px 60px rgba(0,0,0,0.5);">' +
         '<h3 style="color:var(--secondary-gold);font-size:1.15rem;margin-bottom:6px;">Move to Another Room</h3>' +
         '<p style="color:rgba(245,245,245,0.75);font-size:0.88rem;margin-bottom:14px;"><strong>' + esc(name) + '</strong> &middot; <span style="color:var(--secondary-gold);">' + esc(pyc) + '</span></p>' +
         '<label style="display:block;color:var(--text-light);font-size:0.85rem;font-weight:600;margin-bottom:6px;">Target Room</label>' +
-        '<select id="moveTargetSelect" style="width:100%;padding:10px 12px;background:rgba(0,0,0,0.3);border:1px solid rgba(212,165,86,0.3);border-radius:7px;color:var(--text-light);font-size:0.92rem;margin-bottom:8px;">' + optionsHtml + '</select>' +
+        '<select id="moveTargetSelect" style="width:100%;padding:10px 12px;background:rgba(0,0,0,0.3);border:1px solid rgba(201, 184, 151,0.3);border-radius:7px;color:var(--text-light);font-size:0.92rem;margin-bottom:8px;">' + optionsHtml + '</select>' +
         '<div id="moveCapacityWarning" style="font-size:0.82rem;color:#e67e22;margin-bottom:10px;min-height:20px;"></div>' +
         '<div id="moveMsg" style="font-size:0.84rem;min-height:20px;margin-bottom:8px;"></div>' +
         '<div style="display:flex;gap:8px;justify-content:flex-end;margin-top:8px;">' +
@@ -2966,13 +2966,13 @@ function applyLockVisualToCard(hall, roomNumber, locked) {
     var card = document.querySelector('.room-card[data-hall="' + cssEsc(hall) + '"][data-room="' + roomNumber + '"]');
     if (!card) return;
     if (locked) {
-        card.style.background = 'rgba(212,165,86,0.10)';
-        card.style.border = '2px solid #d4a556';
-        card.style.boxShadow = '0 0 0 1px rgba(212,165,86,0.3) inset';
+        card.style.background = 'rgba(201, 184, 151,0.10)';
+        card.style.border = '2px solid #c9b897';
+        card.style.boxShadow = '0 0 0 1px rgba(201, 184, 151,0.3) inset';
         card.classList.add('room-card-locked');
     } else {
         card.style.background = 'rgba(255,255,255,0.03)';
-        card.style.border = '1px solid rgba(212,165,86,0.15)';
+        card.style.border = '1px solid rgba(201, 184, 151,0.15)';
         card.style.boxShadow = '';
         card.classList.remove('room-card-locked');
     }
@@ -2981,10 +2981,10 @@ function applyLockVisualToCard(hall, roomNumber, locked) {
     var btn = card.querySelector('.room-card-lockbtn');
     if (btn) {
         btn.title = locked ? 'Unlock this room' : 'Lock this room';
-        btn.style.borderColor = locked ? '#d4a556' : 'rgba(245,245,245,0.2)';
+        btn.style.borderColor = locked ? '#c9b897' : 'rgba(245,245,245,0.2)';
         // Swap the SVG inside
         btn.innerHTML = locked
-            ? '<svg width="14" height="16" viewBox="0 0 14 16" fill="none" xmlns="http://www.w3.org/2000/svg" style="vertical-align:middle;"><rect x="2" y="7" width="10" height="7" rx="1.2" fill="#d4a556" stroke="#d4a556" stroke-width="0.6"/><path d="M4 7V4.5C4 2.84 5.34 1.5 7 1.5C8.66 1.5 10 2.84 10 4.5V7" stroke="#d4a556" stroke-width="1.6" fill="none" stroke-linecap="round"/><circle cx="7" cy="10.2" r="1.1" fill="#1c1c1e"/><rect x="6.55" y="10.5" width="0.9" height="2" fill="#1c1c1e"/></svg>'
+            ? '<svg width="14" height="16" viewBox="0 0 14 16" fill="none" xmlns="http://www.w3.org/2000/svg" style="vertical-align:middle;"><rect x="2" y="7" width="10" height="7" rx="1.2" fill="#c9b897" stroke="#c9b897" stroke-width="0.6"/><path d="M4 7V4.5C4 2.84 5.34 1.5 7 1.5C8.66 1.5 10 2.84 10 4.5V7" stroke="#c9b897" stroke-width="1.6" fill="none" stroke-linecap="round"/><circle cx="7" cy="10.2" r="1.1" fill="#1c1c1e"/><rect x="6.55" y="10.5" width="0.9" height="2" fill="#1c1c1e"/></svg>'
             : '<svg width="14" height="16" viewBox="0 0 14 16" fill="none" xmlns="http://www.w3.org/2000/svg" style="vertical-align:middle;opacity:0.55;"><rect x="2" y="7" width="10" height="7" rx="1.2" fill="none" stroke="#aaa" stroke-width="1.4"/><path d="M4 7V4.5C4 2.84 5.34 1.5 7 1.5C8.66 1.5 10 2.84 10 4.5V5.5" stroke="#aaa" stroke-width="1.4" fill="none" stroke-linecap="round"/></svg>';
         // Update onclick to flip behavior next click
         btn.setAttribute('onclick', "toggleRoomLock('" + hall.replace(/'/g, "\\'") + "', " + roomNumber + ", " + (locked ? 'false' : 'true') + ')');
@@ -3066,12 +3066,12 @@ function addVolunteerRow() {
     tr.className = 'vol-row';
     tr.style.cssText = 'border-bottom:1px solid rgba(255,255,255,0.05);';
     tr.innerHTML =
-        '<td style="padding:6px 4px;"><div style="display:flex;align-items:center;gap:6px;"><input type="text" class="vol-pyc" placeholder="PYC-1234" onblur="lookupVolunteerPyc(this)" style="flex:1;min-width:110px;padding:8px 10px;background:rgba(0,0,0,0.3);border:1px solid rgba(212,165,86,0.2);border-radius:5px;color:var(--text-light);font-size:0.85rem;text-transform:uppercase;"><span class="vol-pyc-status" style="width:18px;display:inline-flex;justify-content:center;font-weight:700;font-size:1rem;line-height:1;">&nbsp;</span></div></td>' +
-        '<td style="padding:6px 4px;"><input type="text" class="vol-name" placeholder="Full name" style="width:100%;padding:8px 10px;background:rgba(0,0,0,0.3);border:1px solid rgba(212,165,86,0.2);border-radius:5px;color:var(--text-light);font-size:0.85rem;"></td>' +
-        '<td style="padding:6px 4px;"><input type="email" class="vol-email" placeholder="email@example.com" style="width:100%;padding:8px 10px;background:rgba(0,0,0,0.3);border:1px solid rgba(212,165,86,0.2);border-radius:5px;color:var(--text-light);font-size:0.85rem;"></td>' +
-        '<td style="padding:6px 4px;"><select class="vol-gender" onchange="onVolGenderChange(this)" style="width:100%;padding:8px 8px;background:rgba(0,0,0,0.3);border:1px solid rgba(212,165,86,0.2);border-radius:5px;color:var(--text-light);font-size:0.85rem;"><option value="">--</option><option value="Male">Male</option><option value="Female">Female</option></select></td>' +
-        '<td style="padding:6px 4px;"><select class="vol-type" style="width:100%;padding:8px 8px;background:rgba(0,0,0,0.3);border:1px solid rgba(212,165,86,0.2);border-radius:5px;color:var(--text-light);font-size:0.85rem;"><option value="">--</option><option value="girls_dorm">Girls\' Dorm</option><option value="boys_dorm">Boys\' Dorm</option><option value="camping">Camping</option></select></td>' +
-        '<td style="padding:6px 4px;"><input type="number" class="vol-spots" min="1" max="10" value="1" style="width:60px;padding:8px 8px;background:rgba(0,0,0,0.3);border:1px solid rgba(212,165,86,0.2);border-radius:5px;color:var(--text-light);font-size:0.85rem;text-align:center;"></td>' +
+        '<td style="padding:6px 4px;"><div style="display:flex;align-items:center;gap:6px;"><input type="text" class="vol-pyc" placeholder="PYC-1234" onblur="lookupVolunteerPyc(this)" style="flex:1;min-width:110px;padding:8px 10px;background:rgba(0,0,0,0.3);border:1px solid rgba(201, 184, 151,0.2);border-radius:5px;color:var(--text-light);font-size:0.85rem;text-transform:uppercase;"><span class="vol-pyc-status" style="width:18px;display:inline-flex;justify-content:center;font-weight:700;font-size:1rem;line-height:1;">&nbsp;</span></div></td>' +
+        '<td style="padding:6px 4px;"><input type="text" class="vol-name" placeholder="Full name" style="width:100%;padding:8px 10px;background:rgba(0,0,0,0.3);border:1px solid rgba(201, 184, 151,0.2);border-radius:5px;color:var(--text-light);font-size:0.85rem;"></td>' +
+        '<td style="padding:6px 4px;"><input type="email" class="vol-email" placeholder="email@example.com" style="width:100%;padding:8px 10px;background:rgba(0,0,0,0.3);border:1px solid rgba(201, 184, 151,0.2);border-radius:5px;color:var(--text-light);font-size:0.85rem;"></td>' +
+        '<td style="padding:6px 4px;"><select class="vol-gender" onchange="onVolGenderChange(this)" style="width:100%;padding:8px 8px;background:rgba(0,0,0,0.3);border:1px solid rgba(201, 184, 151,0.2);border-radius:5px;color:var(--text-light);font-size:0.85rem;"><option value="">--</option><option value="Male">Male</option><option value="Female">Female</option></select></td>' +
+        '<td style="padding:6px 4px;"><select class="vol-type" style="width:100%;padding:8px 8px;background:rgba(0,0,0,0.3);border:1px solid rgba(201, 184, 151,0.2);border-radius:5px;color:var(--text-light);font-size:0.85rem;"><option value="">--</option><option value="girls_dorm">Girls\' Dorm</option><option value="boys_dorm">Boys\' Dorm</option><option value="camping">Camping</option></select></td>' +
+        '<td style="padding:6px 4px;"><input type="number" class="vol-spots" min="1" max="10" value="1" style="width:60px;padding:8px 8px;background:rgba(0,0,0,0.3);border:1px solid rgba(201, 184, 151,0.2);border-radius:5px;color:var(--text-light);font-size:0.85rem;text-align:center;"></td>' +
         '<td style="padding:6px 4px;text-align:center;"><button onclick="removeVolunteerRow(this)" style="background:rgba(231,76,60,0.15);color:#e74c3c;border:1px solid rgba(231,76,60,0.3);border-radius:5px;padding:6px 9px;cursor:pointer;font-size:0.85rem;font-weight:700;line-height:1;">&times;</button></td>';
     body.appendChild(tr);
 }
@@ -3269,7 +3269,7 @@ async function loadAdminAddedReservations() {
 
         var typeNames = { girls_dorm: "Girls' Dorm", boys_dorm: "Boys' Dorm", camping: 'Camping' };
         var h = '<div style="overflow-x:auto;-webkit-overflow-scrolling:touch;"><table style="width:100%;border-collapse:collapse;font-size:0.85rem;">';
-        h += '<thead><tr style="background:rgba(212,165,86,0.08);"><th style="text-align:left;padding:9px;color:var(--secondary-gold);font-size:0.75rem;text-transform:uppercase;letter-spacing:0.5px;">Name</th><th style="text-align:left;padding:9px;color:var(--secondary-gold);font-size:0.75rem;text-transform:uppercase;letter-spacing:0.5px;">Email</th><th style="text-align:left;padding:9px;color:var(--secondary-gold);font-size:0.75rem;text-transform:uppercase;letter-spacing:0.5px;">PYC</th><th style="text-align:left;padding:9px;color:var(--secondary-gold);font-size:0.75rem;text-transform:uppercase;letter-spacing:0.5px;">Type</th><th style="text-align:center;padding:9px;color:var(--secondary-gold);font-size:0.75rem;text-transform:uppercase;letter-spacing:0.5px;">Spots</th><th style="text-align:left;padding:9px;color:var(--secondary-gold);font-size:0.75rem;text-transform:uppercase;letter-spacing:0.5px;">Created</th><th style="padding:9px;width:40px;"></th></tr></thead><tbody>';
+        h += '<thead><tr style="background:rgba(201, 184, 151,0.08);"><th style="text-align:left;padding:9px;color:var(--secondary-gold);font-size:0.75rem;text-transform:uppercase;letter-spacing:0.5px;">Name</th><th style="text-align:left;padding:9px;color:var(--secondary-gold);font-size:0.75rem;text-transform:uppercase;letter-spacing:0.5px;">Email</th><th style="text-align:left;padding:9px;color:var(--secondary-gold);font-size:0.75rem;text-transform:uppercase;letter-spacing:0.5px;">PYC</th><th style="text-align:left;padding:9px;color:var(--secondary-gold);font-size:0.75rem;text-transform:uppercase;letter-spacing:0.5px;">Type</th><th style="text-align:center;padding:9px;color:var(--secondary-gold);font-size:0.75rem;text-transform:uppercase;letter-spacing:0.5px;">Spots</th><th style="text-align:left;padding:9px;color:var(--secondary-gold);font-size:0.75rem;text-transform:uppercase;letter-spacing:0.5px;">Created</th><th style="padding:9px;width:40px;"></th></tr></thead><tbody>';
         arr.forEach(function(r) {
             var pyc = (r.registration_id && pycMap[r.registration_id]) ? pycMap[r.registration_id] : '--';
             h += '<tr style="border-bottom:1px solid rgba(255,255,255,0.05);">';

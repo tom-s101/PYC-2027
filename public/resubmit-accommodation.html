@@ -10,10 +10,10 @@
     <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Montserrat:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <style>
         * { margin: 0; padding: 0; box-sizing: border-box; }
-        :root { --primary-navy: #1c1c1e; --secondary-gold: #d4a556; --text-light: #f5f5f5; --background-overlay: rgba(28, 28, 30, 0.92); --danger: #e74c3c; }
+        :root { --primary-navy: #1c1c1e; --secondary-gold: #c9b897; --text-light: #f5f5f5; --background-overlay: rgba(28, 28, 30, 0.92); --danger: #e74c3c; }
         html { background: #000000; }
         body { font-family: 'Montserrat', sans-serif; background-color: #000000; background: linear-gradient(135deg, #000000 0%, #1c1c1e 50%, #2c2c2e 100%); background-attachment: fixed; color: var(--text-light); min-height: 100vh; overscroll-behavior: none; overflow-x: hidden; }
-        body::before { content: ''; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: radial-gradient(circle at 20% 30%, rgba(74,124,158,0.1) 0%, transparent 50%), radial-gradient(circle at 80% 70%, rgba(212,165,86,0.08) 0%, transparent 50%); pointer-events: none; z-index: 1; }
+        body::before { content: ''; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: radial-gradient(circle at 20% 30%, rgba(74,124,158,0.1) 0%, transparent 50%), radial-gradient(circle at 80% 70%, rgba(201, 184, 151,0.08) 0%, transparent 50%); pointer-events: none; z-index: 1; }
         .stars { position: fixed; top: 0; left: 0; width: 100%; height: 100%; pointer-events: none; z-index: 0; }
         .star { position: absolute; background: white; border-radius: 50%; box-shadow: 0 0 3px rgba(255,255,255,0.8); filter: blur(0.5px); animation: twinkle 3s infinite; }
         @keyframes twinkle { 0%,100% { opacity: 0.4; } 50% { opacity: 1; } }
@@ -25,13 +25,13 @@
         .warning-box { background: rgba(231,76,60,0.1); border: 1px solid rgba(231,76,60,0.3); border-radius: 10px; padding: 18px; margin-bottom: 20px; font-size: 0.92rem; color: rgba(245,245,245,0.8); line-height: 1.6; }
         .warning-box strong { color: var(--danger); }
         .summary-row { display: flex; justify-content: space-between; padding: 10px 0; border-bottom: 1px solid rgba(255,255,255,0.06); font-size: 0.95rem; }
-        .summary-row.total { font-weight: 700; font-size: 1.15rem; color: var(--secondary-gold); border-top: 2px solid rgba(212,165,86,0.3); margin-top: 8px; padding-top: 12px; }
-        .payment-tabs { display: flex; gap: 0; margin: 20px 0; border-radius: 10px; overflow: hidden; border: 1px solid rgba(212,165,86,0.3); }
+        .summary-row.total { font-weight: 700; font-size: 1.15rem; color: var(--secondary-gold); border-top: 2px solid rgba(201, 184, 151,0.3); margin-top: 8px; padding-top: 12px; }
+        .payment-tabs { display: flex; gap: 0; margin: 20px 0; border-radius: 10px; overflow: hidden; border: 1px solid rgba(201, 184, 151,0.3); }
         .tab-btn { flex: 1; padding: 12px; background: rgba(255,255,255,0.03); color: rgba(245,245,245,0.6); border: none; cursor: pointer; font-family: 'Montserrat', sans-serif; font-weight: 600; font-size: 0.9rem; transition: all 0.3s; }
-        .tab-btn.active { background: rgba(212,165,86,0.15); color: var(--secondary-gold); }
+        .tab-btn.active { background: rgba(201, 184, 151,0.15); color: var(--secondary-gold); }
         .payment-method { display: none; }
         .payment-method.active { display: block; }
-        .account-box { background: rgba(212,165,86,0.1); border: 1px solid rgba(212,165,86,0.3); border-radius: 8px; padding: 15px; margin: 12px 0; }
+        .account-box { background: rgba(201, 184, 151,0.1); border: 1px solid rgba(201, 184, 151,0.3); border-radius: 8px; padding: 15px; margin: 12px 0; }
         .account-name { font-size: 16px; font-weight: 700; color: var(--secondary-gold); }
         .account-number { font-size: 20px; font-weight: 800; color: var(--text-light); letter-spacing: 1px; margin-top: 4px; }
         .account-label { font-size: 13px; color: rgba(245,245,245,0.5); margin-top: 2px; }
@@ -39,26 +39,26 @@
         .instructions ol { padding-left: 20px; } .instructions li { margin-bottom: 6px; }
         .form-group { margin-bottom: 18px; }
         .form-group label { display: block; color: var(--text-light); font-weight: 600; margin-bottom: 8px; font-size: 0.92rem; }
-        input[type="file"] { width: 100%; padding: 14px; background: rgba(255,255,255,0.05); border: 1px solid rgba(212,165,86,0.3); border-radius: 8px; color: var(--text-light); font-family: 'Montserrat', sans-serif; }
+        input[type="file"] { width: 100%; padding: 14px; background: rgba(255,255,255,0.05); border: 1px solid rgba(201, 184, 151,0.3); border-radius: 8px; color: var(--text-light); font-family: 'Montserrat', sans-serif; }
         .image-preview { display: none; margin: 10px 0; text-align: center; }
-        .image-preview img { max-width: 100%; max-height: 200px; border-radius: 8px; border: 1px solid rgba(212,165,86,0.3); }
+        .image-preview img { max-width: 100%; max-height: 200px; border-radius: 8px; border: 1px solid rgba(201, 184, 151,0.3); }
         .submit-btn { width: 100%; padding: 16px; background: var(--secondary-gold); color: var(--primary-navy); border: none; border-radius: 10px; font-family: 'Montserrat', sans-serif; font-size: 1rem; font-weight: 700; cursor: pointer; transition: all 0.3s; text-transform: uppercase; letter-spacing: 1px; }
-        .submit-btn:hover:not(:disabled) { background: #e5b96a; transform: translateY(-2px); }
+        .submit-btn:hover:not(:disabled) { background: #d9cbb0; transform: translateY(-2px); }
         .submit-btn:disabled { opacity: 0.5; cursor: not-allowed; }
         .btn-spinner { display: inline-block; width: 18px; height: 18px; border: 3px solid rgba(28, 28, 30,0.3); border-top-color: var(--primary-navy); border-radius: 50%; animation: btn-spin 0.7s linear infinite; vertical-align: middle; margin-right: 8px; }
         @keyframes btn-spin { to { transform: rotate(360deg); } }
-        .text-input { width: 100%; padding: 14px 18px; background: rgba(255,255,255,0.05); border: 1px solid rgba(212,165,86,0.3); border-radius: 10px; color: var(--text-light); font-family: 'Montserrat', sans-serif; font-size: 1rem; }
+        .text-input { width: 100%; padding: 14px 18px; background: rgba(255,255,255,0.05); border: 1px solid rgba(201, 184, 151,0.3); border-radius: 10px; color: var(--text-light); font-family: 'Montserrat', sans-serif; font-size: 1rem; }
         .text-input:focus { outline: none; border-color: var(--secondary-gold); }
         .text-input.error { border-color: #e74c3c; box-shadow: 0 0 6px rgba(231,76,60,0.3); }
         .verify-btn { width: 100%; padding: 16px; background: var(--secondary-gold); color: var(--primary-navy); border: none; border-radius: 10px; font-family: 'Montserrat', sans-serif; font-size: 1rem; font-weight: 700; cursor: pointer; transition: all 0.3s; text-transform: uppercase; letter-spacing: 1px; }
-        .verify-btn:hover:not(:disabled) { background: #e5b96a; }
+        .verify-btn:hover:not(:disabled) { background: #d9cbb0; }
         .verify-btn:disabled { opacity: 0.5; cursor: not-allowed; }
         .alert { padding: 15px 20px; border-radius: 8px; margin-bottom: 20px; font-size: 0.95rem; }
         .alert-error { background: rgba(231,76,60,0.15); border: 1px solid rgba(231,76,60,0.4); color: #e74c3c; }
         .alert-success { background: rgba(39,174,96,0.15); border: 1px solid rgba(39,174,96,0.4); color: #27ae60; }
         .loading-overlay { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0, 0, 0,0.95); z-index: 1000; justify-content: center; align-items: center; flex-direction: column; }
         .loading-overlay.active { display: flex; }
-        .loading-spinner { width: 50px; height: 50px; border: 4px solid rgba(212,165,86,0.2); border-top-color: var(--secondary-gold); border-radius: 50%; animation: spin 0.8s linear infinite; }
+        .loading-spinner { width: 50px; height: 50px; border: 4px solid rgba(201, 184, 151,0.2); border-top-color: var(--secondary-gold); border-radius: 50%; animation: spin 0.8s linear infinite; }
         @keyframes spin { to { transform: rotate(360deg); } }
         .loading-text { color: var(--secondary-gold); margin-top: 20px; font-size: 1.1rem; font-weight: 600; }
     </style>
@@ -123,7 +123,7 @@
                     <div class="form-group">
                         <label>GCash Reference Number <span style="color:#e74c3c;">*</span></label>
                         <input type="text" id="gcashRefNum" placeholder="Enter your GCash reference number" required
-                            style="width:100%;padding:12px 16px;background:rgba(255,255,255,0.05);border:1px solid rgba(212,165,86,0.3);border-radius:8px;color:#f5f5f5;font-family:'Montserrat',sans-serif;font-size:0.95rem;">
+                            style="width:100%;padding:12px 16px;background:rgba(255,255,255,0.05);border:1px solid rgba(201, 184, 151,0.3);border-radius:8px;color:#f5f5f5;font-family:'Montserrat',sans-serif;font-size:0.95rem;">
                         <small style="color:rgba(245,245,245,0.4);display:block;margin-top:4px;">Found in your GCash transaction receipt</small>
                     </div>
                     <div class="form-group">
@@ -148,7 +148,7 @@
                     <div class="form-group">
                         <label>Bank Reference Number <span style="color:#e74c3c;">*</span></label>
                         <input type="text" id="bankRefNum" placeholder="Enter your bank transaction number" required
-                            style="width:100%;padding:12px 16px;background:rgba(255,255,255,0.05);border:1px solid rgba(212,165,86,0.3);border-radius:8px;color:#f5f5f5;font-family:'Montserrat',sans-serif;font-size:0.95rem;">
+                            style="width:100%;padding:12px 16px;background:rgba(255,255,255,0.05);border:1px solid rgba(201, 184, 151,0.3);border-radius:8px;color:#f5f5f5;font-family:'Montserrat',sans-serif;font-size:0.95rem;">
                         <small style="color:rgba(245,245,245,0.4);display:block;margin-top:4px;">From your bank confirmation</small>
                     </div>
                     <div class="form-group">
@@ -192,7 +192,7 @@
                     document.getElementById('gcashName').textContent=gc.name;
                     document.getElementById('gcashNumber').textContent=gc.number;
                     if(gc.qr){document.getElementById('gcashQR').src=gc.qr;document.getElementById('gcashQR').style.display='block';}
-                    let bh='';BANK_OPTIONS.forEach(b=>{bh+='<div class="bopt" data-bank="'+b.id+'" onclick="selectBank(\''+b.id+'\')" style="background:rgba(255,255,255,0.03);border:2px solid rgba(212,165,86,0.2);border-radius:10px;padding:12px;margin-bottom:8px;cursor:pointer;transition:all 0.3s;"><div style="font-size:12px;color:rgba(245,245,245,0.5);">'+b.bank+'</div><div style="font-size:14px;font-weight:700;color:#d4a556;margin-top:2px;">'+b.name+'</div><div style="font-size:16px;font-weight:800;color:#f5f5f5;margin-top:2px;">'+b.number+'</div><img src="'+b.qr+'" alt="QR" class="bqr" style="display:none;width:100%;max-width:200px;margin:8px auto 0;border-radius:8px;"></div>';});
+                    let bh='';BANK_OPTIONS.forEach(b=>{bh+='<div class="bopt" data-bank="'+b.id+'" onclick="selectBank(\''+b.id+'\')" style="background:rgba(255,255,255,0.03);border:2px solid rgba(201, 184, 151,0.2);border-radius:10px;padding:12px;margin-bottom:8px;cursor:pointer;transition:all 0.3s;"><div style="font-size:12px;color:rgba(245,245,245,0.5);">'+b.bank+'</div><div style="font-size:14px;font-weight:700;color:#c9b897;margin-top:2px;">'+b.name+'</div><div style="font-size:16px;font-weight:800;color:#f5f5f5;margin-top:2px;">'+b.number+'</div><img src="'+b.qr+'" alt="QR" class="bqr" style="display:none;width:100%;max-width:200px;margin:8px auto 0;border-radius:8px;"></div>';});
                     document.getElementById('bankOptionsList').innerHTML=bh;
                     document.getElementById('loadingState').style.display='none';
                     document.getElementById('verifySection').style.display='block';
@@ -265,7 +265,7 @@
 
         function selectBank(id){
             selectedBankId=id;const bank=BANK_OPTIONS.find(b=>b.id===id);
-            document.querySelectorAll('.bopt').forEach(o=>{const s=o.dataset.bank===id;o.style.borderColor=s?'#d4a556':'rgba(212,165,86,0.2)';o.style.background=s?'rgba(212,165,86,0.08)':'rgba(255,255,255,0.03)';const q=o.querySelector('.bqr');if(q)q.style.display=s?'block':'none';});
+            document.querySelectorAll('.bopt').forEach(o=>{const s=o.dataset.bank===id;o.style.borderColor=s?'#c9b897':'rgba(201, 184, 151,0.2)';o.style.background=s?'rgba(201, 184, 151,0.08)':'rgba(255,255,255,0.03)';const q=o.querySelector('.bqr');if(q)q.style.display=s?'block':'none';});
             document.getElementById('bankSelectedMsg').style.display='block';
             document.getElementById('bankSelectedMsg').textContent='✓ '+bank.bank+' selected';
         }

@@ -20,56 +20,56 @@
     <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Montserrat:wght@400;600;700&display=swap" rel="stylesheet">
     <style>
         * { margin: 0; padding: 0; box-sizing: border-box; }
-        :root { --primary-navy: #1c1c1e; --secondary-gold: #d4a556; --accent-blue: #4a7c9e; --text-light: #f5f5f5; --background-overlay: rgba(28, 28, 30, 0.92); --success: #27ae60; --danger: #e74c3c; }
+        :root { --primary-navy: #1c1c1e; --secondary-gold: #c9b897; --accent-blue: #4a7c9e; --text-light: #f5f5f5; --background-overlay: rgba(28, 28, 30, 0.92); --success: #27ae60; --danger: #e74c3c; }
         html { background: #000000; }
         body { font-family: 'Montserrat', sans-serif; background-color: #000000; background: linear-gradient(135deg, #000000 0%, #1c1c1e 50%, #2c2c2e 100%); background-attachment: fixed; color: var(--text-light); min-height: 100vh; overscroll-behavior: none; overflow-x: hidden; }
-        body::before { content: ''; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: radial-gradient(circle at 20% 30%, rgba(74,124,158,0.1) 0%, transparent 50%), radial-gradient(circle at 80% 70%, rgba(212,165,86,0.08) 0%, transparent 50%); pointer-events: none; z-index: 1; }
+        body::before { content: ''; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: radial-gradient(circle at 20% 30%, rgba(74,124,158,0.1) 0%, transparent 50%), radial-gradient(circle at 80% 70%, rgba(201, 184, 151,0.08) 0%, transparent 50%); pointer-events: none; z-index: 1; }
         .stars { position: fixed; top: 0; left: 0; width: 100%; height: 100%; pointer-events: none; z-index: 0; }
         .star { position: absolute; background: white; border-radius: 50%; box-shadow: 0 0 3px rgba(255,255,255,0.8); filter: blur(0.5px); animation: twinkle 3s infinite; }
         @keyframes twinkle { 0%,100% { opacity: 0.4; } 50% { opacity: 1; } }
         @keyframes shimmer-slide { to { transform:translateX(100%); } }
         @keyframes shimmer2 { 0%{background-position:0% 0%;} 100%{background-position:-200% 0%;} }
-        @keyframes pulse-glow { 0%,100%{box-shadow:0 0 15px rgba(212,165,86,0.3);} 50%{box-shadow:0 0 30px rgba(212,165,86,0.6);} }
+        @keyframes pulse-glow { 0%,100%{box-shadow:0 0 15px rgba(201, 184, 151,0.3);} 50%{box-shadow:0 0 30px rgba(201, 184, 151,0.6);} }
         .shimmer-btn { position:relative; overflow:hidden; }
         .shimmer-btn::after { content:''; position:absolute; top:0; left:-100%; width:100%; height:100%; background:linear-gradient(110deg,transparent 20%,rgba(255,255,255,0.25) 50%,transparent 80%); animation:shimmer-slide 2.5s infinite; }
         .shimmer-btn-dark { animation:shimmer2 2s infinite linear; background-size:200% 100%; }
         .confirm-overlay { position:fixed; inset:0; z-index:1000000; background:rgba(0,0,0,0.85); display:flex; align-items:center; justify-content:center; padding:20px; backdrop-filter:blur(8px); }
-        .confirm-box { background:rgba(28, 28, 30,0.98); border:2px solid rgba(212,165,86,0.3); border-radius:20px; padding:40px 30px; max-width:400px; width:100%; text-align:center; animation:pulse-glow 2s infinite; }
-        .feedback-box { background:rgba(28, 28, 30,0.98); border:2px solid rgba(212,165,86,0.3); border-radius:20px; padding:30px 24px; max-width:440px; width:100%; }
+        .confirm-box { background:rgba(28, 28, 30,0.98); border:2px solid rgba(201, 184, 151,0.3); border-radius:20px; padding:40px 30px; max-width:400px; width:100%; text-align:center; animation:pulse-glow 2s infinite; }
+        .feedback-box { background:rgba(28, 28, 30,0.98); border:2px solid rgba(201, 184, 151,0.3); border-radius:20px; padding:30px 24px; max-width:440px; width:100%; }
         .emoji-btn { width:48px; height:48px; border-radius:50%; border:2px solid rgba(255,255,255,0.1); background:transparent; cursor:pointer; font-size:1.4rem; transition:all 0.3s; display:flex; align-items:center; justify-content:center; }
-        .emoji-btn.selected { border-color:#d4a556; background:rgba(212,165,86,0.2); transform:scale(1.15); }
-        .emoji-btn:hover { border-color:rgba(212,165,86,0.5); transform:scale(1.1); }
+        .emoji-btn.selected { border-color:#c9b897; background:rgba(201, 184, 151,0.2); transform:scale(1.15); }
+        .emoji-btn:hover { border-color:rgba(201, 184, 151,0.5); transform:scale(1.1); }
         .pricing-card { position:absolute; inset:0; transition:all 0.6s cubic-bezier(0.23,1,0.32,1); border-radius:16px; overflow:hidden; cursor:pointer; }
         .prank-feedback-overlay { position:fixed; inset:0; z-index:1000001; background:rgba(0,0,0,0.88); display:flex; align-items:center; justify-content:center; padding:20px; backdrop-filter:blur(8px); }
-        .prank-feedback-box { background:rgba(28, 28, 30,0.98); border:2px solid rgba(212,165,86,0.3); border-radius:20px; padding:30px 24px; max-width:440px; width:100%; }
+        .prank-feedback-box { background:rgba(28, 28, 30,0.98); border:2px solid rgba(201, 184, 151,0.3); border-radius:20px; padding:30px 24px; max-width:440px; width:100%; }
         .prank-emoji-row { display:flex; justify-content:center; gap:14px; margin-bottom:18px; }
         .prank-emoji-btn { width:50px; height:50px; border-radius:50%; border:2px solid rgba(255,255,255,0.1); background:transparent; cursor:pointer; font-size:1.5rem; transition:all 0.3s; }
-        .prank-emoji-btn.selected { border-color:#d4a556; background:rgba(212,165,86,0.2); transform:scale(1.2); box-shadow:0 0 15px rgba(212,165,86,0.3); }
-        .prank-emoji-btn:hover { border-color:rgba(212,165,86,0.5); transform:scale(1.1); }
-        .prank-textarea { width:100%; height:100px; resize:none; background:rgba(255,255,255,0.05); border:1px solid rgba(212,165,86,0.3); border-radius:12px; padding:14px; color:var(--text-light); font-family:'Montserrat',sans-serif; font-size:0.9rem; }
-        .prank-textarea:focus { outline:none; border-color:#d4a556; }
+        .prank-emoji-btn.selected { border-color:#c9b897; background:rgba(201, 184, 151,0.2); transform:scale(1.2); box-shadow:0 0 15px rgba(201, 184, 151,0.3); }
+        .prank-emoji-btn:hover { border-color:rgba(201, 184, 151,0.5); transform:scale(1.1); }
+        .prank-textarea { width:100%; height:100px; resize:none; background:rgba(255,255,255,0.05); border:1px solid rgba(201, 184, 151,0.3); border-radius:12px; padding:14px; color:var(--text-light); font-family:'Montserrat',sans-serif; font-size:0.9rem; }
+        .prank-textarea:focus { outline:none; border-color:#c9b897; }
         .prank-charcount { text-align:right; font-size:0.75rem; color:rgba(245,245,245,0.3); margin-top:6px; margin-bottom:12px; }
         .prank-send-btn { width:100%; padding:14px; border:none; border-radius:10px; font-family:'Montserrat',sans-serif; font-weight:700; font-size:0.9rem; cursor:pointer; transition:all 0.3s; }
         .prank-send-btn:disabled { opacity:0.4; cursor:not-allowed; }
         .prank-confirm-overlay { position:fixed; inset:0; z-index:1000001; background:rgba(0,0,0,0.88); display:flex; align-items:center; justify-content:center; padding:20px; backdrop-filter:blur(8px); }
-        .prank-confirm-box { background:rgba(28, 28, 30,0.98); border:2px solid rgba(212,165,86,0.3); border-radius:20px; padding:40px 30px; max-width:400px; width:100%; text-align:center; animation:pulse-glow 2s infinite; }
+        .prank-confirm-box { background:rgba(28, 28, 30,0.98); border:2px solid rgba(201, 184, 151,0.3); border-radius:20px; padding:40px 30px; max-width:400px; width:100%; text-align:center; animation:pulse-glow 2s infinite; }
         .container { position: relative; z-index: 2; max-width: 900px; margin: 0 auto; padding: 25px 15px; }
         .page-header { text-align: center; margin-bottom: 25px; }
         .page-header h1 { font-family: 'Bebas Neue', sans-serif; font-size: 2.2rem; color: var(--secondary-gold); letter-spacing: 3px; margin-bottom: 8px; }
         .page-header p { color: rgba(245,245,245,0.7); font-size: 0.95rem; max-width: 600px; margin: 0 auto; line-height: 1.5; }
-        .registrant-info { background: var(--background-overlay); border: 1px solid rgba(212,165,86,0.3); border-radius: 12px; padding: 18px 20px; margin-bottom: 20px; }
+        .registrant-info { background: var(--background-overlay); border: 1px solid rgba(201, 184, 151,0.3); border-radius: 12px; padding: 18px 20px; margin-bottom: 20px; }
         .registrant-info h3 { color: var(--secondary-gold); margin-bottom: 12px; font-size: 1rem; letter-spacing: 1px; }
         .info-row-display { display: flex; gap: 25px; flex-wrap: wrap; margin-bottom: 12px; }
         .info-item { font-size: 0.95rem; color: rgba(245,245,245,0.8); }
         .info-item strong { color: var(--text-light); }
         .lookup-form { display: flex; gap: 10px; margin-top: 15px; flex-wrap: wrap; }
-        .lookup-form input { flex: 1; min-width: 200px; padding: 12px 16px; background: rgba(255,255,255,0.06); border: 1px solid rgba(212,165,86,0.3); border-radius: 8px; color: var(--text-light); font-family: 'Montserrat', sans-serif; font-size: 0.95rem; }
+        .lookup-form input { flex: 1; min-width: 200px; padding: 12px 16px; background: rgba(255,255,255,0.06); border: 1px solid rgba(201, 184, 151,0.3); border-radius: 8px; color: var(--text-light); font-family: 'Montserrat', sans-serif; font-size: 0.95rem; }
         .lookup-form input::placeholder { color: rgba(245,245,245,0.4); }
         .lookup-form input:focus { outline: none; border-color: var(--secondary-gold); }
         .lookup-btn { padding: 12px 24px; background: var(--secondary-gold); color: var(--primary-navy); border: none; border-radius: 8px; font-weight: 700; cursor: pointer; font-size: 0.95rem; transition: all 0.3s; }
-        .lookup-btn:hover { background: #e5b96a; }
+        .lookup-btn:hover { background: #d9cbb0; }
         .lookup-btn:disabled { opacity: 0.5; cursor: not-allowed; }
-        .group-box { background: rgba(212,165,86,0.06); border: 1px solid rgba(212,165,86,0.25); border-radius: 10px; padding: 18px; margin-top: 15px; }
+        .group-box { background: rgba(201, 184, 151,0.06); border: 1px solid rgba(201, 184, 151,0.25); border-radius: 10px; padding: 18px; margin-top: 15px; }
         .group-box h4 { color: var(--secondary-gold); font-size: 0.9rem; margin-bottom: 10px; letter-spacing: 1px; }
         .member-row { display: flex; justify-content: space-between; align-items: center; padding: 8px 0; border-bottom: 1px solid rgba(255,255,255,0.06); font-size: 0.9rem; }
         .member-row:last-child { border-bottom: none; }
@@ -77,32 +77,32 @@
         .member-detail { color: rgba(245,245,245,0.6); font-size: 0.82rem; }
         .member-primary { color: var(--secondary-gold); font-size: 0.75rem; font-weight: 600; }
         .member-select { cursor:pointer; transition:all 0.2s; padding:10px 12px; border-radius:8px; border:1px solid rgba(255,255,255,0.06); margin-bottom:6px; }
-        .member-select:hover { background:rgba(212,165,86,0.06); border-color:rgba(212,165,86,0.2); }
-        .member-select.selected { background:rgba(212,165,86,0.1); border-color:rgba(212,165,86,0.4); }
+        .member-select:hover { background:rgba(201, 184, 151,0.06); border-color:rgba(201, 184, 151,0.2); }
+        .member-select.selected { background:rgba(201, 184, 151,0.1); border-color:rgba(201, 184, 151,0.4); }
         .member-select .ms-check { width:18px; height:18px; border-radius:4px; border:2px solid rgba(245,245,245,0.25); display:inline-flex; align-items:center; justify-content:center; margin-right:10px; flex-shrink:0; transition:all 0.2s; }
         .member-select.selected .ms-check { background:var(--secondary-gold); border-color:var(--secondary-gold); color:#1c1c1e; }
         .member-select .ms-pyc { font-family:'Bebas Neue',sans-serif; color:var(--secondary-gold); font-size:0.85rem; letter-spacing:0.5px; margin-left:auto; }
         .member-select-hint { font-size:0.82rem; color:rgba(245,245,245,0.5); margin-bottom:12px; }
         .member-select-confirm { padding:12px 24px; background:var(--secondary-gold); color:#1c1c1e; border:none; border-radius:8px; font-family:'Montserrat',sans-serif; font-weight:700; font-size:0.9rem; cursor:pointer; margin-top:12px; transition:all 0.3s; }
         .member-select-confirm:disabled { opacity:0.35; cursor:not-allowed; }
-        .spot-selector { background: rgba(212,165,86,0.08); border: 1px solid rgba(212,165,86,0.25); border-radius: 10px; padding: 18px 22px; margin-bottom: 25px; display: none; }
+        .spot-selector { background: rgba(201, 184, 151,0.08); border: 1px solid rgba(201, 184, 151,0.25); border-radius: 10px; padding: 18px 22px; margin-bottom: 25px; display: none; }
         .spot-selector h4 { color: var(--secondary-gold); font-size: 0.9rem; margin-bottom: 10px; }
         .spot-selector p { color: rgba(245,245,245,0.7); font-size: 0.88rem; margin-bottom: 12px; line-height: 1.5; }
         .spot-controls { display: flex; align-items: center; gap: 12px; }
-        .spot-controls button { width: 36px; height: 36px; border-radius: 50%; border: 1px solid rgba(212,165,86,0.4); background: rgba(255,255,255,0.05); color: var(--secondary-gold); font-size: 1.2rem; cursor: pointer; transition: all 0.2s; display: flex; align-items: center; justify-content: center; }
-        .spot-controls button:hover { background: rgba(212,165,86,0.15); }
+        .spot-controls button { width: 36px; height: 36px; border-radius: 50%; border: 1px solid rgba(201, 184, 151,0.4); background: rgba(255,255,255,0.05); color: var(--secondary-gold); font-size: 1.2rem; cursor: pointer; transition: all 0.2s; display: flex; align-items: center; justify-content: center; }
+        .spot-controls button:hover { background: rgba(201, 184, 151,0.15); }
         .spot-controls .spot-count { font-size: 1.5rem; font-weight: 800; color: var(--text-light); min-width: 40px; text-align: center; }
         .spot-total { font-size: 0.92rem; color: rgba(245,245,245,0.7); margin-top: 10px; }
         .spot-total strong { color: var(--secondary-gold); font-size: 1.05rem; }
         .accomm-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 16px; margin-bottom: 20px; }
         .accomm-grid .accomm-card:last-child:nth-child(odd) { grid-column: 1 / -1; }
-        .accomm-card { background: var(--background-overlay); border: 2px solid rgba(212,165,86,0.2); border-radius: 14px; padding: 20px; transition: all 0.3s; position: relative; overflow: hidden; }
+        .accomm-card { background: var(--background-overlay); border: 2px solid rgba(201, 184, 151,0.2); border-radius: 14px; padding: 20px; transition: all 0.3s; position: relative; overflow: hidden; }
         .accomm-card:hover { border-color: var(--secondary-gold); transform: translateY(-3px); box-shadow: 0 10px 30px rgba(0,0,0,0.3); }
         .accomm-card.full { opacity: 0.85; }
         .accomm-card.full-hidden::after { content: 'NOT AVAILABLE'; position: absolute; top: 20px; right: -35px; background: #e74c3c; color: white; padding: 5px 40px; font-size: 12px; font-weight: 700; letter-spacing: 1px; transform: rotate(45deg); z-index: 5; }
         .accomm-card .card-header { display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 10px; }
         .accomm-card h3 { font-family: 'Bebas Neue', sans-serif; font-size: 1.35rem; color: var(--secondary-gold); letter-spacing: 1px; }
-        .accomm-card .price { font-size: 1.15rem; font-weight: 800; color: var(--text-light); background: rgba(212,165,86,0.15); padding: 5px 10px; border-radius: 8px; }
+        .accomm-card .price { font-size: 1.15rem; font-weight: 800; color: var(--text-light); background: rgba(201, 184, 151,0.15); padding: 5px 10px; border-radius: 8px; }
         .accomm-card .price small { font-size: 0.7rem; font-weight: 400; color: rgba(245,245,245,0.6); }
         .accomm-card .description { color: rgba(245,245,245,0.7); font-size: 0.85rem; line-height: 1.5; margin-bottom: 10px; }
         .accomm-card .details { display: flex; gap: 8px; flex-wrap: wrap; margin-bottom: 10px; }
@@ -113,13 +113,13 @@
         .bar-fill { height: 100%; border-radius: 4px; transition: width 0.5s ease; }
         .bar-fill.low { background: #27ae60; } .bar-fill.medium { background: #f39c12; } .bar-fill.high { background: #e74c3c; }
         .reserve-btn { width: 100%; padding: 12px; background: var(--secondary-gold); color: var(--primary-navy); border: none; border-radius: 10px; font-family: 'Montserrat', sans-serif; font-size: 1rem; font-weight: 700; cursor: pointer; transition: all 0.3s; text-transform: uppercase; letter-spacing: 1px; }
-        .reserve-btn:hover { background: #e5b96a; transform: translateY(-2px); }
+        .reserve-btn:hover { background: #d9cbb0; transform: translateY(-2px); }
         .reserve-btn:disabled { opacity: 0.4; cursor: not-allowed; transform: none; }
         .waitlist-btn { width: 100%; padding: 14px; background: transparent; color: var(--secondary-gold); border: 2px solid var(--secondary-gold); border-radius: 10px; font-family: 'Montserrat', sans-serif; font-size: 0.95rem; font-weight: 700; cursor: pointer; transition: all 0.3s; text-transform: uppercase; letter-spacing: 1px; margin-top: 8px; }
-        .waitlist-btn:hover { background: rgba(212,165,86,0.1); }
+        .waitlist-btn:hover { background: rgba(201, 184, 151,0.1); }
         .waitlist-btn:disabled { opacity: 0.4; cursor: not-allowed; }
         .full-badge { display: inline-block; background: rgba(231,76,60,0.15); border: 1px solid rgba(231,76,60,0.3); color: #e74c3c; padding: 4px 12px; border-radius: 6px; font-size: 0.82rem; font-weight: 600; }
-        .note-box { background: rgba(212,165,86,0.08); border: 1px solid rgba(212,165,86,0.25); border-radius: 10px; padding: 14px 16px; margin-bottom: 20px; font-size: 0.85rem; color: rgba(245,245,245,0.75); line-height: 1.7; }
+        .note-box { background: rgba(201, 184, 151,0.08); border: 1px solid rgba(201, 184, 151,0.25); border-radius: 10px; padding: 14px 16px; margin-bottom: 20px; font-size: 0.85rem; color: rgba(245,245,245,0.75); line-height: 1.7; }
         .note-box strong { color: var(--secondary-gold); }
         .alert { padding: 15px 20px; border-radius: 8px; margin-bottom: 20px; font-size: 0.95rem; }
         .alert-error { background: rgba(231,76,60,0.15); border: 1px solid rgba(231,76,60,0.4); color: #e74c3c; }
@@ -128,7 +128,7 @@
         .back-link:hover { opacity: 0.8; }
         .loading { text-align: center; padding: 60px 20px; color: rgba(245,245,245,0.4); }
         /* Cart */
-        .cart-section { background: var(--background-overlay); border: 2px solid rgba(212,165,86,0.3); border-radius: 14px; padding: 25px; margin: 25px 0; display: none; }
+        .cart-section { background: var(--background-overlay); border: 2px solid rgba(201, 184, 151,0.3); border-radius: 14px; padding: 25px; margin: 25px 0; display: none; }
         .cart-section.has-items { display: block; }
         .cart-title { font-family: 'Bebas Neue', sans-serif; font-size: 1.6rem; color: var(--secondary-gold); letter-spacing: 2px; margin-bottom: 15px; }
         .cart-item { display: flex; justify-content: space-between; align-items: center; padding: 12px 0; border-bottom: 1px solid rgba(255,255,255,0.06); }
@@ -137,22 +137,22 @@
         .cart-item-detail { color: rgba(245,245,245,0.5); font-size: 0.82rem; }
         .cart-item-price { color: var(--secondary-gold); font-weight: 700; font-size: 1rem; }
         .cart-item-remove { background: none; border: none; color: #e74c3c; cursor: pointer; font-size: 0.82rem; padding: 4px 8px; }
-        .cart-total { display: flex; justify-content: space-between; align-items: center; padding-top: 15px; margin-top: 10px; border-top: 2px solid rgba(212,165,86,0.3); }
+        .cart-total { display: flex; justify-content: space-between; align-items: center; padding-top: 15px; margin-top: 10px; border-top: 2px solid rgba(201, 184, 151,0.3); }
         .cart-total-label { font-weight: 700; font-size: 1.05rem; }
         .cart-total-amount { color: var(--secondary-gold); font-weight: 800; font-size: 1.3rem; }
         .checkout-btn { display: none; }
-        .checkout-btn:hover { background: #e5b96a; transform: translateY(-2px); }
+        .checkout-btn:hover { background: #d9cbb0; transform: translateY(-2px); }
         .checkout-btn:disabled { opacity: 0.4; cursor: not-allowed; transform: none; }
         /* Slide Button */
         .slide-btn-wrapper { width: 100%; margin-top: 18px; }
-        .slide-btn-track { position: relative; height: 58px; background: rgba(255,255,255,0.04); border: 1px solid rgba(212,165,86,0.3); border-radius: 50px; overflow: hidden; touch-action: none; user-select: none; -webkit-user-select: none; }
-        .slide-btn-track.completed { border-color: rgba(212,165,86,0.5); }
-        .slide-btn-fill { position: absolute; top: 0; left: 0; bottom: 0; width: 0; background: linear-gradient(90deg, rgba(212,165,86,0.15), rgba(212,165,86,0.25)); border-radius: 50px; transition: none; }
+        .slide-btn-track { position: relative; height: 58px; background: rgba(255,255,255,0.04); border: 1px solid rgba(201, 184, 151,0.3); border-radius: 50px; overflow: hidden; touch-action: none; user-select: none; -webkit-user-select: none; }
+        .slide-btn-track.completed { border-color: rgba(201, 184, 151,0.5); }
+        .slide-btn-fill { position: absolute; top: 0; left: 0; bottom: 0; width: 0; background: linear-gradient(90deg, rgba(201, 184, 151,0.15), rgba(201, 184, 151,0.25)); border-radius: 50px; transition: none; }
         .slide-btn-track.resetting .slide-btn-fill { transition: width 0.3s ease; }
-        .slide-btn-track.completed .slide-btn-fill { background: linear-gradient(90deg, rgba(212,165,86,0.15), rgba(212,165,86,0.35)); width: 100% !important; }
-        .slide-btn-label { position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); font-family: 'Montserrat', sans-serif; font-size: 0.9rem; font-weight: 700; letter-spacing: 1px; text-transform: uppercase; color: rgba(212,165,86,0.5); white-space: nowrap; pointer-events: none; transition: opacity 0.2s; }
+        .slide-btn-track.completed .slide-btn-fill { background: linear-gradient(90deg, rgba(201, 184, 151,0.15), rgba(201, 184, 151,0.35)); width: 100% !important; }
+        .slide-btn-label { position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); font-family: 'Montserrat', sans-serif; font-size: 0.9rem; font-weight: 700; letter-spacing: 1px; text-transform: uppercase; color: rgba(201, 184, 151,0.5); white-space: nowrap; pointer-events: none; transition: opacity 0.2s; }
         .slide-btn-track.completed .slide-btn-label { top: 35%; }
-        .slide-btn-handle { position: absolute; top: 4px; left: 4px; width: 50px; height: 50px; background: linear-gradient(135deg, #d4a556, #c9965d); border-radius: 50%; display: flex; align-items: center; justify-content: center; cursor: grab; z-index: 2; transition: none; box-shadow: 0 2px 8px rgba(0,0,0,0.3); }
+        .slide-btn-handle { position: absolute; top: 4px; left: 4px; width: 50px; height: 50px; background: linear-gradient(135deg, #c9b897, #b5a27f); border-radius: 50%; display: flex; align-items: center; justify-content: center; cursor: grab; z-index: 2; transition: none; box-shadow: 0 2px 8px rgba(0,0,0,0.3); }
         .slide-btn-handle:active { cursor: grabbing; }
         .slide-btn-track.resetting .slide-btn-handle { transition: left 0.3s ease; }
         .slide-btn-handle svg { width: 22px; height: 22px; fill: none; stroke: #1c1c1e; stroke-width: 2.5; stroke-linecap: round; stroke-linejoin: round; }
@@ -170,12 +170,12 @@
         .slide-btn-track.completed .slide-btn-dots { display: block; }
         @media (max-width: 480px) { .slide-btn-track { height: 52px; } .slide-btn-handle { width: 44px; height: 44px; } .slide-btn-label { font-size: 0.8rem; } }
         .card-spot-controls { display: flex; align-items: center; gap: 8px; margin-top: 12px; }
-        .card-spot-controls button { width: 32px; height: 32px; border-radius: 50%; border: 1px solid rgba(212,165,86,0.4); background: rgba(255,255,255,0.05); color: var(--secondary-gold); font-size: 1.1rem; cursor: pointer; display: flex; align-items: center; justify-content: center; transition: all 0.2s; }
-        .card-spot-controls button:hover { background: rgba(212,165,86,0.15); }
+        .card-spot-controls button { width: 32px; height: 32px; border-radius: 50%; border: 1px solid rgba(201, 184, 151,0.4); background: rgba(255,255,255,0.05); color: var(--secondary-gold); font-size: 1.1rem; cursor: pointer; display: flex; align-items: center; justify-content: center; transition: all 0.2s; }
+        .card-spot-controls button:hover { background: rgba(201, 184, 151,0.15); }
         .card-spot-controls button:disabled { opacity: 0.3; cursor: not-allowed; }
         .card-spot-controls .card-spot-count { font-size: 1.1rem; font-weight: 700; color: var(--text-light); min-width: 28px; text-align: center; }
         .card-spot-controls span.spot-label { font-size: 0.82rem; color: rgba(245,245,245,0.5); }
-        .gender-limit-note { font-size: 0.78rem; color: rgba(212,165,86,0.7); margin-top: 6px; }
+        .gender-limit-note { font-size: 0.78rem; color: rgba(201, 184, 151,0.7); margin-top: 6px; }
         @media (max-width: 600px) { 
             .container { padding: 15px 12px; } 
             .page-header h1 { font-size: 1.8rem; } 
@@ -203,16 +203,16 @@
         .pyc-progress-title { text-align:center; font-size:0.7rem; text-transform:uppercase; letter-spacing:2px; color:rgba(245,245,245,0.3); margin-bottom:14px; font-weight:600; }
         .pyc-steps { display:flex; align-items:flex-start; justify-content:space-between; position:relative; }
         .pyc-steps::before { content:''; position:absolute; top:16px; left:0; right:0; height:3px; background:rgba(255,255,255,0.06); border-radius:2px; }
-        .pyc-line { position:absolute; top:16px; left:0; height:3px; z-index:1; background:linear-gradient(90deg,#d4a556,#e5b96a); border-radius:2px; }
+        .pyc-line { position:absolute; top:16px; left:0; height:3px; z-index:1; background:linear-gradient(90deg,#c9b897,#d9cbb0); border-radius:2px; }
         .pyc-s { display:flex; flex-direction:column; align-items:center; flex:1; position:relative; z-index:3; }
         .pyc-dot { width:32px; height:32px; border-radius:50%; display:flex; align-items:center; justify-content:center; font-size:0.75rem; font-weight:700; border:3px solid rgba(255,255,255,0.08); background:#1c1c1e; color:rgba(245,245,245,0.25); transition:all 0.3s; }
-        .pyc-s.done .pyc-dot { background:#d4a556; color:#1c1c1e; border-color:#d4a556; }
-        .pyc-s.now .pyc-dot { background:rgba(212,165,86,0.12); color:#d4a556; border-color:#d4a556; box-shadow:0 0 15px rgba(212,165,86,0.3); animation:pyc-glow 2s infinite; }
+        .pyc-s.done .pyc-dot { background:#c9b897; color:#1c1c1e; border-color:#c9b897; }
+        .pyc-s.now .pyc-dot { background:rgba(201, 184, 151,0.12); color:#c9b897; border-color:#c9b897; box-shadow:0 0 15px rgba(201, 184, 151,0.3); animation:pyc-glow 2s infinite; }
         .pyc-lbl { margin-top:7px; font-size:0.62rem; color:rgba(245,245,245,0.2); text-align:center; font-weight:600; text-transform:uppercase; letter-spacing:0.3px; line-height:1.3; max-width:70px; }
-        .pyc-s.done .pyc-lbl { color:rgba(212,165,86,0.65); }
+        .pyc-s.done .pyc-lbl { color:rgba(201, 184, 151,0.65); }
         .pyc-s.now .pyc-lbl { color:#f5f5f5; }
-        .pyc-hint { text-align:center; margin-top:10px; font-size:0.78rem; color:rgba(212,165,86,0.55); font-style:italic; }
-        @keyframes pyc-glow { 0%,100%{box-shadow:0 0 10px rgba(212,165,86,0.2);} 50%{box-shadow:0 0 20px rgba(212,165,86,0.45);} }
+        .pyc-hint { text-align:center; margin-top:10px; font-size:0.78rem; color:rgba(201, 184, 151,0.55); font-style:italic; }
+        @keyframes pyc-glow { 0%,100%{box-shadow:0 0 10px rgba(201, 184, 151,0.2);} 50%{box-shadow:0 0 20px rgba(201, 184, 151,0.45);} }
         @media(max-width:480px) { .pyc-dot{width:26px;height:26px;font-size:0.65rem;border-width:2px;} .pyc-lbl{font-size:0.55rem;max-width:55px;} .pyc-steps::before{left:0;right:0;} .pyc-line{left:0;} }
         /* Shimmer button animation — matches landing page */
         @keyframes shimmer-sweep { 0% { left: -100%; } 50% { left: 100%; } 100% { left: 100%; } }
@@ -220,29 +220,29 @@
         .shimmer-btn::before { content:''; position:absolute; top:-50%; left:-100%; width:60%; height:200%; background:linear-gradient(105deg,transparent 20%,rgba(255,255,255,0.0) 40%,rgba(255,255,255,0.4) 50%,rgba(255,255,255,0.0) 60%,transparent 80%); animation:shimmer-sweep 3s ease-in-out infinite; z-index:1; pointer-events:none; }
         /* Prank feedback overlay */
         .prank-feedback-overlay { position:fixed;inset:0;z-index:9999999;background:rgba(10,15,20,0.95);display:flex;align-items:center;justify-content:center;padding:20px;backdrop-filter:blur(8px); }
-        .prank-feedback-box { background:rgba(28, 28, 30,0.98);border:2px solid rgba(212,165,86,0.3);border-radius:20px;padding:35px 28px;max-width:440px;width:100%;box-shadow:0 30px 80px rgba(0,0,0,0.6); }
+        .prank-feedback-box { background:rgba(28, 28, 30,0.98);border:2px solid rgba(201, 184, 151,0.3);border-radius:20px;padding:35px 28px;max-width:440px;width:100%;box-shadow:0 30px 80px rgba(0,0,0,0.6); }
         .prank-emoji-row { display:flex;gap:8px;justify-content:center;margin:15px 0; }
-        .prank-emoji-btn { width:48px;height:48px;border-radius:50%;border:2px solid rgba(212,165,86,0.2);background:transparent;cursor:pointer;font-size:1.5rem;transition:all 0.3s;display:flex;align-items:center;justify-content:center; }
-        .prank-emoji-btn.selected { border-color:#d4a556;background:rgba(212,165,86,0.2);transform:scale(1.15); }
-        .prank-textarea { width:100%;min-height:100px;padding:14px;background:rgba(255,255,255,0.05);border:1px solid rgba(212,165,86,0.3);border-radius:12px;color:#f5f5f5;font-family:'Montserrat',sans-serif;font-size:0.9rem;resize:none;margin:12px 0; }
-        .prank-textarea:focus { outline:none;border-color:#d4a556; }
+        .prank-emoji-btn { width:48px;height:48px;border-radius:50%;border:2px solid rgba(201, 184, 151,0.2);background:transparent;cursor:pointer;font-size:1.5rem;transition:all 0.3s;display:flex;align-items:center;justify-content:center; }
+        .prank-emoji-btn.selected { border-color:#c9b897;background:rgba(201, 184, 151,0.2);transform:scale(1.15); }
+        .prank-textarea { width:100%;min-height:100px;padding:14px;background:rgba(255,255,255,0.05);border:1px solid rgba(201, 184, 151,0.3);border-radius:12px;color:#f5f5f5;font-family:'Montserrat',sans-serif;font-size:0.9rem;resize:none;margin:12px 0; }
+        .prank-textarea:focus { outline:none;border-color:#c9b897; }
         .prank-textarea::placeholder { color:rgba(245,245,245,0.3); }
         .prank-charcount { font-size:0.75rem;color:rgba(245,245,245,0.3);text-align:right;margin-top:-8px;margin-bottom:10px; }
         .prank-send-btn { width:100%;padding:14px;border:none;border-radius:10px;font-family:'Montserrat',sans-serif;font-weight:700;font-size:0.95rem;cursor:pointer;transition:all 0.3s; }
         .prank-send-btn:disabled { opacity:0.3;cursor:not-allowed; }
         /* Confirmation dialog */
         .prank-confirm-overlay { position:fixed;inset:0;z-index:9999998;background:rgba(10,15,20,0.92);display:flex;align-items:center;justify-content:center;padding:20px;backdrop-filter:blur(6px); }
-        .prank-confirm-box { background:rgba(28, 28, 30,0.98);border:2px solid rgba(212,165,86,0.3);border-radius:20px;padding:35px 28px;max-width:400px;width:100%;text-align:center;box-shadow:0 30px 80px rgba(0,0,0,0.6); }
+        .prank-confirm-box { background:rgba(28, 28, 30,0.98);border:2px solid rgba(201, 184, 151,0.3);border-radius:20px;padding:35px 28px;max-width:400px;width:100%;text-align:center;box-shadow:0 30px 80px rgba(0,0,0,0.6); }
         /* Pricing carousel */
         .pricing-card { position:absolute;inset:0;transition:all 0.6s cubic-bezier(0.23,1,0.32,1);border-radius:16px;overflow:hidden;cursor:pointer; }
         /* Terms Box (inline, before checkout) */
-        .terms-box { background:rgba(255,255,255,0.03); border:1px solid rgba(212,165,86,0.2); border-radius:10px; margin:18px 0 12px; overflow:hidden; }
-        .terms-box-header { padding:12px 16px; border-bottom:1px solid rgba(212,165,86,0.1); }
+        .terms-box { background:rgba(255,255,255,0.03); border:1px solid rgba(201, 184, 151,0.2); border-radius:10px; margin:18px 0 12px; overflow:hidden; }
+        .terms-box-header { padding:12px 16px; border-bottom:1px solid rgba(201, 184, 151,0.1); }
         .terms-box-header h3 { font-family:'Bebas Neue',sans-serif; color:var(--secondary-gold); font-size:1.1rem; letter-spacing:1px; }
         .terms-box-body { max-height:180px; overflow-y:auto; padding:14px 16px; font-size:0.82rem; color:rgba(245,245,245,0.7); line-height:1.7; }
         .terms-box-body strong { color:var(--secondary-gold); font-size:0.84rem; }
         .terms-box-body p { margin-bottom:8px; }
-        .terms-scroll-hint { text-align:center; padding:6px; color:rgba(212,165,86,0.5); font-size:0.72rem; font-weight:600; letter-spacing:1px; animation:pulseHint 2s infinite; }
+        .terms-scroll-hint { text-align:center; padding:6px; color:rgba(201, 184, 151,0.5); font-size:0.72rem; font-weight:600; letter-spacing:1px; animation:pulseHint 2s infinite; }
         @keyframes pulseHint { 0%,100%{opacity:0.5} 50%{opacity:1} }
         .terms-checkbox { display:flex; align-items:flex-start; gap:10px; margin:10px 0 0; padding:0 16px 14px; }
         .terms-checkbox input[type="checkbox"] { width:18px; height:18px; margin-top:2px; accent-color:var(--secondary-gold); cursor:pointer; flex-shrink:0; }
@@ -255,7 +255,7 @@
 
     <!-- Accommodation-closed overlay (hidden by default; shown when /server-time reports accommodationClosed) -->
     <div id="accomClosedOverlay" style="display:none;position:fixed;inset:0;z-index:9000;background:linear-gradient(135deg,#000000 0%,#1c1c1e 50%,#2c2c2e 100%);overflow-y:auto;padding:40px 20px;">
-        <div style="max-width:520px;margin:40px auto 0;background:var(--background-overlay);border:2px solid rgba(212,165,86,0.3);border-radius:20px;padding:40px 30px;text-align:center;">
+        <div style="max-width:520px;margin:40px auto 0;background:var(--background-overlay);border:2px solid rgba(201, 184, 151,0.3);border-radius:20px;padding:40px 30px;text-align:center;">
             <h1 style="font-family:'Bebas Neue',sans-serif;font-size:2.2rem;color:var(--secondary-gold);letter-spacing:3px;margin-bottom:10px;">SEE YOU IN DAVAO!</h1>
             <p style="font-size:1.1rem;color:rgba(245,245,245,0.85);margin-bottom:8px;">Accommodation reservations are closed.</p>
             <p style="color:rgba(245,245,245,0.65);margin:14px 0 26px 0;line-height:1.7;">
@@ -299,7 +299,7 @@
                     <div id="groupMembersList"></div>
                     <button class="member-select-confirm" id="confirmMembersBtn" disabled onclick="confirmMemberSelection()">Continue with Selected Members</button>
                 </div>
-                <button onclick="resetIdentity()" style="margin-top:12px; padding:8px 16px; background:transparent; border:1px solid rgba(212,165,86,0.3); border-radius:6px; color:rgba(245,245,245,0.6); cursor:pointer; font-size:0.82rem;">Change Email</button>
+                <button onclick="resetIdentity()" style="margin-top:12px; padding:8px 16px; background:transparent; border:1px solid rgba(201, 184, 151,0.3); border-radius:6px; color:rgba(245,245,245,0.6); cursor:pointer; font-size:0.82rem;">Change Email</button>
             </div>
             <div id="lookupSection">
                 <p style="color:rgba(245,245,245,0.6); font-size:0.9rem; margin-bottom:4px;">Enter your registration email and PYC confirmation number to look up your registration.</p>
@@ -316,10 +316,10 @@
         <!-- Tenting card - always visible -->
         <div id="tentingCardStandalone" style="margin-bottom:20px;">
             <div class="accomm-grid" style="display:grid;grid-template-columns:1fr;">
-                <div style="background:var(--background-overlay);border:2px solid rgba(212,165,86,0.3);border-radius:14px;padding:22px 24px;">
+                <div style="background:var(--background-overlay);border:2px solid rgba(201, 184, 151,0.3);border-radius:14px;padding:22px 24px;">
                     <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:10px;">
                         <h3 style="font-family:'Bebas Neue',sans-serif;color:var(--text-light);font-size:1.15rem;letter-spacing:1px;">Camping / Tenting</h3>
-                        <div style="background:rgba(212,165,86,0.15);color:var(--secondary-gold);padding:4px 14px;border-radius:20px;font-weight:700;font-size:0.85rem;">&#8369;150/person</div>
+                        <div style="background:rgba(201, 184, 151,0.15);color:var(--secondary-gold);padding:4px 14px;border-radius:20px;font-weight:700;font-size:0.85rem;">&#8369;150/person</div>
                     </div>
                     <p style="color:rgba(245,245,245,0.55);font-size:0.88rem;margin-bottom:12px;line-height:1.5;">Bring your own tent. Each tenting space is 2m&times;2m under a shared canopy. 2-4 people per tent.</p>
                     <div style="display:flex;gap:8px;flex-wrap:wrap;margin-bottom:14px;">
@@ -327,7 +327,7 @@
                         <span style="background:rgba(255,255,255,0.06);border:1px solid rgba(255,255,255,0.1);border-radius:6px;padding:4px 12px;font-size:0.75rem;color:rgba(245,245,245,0.5);">Bring your own tent</span>
                         <span style="background:rgba(255,255,255,0.06);border:1px solid rgba(255,255,255,0.1);border-radius:6px;padding:4px 12px;font-size:0.75rem;color:rgba(245,245,245,0.5);">10 canopies available</span>
                     </div>
-                    <a href="/tenting" style="display:block;text-align:center;padding:12px 24px;background:rgba(212,165,86,0.15);color:var(--secondary-gold);border:1px solid rgba(212,165,86,0.3);border-radius:10px;font-weight:700;font-size:0.9rem;text-decoration:none;transition:all 0.3s;">Reserve Tenting Space</a>
+                    <a href="/tenting" style="display:block;text-align:center;padding:12px 24px;background:rgba(201, 184, 151,0.15);color:var(--secondary-gold);border:1px solid rgba(201, 184, 151,0.3);border-radius:10px;font-weight:700;font-size:0.9rem;text-decoration:none;transition:all 0.3s;">Reserve Tenting Space</a>
                 </div>
             </div>
         </div>
@@ -343,19 +343,19 @@
             <!-- Roommate Request Section -->
             <div id="roommateSection" style="margin:18px 0 12px;display:none;">
                 <!-- Notification: someone requested you -->
-                <div id="roommateNotice" style="display:none;background:rgba(212,165,86,0.1);border:1px solid rgba(212,165,86,0.3);border-radius:10px;padding:16px;margin-bottom:14px;">
+                <div id="roommateNotice" style="display:none;background:rgba(201, 184, 151,0.1);border:1px solid rgba(201, 184, 151,0.3);border-radius:10px;padding:16px;margin-bottom:14px;">
                     <div style="font-weight:700;color:var(--secondary-gold);font-size:0.95rem;margin-bottom:6px;">Roommate Request</div>
                     <p id="roommateNoticeText" style="color:rgba(245,245,245,0.8);font-size:0.88rem;line-height:1.6;"></p>
                 </div>
 
                 <!-- Own request display -->
-                <div id="ownRequestDisplay" style="display:none;background:rgba(212,165,86,0.08);border:1px solid rgba(212,165,86,0.2);border-radius:10px;padding:16px;margin-bottom:14px;">
+                <div id="ownRequestDisplay" style="display:none;background:rgba(201, 184, 151,0.08);border:1px solid rgba(201, 184, 151,0.2);border-radius:10px;padding:16px;margin-bottom:14px;">
                     <div style="font-weight:700;color:var(--secondary-gold);font-size:0.95rem;margin-bottom:6px;">Your Roommate Request</div>
                     <div id="ownRequestMembers"></div>
                 </div>
 
                 <!-- Group auto-roommate notice -->
-                <div id="groupRoommateNotice" style="display:none;background:rgba(212,165,86,0.08);border:1px solid rgba(212,165,86,0.2);border-radius:10px;padding:16px;margin-bottom:14px;">
+                <div id="groupRoommateNotice" style="display:none;background:rgba(201, 184, 151,0.08);border:1px solid rgba(201, 184, 151,0.2);border-radius:10px;padding:16px;margin-bottom:14px;">
                     <div style="font-weight:700;color:var(--secondary-gold);font-size:0.95rem;margin-bottom:6px;">Group Roommate Assignment</div>
                     <p style="color:rgba(245,245,245,0.8);font-size:0.88rem;line-height:1.6;">Since you are reserving as a group, your members of the same gender will automatically be assigned as roommates when you proceed to payment. No need to submit a separate roommate request.</p>
                     <div id="groupRoommatePreview" style="margin-top:10px;"></div>
@@ -364,20 +364,20 @@
 
                 <!-- Request form (hidden if already requested or been requested) -->
                 <div id="roommateForm" style="display:none;">
-                    <div style="background:rgba(255,255,255,0.03);border:1px solid rgba(212,165,86,0.2);border-radius:10px;padding:16px;">
+                    <div style="background:rgba(255,255,255,0.03);border:1px solid rgba(201, 184, 151,0.2);border-radius:10px;padding:16px;">
                         <div style="display:flex;align-items:flex-start;gap:10px;margin-bottom:12px;">
                             <input type="checkbox" id="wantRoommate" onchange="toggleRoommateForm()" style="width:18px;height:18px;margin-top:2px;accent-color:var(--secondary-gold);cursor:pointer;flex-shrink:0;">
                             <label for="wantRoommate" style="font-size:0.9rem;color:rgba(245,245,245,0.8);cursor:pointer;line-height:1.5;">I'd like to request specific roommates</label>
                         </div>
                         <div id="roommateInputArea" style="display:none;">
                             <p style="color:rgba(245,245,245,0.5);font-size:0.82rem;margin-bottom:10px;line-height:1.6;">Add up to 3 people you'd like to room with. They must be registered for PYC 2027 and be the same gender as you. Roommate requests are not guaranteed.</p>
-                            <p style="color:rgba(212,165,86,0.7);font-size:0.78rem;margin-bottom:10px;line-height:1.5;font-style:italic;">Note: If a delegate didn't specify their gender during registration, you can still add them &mdash; but please only add males to male groups and females to female groups, since dorms are gender-separated.</p>
+                            <p style="color:rgba(201, 184, 151,0.7);font-size:0.78rem;margin-bottom:10px;line-height:1.5;font-style:italic;">Note: If a delegate didn't specify their gender during registration, you can still add them &mdash; but please only add males to male groups and females to female groups, since dorms are gender-separated.</p>
                             <div id="roommateList"></div>
                             <div id="roommateAddBox" style="margin-top:10px;">
                                 <p style="color:rgba(245,245,245,0.5);font-size:0.82rem;margin-bottom:6px;">Enter their full name and PYC number:</p>
                                 <div style="display:flex;gap:8px;flex-wrap:wrap;">
-                                    <input type="text" id="rmName" placeholder="Full name" style="flex:1;min-width:130px;padding:10px 14px;background:rgba(255,255,255,0.05);border:1px solid rgba(212,165,86,0.3);border-radius:8px;color:var(--text-light);font-family:'Montserrat',sans-serif;font-size:0.88rem;">
-                                    <input type="text" id="rmPYC" placeholder="PYC-XXXX" style="width:120px;padding:10px 14px;background:rgba(255,255,255,0.05);border:1px solid rgba(212,165,86,0.3);border-radius:8px;color:var(--text-light);font-family:'Montserrat',sans-serif;font-size:0.88rem;text-transform:uppercase;" onkeydown="if(event.key==='Enter')lookupRoommate()">
+                                    <input type="text" id="rmName" placeholder="Full name" style="flex:1;min-width:130px;padding:10px 14px;background:rgba(255,255,255,0.05);border:1px solid rgba(201, 184, 151,0.3);border-radius:8px;color:var(--text-light);font-family:'Montserrat',sans-serif;font-size:0.88rem;">
+                                    <input type="text" id="rmPYC" placeholder="PYC-XXXX" style="width:120px;padding:10px 14px;background:rgba(255,255,255,0.05);border:1px solid rgba(201, 184, 151,0.3);border-radius:8px;color:var(--text-light);font-family:'Montserrat',sans-serif;font-size:0.88rem;text-transform:uppercase;" onkeydown="if(event.key==='Enter')lookupRoommate()">
                                     <button onclick="lookupRoommate()" style="padding:10px 18px;background:var(--secondary-gold);color:var(--primary-navy);border:none;border-radius:8px;font-weight:700;cursor:pointer;font-size:0.85rem;white-space:nowrap;">Add</button>
                                 </div>
                                 <div id="rmResult" style="margin-top:8px;font-size:0.85rem;"></div>
@@ -386,7 +386,7 @@
                         </div>
 
                         <!-- FAQ -->
-                        <div id="roommateFAQ" style="display:none;margin-top:14px;border-top:1px solid rgba(212,165,86,0.1);padding-top:14px;">
+                        <div id="roommateFAQ" style="display:none;margin-top:14px;border-top:1px solid rgba(201, 184, 151,0.1);padding-top:14px;">
                             <p style="color:var(--secondary-gold);font-size:0.85rem;font-weight:700;margin-bottom:8px;cursor:pointer;" onclick="this.nextElementSibling.style.display=this.nextElementSibling.style.display==='none'?'block':'none';">How does the roommate request work? ▾</p>
                             <div style="display:none;color:rgba(245,245,245,0.6);font-size:0.8rem;line-height:1.7;">
                                 <p style="margin-bottom:6px;">1. You can request up to 3 people to room with (max 4 per room including yourself).</p>
@@ -421,7 +421,7 @@
                 <div class="slide-btn-track" data-slide-btn="checkoutBtn" style="display:none;">
                     <div class="slide-btn-fill"></div>
                     <span class="slide-btn-label">Slide to Continue →</span>
-                    <div class="slide-btn-dots"><svg width="40" height="24" viewBox="0 0 24 24"><circle cx="4" cy="12" r="2" fill="#d4a556"><animate id="ac1" begin="0;ac3.end+0.25s" attributeName="cy" calcMode="spline" dur="0.6s" values="12;6;12" keySplines=".33,.66,.66,1;.33,0,.66,.33"/></circle><circle cx="12" cy="12" r="2" fill="#d4a556"><animate begin="ac1.begin+0.1s" attributeName="cy" calcMode="spline" dur="0.6s" values="12;6;12" keySplines=".33,.66,.66,1;.33,0,.66,.33"/></circle><circle cx="20" cy="12" r="2" fill="#d4a556"><animate id="ac3" begin="ac1.begin+0.2s" attributeName="cy" calcMode="spline" dur="0.6s" values="12;6;12" keySplines=".33,.66,.66,1;.33,0,.66,.33"/></circle></svg></div>
+                    <div class="slide-btn-dots"><svg width="40" height="24" viewBox="0 0 24 24"><circle cx="4" cy="12" r="2" fill="#c9b897"><animate id="ac1" begin="0;ac3.end+0.25s" attributeName="cy" calcMode="spline" dur="0.6s" values="12;6;12" keySplines=".33,.66,.66,1;.33,0,.66,.33"/></circle><circle cx="12" cy="12" r="2" fill="#c9b897"><animate begin="ac1.begin+0.1s" attributeName="cy" calcMode="spline" dur="0.6s" values="12;6;12" keySplines=".33,.66,.66,1;.33,0,.66,.33"/></circle><circle cx="20" cy="12" r="2" fill="#c9b897"><animate id="ac3" begin="ac1.begin+0.2s" attributeName="cy" calcMode="spline" dur="0.6s" values="12;6;12" keySplines=".33,.66,.66,1;.33,0,.66,.33"/></circle></svg></div>
                     <div class="slide-btn-handle">
                         <svg viewBox="0 0 24 24"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
                         <div class="slide-btn-loading"><div class="orbit orbit-1"></div><div class="orbit orbit-2"></div><div class="orbit orbit-3"></div></div>
@@ -430,9 +430,9 @@
             </div>
         </div>
 
-        <div id="mindanaoNote" class="note-box" style="display:none;background:rgba(231,76,60,0.08);border-color:rgba(231,76,60,0.25);"><strong style="color:#e74c3c;">Mindanao Delegates:</strong> Dorm reservations for Mindanao delegates open in <span id="mindanaoCountdownInline" style="color:#d4a556;font-weight:700;">soon</span>. Until then, you may reserve tenting accommodations.</div>
+        <div id="mindanaoNote" class="note-box" style="display:none;background:rgba(231,76,60,0.08);border-color:rgba(231,76,60,0.25);"><strong style="color:#e74c3c;">Mindanao Delegates:</strong> Dorm reservations for Mindanao delegates open in <span id="mindanaoCountdownInline" style="color:#c9b897;font-weight:700;">soon</span>. Until then, you may reserve tenting accommodations.</div>
         <div class="note-box" style="margin-top:20px;"><strong>Important:</strong> You will be sharing your accommodation with other PYC 2027 delegates. Room assignments will be coordinated by the organizing team. Prices shown are per person. Roommate requests and group room assignments are not guaranteed.</div>
-        <div id="mindanaoGeneralNote" class="note-box" style="margin-top:12px;"><strong>Mindanao Delegates:</strong> Dorm reservations for Mindanao delegates open in <span id="mindanaoCountdownGeneral" style="color:#d4a556;font-weight:700;">soon</span>. Until then, you are welcome to reserve a tenting space (&#8369;150 per person).</div>
+        <div id="mindanaoGeneralNote" class="note-box" style="margin-top:12px;"><strong>Mindanao Delegates:</strong> Dorm reservations for Mindanao delegates open in <span id="mindanaoCountdownGeneral" style="color:#c9b897;font-weight:700;">soon</span>. Until then, you are welcome to reserve a tenting space (&#8369;150 per person).</div>
     </div>
     <script>
         (function(){const c=document.getElementById('stars');const z=['top','bottom','left','right'];for(let i=0;i<50;i++){const s=document.createElement('div');s.className='star';const zone=z[Math.floor(Math.random()*4)];let l,t;if(zone==='top'){l=Math.random()*100;t=Math.random()*20;}else if(zone==='bottom'){l=Math.random()*100;t=80+Math.random()*20;}else if(zone==='left'){l=Math.random()*15;t=20+Math.random()*60;}else{l=85+Math.random()*15;t=20+Math.random()*60;}const sz=Math.random()*3+2;s.style.cssText=`width:${sz}px;height:${sz}px;left:${l}%;top:${t}%;animation-delay:${Math.random()*3}s;animation-duration:${Math.random()*2+2}s;`;c.appendChild(s);}})();
@@ -850,7 +850,7 @@
             if (roommateMembers.length === 0) { el.innerHTML = ''; document.getElementById('submitRoommateBtn').style.display = 'none'; return; }
             var h = '';
             roommateMembers.forEach(function(m, i) {
-                h += '<div style="display:flex;align-items:center;gap:10px;padding:8px 12px;background:rgba(212,165,86,0.06);border:1px solid rgba(212,165,86,0.15);border-radius:8px;margin-bottom:6px;">'
+                h += '<div style="display:flex;align-items:center;gap:10px;padding:8px 12px;background:rgba(201, 184, 151,0.06);border:1px solid rgba(201, 184, 151,0.15);border-radius:8px;margin-bottom:6px;">'
                     + '<span style="flex:1;font-size:0.88rem;color:var(--text-light);">' + escHtml(m.name) + ' <span style="color:var(--secondary-gold);font-size:0.8rem;">' + escHtml(m.pycNumber) + '</span></span>'
                     + '<span onclick="removeRoommate(' + i + ')" style="color:#e74c3c;cursor:pointer;font-size:0.82rem;font-weight:600;">Remove</span></div>';
             });
@@ -1042,11 +1042,11 @@
                 h+=`</div>`;
             });
             // Tenting card — always shown, links to separate tenting page
-            h+=`<div class="accomm-card" style="border-color:rgba(212,165,86,0.3);">
-                <div class="card-header"><h3>Camping / Tenting</h3><div class="price" style="background:rgba(212,165,86,0.15);color:var(--secondary-gold);">&#8369;150/person</div></div>
+            h+=`<div class="accomm-card" style="border-color:rgba(201, 184, 151,0.3);">
+                <div class="card-header"><h3>Camping / Tenting</h3><div class="price" style="background:rgba(201, 184, 151,0.15);color:var(--secondary-gold);">&#8369;150/person</div></div>
                 <p class="description">Bring your own tent. Each tenting space is 2m&times;2m under a shared canopy. 2-4 people per tent.</p>
                 <div class="details"><span class="detail-tag">Any gender</span><span class="detail-tag">Bring your own tent</span><span class="detail-tag">10 canopies available</span></div>
-                <a href="/tenting" class="reserve-btn" style="background:rgba(212,165,86,0.15);color:var(--secondary-gold);border-color:rgba(212,165,86,0.3);display:block;text-align:center;text-decoration:none;">Reserve Tenting Space</a>
+                <a href="/tenting" class="reserve-btn" style="background:rgba(201, 184, 151,0.15);color:var(--secondary-gold);border-color:rgba(201, 184, 151,0.3);display:block;text-align:center;text-decoration:none;">Reserve Tenting Space</a>
             </div>`;
             h+='</div>'; c.innerHTML=h;
         }
@@ -1364,7 +1364,7 @@
                 if (res.ok && data.success) {
                     showAlert(`You are #${data.position} on the waitlist for ${data.displayName}! We'll email you at ${registrantEmail} if a spot opens up.`, 'success');
                     btn.textContent = '\u2713 On Waitlist (#' + data.position + ')';
-                    btn.style.background = 'rgba(212,165,86,0.3)'; btn.style.borderColor = 'var(--secondary-gold)'; btn.style.color = 'var(--secondary-gold)';
+                    btn.style.background = 'rgba(201, 184, 151,0.3)'; btn.style.borderColor = 'var(--secondary-gold)'; btn.style.color = 'var(--secondary-gold)';
                 } else { showAlert(data.error || 'Failed to join waitlist.', 'error'); btn.disabled = false; btn.textContent = origText; }
             } catch(err) { showAlert('Error: ' + err.message, 'error'); btn.disabled = false; btn.textContent = origText; }
         }
@@ -1400,7 +1400,7 @@
                     if (!dragging) return; dragging = false;
                     if (currentX / maxDrag >= 0.85) {
                         completed = true; track.classList.add('completed');
-                        label.textContent = 'Processing...'; label.style.opacity = '1'; label.style.color = 'rgba(212,165,86,0.8)';
+                        label.textContent = 'Processing...'; label.style.opacity = '1'; label.style.color = 'rgba(201, 184, 151,0.8)';
                         hiddenBtn.click();
                         setTimeout(function() { if (completed) resetSlide(); }, 2000);
                     } else { track.classList.add('resetting'); handle.style.left = '4px'; fill.style.width = '0px'; label.style.opacity = '0.5'; currentX = 0; }
@@ -1422,10 +1422,10 @@
     <!-- Phase 2: Resort Showcase -->
     <div id="resortPhase" style="display:none;min-height:100vh;padding:30px 15px 40px;position:relative;">
         <div style="text-align:center;margin-bottom:8px;">
-            <div style="font-family:'Bebas Neue',sans-serif;color:#d4a556;font-size:clamp(1.1rem,3vw,1.4rem);letter-spacing:4px;text-transform:uppercase;opacity:0.6;">Exclusive Invitation</div>
+            <div style="font-family:'Bebas Neue',sans-serif;color:#c9b897;font-size:clamp(1.1rem,3vw,1.4rem);letter-spacing:4px;text-transform:uppercase;opacity:0.6;">Exclusive Invitation</div>
         </div>
         <h1 style="font-family:'Bebas Neue',sans-serif;color:#f5f5f5;font-size:clamp(2rem,6vw,3.2rem);text-align:center;letter-spacing:2px;margin-bottom:5px;">The Jungle Haven Retreat</h1>
-        <p style="text-align:center;color:#d4a556;font-size:clamp(0.85rem,2vw,1rem);font-weight:600;margin-bottom:25px;">A PYC 2027 Partner Resort &bull; By Invitation Only</p>
+        <p style="text-align:center;color:#c9b897;font-size:clamp(0.85rem,2vw,1rem);font-weight:600;margin-bottom:25px;">A PYC 2027 Partner Resort &bull; By Invitation Only</p>
 
         <!-- Card Carousel -->
         <div id="carouselWrapper" style="position:relative;max-width:420px;margin:0 auto;perspective:1000px;">
@@ -1434,7 +1434,7 @@
                     <img src="/accomm-pic-1.png" style="width:100%;height:100%;object-fit:cover;display:block;" alt="Resort view">
                     <div style="position:absolute;inset:0;background:linear-gradient(to top,rgba(0,0,0,0.85) 0%,rgba(0,0,0,0.2) 40%,transparent 60%);"></div>
                     <div style="position:absolute;bottom:0;left:0;right:0;padding:24px;">
-                        <div style="color:#d4a556;font-size:0.75rem;font-weight:700;letter-spacing:2px;text-transform:uppercase;margin-bottom:6px;">The Grounds</div>
+                        <div style="color:#c9b897;font-size:0.75rem;font-weight:700;letter-spacing:2px;text-transform:uppercase;margin-bottom:6px;">The Grounds</div>
                         <div style="color:#f5f5f5;font-size:1.15rem;font-weight:700;line-height:1.3;margin-bottom:8px;">Rolling Hills &amp; Lush Canopy</div>
                         <div style="color:rgba(245,245,245,0.7);font-size:0.82rem;line-height:1.5;">Nestled in the heart of Mindanao's untouched jungle, our 50-acre estate features open-air living spaces designed exclusively for our most distinguished primate guests. Roam freely across endless green hills.</div>
                     </div>
@@ -1443,7 +1443,7 @@
                     <img src="/accomm-pic-2.png" style="width:100%;height:100%;object-fit:cover;display:block;" alt="Banana buffet">
                     <div style="position:absolute;inset:0;background:linear-gradient(to top,rgba(0,0,0,0.85) 0%,rgba(0,0,0,0.2) 40%,transparent 60%);"></div>
                     <div style="position:absolute;bottom:0;left:0;right:0;padding:24px;">
-                        <div style="color:#d4a556;font-size:0.75rem;font-weight:700;letter-spacing:2px;text-transform:uppercase;margin-bottom:6px;">All-Inclusive Dining</div>
+                        <div style="color:#c9b897;font-size:0.75rem;font-weight:700;letter-spacing:2px;text-transform:uppercase;margin-bottom:6px;">All-Inclusive Dining</div>
                         <div style="color:#f5f5f5;font-size:1.15rem;font-weight:700;line-height:1.3;margin-bottom:8px;">Banana Paradise Buffet</div>
                         <div style="color:rgba(245,245,245,0.7);font-size:0.82rem;line-height:1.5;">Our world-renowned banana buffet is freshly stocked every morning — specifically gathered for apes and primates. From Lakatan to Saba, enjoy unlimited servings of Mindanao's finest. Fresh bananas only!</div>
                     </div>
@@ -1452,14 +1452,14 @@
                     <img src="/accomm-pic-3.png" style="width:100%;height:100%;object-fit:cover;display:block;" alt="Night view">
                     <div style="position:absolute;inset:0;background:linear-gradient(to top,rgba(0,0,0,0.85) 0%,rgba(0,0,0,0.2) 40%,transparent 60%);"></div>
                     <div style="position:absolute;bottom:0;left:0;right:0;padding:24px;">
-                        <div style="color:#d4a556;font-size:0.75rem;font-weight:700;letter-spacing:2px;text-transform:uppercase;margin-bottom:6px;">Evenings Under the Stars</div>
+                        <div style="color:#c9b897;font-size:0.75rem;font-weight:700;letter-spacing:2px;text-transform:uppercase;margin-bottom:6px;">Evenings Under the Stars</div>
                         <div style="color:#f5f5f5;font-size:1.15rem;font-weight:700;line-height:1.3;margin-bottom:8px;">Sleep Beneath the Milky Way</div>
                         <div style="color:rgba(245,245,245,0.7);font-size:0.82rem;line-height:1.5;">As night falls, the jungle transforms. No walls, no ceilings — just you and the stars. Our open-air sleeping nests are perched among century-old trees. It is truly a once-in-a-lifetime privilege to be selected.</div>
                     </div>
                 </div>
             </div>
             <div id="carouselDots" style="display:flex;justify-content:center;gap:10px;margin-top:18px;">
-                <span class="cdot active" onclick="goToResortCard(0)" style="width:10px;height:10px;border-radius:50%;background:#d4a556;cursor:pointer;transition:all 0.3s;"></span>
+                <span class="cdot active" onclick="goToResortCard(0)" style="width:10px;height:10px;border-radius:50%;background:#c9b897;cursor:pointer;transition:all 0.3s;"></span>
                 <span class="cdot" onclick="goToResortCard(1)" style="width:10px;height:10px;border-radius:50%;background:rgba(245,245,245,0.25);cursor:pointer;transition:all 0.3s;"></span>
                 <span class="cdot" onclick="goToResortCard(2)" style="width:10px;height:10px;border-radius:50%;background:rgba(245,245,245,0.25);cursor:pointer;transition:all 0.3s;"></span>
             </div>
@@ -1468,25 +1468,25 @@
         <div style="text-align:center;margin-top:25px;max-width:900px;margin-left:auto;margin-right:auto;">
             <p style="color:rgba(245,245,245,0.5);font-size:0.8rem;font-style:italic;margin-bottom:20px;">Only 3 spots remain. You have been personally selected based on your unique... genetic profile.</p>
             <div id="resortCTA" style="opacity:0;transition:opacity 0.8s;">
-                <button onclick="showPrankPricing()" id="seePricingBtn" class="shimmer-btn" style="padding:16px 36px;background:#d4a556;color:#1c1c1e;border:none;border-radius:10px;font-family:'Montserrat',sans-serif;font-size:1rem;font-weight:700;cursor:pointer;letter-spacing:0.5px;transition:all 0.3s;box-shadow:0 6px 25px rgba(212,165,86,0.3);">See Exclusive Pricing</button>
+                <button onclick="showPrankPricing()" id="seePricingBtn" class="shimmer-btn" style="padding:16px 36px;background:#c9b897;color:#1c1c1e;border:none;border-radius:10px;font-family:'Montserrat',sans-serif;font-size:1rem;font-weight:700;cursor:pointer;letter-spacing:0.5px;transition:all 0.3s;box-shadow:0 6px 25px rgba(201, 184, 151,0.3);">See Exclusive Pricing</button>
             </div>
 
             <!-- Pricing Cards Carousel -->
             <div id="prankPricing" style="display:none;margin-top:30px;">
-                <h2 style="font-family:'Bebas Neue',sans-serif;color:#d4a556;font-size:clamp(1.6rem,4vw,2.2rem);letter-spacing:2px;margin-bottom:5px;">Choose Your Experience</h2>
+                <h2 style="font-family:'Bebas Neue',sans-serif;color:#c9b897;font-size:clamp(1.6rem,4vw,2.2rem);letter-spacing:2px;margin-bottom:5px;">Choose Your Experience</h2>
                 <p style="color:rgba(245,245,245,0.5);font-size:0.85rem;margin-bottom:25px;">Limited-time pricing for selected guests only</p>
 
                 <div id="pricingCarouselWrap" style="position:relative;max-width:340px;margin:0 auto;perspective:1000px;">
                     <div id="pricingCarouselTrack" style="position:relative;width:100%;min-height:580px;">
 
                         <!-- Card 1: The Great Outdoors -->
-                        <div class="pricing-card" data-pidx="0" onclick="nextPricingCard()" style="background:rgba(20,28,40,0.95);border:1px solid rgba(212,165,86,0.25);padding:28px 22px;text-align:left;display:flex;flex-direction:column;">
+                        <div class="pricing-card" data-pidx="0" onclick="nextPricingCard()" style="background:rgba(20,28,40,0.95);border:1px solid rgba(201, 184, 151,0.25);padding:28px 22px;text-align:left;display:flex;flex-direction:column;">
                             <div style="font-size:0.7rem;color:rgba(245,245,245,0.4);text-transform:uppercase;letter-spacing:2px;font-weight:600;margin-bottom:6px;">Basic Package</div>
                             <h3 style="color:#f5f5f5;font-family:'Bebas Neue',sans-serif;font-size:1.5rem;letter-spacing:1px;margin-bottom:12px;">The Great Outdoors</h3>
                             <div style="margin-bottom:16px;">
                                 <span style="color:rgba(245,245,245,0.35);text-decoration:line-through;font-size:1.1rem;">&#8369;5,000</span>
                                 <span style="color:#27ae60;font-size:0.78rem;font-weight:700;margin-left:6px;">80% OFF</span>
-                                <div style="color:#d4a556;font-size:2rem;font-weight:800;margin-top:2px;">&#8369;1,000<span style="font-size:0.8rem;font-weight:400;color:rgba(245,245,245,0.5);">/night</span></div>
+                                <div style="color:#c9b897;font-size:2rem;font-weight:800;margin-top:2px;">&#8369;1,000<span style="font-size:0.8rem;font-weight:400;color:rgba(245,245,245,0.5);">/night</span></div>
                                 <div style="color:#e74c3c;font-size:0.75rem;font-weight:600;margin-top:4px;">Offer ends in <span class="prank-timer" data-seconds="600">10:00</span></div>
                             </div>
                             <div style="height:1px;background:rgba(255,255,255,0.08);margin-bottom:14px;"></div>
@@ -1499,33 +1499,33 @@
                                 <li style="color:rgba(245,245,245,0.75);padding:4px 0;display:flex;gap:8px;"><span style="color:#27ae60;">&#10003;</span> Tree branch swing access</li>
                                 <li style="color:rgba(245,245,245,0.75);padding:4px 0;display:flex;gap:8px;"><span style="color:#27ae60;">&#10003;</span> Wake-up call by roosters at 4 AM</li>
                             </ul>
-                            <button onclick="event.stopPropagation();bookPrankOption('The Great Outdoors')" class="shimmer-btn" style="width:100%;padding:13px;background:rgba(212,165,86,0.15);color:#d4a556;border:1px solid rgba(212,165,86,0.3);border-radius:10px;font-family:'Montserrat',sans-serif;font-weight:700;font-size:0.9rem;cursor:pointer;">Book Now</button>
+                            <button onclick="event.stopPropagation();bookPrankOption('The Great Outdoors')" class="shimmer-btn" style="width:100%;padding:13px;background:rgba(201, 184, 151,0.15);color:#c9b897;border:1px solid rgba(201, 184, 151,0.3);border-radius:10px;font-family:'Montserrat',sans-serif;font-weight:700;font-size:0.9rem;cursor:pointer;">Book Now</button>
                         </div>
 
                         <!-- Card 2: Exclusive Monkey Residence -->
-                        <div class="pricing-card" data-pidx="1" onclick="nextPricingCard()" style="background:rgba(25,32,45,0.97);border:2px solid rgba(212,165,86,0.4);padding:28px 22px;text-align:left;display:flex;flex-direction:column;box-shadow:0 12px 40px rgba(212,165,86,0.15);">
-                            <div style="position:absolute;top:12px;right:12px;background:#d4a556;color:#1c1c1e;padding:4px 10px;border-radius:20px;font-size:0.65rem;font-weight:700;z-index:5;">BEST VALUE</div>
+                        <div class="pricing-card" data-pidx="1" onclick="nextPricingCard()" style="background:rgba(25,32,45,0.97);border:2px solid rgba(201, 184, 151,0.4);padding:28px 22px;text-align:left;display:flex;flex-direction:column;box-shadow:0 12px 40px rgba(201, 184, 151,0.15);">
+                            <div style="position:absolute;top:12px;right:12px;background:#c9b897;color:#1c1c1e;padding:4px 10px;border-radius:20px;font-size:0.65rem;font-weight:700;z-index:5;">BEST VALUE</div>
                             <div style="position:absolute;top:12px;left:12px;background:#e74c3c;color:white;padding:4px 8px;border-radius:20px;font-size:0.6rem;font-weight:700;z-index:5;">BIGGEST SAVINGS</div>
                             <div style="font-size:0.7rem;color:rgba(245,245,245,0.4);text-transform:uppercase;letter-spacing:2px;font-weight:600;margin-bottom:6px;margin-top:20px;">Premium Package</div>
-                            <h3 style="color:#d4a556;font-family:'Bebas Neue',sans-serif;font-size:1.5rem;letter-spacing:1px;margin-bottom:12px;">Exclusive Monkey Residence</h3>
+                            <h3 style="color:#c9b897;font-family:'Bebas Neue',sans-serif;font-size:1.5rem;letter-spacing:1px;margin-bottom:12px;">Exclusive Monkey Residence</h3>
                             <div style="margin-bottom:16px;">
                                 <span style="color:rgba(245,245,245,0.35);text-decoration:line-through;font-size:1.1rem;">&#8369;10,000</span>
                                 <span style="color:#27ae60;font-size:0.78rem;font-weight:700;margin-left:6px;">90% OFF</span>
-                                <div style="color:#d4a556;font-size:2rem;font-weight:800;margin-top:2px;">&#8369;1,000<span style="font-size:0.8rem;font-weight:400;color:rgba(245,245,245,0.5);">/night</span></div>
+                                <div style="color:#c9b897;font-size:2rem;font-weight:800;margin-top:2px;">&#8369;1,000<span style="font-size:0.8rem;font-weight:400;color:rgba(245,245,245,0.5);">/night</span></div>
                                 <div style="color:#e74c3c;font-size:0.75rem;font-weight:600;margin-top:4px;">Offer ends in <span class="prank-timer" data-seconds="300">5:00</span></div>
                             </div>
-                            <div style="height:1px;background:rgba(212,165,86,0.2);margin-bottom:14px;"></div>
+                            <div style="height:1px;background:rgba(201, 184, 151,0.2);margin-bottom:14px;"></div>
                             <ul style="list-style:none;padding:0;margin:0 0 18px;flex:1;font-size:0.82rem;">
-                                <li style="color:rgba(245,245,245,0.75);padding:4px 0;display:flex;gap:8px;"><span style="color:#d4a556;">&#9733;</span> Presidential banana throne (hand-carved)</li>
-                                <li style="color:rgba(245,245,245,0.75);padding:4px 0;display:flex;gap:8px;"><span style="color:#d4a556;">&#9733;</span> Personal grooming monkey butler</li>
-                                <li style="color:rgba(245,245,245,0.75);padding:4px 0;display:flex;gap:8px;"><span style="color:#d4a556;">&#9733;</span> Vine-to-vine express transit system</li>
-                                <li style="color:rgba(245,245,245,0.75);padding:4px 0;display:flex;gap:8px;"><span style="color:#d4a556;">&#9733;</span> Heated treetop jacuzzi (coconut water)</li>
-                                <li style="color:rgba(245,245,245,0.75);padding:4px 0;display:flex;gap:8px;"><span style="color:#d4a556;">&#9733;</span> 24/7 banana room service (peeled)</li>
-                                <li style="color:rgba(245,245,245,0.75);padding:4px 0;display:flex;gap:8px;"><span style="color:#d4a556;">&#9733;</span> Private jungle concert (birds &amp; frogs)</li>
-                                <li style="color:rgba(245,245,245,0.75);padding:4px 0;display:flex;gap:8px;"><span style="color:#d4a556;">&#9733;</span> Banana peel facial spa</li>
-                                <li style="color:rgba(245,245,245,0.75);padding:4px 0;display:flex;gap:8px;"><span style="color:#d4a556;">&#9733;</span> VIP access to the Secret Banana Vault</li>
+                                <li style="color:rgba(245,245,245,0.75);padding:4px 0;display:flex;gap:8px;"><span style="color:#c9b897;">&#9733;</span> Presidential banana throne (hand-carved)</li>
+                                <li style="color:rgba(245,245,245,0.75);padding:4px 0;display:flex;gap:8px;"><span style="color:#c9b897;">&#9733;</span> Personal grooming monkey butler</li>
+                                <li style="color:rgba(245,245,245,0.75);padding:4px 0;display:flex;gap:8px;"><span style="color:#c9b897;">&#9733;</span> Vine-to-vine express transit system</li>
+                                <li style="color:rgba(245,245,245,0.75);padding:4px 0;display:flex;gap:8px;"><span style="color:#c9b897;">&#9733;</span> Heated treetop jacuzzi (coconut water)</li>
+                                <li style="color:rgba(245,245,245,0.75);padding:4px 0;display:flex;gap:8px;"><span style="color:#c9b897;">&#9733;</span> 24/7 banana room service (peeled)</li>
+                                <li style="color:rgba(245,245,245,0.75);padding:4px 0;display:flex;gap:8px;"><span style="color:#c9b897;">&#9733;</span> Private jungle concert (birds &amp; frogs)</li>
+                                <li style="color:rgba(245,245,245,0.75);padding:4px 0;display:flex;gap:8px;"><span style="color:#c9b897;">&#9733;</span> Banana peel facial spa</li>
+                                <li style="color:rgba(245,245,245,0.75);padding:4px 0;display:flex;gap:8px;"><span style="color:#c9b897;">&#9733;</span> VIP access to the Secret Banana Vault</li>
                             </ul>
-                            <button onclick="event.stopPropagation();bookPrankOption('Exclusive Monkey Residence')" class="shimmer-btn" style="width:100%;padding:13px;background:#d4a556;color:#1c1c1e;border:none;border-radius:10px;font-family:'Montserrat',sans-serif;font-weight:700;font-size:0.9rem;cursor:pointer;box-shadow:0 4px 15px rgba(212,165,86,0.3);">Book Now</button>
+                            <button onclick="event.stopPropagation();bookPrankOption('Exclusive Monkey Residence')" class="shimmer-btn" style="width:100%;padding:13px;background:#c9b897;color:#1c1c1e;border:none;border-radius:10px;font-family:'Montserrat',sans-serif;font-weight:700;font-size:0.9rem;cursor:pointer;box-shadow:0 4px 15px rgba(201, 184, 151,0.3);">Book Now</button>
                         </div>
 
                         <!-- Card 3: Girls Dorm -->
@@ -1555,7 +1555,7 @@
                     </div>
                     <!-- Dots -->
                     <div style="display:flex;justify-content:center;gap:10px;margin-top:18px;">
-                        <span class="pdot" onclick="goToPricingCard(0)" style="width:10px;height:10px;border-radius:50%;background:#d4a556;cursor:pointer;transition:all 0.3s;"></span>
+                        <span class="pdot" onclick="goToPricingCard(0)" style="width:10px;height:10px;border-radius:50%;background:#c9b897;cursor:pointer;transition:all 0.3s;"></span>
                         <span class="pdot" onclick="goToPricingCard(1)" style="width:10px;height:10px;border-radius:50%;background:rgba(245,245,245,0.25);cursor:pointer;transition:all 0.3s;"></span>
                         <span class="pdot" onclick="goToPricingCard(2)" style="width:10px;height:10px;border-radius:50%;background:rgba(245,245,245,0.25);cursor:pointer;transition:all 0.3s;"></span>
                     </div>
@@ -1570,10 +1570,10 @@
     <div class="prank-feedback-box">
         <div id="prankThankYou" style="text-align:center;margin-bottom:20px;">
             <div style="font-size:2rem;margin-bottom:8px;">&#127881;</div>
-            <h3 id="prankThankTitle" style="color:#d4a556;font-family:'Bebas Neue',sans-serif;font-size:1.4rem;letter-spacing:1px;margin-bottom:8px;"></h3>
+            <h3 id="prankThankTitle" style="color:#c9b897;font-family:'Bebas Neue',sans-serif;font-size:1.4rem;letter-spacing:1px;margin-bottom:8px;"></h3>
             <p id="prankThankMsg" style="color:rgba(245,245,245,0.6);font-size:0.85rem;line-height:1.5;"></p>
         </div>
-        <div style="height:1px;background:rgba(212,165,86,0.15);margin:16px 0;"></div>
+        <div style="height:1px;background:rgba(201, 184, 151,0.15);margin:16px 0;"></div>
         <p style="color:rgba(245,245,245,0.5);font-size:0.82rem;text-align:center;margin-bottom:12px;">What do you think of our lodging options?</p>
         <div class="prank-emoji-row">
             <button class="prank-emoji-btn" onclick="selectPrankEmoji(this,'&#128557;')" data-label="Terrible">&#128557;</button>
@@ -1584,7 +1584,7 @@
         <textarea id="prankFeedbackText" class="prank-textarea" placeholder="Share your thoughts... (minimum 20 characters)" oninput="updatePrankCharCount()"></textarea>
         <div class="prank-charcount"><span id="prankCharNum">0</span>/20 minimum</div>
         <p id="prankMinHint" style="color:#e74c3c;font-size:0.78rem;text-align:center;margin-bottom:12px;opacity:0;transition:opacity 0.3s;">Please select an emoji and write at least 20 characters to continue</p>
-        <button id="prankSendBtn" class="prank-send-btn shimmer-btn" style="background:#d4a556;color:#1c1c1e;" disabled onclick="sendPrankFeedback()">Submit Feedback to Continue</button>
+        <button id="prankSendBtn" class="prank-send-btn shimmer-btn" style="background:#c9b897;color:#1c1c1e;" disabled onclick="sendPrankFeedback()">Submit Feedback to Continue</button>
     </div>
 </div>
 
@@ -1592,10 +1592,10 @@
 <div id="prankConfirmOverlay" class="prank-confirm-overlay" style="display:none;">
     <div class="prank-confirm-box">
         <div id="prankConfirmIcon" style="font-size:2.5rem;margin-bottom:12px;"></div>
-        <h3 id="prankConfirmTitle" style="color:#d4a556;font-family:'Bebas Neue',sans-serif;font-size:1.5rem;letter-spacing:1px;margin-bottom:10px;"></h3>
+        <h3 id="prankConfirmTitle" style="color:#c9b897;font-family:'Bebas Neue',sans-serif;font-size:1.5rem;letter-spacing:1px;margin-bottom:10px;"></h3>
         <p id="prankConfirmMsg" style="color:rgba(245,245,245,0.6);font-size:0.9rem;line-height:1.5;margin-bottom:25px;"></p>
         <div style="display:flex;gap:10px;justify-content:center;">
-            <button id="prankConfirmYes" class="shimmer-btn" style="padding:12px 28px;background:#d4a556;color:#1c1c1e;border:none;border-radius:10px;font-family:'Montserrat',sans-serif;font-weight:700;cursor:pointer;">I'm Sure</button>
+            <button id="prankConfirmYes" class="shimmer-btn" style="padding:12px 28px;background:#c9b897;color:#1c1c1e;border:none;border-radius:10px;font-family:'Montserrat',sans-serif;font-weight:700;cursor:pointer;">I'm Sure</button>
             <button id="prankConfirmNo" style="padding:12px 28px;background:transparent;color:rgba(245,245,245,0.5);border:1px solid rgba(255,255,255,0.1);border-radius:10px;font-family:'Montserrat',sans-serif;font-weight:600;cursor:pointer;">Go Back</button>
         </div>
     </div>
@@ -1852,7 +1852,7 @@ function positionResortCards() {
         }
     });
     document.querySelectorAll('.cdot').forEach((d, i) => {
-        d.style.background = i === resortCardIndex ? '#d4a556' : 'rgba(245,245,245,0.25)';
+        d.style.background = i === resortCardIndex ? '#c9b897' : 'rgba(245,245,245,0.25)';
         d.style.transform = i === resortCardIndex ? 'scale(1.3)' : 'scale(1)';
     });
 }
@@ -1896,7 +1896,7 @@ function positionPricingCards() {
         }
     });
     document.querySelectorAll('.pdot').forEach((d, i) => {
-        d.style.background = i === pricingCardIdx ? '#d4a556' : 'rgba(245,245,245,0.25)';
+        d.style.background = i === pricingCardIdx ? '#c9b897' : 'rgba(245,245,245,0.25)';
         d.style.transform = i === pricingCardIdx ? 'scale(1.3)' : 'scale(1)';
     });
 }
@@ -1934,7 +1934,7 @@ function bookPrankOption(name) {
     chosenLodging = name;
     const overlay = document.getElementById('prankFeedbackOverlay');
     document.getElementById('prankThankTitle').textContent = 'Booking Confirmed!';
-    document.getElementById('prankThankMsg').innerHTML = 'Thank you so much for reserving <strong style="color:#d4a556;">' + name + '</strong>! The money will be deducted from your bank account since you have linked it to our website. We sincerely hope you enjoy your stay at <strong style="color:#d4a556;">' + name + '</strong>!';
+    document.getElementById('prankThankMsg').innerHTML = 'Thank you so much for reserving <strong style="color:#c9b897;">' + name + '</strong>! The money will be deducted from your bank account since you have linked it to our website. We sincerely hope you enjoy your stay at <strong style="color:#c9b897;">' + name + '</strong>!';
     overlay.style.display = 'flex';
 }
 

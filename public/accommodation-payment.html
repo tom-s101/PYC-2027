@@ -21,7 +21,7 @@
     <style>
         * { margin: 0; padding: 0; box-sizing: border-box; }
         :root {
-            --primary-navy: #1c1c1e; --secondary-gold: #d4a556;
+            --primary-navy: #1c1c1e; --secondary-gold: #c9b897;
             --text-light: #f5f5f5; --background-overlay: rgba(28, 28, 30, 0.92);
         }
         html { background: #000000; }
@@ -33,7 +33,7 @@
         body::before {
             content: ''; position: fixed; top: 0; left: 0; width: 100%; height: 100%;
             background: radial-gradient(circle at 20% 30%, rgba(74,124,158,0.1) 0%, transparent 50%),
-                        radial-gradient(circle at 80% 70%, rgba(212,165,86,0.08) 0%, transparent 50%);
+                        radial-gradient(circle at 80% 70%, rgba(201, 184, 151,0.08) 0%, transparent 50%);
             pointer-events: none; z-index: 1;
         }
         .stars { position: fixed; top: 0; left: 0; width: 100%; height: 100%; pointer-events: none; z-index: 0; }
@@ -46,27 +46,27 @@
         .page-header p { color: rgba(245,245,245,0.6); font-size: 0.95rem; }
 
         .payment-card {
-            background: var(--background-overlay); border: 2px solid rgba(212,165,86,0.3);
+            background: var(--background-overlay); border: 2px solid rgba(201, 184, 151,0.3);
             border-radius: 16px; padding: 30px; margin-bottom: 30px;
         }
         .summary-section { margin-bottom: 25px; }
         .summary-row { display: flex; justify-content: space-between; padding: 10px 0; border-bottom: 1px solid rgba(255,255,255,0.06); font-size: 0.95rem; }
         .summary-row:last-child { border-bottom: none; }
-        .summary-row.total { font-weight: 700; font-size: 1.15rem; color: var(--secondary-gold); border-top: 2px solid rgba(212,165,86,0.3); margin-top: 8px; padding-top: 12px; }
+        .summary-row.total { font-weight: 700; font-size: 1.15rem; color: var(--secondary-gold); border-top: 2px solid rgba(201, 184, 151,0.3); margin-top: 8px; padding-top: 12px; }
 
-        .payment-tabs { display: flex; gap: 0; margin-bottom: 20px; border-radius: 10px; overflow: hidden; border: 1px solid rgba(212,165,86,0.3); }
+        .payment-tabs { display: flex; gap: 0; margin-bottom: 20px; border-radius: 10px; overflow: hidden; border: 1px solid rgba(201, 184, 151,0.3); }
         .tab-btn {
             flex: 1; padding: 12px; background: rgba(255,255,255,0.03); color: rgba(245,245,245,0.6);
             border: none; cursor: pointer; font-family: 'Montserrat', sans-serif; font-weight: 600; font-size: 0.9rem; transition: all 0.3s;
         }
-        .tab-btn.active { background: rgba(212,165,86,0.15); color: var(--secondary-gold); }
+        .tab-btn.active { background: rgba(201, 184, 151,0.15); color: var(--secondary-gold); }
         .tab-btn:hover:not(.active) { background: rgba(255,255,255,0.06); }
 
         .payment-method { display: none; }
         .payment-method.active { display: block; }
 
         .account-box {
-            background: rgba(212,165,86,0.1); border: 1px solid rgba(212,165,86,0.3);
+            background: rgba(201, 184, 151,0.1); border: 1px solid rgba(201, 184, 151,0.3);
             border-radius: 8px; padding: 15px; margin: 12px 0;
         }
         .account-name { font-size: 16px; font-weight: 700; color: var(--secondary-gold); }
@@ -82,24 +82,24 @@
         .form-group label { display: block; color: var(--text-light); font-weight: 600; margin-bottom: 8px; font-size: 0.92rem; }
         input[type="file"] {
             width: 100%; padding: 14px; background: rgba(255,255,255,0.05);
-            border: 1px solid rgba(212,165,86,0.3); border-radius: 8px; color: var(--text-light);
+            border: 1px solid rgba(201, 184, 151,0.3); border-radius: 8px; color: var(--text-light);
             font-family: 'Montserrat', sans-serif;
         }
 
         .image-preview { display: none; margin: 10px 0; text-align: center; }
-        .image-preview img { max-width: 100%; max-height: 200px; border-radius: 8px; border: 1px solid rgba(212,165,86,0.3); }
+        .image-preview img { max-width: 100%; max-height: 200px; border-radius: 8px; border: 1px solid rgba(201, 184, 151,0.3); }
 
         .submit-btn { display: none; }
         /* Slide Button */
         .slide-btn-wrapper { width: 100%; margin-top: 10px; }
-        .slide-btn-track { position: relative; height: 58px; background: rgba(255,255,255,0.04); border: 1px solid rgba(212,165,86,0.3); border-radius: 50px; overflow: hidden; touch-action: none; user-select: none; -webkit-user-select: none; }
-        .slide-btn-track.completed { border-color: rgba(212,165,86,0.5); }
-        .slide-btn-fill { position: absolute; top: 0; left: 0; bottom: 0; width: 0; background: linear-gradient(90deg, rgba(212,165,86,0.15), rgba(212,165,86,0.25)); border-radius: 50px; transition: none; }
+        .slide-btn-track { position: relative; height: 58px; background: rgba(255,255,255,0.04); border: 1px solid rgba(201, 184, 151,0.3); border-radius: 50px; overflow: hidden; touch-action: none; user-select: none; -webkit-user-select: none; }
+        .slide-btn-track.completed { border-color: rgba(201, 184, 151,0.5); }
+        .slide-btn-fill { position: absolute; top: 0; left: 0; bottom: 0; width: 0; background: linear-gradient(90deg, rgba(201, 184, 151,0.15), rgba(201, 184, 151,0.25)); border-radius: 50px; transition: none; }
         .slide-btn-track.resetting .slide-btn-fill { transition: width 0.3s ease; }
-        .slide-btn-track.completed .slide-btn-fill { background: linear-gradient(90deg, rgba(212,165,86,0.15), rgba(212,165,86,0.35)); width: 100% !important; }
-        .slide-btn-label { position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); font-family: 'Montserrat', sans-serif; font-size: 0.9rem; font-weight: 700; letter-spacing: 1px; text-transform: uppercase; color: rgba(212,165,86,0.5); white-space: nowrap; pointer-events: none; transition: opacity 0.2s; }
+        .slide-btn-track.completed .slide-btn-fill { background: linear-gradient(90deg, rgba(201, 184, 151,0.15), rgba(201, 184, 151,0.35)); width: 100% !important; }
+        .slide-btn-label { position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); font-family: 'Montserrat', sans-serif; font-size: 0.9rem; font-weight: 700; letter-spacing: 1px; text-transform: uppercase; color: rgba(201, 184, 151,0.5); white-space: nowrap; pointer-events: none; transition: opacity 0.2s; }
         .slide-btn-track.completed .slide-btn-label { top: 35%; }
-        .slide-btn-handle { position: absolute; top: 4px; left: 4px; width: 50px; height: 50px; background: linear-gradient(135deg, #d4a556, #c9965d); border-radius: 50%; display: flex; align-items: center; justify-content: center; cursor: grab; z-index: 2; transition: none; box-shadow: 0 2px 8px rgba(0,0,0,0.3); }
+        .slide-btn-handle { position: absolute; top: 4px; left: 4px; width: 50px; height: 50px; background: linear-gradient(135deg, #c9b897, #b5a27f); border-radius: 50%; display: flex; align-items: center; justify-content: center; cursor: grab; z-index: 2; transition: none; box-shadow: 0 2px 8px rgba(0,0,0,0.3); }
         .slide-btn-handle:active { cursor: grabbing; }
         .slide-btn-track.resetting .slide-btn-handle { transition: left 0.3s ease; }
         .slide-btn-handle svg { width: 22px; height: 22px; fill: none; stroke: #1c1c1e; stroke-width: 2.5; stroke-linecap: round; stroke-linejoin: round; }
@@ -129,7 +129,7 @@
         }
         .loading-overlay.active { display: flex; }
         .loading-spinner { width: 65px; aspect-ratio: 1; margin: 0 auto 20px; position: relative; }
-        .loading-spinner span { position: absolute; border-radius: 50px; box-shadow: inset 0 0 0 3px #d4a556; animation: loaderMorph 2.5s infinite; }
+        .loading-spinner span { position: absolute; border-radius: 50px; box-shadow: inset 0 0 0 3px #c9b897; animation: loaderMorph 2.5s infinite; }
         .loading-spinner span:nth-child(2) { animation-delay: -1.25s; }
         @keyframes loaderMorph { 0%{inset:0 35px 35px 0;} 12.5%{inset:0 35px 0 0;} 25%{inset:35px 35px 0 0;} 37.5%{inset:35px 0 0 0;} 50%{inset:35px 0 0 35px;} 62.5%{inset:0 0 0 35px;} 75%{inset:0 0 35px 35px;} 87.5%{inset:0 0 35px 0;} 100%{inset:0 35px 35px 0;} }
         @keyframes spin { to { transform: rotate(360deg); } }
@@ -144,16 +144,16 @@
         .pyc-progress-title { text-align:center; font-size:0.7rem; text-transform:uppercase; letter-spacing:2px; color:rgba(245,245,245,0.3); margin-bottom:14px; font-weight:600; }
         .pyc-steps { display:flex; align-items:flex-start; justify-content:space-between; position:relative; }
         .pyc-steps::before { content:''; position:absolute; top:16px; left:0; right:0; height:3px; background:rgba(255,255,255,0.06); border-radius:2px; }
-        .pyc-line { position:absolute; top:16px; left:0; height:3px; z-index:1; background:linear-gradient(90deg,#d4a556,#e5b96a); border-radius:2px; }
+        .pyc-line { position:absolute; top:16px; left:0; height:3px; z-index:1; background:linear-gradient(90deg,#c9b897,#d9cbb0); border-radius:2px; }
         .pyc-s { display:flex; flex-direction:column; align-items:center; flex:1; position:relative; z-index:3; }
         .pyc-dot { width:32px; height:32px; border-radius:50%; display:flex; align-items:center; justify-content:center; font-size:0.75rem; font-weight:700; border:3px solid rgba(255,255,255,0.08); background:#1c1c1e; color:rgba(245,245,245,0.25); transition:all 0.3s; }
-        .pyc-s.done .pyc-dot { background:#d4a556; color:#1c1c1e; border-color:#d4a556; }
-        .pyc-s.now .pyc-dot { background:rgba(212,165,86,0.12); color:#d4a556; border-color:#d4a556; box-shadow:0 0 15px rgba(212,165,86,0.3); animation:pyc-glow 2s infinite; }
+        .pyc-s.done .pyc-dot { background:#c9b897; color:#1c1c1e; border-color:#c9b897; }
+        .pyc-s.now .pyc-dot { background:rgba(201, 184, 151,0.12); color:#c9b897; border-color:#c9b897; box-shadow:0 0 15px rgba(201, 184, 151,0.3); animation:pyc-glow 2s infinite; }
         .pyc-lbl { margin-top:7px; font-size:0.62rem; color:rgba(245,245,245,0.2); text-align:center; font-weight:600; text-transform:uppercase; letter-spacing:0.3px; line-height:1.3; max-width:70px; }
-        .pyc-s.done .pyc-lbl { color:rgba(212,165,86,0.65); }
+        .pyc-s.done .pyc-lbl { color:rgba(201, 184, 151,0.65); }
         .pyc-s.now .pyc-lbl { color:#f5f5f5; }
-        .pyc-hint { text-align:center; margin-top:10px; font-size:0.78rem; color:rgba(212,165,86,0.55); font-style:italic; }
-        @keyframes pyc-glow { 0%,100%{box-shadow:0 0 10px rgba(212,165,86,0.2);} 50%{box-shadow:0 0 20px rgba(212,165,86,0.45);} }
+        .pyc-hint { text-align:center; margin-top:10px; font-size:0.78rem; color:rgba(201, 184, 151,0.55); font-style:italic; }
+        @keyframes pyc-glow { 0%,100%{box-shadow:0 0 10px rgba(201, 184, 151,0.2);} 50%{box-shadow:0 0 20px rgba(201, 184, 151,0.45);} }
         @media(max-width:480px) { .pyc-dot{width:26px;height:26px;font-size:0.65rem;border-width:2px;} .pyc-lbl{font-size:0.55rem;max-width:55px;} .pyc-steps::before{left:0;right:0;} .pyc-line{left:0;} }
     </style>
     <link rel="stylesheet" href="/theme-2027.css"><!-- PYC 2027 site theme: keep this the LAST stylesheet in <head> -->
@@ -213,7 +213,7 @@
                     <div class="form-group">
                         <label>GCash Reference Number <span style="color:#e74c3c;">*</span></label>
                         <input type="text" id="gcashRefNum" placeholder="Enter your GCash reference number" required
-                            style="width:100%;padding:12px 16px;background:rgba(255,255,255,0.05);border:1px solid rgba(212,165,86,0.3);border-radius:8px;color:#f5f5f5;font-family:'Montserrat',sans-serif;font-size:0.95rem;">
+                            style="width:100%;padding:12px 16px;background:rgba(255,255,255,0.05);border:1px solid rgba(201, 184, 151,0.3);border-radius:8px;color:#f5f5f5;font-family:'Montserrat',sans-serif;font-size:0.95rem;">
                         <small style="color:rgba(245,245,245,0.4);display:block;margin-top:4px;">Found in your GCash transaction receipt</small>
                     </div>
                     <div class="form-group">
@@ -227,7 +227,7 @@
                     <div class="slide-btn-track" data-slide-btn="gcashSubmitBtn">
                         <div class="slide-btn-fill"></div>
                         <span class="slide-btn-label">Slide to Submit →</span>
-                        <div class="slide-btn-dots"><svg width="40" height="24" viewBox="0 0 24 24"><circle cx="4" cy="12" r="2" fill="#d4a556"><animate id="ag1" begin="0;ag3.end+0.25s" attributeName="cy" calcMode="spline" dur="0.6s" values="12;6;12" keySplines=".33,.66,.66,1;.33,0,.66,.33"/></circle><circle cx="12" cy="12" r="2" fill="#d4a556"><animate begin="ag1.begin+0.1s" attributeName="cy" calcMode="spline" dur="0.6s" values="12;6;12" keySplines=".33,.66,.66,1;.33,0,.66,.33"/></circle><circle cx="20" cy="12" r="2" fill="#d4a556"><animate id="ag3" begin="ag1.begin+0.2s" attributeName="cy" calcMode="spline" dur="0.6s" values="12;6;12" keySplines=".33,.66,.66,1;.33,0,.66,.33"/></circle></svg></div>
+                        <div class="slide-btn-dots"><svg width="40" height="24" viewBox="0 0 24 24"><circle cx="4" cy="12" r="2" fill="#c9b897"><animate id="ag1" begin="0;ag3.end+0.25s" attributeName="cy" calcMode="spline" dur="0.6s" values="12;6;12" keySplines=".33,.66,.66,1;.33,0,.66,.33"/></circle><circle cx="12" cy="12" r="2" fill="#c9b897"><animate begin="ag1.begin+0.1s" attributeName="cy" calcMode="spline" dur="0.6s" values="12;6;12" keySplines=".33,.66,.66,1;.33,0,.66,.33"/></circle><circle cx="20" cy="12" r="2" fill="#c9b897"><animate id="ag3" begin="ag1.begin+0.2s" attributeName="cy" calcMode="spline" dur="0.6s" values="12;6;12" keySplines=".33,.66,.66,1;.33,0,.66,.33"/></circle></svg></div>
                         <div class="slide-btn-handle">
                             <svg viewBox="0 0 24 24"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
                             <div class="slide-btn-loading"><div class="orbit orbit-1"></div><div class="orbit orbit-2"></div><div class="orbit orbit-3"></div></div>
@@ -241,7 +241,7 @@
             <div class="payment-method" id="bankTab">
                 <div class="instructions">
                     <strong>Choose a Bank Account:</strong>
-                    <p style="color:rgba(245,245,245,0.6);font-size:0.9rem;margin:8px 0 12px;">Transfer <strong style="color:#d4a556;"><span class="totalDisplay">₱0</span></strong> to one of the accounts below. Tap to select.</p>
+                    <p style="color:rgba(245,245,245,0.6);font-size:0.9rem;margin:8px 0 12px;">Transfer <strong style="color:#c9b897;"><span class="totalDisplay">₱0</span></strong> to one of the accounts below. Tap to select.</p>
                     <div id="bankOptionsList"></div>
                     <div id="bankSelectedMsg" style="display:none;background:rgba(39,174,96,0.1);border:1px solid rgba(39,174,96,0.3);border-radius:8px;padding:10px;margin:10px 0;color:#4cd68a;font-weight:600;font-size:0.85rem;text-align:center;"></div>
                     <ol style="margin-top:10px;">
@@ -254,7 +254,7 @@
                     <div class="form-group">
                         <label>Bank Reference Number <span style="color:#e74c3c;">*</span></label>
                         <input type="text" id="bankRefNum" placeholder="Enter your bank transaction/reference number" required
-                            style="width:100%;padding:12px 16px;background:rgba(255,255,255,0.05);border:1px solid rgba(212,165,86,0.3);border-radius:8px;color:#f5f5f5;font-family:'Montserrat',sans-serif;font-size:0.95rem;">
+                            style="width:100%;padding:12px 16px;background:rgba(255,255,255,0.05);border:1px solid rgba(201, 184, 151,0.3);border-radius:8px;color:#f5f5f5;font-family:'Montserrat',sans-serif;font-size:0.95rem;">
                         <small style="color:rgba(245,245,245,0.4);display:block;margin-top:4px;">Found on your bank transfer confirmation</small>
                     </div>
                     <div class="form-group">
@@ -268,7 +268,7 @@
                     <div class="slide-btn-track" data-slide-btn="bankSubmitBtn">
                         <div class="slide-btn-fill"></div>
                         <span class="slide-btn-label">Slide to Submit →</span>
-                        <div class="slide-btn-dots"><svg width="40" height="24" viewBox="0 0 24 24"><circle cx="4" cy="12" r="2" fill="#d4a556"><animate id="ab1" begin="0;ab3.end+0.25s" attributeName="cy" calcMode="spline" dur="0.6s" values="12;6;12" keySplines=".33,.66,.66,1;.33,0,.66,.33"/></circle><circle cx="12" cy="12" r="2" fill="#d4a556"><animate begin="ab1.begin+0.1s" attributeName="cy" calcMode="spline" dur="0.6s" values="12;6;12" keySplines=".33,.66,.66,1;.33,0,.66,.33"/></circle><circle cx="20" cy="12" r="2" fill="#d4a556"><animate id="ab3" begin="ab1.begin+0.2s" attributeName="cy" calcMode="spline" dur="0.6s" values="12;6;12" keySplines=".33,.66,.66,1;.33,0,.66,.33"/></circle></svg></div>
+                        <div class="slide-btn-dots"><svg width="40" height="24" viewBox="0 0 24 24"><circle cx="4" cy="12" r="2" fill="#c9b897"><animate id="ab1" begin="0;ab3.end+0.25s" attributeName="cy" calcMode="spline" dur="0.6s" values="12;6;12" keySplines=".33,.66,.66,1;.33,0,.66,.33"/></circle><circle cx="12" cy="12" r="2" fill="#c9b897"><animate begin="ab1.begin+0.1s" attributeName="cy" calcMode="spline" dur="0.6s" values="12;6;12" keySplines=".33,.66,.66,1;.33,0,.66,.33"/></circle><circle cx="20" cy="12" r="2" fill="#c9b897"><animate id="ab3" begin="ab1.begin+0.2s" attributeName="cy" calcMode="spline" dur="0.6s" values="12;6;12" keySplines=".33,.66,.66,1;.33,0,.66,.33"/></circle></svg></div>
                         <div class="slide-btn-handle">
                             <svg viewBox="0 0 24 24"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
                             <div class="slide-btn-loading"><div class="orbit orbit-1"></div><div class="orbit orbit-2"></div><div class="orbit orbit-3"></div></div>
@@ -338,9 +338,9 @@
         let bhtml = '';
         BANK_OPTIONS.forEach(b => {
             var numStyle = b.number === 'QR Code Only' ? 'font-size:13px;font-weight:600;color:rgba(245,245,245,0.5);font-style:italic;margin-top:2px;' : 'font-size:16px;font-weight:800;color:#f5f5f5;letter-spacing:1px;margin-top:2px;';
-            bhtml += '<div class="bank-opt" data-bank="'+b.id+'" onclick="selectBank(\''+b.id+'\',this)" style="background:rgba(255,255,255,0.03);border:2px solid rgba(212,165,86,0.2);border-radius:10px;padding:12px;margin-bottom:10px;cursor:pointer;transition:all 0.3s;">'
+            bhtml += '<div class="bank-opt" data-bank="'+b.id+'" onclick="selectBank(\''+b.id+'\',this)" style="background:rgba(255,255,255,0.03);border:2px solid rgba(201, 184, 151,0.2);border-radius:10px;padding:12px;margin-bottom:10px;cursor:pointer;transition:all 0.3s;">'
                 + '<div style="font-size:12px;color:rgba(245,245,245,0.5);">'+b.bank+'</div>'
-                + '<div style="font-size:14px;font-weight:700;color:#d4a556;margin-top:2px;">'+b.name+'</div>'
+                + '<div style="font-size:14px;font-weight:700;color:#c9b897;margin-top:2px;">'+b.name+'</div>'
                 + '<div style="'+numStyle+'">'+b.number+'</div>'
                 + '<img src="'+b.qr+'" alt="QR" style="display:none;width:100%;max-width:220px;margin:10px auto 0;border-radius:8px;" class="bqr">'
                 + '</div>';
@@ -376,8 +376,8 @@
             const bank = BANK_OPTIONS.find(b => b.id === id);
             document.querySelectorAll('.bank-opt').forEach(o => {
                 const sel = o.dataset.bank === id;
-                o.style.borderColor = sel ? '#d4a556' : 'rgba(212,165,86,0.2)';
-                o.style.background = sel ? 'rgba(212,165,86,0.08)' : 'rgba(255,255,255,0.03)';
+                o.style.borderColor = sel ? '#c9b897' : 'rgba(201, 184, 151,0.2)';
+                o.style.background = sel ? 'rgba(201, 184, 151,0.08)' : 'rgba(255,255,255,0.03)';
                 const qr = o.querySelector('.bqr');
                 if (qr) qr.style.display = sel ? 'block' : 'none';
             });
@@ -464,7 +464,7 @@
                     if (!dragging) return; dragging = false;
                     if (currentX / maxDrag >= 0.85) {
                         completed = true; track.classList.add('completed');
-                        label.textContent = 'Uploading...'; label.style.opacity = '1'; label.style.color = 'rgba(212,165,86,0.8)';
+                        label.textContent = 'Uploading...'; label.style.opacity = '1'; label.style.color = 'rgba(201, 184, 151,0.8)';
                         hiddenBtn.click();
                         setTimeout(function() { if (completed && !hiddenBtn.disabled) resetSlide(); }, 800);
                     } else { track.classList.add('resetting'); handle.style.left = '4px'; fill.style.width = '0px'; label.style.opacity = '0.5'; currentX = 0; }

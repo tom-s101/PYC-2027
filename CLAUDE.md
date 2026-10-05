@@ -137,9 +137,17 @@ raise risks *before* proceeding rather than correcting afterward.
 ## 4. DESIGN / THEME
 
 **2027 theme (current):** Apple-developer-style. Black background, system font stack
-(SF Pro on Apple devices, Inter fallback), large tight headlines, one gold accent
-(`#d4a556`), full-bleed photos with text on top, pill buttons. Source of truth:
-`public/home-v2.html` (new landing page) + **`public/theme-2027.css`**.
+(SF Pro on Apple devices, Inter fallback), large tight headlines, full-bleed photos with
+text on top, pill buttons. Source of truth: `public/home-v2.html` (new landing page) +
+**`public/theme-2027.css`**.
+
+**Accent colours (developer decision):**
+- Landing page (`home-v2.html`) keeps the brighter gold `#d4a556`.
+- All app pages (registration, payment, accommodation, tenting, dashboards) use a muted
+  **sand** `#c9b897` (hover/light `#d9cbb0`, dark `#b5a27f`, rgba form `201,184,151`).
+  Headings are white and form labels soft grey; sand is only for buttons, borders, prices
+  and small highlights. Do NOT reintroduce gold text on these text-heavy pages.
+- Status colours (green paid, red rejected, orange pending) are unchanged.
 
 - `theme-2027.css` is linked as the LAST stylesheet on every app page (one `<link>` line
   just before `</head>`, or before `<body>` in register.html, which has no `</head>`). It

@@ -20,11 +20,11 @@
 
         :root {
             --primary-navy: #1c1c1e;
-            --secondary-gold: #d4a556;
+            --secondary-gold: #c9b897;
             --accent-blue: #4a7c9e;
             --text-light: #f5f5f5;
             --text-dark: #2c3e50;
-            --border-gold: #c9965d;
+            --border-gold: #b5a27f;
             --background-overlay: rgba(28, 28, 30, 0.92);
         }
 
@@ -54,7 +54,7 @@
             height: 100%;
             background: 
                 radial-gradient(circle at 20% 30%, rgba(74, 124, 158, 0.1) 0%, transparent 50%),
-                radial-gradient(circle at 80% 70%, rgba(212, 165, 86, 0.08) 0%, transparent 50%);
+                radial-gradient(circle at 80% 70%, rgba(201, 184, 151, 0.08) 0%, transparent 50%);
             pointer-events: none;
             z-index: 1;
         }
@@ -136,7 +136,7 @@
             box-shadow: 
                 0 30px 80px rgba(0, 0, 0, 0.5),
                 inset 0 1px 0 rgba(255, 255, 255, 0.1);
-            border: 1px solid rgba(212, 165, 86, 0.3);
+            border: 1px solid rgba(201, 184, 151, 0.3);
             backdrop-filter: blur(10px);
             animation: fadeInUp 1s ease-out 0.3s both;
         }
@@ -156,7 +156,7 @@
             font-family: 'Bebas Neue', sans-serif;
             font-size: 3rem;
             font-weight: 400;
-            color: #d4a556;
+            color: #c9b897;
             text-align: center;
             margin-bottom: 15px;
             letter-spacing: 4px;
@@ -180,10 +180,10 @@
         .section-header {
             font-family: 'Bebas Neue', sans-serif;
             font-size: 1.8rem;
-            color: #d4a556;
+            color: #c9b897;
             margin-bottom: 20px;
             padding-bottom: 10px;
-            border-bottom: 2px solid rgba(212, 165, 86, 0.3);
+            border-bottom: 2px solid rgba(201, 184, 151, 0.3);
             letter-spacing: 2px;
         }
 
@@ -222,7 +222,7 @@
             font-family: 'Cormorant Garamond', serif;
             font-size: 1.05rem;
             background: rgba(255, 255, 255, 0.05);
-            border: 1px solid rgba(212, 165, 86, 0.3);
+            border: 1px solid rgba(201, 184, 151, 0.3);
             border-radius: 10px;
             color: var(--text-light);
             transition: all 0.3s ease;
@@ -233,13 +233,13 @@
             outline: none;
             border-color: var(--secondary-gold);
             background: rgba(255, 255, 255, 0.08);
-            box-shadow: 0 0 20px rgba(212, 165, 86, 0.2);
+            box-shadow: 0 0 20px rgba(201, 184, 151, 0.2);
         }
 
         select {
             cursor: pointer;
             appearance: none;
-            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 12 12'%3E%3Cpath fill='%23d4a556' d='M6 9L1 4h10z'/%3E%3C/svg%3E");
+            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 12 12'%3E%3Cpath fill='%23c9b897' d='M6 9L1 4h10z'/%3E%3C/svg%3E");
             background-repeat: no-repeat;
             background-position: right 18px center;
             padding-right: 45px;
@@ -256,9 +256,9 @@
             align-items: center;
             gap: 12px;
             padding: 15px;
-            background: rgba(212, 165, 86, 0.08);
+            background: rgba(201, 184, 151, 0.08);
             border-radius: 10px;
-            border: 1px solid rgba(212, 165, 86, 0.2);
+            border: 1px solid rgba(201, 184, 151, 0.2);
             cursor: pointer;
         }
 
@@ -284,7 +284,7 @@
             gap: 12px;
             padding: 15px 18px;
             background: rgba(255, 255, 255, 0.05);
-            border: 1px solid rgba(212, 165, 86, 0.3);
+            border: 1px solid rgba(201, 184, 151, 0.3);
             border-radius: 10px;
             cursor: pointer;
         }
@@ -306,20 +306,20 @@
             font-weight: 700;
             letter-spacing: 2px;
             text-transform: uppercase;
-            background: linear-gradient(135deg, var(--secondary-gold) 0%, #c9965d 100%);
+            background: linear-gradient(135deg, var(--secondary-gold) 0%, #b5a27f 100%);
             color: var(--primary-navy);
             border: none;
             border-radius: 12px;
             cursor: pointer;
             transition: all 0.4s ease;
-            box-shadow: 0 10px 30px rgba(212, 165, 86, 0.3);
+            box-shadow: 0 10px 30px rgba(201, 184, 151, 0.3);
             margin-top: 30px;
             position: relative;
         }
 
         .submit-btn:hover {
             transform: translateY(-2px);
-            box-shadow: 0 15px 40px rgba(212, 165, 86, 0.4);
+            box-shadow: 0 15px 40px rgba(201, 184, 151, 0.4);
         }
 
         .submit-btn:disabled {
@@ -434,7 +434,7 @@
         .loading-spinner span {
             position: absolute;
             border-radius: 50px;
-            box-shadow: inset 0 0 0 3px #d4a556;
+            box-shadow: inset 0 0 0 3px #c9b897;
             animation: loaderMorph 2.5s infinite;
         }
         .loading-spinner span:nth-child(2) {
@@ -496,7 +496,7 @@
         .social-links {
             margin-top: 50px;
             padding-top: 40px;
-            border-top: 1px solid rgba(212, 165, 86, 0.2);
+            border-top: 1px solid rgba(201, 184, 151, 0.2);
             text-align: center;
         }
 
@@ -521,7 +521,7 @@
             width: 50px;
             height: 50px;
             background: rgba(255, 255, 255, 0.05);
-            border: 1px solid rgba(212, 165, 86, 0.3);
+            border: 1px solid rgba(201, 184, 151, 0.3);
             border-radius: 50%;
             color: var(--secondary-gold);
             transition: all 0.3s ease;
@@ -532,7 +532,7 @@
             background: var(--secondary-gold);
             color: var(--primary-navy);
             transform: translateY(-3px);
-            box-shadow: 0 5px 20px rgba(212, 165, 86, 0.4);
+            box-shadow: 0 5px 20px rgba(201, 184, 151, 0.4);
         }
 
         .social-icon svg {
@@ -548,21 +548,21 @@
         }
 
         .terms-link:hover {
-            color: #e0b584;
+            color: #d9cbb0;
             text-decoration: underline;
         }
 
         /* Pricing Summary */
-        .pricing-summary { background: rgba(28, 28, 30, 0.6); border: 1px solid rgba(212,165,86,0.2); border-radius: 12px; padding: 20px; }
+        .pricing-summary { background: rgba(28, 28, 30, 0.6); border: 1px solid rgba(201, 184, 151,0.2); border-radius: 12px; padding: 20px; }
         .pricing-row { display: flex; justify-content: space-between; align-items: center; padding: 8px 0; color: rgba(245,245,245,0.8); font-size: 0.92rem; border-bottom: 1px solid rgba(255,255,255,0.05); }
         .pricing-row:last-child { border-bottom: none; }
-        .pricing-row.total { border-top: 2px solid rgba(212,165,86,0.3); margin-top: 8px; padding-top: 14px; font-weight: 700; font-size: 1.05rem; color: var(--secondary-gold); }
+        .pricing-row.total { border-top: 2px solid rgba(201, 184, 151,0.3); margin-top: 8px; padding-top: 14px; font-weight: 700; font-size: 1.05rem; color: var(--secondary-gold); }
 
         /* Policy Modals */
         .policy-modal-overlay { display:none; position:fixed; top:0; left:0; width:100%; height:100%; background:rgba(0,0,0,0.7); z-index:9999; justify-content:center; align-items:center; padding:20px; }
         .policy-modal-overlay.active { display:flex; }
-        .policy-modal { background:#1c1c1e; border:2px solid rgba(212,165,86,0.3); border-radius:16px; max-width:600px; width:100%; max-height:80vh; display:flex; flex-direction:column; box-shadow:0 30px 80px rgba(0,0,0,0.6); }
-        .policy-modal-header { padding:20px 25px 15px; border-bottom:1px solid rgba(212,165,86,0.15); display:flex; justify-content:space-between; align-items:center; flex-shrink:0; }
+        .policy-modal { background:#1c1c1e; border:2px solid rgba(201, 184, 151,0.3); border-radius:16px; max-width:600px; width:100%; max-height:80vh; display:flex; flex-direction:column; box-shadow:0 30px 80px rgba(0,0,0,0.6); }
+        .policy-modal-header { padding:20px 25px 15px; border-bottom:1px solid rgba(201, 184, 151,0.15); display:flex; justify-content:space-between; align-items:center; flex-shrink:0; }
         .policy-modal-header h2 { font-family:'Bebas Neue',sans-serif; color:var(--secondary-gold); font-size:1.5rem; letter-spacing:1px; margin:0; }
         .policy-modal-close { background:none; border:none; color:rgba(245,245,245,0.5); font-size:1.5rem; cursor:pointer; padding:5px 10px; border-radius:8px; transition:all 0.2s; }
         .policy-modal-close:hover { color:#f5f5f5; background:rgba(255,255,255,0.1); }
@@ -573,13 +573,13 @@
         .policy-modal-body ul { padding-left:22px; margin:8px 0; list-style:disc; }
         .policy-modal-body ul li { margin-bottom:6px; }
         .policy-modal-body p { margin-bottom:12px; }
-        .policy-modal-body .note { background:rgba(212,165,86,0.08); border-left:3px solid var(--secondary-gold); padding:10px 14px; border-radius:0 8px 8px 0; margin:10px 0; font-size:0.88rem; }
+        .policy-modal-body .note { background:rgba(201, 184, 151,0.08); border-left:3px solid var(--secondary-gold); padding:10px 14px; border-radius:0 8px 8px 0; margin:10px 0; font-size:0.88rem; }
         .sizing-table { width:100%; border-collapse:collapse; margin:12px 0; font-size:0.85rem; }
-        .sizing-table th { background:rgba(212,165,86,0.15); color:var(--secondary-gold); padding:8px 10px; text-align:center; font-size:0.78rem; text-transform:uppercase; letter-spacing:0.5px; }
+        .sizing-table th { background:rgba(201, 184, 151,0.15); color:var(--secondary-gold); padding:8px 10px; text-align:center; font-size:0.78rem; text-transform:uppercase; letter-spacing:0.5px; }
         .sizing-table td { padding:7px 10px; text-align:center; border-bottom:1px solid rgba(255,255,255,0.05); }
         .sizing-table tr:hover td { background:rgba(255,255,255,0.03); }
         .sizing-link { color:var(--secondary-gold); cursor:pointer; font-size:0.85rem; text-decoration:underline; margin-left:8px; }
-        .sizing-link:hover { color:#e5b96a; }
+        .sizing-link:hover { color:#d9cbb0; }
 
 
 
@@ -590,16 +590,16 @@
         .pyc-progress-title { text-align:center; font-size:0.7rem; text-transform:uppercase; letter-spacing:2px; color:rgba(245,245,245,0.3); margin-bottom:14px; font-weight:600; }
         .pyc-steps { display:flex; align-items:flex-start; justify-content:space-between; position:relative; }
         .pyc-steps::before { content:''; position:absolute; top:16px; left:40px; right:40px; height:3px; background:rgba(255,255,255,0.06); border-radius:2px; }
-        .pyc-line { position:absolute; top:16px; left:40px; height:3px; background:linear-gradient(90deg,#d4a556,#e5b96a); border-radius:2px; }
+        .pyc-line { position:absolute; top:16px; left:40px; height:3px; background:linear-gradient(90deg,#c9b897,#d9cbb0); border-radius:2px; }
         .pyc-s { display:flex; flex-direction:column; align-items:center; flex:1; position:relative; z-index:2; }
         .pyc-dot { width:34px; height:34px; border-radius:50%; display:flex; align-items:center; justify-content:center; font-size:0.8rem; font-weight:700; border:3px solid rgba(255,255,255,0.08); background:rgba(28, 28, 30,0.95); color:rgba(245,245,245,0.25); transition:all 0.3s; }
-        .pyc-s.done .pyc-dot { background:#d4a556; color:#1c1c1e; border-color:#d4a556; }
-        .pyc-s.now .pyc-dot { background:rgba(212,165,86,0.12); color:#d4a556; border-color:#d4a556; box-shadow:0 0 15px rgba(212,165,86,0.3); animation:pyc-glow 2s infinite; }
+        .pyc-s.done .pyc-dot { background:#c9b897; color:#1c1c1e; border-color:#c9b897; }
+        .pyc-s.now .pyc-dot { background:rgba(201, 184, 151,0.12); color:#c9b897; border-color:#c9b897; box-shadow:0 0 15px rgba(201, 184, 151,0.3); animation:pyc-glow 2s infinite; }
         .pyc-lbl { margin-top:8px; font-size:0.68rem; color:rgba(245,245,245,0.25); text-align:center; font-weight:600; text-transform:uppercase; letter-spacing:0.5px; line-height:1.3; }
-        .pyc-s.done .pyc-lbl { color:rgba(212,165,86,0.7); }
+        .pyc-s.done .pyc-lbl { color:rgba(201, 184, 151,0.7); }
         .pyc-s.now .pyc-lbl { color:#f5f5f5; }
-        .pyc-hint { text-align:center; margin-top:10px; font-size:0.78rem; color:rgba(212,165,86,0.55); font-style:italic; }
-        @keyframes pyc-glow { 0%,100%{box-shadow:0 0 10px rgba(212,165,86,0.2);} 50%{box-shadow:0 0 20px rgba(212,165,86,0.45);} }
+        .pyc-hint { text-align:center; margin-top:10px; font-size:0.78rem; color:rgba(201, 184, 151,0.55); font-style:italic; }
+        @keyframes pyc-glow { 0%,100%{box-shadow:0 0 10px rgba(201, 184, 151,0.2);} 50%{box-shadow:0 0 20px rgba(201, 184, 151,0.45);} }
         @media(max-width:480px) { .pyc-dot{width:28px;height:28px;font-size:0.7rem;} .pyc-lbl{font-size:0.6rem;} }
         /* PYC Counter */
         .pyc-counter {
@@ -608,16 +608,16 @@
             justify-content: center;
             gap: 0;
             background: rgba(255,255,255,0.05);
-            border: 1px solid rgba(212,165,86,0.3);
+            border: 1px solid rgba(201, 184, 151,0.3);
             border-radius: 10px;
             overflow: hidden;
             height: 48px;
             max-width: 200px;
         }
         .pyc-counter-btn {
-            background: rgba(212,165,86,0.15);
+            background: rgba(201, 184, 151,0.15);
             border: none;
-            color: #d4a556;
+            color: #c9b897;
             width: 48px;
             height: 100%;
             font-size: 1.4rem;
@@ -629,7 +629,7 @@
             transition: background 0.15s;
             -webkit-tap-highlight-color: transparent;
         }
-        .pyc-counter-btn:hover:not(:disabled) { background: rgba(212,165,86,0.3); }
+        .pyc-counter-btn:hover:not(:disabled) { background: rgba(201, 184, 151,0.3); }
         .pyc-counter-btn:disabled { opacity: 0.3; cursor: default; }
         .pyc-counter-display {
             min-width: 70px;
@@ -650,24 +650,24 @@
             position: relative;
             height: 58px;
             background: rgba(255,255,255,0.04);
-            border: 1px solid rgba(212,165,86,0.3);
+            border: 1px solid rgba(201, 184, 151,0.3);
             border-radius: 50px;
             overflow: hidden;
             touch-action: none;
             user-select: none;
             -webkit-user-select: none;
         }
-        .slide-btn-track.completed { border-color: rgba(212,165,86,0.5); }
+        .slide-btn-track.completed { border-color: rgba(201, 184, 151,0.5); }
         .slide-btn-fill {
             position: absolute;
             top: 0; left: 0; bottom: 0;
             width: 0;
-            background: linear-gradient(90deg, rgba(212,165,86,0.15), rgba(212,165,86,0.25));
+            background: linear-gradient(90deg, rgba(201, 184, 151,0.15), rgba(201, 184, 151,0.25));
             border-radius: 50px;
             transition: none;
         }
         .slide-btn-track.resetting .slide-btn-fill { transition: width 0.3s ease; }
-        .slide-btn-track.completed .slide-btn-fill { background: linear-gradient(90deg, rgba(212,165,86,0.15), rgba(212,165,86,0.35)); width: 100% !important; }
+        .slide-btn-track.completed .slide-btn-fill { background: linear-gradient(90deg, rgba(201, 184, 151,0.15), rgba(201, 184, 151,0.35)); width: 100% !important; }
         .slide-btn-label {
             position: absolute;
             top: 50%; left: 50%;
@@ -677,7 +677,7 @@
             font-weight: 700;
             letter-spacing: 2px;
             text-transform: uppercase;
-            color: rgba(212,165,86,0.5);
+            color: rgba(201, 184, 151,0.5);
             white-space: nowrap;
             pointer-events: none;
             transition: opacity 0.2s;
@@ -687,7 +687,7 @@
             position: absolute;
             top: 4px; left: 4px;
             width: 50px; height: 50px;
-            background: linear-gradient(135deg, #d4a556, #c9965d);
+            background: linear-gradient(135deg, #c9b897, #b5a27f);
             border-radius: 50%;
             display: flex; align-items: center; justify-content: center;
             cursor: grab;
@@ -754,7 +754,7 @@
             width: 100%;
             padding: 14px 18px;
             background: rgba(255,255,255,0.05);
-            border: 1px solid rgba(212,165,86,0.3);
+            border: 1px solid rgba(201, 184, 151,0.3);
             border-radius: 8px;
             color: #f5f5f5;
             font-family: 'Montserrat', sans-serif;
@@ -766,12 +766,12 @@
             align-items: center;
             transition: border-color 0.2s;
         }
-        .anim-dropdown-btn:hover, .anim-dropdown.open .anim-dropdown-btn { border-color: rgba(212,165,86,0.6); }
+        .anim-dropdown-btn:hover, .anim-dropdown.open .anim-dropdown-btn { border-color: rgba(201, 184, 151,0.6); }
         .anim-dropdown-btn .dd-placeholder { color: rgba(245,245,245,0.4); }
         .anim-dropdown-chevron {
             width: 18px; height: 18px;
             transition: transform 0.2s ease;
-            stroke: rgba(212,165,86,0.6);
+            stroke: rgba(201, 184, 151,0.6);
             flex-shrink: 0;
             margin-left: 8px;
         }
@@ -782,7 +782,7 @@
             left: 0; right: 0;
             z-index: 50;
             background: #1c1c1e;
-            border: 1px solid rgba(212,165,86,0.3);
+            border: 1px solid rgba(201, 184, 151,0.3);
             border-radius: 8px;
             overflow: hidden;
             box-shadow: 0 8px 24px rgba(0,0,0,0.4);
@@ -803,7 +803,7 @@
             background: transparent;
             text-align: left;
             cursor: pointer;
-            border-bottom: 1px solid rgba(212,165,86,0.1);
+            border-bottom: 1px solid rgba(201, 184, 151,0.1);
             transition: background 0.15s;
             opacity: 0;
             transform: translateX(-15px);
@@ -819,8 +819,8 @@
         .anim-dropdown.open .anim-dropdown-item:nth-child(5) { transition-delay: 0.14s; }
         .anim-dropdown.open .anim-dropdown-item:nth-child(6) { transition-delay: 0.17s; }
         .anim-dropdown-item:last-child { border-bottom: none; }
-        .anim-dropdown-item:hover { background: rgba(212,165,86,0.15); }
-        .anim-dropdown-item.selected { color: #d4a556; font-weight: 600; }
+        .anim-dropdown-item:hover { background: rgba(201, 184, 151,0.15); }
+        .anim-dropdown-item.selected { color: #c9b897; font-weight: 600; }
     </style>
     <link rel="stylesheet" href="/theme-2027.css"><!-- PYC 2027 site theme: keep this the LAST stylesheet in <head> -->
 <body>
@@ -928,7 +928,7 @@
                     <div class="form-group">
                         <label for="nickname">Nickname <span class="required">*</span></label>
                         <input type="text" id="nickname" name="nickname" required placeholder="e.g. Mike, Cess, JR">
-                        <small style="color:rgba(212,165,86,0.7);font-size:0.8rem;margin-top:4px;display:block;">This is the name that will be printed on your conference ID / name tag.</small>
+                        <small style="color:rgba(201, 184, 151,0.7);font-size:0.8rem;margin-top:4px;display:block;">This is the name that will be printed on your conference ID / name tag.</small>
                     </div>
 
                     <div class="form-row">
@@ -941,7 +941,7 @@
                                 <option value="26-35">26-35</option>
                                 <option value="36+">36+</option>
                             </select>
-                            <small style="color:rgba(212,165,86,0.7);font-size:0.8rem;margin-top:4px;display:block;">Ages 0–12 do not need to register. They may attend but will not receive a T-shirt or conference materials.</small>
+                            <small style="color:rgba(201, 184, 151,0.7);font-size:0.8rem;margin-top:4px;display:block;">Ages 0–12 do not need to register. They may attend but will not receive a T-shirt or conference materials.</small>
                         </div>
                         <div class="form-group">
                             <label>Gender <span class="required">*</span></label>
@@ -961,7 +961,7 @@
                     <div class="form-group">
                         <label for="email">Email Address <span class="required">*</span></label>
                         <input type="email" id="email" name="email" required>
-                        <small style="color:rgba(212,165,86,0.7);font-size:0.8rem;margin-top:4px;display:block;">Please use a valid email — this is where your registration confirmation and receipt will be sent.</small>
+                        <small style="color:rgba(201, 184, 151,0.7);font-size:0.8rem;margin-top:4px;display:block;">Please use a valid email — this is where your registration confirmation and receipt will be sent.</small>
                     </div>
 
                     <div class="form-group">
@@ -1207,7 +1207,7 @@
                                 <span class="required">*</span>
                             </label>
                         </div>
-                        <p id="termsScrollHint" style="color:rgba(212,165,86,0.7);font-size:0.78rem;margin-top:6px;margin-left:28px;transition:opacity 0.3s;">To accept, you must open and scroll to the bottom of both the <span class="terms-link" onclick="openModal('termsModal')" style="font-size:0.78rem;">Terms and Conditions</span> and the <span class="terms-link" onclick="openModal('refundModal')" style="font-size:0.78rem;">Refund & Transfer Policy</span></p>
+                        <p id="termsScrollHint" style="color:rgba(201, 184, 151,0.7);font-size:0.78rem;margin-top:6px;margin-left:28px;transition:opacity 0.3s;">To accept, you must open and scroll to the bottom of both the <span class="terms-link" onclick="openModal('termsModal')" style="font-size:0.78rem;">Terms and Conditions</span> and the <span class="terms-link" onclick="openModal('refundModal')" style="font-size:0.78rem;">Refund & Transfer Policy</span></p>
                     </div>
                 </div>
 
@@ -1217,10 +1217,10 @@
                     <p style="margin-bottom: 12px; line-height: 1.6;">
                         Since there is an attendee under 18 years old, a signed <strong>Assumption of Risk, Release and Waiver of Liability for Minor Participation Form</strong> is required.
                     </p>
-                    <div style="background:rgba(212,165,86,0.08);border:1px solid rgba(212,165,86,0.25);border-radius:10px;padding:15px;margin-bottom:15px;">
-                        <p style="margin-bottom:10px;font-weight:600;color:#d4a556;">What you need to do:</p>
+                    <div style="background:rgba(201, 184, 151,0.08);border:1px solid rgba(201, 184, 151,0.25);border-radius:10px;padding:15px;margin-bottom:15px;">
+                        <p style="margin-bottom:10px;font-weight:600;color:#c9b897;">What you need to do:</p>
                         <ol style="padding-left:20px;margin:0;line-height:1.8;font-size:0.92rem;">
-                            <li>Download and print the <a href="/PYC_2026_Minor_Waiver.pdf" target="_blank" style="color:#d4a556;font-weight:600;">Minor Waiver Form (PDF)</a></li>
+                            <li>Download and print the <a href="/PYC_2026_Minor_Waiver.pdf" target="_blank" style="color:#c9b897;font-weight:600;">Minor Waiver Form (PDF)</a></li>
                             <li>Have a parent or legal guardian sign the form</li>
                             <li><strong style="color:#dc3545;">Bring the signed form to the conference</strong> — it must be submitted to the organizers during on-site registration</li>
                         </ol>
@@ -1243,7 +1243,7 @@
                     <div class="slide-btn-track" data-slide-btn="submitBtn">
                         <div class="slide-btn-fill"></div>
                         <span class="slide-btn-label">Slide to Continue →</span>
-                        <div class="slide-btn-dots"><svg width="40" height="24" viewBox="0 0 24 24"><circle cx="4" cy="12" r="2" fill="#d4a556"><animate id="sd1" begin="0;sd3.end+0.25s" attributeName="cy" calcMode="spline" dur="0.6s" values="12;6;12" keySplines=".33,.66,.66,1;.33,0,.66,.33"/></circle><circle cx="12" cy="12" r="2" fill="#d4a556"><animate begin="sd1.begin+0.1s" attributeName="cy" calcMode="spline" dur="0.6s" values="12;6;12" keySplines=".33,.66,.66,1;.33,0,.66,.33"/></circle><circle cx="20" cy="12" r="2" fill="#d4a556"><animate id="sd3" begin="sd1.begin+0.2s" attributeName="cy" calcMode="spline" dur="0.6s" values="12;6;12" keySplines=".33,.66,.66,1;.33,0,.66,.33"/></circle></svg></div>
+                        <div class="slide-btn-dots"><svg width="40" height="24" viewBox="0 0 24 24"><circle cx="4" cy="12" r="2" fill="#c9b897"><animate id="sd1" begin="0;sd3.end+0.25s" attributeName="cy" calcMode="spline" dur="0.6s" values="12;6;12" keySplines=".33,.66,.66,1;.33,0,.66,.33"/></circle><circle cx="12" cy="12" r="2" fill="#c9b897"><animate begin="sd1.begin+0.1s" attributeName="cy" calcMode="spline" dur="0.6s" values="12;6;12" keySplines=".33,.66,.66,1;.33,0,.66,.33"/></circle><circle cx="20" cy="12" r="2" fill="#c9b897"><animate id="sd3" begin="sd1.begin+0.2s" attributeName="cy" calcMode="spline" dur="0.6s" values="12;6;12" keySplines=".33,.66,.66,1;.33,0,.66,.33"/></circle></svg></div>
                         <div class="slide-btn-handle">
                             <svg viewBox="0 0 24 24"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
                             <div class="slide-btn-loading"><div class="orbit orbit-1"></div><div class="orbit orbit-2"></div><div class="orbit orbit-3"></div></div>
@@ -1270,7 +1270,7 @@
             </div>
             
             <div style="text-align: center; padding: 20px; color: rgba(245, 245, 245, 0.7); font-size: 0.95rem; margin-top: 20px;">
-                <p>Send us your prayer requests: <a href="https://docs.google.com/forms/d/e/1FAIpQLScF58bssW1NRk_1kisP1M3yrpcbyn2SBLxf8YvGI-nWFVF6vg/viewform" target="_blank" style="color: #d4a556; text-decoration: none;">Submit a Prayer Request</a></p>
+                <p>Send us your prayer requests: <a href="https://docs.google.com/forms/d/e/1FAIpQLScF58bssW1NRk_1kisP1M3yrpcbyn2SBLxf8YvGI-nWFVF6vg/viewform" target="_blank" style="color: #c9b897; text-decoration: none;">Submit a Prayer Request</a></p>
             </div>
         </div>
     </div>
@@ -1437,7 +1437,7 @@
             
             if (confirmEmail === '') {
                 emailMatchMessage.style.display = 'none';
-                confirmEmailInput.style.borderColor = 'rgba(212, 165, 86, 0.3)';
+                confirmEmailInput.style.borderColor = 'rgba(201, 184, 151, 0.3)';
                 return;
             }
             
@@ -1663,7 +1663,7 @@
                             <option value="26-35">26–35</option>
                             <option value="36+">36+</option>
                         </select>
-                        <small style="color:rgba(212,165,86,0.7);font-size:0.75rem;margin-top:3px;display:block;">Ages 0–12 do not need to register.</small>
+                        <small style="color:rgba(201, 184, 151,0.7);font-size:0.75rem;margin-top:3px;display:block;">Ages 0–12 do not need to register.</small>
                     </div>
                     <div class="form-group">
                         <label>Gender <span class="required">*</span></label>
@@ -2216,7 +2216,7 @@
                         var origLabel = label.textContent;
                         label.textContent = 'Submitting...';
                         label.style.opacity = '1';
-                        label.style.color = 'rgba(212,165,86,0.8)';
+                        label.style.color = 'rgba(201, 184, 151,0.8)';
                         hiddenBtn.click();
                         // Fallback: if validation rejects instantly, reset
                         setTimeout(function() { if (completed && !hiddenBtn.disabled) resetSlide(); }, 800);
@@ -2370,7 +2370,7 @@
                     <li>The organizers shall use the personal information of attendees for conference purposes only.</li>
                     <li>The organizers reserve the right to alter any schedules, speakers, and program content should unforeseen circumstances require it. The organizers are not responsible for resulting costs or inconvenience to participants in this case.</li>
                 </ol>
-                <div id="termsScrollPrompt" style="text-align:center;padding:15px 0 5px;color:rgba(212,165,86,0.6);font-size:0.8rem;font-weight:600;letter-spacing:0.5px;">&#8595; Scroll down to continue &#8595;</div>
+                <div id="termsScrollPrompt" style="text-align:center;padding:15px 0 5px;color:rgba(201, 184, 151,0.6);font-size:0.8rem;font-weight:600;letter-spacing:0.5px;">&#8595; Scroll down to continue &#8595;</div>
             </div>
         </div>
     </div>
@@ -2396,7 +2396,7 @@
                 <h3>3. Shirt Size Policy</h3>
                 <p>Once registration is confirmed, shirt sizes can no longer be changed. The replacement delegate will receive the originally registered shirt size.</p>
                 <div class="note">We appreciate your understanding and cooperation as this policy allows us to prepare efficiently and steward resources responsibly for the success of our event.<br><br>For transfer requests and concerns, please contact the event organizing team within the given timeframe.</div>
-                <div id="refundScrollPrompt" style="text-align:center;padding:15px 0 5px;color:rgba(212,165,86,0.6);font-size:0.8rem;font-weight:600;letter-spacing:0.5px;">&#8595; Scroll down to continue &#8595;</div>
+                <div id="refundScrollPrompt" style="text-align:center;padding:15px 0 5px;color:rgba(201, 184, 151,0.6);font-size:0.8rem;font-weight:600;letter-spacing:0.5px;">&#8595; Scroll down to continue &#8595;</div>
             </div>
         </div>
     </div>
@@ -2531,7 +2531,7 @@
             if (regCard && !document.getElementById('adminBypassBanner')) {
                 var banner = document.createElement('div');
                 banner.id = 'adminBypassBanner';
-                banner.style.cssText = 'background:rgba(212,165,86,0.18);border:2px solid var(--secondary-gold);border-radius:8px;padding:12px 16px;margin-bottom:18px;color:var(--secondary-gold);font-weight:600;text-align:center;';
+                banner.style.cssText = 'background:rgba(201, 184, 151,0.18);border:2px solid var(--secondary-gold);border-radius:8px;padding:12px 16px;margin-bottom:18px;color:var(--secondary-gold);font-weight:600;text-align:center;';
                 banner.innerHTML = text;
                 regCard.insertBefore(banner, regCard.firstChild);
             }
