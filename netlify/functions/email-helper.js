@@ -202,6 +202,12 @@ async function sendApprovalReceiptEmail(registrationData, hasMinorInGroup) {
       <div style="text-align:right;padding:10px 20px;">
         <span style="display:inline-block;border:2px solid #6b2737;border-radius:4px;padding:6px 12px;font-size:13px;color:#6b2737;">Receipt No. <strong>${confNum}</strong></span>
       </div>
+      ${/^PYC-\d{4,5}$/.test(confNum) ? `
+      <div style="text-align:center;padding:10px 20px 24px;border-top:1px solid #eee;">
+        <p style="margin:12px 0 8px;font-size:14px;font-weight:bold;color:#1a2332;">Your check-in QR code</p>
+        <img src="${process.env.URL || 'https://philippineyouthforchrist.org'}/.netlify/functions/qr?c=${confNum}" alt="QR code for ${confNum}" width="180" height="180" style="display:inline-block;width:180px;height:180px;">
+        <p style="margin:8px 0 0;font-size:12px;color:#888;">Show this at on-site check-in. If the image doesn't load, just give your number: <strong>${confNum}</strong></p>
+      </div>` : ''}
     </div>`;
 
   const emailHtml = `<!DOCTYPE html><html><head><style>
@@ -346,6 +352,12 @@ async function sendPycCorrectionEmail(registrationData, hasMinorInGroup) {
       <div style="text-align:right;padding:10px 20px;">
         <span style="display:inline-block;border:2px solid #6b2737;border-radius:4px;padding:6px 12px;font-size:13px;color:#6b2737;">Receipt No. <strong>${confNum}</strong></span>
       </div>
+      ${/^PYC-\d{4,5}$/.test(confNum) ? `
+      <div style="text-align:center;padding:10px 20px 24px;border-top:1px solid #eee;">
+        <p style="margin:12px 0 8px;font-size:14px;font-weight:bold;color:#1a2332;">Your check-in QR code</p>
+        <img src="${process.env.URL || 'https://philippineyouthforchrist.org'}/.netlify/functions/qr?c=${confNum}" alt="QR code for ${confNum}" width="180" height="180" style="display:inline-block;width:180px;height:180px;">
+        <p style="margin:8px 0 0;font-size:12px;color:#888;">Show this at on-site check-in. If the image doesn't load, just give your number: <strong>${confNum}</strong></p>
+      </div>` : ''}
     </div>`;
 
   const emailHtml = `<!DOCTYPE html><html><head><style>

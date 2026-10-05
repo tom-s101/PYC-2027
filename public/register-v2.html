@@ -224,6 +224,58 @@
         .summary-row { display: flex; justify-content: space-between; padding: 7px 0; font-size: 0.92rem; }
         .summary-total { border-top: 1px solid rgba(212,165,86,0.25); margin-top: 8px; padding-top: 12px; font-weight: 700; font-size: 1.1rem; color: var(--secondary-gold); }
 
+        .hint { color: rgba(245,245,245,0.6); font-size: 0.85rem; margin-bottom: 12px; line-height: 1.5; }
+
+        /* Group members */
+        .member-block {
+            border: 1px solid rgba(212,165,86,0.25); border-radius: 12px;
+            padding: 14px 14px 2px; margin-bottom: 12px; background: rgba(255,255,255,0.02);
+        }
+        .member-head { display: flex; align-items: center; gap: 10px; margin-bottom: 12px; cursor: pointer; min-height: 44px; }
+        .member-title { font-weight: 700; color: var(--secondary-gold); flex: 1; }
+        .member-title::before { content: '\25BE'; display: inline-block; margin-right: 8px; transition: transform .15s; }
+        .member-block.collapsed .member-title::before { transform: rotate(-90deg); }
+        .member-block.collapsed .member-body { display: none; }
+        .member-block.collapsed { padding-bottom: 0; }
+        .member-remove {
+            background: none; border: 1px solid rgba(231,76,60,0.45); color: #e8826a;
+            border-radius: 8px; padding: 10px 14px; font-weight: 600; font-size: 0.85rem; cursor: pointer; min-height: 44px;
+        }
+        .form-group label.radio-option { display: flex; margin: 0; font-weight: 400; cursor: pointer; min-height: 44px; }
+        .btn-add {
+            width: 100%; background: transparent; color: var(--secondary-gold);
+            border: 1.5px dashed rgba(212,165,86,0.5); margin-bottom: 8px;
+        }
+
+        /* Payment details */
+        .pay-box {
+            text-align: center; padding: 16px; margin: 4px 0 16px; border-radius: 10px;
+            background: rgba(212,165,86,0.08); border: 1px solid rgba(212,165,86,0.3);
+        }
+        .pay-label { font-size: 0.8rem; color: rgba(245,245,245,0.6); }
+        .pay-name { font-weight: 700; color: var(--secondary-gold); font-size: 1.05rem; margin-top: 2px; }
+        .pay-number { font-weight: 800; font-size: 1.3rem; letter-spacing: 1px; margin-top: 4px; }
+        .pay-qr { display: block; width: 100%; max-width: 260px; margin: 12px auto 0; border-radius: 8px; border: 1px solid rgba(212,165,86,0.2); }
+        .pay-steps { padding-left: 20px; color: rgba(245,245,245,0.8); font-size: 0.9rem; line-height: 1.8; }
+
+        /* Upload */
+        .form-group input[type="file"] {
+            width: 100%; padding: 12px; min-height: 50px; font-size: 16px; color: var(--light);
+            border: 1.5px dashed rgba(212,165,86,0.45); border-radius: 8px; background: rgba(255,255,255,0.04);
+        }
+        .proof-preview img { display: block; max-width: 100%; max-height: 360px; margin: 0 auto 8px; border-radius: 8px; border: 1px solid rgba(212,165,86,0.25); }
+        .alert-success { background: rgba(39,174,96,0.12); border: 1px solid rgba(39,174,96,0.35); color: #4cd68a; }
+
+        /* Done screen */
+        .done { text-align: center; padding: 8px 0; }
+        .done-icon {
+            width: 72px; height: 72px; border-radius: 50%; margin: 0 auto 14px;
+            display: flex; align-items: center; justify-content: center;
+            background: rgba(39,174,96,0.15); border: 2px solid #27ae60; color: #4cd68a; font-size: 2.2rem;
+        }
+        .done-list { text-align: left; margin: 16px 0; }
+        .done p { line-height: 1.6; color: rgba(245,245,245,0.85); margin-bottom: 10px; }
+
         @media (max-width: 480px) {
             .header h1 { font-size: 2.1rem; }
             .form-row { grid-template-columns: 1fr; }
@@ -368,14 +420,6 @@
                     </div>
                 </div>
 
-                <!-- Minor waiver (shown for under-18) -->
-                <div class="form-group hidden" id="minorWaiverSection">
-                    <div class="checkbox-group" style="align-items:flex-start;">
-                        <input type="checkbox" id="minorWaiverAccept">
-                        <label for="minorWaiverAccept" style="margin:0;">As a registrant under 18, I confirm a parent/guardian consents to my participation. <span class="required">*</span></label>
-                    </div>
-                    <div class="field-error" id="err-minorWaiver">Parental consent is required for minors.</div>
-                </div>
                 <h2 class="section-header">Contact</h2>
                 <div class="form-group">
                     <label for="email">Email Address <span class="required">*</span></label>
@@ -476,6 +520,21 @@
                     </select>
                     <div class="field-error" id="err-referralSource">Required.</div>
                 </div>
+                <!-- Group / family members -->
+                <h2 class="section-header">Registering Others?</h2>
+                <p class="hint">Add family or group members here. They share your contact details and one payment.</p>
+                <div id="memberList"></div>
+                <button type="button" class="btn btn-add" id="addMemberBtn">+ Add another registrant</button>
+
+                <!-- Minor waiver (shown when any registrant is under 18) -->
+                <div class="form-group hidden" id="minorWaiverSection" style="margin-top:18px;">
+                    <div class="checkbox-group" style="align-items:flex-start;">
+                        <input type="checkbox" id="minorWaiverAccept">
+                        <label for="minorWaiverAccept" style="margin:0;" id="minorWaiverText">As a registrant under 18, I confirm a parent/guardian consents to my participation. <span class="required">*</span></label>
+                    </div>
+                    <div class="field-error" id="err-minorWaiver">Parental consent is required for minors.</div>
+                </div>
+
                 <!-- Terms -->
                 <div class="form-group" style="margin-top:18px;">
                     <div class="checkbox-group" style="align-items:flex-start;">
@@ -495,48 +554,114 @@
                 </div>
             </div>
 
-            <!-- ============ STEP 2: PAYMENT (placeholder) ============ -->
+            <!-- ============ STEP 2: PAYMENT ============ -->
             <div class="step" id="step2">
                 <h2 class="section-header">Payment</h2>
                 <div class="summary-box">
-                    <div class="summary-row"><span id="sumMealName">—</span><span id="sumMeal">₱0.00</span></div>
-                    <div class="summary-row" id="sumTierRow"><span>Pricing</span><span id="sumTier"></span></div>
+                    <div id="sumLines"></div>
+                    <div class="summary-row"><span>Pricing</span><span id="sumTier"></span></div>
                     <div class="summary-row summary-total"><span>Total</span><span id="sumTotal">₱0.00</span></div>
                 </div>
-                <div class="alert alert-info show" style="margin-bottom:18px;">
-                    <strong>Note:</strong> This is the wizard shell. The GCash account assignment and payment
-                    instructions will be wired in next. For now this confirms the flow and totals work.
+
+                <div class="form-group">
+                    <label>How will you pay? <span class="required">*</span></label>
+                    <div class="opt-group">
+                        <label class="opt-card" for="payGcash">
+                            <input type="radio" id="payGcash" name="payMethod" value="GCash">
+                            <div class="opt-body">
+                                <div class="opt-title">GCash</div>
+                                <div class="opt-desc">Send to the GCash account shown</div>
+                            </div>
+                        </label>
+                        <label class="opt-card" for="payBank">
+                            <input type="radio" id="payBank" name="payMethod" value="Bank Transfer">
+                            <div class="opt-body">
+                                <div class="opt-title">Bank Transfer</div>
+                                <div class="opt-desc">BDO or BPI</div>
+                            </div>
+                        </label>
+                    </div>
+                    <div class="field-error" id="err-payMethod">Please choose how you'll pay.</div>
                 </div>
-                <p style="color:rgba(245,245,245,0.6);font-size:0.88rem;">After paying via GCash, tap continue to upload your screenshot.</p>
+
+                <div id="gcashBox" class="pay-box hidden">
+                    <div class="pay-label">Send to this GCash account</div>
+                    <div class="pay-name" id="gcashName"></div>
+                    <div class="pay-number" id="gcashNumber"></div>
+                    <img id="gcashQr" class="pay-qr" alt="GCash QR code">
+                </div>
+
+                <div id="bankBox" class="hidden">
+                    <div class="form-group">
+                        <label>Choose a bank account <span class="required">*</span></label>
+                        <div class="opt-group" id="bankOptions"></div>
+                        <div class="field-error" id="err-bankChoice">Please choose a bank account.</div>
+                    </div>
+                    <div id="bankDetail" class="pay-box hidden">
+                        <div class="pay-label" id="bankLabel"></div>
+                        <div class="pay-name" id="bankName"></div>
+                        <div class="pay-number" id="bankNumber"></div>
+                        <img id="bankQr" class="pay-qr" alt="Bank QR code">
+                    </div>
+                </div>
+
+                <ol class="pay-steps">
+                    <li>Send exactly <strong class="amount-due">₱0.00</strong></li>
+                    <li>Take a screenshot of the confirmation (it shows the reference number)</li>
+                    <li>Tap <strong>I've paid</strong> to upload it</li>
+                </ol>
+
                 <div class="nav-row">
                     <button class="btn btn-back" onclick="goToStep(1)">← Back</button>
-                    <button class="btn btn-primary" onclick="goToStep(3)">I've paid →</button>
+                    <button class="btn btn-primary" onclick="goToStep3()">I've paid →</button>
                 </div>
             </div>
 
-            <!-- ============ STEP 3: UPLOAD PROOF (placeholder) ============ -->
+            <!-- ============ STEP 3: UPLOAD PROOF ============ -->
             <div class="step" id="step3">
                 <h2 class="section-header">Upload Payment Proof</h2>
-                <div class="alert alert-info show" style="margin-bottom:18px;">
-                    <strong>Coming next:</strong> photo picker + in-browser compression + the single
-                    combined submit (info + image) that creates the record. This placeholder shows where it goes.
+                <p class="hint">You paid <strong class="amount-due">₱0.00</strong> via <strong id="paidVia"></strong>.</p>
+
+                <div class="form-group">
+                    <label for="txnRef">Reference / Transaction Number <span class="required">*</span></label>
+                    <input type="text" id="txnRef" autocomplete="off" placeholder="From your payment confirmation">
+                    <div class="field-error" id="err-txnRef">Please enter the reference number.</div>
                 </div>
-                <p style="color:rgba(245,245,245,0.6);font-size:0.88rem;margin-bottom:8px;">When complete, this step will:</p>
-                <ul style="color:rgba(245,245,245,0.55);font-size:0.85rem;padding-left:18px;line-height:1.8;">
-                    <li>Let you choose your payment screenshot</li>
-                    <li>Compress it in the browser (kept readable)</li>
-                    <li>Submit everything in one request — the only DB write</li>
-                </ul>
+
+                <div class="form-group">
+                    <label for="proofFile">Payment Screenshot <span class="required">*</span></label>
+                    <input type="file" id="proofFile" accept="image/*">
+                    <div class="field-error" id="err-proofFile">Please choose your payment screenshot.</div>
+                </div>
+                <div id="proofPreview" class="proof-preview hidden">
+                    <img id="proofImg" alt="Payment screenshot preview">
+                    <p class="hint" id="proofInfo" style="text-align:center;"></p>
+                </div>
+
+                <div id="submitStatus" class="alert"></div>
+
                 <div class="nav-row">
-                    <button class="btn btn-back" onclick="goToStep(2)">← Back</button>
-                    <button class="btn btn-primary" onclick="showModal('Not wired yet', 'Submission will be wired in the next build step.')">Submit (placeholder)</button>
+                    <button class="btn btn-back" id="step3Back" onclick="goToStep(2)">← Back</button>
+                    <button class="btn btn-primary" id="submitBtn" onclick="submitRegistration()">Submit Registration</button>
+                </div>
+            </div>
+
+            <!-- ============ DONE ============ -->
+            <div class="step" id="stepDone">
+                <div class="done">
+                    <div class="done-icon">&#10003;</div>
+                    <h2 class="section-header" style="margin-top:0;">Payment Under Review</h2>
+                    <p>Thank you! Your registration and payment proof were received.</p>
+                    <div class="summary-box done-list" id="doneList"></div>
+                    <p>We sent a confirmation to <strong id="doneEmail"></strong>. Once the team verifies your payment, you'll get another email with your <strong>check-in QR code</strong>.</p>
+                    <p class="hint">Questions? Message us on <a class="terms-link" href="https://www.facebook.com/philippineyouthforchrist" target="_blank" rel="noopener">Facebook</a>.</p>
                 </div>
             </div>
         </div>
     </div>
 
     <div class="total-bar show" id="totalBar">
-        <span class="total-label">Total</span>
+        <span class="total-label" id="totalLabel">Total</span>
         <span class="total-amount" id="runningTotal">&#8369;0.00</span>
     </div>
 
@@ -550,42 +675,104 @@
         </div>
     </div>
 
+    <template id="memberTpl">
+        <div class="member-block">
+            <div class="member-head">
+                <span class="member-title">Registrant</span>
+                <button type="button" class="member-remove">Remove</button>
+            </div>
+            <div class="member-body">
+                <div class="form-row">
+                    <div class="form-group">
+                        <label>First Name <span class="required">*</span></label>
+                        <input type="text" data-field="firstName">
+                        <div class="field-error" data-err="firstName">Required.</div>
+                    </div>
+                    <div class="form-group">
+                        <label>Last Name <span class="required">*</span></label>
+                        <input type="text" data-field="lastName">
+                        <div class="field-error" data-err="lastName">Required.</div>
+                    </div>
+                </div>
+                <div class="form-row">
+                    <div class="form-group">
+                        <label>Age <span class="required">*</span></label>
+                        <select data-field="age"></select>
+                        <div class="field-error" data-err="age">Required.</div>
+                    </div>
+                    <div class="form-group">
+                        <label>Gender <span class="required">*</span></label>
+                        <div class="radio-group">
+                            <label class="radio-option"><input type="radio" data-field="gender" value="Male"> Male</label>
+                            <label class="radio-option"><input type="radio" data-field="gender" value="Female"> Female</label>
+                        </div>
+                        <div class="field-error" data-err="gender">Please select a gender.</div>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label>Meal Plan <span class="required">*</span></label>
+                    <select data-field="mealPlan"></select>
+                    <div class="field-error" data-err="mealPlan">Please select a meal plan.</div>
+                </div>
+                <div class="form-row">
+                    <div class="form-group">
+                        <label>T-Shirt Size <span class="required">*</span></label>
+                        <select data-field="shirtSize"></select>
+                        <div class="field-error" data-err="shirtSize">Required.</div>
+                    </div>
+                    <div class="form-group">
+                        <label>This will be their ___ PYC <span class="required">*</span></label>
+                        <select data-field="pycCount"></select>
+                        <div class="field-error" data-err="pycCount">Required.</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </template>
+
     <script>
         // ============================================================
-        // PYC 2027 register-v2 — WIZARD SHELL
-        // Nothing is sent to the backend yet. All info is held in the
-        // browser (formData) and only committed at the final upload step. The only fetch is a
-        // read-only server-time call (early-bird gate); nothing is saved.
-        // (to be built next). This first build covers Step 1 + navigation.
+        // PYC 2027 register-v2 — one-page wizard (Info -> Payment -> Upload Proof)
+        //
+        // NOTHING is saved until the final submit. Every answer is held in the
+        // browser (formData) and sent in ONE request, together with the
+        // browser-compressed screenshot, to submit-registration-with-payment.js.
+        // The only other fetch is a read-only server-time call (early-bird gate).
         // ============================================================
 
         // Prices are all-inclusive per person (same as live 2026 register.html / payment.html).
         // Early bird ends at EARLY_BIRD_DEADLINE (11:59 PM Philippine Time, UTC+8).
-        // TODO: confirm the 2027 early-bird deadline (2026 was April 15).
+        // Keep in sync with submit-registration-with-payment.js.
         var EARLY_BIRD_DEADLINE = new Date('2027-04-15T23:59:59+08:00').getTime();
         var PRICE_TIERS = {
             early:   { vegan: 2100, vegetarian: 1750, none: 750 },
             regular: { vegan: 2200, vegetarian: 1850, none: 850 }
         };
         var MEAL_LABELS = { vegan: 'Full Meal — Vegan', vegetarian: 'Full Meal — Vegetarian', none: 'Without Meal' };
+        var MINOR_AGES = ['0-8', '9-13', '14-17'];
+
+        // Payment accounts (same as live payment.html; 'E' disabled there too).
+        // If you change these, also update PAYMENT_ACCOUNT_LABELS in admin-dashboard.html.
+        var GCASH_ACCOUNTS = {
+            A: { name: 'Febie Gemere Gacusan', number: '0975-243-5839', qr: '/qr-gcash-a.jpeg' },
+            B: { name: 'Alpha Beth Fofue', number: '0943-473-6234', qr: '/qr-gcash-b.jpeg' },
+            C: { name: 'Ydjean Joy Dela Cruz', number: '0935-114-9442', qr: '/qr-gcash-c.jpeg' },
+            D: { name: 'Dorothy Claire Manata', number: '0919-526-9551', qr: '/qr-gcash-d.jpeg' }
+        };
+        var BANK_ACCOUNTS = {
+            bank_bdo: { bank: 'BDO', name: 'Alpha Beth Fofue', number: '0068 9031 4963', qr: '/qr-bank-bdo.jpeg' },
+            bank_bpi: { bank: 'BPI', name: 'Febie Gemere Gacusan', number: '8989382005', qr: '/qr-bank-bpi.jpeg' }
+        };
+
         var serverNow = null; // authoritative time from server-time.js; falls back to device clock
         function isEarlyBird() { return (serverNow !== null ? serverNow : Date.now()) <= EARLY_BIRD_DEADLINE; }
         function activePrices() { return isEarlyBird() ? PRICE_TIERS.early : PRICE_TIERS.regular; }
-        var formData = {}; // holds all Step 1 answers in the browser
+        function money(n) { return '₱' + n.toLocaleString('en-PH', { minimumFractionDigits: 2, maximumFractionDigits: 2 }); }
 
-        // ---- Location type toggling ----
-        document.getElementById('locationType').addEventListener('change', function() {
-            var v = this.value;
-            document.getElementById('philippinesAddress').classList.toggle('hidden', v !== 'philippines');
-            document.getElementById('internationalAddress').classList.toggle('hidden', v !== 'international');
-        });
+        var formData = {};   // all answers, held in the browser only
+        var proofData = null; // { dataUrl, bytes } after compression
 
-        // ---- Minor waiver shows for under-18 ages ----
-        document.getElementById('age').addEventListener('change', function() {
-            var minor = (this.value === '0-8' || this.value === '9-13' || this.value === '14-17');
-            document.getElementById('minorWaiverSection').classList.toggle('hidden', !minor);
-        });
-
+        function val(id) { var el = document.getElementById(id); return el ? el.value.trim() : ''; }
         function showErr(id, show) {
             var el = document.getElementById('err-' + id);
             if (el) el.classList.toggle('show', !!show);
@@ -594,9 +781,168 @@
             document.querySelectorAll('.field-error').forEach(function(e){ e.classList.remove('show'); });
             var ta = document.getElementById('topAlert'); ta.className = 'alert';
         }
-        function val(id) { var el = document.getElementById(id); return el ? el.value.trim() : ''; }
+        function showTopError(msg) {
+            var ta = document.getElementById('topAlert');
+            ta.textContent = msg;
+            ta.className = 'alert alert-error show';
+        }
 
-        // ---- Validate Step 1 (incl. the gender fix) ----
+        // ---- Custom modal (no native alert/confirm on iPad Safari) ----
+        function showModal(title, body) {
+            document.getElementById('modalTitle').textContent = title;
+            document.getElementById('modalBody').textContent = body;
+            document.getElementById('modal').classList.add('show');
+        }
+        document.getElementById('modalOk').addEventListener('click', function() {
+            document.getElementById('modal').classList.remove('show');
+        });
+        document.getElementById('statusLink').addEventListener('click', function() {
+            showModal('Check my status', 'Online status lookup is coming soon. For now, please contact us through our Facebook page.');
+        });
+
+        // ---- Option cards: highlight the checked one (JS instead of :has() for older iPads) ----
+        function syncCards() {
+            document.querySelectorAll('.opt-card').forEach(function(card) {
+                var input = card.querySelector('input');
+                card.classList.toggle('selected', !!(input && input.checked));
+            });
+        }
+        document.addEventListener('change', function(e) {
+            if (e.target.closest && e.target.closest('.opt-card')) syncCards();
+        });
+
+        // ---- Location type toggling ----
+        document.getElementById('locationType').addEventListener('change', function() {
+            var v = this.value;
+            document.getElementById('philippinesAddress').classList.toggle('hidden', v !== 'philippines');
+            document.getElementById('internationalAddress').classList.toggle('hidden', v !== 'international');
+        });
+
+        // ============================================================
+        // GROUP MEMBERS ("Add another registrant")
+        // ============================================================
+        var memberList = document.getElementById('memberList');
+        var memberSeq = 0;
+        var MEMBER_FIELDS = ['firstName', 'lastName', 'age', 'gender', 'mealPlan', 'shirtSize', 'pycCount'];
+
+        function memberBlocks() { return Array.prototype.slice.call(memberList.querySelectorAll('.member-block')); }
+
+        function mealOptionsHtml() {
+            var p = activePrices();
+            return '<option value="">-- Select --</option>' + ['vegan', 'vegetarian', 'none'].map(function(k) {
+                return '<option value="' + k + '">' + MEAL_LABELS[k] + ' — ' + money(p[k]) + '</option>';
+            }).join('');
+        }
+
+        function readMember(block) {
+            function f(name) { var el = block.querySelector('[data-field="' + name + '"]'); return el ? el.value.trim() : ''; }
+            var g = block.querySelector('input[data-field="gender"]:checked');
+            return {
+                firstName: f('firstName'), lastName: f('lastName'), age: f('age'),
+                gender: g ? g.value : '', mealPlan: f('mealPlan'), shirtSize: f('shirtSize'), pycCount: f('pycCount')
+            };
+        }
+
+        function renumberMembers() {
+            memberBlocks().forEach(function(block, i) {
+                var m = readMember(block);
+                var name = (m.firstName + ' ' + m.lastName).trim();
+                block.querySelector('.member-title').textContent = 'Registrant ' + (i + 2) + (name ? ' — ' + name : '');
+            });
+        }
+
+        function addMember() {
+            memberSeq++;
+            var node = document.getElementById('memberTpl').content.firstElementChild.cloneNode(true);
+            // Reuse the primary form's option lists so values always match.
+            node.querySelector('[data-field="age"]').innerHTML = document.getElementById('age').innerHTML;
+            node.querySelector('[data-field="shirtSize"]').innerHTML = document.getElementById('shirtSize').innerHTML;
+            node.querySelector('[data-field="pycCount"]').innerHTML = document.getElementById('pycCount').innerHTML;
+            node.querySelector('[data-field="mealPlan"]').innerHTML = mealOptionsHtml();
+            node.querySelectorAll('input[data-field="gender"]').forEach(function(r) { r.name = 'gender_m' + memberSeq; });
+            // Collapse the others so the page stays short.
+            memberBlocks().forEach(function(b) { b.classList.add('collapsed'); });
+            memberList.appendChild(node);
+            renumberMembers();
+            recalcTotal();
+            updateMinorWaiver();
+            node.querySelector('[data-field="firstName"]').focus();
+        }
+        document.getElementById('addMemberBtn').addEventListener('click', addMember);
+
+        memberList.addEventListener('click', function(e) {
+            var block = e.target.closest('.member-block');
+            if (!block) return;
+            if (e.target.closest('.member-remove')) {
+                block.parentNode.removeChild(block);
+                renumberMembers(); recalcTotal(); updateMinorWaiver();
+                return;
+            }
+            if (e.target.closest('.member-head')) block.classList.toggle('collapsed');
+        });
+        memberList.addEventListener('change', function() { renumberMembers(); recalcTotal(); updateMinorWaiver(); });
+        memberList.addEventListener('input', renumberMembers);
+
+        // ---- Minor waiver: shown when ANY registrant is under 18 ----
+        function anyMinor() {
+            if (MINOR_AGES.indexOf(val('age')) !== -1) return true;
+            return memberBlocks().some(function(b) { return MINOR_AGES.indexOf(readMember(b).age) !== -1; });
+        }
+        function updateMinorWaiver() {
+            document.getElementById('minorWaiverSection').classList.toggle('hidden', !anyMinor());
+            document.getElementById('minorWaiverText').innerHTML = (memberBlocks().length
+                ? 'For every registrant under 18, I confirm a parent/guardian consents to their participation.'
+                : 'As a registrant under 18, I confirm a parent/guardian consents to my participation.') +
+                ' <span class="required">*</span>';
+        }
+        document.getElementById('age').addEventListener('change', updateMinorWaiver);
+
+        // ============================================================
+        // PRICING — one source of truth for the sticky bar AND the Step 2 summary
+        // ============================================================
+        function selectedMeals() {
+            var primary = document.querySelector('input[name="mealPlan"]:checked');
+            var list = [primary ? primary.value : ''];
+            memberBlocks().forEach(function(b) { list.push(readMember(b).mealPlan); });
+            return list;
+        }
+        function currentTotal() {
+            var p = activePrices();
+            return selectedMeals().reduce(function(sum, k) { return sum + (p[k] || 0); }, 0);
+        }
+        function recalcTotal() {
+            var prices = activePrices();
+            var early = isEarlyBird();
+            document.querySelectorAll('#mealOptions [data-meal-price]').forEach(function(priceEl) {
+                var key = priceEl.getAttribute('data-meal-price');
+                priceEl.innerHTML = early
+                    ? '<s>' + money(PRICE_TIERS.regular[key]) + '</s>' + money(prices[key])
+                    : money(prices[key]);
+            });
+            // Member meal dropdowns show prices too; rebuild in case the tier changed.
+            memberList.querySelectorAll('[data-field="mealPlan"]').forEach(function(sel) {
+                var keep = sel.value;
+                sel.innerHTML = mealOptionsHtml();
+                sel.value = keep;
+            });
+            var note = document.getElementById('earlyBirdNote');
+            if (early) {
+                var d = new Date(EARLY_BIRD_DEADLINE);
+                note.textContent = 'Early bird pricing until ' + d.toLocaleDateString('en-PH', { month: 'long', day: 'numeric', year: 'numeric', timeZone: 'Asia/Manila' }) + ' (11:59 PM Philippine Time).';
+                note.className = 'alert alert-info show';
+            } else {
+                note.className = 'alert alert-info';
+            }
+            var count = 1 + memberBlocks().length;
+            document.getElementById('totalLabel').textContent = count > 1 ? 'Total · ' + count + ' registrants' : 'Total';
+            document.getElementById('runningTotal').textContent = money(currentTotal());
+            syncCards();
+        }
+        document.querySelectorAll('input[name="mealPlan"]').forEach(function(r) { r.addEventListener('change', recalcTotal); });
+
+        // ============================================================
+        // STEP 1 — validate + capture (browser only)
+        // ============================================================
         function validateStep1() {
             clearAllErrors();
             var ok = true;
@@ -613,21 +959,13 @@
             if (!val('age')) fail('age');
 
             // GENDER — the bug fix: explicitly require a selection
-            var gender = document.querySelector('input[name="gender"]:checked');
-            if (!gender) fail('gender');
-
-            // Minor waiver if under 18
-            var age = val('age');
-            if (age === '0-8' || age === '9-13' || age === '14-17') {
-                if (!document.getElementById('minorWaiverAccept').checked) fail('minorWaiver');
-            }
+            if (!document.querySelector('input[name="gender"]:checked')) fail('gender');
 
             var email = val('email');
-            if (!email || email.indexOf('@') === -1) fail('email');
-            if (val('confirmEmail') !== email || !email) fail('confirmEmail');
+            if (!email || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) fail('email');
+            if (val('confirmEmail').toLowerCase() !== email.toLowerCase() || !email) fail('confirmEmail');
             if (!val('phone')) fail('phone');
 
-            // Location-specific
             if (val('locationType') === 'philippines') {
                 if (!val('phRegion')) fail('phRegion');
                 if (!val('phCity')) fail('phCity');
@@ -637,114 +975,334 @@
             }
 
             if (!val('shirtSize')) fail('shirtSize');
-
-            var meal = document.querySelector('input[name="mealPlan"]:checked');
-            if (!meal) fail('mealPlan');
-
+            if (!document.querySelector('input[name="mealPlan"]:checked')) fail('mealPlan');
             if (!val('pycCount')) fail('pycCount');
             if (!val('referralSource')) fail('referralSource');
+
+            // Group members
+            memberBlocks().forEach(function(block) {
+                var m = readMember(block);
+                MEMBER_FIELDS.forEach(function(k) {
+                    var err = block.querySelector('[data-err="' + k + '"]');
+                    if (!m[k]) {
+                        ok = false;
+                        if (err) err.classList.add('show');
+                        block.classList.remove('collapsed');
+                        if (!firstInvalid) firstInvalid = err;
+                    }
+                });
+            });
+
+            if (anyMinor() && !document.getElementById('minorWaiverAccept').checked) fail('minorWaiver');
             if (!document.getElementById('acceptTerms').checked) fail('acceptTerms');
 
             if (!ok) {
-                var ta = document.getElementById('topAlert');
-                ta.textContent = 'Please complete all required fields highlighted below.';
-                ta.className = 'alert alert-error show';
+                showTopError('Please complete all required fields highlighted below.');
                 if (firstInvalid && firstInvalid.scrollIntoView) firstInvalid.scrollIntoView({ behavior: 'smooth', block: 'center' });
             }
             return ok;
         }
 
-        // ---- Capture Step 1 into formData (browser only — nothing sent) ----
         function captureStep1() {
             var gender = document.querySelector('input[name="gender"]:checked');
             var meal = document.querySelector('input[name="mealPlan"]:checked');
+            var primary = {
+                firstName: val('firstName'), lastName: val('lastName'), age: val('age'),
+                gender: gender ? gender.value : '', mealPlan: meal ? meal.value : '',
+                shirtSize: val('shirtSize'), pycCount: val('pycCount')
+            };
             formData = {
-                locationType: val('locationType'),
-                firstName: val('firstName'),
-                lastName: val('lastName'),
-                age: val('age'),
-                gender: gender ? gender.value : '',
-                minorWaiverAccept: document.getElementById('minorWaiverAccept').checked ? 'Yes' : null,
-                email: val('email'),
-                phone: val('phone'),
-                phRegion: val('phRegion'),
-                phCity: val('phCity'),
-                intCountry: val('intCountry'),
-                intCity: val('intCity'),
-                shirtSize: val('shirtSize'),
-                mealPlan: meal ? meal.value : '',
-                volunteer: document.getElementById('volunteer').checked ? 'yes' : 'no',
-                pycCount: val('pycCount'),
-                referralSource: val('referralSource'),
-                acceptTerms: document.getElementById('acceptTerms').checked
+                // shared by everyone in the registration
+                shared: {
+                    locationType: val('locationType'),
+                    email: val('email'),
+                    phone: val('phone'),
+                    phRegion: val('phRegion'),
+                    phCity: val('phCity'),
+                    intCountry: val('intCountry'),
+                    intCity: val('intCity'),
+                    volunteer: document.getElementById('volunteer').checked ? 'yes' : 'no',
+                    referralSource: val('referralSource'),
+                    minorWaiverAccept: anyMinor() && document.getElementById('minorWaiverAccept').checked ? 'Yes' : null,
+                    acceptTerms: document.getElementById('acceptTerms').checked
+                },
+                registrants: [primary].concat(memberBlocks().map(readMember))
             };
         }
 
-        function money(n) { return '₱' + n.toLocaleString('en-PH', { minimumFractionDigits: 2, maximumFractionDigits: 2 }); }
-
-        // Single source of truth for the amount: feeds the sticky bar AND the Step 2 summary.
-        function currentTotal() {
-            var meal = document.querySelector('input[name="mealPlan"]:checked');
-            return meal ? (activePrices()[meal.value] || 0) : 0;
-        }
-        function recalcTotal() {
-            var prices = activePrices();
-            var early = isEarlyBird();
-            document.querySelectorAll('.opt-card').forEach(function(card) {
-                var radio = card.querySelector('input');
-                card.classList.toggle('selected', radio.checked);
-                var priceEl = card.querySelector('[data-meal-price]');
-                var p = prices[priceEl.getAttribute('data-meal-price')];
-                var reg = PRICE_TIERS.regular[priceEl.getAttribute('data-meal-price')];
-                priceEl.innerHTML = early ? '<s>' + money(reg) + '</s>' + money(p) : money(p);
-            });
-            var note = document.getElementById('earlyBirdNote');
-            if (early) {
-                var d = new Date(EARLY_BIRD_DEADLINE);
-                note.textContent = 'Early bird pricing until ' + d.toLocaleDateString('en-PH', { month: 'long', day: 'numeric', year: 'numeric', timeZone: 'Asia/Manila' }) + ' (11:59 PM Philippine Time).';
-                note.className = 'alert alert-info show';
-            } else {
-                note.className = 'alert alert-info';
-            }
-            document.getElementById('runningTotal').textContent = money(currentTotal());
-        }
-        document.querySelectorAll('input[name="mealPlan"]').forEach(function(r) { r.addEventListener('change', recalcTotal); });
-
         function updatePaymentSummary() {
+            var p = activePrices();
+            var html = '';
+            formData.registrants.forEach(function(r) {
+                html += '<div class="summary-row"><span></span><span></span></div>';
+            });
+            var box = document.getElementById('sumLines');
+            box.innerHTML = html;
+            // Fill with textContent (names may contain apostrophes/quotes).
+            box.querySelectorAll('.summary-row').forEach(function(row, i) {
+                var r = formData.registrants[i];
+                row.children[0].textContent = r.firstName + ' ' + r.lastName + ' · ' + MEAL_LABELS[r.mealPlan];
+                row.children[1].textContent = money(p[r.mealPlan] || 0);
+            });
             var total = currentTotal();
-            document.getElementById('sumMealName').textContent = MEAL_LABELS[formData.mealPlan] || '—';
-            document.getElementById('sumMeal').textContent = money(total);
             document.getElementById('sumTier').textContent = isEarlyBird() ? 'Early bird' : 'Regular';
             document.getElementById('sumTotal').textContent = money(total);
+            document.querySelectorAll('.amount-due').forEach(function(el) { el.textContent = money(total); });
             formData.totalAmount = total;
             formData.pricingType = isEarlyBird() ? 'early_bird' : 'regular';
         }
 
-        // ---- Custom modal (no native alert/confirm on iPad Safari) ----
-        function showModal(title, body) {
-            document.getElementById('modalTitle').textContent = title;
-            document.getElementById('modalBody').textContent = body;
-            document.getElementById('modal').classList.add('show');
+        // ============================================================
+        // STEP 2 — payment method + account (still nothing saved)
+        // ============================================================
+        // GCash account: picked at random from A–D in the browser (no DB row exists
+        // yet to round-robin on) and kept for this tab so a refresh shows the same one.
+        function assignedGcashCode() {
+            var code = null;
+            try { code = sessionStorage.getItem('v2PaymentAccount'); } catch (e) {}
+            if (!GCASH_ACCOUNTS[code]) {
+                var codes = Object.keys(GCASH_ACCOUNTS);
+                code = codes[Math.floor(Math.random() * codes.length)];
+                try { sessionStorage.setItem('v2PaymentAccount', code); } catch (e) {}
+            }
+            return code;
         }
-        document.getElementById('modalOk').addEventListener('click', function() {
-            document.getElementById('modal').classList.remove('show');
+        (function renderPaymentAccounts() {
+            var g = GCASH_ACCOUNTS[assignedGcashCode()];
+            document.getElementById('gcashName').textContent = g.name;
+            document.getElementById('gcashNumber').textContent = g.number;
+            document.getElementById('gcashQr').src = g.qr;
+
+            var box = document.getElementById('bankOptions');
+            Object.keys(BANK_ACCOUNTS).forEach(function(code) {
+                var b = BANK_ACCOUNTS[code];
+                var label = document.createElement('label');
+                label.className = 'opt-card';
+                label.innerHTML = '<input type="radio" name="bankChoice"><div class="opt-body"><div class="opt-title"></div><div class="opt-desc"></div></div>';
+                label.querySelector('input').value = code;
+                label.querySelector('.opt-title').textContent = b.bank;
+                label.querySelector('.opt-desc').textContent = b.name;
+                box.appendChild(label);
+            });
+        })();
+
+        document.querySelectorAll('input[name="payMethod"]').forEach(function(r) {
+            r.addEventListener('change', function() {
+                clearAllErrors();
+                document.getElementById('gcashBox').classList.toggle('hidden', this.value !== 'GCash');
+                document.getElementById('bankBox').classList.toggle('hidden', this.value !== 'Bank Transfer');
+            });
         });
-        document.getElementById('statusLink').addEventListener('click', function() {
-            showModal('Check my status', 'Online status lookup is coming soon. For now, please contact us through our Facebook page.');
+        document.getElementById('bankOptions').addEventListener('change', function(e) {
+            var b = BANK_ACCOUNTS[e.target.value];
+            if (!b) return;
+            clearAllErrors();
+            document.getElementById('bankLabel').textContent = 'Transfer to this ' + b.bank + ' account';
+            document.getElementById('bankName').textContent = b.name;
+            document.getElementById('bankNumber').textContent = b.number;
+            document.getElementById('bankQr').src = b.qr;
+            document.getElementById('bankDetail').classList.remove('hidden');
         });
 
-        // ---- Step navigation ----
+        function goToStep3() {
+            clearAllErrors();
+            var method = document.querySelector('input[name="payMethod"]:checked');
+            if (!method) { showErr('payMethod', true); showTopError('Please choose how you\'ll pay.'); return; }
+            var account;
+            if (method.value === 'GCash') {
+                account = assignedGcashCode();
+            } else {
+                var bank = document.querySelector('input[name="bankChoice"]:checked');
+                if (!bank) { showErr('bankChoice', true); showTopError('Please choose a bank account.'); return; }
+                account = bank.value;
+            }
+            formData.payment = { method: method.value, account: account };
+            var via = method.value === 'GCash'
+                ? 'GCash (' + GCASH_ACCOUNTS[account].name + ')'
+                : BANK_ACCOUNTS[account].bank + ' (' + BANK_ACCOUNTS[account].name + ')';
+            document.getElementById('paidVia').textContent = via;
+            setStep(3);
+        }
+
+        // ============================================================
+        // STEP 3 — compress screenshot in the browser, then ONE submit
+        // ============================================================
+        // ~1400px longest side, JPEG 0.8 keeps reference numbers readable while a
+        // 4 MB phone screenshot drops to ~500 KB. Small JPG/PNG/WebP files (<= 800 KB)
+        // are sent as-is. Anything else (e.g. HEIC) is always re-encoded to JPEG.
+        var COMPRESS = { threshold: 800 * 1024, maxSide: 1400, quality: 0.8 };
+        var MAX_UPLOAD_BYTES = 4 * 1024 * 1024; // keeps the JSON request well under Netlify's 6 MB limit
+
+        function dataUrlBytes(dataUrl) {
+            var b64 = dataUrl.slice(dataUrl.indexOf(',') + 1);
+            return Math.floor(b64.length * 3 / 4);
+        }
+        function readAsDataUrl(file) {
+            return new Promise(function(resolve, reject) {
+                var r = new FileReader();
+                r.onload = function() { resolve(r.result); };
+                r.onerror = function() { reject(new Error('Could not read that file.')); };
+                r.readAsDataURL(file);
+            });
+        }
+        function compressImage(file) {
+            var passThrough = file.size <= COMPRESS.threshold && /^image\/(jpeg|png|webp)$/.test(file.type);
+            if (passThrough) {
+                return readAsDataUrl(file).then(function(dataUrl) { return { dataUrl: dataUrl, bytes: file.size, compressed: false }; });
+            }
+            return new Promise(function(resolve, reject) {
+                var url = URL.createObjectURL(file);
+                var img = new Image();
+                img.onload = function() {
+                    var w = img.naturalWidth, h = img.naturalHeight;
+                    var scale = Math.min(1, COMPRESS.maxSide / Math.max(w, h));
+                    var canvas = document.createElement('canvas');
+                    canvas.width = Math.round(w * scale);
+                    canvas.height = Math.round(h * scale);
+                    var ctx = canvas.getContext('2d');
+                    ctx.fillStyle = '#ffffff'; // transparent PNG areas become white, not black
+                    ctx.fillRect(0, 0, canvas.width, canvas.height);
+                    ctx.drawImage(img, 0, 0, canvas.width, canvas.height);
+                    URL.revokeObjectURL(url);
+                    var dataUrl = canvas.toDataURL('image/jpeg', COMPRESS.quality);
+                    resolve({ dataUrl: dataUrl, bytes: dataUrlBytes(dataUrl), compressed: true });
+                };
+                img.onerror = function() {
+                    URL.revokeObjectURL(url);
+                    reject(new Error('Could not open that image. Please choose a JPG or PNG screenshot.'));
+                };
+                img.src = url;
+            });
+        }
+        function kb(n) { return n >= 1024 * 1024 ? (n / 1024 / 1024).toFixed(1) + ' MB' : Math.round(n / 1024) + ' KB'; }
+
+        document.getElementById('proofFile').addEventListener('change', function() {
+            var file = this.files && this.files[0];
+            proofData = null;
+            showErr('proofFile', false);
+            document.getElementById('proofPreview').classList.add('hidden');
+            if (!file) return;
+            if (file.type && file.type.indexOf('image/') !== 0) {
+                document.getElementById('err-proofFile').textContent = 'Please choose an image (JPG, PNG or a screenshot).';
+                showErr('proofFile', true);
+                return;
+            }
+            var info = document.getElementById('proofInfo');
+            info.textContent = 'Preparing image…';
+            document.getElementById('proofPreview').classList.remove('hidden');
+            compressImage(file).then(function(result) {
+                if (result.bytes > MAX_UPLOAD_BYTES) throw new Error('That image is still too large (' + kb(result.bytes) + '). Please choose a screenshot instead of a photo.');
+                proofData = result;
+                document.getElementById('proofImg').src = result.dataUrl;
+                info.textContent = result.compressed
+                    ? 'Ready · ' + kb(result.bytes) + ' (reduced from ' + kb(file.size) + '). Check the reference number is readable.'
+                    : 'Ready · ' + kb(result.bytes);
+            }).catch(function(err) {
+                document.getElementById('proofPreview').classList.add('hidden');
+                document.getElementById('err-proofFile').textContent = err.message;
+                showErr('proofFile', true);
+            });
+        });
+
+        function setSubmitStatus(msg, kind) {
+            var el = document.getElementById('submitStatus');
+            el.textContent = msg || '';
+            el.className = msg ? 'alert alert-' + (kind || 'info') + ' show' : 'alert';
+        }
+
+        var submitting = false;
+        function submitRegistration() {
+            if (submitting) return;
+            clearAllErrors();
+            setSubmitStatus('');
+            var ref = val('txnRef');
+            var ok = true;
+            if (!ref) { showErr('txnRef', true); ok = false; }
+            if (!proofData) {
+                document.getElementById('err-proofFile').textContent = 'Please choose your payment screenshot.';
+                showErr('proofFile', true); ok = false;
+            }
+            if (!ok) { showTopError('Please add your reference number and screenshot.'); return; }
+
+            submitting = true;
+            var btn = document.getElementById('submitBtn');
+            var back = document.getElementById('step3Back');
+            btn.disabled = true; back.disabled = true;
+            btn.textContent = 'Submitting…';
+            setSubmitStatus('Sending your registration and screenshot. Please keep this page open.', 'info');
+
+            var payload = {
+                shared: formData.shared,
+                registrants: formData.registrants,
+                payment: {
+                    method: formData.payment.method,
+                    account: formData.payment.account,
+                    reference: ref,
+                    pricingType: formData.pricingType
+                },
+                imageBase64: proofData.dataUrl
+            };
+
+            fetch('/.netlify/functions/submit-registration-with-payment', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify(payload)
+            }).then(function(res) {
+                return res.text().then(function(text) {
+                    var data = null;
+                    try { data = JSON.parse(text); } catch (e) { /* server returned HTML (timeout/500) */ }
+                    if (!res.ok || !data || !data.success) {
+                        throw new Error((data && data.error) || 'The server took too long to respond (' + res.status + '). Please tap Submit again — you won\'t be registered twice.');
+                    }
+                    return data;
+                });
+            }).then(function(data) {
+                showDone(data);
+            }).catch(function(err) {
+                var msg = err && err.message && err.message !== 'Failed to fetch' && err.message !== 'Load failed'
+                    ? err.message
+                    : 'Could not reach the server. Check your connection and tap Submit again — you won\'t be registered twice.';
+                setSubmitStatus(msg, 'error');
+            }).then(function() {
+                submitting = false;
+                btn.disabled = false; back.disabled = false;
+                btn.textContent = 'Submit Registration';
+            });
+        }
+
+        function showDone(data) {
+            var list = document.getElementById('doneList');
+            list.innerHTML = '';
+            (data.registrants || []).forEach(function(r) {
+                var row = document.createElement('div');
+                row.className = 'summary-row';
+                var a = document.createElement('span'); a.textContent = r.name;
+                var b = document.createElement('span'); b.textContent = r.confirmationNumber || '';
+                b.style.fontWeight = '700'; b.style.color = 'var(--secondary-gold)';
+                row.appendChild(a); row.appendChild(b);
+                list.appendChild(row);
+            });
+            document.getElementById('doneEmail').textContent = formData.shared.email;
+            setStep(4);
+        }
+
+        // ============================================================
+        // NAVIGATION
+        // ============================================================
+        var STEP_IDS = ['step1', 'step2', 'step3', 'stepDone'];
         function setStep(n) {
-            [1,2,3].forEach(function(i){
-                document.getElementById('step'+i).classList.toggle('active', i === n);
-                var p = document.getElementById('pstep'+i);
+            STEP_IDS.forEach(function(id, i) {
+                document.getElementById(id).classList.toggle('active', i + 1 === n);
+            });
+            [1, 2, 3].forEach(function(i) {
+                var p = document.getElementById('pstep' + i);
                 p.classList.toggle('active', i === n);
                 p.classList.toggle('done', i < n);
             });
             document.getElementById('totalBar').classList.toggle('show', n === 1);
             window.scrollTo({ top: 0, behavior: 'smooth' });
         }
-        function goToStep(n) { setStep(n); }
+        function goToStep(n) { clearAllErrors(); setStep(n); }
 
         function goToStep2() {
             if (!validateStep1()) return;

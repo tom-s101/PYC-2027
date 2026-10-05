@@ -212,15 +212,21 @@ roomSize 4. Auto-assign clusters by gender; respects locked rooms and whitelists
 
 ## 6. PRICING
 
-Current code constants (`submit-registration.js`): `BASE_PRICE = 500`, full meal `1500`.
-Historical reference from March 2026 (verify against live before relying on these):
-- **Early bird** (ended Mar 31, 11:59pm PHT): with meals 1750, without 750
-- **Regular:** with meals 1850, without 850
+All-inclusive per person, chosen by meal plan (`meal_plan` = `vegan`/`vegetarian`/`none`;
+`registration_fee`/`meal_fee` are 0, `total_amount` holds the price). **Confirmed by the
+developer: 2027 uses the same prices as 2026.**
 
-`total_amount = registration_fee + meal_fee`. `meal_plan` is `full`/`half`.
-**Action for whoever picks this up:** confirm the authoritative 2026/2027 prices with the
-developer before changing pricing anywhere — it lives in multiple places (register, payment,
-email, backend).
+| Meal plan | Early bird | Regular |
+|---|---|---|
+| `vegan` (Full Meal — Vegan) | 2100 | 2200 |
+| `vegetarian` (Full Meal — Vegetarian) | 1750 | 1850 |
+| `none` (Without Meal) | 750 | 850 |
+
+`pricing_type` = `early_bird`/`regular`. Early-bird deadline: 2026 was Apr 15 11:59 PM PHT;
+**2027 is Apr 15, 2027 11:59 PM PHT** (in `register-v2.html` and
+`submit-registration-with-payment.js` — keep both in sync). Live 2026 files
+(`register.html`, `payment.html`, `submit-registration.js`, `email-helper.js`) still carry the
+2026 deadline; the developer will update those later.
 
 ---
 
@@ -266,7 +272,7 @@ registration. Group members each get their own sequential number.
 | `checkin.html` | Public registration check-in (mobile-first) |
 | `ac.html` | Accommodation check-in (renamed from accommodation-checkin.html) |
 | `reminder-email-preview.html` | Preview of the reminder email |
-| `register-v2.html` | **NEW 2027** wizard registration (in progress — see §11) |
+| `register-v2.html` | **NEW 2027** wizard registration (`/register-v2`, not live yet — see §11) |
 
 ### admin-dashboard.html tabs (6)
 Check-In, GCash Payment Proofs, Resubmissions, All Registrations, **Payments**, Statistics.
@@ -384,20 +390,33 @@ stays live and untouched until v2 is proven.
   `submit-registration.js` + `upload-payment-proof.js` do, in one commit at proof time.
 
 ### Build order (from the spec)
-1. ✅ **Wizard shell** — DONE (`register-v2.html`): Step 1 full form (all fields, gender
-   fixed, conditional PH/Intl sections, minor waiver, validation with inline errors +
-   scroll-to-first-invalid), progress bar, step nav, `captureStep1()` into browser-held
-   `formData` (ZERO fetch calls). Steps 2 (payment summary placeholder) + 3 (upload
-   placeholder) are functional stubs. PRICES placeholder `{base:500, full:1500, half:900}`
-   — confirm 2027 prices.
-2. **Reorder Step 1 + option cards + live running total** (RegFox-informed layout — see
-   "RegFox layout integration" below and `register-v2-regfox-layout.md`).
-3. Browser-side image compression (test readability on real screenshots).
-4. `submit-registration-with-payment.js` — merged single-commit backend.
-5. Group flow in the wizard (`registrants[]`, "Add another registrant").
-6. QR generation in the approval email (qrcode lib).
-7. End-to-end test in parallel with live system.
+1. ✅ **Wizard shell** (`public/register-v2.html`).
+2. ✅ **Reorder Step 1 + option cards + live running total** — options first (meal cards
+   with early-bird strike-through, t-shirt), then who/contact/address/questions; sticky
+   running total; sticky top bar (Register · Check my status → "coming soon" modal ·
+   Contact → Facebook); one input font (Montserrat). Early-bird tier uses `server-time.js`.
+3. ✅ Browser-side image compression — `compressImage()`: >800 KB or non-JPG/PNG/WebP
+   (e.g. HEIC) → canvas, 1400px longest side, JPEG 0.8. Checked on a phone-size receipt:
+   reference numbers and 9px small print stay legible.
+4. ✅ `submit-registration-with-payment.js` — validates everything server-side, recomputes
+   prices (24h early-bird grace if the client saw early prices), duplicate check on
+   email + transaction reference (safe to retry), uploads image to `payment-proofs/v2-<uuid>`,
+   inserts ALL rows in one multi-row insert as `Pending Review`, assigns PYC numbers with the
+   cap-proof allocator (copied from approve-payment.js), sends confirmation email + Telegram.
+5. ✅ Group flow — "Add another registrant" blocks (collapsible, removable); members share
+   contact/location/payment; minor waiver shows if ANY registrant is under 18 (moved next to
+   Terms so it appears after members are added). Payload: `{shared, registrants[], payment,
+   imageBase64}`.
+6. ✅ QR in the approval email — `email-helper.js` receipt (approval + PYC-correction emails)
+   shows a QR image from the new `qr.js` function (`/.netlify/functions/qr?c=PYC-0487`,
+   `qrcode` npm). Hosted image instead of inline base64 because Gmail blocks `data:` images;
+   the PYC number is printed under it as a fallback.
+7. End-to-end test in parallel with live system (local harness run passed; still needs a real
+   Netlify deploy-preview test against Supabase/Brevo).
 8. Switch register.html → register-v2 only when fully verified.
+
+GCash account in v2: no DB row exists before submit, so the browser picks one of A–D at
+random (kept per tab in sessionStorage `v2PaymentAccount`) instead of the server-side count.
 
 ### RegFox layout integration (researched; build-ready spec in `register-v2-regfox-layout.md`)
 The developer asked to redesign registration to follow RegFox's professional structure.
@@ -490,13 +509,14 @@ realistic load.
 
 ## 16. OPEN ITEMS / NEXT STEPS
 
-- **Next build step:** reorder register-v2 Step 1 per `register-v2-regfox-layout.md`
-  (options-first, option cards, running total) — after confirming its §9 open questions.
-- Then: image compression → merged backend → group flow → QR email → end-to-end test.
-- Confirm authoritative 2026/2027 pricing across register/payment/email/backend.
+- **Next:** deploy-preview test of register-v2 end to end (real Supabase/Brevo/Telegram),
+  then switch over. Netlify must install the new `qrcode` dependency (package.json).
+- Update the 2026 early-bird date in live `register.html`/`payment.html`/
+  `submit-registration.js`/`email-helper.js` (developer will do this later).
+- Emails still say "PYC 2026" (email-helper.js) — update wording for 2027.
+- "Check my status" page (self-service lookup) — top-bar link shows "coming soon" for now.
 - Obtain `accommodation-login.js` (not in working copies) if accommodation login needs changes.
 - Consider the QR check-in + meal redemption system for 2027 (§11 future).
-- Replace the `alert()` placeholder in register-v2 Step 3 with a custom modal when wiring submit.
 
 ---
 
@@ -508,8 +528,8 @@ realistic load.
 | `register-v2-spec.md` | 2027 registration architecture: no-save-until-payment, compression, merged backend, groups, QR email |
 | `register-v2-regfox-layout.md` | Build-ready RegFox-informed layout/theme spec for register-v2 (order, option cards, running total, group blocks, CSS, open questions) |
 | `regfox-redesign-exploration.md` | The research report behind the layout spec (what RegFox pages really look like, what to adopt/skip) |
-| `register-v2.html` | The wizard shell built so far (Step 1 in old field order; Steps 2–3 stubs) |
-| `add-reminder-sent-column.sql` | Required SQL before the reminder sender is used |
+| `public/register-v2.html` | The 2027 wizard (all 3 steps + group flow + confirmation screen) |
+| `add-reminder-sent-column.sql` | Required SQL before the reminder sender is used (recreated from the description in §15) |
 
 ---
 
@@ -539,6 +559,11 @@ Files changed, with what to verify is deployed (HTML → `public/`, JS → `netl
   `add-reminder-sent-column.sql`). `auto-assign-rooms.js` — Pearl overfill and ghost-spot
   fixes (after deploying, Reset Assignments + re-run Auto-Assign; locked rooms preserved).
 - `register-v2.html`, the three register-v2 docs above — 2027 redesign work (not live).
+- **2027 build (this session):** `public/register-v2.html` (moved from repo root; `/register-v2`
+  redirect), NEW `submit-registration-with-payment.js`, NEW `qr.js`, `email-helper.js`
+  (QR block added to the approval/correction receipt — affects all approval emails),
+  `package.json` (+`qrcode`), NEW `add-reminder-sent-column.sql`. Live `register.html`,
+  `submit-registration.js`, `upload-payment-proof.js` untouched.
 
 **Reminder:** several files above were edited from working copies that can lag the deployed
 versions. Per §3.6, confirm the live version before editing any of them.
