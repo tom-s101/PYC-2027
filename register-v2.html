@@ -1,0 +1,601 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Register — PYC 2027</title>
+    <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Montserrat:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary-navy: #1a2332;
+            --secondary-gold: #d4a556;
+            --light: #f5f5f5;
+        }
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            font-family: 'Montserrat', sans-serif;
+            background: linear-gradient(135deg, #0f1419 0%, #1a2332 50%, #2a3f5f 100%);
+            background-attachment: fixed;
+            color: var(--light);
+            min-height: 100vh;
+            padding: 20px 12px 60px;
+        }
+        .container { max-width: 640px; margin: 0 auto; }
+
+        .header { text-align: center; padding: 24px 0 16px; }
+        .header h1 {
+            font-family: 'Bebas Neue', sans-serif;
+            color: var(--secondary-gold);
+            font-size: 2.6rem;
+            letter-spacing: 2px;
+            line-height: 1.05;
+        }
+        .header p { color: rgba(245,245,245,0.7); font-size: 0.9rem; margin-top: 6px; }
+
+        /* Progress steps */
+        .progress {
+            display: flex;
+            justify-content: space-between;
+            margin: 20px 0 26px;
+            position: relative;
+        }
+        .progress::before {
+            content: '';
+            position: absolute;
+            top: 18px; left: 8%; right: 8%;
+            height: 2px;
+            background: rgba(212,165,86,0.2);
+            z-index: 0;
+        }
+        .progress-step {
+            display: flex; flex-direction: column; align-items: center;
+            gap: 6px; z-index: 1; flex: 1;
+        }
+        .progress-dot {
+            width: 38px; height: 38px; border-radius: 50%;
+            background: var(--primary-navy);
+            border: 2px solid rgba(212,165,86,0.3);
+            display: flex; align-items: center; justify-content: center;
+            font-weight: 700; color: rgba(245,245,245,0.5);
+            font-size: 0.95rem; transition: all 0.3s;
+        }
+        .progress-step.active .progress-dot {
+            background: var(--secondary-gold); color: var(--primary-navy);
+            border-color: var(--secondary-gold);
+        }
+        .progress-step.done .progress-dot {
+            background: #27ae60; color: #fff; border-color: #27ae60;
+        }
+        .progress-label { font-size: 0.72rem; color: rgba(245,245,245,0.55); text-align: center; }
+        .progress-step.active .progress-label { color: var(--secondary-gold); font-weight: 600; }
+
+        /* Card */
+        .card {
+            background: rgba(255,255,255,0.04);
+            border: 1px solid rgba(212,165,86,0.18);
+            border-radius: 14px;
+            padding: 24px 20px;
+        }
+
+        .step { display: none; }
+        .step.active { display: block; }
+
+        .section-header {
+            font-family: 'Bebas Neue', sans-serif;
+            color: var(--secondary-gold);
+            font-size: 1.4rem;
+            letter-spacing: 1px;
+            margin: 22px 0 14px;
+        }
+        .section-header:first-child { margin-top: 0; }
+
+        .form-group { margin-bottom: 16px; }
+        .form-group label { display: block; margin-bottom: 6px; font-size: 0.9rem; font-weight: 500; }
+        .required { color: #e8826a; }
+        .form-group input[type="text"],
+        .form-group input[type="email"],
+        .form-group input[type="tel"],
+        .form-group select {
+            width: 100%;
+            padding: 13px 14px;
+            background: rgba(255,255,255,0.06);
+            border: 1px solid rgba(212,165,86,0.25);
+            border-radius: 8px;
+            color: var(--light);
+            font-size: 16px; /* 16px prevents iOS zoom on focus */
+            font-family: 'Montserrat', sans-serif;
+            min-height: 50px;
+        }
+        .form-group input:focus, .form-group select:focus {
+            outline: none; border-color: var(--secondary-gold);
+        }
+        select option { background: var(--primary-navy); }
+
+        .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+
+        .radio-group, .checkbox-group { display: flex; gap: 18px; flex-wrap: wrap; }
+        .radio-option, .checkbox-group { display: flex; align-items: center; gap: 8px; }
+        .radio-option input, .checkbox-group input { width: 20px; height: 20px; accent-color: var(--secondary-gold); }
+        .radio-option label, .checkbox-group label { margin: 0; font-weight: 400; cursor: pointer; }
+
+        .hidden { display: none !important; }
+
+        .field-error { color: #e8826a; font-size: 0.8rem; margin-top: 5px; display: none; }
+        .field-error.show { display: block; }
+
+        .alert {
+            padding: 13px 16px; border-radius: 8px; margin-bottom: 16px;
+            font-size: 0.88rem; display: none;
+        }
+        .alert.show { display: block; }
+        .alert-error { background: rgba(231,76,60,0.12); border: 1px solid rgba(231,76,60,0.35); color: #e8826a; }
+        .alert-info { background: rgba(212,165,86,0.1); border: 1px solid rgba(212,165,86,0.3); color: var(--secondary-gold); }
+
+        .terms-link { color: var(--secondary-gold); }
+
+        /* Nav buttons */
+        .nav-row { display: flex; gap: 12px; margin-top: 24px; }
+        .btn {
+            flex: 1; padding: 16px; border-radius: 8px; font-weight: 700;
+            font-size: 1rem; cursor: pointer; border: none; min-height: 54px;
+            font-family: 'Montserrat', sans-serif;
+        }
+        .btn-primary { background: linear-gradient(135deg, var(--secondary-gold), #c9965d); color: var(--primary-navy); }
+        .btn-back { background: rgba(255,255,255,0.06); color: var(--light); border: 1px solid rgba(255,255,255,0.15); flex: 0 0 110px; }
+
+        /* Payment summary (step 2 placeholder) */
+        .summary-box {
+            background: rgba(212,165,86,0.08);
+            border: 1px solid rgba(212,165,86,0.3);
+            border-radius: 10px; padding: 18px; margin-bottom: 18px;
+        }
+        .summary-row { display: flex; justify-content: space-between; padding: 7px 0; font-size: 0.92rem; }
+        .summary-total { border-top: 1px solid rgba(212,165,86,0.25); margin-top: 8px; padding-top: 12px; font-weight: 700; font-size: 1.1rem; color: var(--secondary-gold); }
+
+        @media (max-width: 480px) {
+            .header h1 { font-size: 2.1rem; }
+            .form-row { grid-template-columns: 1fr; }
+            .btn-back { flex: 0 0 90px; }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>PYC 2027 Registration</h1>
+            <p>Above and Beyond</p>
+        </div>
+
+        <!-- Progress -->
+        <div class="progress">
+            <div class="progress-step active" id="pstep1">
+                <div class="progress-dot">1</div>
+                <div class="progress-label">Your Info</div>
+            </div>
+            <div class="progress-step" id="pstep2">
+                <div class="progress-dot">2</div>
+                <div class="progress-label">Payment</div>
+            </div>
+            <div class="progress-step" id="pstep3">
+                <div class="progress-dot">3</div>
+                <div class="progress-label">Upload Proof</div>
+            </div>
+        </div>
+
+        <div class="card">
+            <div id="topAlert" class="alert"></div>
+
+            <!-- ============ STEP 1: INFORMATION ============ -->
+            <div class="step active" id="step1">
+                <!-- Location Type -->
+                <h2 class="section-header">Location</h2>
+                <div class="form-group">
+                    <label for="locationType">Where are you from? <span class="required">*</span></label>
+                    <select id="locationType" required>
+                        <option value="">-- Select --</option>
+                        <option value="philippines">Philippines</option>
+                        <option value="international">International</option>
+                    </select>
+                    <div class="field-error" id="err-locationType">Please select your location.</div>
+                </div>
+
+                <!-- Personal Information -->
+                <h2 class="section-header">Personal Information</h2>
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="firstName">First Name <span class="required">*</span></label>
+                        <input type="text" id="firstName" required>
+                        <div class="field-error" id="err-firstName">Required.</div>
+                    </div>
+                    <div class="form-group">
+                        <label for="lastName">Last Name <span class="required">*</span></label>
+                        <input type="text" id="lastName" required>
+                        <div class="field-error" id="err-lastName">Required.</div>
+                    </div>
+                </div>
+
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="age">Age <span class="required">*</span></label>
+                        <select id="age" required>
+                            <option value="">-- Select --</option>
+                            <option value="0-8">0-8</option>
+                            <option value="9-13">9-13</option>
+                            <option value="14-17">14-17</option>
+                            <option value="18-25">18-25</option>
+                            <option value="26-35">26-35</option>
+                            <option value="36+">36+</option>
+                        </select>
+                        <div class="field-error" id="err-age">Required.</div>
+                    </div>
+                    <div class="form-group">
+                        <label>Gender <span class="required">*</span></label>
+                        <div class="radio-group" style="padding-top:10px;">
+                            <div class="radio-option">
+                                <input type="radio" id="genderMale" name="gender" value="Male">
+                                <label for="genderMale">Male</label>
+                            </div>
+                            <div class="radio-option">
+                                <input type="radio" id="genderFemale" name="gender" value="Female">
+                                <label for="genderFemale">Female</label>
+                            </div>
+                        </div>
+                        <div class="field-error" id="err-gender">Please select a gender.</div>
+                    </div>
+                </div>
+
+                <!-- Minor waiver (shown for under-18) -->
+                <div class="form-group hidden" id="minorWaiverSection">
+                    <div class="checkbox-group" style="align-items:flex-start;">
+                        <input type="checkbox" id="minorWaiverAccept">
+                        <label for="minorWaiverAccept" style="margin:0;">As a registrant under 18, I confirm a parent/guardian consents to my participation. <span class="required">*</span></label>
+                    </div>
+                    <div class="field-error" id="err-minorWaiver">Parental consent is required for minors.</div>
+                </div>
+
+                <div class="form-group">
+                    <label for="email">Email Address <span class="required">*</span></label>
+                    <input type="email" id="email" required>
+                    <div class="field-error" id="err-email">Enter a valid email.</div>
+                </div>
+                <div class="form-group">
+                    <label for="confirmEmail">Confirm Email Address <span class="required">*</span></label>
+                    <input type="email" id="confirmEmail" required>
+                    <div class="field-error" id="err-confirmEmail">Emails must match.</div>
+                </div>
+                <div class="form-group">
+                    <label for="phone">Phone Number <span class="required">*</span></label>
+                    <input type="tel" id="phone" required>
+                    <div class="field-error" id="err-phone">Required.</div>
+                </div>
+
+                <!-- Philippines Address -->
+                <div id="philippinesAddress" class="hidden">
+                    <h2 class="section-header">Location (Philippines)</h2>
+                    <div class="form-group">
+                        <label for="phRegion">Region <span class="required">*</span></label>
+                        <select id="phRegion">
+                            <option value="">-- Select Region --</option>
+                            <option value="Luzon">Luzon</option>
+                            <option value="Visayas">Visayas</option>
+                            <option value="Mindanao">Mindanao</option>
+                        </select>
+                        <div class="field-error" id="err-phRegion">Required.</div>
+                    </div>
+                    <div class="form-group">
+                        <label for="phCity">City/Municipality <span class="required">*</span></label>
+                        <input type="text" id="phCity" placeholder="Enter your city">
+                        <div class="field-error" id="err-phCity">Required.</div>
+                    </div>
+                </div>
+
+                <!-- International Address -->
+                <div id="internationalAddress" class="hidden">
+                    <h2 class="section-header">Location (International)</h2>
+                    <div class="form-group">
+                        <label for="intCountry">Country <span class="required">*</span></label>
+                        <select id="intCountry">
+                            <option value="">-- Select Country --</option>
+                            <option value="United States">United States</option>
+                            <option value="Canada">Canada</option>
+                            <option value="United Kingdom">United Kingdom</option>
+                            <option value="Australia">Australia</option>
+                            <option value="New Zealand">New Zealand</option>
+                            <option value="Singapore">Singapore</option>
+                            <option value="Hong Kong">Hong Kong</option>
+                            <option value="Japan">Japan</option>
+                            <option value="South Korea">South Korea</option>
+                            <option value="United Arab Emirates">United Arab Emirates</option>
+                            <option value="Saudi Arabia">Saudi Arabia</option>
+                            <option value="Qatar">Qatar</option>
+                            <option value="Malaysia">Malaysia</option>
+                            <option value="Other">Other</option>
+                        </select>
+                        <div class="field-error" id="err-intCountry">Required.</div>
+                    </div>
+                    <div class="form-group">
+                        <label for="intCity">City <span class="required">*</span></label>
+                        <input type="text" id="intCity" placeholder="Enter your city">
+                        <div class="field-error" id="err-intCity">Required.</div>
+                    </div>
+                </div>
+
+                <!-- Conference Options -->
+                <h2 class="section-header">Conference Options</h2>
+                <div class="form-group">
+                    <label for="shirtSize">T-Shirt Size <span class="required">*</span></label>
+                    <select id="shirtSize" required>
+                        <option value="">-- Select Size --</option>
+                        <option value="xs">XS</option>
+                        <option value="s">S</option>
+                        <option value="m">M</option>
+                        <option value="l">L</option>
+                        <option value="xl">XL</option>
+                        <option value="2xl">2XL</option>
+                        <option value="3xl">3XL</option>
+                        <option value="4xl">4XL</option>
+                        <option value="5xl">5XL</option>
+                    </select>
+                    <div class="field-error" id="err-shirtSize">Required.</div>
+                </div>
+                <div class="form-group">
+                    <label>Meal Plan <span class="required">*</span></label>
+                    <div class="radio-group" style="padding-top:6px;">
+                        <div class="radio-option">
+                            <input type="radio" id="mealFull" name="mealPlan" value="full">
+                            <label for="mealFull">Full Meal Plan</label>
+                        </div>
+                        <div class="radio-option">
+                            <input type="radio" id="mealHalf" name="mealPlan" value="half">
+                            <label for="mealHalf">Half Meal Plan</label>
+                        </div>
+                    </div>
+                    <div class="field-error" id="err-mealPlan">Please select a meal plan.</div>
+                </div>
+                <div class="form-group">
+                    <div class="checkbox-group">
+                        <input type="checkbox" id="volunteer" value="yes">
+                        <label for="volunteer">I would like to volunteer</label>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="pycCount">This will be my ___ PYC <span class="required">*</span></label>
+                    <select id="pycCount" required>
+                        <option value="">-- Select --</option>
+                        <option value="1st">1st PYC</option>
+                        <option value="2nd">2nd PYC</option>
+                        <option value="3rd">3rd PYC</option>
+                        <option value="4th">4th PYC</option>
+                        <option value="5th">5th PYC</option>
+                        <option value="6th">6th PYC</option>
+                        <option value="7th+">7th+ PYC</option>
+                    </select>
+                    <div class="field-error" id="err-pycCount">Required.</div>
+                </div>
+
+                <!-- Additional Information -->
+                <h2 class="section-header">Additional Information</h2>
+                <div class="form-group">
+                    <label for="referralSource">How did you hear about us? <span class="required">*</span></label>
+                    <select id="referralSource" required>
+                        <option value="">-- Select Option --</option>
+                        <option value="social_media">Social Media</option>
+                        <option value="friend">Friend/Family</option>
+                        <option value="church">Church</option>
+                        <option value="website">Website</option>
+                        <option value="email">Email</option>
+                        <option value="poster">Poster/Flyer</option>
+                    </select>
+                    <div class="field-error" id="err-referralSource">Required.</div>
+                </div>
+
+                <!-- Terms -->
+                <div class="form-group" style="margin-top:18px;">
+                    <div class="checkbox-group" style="align-items:flex-start;">
+                        <input type="checkbox" id="acceptTerms">
+                        <label for="acceptTerms" style="margin:0;">
+                            I accept the <a href="/code-of-conduct.pdf" target="_blank" class="terms-link">Code of Conduct</a>,
+                            <a href="/data-privacy.pdf" target="_blank" class="terms-link">Data Privacy Consent</a>,
+                            <a href="/refund-policy.pdf" target="_blank" class="terms-link">Refund Policy</a>,
+                            and <a href="/terms-of-service.pdf" target="_blank" class="terms-link">Terms of Service</a>
+                            <span class="required">*</span>
+                        </label>
+                    </div>
+                    <div class="field-error" id="err-acceptTerms">You must accept the terms to continue.</div>
+                </div>
+
+                <div class="nav-row">
+                    <button class="btn btn-primary" onclick="goToStep2()">Next: Payment →</button>
+                </div>
+            </div>
+
+            <!-- ============ STEP 2: PAYMENT (placeholder) ============ -->
+            <div class="step" id="step2">
+                <h2 class="section-header">Payment</h2>
+                <div class="summary-box">
+                    <div class="summary-row"><span>Registration Fee</span><span id="sumBase">₱500.00</span></div>
+                    <div class="summary-row"><span>Meal Plan (<span id="sumMealName">—</span>)</span><span id="sumMeal">₱0.00</span></div>
+                    <div class="summary-row summary-total"><span>Total</span><span id="sumTotal">₱0.00</span></div>
+                </div>
+                <div class="alert alert-info show" style="margin-bottom:18px;">
+                    <strong>Note:</strong> This is the wizard shell. The GCash account assignment and payment
+                    instructions will be wired in next. For now this confirms the flow and totals work.
+                </div>
+                <p style="color:rgba(245,245,245,0.6);font-size:0.88rem;">After paying via GCash, tap continue to upload your screenshot.</p>
+                <div class="nav-row">
+                    <button class="btn btn-back" onclick="goToStep(1)">← Back</button>
+                    <button class="btn btn-primary" onclick="goToStep(3)">I've paid →</button>
+                </div>
+            </div>
+
+            <!-- ============ STEP 3: UPLOAD PROOF (placeholder) ============ -->
+            <div class="step" id="step3">
+                <h2 class="section-header">Upload Payment Proof</h2>
+                <div class="alert alert-info show" style="margin-bottom:18px;">
+                    <strong>Coming next:</strong> photo picker + in-browser compression + the single
+                    combined submit (info + image) that creates the record. This placeholder shows where it goes.
+                </div>
+                <p style="color:rgba(245,245,245,0.6);font-size:0.88rem;margin-bottom:8px;">When complete, this step will:</p>
+                <ul style="color:rgba(245,245,245,0.55);font-size:0.85rem;padding-left:18px;line-height:1.8;">
+                    <li>Let you choose your payment screenshot</li>
+                    <li>Compress it in the browser (kept readable)</li>
+                    <li>Submit everything in one request — the only DB write</li>
+                </ul>
+                <div class="nav-row">
+                    <button class="btn btn-back" onclick="goToStep(2)">← Back</button>
+                    <button class="btn btn-primary" onclick="alert('Submission will be wired in the next build step.')">Submit (placeholder)</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // ============================================================
+        // PYC 2027 register-v2 — WIZARD SHELL
+        // Nothing is sent to the backend yet. All info is held in the
+        // browser (formData) and only committed at the final upload step
+        // (to be built next). This first build covers Step 1 + navigation.
+        // ============================================================
+
+        var PRICES = { base: 500, full: 1500, half: 900 }; // half is a placeholder amount; confirm for 2027
+        var formData = {}; // holds all Step 1 answers in the browser
+
+        // ---- Location type toggling ----
+        document.getElementById('locationType').addEventListener('change', function() {
+            var v = this.value;
+            document.getElementById('philippinesAddress').classList.toggle('hidden', v !== 'philippines');
+            document.getElementById('internationalAddress').classList.toggle('hidden', v !== 'international');
+        });
+
+        // ---- Minor waiver shows for under-18 ages ----
+        document.getElementById('age').addEventListener('change', function() {
+            var minor = (this.value === '0-8' || this.value === '9-13' || this.value === '14-17');
+            document.getElementById('minorWaiverSection').classList.toggle('hidden', !minor);
+        });
+
+        function showErr(id, show) {
+            var el = document.getElementById('err-' + id);
+            if (el) el.classList.toggle('show', !!show);
+        }
+        function clearAllErrors() {
+            document.querySelectorAll('.field-error').forEach(function(e){ e.classList.remove('show'); });
+            var ta = document.getElementById('topAlert'); ta.className = 'alert';
+        }
+        function val(id) { var el = document.getElementById(id); return el ? el.value.trim() : ''; }
+
+        // ---- Validate Step 1 (incl. the gender fix) ----
+        function validateStep1() {
+            clearAllErrors();
+            var ok = true;
+            var firstInvalid = null;
+
+            function fail(id) {
+                showErr(id, true); ok = false;
+                if (!firstInvalid) firstInvalid = document.getElementById(id) || document.getElementById('err-' + id);
+            }
+
+            if (!val('locationType')) fail('locationType');
+            if (!val('firstName')) fail('firstName');
+            if (!val('lastName')) fail('lastName');
+            if (!val('age')) fail('age');
+
+            // GENDER — the bug fix: explicitly require a selection
+            var gender = document.querySelector('input[name="gender"]:checked');
+            if (!gender) fail('gender');
+
+            // Minor waiver if under 18
+            var age = val('age');
+            if (age === '0-8' || age === '9-13' || age === '14-17') {
+                if (!document.getElementById('minorWaiverAccept').checked) fail('minorWaiver');
+            }
+
+            var email = val('email');
+            if (!email || email.indexOf('@') === -1) fail('email');
+            if (val('confirmEmail') !== email || !email) fail('confirmEmail');
+            if (!val('phone')) fail('phone');
+
+            // Location-specific
+            if (val('locationType') === 'philippines') {
+                if (!val('phRegion')) fail('phRegion');
+                if (!val('phCity')) fail('phCity');
+            } else if (val('locationType') === 'international') {
+                if (!val('intCountry')) fail('intCountry');
+                if (!val('intCity')) fail('intCity');
+            }
+
+            if (!val('shirtSize')) fail('shirtSize');
+
+            var meal = document.querySelector('input[name="mealPlan"]:checked');
+            if (!meal) fail('mealPlan');
+
+            if (!val('pycCount')) fail('pycCount');
+            if (!val('referralSource')) fail('referralSource');
+            if (!document.getElementById('acceptTerms').checked) fail('acceptTerms');
+
+            if (!ok) {
+                var ta = document.getElementById('topAlert');
+                ta.textContent = 'Please complete all required fields highlighted below.';
+                ta.className = 'alert alert-error show';
+                if (firstInvalid && firstInvalid.scrollIntoView) firstInvalid.scrollIntoView({ behavior: 'smooth', block: 'center' });
+            }
+            return ok;
+        }
+
+        // ---- Capture Step 1 into formData (browser only — nothing sent) ----
+        function captureStep1() {
+            var gender = document.querySelector('input[name="gender"]:checked');
+            var meal = document.querySelector('input[name="mealPlan"]:checked');
+            formData = {
+                locationType: val('locationType'),
+                firstName: val('firstName'),
+                lastName: val('lastName'),
+                age: val('age'),
+                gender: gender ? gender.value : '',
+                minorWaiverAccept: document.getElementById('minorWaiverAccept').checked ? 'Yes' : null,
+                email: val('email'),
+                phone: val('phone'),
+                phRegion: val('phRegion'),
+                phCity: val('phCity'),
+                intCountry: val('intCountry'),
+                intCity: val('intCity'),
+                shirtSize: val('shirtSize'),
+                mealPlan: meal ? meal.value : '',
+                volunteer: document.getElementById('volunteer').checked ? 'yes' : 'no',
+                pycCount: val('pycCount'),
+                referralSource: val('referralSource'),
+                acceptTerms: document.getElementById('acceptTerms').checked
+            };
+        }
+
+        function updatePaymentSummary() {
+            var base = PRICES.base;
+            var mealAmt = PRICES[formData.mealPlan] || 0;
+            var total = base + mealAmt;
+            document.getElementById('sumBase').textContent = '₱' + base.toFixed(2);
+            document.getElementById('sumMealName').textContent = formData.mealPlan === 'full' ? 'Full' : formData.mealPlan === 'half' ? 'Half' : '—';
+            document.getElementById('sumMeal').textContent = '₱' + mealAmt.toFixed(2);
+            document.getElementById('sumTotal').textContent = '₱' + total.toFixed(2);
+            formData.totalAmount = total;
+        }
+
+        // ---- Step navigation ----
+        function setStep(n) {
+            [1,2,3].forEach(function(i){
+                document.getElementById('step'+i).classList.toggle('active', i === n);
+                var p = document.getElementById('pstep'+i);
+                p.classList.toggle('active', i === n);
+                p.classList.toggle('done', i < n);
+            });
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+        function goToStep(n) { setStep(n); }
+
+        function goToStep2() {
+            if (!validateStep1()) return;
+            captureStep1();
+            updatePaymentSummary();
+            setStep(2);
+        }
+    </script>
+</body>
+</html>
