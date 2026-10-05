@@ -18,9 +18,81 @@
             background-attachment: fixed;
             color: var(--light);
             min-height: 100vh;
-            padding: 20px 12px 60px;
+            padding: 20px 12px 96px;
         }
         .container { max-width: 640px; margin: 0 auto; }
+
+        /* One font for every input, select and button */
+        input, select, button, textarea { font-family: inherit; }
+
+        /* Sticky top bar */
+        .topbar {
+            position: sticky; top: 0; z-index: 50;
+            margin: -20px -12px 0; padding: 0 12px;
+            background: rgba(15,20,25,0.92);
+            backdrop-filter: blur(6px); -webkit-backdrop-filter: blur(6px);
+            border-bottom: 1px solid rgba(212,165,86,0.2);
+        }
+        .topbar-inner {
+            max-width: 640px; margin: 0 auto; min-height: 48px;
+            display: flex; align-items: center; gap: 4px;
+        }
+        .topbar-brand {
+            font-family: 'Bebas Neue', sans-serif; letter-spacing: 1.5px;
+            color: var(--secondary-gold); font-size: 1.3rem; margin-right: auto; white-space: nowrap;
+        }
+        .topbar a, .topbar button.topbar-link {
+            background: none; border: none; cursor: pointer;
+            color: var(--light); text-decoration: none;
+            font-size: 0.82rem; font-weight: 600;
+            padding: 14px 10px; min-height: 48px;
+        }
+        .topbar a.current { color: var(--secondary-gold); }
+
+        /* Option cards */
+        .opt-group { display: flex; flex-direction: column; gap: 10px; padding-top: 4px; }
+        .opt-card {
+            position: relative; display: flex; align-items: center; gap: 14px;
+            padding: 16px; min-height: 56px; border-radius: 12px; cursor: pointer;
+            background: rgba(255,255,255,0.04);
+            border: 1.5px solid rgba(212,165,86,0.25);
+            transition: border-color .15s, background .15s;
+        }
+        .form-group label.opt-card { display: flex; margin-bottom: 0; font-size: 1rem; }
+        .opt-body { flex: 1; }
+        .opt-card input { position: absolute; opacity: 0; pointer-events: none; }
+        .opt-card.selected { border-color: var(--secondary-gold); background: rgba(212,165,86,0.12); }
+        .opt-title { font-weight: 600; }
+        .opt-desc { font-size: 0.8rem; color: rgba(245,245,245,0.6); }
+        .opt-price { margin-left: auto; font-weight: 700; color: var(--secondary-gold); white-space: nowrap; }
+        .opt-price s { color: rgba(245,245,245,0.45); font-weight: 400; font-size: 0.8rem; margin-right: 6px; }
+
+        /* Sticky running total (Step 1 only) */
+        .total-bar {
+            position: fixed; left: 0; right: 0; bottom: 0; z-index: 40;
+            display: none; align-items: center; justify-content: space-between;
+            padding: 12px 20px calc(12px + env(safe-area-inset-bottom));
+            background: rgba(15,20,25,0.95); border-top: 1px solid rgba(212,165,86,0.35);
+        }
+        .total-bar.show { display: flex; }
+        .total-bar > * { max-width: 600px; }
+        .total-label { font-weight: 600; color: rgba(245,245,245,0.75); }
+        .total-amount { font-family: 'Bebas Neue', sans-serif; font-size: 1.7rem; letter-spacing: 1px; color: var(--secondary-gold); }
+
+        /* Custom modal (iPad Safari: never use native alert/confirm) */
+        .modal-backdrop {
+            position: fixed; inset: 0; z-index: 100; display: none;
+            align-items: center; justify-content: center; padding: 20px;
+            background: rgba(0,0,0,0.65);
+        }
+        .modal-backdrop.show { display: flex; }
+        .modal-box {
+            max-width: 420px; width: 100%; padding: 24px 20px;
+            background: var(--primary-navy); border: 1px solid rgba(212,165,86,0.35);
+            border-radius: 14px;
+        }
+        .modal-box h3 { font-family: 'Bebas Neue', sans-serif; letter-spacing: 1px; color: var(--secondary-gold); font-size: 1.5rem; margin-bottom: 8px; }
+        .modal-box p { font-size: 0.92rem; line-height: 1.5; color: rgba(245,245,245,0.85); }
 
         .header { text-align: center; padding: 24px 0 16px; }
         .header h1 {
@@ -160,6 +232,14 @@
     </style>
 </head>
 <body>
+    <div class="topbar">
+        <div class="topbar-inner">
+            <span class="topbar-brand">PYC 2027</span>
+            <a href="/register-v2" class="current">Register</a>
+            <button type="button" class="topbar-link" id="statusLink">Check my status</button>
+            <a href="https://www.facebook.com/philippineyouthforchrist" target="_blank" rel="noopener">Contact</a>
+        </div>
+    </div>
     <div class="container">
         <div class="header">
             <h1>PYC 2027 Registration</h1>
@@ -187,8 +267,55 @@
 
             <!-- ============ STEP 1: INFORMATION ============ -->
             <div class="step active" id="step1">
-                <!-- Location Type -->
-                <h2 class="section-header">Location</h2>
+                <h2 class="section-header">Choose Your Options</h2>
+                <div id="earlyBirdNote" class="alert alert-info"></div>
+                <div class="form-group">
+                    <label>Meal Plan <span class="required">*</span></label>
+                    <div class="opt-group" id="mealOptions">
+                        <label class="opt-card" for="mealVegan">
+                            <input type="radio" id="mealVegan" name="mealPlan" value="vegan">
+                            <div class="opt-body">
+                                <div class="opt-title">Full Meal — Vegan</div>
+                                <div class="opt-desc">10 meals included</div>
+                            </div>
+                            <div class="opt-price" data-meal-price="vegan"></div>
+                        </label>
+                        <label class="opt-card" for="mealVegetarian">
+                            <input type="radio" id="mealVegetarian" name="mealPlan" value="vegetarian">
+                            <div class="opt-body">
+                                <div class="opt-title">Full Meal — Vegetarian</div>
+                                <div class="opt-desc">10 meals included</div>
+                            </div>
+                            <div class="opt-price" data-meal-price="vegetarian"></div>
+                        </label>
+                        <label class="opt-card" for="mealNone">
+                            <input type="radio" id="mealNone" name="mealPlan" value="none">
+                            <div class="opt-body">
+                                <div class="opt-title">Without Meal</div>
+                                <div class="opt-desc">Registration only</div>
+                            </div>
+                            <div class="opt-price" data-meal-price="none"></div>
+                        </label>
+                    </div>
+                    <div class="field-error" id="err-mealPlan">Please select a meal plan.</div>
+                </div>
+                <div class="form-group">
+                    <label for="shirtSize">T-Shirt Size <span class="required">*</span></label>
+                    <select id="shirtSize" required>
+                        <option value="">-- Select Size --</option>
+                        <option value="xs">XS</option>
+                        <option value="s">S</option>
+                        <option value="m">M</option>
+                        <option value="l">L</option>
+                        <option value="xl">XL</option>
+                        <option value="2xl">2XL</option>
+                        <option value="3xl">3XL</option>
+                        <option value="4xl">4XL</option>
+                        <option value="5xl">5XL</option>
+                    </select>
+                    <div class="field-error" id="err-shirtSize">Required.</div>
+                </div>
+                <h2 class="section-header">Who Is Attending</h2>
                 <div class="form-group">
                     <label for="locationType">Where are you from? <span class="required">*</span></label>
                     <select id="locationType" required>
@@ -198,9 +325,6 @@
                     </select>
                     <div class="field-error" id="err-locationType">Please select your location.</div>
                 </div>
-
-                <!-- Personal Information -->
-                <h2 class="section-header">Personal Information</h2>
                 <div class="form-row">
                     <div class="form-group">
                         <label for="firstName">First Name <span class="required">*</span></label>
@@ -252,7 +376,7 @@
                     </div>
                     <div class="field-error" id="err-minorWaiver">Parental consent is required for minors.</div>
                 </div>
-
+                <h2 class="section-header">Contact</h2>
                 <div class="form-group">
                     <label for="email">Email Address <span class="required">*</span></label>
                     <input type="email" id="email" required>
@@ -268,7 +392,6 @@
                     <input type="tel" id="phone" required>
                     <div class="field-error" id="err-phone">Required.</div>
                 </div>
-
                 <!-- Philippines Address -->
                 <div id="philippinesAddress" class="hidden">
                     <h2 class="section-header">Location (Philippines)</h2>
@@ -319,45 +442,7 @@
                         <div class="field-error" id="err-intCity">Required.</div>
                     </div>
                 </div>
-
-                <!-- Conference Options -->
-                <h2 class="section-header">Conference Options</h2>
-                <div class="form-group">
-                    <label for="shirtSize">T-Shirt Size <span class="required">*</span></label>
-                    <select id="shirtSize" required>
-                        <option value="">-- Select Size --</option>
-                        <option value="xs">XS</option>
-                        <option value="s">S</option>
-                        <option value="m">M</option>
-                        <option value="l">L</option>
-                        <option value="xl">XL</option>
-                        <option value="2xl">2XL</option>
-                        <option value="3xl">3XL</option>
-                        <option value="4xl">4XL</option>
-                        <option value="5xl">5XL</option>
-                    </select>
-                    <div class="field-error" id="err-shirtSize">Required.</div>
-                </div>
-                <div class="form-group">
-                    <label>Meal Plan <span class="required">*</span></label>
-                    <div class="radio-group" style="padding-top:6px;">
-                        <div class="radio-option">
-                            <input type="radio" id="mealFull" name="mealPlan" value="full">
-                            <label for="mealFull">Full Meal Plan</label>
-                        </div>
-                        <div class="radio-option">
-                            <input type="radio" id="mealHalf" name="mealPlan" value="half">
-                            <label for="mealHalf">Half Meal Plan</label>
-                        </div>
-                    </div>
-                    <div class="field-error" id="err-mealPlan">Please select a meal plan.</div>
-                </div>
-                <div class="form-group">
-                    <div class="checkbox-group">
-                        <input type="checkbox" id="volunteer" value="yes">
-                        <label for="volunteer">I would like to volunteer</label>
-                    </div>
-                </div>
+                <h2 class="section-header">A Few More Questions</h2>
                 <div class="form-group">
                     <label for="pycCount">This will be my ___ PYC <span class="required">*</span></label>
                     <select id="pycCount" required>
@@ -372,9 +457,12 @@
                     </select>
                     <div class="field-error" id="err-pycCount">Required.</div>
                 </div>
-
-                <!-- Additional Information -->
-                <h2 class="section-header">Additional Information</h2>
+                <div class="form-group">
+                    <div class="checkbox-group">
+                        <input type="checkbox" id="volunteer" value="yes">
+                        <label for="volunteer">I would like to volunteer</label>
+                    </div>
+                </div>
                 <div class="form-group">
                     <label for="referralSource">How did you hear about us? <span class="required">*</span></label>
                     <select id="referralSource" required>
@@ -388,7 +476,6 @@
                     </select>
                     <div class="field-error" id="err-referralSource">Required.</div>
                 </div>
-
                 <!-- Terms -->
                 <div class="form-group" style="margin-top:18px;">
                     <div class="checkbox-group" style="align-items:flex-start;">
@@ -403,7 +490,6 @@
                     </div>
                     <div class="field-error" id="err-acceptTerms">You must accept the terms to continue.</div>
                 </div>
-
                 <div class="nav-row">
                     <button class="btn btn-primary" onclick="goToStep2()">Next: Payment →</button>
                 </div>
@@ -413,8 +499,8 @@
             <div class="step" id="step2">
                 <h2 class="section-header">Payment</h2>
                 <div class="summary-box">
-                    <div class="summary-row"><span>Registration Fee</span><span id="sumBase">₱500.00</span></div>
-                    <div class="summary-row"><span>Meal Plan (<span id="sumMealName">—</span>)</span><span id="sumMeal">₱0.00</span></div>
+                    <div class="summary-row"><span id="sumMealName">—</span><span id="sumMeal">₱0.00</span></div>
+                    <div class="summary-row" id="sumTierRow"><span>Pricing</span><span id="sumTier"></span></div>
                     <div class="summary-row summary-total"><span>Total</span><span id="sumTotal">₱0.00</span></div>
                 </div>
                 <div class="alert alert-info show" style="margin-bottom:18px;">
@@ -443,8 +529,23 @@
                 </ul>
                 <div class="nav-row">
                     <button class="btn btn-back" onclick="goToStep(2)">← Back</button>
-                    <button class="btn btn-primary" onclick="alert('Submission will be wired in the next build step.')">Submit (placeholder)</button>
+                    <button class="btn btn-primary" onclick="showModal('Not wired yet', 'Submission will be wired in the next build step.')">Submit (placeholder)</button>
                 </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="total-bar show" id="totalBar">
+        <span class="total-label">Total</span>
+        <span class="total-amount" id="runningTotal">&#8369;0.00</span>
+    </div>
+
+    <div class="modal-backdrop" id="modal">
+        <div class="modal-box">
+            <h3 id="modalTitle"></h3>
+            <p id="modalBody"></p>
+            <div class="nav-row">
+                <button type="button" class="btn btn-primary" id="modalOk">OK</button>
             </div>
         </div>
     </div>
@@ -453,11 +554,23 @@
         // ============================================================
         // PYC 2027 register-v2 — WIZARD SHELL
         // Nothing is sent to the backend yet. All info is held in the
-        // browser (formData) and only committed at the final upload step
+        // browser (formData) and only committed at the final upload step. The only fetch is a
+        // read-only server-time call (early-bird gate); nothing is saved.
         // (to be built next). This first build covers Step 1 + navigation.
         // ============================================================
 
-        var PRICES = { base: 500, full: 1500, half: 900 }; // half is a placeholder amount; confirm for 2027
+        // Prices are all-inclusive per person (same as live 2026 register.html / payment.html).
+        // Early bird ends at EARLY_BIRD_DEADLINE (11:59 PM Philippine Time, UTC+8).
+        // TODO: confirm the 2027 early-bird deadline (2026 was April 15).
+        var EARLY_BIRD_DEADLINE = new Date('2027-04-15T23:59:59+08:00').getTime();
+        var PRICE_TIERS = {
+            early:   { vegan: 2100, vegetarian: 1750, none: 750 },
+            regular: { vegan: 2200, vegetarian: 1850, none: 850 }
+        };
+        var MEAL_LABELS = { vegan: 'Full Meal — Vegan', vegetarian: 'Full Meal — Vegetarian', none: 'Without Meal' };
+        var serverNow = null; // authoritative time from server-time.js; falls back to device clock
+        function isEarlyBird() { return (serverNow !== null ? serverNow : Date.now()) <= EARLY_BIRD_DEADLINE; }
+        function activePrices() { return isEarlyBird() ? PRICE_TIERS.early : PRICE_TIERS.regular; }
         var formData = {}; // holds all Step 1 answers in the browser
 
         // ---- Location type toggling ----
@@ -567,16 +680,58 @@
             };
         }
 
-        function updatePaymentSummary() {
-            var base = PRICES.base;
-            var mealAmt = PRICES[formData.mealPlan] || 0;
-            var total = base + mealAmt;
-            document.getElementById('sumBase').textContent = '₱' + base.toFixed(2);
-            document.getElementById('sumMealName').textContent = formData.mealPlan === 'full' ? 'Full' : formData.mealPlan === 'half' ? 'Half' : '—';
-            document.getElementById('sumMeal').textContent = '₱' + mealAmt.toFixed(2);
-            document.getElementById('sumTotal').textContent = '₱' + total.toFixed(2);
-            formData.totalAmount = total;
+        function money(n) { return '₱' + n.toLocaleString('en-PH', { minimumFractionDigits: 2, maximumFractionDigits: 2 }); }
+
+        // Single source of truth for the amount: feeds the sticky bar AND the Step 2 summary.
+        function currentTotal() {
+            var meal = document.querySelector('input[name="mealPlan"]:checked');
+            return meal ? (activePrices()[meal.value] || 0) : 0;
         }
+        function recalcTotal() {
+            var prices = activePrices();
+            var early = isEarlyBird();
+            document.querySelectorAll('.opt-card').forEach(function(card) {
+                var radio = card.querySelector('input');
+                card.classList.toggle('selected', radio.checked);
+                var priceEl = card.querySelector('[data-meal-price]');
+                var p = prices[priceEl.getAttribute('data-meal-price')];
+                var reg = PRICE_TIERS.regular[priceEl.getAttribute('data-meal-price')];
+                priceEl.innerHTML = early ? '<s>' + money(reg) + '</s>' + money(p) : money(p);
+            });
+            var note = document.getElementById('earlyBirdNote');
+            if (early) {
+                var d = new Date(EARLY_BIRD_DEADLINE);
+                note.textContent = 'Early bird pricing until ' + d.toLocaleDateString('en-PH', { month: 'long', day: 'numeric', year: 'numeric', timeZone: 'Asia/Manila' }) + ' (11:59 PM Philippine Time).';
+                note.className = 'alert alert-info show';
+            } else {
+                note.className = 'alert alert-info';
+            }
+            document.getElementById('runningTotal').textContent = money(currentTotal());
+        }
+        document.querySelectorAll('input[name="mealPlan"]').forEach(function(r) { r.addEventListener('change', recalcTotal); });
+
+        function updatePaymentSummary() {
+            var total = currentTotal();
+            document.getElementById('sumMealName').textContent = MEAL_LABELS[formData.mealPlan] || '—';
+            document.getElementById('sumMeal').textContent = money(total);
+            document.getElementById('sumTier').textContent = isEarlyBird() ? 'Early bird' : 'Regular';
+            document.getElementById('sumTotal').textContent = money(total);
+            formData.totalAmount = total;
+            formData.pricingType = isEarlyBird() ? 'early_bird' : 'regular';
+        }
+
+        // ---- Custom modal (no native alert/confirm on iPad Safari) ----
+        function showModal(title, body) {
+            document.getElementById('modalTitle').textContent = title;
+            document.getElementById('modalBody').textContent = body;
+            document.getElementById('modal').classList.add('show');
+        }
+        document.getElementById('modalOk').addEventListener('click', function() {
+            document.getElementById('modal').classList.remove('show');
+        });
+        document.getElementById('statusLink').addEventListener('click', function() {
+            showModal('Check my status', 'Online status lookup is coming soon. For now, please contact us through our Facebook page.');
+        });
 
         // ---- Step navigation ----
         function setStep(n) {
@@ -586,6 +741,7 @@
                 p.classList.toggle('active', i === n);
                 p.classList.toggle('done', i < n);
             });
+            document.getElementById('totalBar').classList.toggle('show', n === 1);
             window.scrollTo({ top: 0, behavior: 'smooth' });
         }
         function goToStep(n) { setStep(n); }
@@ -596,6 +752,13 @@
             updatePaymentSummary();
             setStep(2);
         }
+
+        // ---- Init: draw prices, then sync with server time (read-only; early-bird gate) ----
+        recalcTotal();
+        fetch('/.netlify/functions/server-time', { cache: 'no-store' })
+            .then(function(r) { return r.text(); })
+            .then(function(t) { var j = JSON.parse(t); if (j && j.now) { serverNow = j.now; recalcTotal(); } })
+            .catch(function() { /* keep device clock */ });
     </script>
 </body>
 </html>
