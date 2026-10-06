@@ -138,11 +138,11 @@ raise risks *before* proceeding rather than correcting afterward.
 
 **2027 theme (current):** Apple-developer-style. Black background, system font stack
 (SF Pro on Apple devices, Inter fallback), large tight headlines, full-bleed photos with
-text on top, pill buttons. Source of truth: `public/home-v2.html` (new landing page) +
+text on top, pill buttons. Source of truth: `public/index.html` (the 2027 landing page, formerly home-v2) +
 **`public/theme-2027.css`**.
 
 **Accent colours (developer decision):**
-- Landing page (`home-v2.html`) keeps the brighter gold `#d4a556`.
+- Landing page (`index.html`) keeps the brighter gold `#d4a556`.
 - All app pages (registration, payment, accommodation, tenting, dashboards) use a muted
   **sand** `#c9b897` (hover/light `#d9cbb0`, dark `#b5a27f`, rgba form `201,184,151`).
   Headings are white and form labels soft grey; sand is only for buttons, borders, prices
@@ -157,7 +157,7 @@ text on top, pill buttons. Source of truth: `public/home-v2.html` (new landing p
 - The old navy literals in pages were swapped to neutrals (`#1a2332`→`#1c1c1e`,
   `#0f1419`→`#000`, `#2a3f5f`→`#2c2c2e`, matching `rgba()` forms).
 - Photos live in `public/img/` (worship, community, notes, delegates; `-sm` = mobile).
-- Not themed on purpose: `index.html` (old 2026 landing — to be replaced by home-v2),
+- Not themed on purpose: `index-2026.html` (old 2026 landing, kept only as a backup),
   `special-welcome.html`, `monkey-*.html`, `stress-test.html`, `analytics67.html.html`.
 
 **2026 theme (legacy, for reference):**
@@ -286,7 +286,8 @@ registration. Group members each get their own sequential number.
 
 | File | Purpose |
 |---|---|
-| `index.html` | Public landing page (theme source of truth for design) |
+| `index.html` | Public landing page — 2027 "Abide" design (theme source of truth); all event facts in its `PYC = {…}` config block |
+| `index-2026.html` | Old 2026 landing page, backup only (not linked) |
 | `register.html` | **Live** registration form (2026). Two-page flow: form → payment. |
 | `payment.html` | Payment page: round-robin GCash assignment + proof upload |
 | `accommodations.html` | Public dorm reservation |
@@ -549,7 +550,8 @@ realistic load.
   currently show their "closed" screens.
 - `PYC_2026_Minor_Waiver.pdf` and the `PYC2026_RoomAssignments` Google Sheet name are still
   2026 — replace the PDF and rename references when ready.
-- Make `home-v2.html` the real `index.html` when ready to go live.
+- DONE: the 2027 landing page is now `public/index.html` (old one kept as
+  `index-2026.html`; `/home-v2` redirects to `/`).
 - "Check my status" page (self-service lookup) — top-bar link shows "coming soon" for now.
 - Obtain `accommodation-login.js` (not in working copies) if accommodation login needs changes.
 - Consider the QR check-in + meal redemption system for 2027 (§11 future).
