@@ -157,6 +157,14 @@ text on top, pill buttons. Source of truth: `public/index.html` (the 2027 landin
 - The old navy literals in pages were swapped to neutrals (`#1a2332`→`#1c1c1e`,
   `#0f1419`→`#000`, `#2a3f5f`→`#2c2c2e`, matching `rgba()` forms).
 - Photos live in `public/img/` (worship, community, notes, delegates; `-sm` = mobile).
+- Logo: `public/img/pyc-logo.png` is a transparent-background version of
+  `pyc-logo-white.png` (that file is a JPEG with a black box). Use the PNG on photos/dark UI.
+- Landing-page motion (index.html, one rAF scroll loop, all off under prefers-reduced-motion):
+  hero photo zoom + copy fade, word-by-word light-up on `[data-words]`, tile photo parallax,
+  video tilt-in (`[data-tilt]`, like the 2026 page), background zoom-out (`[data-zoom]`),
+  fade-up reveals (`.rv`). Old 2026 wording restored: tagline, countdown label, exact
+  Identity/Vision/Mission, Discover PYC video, Review and Herald quote, closing line,
+  Spirit of PYC + contact intros.
 - Not themed on purpose: `index-2026.html` (old 2026 landing, kept only as a backup),
   `special-welcome.html`, `monkey-*.html`, `stress-test.html`, `analytics67.html.html`.
 

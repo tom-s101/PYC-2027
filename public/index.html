@@ -102,9 +102,6 @@
         .statement p {
             font-size: clamp(2rem, 5.2vw, 4.2rem); font-weight: 700; letter-spacing: -0.035em; line-height: 1.08; max-width: 24ch;
         }
-        .statement p .dim { color: rgba(245,245,247,0.28); transition: color .6s; }
-        .statement.in p .dim { color: rgba(245,245,247,0.28); }
-        .statement p .lit { color: #fff; }
 
         /* ---------- Tile grid (photo cards, text on top) ---------- */
         .tiles { padding: 0 0 100px; background: var(--bg); }
@@ -192,6 +189,51 @@
         .foot-bottom { padding-top: 18px; display: flex; justify-content: space-between; gap: 20px; flex-wrap: wrap; }
         .foot-bottom a { display: inline; }
 
+        /* ---------- Logo ---------- */
+        .brand img { height: 26px; width: auto; display: block; }
+        .hero-logo { width: clamp(120px, 16vw, 190px); height: auto; margin-bottom: 22px; filter: drop-shadow(0 2px 12px rgba(0,0,0,0.45)); }
+        .hero-tag { margin-top: 14px; font-size: clamp(1rem, 1.6vw, 1.25rem); font-weight: 600; letter-spacing: -0.01em; color: #fff; }
+        .hero-meta { margin-top: 6px; }
+
+        /* ---------- Countdown label ---------- */
+        .cd-label { margin-top: 48px; font-size: 0.8rem; font-weight: 600; letter-spacing: 0.04em; text-transform: uppercase; color: var(--ink-dim); }
+        .cd-label + .countdown { margin-top: 12px; }
+
+        /* ---------- Theme description ---------- */
+        .theme-desc { max-width: 52ch; margin: 30px auto 0; color: var(--text-dim); font-size: 1.1rem; line-height: 1.6; }
+
+        /* ---------- Video ---------- */
+        .video { background: var(--bg-soft); padding: 120px 0; }
+        .video h2 { font-size: clamp(2rem, 4.4vw, 3.4rem); font-weight: 700; letter-spacing: -0.035em; line-height: 1.06; }
+        .video .lead { margin-top: 12px; color: var(--text-dim); font-size: 1.2rem; max-width: 40ch; }
+        .video-frame {
+            position: relative; margin-top: 44px; border-radius: var(--radius); overflow: hidden;
+            background: #111; aspect-ratio: 16 / 9; box-shadow: 0 30px 80px rgba(0,0,0,0.5);
+        }
+        .video-frame iframe { position: absolute; inset: 0; width: 100%; height: 100%; border: 0; }
+        .video .fallback { margin-top: 16px; color: var(--text-dim); font-size: 0.9rem; }
+        .video .fallback a { color: var(--accent); }
+
+        /* ---------- Quote over photo ---------- */
+        .quote { position: relative; isolation: isolate; overflow: hidden; padding: 160px 0; }
+        .quote img { position: absolute; inset: 0; z-index: -2; width: 100%; height: 100%; object-fit: cover; object-position: 40% 50%; }
+        .quote::after { content: ""; position: absolute; inset: 0; z-index: -1; background: linear-gradient(90deg, rgba(0,0,0,0.88) 0%, rgba(0,0,0,0.72) 55%, rgba(0,0,0,0.45) 100%); }
+        .quote blockquote { font-size: clamp(1.35rem, 2.8vw, 2.2rem); font-weight: 600; letter-spacing: -0.02em; line-height: 1.35; max-width: 34ch; }
+        .quote cite { display: block; margin-top: 22px; font-style: normal; font-weight: 600; color: var(--accent); font-size: 1rem; }
+
+        /* ---------- Footer intro lines ---------- */
+        footer .intro { margin-bottom: 8px; }
+
+        /* ---------- Scroll motion (driven by JS; off for reduced motion) ---------- */
+        .hero picture { position: absolute; inset: 0; z-index: -2; display: block; will-change: transform; transform-origin: 50% 40%; }
+        .hero-copy { will-change: transform, opacity; }
+        [data-words] .w { color: rgba(245,245,247,0.24); transition: color .35s ease; }
+        [data-words] .w.lit { color: #f5f5f7; }
+        .tile img { transform: scale(1.14); will-change: transform; transition: none; }
+        .tile:hover img { transform: scale(1.14); }
+        .video-frame { transform-origin: 50% 0; will-change: transform; }
+        .quote img, .final img { will-change: transform; }
+
         /* ---------- Reveal ---------- */
         .rv { opacity: 0; transform: translateY(28px); transition: opacity 1s cubic-bezier(.2,.7,.2,1), transform 1s cubic-bezier(.2,.7,.2,1); }
         .rv.on { opacity: 1; transform: none; }
@@ -209,6 +251,9 @@
             .statement { padding: 96px 0 80px; }
             .theme { padding: 100px 0; }
             .final { padding: 120px 0; }
+            .video { padding: 90px 0; }
+            .quote { padding: 110px 0; }
+            .quote::after { background: rgba(0,0,0,0.78); }
             .pill { font-size: 1rem; }
         }
         @media (max-width: 520px) {
@@ -224,7 +269,8 @@
             html { scroll-behavior: auto; }
             .hero-img { animation: none; }
             .rv { opacity: 1; transform: none; transition: none; }
-            .tile img { transition: none; }
+            .tile img { transition: none; transform: none !important; }
+            [data-words] .w { color: inherit !important; }
         }
     </style>
 </head>
@@ -253,10 +299,11 @@
 
 <header class="gnav" id="gnav">
     <div class="gnav-inner">
-        <a href="#top" class="brand"><span>PYC <span data-cfg="year">2027</span></span></a>
+        <a href="#top" class="brand"><img src="/img/pyc-logo.png" alt="PYC logo"><span>PYC <span data-cfg="year">2027</span></span></a>
         <ul class="gnav-links">
-            <li><a href="#experience">Experience</a></li>
             <li><a href="#details">Details</a></li>
+            <li><a href="#theme">Theme</a></li>
+            <li><a href="#video">Video</a></li>
             <li><a href="#gallery">Gallery</a></li>
             <li><a href="#about">About</a></li>
             <li><a href="#contact">Contact</a></li>
@@ -273,9 +320,11 @@
             <img class="hero-img" src="/img/worship.jpg" alt="Hundreds of young people praying together in the conference hall" fetchpriority="high">
         </picture>
         <div class="wrap hero-copy">
+            <img class="hero-logo" src="/img/pyc-logo.png" alt="Philippine Youth for Christ logo">
             <p class="eyebrow">Philippine Youth for Christ <span data-cfg="year">2027</span></p>
             <h1 data-cfg="heroTitle">PYC <span data-cfg="year">2027</span></h1>
             <p class="hero-sub" data-cfg="heroSub">Worship, the Word, and a generation that shows up for each other.</p>
+            <p class="hero-tag">An unforgettable conference experience.</p>
             <p class="hero-meta" data-cfg="heroMeta">Dates and venue to be announced.</p>
             <div class="cta-row">
                 <a class="pill" href="/register-v2" data-register>Register now</a>
@@ -287,7 +336,7 @@
     <!-- Statement -->
     <section class="statement" id="experience">
         <div class="wrap">
-            <p class="rv" data-statement>A week set apart. Voices raised together. Young people from across the Philippines and the world, gathered to know Christ more and to go and serve.</p>
+            <p class="rv" data-statement data-words>A week set apart. Voices raised together. Young people from across the Philippines and the world, gathered to know Christ more and to go and serve.</p>
         </div>
     </section>
 
@@ -325,6 +374,7 @@
     <section class="facts" id="details">
         <div class="wrap">
             <h2 class="rv">The details.</h2>
+            <p class="cd-label rv" id="cdLabel" hidden>Conference begins in</p>
             <div class="countdown rv" id="countdown" hidden>
                 <div><b id="cdD">--</b><span>Days</span></div>
                 <div><b id="cdH">--</b><span>Hours</span></div>
@@ -361,6 +411,7 @@
             <p class="eyebrow rv">The 2027 theme</p>
             <h2 class="rv d1" data-cfg="theme">Announced soon.</h2>
             <blockquote class="rv d2" data-verse hidden></blockquote>
+            <p class="theme-desc rv">Join us as we learn what it means to abide in Christ &mdash; to stay connected to the Vine, draw our life from Him, and bear fruit that lasts. This year&rsquo;s theme calls us away from striving on our own and into a daily, living relationship with Jesus, where everything we do flows from Him.</p>
         </div>
     </section>
 
@@ -381,6 +432,20 @@
         </div>
     </section>
 
+    <!-- Video -->
+    <section class="video" id="video">
+        <div class="wrap">
+            <h2 class="rv">Discover PYC.</h2>
+            <p class="lead rv d1">Watch this video to learn more about who we are and what PYC is all about.</p>
+            <div class="video-frame" data-tilt>
+                <iframe src="https://www.facebook.com/plugins/video.php?height=314&amp;href=https%3A%2F%2Fwww.facebook.com%2Fphilippineyouthforchrist%2Fvideos%2F586692164264114%2F&amp;show_text=false&amp;width=560&amp;t=0"
+                    title="Discover PYC video" scrolling="no" allowfullscreen="true"
+                    allow="autoplay; clipboard-write; encrypted-media; picture-in-picture; web-share" loading="lazy"></iframe>
+            </div>
+            <p class="fallback">Having trouble playing the video? <a href="https://www.facebook.com/philippineyouthforchrist/videos/586692164264114/" target="_blank" rel="noopener">Watch on Facebook</a></p>
+        </div>
+    </section>
+
     <!-- About -->
     <section class="light" id="about">
         <div class="wrap">
@@ -388,29 +453,40 @@
             <div class="about-grid">
                 <div class="rv">
                     <h3>Identity</h3>
-                    <p>Philippine Youth for Christ (PYC) is a youth-initiated and youth-led supporting ministry within the Seventh-day Adventist Church, working alongside Adventist Youth Ministries to lead young people to Christ and equip them for evangelism.</p>
+                    <p>Philippine Youth for Christ (PYC) is a youth-initiated and youth-led supporting ministry within the Seventh-day Adventist Church, committed to working closely with Adventist Youth Ministries in leading young people to Christ, nurturing, and equipping them for evangelism.</p>
                 </div>
                 <div class="rv d1">
                     <h3>Vision</h3>
-                    <p>A generation of youth upholding the distinctive message of the Seventh-day Adventist Church, excelling in every part of life, and embracing radical discipleship and a life of missionary service.</p>
+                    <p>PYC envisions a generation of youth upholding the distinctive message of the Seventh-day Adventist Church; aspiring to excel in all aspects of their lives &mdash; academic, professional, and spiritual; embracing the call to radical discipleship and a life of missionary service.</p>
                 </div>
                 <div class="rv d2">
                     <h3>Mission</h3>
-                    <p>To galvanize young people toward radical commitment to Christ, and to mobilize youth and young adults for the message and mission of the Adventist Church and the proclamation of the Three Angels&rsquo; Messages.</p>
+                    <p>PYC seeks to galvanize young people towards radical commitment to Christ and to mobilize youth and young adults to be fully committed to the distinctive message and mission of the Adventist church towards the proclamation of the Three Angels&rsquo; Messages.</p>
                 </div>
             </div>
         </div>
     </section>
 
+    <!-- Quote over photo -->
+    <section class="quote">
+        <img src="/img/notes.jpg" alt="" loading="lazy" data-zoom>
+        <div class="wrap">
+            <blockquote><span data-words>&ldquo;As you empty the heart of self, you must accept the righteousness of Christ. Lay hold of it by faith; for you must have the mind and spirit of Christ, that you may work the works of Christ. If you open the door of the heart, Jesus will supply the vacuum by the gift of his Spirit, and then you can be a living preacher in your home, in the church, and in the world.&rdquo;</span>
+                <cite>&mdash; Review and Herald</cite>
+            </blockquote>
+        </div>
+    </section>
+
     <!-- Final CTA -->
     <section class="final">
-        <img src="/img/community.jpg" alt="" loading="lazy">
+        <img src="/img/community.jpg" alt="" loading="lazy" data-zoom>
         <div class="wrap">
-            <h2 class="rv">Be there.</h2>
-            <p class="rv d1">Join young people from across the Philippines for PYC <span data-cfg="year">2027</span> in Davao.</p>
+            <h2 class="rv">See you in Davao!</h2>
+            <p class="rv d1">PYC <span data-cfg="year">2027</span> is coming. Join us in seeking to know more about our Saviour.</p>
             <div class="cta-row rv d2">
                 <a class="pill" href="/register-v2" data-register>Register now</a>
             </div>
+            <p class="rv d2" style="font-size:1rem;margin-top:26px;color:rgba(255,255,255,0.7);">Have questions? <a href="#contact" style="text-decoration:underline;">Contact us through social media!</a></p>
         </div>
     </section>
 </main>
@@ -420,6 +496,7 @@
         <div class="foot-grid">
             <div>
                 <h4>The Spirit of PYC</h4>
+                <p class="intro">The Spirit of PYC describes the core guiding principles of this movement. All PYC participants are expected to uphold these values:</p>
                 <p>A respect for Scripture · An appreciation for the Spirit of Prophecy · A quest for Biblical holiness · A vibrant worship experience · A passion for lost souls · A cultivation of godly relationships · An exemplary and abundant lifestyle · An enthusiasm for service · A commitment to the Seventh-day Adventist Church · An attitude of humility and cordiality</p>
             </div>
             <div>
@@ -427,10 +504,13 @@
                 <a href="/register-v2" data-register>Register</a>
                 <a href="/PYC_2026_Minor_Waiver.pdf" target="_blank" rel="noopener">Minor Waiver Form</a>
                 <a href="#details">Details</a>
+                <a href="#theme">Theme</a>
+                <a href="#video">Video</a>
                 <a href="#about">About</a>
             </div>
             <div>
                 <h4>Contact</h4>
+                <p class="intro">For questions or concerns, contact us through social media:</p>
                 <a href="https://www.facebook.com/share/1D9PJw6wkq/?mibextid=wwXIfr" target="_blank" rel="noopener">Facebook</a>
                 <a href="https://www.instagram.com/philippineyouthforchrist?igsh=c2Q0MjAwbWh1cXZ2" target="_blank" rel="noopener">Instagram</a>
                 <a href="mailto:info@philippineyouthforchrist.org">info@philippineyouthforchrist.org</a>
@@ -459,7 +539,11 @@
     if (meta) set('heroMeta', meta);
     if (PYC.verse) {
         var q = document.querySelector('[data-verse]');
-        q.textContent = '“' + PYC.verse + '”';
+        var vs = document.createElement('span');
+        vs.setAttribute('data-words', '');
+        vs.textContent = '“' + PYC.verse + '”';
+        q.textContent = '';
+        q.appendChild(vs);
         if (PYC.verseRef) { var c = document.createElement('cite'); c.textContent = PYC.verseRef; q.appendChild(c); }
         q.hidden = false;
     }
@@ -471,6 +555,7 @@
         if (!isNaN(target)) {
             var box = document.getElementById('countdown');
             box.hidden = false;
+            document.getElementById('cdLabel').hidden = false;
             var pad = function (n) { return String(n).padStart(2, '0'); };
             var tick = function () {
                 var d = Math.max(0, target - Date.now());
@@ -488,19 +573,84 @@
     var onScroll = function () { nav.classList.toggle('solid', window.scrollY > 40); };
     window.addEventListener('scroll', onScroll, { passive: true }); onScroll();
 
-    // ---- Statement: words light up as you scroll (Apple-style) ----
-    var st = document.querySelector('[data-statement]');
-    var words = st.textContent.trim().split(/\s+/);
-    st.innerHTML = words.map(function (w) { return '<span class="dim">' + w + '</span>'; }).join(' ');
-    var spans = st.querySelectorAll('.dim');
+    // ============================================================
+    // Scroll motion (Apple-style). One rAF loop, transforms only.
+    // Skipped entirely when the viewer prefers reduced motion.
+    // ============================================================
     var reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-    function paintStatement() {
-        var r = st.getBoundingClientRect(), vh = window.innerHeight;
-        var p = reduce ? 1 : Math.min(1, Math.max(0, (vh * 0.85 - r.top) / (r.height + vh * 0.35)));
-        var lit = Math.round(p * spans.length);
-        spans.forEach(function (s, i) { s.className = i < lit ? 'lit' : 'dim'; });
+    function clamp01(v) { return v < 0 ? 0 : v > 1 ? 1 : v; }
+    function ease(t) { return 1 - Math.pow(1 - t, 3); }
+
+    // Words light up one by one as a paragraph scrolls through the screen.
+    var wordBlocks = [];
+    document.querySelectorAll('[data-words]').forEach(function (el) {
+        var words = el.textContent.trim().split(/\s+/);
+        el.textContent = '';
+        words.forEach(function (w, i) {
+            var sp = document.createElement('span');
+            sp.className = 'w';
+            sp.textContent = w;
+            el.appendChild(sp);
+            if (i < words.length - 1) el.appendChild(document.createTextNode(' '));
+        });
+        wordBlocks.push({ el: el, spans: el.querySelectorAll('.w') });
+    });
+
+    var heroPic = document.querySelector('.hero picture');
+    var heroCopy = document.querySelector('.hero-copy');
+    var tiles = document.querySelectorAll('.tile');
+    var tilts = document.querySelectorAll('[data-tilt]');
+    var zooms = document.querySelectorAll('[data-zoom]');
+
+    function frame() {
+        var vh = window.innerHeight, y = window.scrollY;
+
+        // Words
+        wordBlocks.forEach(function (b) {
+            var r = b.el.getBoundingClientRect();
+            var p = reduce ? 1 : clamp01((vh * 0.88 - r.top) / (r.height + vh * 0.4));
+            var lit = Math.round(p * b.spans.length);
+            for (var i = 0; i < b.spans.length; i++) b.spans[i].classList.toggle('lit', i < lit);
+        });
+        if (reduce) return;
+
+        // Hero: photo slowly zooms, words drift up and fade as you leave it
+        if (y < vh * 1.2) {
+            var hp = clamp01(y / vh);
+            heroPic.style.transform = 'scale(' + (1 + hp * 0.12).toFixed(4) + ') translateY(' + (hp * 6).toFixed(2) + '%)';
+            heroCopy.style.transform = 'translateY(' + (-hp * 70).toFixed(1) + 'px)';
+            heroCopy.style.opacity = (1 - hp * 1.3).toFixed(3);
+        }
+
+        // Photo cards: picture moves slower than the card (parallax)
+        tiles.forEach(function (t) {
+            var r = t.getBoundingClientRect();
+            if (r.bottom < -100 || r.top > vh + 100) return;
+            var off = (r.top + r.height / 2 - vh / 2) / vh; // -1..1 around the centre of the screen
+            t.querySelector('img').style.transform = 'translateY(' + (off * -7).toFixed(2) + '%) scale(1.14)';
+        });
+
+        // Video: tilts up and grows into place (like the old landing page)
+        tilts.forEach(function (el) {
+            var r = el.getBoundingClientRect();
+            var p = ease(clamp01((vh - r.top) / (vh * 0.85)));
+            el.style.transform = 'perspective(1200px) rotateX(' + ((1 - p) * 22).toFixed(2) + 'deg) scale(' + (0.88 + p * 0.12).toFixed(4) + ')';
+            el.style.opacity = (0.35 + p * 0.65).toFixed(3);
+        });
+
+        // Full-bleed backgrounds: zoom out as the section scrolls past
+        zooms.forEach(function (img) {
+            var r = img.parentElement.getBoundingClientRect();
+            if (r.bottom < 0 || r.top > vh) return;
+            var p = clamp01((vh - r.top) / (vh + r.height));
+            img.style.transform = 'scale(' + (1.18 - p * 0.18).toFixed(4) + ')';
+        });
     }
-    window.addEventListener('scroll', paintStatement, { passive: true }); paintStatement();
+    var ticking = false;
+    function onFrameScroll() { if (!ticking) { ticking = true; requestAnimationFrame(function () { ticking = false; frame(); }); } }
+    window.addEventListener('scroll', onFrameScroll, { passive: true });
+    window.addEventListener('resize', onFrameScroll);
+    frame();
 
     // ---- Fade-up reveal ----
     var rvs = document.querySelectorAll('.rv');
