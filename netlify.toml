@@ -18,7 +18,7 @@
   pretty_urls = false
 
 [build.processing.images]
-  compress = true
+  compress = false  # serve photos exactly as uploaded (no recompression)
 
 # Function configuration
 [functions]

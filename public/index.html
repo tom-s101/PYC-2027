@@ -16,8 +16,7 @@
     <link rel="preconnect" href="https://fonts.googleapis.com" crossorigin>
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
-    <link rel="preload" as="image" href="/img/worship-sm.jpg" media="(max-width: 700px)">
-    <link rel="preload" as="image" href="/img/worship.jpg" media="(min-width: 701px)">
+    <link rel="preload" as="image" href="/img/worship.jpg">
     <style>
         /* ---------- Tokens (change the look of the whole page here) ---------- */
         :root {
@@ -81,7 +80,7 @@
             position: absolute; inset: 0; z-index: -2; width: 100%; height: 100%; object-fit: cover; object-position: 50% 40%;
             animation: slow-zoom 24s ease-out both; transform-origin: 50% 40%;
         }
-        @keyframes slow-zoom { from { transform: scale(1.08); } to { transform: scale(1); } }
+        @keyframes slow-zoom { from { transform: scale(1.04); } to { transform: scale(1); } }
         .hero::after {
             content: ""; position: absolute; inset: 0; z-index: -1;
             background:
@@ -229,8 +228,8 @@
         .hero-copy { will-change: transform, opacity; }
         [data-words] .w { color: rgba(245,245,247,0.24); transition: color .35s ease; }
         [data-words] .w.lit { color: #f5f5f7; }
-        .tile img { transform: scale(1.14); will-change: transform; transition: none; }
-        .tile:hover img { transform: scale(1.14); }
+        .tile img { transform: scale(1.06); will-change: transform; transition: none; }
+        .tile:hover img { transform: scale(1.06); }
         .video-frame { transform-origin: 50% 0; will-change: transform; }
         .quote img, .final img { will-change: transform; }
 
@@ -316,7 +315,6 @@
     <!-- Hero: photo with text on top -->
     <section class="hero">
         <picture>
-            <source media="(max-width: 700px)" srcset="/img/worship-sm.jpg">
             <img class="hero-img" src="/img/worship.jpg" alt="Hundreds of young people praying together in the conference hall" fetchpriority="high">
         </picture>
         <div class="wrap hero-copy">
@@ -617,7 +615,7 @@
         // Hero: photo slowly zooms, words drift up and fade as you leave it
         if (y < vh * 1.2) {
             var hp = clamp01(y / vh);
-            heroPic.style.transform = 'scale(' + (1 + hp * 0.12).toFixed(4) + ') translateY(' + (hp * 6).toFixed(2) + '%)';
+            heroPic.style.transform = 'scale(' + (1 + hp * 0.06).toFixed(4) + ') translateY(' + (hp * 6).toFixed(2) + '%)';
             heroCopy.style.transform = 'translateY(' + (-hp * 70).toFixed(1) + 'px)';
             heroCopy.style.opacity = (1 - hp * 1.3).toFixed(3);
         }
@@ -627,7 +625,7 @@
             var r = t.getBoundingClientRect();
             if (r.bottom < -100 || r.top > vh + 100) return;
             var off = (r.top + r.height / 2 - vh / 2) / vh; // -1..1 around the centre of the screen
-            t.querySelector('img').style.transform = 'translateY(' + (off * -7).toFixed(2) + '%) scale(1.14)';
+            t.querySelector('img').style.transform = 'translateY(' + (off * -2.8).toFixed(2) + '%) scale(1.06)';
         });
 
         // Video: tilts up and grows into place (like the old landing page)
@@ -643,7 +641,7 @@
             var r = img.parentElement.getBoundingClientRect();
             if (r.bottom < 0 || r.top > vh) return;
             var p = clamp01((vh - r.top) / (vh + r.height));
-            img.style.transform = 'scale(' + (1.18 - p * 0.18).toFixed(4) + ')';
+            img.style.transform = 'scale(' + (1.08 - p * 0.08).toFixed(4) + ')';
         });
     }
     var ticking = false;
