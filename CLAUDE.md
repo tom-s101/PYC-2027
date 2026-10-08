@@ -156,12 +156,14 @@ text on top, pill buttons. Source of truth: `public/index.html` (the 2027 landin
   **New pages: add that one `<link>` line last in `<head>`.**
 - The old navy literals in pages were swapped to neutrals (`#1a2332`→`#1c1c1e`,
   `#0f1419`→`#000`, `#2a3f5f`→`#2c2c2e`, matching `rgba()` forms).
-- Photos live in `public/img/` (worship, community, notes, delegates, session, media-team, sabbath) and are the developer's
+- Photos live in `public/img/` (worship, community, notes, delegates, session, media-team, sabbath,
+  photo-booth, river, mvc) and are the developer's
   ORIGINAL uploads, byte-for-byte (2576px, q95). Do NOT downscale/recompress them or add
   small mobile copies — the developer wants full-res photos on every device. Netlify image
   compression is off in `netlify.toml` for the same reason.
   Placement (no repeats in feature spots): hero=worship · tiles=community, delegates, sabbath,
-  session · quote bg=notes · closing bg=media-team · gallery carousel = full album of all 7.
+  session · quote bg=notes · closing bg=media-team · gallery carousel = full album (all
+  feature photos + gallery-only: photo-booth, river, mvc). New photos go in the gallery first.
 - Logo: `public/img/pyc-logo.png` is a transparent-background version of
   `pyc-logo-white.png` (that file is a JPEG with a black box). Use the PNG on photos/dark UI.
 - Landing-page motion (index.html, one rAF scroll loop, all off under prefers-reduced-motion):
