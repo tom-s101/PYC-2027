@@ -233,6 +233,20 @@
         .video-frame { transform-origin: 50% 0; will-change: transform; }
         .quote img, .final img { will-change: transform; }
 
+        /* ---------- Serve with us (volunteers) ---------- */
+        .serve { background: var(--bg-soft); padding: 120px 0; }
+        .serve h2 { font-size: clamp(2rem, 4.4vw, 3.4rem); font-weight: 700; letter-spacing: -0.035em; line-height: 1.06; }
+        .serve .lead { margin-top: 12px; color: var(--text-dim); font-size: 1.2rem; max-width: 44ch; }
+        .vol-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 20px; margin-top: 52px; }
+        .vol-card { background: #161617; border-radius: 22px; padding: 28px 22px 26px; text-align: center; }
+        .vol-card .avatar { width: 96px; height: 96px; border-radius: 50%; overflow: hidden; margin: 0 auto 14px; }
+        .vol-card .avatar img { width: 100%; height: 100%; object-fit: cover; }
+        .vol-card .avatar.mono { display: flex; align-items: center; justify-content: center; background: linear-gradient(160deg, #9d9da3 0%, #6d6d73 100%); color: #fff; font-size: 2rem; font-weight: 600; letter-spacing: 0.02em; }
+        .vol-card .person-name { font-size: 1.1rem; font-weight: 700; letter-spacing: -0.02em; }
+        .vol-card .person-role { margin-top: 3px; font-size: 0.85rem; font-weight: 600; color: var(--accent); }
+        .vol-card .person-bio { margin-top: 10px; font-size: 0.9rem; line-height: 1.5; color: var(--text-dim); }
+        .about-more { margin-top: 44px; }
+
         /* ---------- Reveal ---------- */
         .rv { opacity: 0; transform: translateY(28px); transition: opacity 1s cubic-bezier(.2,.7,.2,1), transform 1s cubic-bezier(.2,.7,.2,1); }
         .rv.on { opacity: 1; transform: none; }
@@ -253,6 +267,11 @@
             .video { padding: 90px 0; }
             .quote { padding: 110px 0; }
             .quote::after { background: rgba(0,0,0,0.78); }
+            .serve { padding: 90px 0; }
+            .vol-grid { grid-template-columns: repeat(2, 1fr); gap: 12px; }
+            .vol-card { padding: 22px 14px; }
+            .vol-card .avatar { width: 76px; height: 76px; }
+            .vol-card .avatar.mono { font-size: 1.6rem; }
             .pill { font-size: 1rem; }
         }
         @media (max-width: 520px) {
@@ -304,7 +323,8 @@
             <li><a href="#theme">Theme</a></li>
             <li><a href="#video">Video</a></li>
             <li><a href="#gallery">Gallery</a></li>
-            <li><a href="#about">About</a></li>
+            <li><a href="/about">About</a></li>
+            <li><a href="/volunteer">Volunteer</a></li>
             <li><a href="#contact">Contact</a></li>
         </ul>
         <a class="pill sm" href="/register-v2" data-register>Register</a>
@@ -465,6 +485,20 @@
                     <p>PYC seeks to galvanize young people towards radical commitment to Christ and to mobilize youth and young adults to be fully committed to the distinctive message and mission of the Adventist church towards the proclamation of the Three Angels&rsquo; Messages.</p>
                 </div>
             </div>
+            <p class="about-more rv"><a class="linkarrow" href="/about" style="color:#946414;">Meet our officers and volunteers</a></p>
+        </div>
+    </section>
+
+    <!-- Serve with us: featured volunteers from team-data.js -->
+    <section class="serve" id="serve">
+        <div class="wrap">
+            <h2 class="rv">Serve with us.</h2>
+            <p class="lead rv">PYC is made possible by young people who give their time and gifts. Join the volunteer team for PYC <span data-cfg="year">2027</span>.</p>
+            <div class="vol-grid" id="volGrid"></div>
+            <div class="cta-row rv" style="margin-top:44px;">
+                <a class="pill" href="/volunteer">Volunteer at PYC 2027</a>
+                <a class="linkarrow" href="/about#volunteers">Meet the team</a>
+            </div>
         </div>
     </section>
 
@@ -524,6 +558,7 @@
     </div>
 </footer>
 
+<script src="/team-data.js"></script>
 <script>
 (function () {
     // ---- Fill event details from PYC config ----
@@ -549,6 +584,13 @@
         q.hidden = false;
     }
     document.querySelectorAll('[data-register]').forEach(function (a) { a.setAttribute('href', PYC.registerUrl); });
+
+    // ---- Featured volunteers (edit public/team-data.js) ----
+    if (window.PYC_TEAM && window.PYC_TEAM_RENDER) {
+        var featured = (PYC_TEAM.volunteers || []).filter(function (v) { return v.featured; }).slice(0, 4);
+        PYC_TEAM_RENDER.render(document.getElementById('volGrid'), featured, { cardClass: 'vol-card rv', avatarClass: 'avatar' });
+    }
+    if (!document.querySelector('#volGrid .vol-card')) document.getElementById('volGrid').style.display = 'none';
 
     // ---- Countdown (only when a start time is configured) ----
     if (PYC.startsAt) {

@@ -302,6 +302,9 @@ registration. Group members each get their own sequential number.
 |---|---|
 | `index.html` | Public landing page — 2027 "Abide" design (theme source of truth); all event facts in its `PYC = {…}` config block |
 | `index-2026.html` | Old 2026 landing page, backup only (not linked) |
+| `about.html` | `/about` — Who we are + **Officers** (photo, name, role, bio) + **Volunteers** + "Serve with us" CTA. Landing-page (gold) style |
+| `volunteer.html` | `/volunteer` — volunteer sign-up form (roles, days June 1 setup–June 6, contact, location, home church, optional PYC #, skills, minor consent). Registration (sand) style → `submit-volunteer.js` |
+| `team-data.js` | **Edit this to change officers/volunteers.** One data file used by `/about` (everyone) and the homepage "Serve with us" section (volunteers with `featured: true`, max 4). `photo: '/img/team/x.jpg'` or `''` for initials. Current entries are SAMPLE people — replace before announcing |
 | `register.html` | **Live** registration form (2026). Two-page flow: form → payment. |
 | `payment.html` | Payment page: round-robin GCash assignment + proof upload |
 | `accommodations.html` | Public dorm reservation |
@@ -377,6 +380,10 @@ people-limit; suppresses ghost under-booking spots), `cancel-reservation.js`,
 (`admin-create-roommate-request.js`, `admin-remove-from-roommate.js`).
 
 **Tents:** `submit-tent.js` (+ group-type clustering, solo-tent whitelist).
+
+**Volunteers:** `submit-volunteer.js` — validates, honeypot spam trap (`website`), one sign-up
+per email (duplicate → success, no new row), inserts into `volunteer_applications`, Telegram
+ping, Brevo confirmation email (both non-fatal). Needs `add-volunteer-applications-table.sql`.
 
 **Email/reminders:** `send-reminder.js` (resumable batched sender; `reminder_sent_at`
 column tracks who's been emailed; counts via `count:'exact'`; sends to Paid only;
@@ -543,6 +550,8 @@ realistic load.
 - Age bracket migration (already run): moved `age` to `0-8/9-13/14-17/18-25/26-35/36+`
   with a CHECK constraint.
 - `diagnose-girls-dorms.sql` — a diagnostic query for dorm gender issues.
+- `add-volunteer-applications-table.sql` — creates `volunteer_applications` (REQUIRED before
+  `/volunteer` can save sign-ups). Includes handy queries (all sign-ups, count per area).
 - Future: `meal_redemptions` table for the 2027 meal-QR system (not yet created).
 
 ---
@@ -566,6 +575,10 @@ realistic load.
   2026 — replace the PDF and rename references when ready.
 - DONE: the 2027 landing page is now `public/index.html` (old one kept as
   `index-2026.html`; `/home-v2` redirects to `/`).
+- Replace the SAMPLE officers/volunteers in `public/team-data.js` with real people + photos
+  (`public/img/team/`) before sharing `/about`. Run `add-volunteer-applications-table.sql`
+  before sharing `/volunteer`. No dashboard view of volunteer sign-ups yet (Supabase table
+  + Telegram only) — could add a tab to admin-dashboard/md.
 - "Check my status" page (self-service lookup) — top-bar link shows "coming soon" for now.
 - Obtain `accommodation-login.js` (not in working copies) if accommodation login needs changes.
 - Consider the QR check-in + meal redemption system for 2027 (§11 future).

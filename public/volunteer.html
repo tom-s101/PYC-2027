@@ -1,0 +1,392 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Volunteer — PYC 2027</title>
+    <meta name="description" content="Sign up to volunteer at PYC 2027: Abide, June 2–6, 2027 at SMX Convention Center Davao.">
+    <meta property="og:title" content="Volunteer at PYC 2027">
+    <meta property="og:description" content="Registration, media, music, prayer, hospitality and more. Sign up to serve at PYC 2027.">
+    <meta property="og:image" content="https://philippineyouthforchrist.org/img/media-team.jpg">
+    <link rel="icon" type="image/x-icon" href="/favicon.ico">
+    <link rel="apple-touch-icon" href="/apple-touch-icon.png">
+    <style>
+        :root { --primary-navy: #1c1c1e; --secondary-gold: #c9b897; --light: #f5f5f5; }
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { background: #000; color: var(--light); min-height: 100vh; padding: 20px 12px 60px; line-height: 1.45; }
+        input, select, button, textarea { font-family: inherit; }
+        .container { max-width: 640px; margin: 0 auto; }
+
+        /* Top bar (same as registration) */
+        .topbar { position: sticky; top: 0; z-index: 50; margin: -20px -12px 0; padding: 0 12px; background: rgba(0,0,0,0.92); -webkit-backdrop-filter: blur(6px); backdrop-filter: blur(6px); border-bottom: 1px solid rgba(201,184,151,0.2); }
+        .topbar-inner { max-width: 640px; margin: 0 auto; min-height: 48px; display: flex; align-items: center; gap: 4px; }
+        .topbar-brand { font-size: 1.15rem; margin-right: auto; white-space: nowrap; display: flex; align-items: center; gap: 8px; }
+        .topbar-brand img { height: 22px; width: auto; }
+        .topbar a { color: var(--light); text-decoration: none; font-size: 0.82rem; font-weight: 600; padding: 14px 10px; min-height: 48px; display: inline-flex; align-items: center; }
+        .topbar a.current { color: var(--secondary-gold); }
+
+        .header { text-align: center; padding: 26px 0 18px; }
+        .header h1 { font-size: 2.4rem; line-height: 1.05; }
+        .header p { color: rgba(245,245,245,0.7); font-size: 0.95rem; margin-top: 8px; }
+
+        .card { background: rgba(255,255,255,0.04); border: 1px solid rgba(201,184,151,0.18); border-radius: 14px; padding: 24px 20px; }
+        .section-header { color: var(--secondary-gold); font-size: 1.35rem; margin: 26px 0 12px; }
+        .section-header:first-child { margin-top: 0; }
+        .hint { color: rgba(245,245,245,0.6); font-size: 0.85rem; margin-bottom: 12px; line-height: 1.5; }
+
+        .form-group { margin-bottom: 16px; }
+        .form-group > label { display: block; margin-bottom: 6px; font-size: 0.9rem; font-weight: 500; }
+        .required { color: #e8826a; }
+        .form-group input[type="text"], .form-group input[type="email"], .form-group input[type="tel"], .form-group select, .form-group textarea {
+            width: 100%; padding: 13px 14px; background: rgba(255,255,255,0.06); border: 1px solid rgba(201,184,151,0.25);
+            border-radius: 12px; color: var(--light); font-size: 16px; min-height: 50px;
+        }
+        .form-group textarea { min-height: 96px; resize: vertical; line-height: 1.45; }
+        select option { background: var(--primary-navy); }
+        .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+        .radio-group { display: flex; gap: 18px; flex-wrap: wrap; padding-top: 6px; }
+        .radio-option { display: flex; align-items: center; gap: 8px; min-height: 44px; cursor: pointer; }
+        .radio-option input, .checkbox-row input { width: 20px; height: 20px; accent-color: var(--secondary-gold); flex: 0 0 auto; }
+        .checkbox-row, .form-group > label.checkbox-row { display: flex; align-items: flex-start; gap: 10px; cursor: pointer; font-size: 0.92rem; line-height: 1.45; margin-bottom: 0; }
+        .checkbox-row input { margin-top: 1px; }
+        .terms-link { color: var(--secondary-gold); }
+        .hidden { display: none !important; }
+
+        /* Selectable cards (roles, days) */
+        .choice-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
+        .choice {
+            position: relative; display: flex; flex-direction: column; justify-content: center; gap: 2px;
+            padding: 14px 16px 14px 44px; min-height: 60px; border-radius: 12px; cursor: pointer;
+            background: rgba(255,255,255,0.04); border: 1.5px solid rgba(201,184,151,0.22);
+            transition: border-color .15s, background .15s;
+        }
+        .choice input { position: absolute; left: 15px; top: 50%; transform: translateY(-50%); width: 18px; height: 18px; accent-color: var(--secondary-gold); }
+        .choice.selected { border-color: var(--secondary-gold); background: rgba(201,184,151,0.12); }
+        .choice-title { font-weight: 600; font-size: 0.95rem; }
+        .choice-desc { font-size: 0.78rem; color: rgba(245,245,245,0.58); }
+
+        .field-error { color: #e8826a; font-size: 0.8rem; margin-top: 6px; display: none; }
+        .field-error.show { display: block; }
+        .alert { padding: 13px 16px; border-radius: 10px; margin-bottom: 16px; font-size: 0.88rem; display: none; }
+        .alert.show { display: block; }
+        .alert-error { background: rgba(231,76,60,0.12); border: 1px solid rgba(231,76,60,0.35); color: #e8826a; }
+        .alert-info { background: rgba(201,184,151,0.1); border: 1px solid rgba(201,184,151,0.3); color: var(--secondary-gold); }
+
+        .btn { width: 100%; padding: 16px; border-radius: 980px; font-weight: 700; font-size: 1.05rem; cursor: pointer; border: none; min-height: 54px; margin-top: 22px;
+            background: linear-gradient(135deg, var(--secondary-gold), #b5a27f); color: #1c1c1e; }
+        .btn:disabled { opacity: 0.6; cursor: default; }
+        .hp { position: absolute; left: -9999px; width: 1px; height: 1px; overflow: hidden; }
+
+        /* Done */
+        .done { text-align: center; padding: 8px 0; }
+        .done-icon { width: 72px; height: 72px; border-radius: 50%; margin: 0 auto 14px; display: flex; align-items: center; justify-content: center; background: rgba(39,174,96,0.15); border: 2px solid #27ae60; color: #4cd68a; font-size: 2.2rem; }
+        .done p { line-height: 1.6; color: rgba(245,245,245,0.85); margin-top: 10px; }
+        .done .btn { display: inline-flex; align-items: center; justify-content: center; text-decoration: none; }
+
+        @media (max-width: 480px) {
+            .header h1 { font-size: 2rem; }
+            .form-row, .choice-grid { grid-template-columns: 1fr; }
+        }
+    </style>
+    <link rel="stylesheet" href="/theme-2027.css"><!-- PYC 2027 site theme: keep this the LAST stylesheet in <head> -->
+</head>
+<body>
+    <div class="topbar">
+        <div class="topbar-inner">
+            <a href="/" class="topbar-brand" style="padding-left:0;"><img src="/img/pyc-logo.png" alt="">PYC 2027</a>
+            <a href="/about">Team</a>
+            <a href="/volunteer" class="current">Volunteer</a>
+            <a href="/register-v2">Register</a>
+        </div>
+    </div>
+
+    <div class="container">
+        <div class="header">
+            <h1>Volunteer at PYC 2027</h1>
+            <p>Abide &middot; June 2&ndash;6, 2027 &middot; SMX Convention Center Davao</p>
+        </div>
+
+        <div class="card">
+            <div id="topAlert" class="alert"></div>
+
+            <!-- ================= FORM ================= -->
+            <form id="volForm" novalidate autocomplete="on">
+                <h2 class="section-header">How would you like to serve?</h2>
+                <p class="hint">Choose all that interest you. We&rsquo;ll match you with a team based on your gifts and where help is needed most.</p>
+                <div class="choice-grid" id="roleGrid"></div>
+                <div class="field-error" id="err-roles">Please choose at least one area.</div>
+
+                <h2 class="section-header">When are you available?</h2>
+                <div class="choice-grid" id="dayGrid"></div>
+                <div class="field-error" id="err-days">Please choose at least one day.</div>
+
+                <h2 class="section-header">About you</h2>
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="firstName">First Name <span class="required">*</span></label>
+                        <input type="text" id="firstName" autocomplete="given-name">
+                        <div class="field-error" id="err-firstName">Required.</div>
+                    </div>
+                    <div class="form-group">
+                        <label for="lastName">Last Name <span class="required">*</span></label>
+                        <input type="text" id="lastName" autocomplete="family-name">
+                        <div class="field-error" id="err-lastName">Required.</div>
+                    </div>
+                </div>
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="age">Age <span class="required">*</span></label>
+                        <select id="age">
+                            <option value="">-- Select --</option>
+                            <option value="14-17">14-17</option>
+                            <option value="18-25">18-25</option>
+                            <option value="26-35">26-35</option>
+                            <option value="36+">36+</option>
+                        </select>
+                        <div class="field-error" id="err-age">Required.</div>
+                    </div>
+                    <div class="form-group">
+                        <label>Gender <span class="required">*</span></label>
+                        <div class="radio-group">
+                            <label class="radio-option"><input type="radio" name="gender" value="Male"> Male</label>
+                            <label class="radio-option"><input type="radio" name="gender" value="Female"> Female</label>
+                        </div>
+                        <div class="field-error" id="err-gender">Please select a gender.</div>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="email">Email Address <span class="required">*</span></label>
+                    <input type="email" id="email" autocomplete="email">
+                    <div class="field-error" id="err-email">Enter a valid email.</div>
+                </div>
+                <div class="form-group">
+                    <label for="phone">Phone Number <span class="required">*</span></label>
+                    <input type="tel" id="phone" autocomplete="tel" placeholder="e.g. 0917 123 4567">
+                    <div class="field-error" id="err-phone">Required.</div>
+                </div>
+
+                <h2 class="section-header">Where are you from?</h2>
+                <div class="form-group">
+                    <label for="locationType">Location <span class="required">*</span></label>
+                    <select id="locationType">
+                        <option value="">-- Select --</option>
+                        <option value="philippines">Philippines</option>
+                        <option value="international">International</option>
+                    </select>
+                    <div class="field-error" id="err-locationType">Required.</div>
+                </div>
+                <div class="form-row hidden" id="phFields">
+                    <div class="form-group">
+                        <label for="phRegion">Region <span class="required">*</span></label>
+                        <select id="phRegion">
+                            <option value="">-- Select --</option>
+                            <option value="Luzon">Luzon</option>
+                            <option value="Visayas">Visayas</option>
+                            <option value="Mindanao">Mindanao</option>
+                        </select>
+                        <div class="field-error" id="err-phRegion">Required.</div>
+                    </div>
+                    <div class="form-group">
+                        <label for="phCity">City / Municipality <span class="required">*</span></label>
+                        <input type="text" id="phCity">
+                        <div class="field-error" id="err-phCity">Required.</div>
+                    </div>
+                </div>
+                <div class="form-row hidden" id="intFields">
+                    <div class="form-group">
+                        <label for="intCountry">Country <span class="required">*</span></label>
+                        <input type="text" id="intCountry">
+                        <div class="field-error" id="err-intCountry">Required.</div>
+                    </div>
+                    <div class="form-group">
+                        <label for="intCity">City <span class="required">*</span></label>
+                        <input type="text" id="intCity">
+                        <div class="field-error" id="err-intCity">Required.</div>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="homeChurch">Home Church <span class="required">*</span></label>
+                    <input type="text" id="homeChurch" placeholder="e.g. Davao Central SDA Church">
+                    <div class="field-error" id="err-homeChurch">Required.</div>
+                </div>
+
+                <h2 class="section-header">A few more questions</h2>
+                <div class="form-group">
+                    <label for="pycNumber">PYC number <span style="color:rgba(245,245,245,0.5);font-weight:400;">(if you&rsquo;ve already registered)</span></label>
+                    <input type="text" id="pycNumber" placeholder="e.g. PYC-0487">
+                </div>
+                <div class="form-group">
+                    <label for="experience">Skills or experience we should know about</label>
+                    <textarea id="experience" maxlength="1000" placeholder="e.g. photography, sound board, first aid training, leading worship"></textarea>
+                </div>
+                <div class="form-group">
+                    <label for="motivation">Why would you like to serve?</label>
+                    <textarea id="motivation" maxlength="1000"></textarea>
+                </div>
+
+                <div class="form-group hidden" id="guardianWrap">
+                    <label class="checkbox-row"><input type="checkbox" id="guardianConsent"> <span>I am under 18 and my parent/guardian agrees to my serving as a volunteer. <span class="required">*</span></span></label>
+                    <div class="field-error" id="err-guardianConsent">Parental consent is required for volunteers under 18.</div>
+                </div>
+                <div class="form-group">
+                    <label class="checkbox-row"><input type="checkbox" id="acceptTerms"> <span>I agree to the <a href="/code-of-conduct.pdf" target="_blank" class="terms-link">Code of Conduct</a> and <a href="/data-privacy.pdf" target="_blank" class="terms-link">Data Privacy Consent</a>. <span class="required">*</span></span></label>
+                    <div class="field-error" id="err-acceptTerms">Please accept to continue.</div>
+                </div>
+
+                <!-- Spam trap: hidden from people, bots fill it in -->
+                <div class="hp" aria-hidden="true"><label>Website <input type="text" id="website" tabindex="-1" autocomplete="off"></label></div>
+
+                <button type="submit" class="btn" id="submitBtn">Sign up to volunteer</button>
+            </form>
+
+            <!-- ================= DONE ================= -->
+            <div class="done hidden" id="doneScreen">
+                <div class="done-icon">&#10003;</div>
+                <h2 class="section-header" style="margin-top:0;">Thank you for signing up!</h2>
+                <p id="doneText">We&rsquo;ve received your volunteer sign-up. Our team will contact you by email or phone with your team assignment and orientation details.</p>
+                <p class="hint" style="margin-top:14px;">Haven&rsquo;t registered for the conference yet? Volunteers still need to register.</p>
+                <a class="btn" href="/register-v2">Register for PYC 2027</a>
+            </div>
+        </div>
+    </div>
+
+    <script>
+    (function () {
+        var ROLES = [
+            ['registration', 'Registration & Check-in', 'Welcome delegates and help them get settled'],
+            ['ushering', 'Ushering & Crowd Care', 'Seating, directions, keeping things running'],
+            ['media', 'Media & Photography', 'Photos, video, livestream, social media'],
+            ['worship', 'Music & Worship', 'Sing or play with the worship team'],
+            ['tech', 'Tech, Sound & Lights', 'Audio, visuals, stage and screens'],
+            ['hospitality', 'Hospitality & Meals', 'Meals, refreshments, and care'],
+            ['prayer', 'Prayer Team', 'Pray with delegates and for every session'],
+            ['firstaid', 'First Aid & Medical', 'For nurses, doctors, and trained first-aiders'],
+            ['logistics', 'Logistics & Setup', 'Set up and pack down the venue'],
+            ['kids', 'Children & Teens', 'Help with the younger delegates']
+        ];
+        var DAYS = [
+            ['jun1', 'Tue, June 1', 'Setup day'],
+            ['jun2', 'Wed, June 2', 'Opening night'],
+            ['jun3', 'Thu, June 3', 'Conference day'],
+            ['jun4', 'Fri, June 4', 'Conference day'],
+            ['jun5', 'Sat, June 5', 'Sabbath'],
+            ['jun6', 'Sun, June 6', 'Closing day']
+        ];
+        var MINOR_AGES = ['14-17'];
+
+        function buildChoices(container, list, name) {
+            list.forEach(function (item) {
+                var label = document.createElement('label');
+                label.className = 'choice';
+                var input = document.createElement('input');
+                input.type = 'checkbox'; input.name = name; input.value = item[0];
+                var t = document.createElement('span'); t.className = 'choice-title'; t.textContent = item[1];
+                var d = document.createElement('span'); d.className = 'choice-desc'; d.textContent = item[2];
+                label.appendChild(input); label.appendChild(t); label.appendChild(d);
+                container.appendChild(label);
+            });
+        }
+        buildChoices(document.getElementById('roleGrid'), ROLES, 'roles');
+        buildChoices(document.getElementById('dayGrid'), DAYS, 'days');
+        document.addEventListener('change', function (e) {
+            var c = e.target.closest && e.target.closest('.choice');
+            if (c) c.classList.toggle('selected', e.target.checked);
+        });
+
+        function el(id) { return document.getElementById(id); }
+        function val(id) { var x = el(id); return x ? x.value.trim() : ''; }
+        function checked(name) { return Array.prototype.map.call(document.querySelectorAll('input[name="' + name + '"]:checked'), function (i) { return i.value; }); }
+        function showErr(id, on) { var x = el('err-' + id); if (x) x.classList.toggle('show', !!on); }
+        function topAlert(msg, kind) { var a = el('topAlert'); a.textContent = msg || ''; a.className = msg ? 'alert alert-' + (kind || 'error') + ' show' : 'alert'; }
+
+        // Clear a field's error as soon as it is filled in / chosen.
+        function clearFor(target) {
+            if (!target) return;
+            var key = target.name === 'roles' ? 'roles' : target.name === 'days' ? 'days' : target.name === 'gender' ? 'gender' : target.id;
+            if (key && (target.type === 'checkbox' || target.type === 'radio' ? true : target.value.trim())) showErr(key, false);
+        }
+        document.addEventListener('input', function (e) { clearFor(e.target); });
+        document.addEventListener('change', function (e) { clearFor(e.target); });
+
+        el('locationType').addEventListener('change', function () {
+            el('phFields').classList.toggle('hidden', this.value !== 'philippines');
+            el('intFields').classList.toggle('hidden', this.value !== 'international');
+        });
+        el('age').addEventListener('change', function () {
+            el('guardianWrap').classList.toggle('hidden', MINOR_AGES.indexOf(this.value) === -1);
+        });
+
+        function validate() {
+            document.querySelectorAll('.field-error').forEach(function (e) { e.classList.remove('show'); });
+            topAlert('');
+            var ok = true, first = null;
+            function fail(id) { showErr(id, true); ok = false; if (!first) first = el(id) || el('err-' + id); }
+            if (!checked('roles').length) fail('roles');
+            if (!checked('days').length) fail('days');
+            if (!val('firstName')) fail('firstName');
+            if (!val('lastName')) fail('lastName');
+            if (!val('age')) fail('age');
+            if (!document.querySelector('input[name="gender"]:checked')) fail('gender');
+            if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(val('email'))) fail('email');
+            if (!val('phone')) fail('phone');
+            var loc = val('locationType');
+            if (!loc) fail('locationType');
+            if (loc === 'philippines') { if (!val('phRegion')) fail('phRegion'); if (!val('phCity')) fail('phCity'); }
+            if (loc === 'international') { if (!val('intCountry')) fail('intCountry'); if (!val('intCity')) fail('intCity'); }
+            if (!val('homeChurch')) fail('homeChurch');
+            if (MINOR_AGES.indexOf(val('age')) !== -1 && !el('guardianConsent').checked) fail('guardianConsent');
+            if (!el('acceptTerms').checked) fail('acceptTerms');
+            if (!ok) {
+                topAlert('Please complete the highlighted fields.');
+                if (first && first.scrollIntoView) first.scrollIntoView({ behavior: 'smooth', block: 'center' });
+            }
+            return ok;
+        }
+
+        var sending = false;
+        el('volForm').addEventListener('submit', function (e) {
+            e.preventDefault();
+            if (sending || !validate()) return;
+            sending = true;
+            var btn = el('submitBtn');
+            btn.disabled = true; btn.textContent = 'Sending…';
+            var g = document.querySelector('input[name="gender"]:checked');
+            var payload = {
+                firstName: val('firstName'), lastName: val('lastName'), age: val('age'), gender: g ? g.value : '',
+                email: val('email'), phone: val('phone'),
+                locationType: val('locationType'), phRegion: val('phRegion'), phCity: val('phCity'),
+                intCountry: val('intCountry'), intCity: val('intCity'), homeChurch: val('homeChurch'),
+                pycNumber: val('pycNumber'), experience: val('experience'), motivation: val('motivation'),
+                roles: checked('roles'), days: checked('days'),
+                guardianConsent: el('guardianConsent').checked, acceptTerms: el('acceptTerms').checked,
+                website: val('website')
+            };
+            fetch('/.netlify/functions/submit-volunteer', {
+                method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(payload)
+            }).then(function (res) {
+                return res.text().then(function (text) {
+                    var data = null;
+                    try { data = JSON.parse(text); } catch (err) { /* server sent HTML (timeout/500) */ }
+                    if (!res.ok || !data || !data.success) {
+                        throw new Error((data && data.error) || 'The server took too long to respond. Please tap the button again.');
+                    }
+                    return data;
+                });
+            }).then(function (data) {
+                if (data.duplicate) el('doneText').textContent = 'You’ve already signed up with this email — thank you! Our team will contact you with your team assignment and orientation details.';
+                el('volForm').classList.add('hidden');
+                el('doneScreen').classList.remove('hidden');
+                window.scrollTo({ top: 0, behavior: 'smooth' });
+            }).catch(function (err) {
+                var msg = err && err.message && err.message !== 'Failed to fetch' && err.message !== 'Load failed'
+                    ? err.message : 'Could not reach the server. Check your connection and tap the button again.';
+                topAlert(msg);
+                window.scrollTo({ top: 0, behavior: 'smooth' });
+            }).then(function () {
+                sending = false; btn.disabled = false; btn.textContent = 'Sign up to volunteer';
+            });
+        });
+    })();
+    </script>
+</body>
+</html>
